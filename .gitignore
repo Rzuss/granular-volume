@@ -1,0 +1,53 @@
+# ============================================================
+# Granular Volume — .gitignore
+# ============================================================
+
+# ----- Credentials & Secrets (NEVER commit) -----
+*.jks
+*.keystore
+.keystore-env
+KEYSTORE-CREDENTIALS.txt
+local.properties
+
+# ----- Android build outputs -----
+build/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# ----- Gradle internals -----
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# ----- Android Studio / IntelliJ IDEA -----
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# ----- Large binaries & generated media -----
+ffmpeg-bin/
+video/raw/
+video/clips/
+video/shots/
+*.mp4
+*.mov
+*.mkv
+
+# ----- OS noise -----
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ----- Node / Python cache (store-assets scripts) -----
+__pycache__/
+*.pyc
+node_modules/

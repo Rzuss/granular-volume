@@ -1,0 +1,20 @@
+<resources>
+    <color name="gv_background">#0E1525</color>
+    <color name="gv_background_grad_top">#131C30</color>
+    <color name="gv_background_grad_bottom">#0B111E</color>
+    <color name="gv_surface">#16203A</color>
+    <color name="gv_surface_stroke">#243049</color>
+    <color name="gv_overlay_bg">#CC1A1A2E</color>
+    <color name="gv_text_primary">#F4F6FB</color>
+    <color name="gv_text_secondary">#9AA6BF</color>
+    <color name="gv_text_muted">#6B7793</color>
+    <color name="gv_accent">#6C63FF</color>
+    <color name="gv_accent_dark">#5046E5</color>
+    <color name="gv_accent_pressed">#5B52F0</color>
+    <color name="gv_on_accent">#FFFFFF</color>
+    <color name="gv_success">#34D399</color>
+    <color name="gv_success_dim">#1F3D34</color>
+    <color name="gv_warning">#FBBF24</color>
+    <color name="gv_warning_dim">#3D341B</color>
+    <color name="gv_launcher_bg">#1A1A2E</color>
+</resources>

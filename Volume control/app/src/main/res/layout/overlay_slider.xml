@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gv_overlay_root"
+    android:layout_width="72dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="6dp"
+    android:paddingBottom="12dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:background="@drawable/bg_pill_overlay"
+    android:elevation="20dp">
+
+    <!-- Close — small, at the TOP so it stays reachable even when the pill is
+         tucked low against the bottom edge (away from the home gesture zone). -->
+    <ImageButton
+        android:id="@+id/gv_btn_dismiss"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:background="@drawable/bg_overlay_close"
+        android:src="@drawable/ic_close"
+        android:tint="#B3FFFFFF"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/gv_dismiss" />
+
+    <!-- Drag handle — grab anywhere on the pill to reposition; this is the visual cue.
+         When the pill is collapsed to a bottom tab, the handle + close above stay visible. -->
+    <View
+        android:id="@+id/gv_drag_handle"
+        android:layout_width="26dp"
+        android:layout_height="4dp"
+        android:background="@drawable/bg_drag_handle"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="@string/gv_drag_handle" />
+
+    <!-- Collapsible body: hidden when the pill is tucked into the bottom tab. -->
+    <LinearLayout
+        android:id="@+id/gv_collapsible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Louder: reduces attenuation → higher perceived volume -->
+        <ImageButton
+            android:id="@+id/gv_btn_up"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@null"
+            android:src="@drawable/ic_chevron_up"
+            android:tint="#EEFFFFFF"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/gv_louder" />
+
+        <!-- 7 discrete volume step bars
+             Arranged top → bottom = loudest → quietest
+             gv_step_bar_6 = 0 dB (top),  gv_step_bar_0 = -30 dB (bottom) -->
+        <LinearLayout
+            android:id="@+id/gv_steps_container"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp">
+
+            <!-- step 6 = 0 dB -->
+            <View
+                android:id="@+id/gv_step_bar_6"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_0db" />
+
+            <!-- step 5 = -5 dB -->
+            <View
+                android:id="@+id/gv_step_bar_5"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_5db" />
+
+            <!-- step 4 = -10 dB -->
+            <View
+                android:id="@+id/gv_step_bar_4"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_10db" />
+
+            <!-- step 3 = -15 dB -->
+            <View
+                android:id="@+id/gv_step_bar_3"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_15db" />
+
+            <!-- step 2 = -20 dB -->
+            <View
+                android:id="@+id/gv_step_bar_2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_20db" />
+
+            <!-- step 1 = -25 dB -->
+            <View
+                android:id="@+id/gv_step_bar_1"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_25db" />
+
+            <!-- step 0 = -30 dB -->
+            <View
+                android:id="@+id/gv_step_bar_0"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@drawable/bg_step_bar"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/gv_step_label_30db" />
+
+        </LinearLayout>
+
+        <!-- Quieter: increases attenuation → lower perceived volume -->
+        <ImageButton
+            android:id="@+id/gv_btn_down"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@null"
+            android:src="@drawable/ic_chevron_down"
+            android:tint="#99FFFFFF"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/gv_quieter" />
+
+        <!-- Current attenuation label -->
+        <TextView
+            android:id="@+id/gv_label_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 dB"
+            android:textColor="#88FFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

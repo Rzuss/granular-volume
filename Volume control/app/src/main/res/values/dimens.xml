@@ -1,0 +1,8 @@
+<resources>
+    <!-- Floating overlay widget -->
+    <dimen name="gv_overlay_width">64dp</dimen>
+    <dimen name="gv_overlay_corner">24dp</dimen>
+    <dimen name="gv_overlay_elevation">8dp</dimen>
+    <dimen name="gv_icon_button">36dp</dimen>
+    <dimen name="gv_slider_length">140dp</dimen>
+</resources>

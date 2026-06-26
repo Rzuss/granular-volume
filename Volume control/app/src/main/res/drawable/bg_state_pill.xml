@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Neutral rounded pill; the solid color is set at runtime to success/warning tint. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/gv_warning_dim" />
+    <corners android:radius="999dp" />
+</shape>

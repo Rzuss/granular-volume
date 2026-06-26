@@ -1,0 +1,24 @@
+# Normalize line endings across platforms.
+# Text files are stored with LF in the repo; checkout converts per platform.
+* text=auto
+
+# Shell scripts and the Gradle wrapper MUST stay LF so they run on Linux CI.
+*.sh        text eol=lf
+gradlew     text eol=lf
+
+# Windows batch files stay CRLF.
+*.bat       text eol=crlf
+
+# Treat known binaries as binary (no EOL conversion, no diff noise).
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.webp      binary
+*.ttf       binary
+*.otf       binary
+*.jar       binary
+*.apk       binary
+*.aab       binary
+*.mp4       binary
+*.keystore  binary
+*.jks       binary

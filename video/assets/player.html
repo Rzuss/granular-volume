@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Now Playing</title>
+<style>
+  :root{
+    --bg0:#0b0f1f; --bg1:#141a36; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:"Roboto","Segoe UI",system-ui,sans-serif;
+    color:var(--txt);
+    background:
+      radial-gradient(120% 80% at 20% 0%, #1e2752 0%, rgba(30,39,82,0) 55%),
+      radial-gradient(120% 90% at 90% 20%, #2a1c54 0%, rgba(42,28,84,0) 50%),
+      linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 100%);
+    min-height:100%;
+    display:flex;flex-direction:column;
+    padding:46px 30px 40px;
+    overflow:hidden;
+  }
+  .topbar{display:flex;align-items:center;justify-content:space-between;color:var(--muted);}
+  .topbar .chev{font-size:26px;opacity:.8;}
+  .topbar .label{font-size:13px;letter-spacing:3px;font-weight:600;color:var(--muted);}
+  .topbar .dots{font-size:24px;letter-spacing:2px;opacity:.8;}
+
+  .artwrap{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+  .glow{
+    position:absolute;width:78%;aspect-ratio:1;border-radius:40px;
+    background:conic-gradient(from 120deg,#6C63FF,#22d3ee,#a855f7,#6C63FF);
+    filter:blur(60px);opacity:.55;animation:spin 14s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .art{
+    position:relative;width:74%;aspect-ratio:1;border-radius:34px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.08);
+    background:
+      radial-gradient(80% 70% at 25% 20%, #8b7bff 0%, rgba(139,123,255,0) 60%),
+      radial-gradient(90% 80% at 85% 85%, #18b8d6 0%, rgba(24,184,214,0) 55%),
+      linear-gradient(135deg,#3a2f9e 0%, #181f43 100%);
+  }
+  .art .rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+  .art .rings i{
+    position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.10);
+  }
+  .art .mono{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:34%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff 0%, #cdd3ff 30%, #6C63FF 75%);
+    box-shadow:0 0 40px rgba(108,99,255,.7);
+  }
+  .art .mono::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:16%;aspect-ratio:1;border-radius:50%;background:#0b0f1f;}
+
+  .meta{margin-top:34px;text-align:left;}
+  .title{font-size:34px;font-weight:800;letter-spacing:.2px;}
+  .artist{font-size:18px;color:var(--muted);margin-top:6px;font-weight:500;}
+
+  .eq{display:flex;align-items:flex-end;gap:5px;height:30px;margin-top:18px;}
+  .eq span{width:5px;border-radius:3px;background:linear-gradient(180deg,var(--accent2),var(--accent));animation:bounce 1s ease-in-out infinite;}
+  .eq span:nth-child(1){animation-delay:-.0s}.eq span:nth-child(2){animation-delay:-.2s}
+  .eq span:nth-child(3){animation-delay:-.4s}.eq span:nth-child(4){animation-delay:-.6s}
+  .eq span:nth-child(5){animation-delay:-.1s}.eq span:nth-child(6){animation-delay:-.5s}
+  .eq span:nth-child(7){animation-delay:-.3s}.eq span:nth-child(8){animation-delay:-.7s}
+  .eq span:nth-child(9){animation-delay:-.15s}.eq span:nth-child(10){animation-delay:-.45s}
+  @keyframes bounce{0%,100%{height:8px}50%{height:30px}}
+
+  .progress{margin-top:26px;}
+  .bar{height:6px;border-radius:6px;background:rgba(255,255,255,.12);position:relative;overflow:hidden;}
+  .bar i{position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:6px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .bar b{position:absolute;left:38%;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.5);}
+  .times{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:10px;font-variant-numeric:tabular-nums;}
+
+  .controls{display:flex;align-items:center;justify-content:space-between;margin-top:30px;}
+  .controls .ic{color:var(--muted);font-size:26px;}
+  .controls .big{
+    width:78px;height:78px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(145deg,var(--accent),#8b7bff);
+    box-shadow:0 14px 40px rgba(108,99,255,.55);color:#fff;font-size:30px;
+  }
+  .glyph{font-family:system-ui;font-weight:700;}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="chev">⌄</div>
+    <div class="label">NOW PLAYING</div>
+    <div class="dots">⋯</div>
+  </div>
+
+  <div class="artwrap">
+    <div class="glow"></div>
+    <div class="art">
+      <div class="rings"><i style="width:86%;height:86%"></i><i style="width:62%;height:62%"></i></div>
+      <div class="mono"></div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="title">Midnight Drive</div>
+    <div class="artist">Aurora Skies</div>
+    <div class="eq">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="progress">
+    <div class="bar"><i></i><b></b></div>
+    <div class="times"><span>1:42</span><span>-2:47</span></div>
+  </div>
+
+  <div class="controls">
+    <div class="ic glyph">⤨</div>
+    <div class="ic glyph">⏮</div>
+    <div class="big glyph">❚❚</div>
+    <div class="ic glyph">⏭</div>
+    <div class="ic glyph">↻</div>
+  </div>
+<script>
+  // Go immersive fullscreen on first interaction so the browser chrome disappears.
+  function goFs(){ var el=document.documentElement; if(el.requestFullscreen) el.requestFullscreen().catch(function(){}); }
+  document.addEventListener('click', goFs, {once:true});
+  document.addEventListener('touchstart', goFs, {once:true});
+</script>
+</body>
+</html>

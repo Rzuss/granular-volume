@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. NoActionBar — the layout supplies its own title. -->
+    <style name="Theme.GranularVolume" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/gv_accent</item>
+        <item name="colorPrimaryVariant">@color/gv_accent</item>
+        <item name="colorOnPrimary">@color/gv_text_primary</item>
+        <item name="colorSecondary">@color/gv_accent</item>
+        <item name="colorOnSecondary">@color/gv_text_primary</item>
+        <item name="android:windowBackground">@color/gv_background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/gv_background</item>
+    </style>
+
+</resources>

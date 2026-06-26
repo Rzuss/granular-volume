@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen_gradient"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="40dp">
+
+        <!-- Hero glyph -->
+        <FrameLayout
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:background="@drawable/bg_hero_circle">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_volume_slider"
+                android:contentDescription="@string/gv_app_glyph" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="26sp"
+            android:textColor="@color/gv_text_primary"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gv_subtitle"
+            android:textSize="14sp"
+            android:textColor="@color/gv_text_secondary"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
+            android:layout_marginTop="8dp" />
+
+        <!-- Status card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginTop="32dp">
+
+            <!-- Overlay permission row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_icon_chip">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_overlay_perm"
+                        android:tint="@color/gv_text_secondary"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_overlay_title"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gv_text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_overlay_desc"
+                        android:textSize="12sp"
+                        android:textColor="@color/gv_text_muted"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_overlay_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_state_pill"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/gv_state_needed"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gv_warning"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gv_surface_stroke" />
+
+            <!-- Audio permission row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_icon_chip">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_volume_up"
+                        android:tint="@color/gv_text_secondary"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_audio_title"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gv_text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_audio_desc"
+                        android:textSize="12sp"
+                        android:textColor="@color/gv_text_muted"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_audio_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_state_pill"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/gv_state_needed"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gv_warning"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Contextual hint -->
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gv_hint_grant_first"
+            android:textSize="13sp"
+            android:textColor="@color/gv_text_secondary"
+            android:gravity="center"
+            android:layout_marginTop="22dp" />
+
+        <!-- Primary CTA -->
+        <Button
+            android:id="@+id/btn_grant_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/gv_grant_overlay"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/gv_btn_primary_text"
+            android:background="@drawable/bg_btn_primary"
+            android:stateListAnimator="@null"
+            android:elevation="0dp"
+            android:maxLines="1"
+            android:layout_marginTop="14dp" />
+
+        <!-- Secondary action -->
+        <Button
+            android:id="@+id/btn_start_service"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/gv_start_service"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/gv_btn_secondary_text"
+            android:background="@drawable/bg_btn_secondary"
+            android:stateListAnimator="@null"
+            android:elevation="0dp"
+            android:maxLines="1"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+</ScrollView>

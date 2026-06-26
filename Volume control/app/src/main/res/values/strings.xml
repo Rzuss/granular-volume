@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Granular Volume</string>
+    <string name="gv_subtitle">Precise per-stream volume, always within reach</string>
+
+    <!-- Permission setup screen -->
+    <string name="gv_grant_overlay">Grant overlay access</string>
+    <string name="gv_start_service">Start volume control</string>
+    <string name="gv_perm_overlay_title">Display over other apps</string>
+    <string name="gv_perm_overlay_desc">Lets the volume control float above your apps</string>
+    <string name="gv_perm_audio_title">Audio adjustment</string>
+    <string name="gv_perm_audio_desc">Lets the app fine-tune output level</string>
+    <string name="gv_state_granted">Granted</string>
+    <string name="gv_state_needed">Needed</string>
+    <string name="gv_hint_grant_first">Grant overlay access to continue</string>
+    <string name="gv_hint_ready">You\'re all set — start the control</string>
+    <string name="gv_app_glyph">App icon</string>
+
+    <!-- Overlay -->
+    <string name="gv_dismiss">Close volume control</string>
+    <string name="gv_drag_handle">Drag to reposition</string>
+    <string name="gv_louder">Louder — reduce attenuation</string>
+    <string name="gv_quieter">Quieter — increase attenuation</string>
+    <string name="gv_step_label_0db">Volume step: 0 dB (full)</string>
+    <string name="gv_step_label_5db">Volume step: −5 dB</string>
+    <string name="gv_step_label_10db">Volume step: −10 dB</string>
+    <string name="gv_step_label_15db">Volume step: −15 dB</string>
+    <string name="gv_step_label_20db">Volume step: −20 dB</string>
+    <string name="gv_step_label_25db">Volume step: −25 dB</string>
+    <string name="gv_step_label_30db">Volume step: −30 dB (quietest)</string>
+</resources>
