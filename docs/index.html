@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Granular Volume: Quieter than your phone allows</title>
+<meta name="description" content="A free, open source Android app that adds the volume levels your phone leaves out, below the hardware minimum, through a small floating dial.">
+<meta property="og:title" content="Granular Volume">
+<meta property="og:description" content="Quieter than your phone allows. Fine volume steps below Android's minimum, in a floating dial.">
+<meta property="og:image" content="img/feature.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.png">
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  /* Hero */
+  header{padding:88px 0 64px;text-align:center;}
+  .icon{width:104px;height:104px;border-radius:26px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 22px 60px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(40px,7vw,68px);font-weight:800;letter-spacing:-.5px;margin:26px 0 8px;}
+  .tag{font-size:clamp(18px,3.4vw,26px);color:var(--accent2);font-weight:600;}
+  .sub{max-width:620px;margin:18px auto 0;color:var(--muted);font-size:18px;}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+  .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+  .chip{font-size:14px;color:#d7d9ee;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);border-radius:999px;padding:8px 16px;}
+
+  /* Sections */
+  section{padding:56px 0;border-top:1px solid var(--line);}
+  h2{font-size:clamp(26px,4vw,36px);font-weight:800;margin-bottom:10px;text-align:center;}
+  .lead{color:var(--muted);text-align:center;max-width:680px;margin:0 auto 36px;font-size:18px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;}
+  .feat h3{font-size:19px;margin-bottom:8px;}
+  .feat p{color:var(--muted);font-size:15px;}
+  .dot{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+    background:rgba(108,99,255,.16);margin-bottom:14px;font-size:20px;}
+
+  .shots{display:flex;gap:18px;overflow-x:auto;padding:6px 2px 14px;scroll-snap-type:x mandatory;}
+  .shots img{height:520px;border-radius:22px;border:1px solid var(--line);scroll-snap-align:center;flex:0 0 auto;}
+
+  .compare{max-width:760px;margin:0 auto;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+  .compare div{display:grid;grid-template-columns:1fr 1fr;}
+  .compare .h{background:rgba(255,255,255,.03);font-weight:700;}
+  .compare span{padding:14px 18px;border-bottom:1px solid var(--line);font-size:15px;}
+  .compare span:nth-child(odd){color:var(--muted);}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="icon"><img src="img/icon.png" alt="Granular Volume icon"></div>
+    <h1>Granular Volume</h1>
+    <div class="tag">Quieter than your phone allows.</div>
+    <p class="sub">Sometimes the lowest volume setting is still too loud. Granular Volume adds the volume levels your phone leaves out, below the hardware minimum, in a small dial that floats over any app.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+      <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">View source</a>
+    </div>
+    <div class="chips">
+      <span class="chip">Free</span>
+      <span class="chip">No ads</span>
+      <span class="chip">No tracking</span>
+      <span class="chip">Open source</span>
+      <span class="chip">Android 9+</span>
+    </div>
+  </header>
+
+  <section id="why">
+    <h2>When the lowest setting is still too loud</h2>
+    <p class="lead">The first notch above mute can be too much for a quiet room, a sleeping baby, or a sensitive pair of headphones. Android will not go lower. Granular Volume does.</p>
+    <div class="grid">
+      <div class="feat"><div class="dot">🔉</div><h3>Quieter than minimum</h3><p>Fine attenuation steps beneath the lowest hardware step, for when even the minimum is too much.</p></div>
+      <div class="feat"><div class="dot">🎚️</div><h3>A floating dial</h3><p>It floats over any app. Drag it anywhere, tuck it to an edge, close it with one tap.</p></div>
+      <div class="feat"><div class="dot">🛡️</div><h3>Touches nothing else</h3><p>No volume button override, no system UI takeover. It just sits on top and stays stable.</p></div>
+      <div class="feat"><div class="dot">🔒</div><h3>Free and private</h3><p>No ads, no tracking, no account, no network access. Open source under GPL-3.0.</p></div>
+    </div>
+  </section>
+
+  <section id="uses">
+    <h2>Made for quiet moments</h2>
+    <p class="lead">The volume you reach for at night.</p>
+    <div class="grid">
+      <div class="feat"><div class="dot">🌙</div><h3>Sleep and white noise</h3><p>Keep lullabies and white noise barely audible next to a sleeping baby.</p></div>
+      <div class="feat"><div class="dot">🎧</div><h3>Sensitive headphones</h3><p>For IEMs and bone conduction where even a few percent is too strong.</p></div>
+      <div class="feat"><div class="dot">📖</div><h3>Late night listening</h3><p>A podcast or audiobook to fall asleep to, without waking anyone beside you.</p></div>
+      <div class="feat"><div class="dot">🧘</div><h3>Quiet rooms</h3><p>A library, a quiet office, meditation, or anywhere that needs calm.</p></div>
+    </div>
+  </section>
+
+  <section id="shots">
+    <h2>See it</h2>
+    <p class="lead">Swipe through.</p>
+    <div class="shots">
+      <img src="img/shot1.png" alt="The lowest setting is still too loud">
+      <img src="img/shot2.png" alt="Quieter than your phone allows">
+      <img src="img/shot3.png" alt="Made for quiet moments">
+      <img src="img/shot4.png" alt="Always within reach">
+    </div>
+  </section>
+
+  <section id="compare">
+    <h2>One thing, done well</h2>
+    <p class="lead">Most volume apps make things louder or rebuild your whole audio system. Granular Volume does the one thing none of them focus on.</p>
+    <div class="compare">
+      <div class="h"><span>Granular Volume</span><span>Typical volume app</span></div>
+      <div><span>Goes quieter than the minimum</span><span>Makes things louder</span></div>
+      <div><span>Sits on top, touches nothing</span><span>Overrides your volume buttons</span></div>
+      <div><span>One dial, no setup</span><span>Equalizer, presets, accounts</span></div>
+      <div><span>Free, open source, no tracking</span><span>Often paid or ad supported</span></div>
+    </div>
+  </section>
+
+  <section style="text-align:center;">
+    <h2>Get the volume you were missing</h2>
+    <div class="cta" style="margin-top:24px;">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+      <a class="btn btn-ghost" href="https://www.youtube.com/watch?v=oQU49OByy10">Watch the demo</a>
+    </div>
+  </section>
+
+</div>
+<footer>
+  <div class="wrap">
+    Granular Volume is free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    Source on <a href="https://github.com/Rzuss/granular-volume">GitHub</a>.
+    No data is collected.
+  </div>
+</footer>
+</body>
+</html>
