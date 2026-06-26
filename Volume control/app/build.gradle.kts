@@ -10,6 +10,12 @@ val localProps = Properties().also { props ->
     rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { props.load(it) }
 }
 
+// Release signing is only configured when a keystore path is supplied locally.
+// Without it (CI, fresh clones, contributors) the project still builds debug
+// artifacts cleanly; bundleRelease simply produces an unsigned bundle.
+val releaseKeystorePath = localProps.getProperty("keystore.path", "")
+val hasReleaseSigning = releaseKeystorePath.isNotEmpty()
+
 android {
     namespace = "com.granularvolume"
     compileSdk = 35
@@ -23,11 +29,13 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(localProps.getProperty("keystore.path", ""))
-            storePassword = localProps.getProperty("keystore.storePassword", "")
-            keyAlias = localProps.getProperty("keystore.keyAlias", "granularvolume")
-            keyPassword = localProps.getProperty("keystore.keyPassword", "")
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseKeystorePath)
+                storePassword = localProps.getProperty("keystore.storePassword", "")
+                keyAlias = localProps.getProperty("keystore.keyAlias", "granularvolume")
+                keyPassword = localProps.getProperty("keystore.keyPassword", "")
+            }
         }
     }
 
@@ -35,7 +43,8 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            signingConfig = signingConfigs.getByName("release")
+            // Use the release signing config only when it was configured above.
+            signingConfig = if (hasReleaseSigning) signingConfigs.getByName("release") else null
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
