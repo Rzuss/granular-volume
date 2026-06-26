@@ -110,6 +110,29 @@ Decision points:
 - Rating under 4.0: stop pushing installs, fix the top complaint first.
 - A feature requested by many reviewers: add it, then reply to those reviewers.
 - A channel that converts well: do more of it. One that does nothing: drop it.
+- **100 active installs: begin Pro version build. See launch/PRO-VERSION-PLAN.md.**
+
+---
+
+## Phase 4: Pro version (triggered at 100 active installs)
+
+The full plan is in launch/PRO-VERSION-PLAN.md. Summary:
+
+Model: freemium, one-time purchase (~$1.99), no subscription.
+
+Split:
+- Free: 3 coarse volume steps below the minimum. Enough to feel the value.
+- Pro: full granular range (20+ fine steps). The experience they wanted.
+
+F-Droid always gets the fully unlocked build (GPL requirement, and their users
+are a word-of-mouth audience, not a revenue audience).
+
+The upgrade UI is a single bottom sheet: "Unlock the full dial. One purchase,
+yours forever." Price pulled live from Play Billing, no dark patterns.
+
+Estimated build time once we start: 12 hours of focused development.
+I have the full technical spec ready. When active installs hit 100 in Play
+Console, tell me and we start immediately.
 
 ---
 
