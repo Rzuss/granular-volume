@@ -1,0 +1,38 @@
+Categories:
+  - Multimedia
+License: GPL-3.0-only
+AuthorName: Rotem
+SourceCode: https://github.com/Rzuss/granular-volume
+IssueTracker: https://github.com/Rzuss/granular-volume/issues
+Changelog: https://github.com/Rzuss/granular-volume/releases
+
+AutoName: Granular Volume
+
+Summary: Volume dial quieter than your phone's minimum
+Description: |-
+  Sometimes the lowest volume setting is still too loud. Granular Volume adds
+  the volume levels your phone leaves out, below the hardware minimum, through
+  a small dial that floats over any app.
+
+  Drag it anywhere, tuck it to an edge, close it with one tap. It does not
+  override your volume buttons or replace the system volume panel. It just
+  sits on top.
+
+  No equalizer, no presets, no account, no network access, no tracking.
+  Single purpose by design.
+
+  For white noise next to a sleeping baby, sensitive IEMs where step one is
+  already loud, late-night listening, or any quiet room.
+
+Builds:
+  - versionName: '1.1.2'
+    versionCode: 4
+    commit: v1.1.2
+    subdir: android/app
+    gradle:
+      - release
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: '1.1.2'
+CurrentVersionCode: 4

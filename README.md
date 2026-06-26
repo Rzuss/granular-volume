@@ -50,7 +50,7 @@ A foreground `Service` owns the effect and the overlay for the full lifetime of 
 ## Project structure
 
 ```
-Volume control/                 Android project (Gradle root)
+android/                        Android project (Gradle root)
   app/
     src/main/
       AndroidManifest.xml
@@ -74,7 +74,7 @@ video/assets/                   Promo and card source files
 Requirements: JDK 17 and the Android SDK (compileSdk 35).
 
 ```bash
-cd "Volume control"
+cd android
 
 # Debug APK (installs alongside the Play build, applicationId suffix .debug)
 ./gradlew assembleDebug

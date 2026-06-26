@@ -39,7 +39,7 @@ repository and their build server compiles the app from this Git repo.
      - versionName: 1.1.2
        versionCode: 4
        commit: v1.1.2
-       subdir: Volume control/app
+       subdir: android/app
        gradle:
          - yes
 
@@ -51,9 +51,8 @@ repository and their build server compiles the app from this Git repo.
 4. Open a merge request. The F-Droid team reviews, the build server compiles
    from source, and the app appears in the F-Droid client.
 
-Note: the build subdir is "Volume control/app". If F-Droid tooling struggles
-with the space in the path, the cleanest fix is to move the Android project to
-the repo root in a future commit. Not required, but it simplifies the recipe.
+Build subdir is android/app (renamed from "Volume control" to remove the space
+for compatibility with F-Droid's Linux build server).
 
 ## After it lands
 
