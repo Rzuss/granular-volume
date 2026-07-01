@@ -1,0 +1,52 @@
+name: F-Droid reproducible reference build
+
+# Builds the UNSIGNED release APK on Linux (Ubuntu) so its byte layout,
+# including line endings inside META-INF/services, matches what the F-Droid
+# build server produces from source. The artifact is downloaded and signed
+# locally with the release key, then published as a release asset for
+# F-Droid to verify reproducibility against. Signing never happens here,
+# so no keystore secret is required.
+
+on:
+  push:
+    branches: [ fdroid-repro ]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref (tag or commit) to build'
+        required: true
+        default: 'v1.1.2-fdroid'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the exact ref F-Droid builds
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref || 'v1.1.2-fdroid' }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make gradlew executable
+        working-directory: android
+        run: chmod +x ./gradlew
+
+      - name: Build unsigned release APK
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
+
+      - name: Upload unsigned release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: granular-volume-release-unsigned
+          path: "android/app/build/outputs/apk/release/*.apk"
+          if-no-files-found: error
