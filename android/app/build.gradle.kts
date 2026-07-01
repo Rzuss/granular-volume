@@ -20,6 +20,13 @@ android {
     namespace = "com.granularvolume"
     compileSdk = 35
 
+    // F-Droid rejects APKs containing the Play-specific "Dependency metadata" signing
+    // block, since it reports dependency info back to Google.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     defaultConfig {
         applicationId = "granularvolume.com"
         minSdk = 28
