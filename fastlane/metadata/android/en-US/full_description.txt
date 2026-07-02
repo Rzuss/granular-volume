@@ -1,32 +1,39 @@
-Sometimes the lowest volume setting is still too loud. The first notch above mute can be too much for a quiet room, a sleeping baby, or a sensitive pair of headphones. Android does not let you go lower. Granular Volume does.
+Volume too loud even at the lowest setting? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
 
-Granular Volume adds the volume levels your phone leaves out. It places a small floating dial over any app, so you can fine tune the output below the hardware minimum, down to a whisper, and back again. One tap, always within reach.
+A small floating volume control appears above any app. Seven steps from no change down to a full 30 dB below your hardware minimum. One tap to move. Drag it anywhere on screen, tuck it to an edge, close it when you are done. Your position is saved.
 
-QUIETER THAN YOUR PHONE ALLOWS
-Most volume apps only make things louder. Granular Volume goes the other way. It inserts fine attenuation steps beneath the lowest hardware step, for the moments when even the minimum is too much.
+LOWER THAN YOUR PHONE OR TABLET ALLOWS
+Every other volume app goes one direction: louder. Granular Volume goes the other way. It reduces volume below the lowest step your device's hardware allows, using Android's audio engine, on phones and tablets alike. No root required. No volume button override. No system volume panel replacement. Just the quiet end of the dial, without touching anything else.
+
+BUILT FOR TABLETS TOO
+Tablets often have an even higher minimum volume than phones, especially through their built in speakers or over headphones. Granular Volume works exactly the same way on Android tablets as it does on phones, so tablet users get the same quiet floor.
+
+A FLOATING VOLUME CONTROL, ALWAYS IN REACH
+The control lives above whatever you are doing. Open any app, start any audio, and it is there when you need it. Drag it anywhere, or tuck it to an edge between uses. One tap closes it. Your last position is remembered next time.
+
+QUICK SETTINGS TILE
+Swipe down, tap once. Add Granular Volume to your Quick Settings panel and toggle the overlay on or off without ever opening the app. No shortcuts to set up, no widgets to place.
 
 MADE FOR QUIET MOMENTS
+- Sensitive IEMs and high-sensitivity headphones, where even step 1 is too loud
+- Tablet speakers and headphones, where the minimum step is often even louder than on phones
 - White noise or lullabies for a sleeping baby, kept barely audible
-- A podcast or audiobook to fall asleep to, without waking the person beside you
-- Sensitive IEMs and bone conduction headphones, where even a few percent is too strong
-- A library, a quiet office, meditation, or late night reading
+- Late-night listening next to a sleeping partner
+- Quiet rooms, libraries, open offices, and meditation
+- ASMR and relaxation audio at a comfortable level
+- Hearing aids and amplified devices where minimum system volume is too strong
+- Anyone who searched for lower volume than the minimum Android setting
 
-A FLOATING DIAL, ALWAYS IN REACH
-The control floats above whatever you are doing. Drag it anywhere on screen, tuck it to an edge when you are done, or close it with a single tap. Your position is remembered next time.
+DESIGNED TO STAY OUT OF THE WAY
+Granular Volume does not take over your volume buttons. It does not replace your system volume panel. It does not add an equalizer suite you did not ask for. It sits quietly on top as an overlay and does one thing: make the output quieter than your hardware minimum.
 
-IT TOUCHES NOTHING ELSE
-Granular Volume does not take over your volume buttons and does not replace your system volume panel. It sits quietly on top as an overlay, so it stays stable and works alongside your music, your calls, and your other apps.
-
-SIMPLE BY DESIGN
-No equalizer maze. No presets to manage. No account to create. One dial that does one thing well.
-
-FREE, PRIVATE, OPEN
-No ads. No tracking. Nothing collected. Granular Volume is open source under the GPL-3.0 license.
+FREE, PRIVATE, OPEN SOURCE
+No ads. No tracking. No internet permission, so the app cannot connect to anything. No account, no sign in, no analytics. Open source under the GPL-3.0 license.
 
 PERMISSIONS, EXPLAINED
-- Display over other apps, so the dial can float above your apps
-- Modify audio settings, to apply the volume attenuation
-- Run a foreground service, to keep the control reliable while you listen
-- Start on boot, so it is ready when you need it
+- Display over other apps: required to show the floating volume control above your screen
+- Modify audio settings: required to apply the volume attenuation
+- Run a foreground service: keeps the control reliable while you listen
+- Start on boot: so it is ready when you need it
 
-If the lowest setting has ever been too loud, this is the volume you were missing.
+Works on Android phones and tablets alike. If your minimum was always too loud, this is the volume you were missing.

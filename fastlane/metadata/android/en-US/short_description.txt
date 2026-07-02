@@ -1,1 +1,1 @@
-Make any app quieter than your phone's minimum. A floating fine volume dial.
+Goes below Android's minimum volume, on phones and tablets. No ads, open source.
