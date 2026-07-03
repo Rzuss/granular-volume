@@ -173,6 +173,49 @@ https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
+## AlternativeTo.net
+
+Submit as an alternative to: Precise Volume, Volume Booster, Volume Styles.
+
+Short description:
+Free, open source Android app that goes below the phone's minimum volume, on
+both phones and tablets. A small floating dial adds fine attenuation steps under
+the hardware floor. No ads, no tracking, no account, GPL-3.0.
+
+Tags: volume control, audio, accessibility, open source, android
+
+Long description (for the detail box):
+Granular Volume adds volume steps below what Android's hardware minimum allows,
+through a small overlay dial that floats over any app. Unlike volume boosters,
+it goes the other direction: quieter, for sensitive IEMs, sleeping next to a
+baby, or a quiet room. Works the same on phones and tablets. It does not
+override the physical volume buttons or replace the system volume panel, it
+just sits on top and does one thing. Free, no ads, no tracking, open source.
+
+---
+
+## Hearing aid and hard of hearing communities (HearingTracker forums, r/hearingaids)
+
+Title: Free app for when even the lowest phone volume is too strong
+
+Body:
+If you use hearing aids or an amplified device, you already know the problem:
+the phone's own lowest volume step can still be stronger than what's comfortable
+once it's combined with your device's own amplification. Android will not go any
+lower on its own.
+
+I built a small free app that adds finer volume steps underneath that minimum,
+through a small floating dial you place anywhere on screen. It does not touch
+your volume buttons or replace the system volume panel, it just adds the
+missing quiet end of the range. No ads, no tracking, no account, open source.
+
+Play: https://play.google.com/store/apps/details?id=granularvolume.com
+
+I'd like to hear if this actually helps in real use with hearing aids
+specifically. That's a case I want to get right.
+
+---
+
 ## Twitter / X thread
 
 1/ The lowest volume on your phone is still too loud at night?

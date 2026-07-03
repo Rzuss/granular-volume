@@ -22,12 +22,62 @@ Not allowed, and worth avoiding entirely:
 
 ---
 
-## The launch ask (send to testers once it is public)
+## The pre-warm email (send now, while still in closed testing)
 
-Now that Granular Volume is live on Google Play, if it has been useful to you, an
-honest review would help a lot. No need to say anything fancy, just whether it
-works for you and what you use it for. Thanks for trying it.
+Google does not let testers write a public Play review until the app has a
+production release. Rather than asking for something they cannot do yet, send
+this now to keep them engaged and collect quotable feedback in the meantime, so
+they act fast the moment T-0 hits instead of having forgotten about the app.
+
+Subject: A quick update, and one honest ask (2 minutes)
+
+Hi everyone,
+
+Thank you for testing Granular Volume this past week. Every day you stay opted in
+moves the countdown to full public launch forward, and that matters more than you
+might realize.
+
+One thing came up that I want to explain honestly: right now, you won't see an
+option to write a Play Store review. That's not a bug on your end, and it's not
+something broken on ours either. Google only unlocks public reviews once an app
+reaches full production release, and we're still about a week away from even
+being eligible to apply. The review option will simply appear on its own once
+that happens. Nothing to troubleshoot.
+
+So instead of asking you to do something you can't do yet, here's what would
+genuinely help right now:
+
+1. Reply to this email with anything on your mind, good or rough. Even one line
+   helps: what you use it for, what surprised you, anything that felt off.
+2. If you're on Reddit, feel free to share your experience wherever feels
+   natural. Real words from real testers carry weight.
+
+The moment the app goes fully public, I'll send one short follow-up and ask if
+you'd leave that review then. No pressure either way, today's ask is just honest
+feedback.
+
+Thank you for being part of this from the start. It means a lot.
+
+## The launch ask (send to testers the moment it goes public, same day as T-0)
+
+Subject: It's live. Thank you for getting us here.
+
+Hi everyone,
+
+Granular Volume is now public on Google Play. The 14 days you stayed opted in are
+the reason it's here, so thank you.
+
+If it's been useful to you, an honest review now would help enormously, especially
+in the first couple of days. No need to write anything long, just whether it
+works for you and what you use it for.
+
 https://play.google.com/store/apps/details?id=granularvolume.com
+
+(On Android, opening that link and scrolling to "Rate this app" takes about 20
+seconds. If you're on the app already, tapping the same link should jump straight
+there.)
+
+Thank you again, genuinely.
 
 ---
 

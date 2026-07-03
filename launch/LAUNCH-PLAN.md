@@ -33,32 +33,44 @@ execute, not scramble.
 
 Get all of this done while the testing clock runs, so launch day is pure execution.
 
-- [ ] Keep 12+ testers installed for the full 14 days (do not drop below 12).
+- [ ] Keep 12+ testers installed for the full 14 days (do not drop below 12). Status 2026-07-02: day 7 of 14, on track.
 - [ ] Apply for production the moment the gate clears, then wait for review.
-- [ ] F-Droid merge request submitted and in their queue (see store-assets/FDROID-SUBMISSION.md). Their review takes weeks, so start early.
-- [ ] Landing page live at GitHub Pages (docs/index.html). Gives every post one clean link.
-- [ ] All launch posts finalized (launch/LAUNCH-POSTS.md).
-- [ ] Press kit ready (launch/PRESS-KIT.md).
-- [ ] Review response templates ready (launch/REVIEWS-PLAYBOOK.md).
+- [x] F-Droid merge request MERGED 2026-07-02 (reproducible build verified, full 9/9 CI green). The actual build+publish to the public F-Droid repo (f-droid.org/packages/granularvolume.com) is still pending on their side as of this writing — check periodically, this is a separate step from the merge and has no fixed timeline.
+- [x] Landing page live at GitHub Pages (docs/index.html), now includes explicit tablet-support messaging.
+- [x] All launch posts finalized (launch/LAUNCH-POSTS.md).
+- [x] Press kit ready (launch/PRESS-KIT.md).
+- [x] Review response templates ready (launch/REVIEWS-PLAYBOOK.md).
 - [ ] Short demo clips cut per use case (sleep, IEM, library) from the existing video pipeline, for posts that allow media.
+- [ ] **NEW, do this now (2026-07-02):** send testers the pre-warm email (see launch/REVIEWS-PLAYBOOK.md "Pre-warm email") explaining honestly that Play blocks writing a review until production exists, and asking for informal text feedback in the meantime instead. This converts an otherwise-wasted ask into real testimonial material and means testers are primed to act fast the moment T-0 hits, instead of forgetting about the app.
+- [ ] **Decision needed from you:** consider adding Google Play's in-app review API (native "Rate this app" popup Google shows automatically at a good moment, no need to leave the app). This is the single highest-leverage lever for review *volume* at launch, well above any Reddit post. It requires one code change and one more test-track release before applying for production; it does NOT reset the 14-day tester clock (pushing a new build to the same closed-testing track does not restart tester-opt-in continuity). Tell me if you want this built; if yes, start now so it is tested before T-0.
 
-## Phase 1: Launch day (T-0, production live)
+## Phase 1: Launch day (T-0, production live) — the review blitz
 
-Post in sequence, not all at once. Space across the day so you can answer comments
-on each before the next. Best days are Tuesday to Thursday, mid morning US time.
+Reviews are won in the first 48 hours, not the first two weeks. Move fast and in
+this order. Space the Reddit posts across the day so you can answer comments on
+each before the next; everything review-related below fires immediately, same day.
 
-Order of channels (highest fit first):
+**Within the first hour of going live:**
+- [ ] Send testers the "it's live" follow-up email (see launch/REVIEWS-PLAYBOOK.md "The launch ask") with the direct Play link. Testers already know this is coming from the pre-warm email, so this should convert fast.
+- [ ] Reply "it's live now" on every existing Reddit thread that already has engagement (the recruitment threads, the Omegv10 review-question thread), with the direct Play link. These threads already have warm, interested readers, this is the fastest review-per-minute channel you have.
+- [ ] If F-Droid's public listing is live by T-0, mention it as a trust signal ("now also independently verified and available on F-Droid") in every post below. If not live yet, do not mention it, do not create a false expectation.
+
+**Same day, spaced through the day:**
 1. r/androidapps (general discovery, allows app posts).
 2. The sensitive hearing communities, one at a time, value first and empathetic.
 3. r/headphones or r/HeadphoneAdvice (the IEM angle).
 4. A parenting community (the sleep angle).
 5. F-Droid forum reply to the existing volume fine-tuner request, once live there.
+
+**Within the same launch week (not the same day, needs its own scheduling):**
 6. Product Hunt (a one shot, schedule for 12:01 AM PT on a Tue to Thu).
 7. Show HN on Hacker News (the FOSS, no tracking angle).
+8. AlternativeTo.net listing (free, 10 minutes, captures people actively comparing against Precise Volume — see launch/LAUNCH-POSTS.md "AlternativeTo.net").
+9. A short 15-20 second vertical cut of the existing demo video for TikTok / Instagram Reels / YouTube Shorts, targeting the sleep and ASMR audience specifically. Different reach than every channel above, near-zero extra cost since the footage exists.
 
-On launch day also:
-- [ ] Ask existing testers to leave an honest review now that it is public. This is allowed. Do not offer anything in return. Honest reviews from real users at launch set the baseline rating.
+**Ongoing, not launch-day-only:**
 - [ ] Pin the Play link and the demo video in every thread's first comment.
+- [ ] Reply to every review the same day it posts, not within 24 hours. Speed compounds: an early reply on a public review is itself marketing material for the next reader.
 
 ## Phase 2: First two weeks (reviews are won here)
 
@@ -92,6 +104,9 @@ The opening rating is decided in the first two weeks. Treat it as the priority.
 | Hacker News (Show HN) | The open source, no tracking story | You post, I draft |
 | XDA forums | Power users, the original "lower the minimum" threads | You post, I draft |
 | Android news tips | Free reach if picked up | You send, I draft blurb |
+| AlternativeTo.net | Captures people already comparing against Precise Volume at the exact moment of decision | You submit (10 min), I draft the listing text |
+| Hearing aid forums (HearingTracker etc.) | High intent, professionally adjacent audience, near zero competition there | You post, I draft |
+| TikTok / Reels / Shorts (short vertical cut) | Sleep and ASMR audiences are very active in short video, a channel none of the above touches | You film/post, I cut the script and shot list from existing footage |
 
 Reddit, Product Hunt, HN, and forums need account actions and sometimes a CAPTCHA,
 so you post and I supply exact text. I cannot post to those for you.
@@ -100,7 +115,13 @@ so you post and I supply exact text. I cannot post to those for you.
 
 ## Success metrics and decision points
 
-Watch weekly:
+**First 48 hours: check every few hours, not daily.** This is the window that sets
+the baseline rating and decides whether momentum builds or stalls.
+- Number of ratings (not just average). Target: at least 5-10 genuine ratings within 48 hours from the pre-warmed tester list alone.
+- Average rating. Target: hold 4.3 or above.
+- Any 1-2 star review: reply same day, not next day.
+
+After the first 48 hours, watch weekly:
 - Installs and the install to opt-out ratio.
 - Average rating and number of ratings. Target: hold 4.3 or above.
 - Crash free users. Target: 99 percent or above.
