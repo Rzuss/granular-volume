@@ -1,1 +1,0 @@
-On Android 13 and above: the app now requests notification permission on first launch (so the foreground control is visible in your notification shade) and offers to add the Quick Settings tile in one tap — no manual tile search needed.
