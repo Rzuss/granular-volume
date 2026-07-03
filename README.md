@@ -4,7 +4,7 @@
 
 # Granular Volume
 
-**Precise per stream volume, always within reach.**
+**Volume below Android's minimum. A floating control that stays above any app.**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](#)
@@ -20,7 +20,7 @@
 
 Android volume buttons are a blunt instrument. Lower your music and your ringtone drops with it. The lowest audible hardware step is often still too loud for a quiet room.
 
-Granular Volume adds a software attenuation layer that inserts finer volume steps below the lowest hardware notch, and puts the control in a small floating widget that stays reachable over any app. Drag it anywhere on screen, tuck it to an edge, or close it with one tap.
+Granular Volume adds a software attenuation layer that inserts finer volume steps below the lowest hardware notch, and puts the control in a small floating volume control that stays above any app. Drag it anywhere on screen, tuck it to an edge, or close it with one tap.
 
 No ads. No tracking. No account. Nothing collected.
 
@@ -28,6 +28,7 @@ No ads. No tracking. No account. Nothing collected.
 
 - **Fine grained attenuation** from 0 dB (pass through) down to about -30 dB in steps, applied to the global output mix.
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
+- **Quick Settings tile** — toggle the overlay on or off from the notification shade without opening the app.
 - **One tap dismiss** and a clean, native feeling control surface.
 - **Auto start on boot** so the control is ready when you need it.
 - **Lightweight**, single purpose, written in pure Kotlin with no Compose runtime.

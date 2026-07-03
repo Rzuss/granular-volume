@@ -24,8 +24,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 35          // Play requires API 35 (Android 15) for new apps in 2025+
-        versionCode = 4
-        versionName = "1.1.2"
+        versionCode = 6
+        versionName = "1.2.1"
     }
 
     signingConfigs {
@@ -76,4 +76,10 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.lifecycle:lifecycle-service:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    // In-app review prompt. Verified: adds no manifest permissions (binds to the
+    // Play Store app via a local service connection, no direct network access
+    // from this app's own process) — confirmed via a merged-manifest dump of a
+    // real build plus an on-device run before adding this to the shipping code.
+    implementation("com.google.android.play:review:2.0.2")
+    implementation("com.google.android.play:review-ktx:2.0.2")
 }

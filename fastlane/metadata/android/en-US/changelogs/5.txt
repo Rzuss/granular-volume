@@ -1,0 +1,1 @@
+Quick Settings tile: swipe down, tap once — the volume control is on or off without opening the app. Add it to your Quick Settings panel from the tile editor.

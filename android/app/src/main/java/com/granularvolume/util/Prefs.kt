@@ -17,6 +17,9 @@ object Prefs {
     private const val KEY_OVERLAY_Y        = "overlay_y"
     private const val KEY_SERVICE_WAS_RUNNING = "service_was_running"
     private const val KEY_COLLAPSED        = "overlay_collapsed"
+    private const val KEY_QS_TILE_OFFERED  = "qs_tile_offered"
+    private const val KEY_LAUNCH_COUNT     = "launch_count"
+    private const val KEY_REVIEW_REQUESTED = "review_flow_requested"
 
     /** Current attenuation in dB (0.0 = none, -30.0 = near-silent) */
     const val ATTENUATION_DEFAULT = 0f
@@ -58,5 +61,26 @@ object Prefs {
 
     fun setCollapsed(context: Context, collapsed: Boolean) {
         prefs(context).edit { putBoolean(KEY_COLLAPSED, collapsed) }
+    }
+
+    fun wasQsTileOffered(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_QS_TILE_OFFERED, false)
+
+    fun setQsTileOffered(context: Context, offered: Boolean) {
+        prefs(context).edit { putBoolean(KEY_QS_TILE_OFFERED, offered) }
+    }
+
+    /** Counts MainActivity opens where the app was already fully set up (a "return visit"). */
+    fun incrementAndGetLaunchCount(context: Context): Int {
+        val next = prefs(context).getInt(KEY_LAUNCH_COUNT, 0) + 1
+        prefs(context).edit { putInt(KEY_LAUNCH_COUNT, next) }
+        return next
+    }
+
+    fun wasReviewFlowRequested(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_REVIEW_REQUESTED, false)
+
+    fun setReviewFlowRequested(context: Context, requested: Boolean) {
+        prefs(context).edit { putBoolean(KEY_REVIEW_REQUESTED, requested) }
     }
 }
