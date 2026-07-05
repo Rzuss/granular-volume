@@ -44,9 +44,24 @@ A foreground `Service` owns the effect and the overlay for the full lifetime of 
 
 ## Screenshots
 
-| Setup | Overlay | In use |
-|:---:|:---:|:---:|
-| ![](store-assets/screenshot_1.png) | ![](store-assets/screenshot_2.png) | ![](store-assets/screenshot_3.png) |
+<table>
+<tr>
+<th>Setup</th><th>Overlay</th><th>In use</th>
+</tr>
+<tr>
+<td><img src="store-assets/screenshot_1.png" width="260" alt="Setup screen"></td>
+<td><img src="store-assets/screenshot_2.png" width="260" alt="Overlay with seven attenuation steps"></td>
+<td><img src="store-assets/screenshot_3.png" width="260" alt="Overlay in use over another app"></td>
+</tr>
+</table>
+
+## Demo
+
+<a href="https://www.youtube.com/watch?v=_k1cdc7uWMI">
+<img src="store-assets/screenshot_2.png" width="220" alt="Watch the demo on YouTube">
+</a>
+
+[Watch the 24-second demo on YouTube](https://www.youtube.com/watch?v=_k1cdc7uWMI)
 
 ## Project structure
 
