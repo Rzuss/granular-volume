@@ -9,8 +9,8 @@ Positioning anchor: **Quieter than your phone allows.** See store-assets/BRAND.m
 Links used everywhere:
 - Play (live): https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo video: https://www.youtube.com/watch?v=oQU49OByy10
-- F-Droid (after acceptance): https://f-droid.org/packages/granularvolume.com
+- Demo video: https://www.youtube.com/watch?v=_k1cdc7uWMI
+- F-Droid (live): https://f-droid.org/en/packages/granularvolume.com/
 - Site: https://rzuss.github.io/granular-volume
 
 Copy rule for every public post: no em dashes, nothing that reads as machine
@@ -137,13 +137,14 @@ Decision points:
 
 ## Phase 4: Pro version (triggered at 100 active installs)
 
-The full plan is in launch/PRO-VERSION-PLAN.md. Summary:
+The full, verified technical plan is in memory (granular-volume-pro-plan) and was
+built against the actual codebase. Summary:
 
-Model: freemium, one-time purchase (~$1.99), no subscription.
+Model: freemium, one-time purchase ($2.99), no subscription, no ads ever.
 
-Split:
-- Free: 3 coarse volume steps below the minimum. Enough to feel the value.
-- Pro: full granular range (20+ fine steps). The experience they wanted.
+Split (the actual 7-step array in OverlayManager.kt):
+- Free: steps 1-2 (the two mildest attenuation steps). Enough to feel the value.
+- Pro: steps 3-7 (down to about -30dB). The full range.
 
 F-Droid always gets the fully unlocked build (GPL requirement, and their users
 are a word-of-mouth audience, not a revenue audience).

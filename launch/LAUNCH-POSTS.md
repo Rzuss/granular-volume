@@ -10,7 +10,7 @@ machine written. Put the Play link and demo in the first comment, not the title.
 Links:
 - Play: https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo: https://www.youtube.com/watch?v=oQU49OByy10
+- Demo: https://www.youtube.com/watch?v=_k1cdc7uWMI
 - Site: https://rzuss.github.io/granular-volume
 
 ---
@@ -46,7 +46,8 @@ over any app. No ads, no analytics, no network access at all, GPL-3.0.
 
 Source: https://github.com/Rzuss/granular-volume
 Play: https://play.google.com/store/apps/details?id=granularvolume.com
-F-Droid submission is in progress. Feedback and issues welcome on GitHub.
+F-Droid: https://f-droid.org/en/packages/granularvolume.com/
+Feedback and issues welcome on GitHub.
 
 ---
 
