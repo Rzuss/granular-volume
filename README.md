@@ -28,7 +28,7 @@ No ads. No tracking. No account. Nothing collected.
 
 - **Fine grained attenuation** from 0 dB (pass through) down to about -30 dB in steps, applied to the global output mix.
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
-- **Quick Settings tile** — toggle the overlay on or off from the notification shade without opening the app.
+- **Quick Settings tile** - toggle the overlay on or off from the notification shade without opening the app.
 - **One tap dismiss** and a clean, native feeling control surface.
 - **Auto start on boot** so the control is ready when you need it.
 - **Lightweight**, single purpose, written in pure Kotlin with no Compose runtime.
