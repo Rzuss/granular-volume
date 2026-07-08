@@ -507,6 +507,129 @@ def c_trust(d, sx, sy, sw, sh):
     d.text((bcx, bcy - s(8)), "GPL", font=bold(46), fill=(180, 174, 255), anchor="mm")
     d.text((bcx, bcy + s(36)), "open source", font=reg(22), fill=SOFT, anchor="mm")
 
+# --- Quick Settings tile screen ---------------------------------------------
+def ic_speaker_waves(d, cx, cy, r, col):
+    """The real tile icon: a speaker with two sound-wave arcs (matches ic_qs_tile.xml)."""
+    d.polygon([(cx - r, cy - int(r * 0.30)), (cx - int(r * 0.34), cy - int(r * 0.30)),
+               (cx + int(r * 0.12), cy - int(r * 0.66)), (cx + int(r * 0.12), cy + int(r * 0.66)),
+               (cx - int(r * 0.34), cy + int(r * 0.30)), (cx - r, cy + int(r * 0.30))], fill=col)
+    w = max(s(2), int(r * 0.13))
+    d.arc([cx - int(r * 0.10), cy - int(r * 0.44), cx + int(r * 0.62), cy + int(r * 0.44)],
+          start=302, end=58, fill=col, width=w)
+    d.arc([cx - int(r * 0.10), cy - int(r * 0.78), cx + int(r * 1.02), cy + int(r * 0.78)],
+          start=306, end=54, fill=col, width=w)
+
+def ic_wifi(d, cx, cy, r, col):
+    w = max(s(2), int(r * 0.13))
+    for rr in (int(r * 0.92), int(r * 0.60), int(r * 0.28)):
+        d.arc([cx - rr, cy - rr + int(r * 0.2), cx + rr, cy + rr + int(r * 0.2)],
+              start=212, end=328, fill=col, width=w)
+    d.ellipse([cx - s(3), cy + int(r * 0.5), cx + s(3), cy + int(r * 0.5) + s(6)], fill=col)
+
+def ic_bolt(d, cx, cy, r, col):
+    d.polygon([(cx + int(r * 0.12), cy - r), (cx - int(r * 0.5), cy + int(r * 0.12)),
+               (cx - int(r * 0.02), cy + int(r * 0.12)), (cx - int(r * 0.12), cy + r),
+               (cx + int(r * 0.5), cy - int(r * 0.12)), (cx + int(r * 0.02), cy - int(r * 0.12))],
+              fill=col)
+
+def ic_plane(d, cx, cy, r, col):
+    d.polygon([(cx, cy - r), (cx + int(r * 0.86), cy + int(r * 0.5)),
+               (cx + int(r * 0.20), cy + int(r * 0.28)), (cx + int(r * 0.20), cy + r),
+               (cx, cy + int(r * 0.72)), (cx - int(r * 0.20), cy + r),
+               (cx - int(r * 0.20), cy + int(r * 0.28)), (cx - int(r * 0.86), cy + int(r * 0.5))],
+              fill=col)
+
+def ic_battery(d, cx, cy, r, col):
+    bw, bh = int(r * 1.5), int(r * 0.9)
+    x0, y0 = cx - bw // 2, cy - bh // 2
+    w = max(s(2), int(r * 0.12))
+    d.rounded_rectangle([x0, y0, x0 + bw, y0 + bh], radius=s(4), outline=col, width=w)
+    d.rounded_rectangle([x0 + bw, cy - int(bh * 0.22), x0 + bw + s(4), cy + int(bh * 0.22)],
+                        radius=s(2), fill=col)
+    d.rounded_rectangle([x0 + w + s(2), y0 + w + s(2), x0 + int(bw * 0.5), y0 + bh - w - s(2)],
+                        radius=s(2), fill=col)
+
+def c_qstile(d, sx, sy, sw, sh):
+    dim_app(d, sx, sy, sw, sh)
+    # the pulled-down shade panel
+    px = sx + s(16)
+    pw = sw - s(32)
+    py = sy + s(6)
+    ph = int(sh * 0.70)
+    d.rounded_rectangle([px, py, px + pw, py + ph], radius=s(44), fill=(24, 28, 48, 250))
+    d.rounded_rectangle([px, py, px + pw, py + ph], radius=s(44), outline=(70, 66, 120, 90), width=s(1))
+    ix = px + s(30)
+    # time + date
+    d.text((ix, py + s(58)), "9:41", font=bold(46), fill=WHITE, anchor="lm")
+    d.text((ix, py + s(104)), "Mon, Jul 8", font=reg(22), fill=MUTED, anchor="lm")
+    # brightness slider
+    by = py + s(150)
+    bx0, bx1 = px + s(28), px + pw - s(28)
+    d.rounded_rectangle([bx0, by, bx1, by + s(30)], radius=s(15), fill=(42, 48, 74))
+    fillw = int((bx1 - bx0) * 0.62)
+    d.rounded_rectangle([bx0, by, bx0 + fillw, by + s(30)], radius=s(15), fill=(150, 158, 190))
+    sc = bx0 + fillw
+    d.ellipse([sc - s(4), by + s(8), sc + s(4), by + s(22)], fill=(70, 76, 104))
+    # tile grid (2 columns of Android-12-style pill tiles)
+    tiles = [
+        ("gv",   "Granular Volume", "On",  True),
+        ("wifi", "Wi-Fi",          "Home", False),
+        ("moon", "Do Not Disturb", "Off", False),
+        ("bolt", "Flashlight",     "Off", False),
+        ("plane","Airplane mode",  "Off", False),
+        ("batt", "Battery Saver",  "Off", False),
+    ]
+    gx0 = px + s(26)
+    gtop = by + s(60)
+    gw = pw - s(52)
+    col_gap = s(16)
+    tile_w = (gw - col_gap) // 2
+    tile_h = int(sh * 0.088)
+    row_gap = s(16)
+    for i, (icon, label, status, active) in enumerate(tiles):
+        col, row = i % 2, i // 2
+        tx = gx0 + col * (tile_w + col_gap)
+        ty = gtop + row * (tile_h + row_gap)
+        if active:
+            # soft glow to draw the eye
+            ge = s(14)
+            d.rounded_rectangle([tx - ge, ty - ge, tx + tile_w + ge, ty + tile_h + ge],
+                                radius=int(tile_h * 0.5) + ge, fill=(108, 99, 255, 40))
+            d.rounded_rectangle([tx, ty, tx + tile_w, ty + tile_h], radius=int(tile_h * 0.5),
+                                fill=(108, 99, 255, 255))
+            chip_bg, glyph_col, lab_col, stat_col = (255, 255, 255, 240), VIOLET, WHITE, (233, 231, 255, 235)
+        else:
+            d.rounded_rectangle([tx, ty, tx + tile_w, ty + tile_h], radius=int(tile_h * 0.5),
+                                fill=(36, 42, 64, 255))
+            chip_bg, glyph_col, lab_col, stat_col = (58, 64, 92, 255), (150, 158, 185), SOFT, FAINT
+        # leading icon chip
+        cr = int(tile_h * 0.30)
+        ccx = tx + s(20) + cr
+        ccy = ty + tile_h // 2
+        d.ellipse([ccx - cr, ccy - cr, ccx + cr, ccy + cr], fill=chip_bg)
+        gr = int(cr * 0.62)
+        if   icon == "gv":    ic_speaker_waves(d, ccx, ccy, gr, glyph_col)
+        elif icon == "wifi":  ic_wifi(d, ccx, ccy, gr, glyph_col)
+        elif icon == "moon":  ic_moon(d, ccx, ccy, gr, glyph_col, chip_bg[:3])
+        elif icon == "bolt":  ic_bolt(d, ccx, ccy, gr, glyph_col)
+        elif icon == "plane": ic_plane(d, ccx, ccy, gr, glyph_col)
+        else:                 ic_battery(d, ccx, ccy, gr, glyph_col)
+        # label + status, sized to fit the remaining tile width; wrap to two
+        # lines (dropping the status line) when the label is too long to fit
+        # cleanly on one line, so nothing is ever truncated.
+        text_x = ccx + cr + s(14)
+        maxw = tx + tile_w - text_x - s(14)
+        lf = semi(22)
+        if d.textlength(label, font=lf) <= maxw:
+            d.text((text_x, ty + int(tile_h * 0.36)), label, font=lf, fill=lab_col, anchor="lm")
+            d.text((text_x, ty + int(tile_h * 0.66)), status, font=reg(17), fill=stat_col, anchor="lm")
+        else:
+            parts = label.split(" ", 1)
+            wf = semi(21)
+            d.text((text_x, ty + int(tile_h * 0.34)), parts[0], font=wf, fill=lab_col, anchor="lm")
+            if len(parts) > 1:
+                d.text((text_x, ty + int(tile_h * 0.64)), parts[1], font=wf, fill=lab_col, anchor="lm")
+
 # --- Feature graphic 1024x500 ------------------------------------------------
 def make_feature():
     Wg, Hg = s(1024), s(500)
@@ -559,4 +682,6 @@ build(5, ["It touches nothing else"],
       "No button override. No system takeover.", c_noninvasive, accent=CYAN)
 build(6, ["Free, private, open"],
       "No ads. No tracking. GPL-3.0.", c_trust)
+build(7, ["One tap from", "Quick Settings"],
+      "Turn it on or off without opening the app", c_qstile)
 print("Done. Assets saved to:", OUT)
