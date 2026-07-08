@@ -9,7 +9,7 @@ Positioning anchor: **Quieter than your phone allows.** See store-assets/BRAND.m
 Links used everywhere:
 - Play (live): https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo video: https://www.youtube.com/watch?v=_k1cdc7uWMI
+- Demo video: https://www.youtube.com/watch?v=L046IL-7ywE
 - F-Droid (live): https://f-droid.org/en/packages/granularvolume.com/
 - Site: https://rzuss.github.io/granular-volume
 
