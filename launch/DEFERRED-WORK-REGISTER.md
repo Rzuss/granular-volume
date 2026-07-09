@@ -72,7 +72,10 @@ This is the single highest legal exposure item in the project.
 
 ### C-build: the Pro implementation
 
-Full spec in memory `granular-volume-pro-plan`. Summary of the parts most easily got wrong:
+**The full ordered execution sequence for everything under trigger C, from "go" to live on
+Google Play, is `launch/PRO-ROLLOUT-RUNBOOK.md` (50 steps, with the verification gates that
+must pass before each phase). Open that file when the trigger fires. The table below is the
+summary of the parts most easily got wrong; the runbook is the order of operations.**
 
 | # | Item | Notes |
 |---|---|---|
