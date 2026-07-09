@@ -10,7 +10,7 @@ machine written. Put the Play link and demo in the first comment, not the title.
 Links:
 - Play: https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo: https://www.youtube.com/watch?v=L046IL-7ywE
+- Demo: https://www.youtube.com/watch?v=YIDK_FplwtM
 - Site: https://rzuss.github.io/granular-volume
 
 ---
@@ -28,7 +28,9 @@ anywhere, tuck it to an edge, close it with one tap.
 
 It does one thing on purpose. No equalizer, no presets, no account. It does not
 take over your volume buttons or your system volume panel, it just sits on top.
-Free, no ads, no tracking, open source under GPL-3.0.
+There's also a Quick Settings tile, so you can turn it on or off from the
+notification shade without opening the app. Free, no ads, no tracking, open
+source under GPL-3.0.
 
 Play: https://play.google.com/store/apps/details?id=granularvolume.com
 Source and demo in the comments. Happy to hear what would make it more useful.
@@ -42,7 +44,8 @@ Title: Granular Volume: open source volume control for the quiet end of the dial
 Body:
 A single purpose, no tracking app for when the lowest hardware volume step is
 still too loud. It adds fine attenuation below the minimum and floats a small dial
-over any app. No ads, no analytics, no network access at all, GPL-3.0.
+over any app, with a Quick Settings tile to toggle it straight from the shade.
+No ads, no analytics, no network access at all, GPL-3.0.
 
 Source: https://github.com/Rzuss/granular-volume
 Play: https://play.google.com/store/apps/details?id=granularvolume.com
@@ -128,7 +131,8 @@ not go lower. So I made the volume that was missing.
 
 It is deliberately tiny. One floating dial, no equalizer maze, no account. It does
 not take over your volume buttons or the system volume panel, it just sits on top
-and stays out of the way. Free, no ads, nothing tracked, GPL-3.0.
+and stays out of the way. There's a Quick Settings tile too, so it's a one tap
+toggle from the notification shade. Free, no ads, nothing tracked, GPL-3.0.
 
 It is most loved for white noise next to a sleeping baby, sensitive IEMs, and
 quiet rooms late at night. I would love your feedback on what to add next.
@@ -151,7 +155,8 @@ can move anywhere.
 It is single purpose by design and deliberately non invasive: it does not override
 the volume buttons or the system volume UI, so it stays stable across devices. No
 ads, no analytics, no network access, GPL-3.0. Kotlin, foreground service plus
-WindowManager overlay, with a DynamicsProcessing to LoudnessEnhancer fallback chain.
+WindowManager overlay, with a DynamicsProcessing to LoudnessEnhancer fallback chain,
+plus a TileService for a one tap Quick Settings toggle.
 
 Source: https://github.com/Rzuss/granular-volume
 Play: https://play.google.com/store/apps/details?id=granularvolume.com

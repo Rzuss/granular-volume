@@ -57,11 +57,11 @@ A foreground `Service` owns the effect and the overlay for the full lifetime of 
 
 ## Demo
 
-<a href="https://www.youtube.com/watch?v=L046IL-7ywE">
+<a href="https://www.youtube.com/watch?v=YIDK_FplwtM">
 <img src="store-assets/screenshot_2.png" width="220" alt="Watch the demo on YouTube">
 </a>
 
-[Watch the demo on YouTube](https://www.youtube.com/watch?v=L046IL-7ywE)
+[Watch the demo on YouTube](https://www.youtube.com/watch?v=YIDK_FplwtM)
 
 ## Project structure
 

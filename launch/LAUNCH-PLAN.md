@@ -9,7 +9,7 @@ Positioning anchor: **Quieter than your phone allows.** See store-assets/BRAND.m
 Links used everywhere:
 - Play (live): https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo video: https://www.youtube.com/watch?v=L046IL-7ywE
+- Demo video: https://www.youtube.com/watch?v=YIDK_FplwtM
 - F-Droid (live): https://f-droid.org/en/packages/granularvolume.com/
 - Site: https://rzuss.github.io/granular-volume
 
@@ -131,11 +131,11 @@ Decision points:
 - Rating under 4.0: stop pushing installs, fix the top complaint first.
 - A feature requested by many reviewers: add it, then reply to those reviewers.
 - A channel that converts well: do more of it. One that does nothing: drop it.
-- **100 active installs: begin Pro version build. See launch/PRO-VERSION-PLAN.md.**
+- **~700 active installs plus a resilient review base (at least 40 real ratings holding 4.3 or above): begin Pro version build.** Raised from the original 100 on purpose: launching Pro on a thin review base means a single bad review or rough patch can sink the app before it has momentum. Invest in marketing first, build a base big enough to absorb a rough review and stay relevant, then move to Pro.
 
 ---
 
-## Phase 4: Pro version (triggered at 100 active installs)
+## Phase 4: Pro version (triggered at ~700 active installs + a resilient review base)
 
 The full, verified technical plan is in memory (granular-volume-pro-plan) and was
 built against the actual codebase. Summary:
@@ -153,8 +153,9 @@ The upgrade UI is a single bottom sheet: "Unlock the full dial. One purchase,
 yours forever." Price pulled live from Play Billing, no dark patterns.
 
 Estimated build time once we start: 12 hours of focused development.
-I have the full technical spec ready. When active installs hit 100 in Play
-Console, tell me and we start immediately.
+I have the full technical spec ready. When active installs are around 700 and
+the review base is strong (40+ ratings holding 4.3 or above), tell me and we
+start immediately.
 
 ---
 
