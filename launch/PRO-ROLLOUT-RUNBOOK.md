@@ -54,7 +54,7 @@ so the gate can never exist in the tree without it.
 | 16 | Read the price from `ProductDetails`. Never hardcode "$2.99" in the UI, it must render in local currency. | [C] |
 | 17 | Call `acknowledgePurchase()` on success. Google auto refunds an unacknowledged purchase after 3 days. Easy silent bug. | [C] |
 | 18 | Call `queryPurchasesAsync` on every app start, not just a persisted local flag, so refunds and chargebacks revoke correctly. | [C] |
-| 19 | Add a manual "Restore purchase" action in About or Settings, for reinstall and new device. | [C] |
+| 19 | Add a manual "Restore purchase" action. **⚠️ There is no About/Settings screen in the app (cold-verified 2026-07-10 — `MainActivity.kt` is a single flash-and-finish screen).** Same open placement question as register item A2c; decide both together at execution time. | [C] |
 | 20 | `fdroid` flavor: zero Billing dependency, zero gate, all 7 steps open, permanently. GPL and F-Droid policy requirement, non negotiable. | [C] |
 | 21 | Bump `versionCode`. **`applicationId` stays `granularvolume.com`. Signing config untouched.** Play Console hard rejects violations of these at upload, but do not rely on that. | [C] |
 
