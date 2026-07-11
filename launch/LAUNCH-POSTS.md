@@ -179,9 +179,38 @@ https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
+## Universal reply: "I had this too, here's what fixed it" (any thread, any forum)
+
+For any thread, comment section, or community post where someone describes this
+exact problem, in their own words, not necessarily a place already tracked above.
+Framed as a personal story first, the app second. Works on Reddit, forums, comment
+sections, anywhere replies are welcome. Always disclose it is your own app, never
+lead with the app name.
+
+Reply text:
+Same issue here, actually. The lowest volume step on my phone was still too loud
+for a quiet room, and for a pair of sensitive headphones it was worse. Android
+just would not go any lower, no matter what I tried.
+
+I ended up building a small app to fix it for myself: it adds finer volume steps
+below the phone's usual minimum, through a small dial that floats over whatever
+you're using. It does not touch your volume buttons or replace the system volume
+panel, it just adds the quiet end that was missing.
+
+Free, no ads, no tracking, open source. Sharing it here in case it helps you too.
+Play: https://play.google.com/store/apps/details?id=granularvolume.com
+F-Droid: https://f-droid.org/en/packages/granularvolume.com/
+
+Shorter variant, for threads where a long reply feels out of place:
+Ran into this exact thing. Built a small free app that adds volume steps below
+the usual minimum, through a floating dial, no ads or tracking. Might help:
+https://play.google.com/store/apps/details?id=granularvolume.com
+
+---
+
 ## AlternativeTo.net
 
-Submit as an alternative to: Precise Volume, Volume Booster, Volume Styles.
+Submit as an alternative in the volume control / audio utility category. (Note: AlternativeTo.net's own submission form asks you to name specific apps yours is an alternative to. That naming happens on their site directly, at submission time, not in this doc.)
 
 Short description:
 Free, open source Android app that goes below the phone's minimum volume, on
