@@ -60,24 +60,29 @@ Thank you for being part of this from the start. It means a lot.
 
 ## The launch ask (send to testers the moment it goes public, same day as T-0)
 
-Subject: It's live. Thank you for getting us here.
+Subject: We're live! (and I owe you one)
 
 Hi everyone,
 
-Granular Volume is now public on Google Play. The 14 days you stayed opted in are
-the reason it's here, so thank you.
+Big news: Granular Volume just went public on Google Play. The 14 days you stayed
+opted in are the actual reason it's there, so genuinely, thank you.
 
-If it's been useful to you, an honest review now would help enormously, especially
-in the first couple of days. No need to write anything long, just whether it
-works for you and what you use it for.
+Here's the one favor I'll ask today. If the app has been useful to you, a quick
+star rating and a line or two of honest review would help more than you'd think,
+especially in these first few days. Doesn't need to be long, just what you use it
+for and whether it does the job.
 
 https://play.google.com/store/apps/details?id=granularvolume.com
 
-(On Android, opening that link and scrolling to "Rate this app" takes about 20
-seconds. If you're on the app already, tapping the same link should jump straight
+(Opening that link on Android and scrolling to "Rate this app" takes about 20
+seconds. If the app is already installed, tapping the link should jump straight
 there.)
 
-Thank you again, genuinely.
+And if there's ever anything I can do to return the favor, testing something of
+yours, giving feedback, a shoutout, whatever, just ask. You got me here, I'd love
+to pay that forward.
+
+Thank you again. Really.
 
 ---
 
