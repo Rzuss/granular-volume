@@ -10,7 +10,7 @@ machine written. Put the Play link and demo in the first comment, not the title.
 Links:
 - Play: https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo: https://www.youtube.com/watch?v=YIDK_FplwtM
+- Demo: https://www.youtube.com/watch?v=8dR0nNhW27g
 - Site: https://rzuss.github.io/granular-volume
 
 ---

@@ -9,7 +9,7 @@ Positioning anchor: **Quieter than your phone allows.** See store-assets/BRAND.m
 Links used everywhere:
 - Play (live): https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo video: https://www.youtube.com/watch?v=YIDK_FplwtM
+- Demo video: https://www.youtube.com/watch?v=8dR0nNhW27g
 - F-Droid (live): https://f-droid.org/en/packages/granularvolume.com/
 - Site: https://rzuss.github.io/granular-volume
 
@@ -65,7 +65,7 @@ each before the next; everything review-related below fires immediately, same da
 **Within the same launch week (not the same day, needs its own scheduling):**
 6. Product Hunt (a one shot, schedule for 12:01 AM PT on a Tue to Thu).
 7. Show HN on Hacker News (the FOSS, no tracking angle).
-8. AlternativeTo.net listing (free, 10 minutes, captures people actively comparing against Precise Volume — see launch/LAUNCH-POSTS.md "AlternativeTo.net").
+8. AlternativeTo.net listing (free, 10 minutes, captures people actively comparing volume apps — see launch/LAUNCH-POSTS.md "AlternativeTo.net").
 9. A short 15-20 second vertical cut of the existing demo video for TikTok / Instagram Reels / YouTube Shorts, targeting the sleep and ASMR audience specifically. Different reach than every channel above, near-zero extra cost since the footage exists.
 
 **Ongoing, not launch-day-only:**
@@ -104,7 +104,7 @@ The opening rating is decided in the first two weeks. Treat it as the priority.
 | Hacker News (Show HN) | The open source, no tracking story | You post, I draft |
 | XDA forums | Power users, the original "lower the minimum" threads | You post, I draft |
 | Android news tips | Free reach if picked up | You send, I draft blurb |
-| AlternativeTo.net | Captures people already comparing against Precise Volume at the exact moment of decision | You submit (10 min), I draft the listing text |
+| AlternativeTo.net | Captures people already comparing volume apps at the exact moment of decision | You submit (10 min), I draft the listing text |
 | Hearing aid forums (HearingTracker etc.) | High intent, professionally adjacent audience, near zero competition there | You post, I draft |
 | TikTok / Reels / Shorts (short vertical cut) | Sleep and ASMR audiences are very active in short video, a channel none of the above touches | You film/post, I cut the script and shot list from existing footage |
 
