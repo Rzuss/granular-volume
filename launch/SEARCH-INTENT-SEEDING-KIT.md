@@ -30,14 +30,28 @@ nobody in these threads has offered yet.
 
 ## Posting rules
 
-1. One post per day, across all channels combined (not one per site per day).
+1. **One post per day, period. One forum per day.** Not one per site per day, one
+   total. This was tightened after a real incident: posting several similar,
+   disclosed replies on Fairphone's forum within a short window (still a new
+   account there) tripped Discourse's automated new-user spam hold, even though
+   every post disclosed authorship and was tailored to its thread. The account
+   was placed on hold pending staff review. Lesson: new accounts have zero trust
+   score, so pace matters more than message quality in the first days on any
+   forum. Space activity days apart, not hours apart, especially on a forum
+   where the account is new.
 2. Always keep the disclosure line ("it is my app"). Required by forum rules, FTC
-   guidance, and our own BRAND.md rule.
+   guidance, and our own BRAND.md rule. Disclosure did not prevent the spam hold
+   above, so it is necessary but not sufficient. Pace is what actually matters to
+   automated spam filters.
 3. Re-read the thread's last 2-3 replies right before posting, in case something
    changed since this was written.
 4. Reply personally and quickly if anyone responds.
 5. Never paste the same text twice.
 6. No em dashes, nothing that reads as machine written.
+7. On a brand-new forum account, consider posting one genuinely helpful,
+   non-promotional reply first (no link, no mention of the app) before any
+   disclosed app-mention post, to build a small amount of account trust first.
+   Not required, but reduces spam-hold risk on stricter forums.
 
 Link: https://play.google.com/store/apps/details?id=granularvolume.com
 
