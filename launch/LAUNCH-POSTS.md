@@ -47,6 +47,35 @@ way, you are the reason this exists at all. Happy to answer anything here.
 
 ---
 
+## r/FreeAppReviews
+
+This sub exists specifically for developers to ask for honest reviews of free
+apps, so the ask can be direct here, more than on general subs. Still disclose
+plainly, still no em dashes, still genuinely invite criticism, not just praise.
+
+Title: Granular Volume, a free and open source app for volume below Android's minimum (feedback and honest reviews welcome)
+
+Body:
+Granular Volume is a small Android app I built and just released. Many phones
+and tablets have a lowest volume step that is still too loud for a quiet room,
+sensitive headphones, or a sleeping baby, and Android will not let you go any
+lower. This adds finer steps below that minimum through a small dial that
+floats over any app, no root needed.
+
+It does one thing on purpose. No equalizer, no presets, no account. It does
+not override your volume buttons or the system volume panel, it just sits on
+top. There is a Quick Settings tile too, so it toggles straight from the
+notification shade. Free, no ads, no tracking, open source under GPL-3.0.
+
+Play Store: https://play.google.com/store/apps/details?id=granularvolume.com
+Source: https://github.com/Rzuss/granular-volume
+
+I would genuinely appreciate honest feedback, good or critical, this is a
+brand new listing and a real review helps more than I can easily explain.
+Happy to answer anything about how it works or what is coming next.
+
+---
+
 ## r/androidapps
 
 Title: Granular Volume, a free and open source app for volume below Android's minimum
