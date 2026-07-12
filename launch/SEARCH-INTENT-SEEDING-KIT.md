@@ -8,17 +8,35 @@ alone because those sites block automated fetching, and one of them turned out t
 be from 2013. Do not trust unverified forum links; if you find a new one yourself,
 open it and check the date before posting.
 
-## Why Fairphone is the entire list right now
+## Status: Fairphone account on hold
 
-Fairphone's community forum is the only one of the sites checked that stays open
-to automated reading, is discourse-based (clean thread structure), gets read by
-real recent posters, and does NOT lock its threads. Every thread below is real,
-recent (within the last ~11 months), and open for replies today.
+The Fairphone forum account is currently on hold pending staff review (new-account
+spam filter, see posting rule #1 below). Do NOT attempt to post on Fairphone until
+that hold is lifted and confirmed. Threads 1-5 below stay in the kit for when it
+clears. In the meantime, section "Samsung Community" below is the active target.
+
+## Platform notes
+
+- **Fairphone Community** (Discourse): open to automated reading, doesn't lock
+  threads, but our account there is on hold (see Status above).
+- **Samsung Community** (Lithium/Khoros, several regional instances —
+  us./eu./r2.community.samsung.com): open to automated reading, threads show a
+  visible reply count and REPLY/COMMENT button when open, "Archived" banner when
+  closed. Different platform and different account needed than Fairphone, so the
+  hold above does not affect posting here.
+- **Google Pixel/Android Community**: almost every thread gets auto-locked
+  ("This question is locked and replying has been disabled"), often even ones
+  asking for solutions. Treat as intel-only, not a posting target, unless a
+  specific thread is confirmed open.
+- **XDA, Android Central, OnePlus, Nothing Community**: block or fail automated
+  fetching/reading in this environment, so nothing there can be verified right
+  now. Don't add threads from these until someone can actually open and read them.
 
 If you want more targets beyond this list, search
-`site:forum.fairphone.com volume too loud` yourself, open any promising result,
-and confirm the date and open/closed status before posting. Do not add to this
-file without verifying like that.
+`site:forum.fairphone.com volume too loud` or `site:community.samsung.com volume
+too loud minimum` yourself, open any promising result, and confirm the date and
+open/closed status before posting. Do not add to this file without verifying like
+that.
 
 ## The pattern we exploit
 
@@ -156,7 +174,60 @@ it listed for tracking, not for posting today.
 
 ---
 
-## After these five
+## Samsung Community (ACTIVE — post here while Fairphone is on hold)
+
+### 6. "Speaker volume too loud even at minimum – uncomfortable listening experience on Galaxy S24 FE" (BEST current target)
+https://eu.community.samsung.com/t5/galaxy-s24-series/speaker-volume-too-loud-even-at-minimum-uncomfortable-listening/td-p/12302196
+
+Verified: created Jun 5, 2025, active back-and-forth through at least Jun 7, 2025
+across 22 replies / 3 pages, **7,746 views**. Open (visible REPLY button, no
+archived/locked banner). The poster is thorough and articulate: tried third-party
+volume limiter apps, the 85dB system limit, every equalizer preset, and Samsung's
+own SoundAssistant fine-step mode, with zero success ("either the volume is too
+low to hear anything, or the next step up is already too loud"). Ends by directly
+asking "Are there alternative solutions I might have missed?" — a direct invite.
+
+Reply to paste:
+
+> This sounds exactly like what I went through on my own Galaxy. SoundAssistant's
+> fine-step mode helped a little but never actually solved it for me either, same
+> problem you describe: still either silent or too loud, nothing in between.
+>
+> What actually fixed it: a small free app that adds real attenuation steps below
+> the phone's hardware floor, applied to the actual output rather than just
+> changing button increments. It's a floating dial, no root, doesn't override your
+> volume buttons or the system panel.
+>
+> Disclosure, it's my own app, I built it after hitting this same wall:
+> https://play.google.com/store/apps/details?id=granularvolume.com
+> Happy to hear if it handles the high-pitched harshness you're describing better.
+
+---
+
+### 7. "In call volume too loud!!" (Galaxy S23)
+https://r2.community.samsung.com/t5/Galaxy-S/In-call-volume-too-loud/td-p/18112176
+
+Verified: created Jan 28, 2025, active same-day replies, open (visible
+COMMENT/REPLY buttons). Galaxy S23, in-call volume (Zoom, Meet, WhatsApp, phone)
+stuck too loud at minimum, slider doesn't go lower, volume buttons don't mute it.
+Poster explicitly confirms: "I've tried sound assistant but that only affects
+media volume. In call volume behaves the same." Direct, explicit gap for us to
+fill.
+
+Reply to paste:
+
+> Ran into the exact same gap, SoundAssistant only touches media volume, calls
+> stay stuck loud no matter what.
+>
+> Fixed it for myself with a small free app that attenuates whatever's actually
+> playing, calls included, not just the media stream. Floating dial, no root,
+> leaves your volume buttons alone. Open source, no ads.
+>
+> Disclosure, it's my app: https://play.google.com/store/apps/details?id=granularvolume.com
+
+---
+
+## After these
 
 This list is intentionally short because everything on it is verified. When you
 want to expand it:
@@ -174,3 +245,7 @@ want to expand it:
   ongoing demand on Pixel devices specifically. One poster explicitly described
   being autistic with sound sensitivity and no built-in fix was offered.
   https://support.google.com/pixelphone/thread/327344134/audio-is-too-loud
+- Google Pixel Community, "Pixel 9a Call Volume Too Loud Even at Lowest Setting"
+  (Aug 25, 2025) — locked, and actually solved by a different cause (an
+  accidentally-enabled "Hearing aids" accessibility toggle), not a genuine
+  hardware-minimum complaint. Not relevant, listed only so it isn't re-checked.
