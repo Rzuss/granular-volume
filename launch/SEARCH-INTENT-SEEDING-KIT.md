@@ -10,7 +10,7 @@ to the listing for years, at zero cost.
 
 Every thread below offers the same four fixes, and all four have a wall:
 - Rooting / build.prop edits — too technical, risky, voids warranties
-- Paid apps (Precise Volume, Fine Volume Control $2.99) — cost adds up
+- Paid apps (Precise Volume, Fine Volume Control) — cost adds up
 - Engineer-mode dialer codes — risky, can damage speakers
 - Samsung SoundAssist — Samsung-only
 
@@ -92,8 +92,8 @@ Reply to paste:
 https://forums.androidcentral.com/threads/volume-on-lowest-still-too-loud.342741/
 
 Why: open, long-running, general Android-limitation thread. The fixes suggested
-there are Fine Volume Control ($2.99), engineer mode, and root, so free + no root
-is a clean contrast.
+there are a paid app, engineer mode, and root, so free + no root is a clean
+contrast.
 
 Reply to paste:
 
