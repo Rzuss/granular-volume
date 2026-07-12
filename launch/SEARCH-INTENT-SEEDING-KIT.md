@@ -1,187 +1,162 @@
-# Search-intent seeding kit
+# Search-intent seeding kit (v2, fully date-verified)
 
-The highest-ROI, compounding marketing move for this app. These are real, live
-forum threads where people ask, in their own words, exactly the question our app
-answers. They already rank on Google for "android volume too loud lowest setting"
-and similar searches, so a genuinely helpful reply keeps sending the right people
-to the listing for years, at zero cost.
+The highest-ROI, compounding marketing move for this app. Every thread below was
+individually opened and its exact post/reply dates confirmed, not guessed from a
+search snippet. That is a correction from v1 of this file: several entries there
+(XDA, Android Central, OnePlus, Samsung Community) were included on topic-match
+alone because those sites block automated fetching, and one of them turned out to
+be from 2013. Do not trust unverified forum links; if you find a new one yourself,
+open it and check the date before posting.
 
-## The pattern we exploit (why we win in every one of these threads)
+## Why Fairphone is the entire list right now
 
-Every thread below offers the same four fixes, and all four have a wall:
-- Rooting / build.prop edits — too technical, risky, voids warranties
-- Paid apps (Precise Volume, Fine Volume Control) — cost adds up
-- Engineer-mode dialer codes — risky, can damage speakers
-- Samsung SoundAssist — Samsung-only
+Fairphone's community forum is the only one of the sites checked that stays open
+to automated reading, is discourse-based (clean thread structure), gets read by
+real recent posters, and does NOT lock its threads. Every thread below is real,
+recent (within the last ~11 months), and open for replies today.
 
-Our reply is the missing fifth option: free, open source, no root, works on any
-device, and it does not override your volume buttons or replace the system volume
-panel (the exact thing reviewers say makes the invasive apps unstable).
+If you want more targets beyond this list, search
+`site:forum.fairphone.com volume too loud` yourself, open any promising result,
+and confirm the date and open/closed status before posting. Do not add to this
+file without verifying like that.
 
-## Posting rules (read before pasting anything)
+## The pattern we exploit
 
-1. Post at most ONE per day. A burst of identical-looking posts across forums in
-   one hour reads as spam and gets removed.
-2. ALWAYS keep the disclosure line ("it is my app"). It is required by Reddit,
-   XDA, FTC guidance, and our own BRAND.md rule. It also builds trust, not doubt:
-   "I had this problem and built the fix" is a credible story.
-3. Read the 2-3 most recent replies in the thread before posting, so you do not
-   repeat a fix already given or walk into a locked thread.
-4. If someone replies, answer personally and quickly. That is where the trust and
-   the installs actually come from.
-5. Never paste the same text twice. Each draft below is already tailored to its
-   thread; keep it that way.
-6. No em dashes, nothing that reads as machine written. These are written to sound
-   like a real person. Keep them that way if you tweak.
+Fairphone's own support team has told users the loud minimum is "intentional by
+design" and will not be fixed (see thread 2 below). Their community's own fixes
+are: contact support (dead end), reduce Bluetooth Absolute Volume (device-specific,
+doesn't help built-in speaker/earpiece), or nothing. Our app is the actual fix
+nobody in these threads has offered yet.
 
-Link to use everywhere: https://play.google.com/store/apps/details?id=granularvolume.com
+## Posting rules
+
+1. One post per day, across all channels combined (not one per site per day).
+2. Always keep the disclosure line ("it is my app"). Required by forum rules, FTC
+   guidance, and our own BRAND.md rule.
+3. Re-read the thread's last 2-3 replies right before posting, in case something
+   changed since this was written.
+4. Reply personally and quickly if anyone responds.
+5. Never paste the same text twice.
+6. No em dashes, nothing that reads as machine written.
+
+Link: https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
-## Priority 1 — Fairphone Community (BEST target)
+## 1. "Call volumes - fp6" (BEST target)
+https://forum.fairphone.com/t/call-volumes-fp6/129922
 
-"Volume control increments too large"
-https://forum.fairphone.com/t/volume-control-increments-too-large/103807
-
-Why it is the best: active and recent (replies into 2025), the exact problem, and
-the community's own conclusion is that the only real fix "requires root." That is
-our entire pitch handed to us.
+Verified: original post Feb 21, 2026, active replies through Apr 19, 2026. Open.
+Fairphone 6, WhatsApp calls and regular calls too loud even at minimum. One user
+explicitly wrote: "I tried downloading precise volume, but it doesn't seem to be
+a solution" — a direct, unprompted mention that our main paid competitor already
+failed here.
 
 Reply to paste:
 
-> Ran into the exact same thing, that jump from too loud to too quiet in a single
-> press. The build.prop fix works but it needs root, which is a lot to ask just to
-> get finer volume.
+> I had this on my FP6 too, WhatsApp calls especially. Precise Volume didn't fix it
+> for me either, it's built around the media stream and didn't touch call audio the
+> way I needed.
 >
-> What solved it for me without rooting: a small dial that floats on screen and
-> adds volume steps below the system minimum, applied on the output through
-> Android's own audio engine. No root, no engineer mode, and it does not touch the
-> volume buttons or the system panel, so nothing gets less stable. Free and open
-> source, no ads.
+> What actually worked: a small app that adds attenuation across whatever audio is
+> playing, calls included, through a floating dial rather than a single fixed
+> effect. Free, no root, open source, and it doesn't override your volume buttons.
 >
-> Full disclosure, it is my own app, I built it because this bugged me for years:
+> Disclosure, it's my own app: https://play.google.com/store/apps/details?id=granularvolume.com
+> Curious if it handles your specific call setup better, let me know if you try it.
+
+---
+
+## 2. "Whatsapp calls volume very loud, even at lowest setting (FP6)"
+https://forum.fairphone.com/t/whatsapp-calls-volume-very-loud-even-at-lowest-setting-fp6/125208
+
+Verified: original post Sep 5, 2025, replies through Jan 17, 2026. Open. Fairphone
+support explicitly closed this as "intentional by design," not a bug. That is an
+open door: the manufacturer will not fix it, ever.
+
+Reply to paste:
+
+> Saw that Fairphone closed this as intentional, which is rough since it means
+> official support isn't coming.
+>
+> I ended up fixing it myself with a small free app that adds finer volume steps
+> below the usual minimum, applied to whatever is playing including calls. It sits
+> as a floating dial, no root, doesn't touch your volume buttons or system UI.
+>
+> Disclosure, it's mine, built it after running into this exact wall:
 > https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
-## Priority 2 — XDA Forums
+## 3. "Minimum volume is too loud" (Fairphone 5)
+https://forum.fairphone.com/t/minimum-volume-is-too-loud/131702
 
-"Speakers too loud - when set to lowest level"
-https://xdaforums.com/t/speakers-too-loud-when-set-to-lowest-level.3952244/
-
-Why: XDA ranks extremely well on Google for this query, and the culture there
-welcomes a developer sharing their own tool as long as it is disclosed and useful.
-
-Reply to paste:
-
-> Same problem here for a long time, the lowest step was still too loud, especially
-> over headphones. Android will not go below that step on its own.
->
-> I built a small app to fix it for myself: it adds finer volume levels beneath the
-> hardware minimum, through a little dial that floats over any app. No root, no
-> button override, no system UI takeover. Free, no ads, open source.
->
-> Disclosure, my own app: https://play.google.com/store/apps/details?id=granularvolume.com
-> Happy to answer anything about how the attenuation works.
-
----
-
-## Priority 3 — Android Central Forum
-
-"volume on lowest still too loud"
-https://forums.androidcentral.com/threads/volume-on-lowest-still-too-loud.342741/
-
-Why: open, long-running, general Android-limitation thread. The fixes suggested
-there are a paid app, engineer mode, and root, so free + no root is a clean
-contrast.
+Verified: original post May 13, 2026, one reply same day (redirect to official
+support). Open. Affects call earpiece, speakerphone, ring, notification, and alarm
+volumes. Notably the poster says media/music volume is fine, only these other
+streams are stuck loud, so this is a strong direct-fit thread.
 
 Reply to paste:
 
-> For anyone still landing here: the engineer mode and root routes work but they
-> are risky and fiddly, and the paid apps add up.
+> Same experience here, music volume was fine but everything else (calls,
+> notifications, ring) got stuck too loud with nowhere lower to go.
 >
-> I ended up building a free one that does just this: a small floating dial that
-> adds fine steps below the phone's lowest hardware level, on any device, no root.
-> It does not override your volume buttons or replace the system volume panel, it
-> just sits on top and brings the output lower than Android normally allows. No
-> ads, no tracking, open source.
+> A small free app fixed it for me: it adds attenuation steps below the normal
+> minimum across whatever's playing, through a floating dial, no root needed. Open
+> source, doesn't touch the physical volume buttons.
 >
-> Disclosure: it is my app. Sharing because this exact thread is what I had years
-> ago. https://play.google.com/store/apps/details?id=granularvolume.com
+> Disclosure, it's my own app: https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
-## Priority 4 — OnePlus Community
+## 4. "The sound is too loud even at minimum volume" (Fairphone 6)
+https://forum.fairphone.com/t/the-sound-is-too-loud-even-at-minimum-volume/123401
 
-"lowest volume for is still way too loud?"
-https://community.oneplus.com/thread/1052706
+Verified: original post Aug 1, 2025, five replies within 24 hours (Aug 1-2, 2025).
+Open. Notification and call speaker volume too loud at minimum.
 
 Reply to paste:
 
-> Had this on OnePlus too, step one was already too loud for quiet listening. There
-> is no system setting that goes lower.
+> Ran into this too on my FP6, notifications and calls both stuck too loud at the
+> lowest setting.
 >
-> What fixed it for me without rooting: a small floating dial that adds volume
-> steps below the hardware minimum, on the output. It leaves your volume buttons
-> and system panel alone. Free, no ads, open source.
+> Fixed it with a small free app that adds volume steps below the usual minimum,
+> a floating dial you place anywhere, works across calls and media both. No root,
+> doesn't override your volume buttons or the system panel. Open source, no ads.
 >
-> Disclosure, it is my app: https://play.google.com/store/apps/details?id=granularvolume.com
+> Disclosure, it's my app: https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
-## Priority 5 — Google Android Community (post carefully)
+## 5. "Minimum volume of XL too loud when connected to laptop via Bluetooth"
+https://forum.fairphone.com/t/minimum-volume-of-xl-too-loud-when-connected-to-laptop-via-bluetooth/99007
 
-"volume way too loud (even at minimum setting). Help!"
-https://support.google.com/android/thread/248353614/
+Verified: recent activity as of May 30, 2026 (posts merged into this thread that
+day). Open. Fairbuds XL earbuds, Bluetooth minimum volume too loud when paired to
+a laptop, not a phone.
 
-Note: Google's official help community is stricter about promotional links than
-the forums above. Keep it helpful-first and low-key, exactly as written. If a
-moderator removes it, do not repost.
-
-Reply to paste:
-
-> If your device has no built in way to go lower (many do not), Android itself will
-> not drop below its lowest volume step.
->
-> One option that worked for me is a small free app that adds finer steps below
-> that minimum, shown as a floating dial you can move anywhere. It does not need
-> root and does not change your volume buttons or system settings, it only lowers
-> the output. No ads, no tracking, open source.
->
-> To be transparent, it is an app I made after having this same issue:
-> https://play.google.com/store/apps/details?id=granularvolume.com
+Note: this one is Bluetooth-to-laptop, not Android, so our app (Android-only)
+cannot directly fix their exact setup. Skip this one unless the thread later
+shows someone with the same earbuds paired to an Android phone instead. Keeping
+it listed for tracking, not for posting today.
 
 ---
 
-## Priority 6 — Samsung Community (lower priority, Samsung has a native option)
+## After these five
 
-"Phone minimum volume too loud. How do I get my feedback to Samsung?"
-https://us.community.samsung.com/t5/Legacy-S-Phones/Phone-minimum-volume-too-loud-How-do-I-get-my-feedback-to/td-p/2782442
+This list is intentionally short because everything on it is verified. When you
+want to expand it:
+1. Search `site:forum.fairphone.com volume too loud` or similar, sorted by latest.
+2. Open each candidate yourself (or ask me to) and confirm date + open status
+   before it goes on this list.
+3. The niche empathy posts in launch/LAUNCH-POSTS.md (r/hyperacusis, r/misophonia,
+   r/tinnitus, r/NewParents, hearing-aid communities) remain a good parallel track
+   for demand creation, one per day, alongside these.
 
-Note: Samsung users have Sound Assistant / SoundAssist natively, so lead with that
-honestly. The value here is the many non-Samsung readers who land on this page from
-Google.
+## Intel only, not posting targets (locked threads, but useful signal)
 
-Reply to paste:
-
-> On Samsung, Sound Assistant can help shrink the step size, worth trying first. If
-> that is not enough, or for anyone here on a non-Samsung phone where it does not
-> exist, Android will not go below its lowest step on its own.
->
-> I made a small free app for exactly that: a floating dial that adds finer steps
-> below the hardware minimum, no root, on any device. It does not override your
-> volume buttons. No ads, open source.
->
-> Disclosure, my own app: https://play.google.com/store/apps/details?id=granularvolume.com
-
----
-
-## After these six
-
-Once these are posted and you have replied to any follow-ups, the next wave is:
-- Search Google yourself for "android volume too loud lowest setting" plus your
-  own device name, and any new thread that appears is a fresh target. Reuse the
-  closest draft above, lightly tailored.
-- The niche empathy posts (r/hyperacusis, r/misophonia, r/tinnitus, r/NewParents,
-  r/headphones, hearing-aid forums) already drafted in launch/LAUNCH-POSTS.md are
-  the demand-creation layer to run in parallel, one per day.
+- Google Pixel Community, "Audio is too loud" (Feb 26, 2025) — locked, cannot
+  reply, but 59 other users clicked "I have the same question." Confirms real,
+  ongoing demand on Pixel devices specifically. One poster explicitly described
+  being autistic with sound sensitivity and no built-in fix was offered.
+  https://support.google.com/pixelphone/thread/327344134/audio-is-too-loud
