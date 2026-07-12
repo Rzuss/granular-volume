@@ -1,4 +1,4 @@
-Volume too loud even at the lowest setting? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
+Volume too loud even at the lowest setting, on calls, media, or notifications? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
 
 A small floating volume control appears above any app. Seven steps from no change down to a full 30 dB below your hardware minimum. One tap to move. Drag it anywhere on screen, tuck it to an edge, close it when you are done. Your position is saved.
 
@@ -17,6 +17,7 @@ QUICK SETTINGS TILE
 Swipe down, tap once. Add Granular Volume to your Quick Settings panel and toggle the overlay on or off without ever opening the app. No shortcuts to set up, no widgets to place.
 
 MADE FOR QUIET MOMENTS
+- Phone and app calls (regular calls, WhatsApp, video calls) where the earpiece or speaker volume stays too loud no matter what
 - Sensitive IEMs and high-sensitivity headphones, where even step 1 is too loud
 - Tablet speakers and headphones, where the minimum step is often even louder than on phones
 - White noise or lullabies for a sleeping baby, kept barely audible
