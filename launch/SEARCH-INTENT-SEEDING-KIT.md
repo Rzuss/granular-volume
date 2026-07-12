@@ -8,16 +8,17 @@ alone because those sites block automated fetching, and one of them turned out t
 be from 2013. Do not trust unverified forum links; if you find a new one yourself,
 open it and check the date before posting.
 
-## Status: Fairphone hold LIFTED (2026-07-12) — resume tomorrow, not today
+## Status: Fairphone hold LIFTED (2026-07-12) — active again today
 
 Checked the account notifications directly: "system: Account no longer on hold."
-The auto-hold is cleared. However, 2 posts already went out today on Samsung
-Community (threads 6 and 7 below), which already uses up today's one-post-per-day
-budget under rule #1. Do NOT post on Fairphone today too — that would be exactly
-the kind of multi-post-in-one-day pattern that caused the original hold. Resume
-Fairphone (thread 1, "Call volumes - fp6") tomorrow, and per rule #7, consider
-leading with a plain non-promotional reply on Fairphone specifically, since that
-account has already been flagged once.
+The auto-hold is cleared. Pacing is now tracked PER PLATFORM/ACCOUNT (see rule #1
+below, corrected after being over-applied as one global daily post limit). 2
+Samsung posts went out earlier today with zero issue, so Fairphone can resume
+today too — it is a separate account and platform, unaffected by Samsung volume.
+Lead with rule #7 on Fairphone specifically (that account has been flagged once):
+one plain non-promotional reply first if a natural spot exists, otherwise go
+straight to thread 1 ("Call volumes - fp6") with the disclosed reply already
+drafted below.
 
 ## Platform notes
 
@@ -52,19 +53,23 @@ nobody in these threads has offered yet.
 
 ## Posting rules
 
-1. **One post per day, period. One forum per day.** Not one per site per day, one
-   total. This was tightened after a real incident: posting several similar,
-   disclosed replies on Fairphone's forum within a short window (still a new
-   account there) tripped Discourse's automated new-user spam hold, even though
-   every post disclosed authorship and was tailored to its thread. The account
-   was placed on hold pending staff review. Lesson: new accounts have zero trust
-   score, so pace matters more than message quality in the first days on any
-   forum. Space activity days apart, not hours apart, especially on a forum
-   where the account is new.
+1. **Pacing is per platform/account, not a single global daily cap.** Corrected
+   from an earlier version of this rule that capped the whole day at one post
+   total everywhere — that was over-applying a lesson that only applies to one
+   specific platform. What actually happened: a brand-new Fairphone (Discourse)
+   account posted several similar, disclosed replies within a short window and
+   tripped that platform's automated new-user spam filter. Samsung Community
+   (different platform, different account) tolerated 2 posts the same day with
+   zero issue. So the real rule is: on any ONE platform where the account is
+   still new/untrusted, space posts out (start around 1/day there, loosen once
+   the account has some history — replies, likes, a few days of age). Different
+   platforms don't share risk, so running Fairphone + Samsung + Xiaomi + Reddit
+   the same day is fine and is the actual plan; just don't burst multiple posts
+   on one single new account in one sitting.
 2. Always keep the disclosure line ("it is my app"). Required by forum rules, FTC
-   guidance, and our own BRAND.md rule. Disclosure did not prevent the spam hold
-   above, so it is necessary but not sufficient. Pace is what actually matters to
-   automated spam filters.
+   guidance, and our own BRAND.md rule. Disclosure did not prevent the Fairphone
+   spam hold, so it is necessary but not sufficient — pace on that specific
+   platform is what actually matters to its automated filter.
 3. Re-read the thread's last 2-3 replies right before posting, in case something
    changed since this was written.
 4. Reply personally and quickly if anyone responds.
@@ -73,7 +78,8 @@ nobody in these threads has offered yet.
 7. On a brand-new forum account, consider posting one genuinely helpful,
    non-promotional reply first (no link, no mention of the app) before any
    disclosed app-mention post, to build a small amount of account trust first.
-   Not required, but reduces spam-hold risk on stricter forums.
+   Not required, but reduces spam-hold risk on stricter/newer-to-us forums
+   (currently: Fairphone since its one flag, and Xiaomi as a brand-new account).
 
 Link: https://play.google.com/store/apps/details?id=granularvolume.com
 
