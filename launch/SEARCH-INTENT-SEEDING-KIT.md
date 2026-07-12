@@ -8,12 +8,16 @@ alone because those sites block automated fetching, and one of them turned out t
 be from 2013. Do not trust unverified forum links; if you find a new one yourself,
 open it and check the date before posting.
 
-## Status: Fairphone account on hold
+## Status: Fairphone hold LIFTED (2026-07-12) — resume tomorrow, not today
 
-The Fairphone forum account is currently on hold pending staff review (new-account
-spam filter, see posting rule #1 below). Do NOT attempt to post on Fairphone until
-that hold is lifted and confirmed. Threads 1-5 below stay in the kit for when it
-clears. In the meantime, section "Samsung Community" below is the active target.
+Checked the account notifications directly: "system: Account no longer on hold."
+The auto-hold is cleared. However, 2 posts already went out today on Samsung
+Community (threads 6 and 7 below), which already uses up today's one-post-per-day
+budget under rule #1. Do NOT post on Fairphone today too — that would be exactly
+the kind of multi-post-in-one-day pattern that caused the original hold. Resume
+Fairphone (thread 1, "Call volumes - fp6") tomorrow, and per rule #7, consider
+leading with a plain non-promotional reply on Fairphone specifically, since that
+account has already been flagged once.
 
 ## Platform notes
 
@@ -226,6 +230,50 @@ Reply to paste:
 > Disclosure, it's my app: https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
+
+## Xiaomi Community (new account needed — check trust/spam rules before first post)
+
+### 8. "Sounds too loud on the lowest setting Xiaomi 15"
+https://xiaomi.eu/community/threads/sounds-too-loud-on-the-lowest-setting-xiaomi-15.75385/
+
+Verified: original post Apr 8, 2025, reply Apr 9, 2025. Open (login-to-reply
+prompt shown, not an archive/lock notice). Xiaomi 15 (current flagship), audio
+too loud even at minimum, poster specifically wants to fall asleep to YouTube.
+Only workaround offered so far: picking notification/ringtone sounds with less
+treble — not a real fix, and doesn't touch media/video playback volume at all.
+A moderator noted this is a custom-ROM community, so official Xiaomi engagement
+is unlikely, another dead end for manufacturer-side fixes.
+
+Reply to paste:
+
+> Ran into the same thing on my 15, media and video playback stayed too loud at
+> the lowest setting no matter what sounds I picked for notifications, that trick
+> only helps with alerts, not what you're actually watching or listening to.
+>
+> Fixed it with a small free app that adds real volume steps below the phone's
+> hardware floor, a floating dial, no root. Doesn't touch your volume buttons.
+> Open source, no ads.
+>
+> Disclosure, it's my own app: https://play.google.com/store/apps/details?id=granularvolume.com
+
+Note: this is a new, separate forum account (not Fairphone, not Samsung). Apply
+posting rule #7 here too — consider one plain reply elsewhere on the site first
+if the account is brand new, before this disclosed post.
+
+---
+
+## Checked but not verifiable / not usable (skip, don't re-search these)
+
+- Lenovo/Motorola forums (forums.lenovo.com) — thread content requires
+  JavaScript/login that neither WebFetch nor the browser tool could get past in
+  this environment; every attempt redirected to a generic community home page.
+  Could not confirm dates or open status for any Moto thread found.
+- Samsung Community, "Minimum media volume too loud" (Galaxy A series,
+  eu.community.samsung.com/.../6855468) — redirected to an SSO login page,
+  couldn't verify.
+- Samsung Community, "Is there a way to lower the minimum volume..." (Galaxy
+  S23, td-p/2861657) — search snippet itself showed the page title as
+  "Archived," so this one is confirmed closed. Skip.
 
 ## After these
 
