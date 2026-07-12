@@ -15,6 +15,38 @@ Links:
 
 ---
 
+## Universal "we're live" launch post (paste across any relevant sub, tweak title per sub's rules)
+
+Use this one when you just want a single clean announcement post rather than a
+tailored per-sub pitch. Post the title as the post title, and the body as the
+post body. Per most subs' self-promo rules, move the Play link to the first
+comment instead of the body if the sub requires that (check each sub's rules
+before posting, and adjust the title if a sub bans "app is out now" style titles).
+
+Title: Granular Volume is live: an open source app for volume below Android's minimum
+
+Body:
+After a good while of building and testing, Granular Volume is now public on
+Google Play. It is a small floating dial that adds volume steps below your
+phone or tablet's usual hardware minimum, for anyone who has ever found even
+the lowest setting too loud (quiet rooms, sensitive headphones, a sleeping
+baby, late night listening).
+
+It does one thing on purpose. No equalizer, no presets, no account. It does
+not take over your volume buttons or your system volume panel, it just floats
+on top. There is also a Quick Settings tile so you can toggle it straight from
+the notification shade. Free, no ads, no tracking, open source under GPL-3.0.
+
+Play Store: https://play.google.com/store/apps/details?id=granularvolume.com
+Source: https://github.com/Rzuss/granular-volume
+
+If you have run into this exact problem, I would genuinely appreciate you
+giving it a try, and if it helps, a rating or an honest review goes a long way
+for a brand new listing like this. Thank you to everyone who tested along the
+way, you are the reason this exists at all. Happy to answer anything here.
+
+---
+
 ## r/androidapps
 
 Title: Granular Volume, a free and open source app for volume below Android's minimum
