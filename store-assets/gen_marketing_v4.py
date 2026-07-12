@@ -653,9 +653,9 @@ def make_feature():
     draw_pill(d, ppx, ppy, m, active=5, show_db=True)
     # wordmark + tagline
     tx = s(330)
-    d.text((tx, s(150)), "Granular", font=bold(72), fill=WHITE, anchor="lm")
-    d.text((tx, s(224)), "Volume", font=bold(72), fill=VIOLET, anchor="lm")
-    d.text((tx, s(292)), "Quieter than your phone allows.", font=reg(33), fill=SOFT, anchor="lm")
+    d.text((tx, s(140)), "Volume Control:", font=semi(44), fill=WHITE, anchor="lm")
+    d.text((tx, s(224)), "Quiet Dial", font=bold(72), fill=VIOLET, anchor="lm")
+    d.text((tx, s(292)), "Quieter than your phone or tablet allows.", font=reg(28), fill=SOFT, anchor="lm")
     by = s(346)
     bx = tx
     for badge in ["Free", "No ads", "Open source"]:
