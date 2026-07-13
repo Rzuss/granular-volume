@@ -75,7 +75,46 @@ would genuinely help. Happy to answer anything.
 
 ---
 
-## r/androidapps
+## r/droidappshowcase (use instead of r/androidapps — see note below)
+
+r/androidapps Rule 2 bans self-promotion, tester requests, and app feedback
+outright, and its own removal message points to this sister sub instead. This
+sub explicitly allows the same content, but requires: a clear, descriptive
+title (not "Check out my app"), a meaningful description, the correct flair
+(this looks like a "Showcase" or "Promo" flair based on other posts), and
+before posting, confirm your account meets its Account Age & Karma
+Requirements and Verified Email rules (both are account-level gates only you
+can check, in the sidebar rules).
+
+Title: Volume Control: Quiet Dial — a floating dial that adds volume steps below Android's hardware minimum (free, open source)
+
+Body:
+On many phones and tablets, the lowest volume step is still too loud for a
+quiet room, sensitive headphones, or a sleeping baby, and Android won't go any
+lower. I built Volume Control: Quiet Dial to add finer steps below that
+minimum, through a small dial that floats over any app. Drag it anywhere, tuck
+it to an edge, close it with one tap.
+
+Key features:
+- Adds volume steps below the hardware minimum, on phones and tablets alike
+- Floating dial, doesn't override your volume buttons or the system panel
+- Quick Settings tile to toggle it without opening the app
+- Free, no ads, no tracking, open source under GPL-3.0, no root needed
+
+Play Store: https://play.google.com/store/apps/details?id=granularvolume.com
+Source: https://github.com/Rzuss/granular-volume
+
+Brand new listing, so I'd genuinely appreciate testers and honest feedback,
+good or critical. Happy to answer anything about how it works.
+
+---
+
+## r/androidapps — DO NOT POST (kept for reference only)
+
+Confirmed 2026-07-13: this sub's Rule 2 bans self-promotion, tester requests,
+and app feedback outright, no exceptions, no rewording gets around it. Reddit's
+own removal message redirects to r/droidappshowcase instead — use that post
+above. Leaving the draft below only so the copy isn't lost, not for posting.
 
 Title: Volume Control: Quiet Dial, a free and open source app for volume below Android's minimum
 
