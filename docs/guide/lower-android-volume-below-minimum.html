@@ -89,9 +89,21 @@
   .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
   .crumb a{color:var(--muted);text-decoration:none;}
   .crumb a:hover{color:var(--accent2);}
-  h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.5px;margin-bottom:14px;}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
   .dek{color:var(--muted);font-size:19px;max-width:620px;}
   .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
 
   article{padding:36px 0;}
   article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
@@ -134,6 +146,7 @@
 
   <header class="top">
     <div class="crumb"><a href="../index.html">Granular Volume</a> / Guide</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
     <p class="meta">Updated July 13, 2026 · 7 min read</p>
@@ -142,6 +155,15 @@
   <article>
     <p class="lead-p">If the lowest step on your phone or tablet's volume slider is still too loud for a quiet room, a sleeping baby, or sensitive headphones, you are not imagining it and you are not doing anything wrong. Android's volume range is divided into a fixed number of steps between silence and full output, and the first step above mute is a fixed fraction of the maximum, not a fixed loudness. On a phone or tablet with a loud maximum, that first step can be genuinely too loud. Stock Android has no setting to move it.</p>
     <p>This guide covers every real method people use to work around it, including the ones that don't actually work the way they're usually described. That distinction matters, because most of what ranks for this question online recommends apps and settings that make the steps <em>finer</em> without making the <em>floor</em> any lower.</p>
+
+    <div class="quickfix">
+      <div class="kicker">Short on time? Here's the answer</div>
+      <p><strong>Granular Volume</strong> is the one app that actually solves this: it adds real volume steps below your device's hardware minimum, not just finer clicks within the existing range. If that's your exact problem, this is the fix, free and set up in under a minute.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#attenuation">Why this works, others don't</a>
+      </div>
+    </div>
 
     <div class="toc">
       <div>On this page</div>
