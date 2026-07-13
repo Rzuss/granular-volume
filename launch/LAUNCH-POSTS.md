@@ -53,45 +53,43 @@ This sub exists specifically for developers to ask for honest reviews of free
 apps, so the ask can be direct here, more than on general subs. Still disclose
 plainly, still no em dashes, still genuinely invite criticism, not just praise.
 
-Title: Granular Volume, a free and open source app for volume below Android's minimum (feedback and honest reviews welcome)
+Title: Volume Control: Quiet Dial, a free and open source app for volume below Android's minimum (feedback and honest reviews welcome)
 
 Body:
-Granular Volume is a small Android app I built and just released. Many phones
-and tablets have a lowest volume step that is still too loud for a quiet room,
-sensitive headphones, or a sleeping baby, and Android will not let you go any
-lower. This adds finer steps below that minimum through a small dial that
-floats over any app, no root needed.
+Many phones and tablets have a lowest volume step that's still too loud for a
+quiet room, sensitive headphones, or a sleeping baby, and Android won't go any
+lower. I built Volume Control: Quiet Dial to fix exactly that: a small dial
+that floats over any app and adds finer steps below the hardware minimum, no
+root needed.
 
-It does one thing on purpose. No equalizer, no presets, no account. It does
-not override your volume buttons or the system volume panel, it just sits on
-top. There is a Quick Settings tile too, so it toggles straight from the
-notification shade. Free, no ads, no tracking, open source under GPL-3.0.
+One thing, done on purpose. No equalizer, no presets, no account. Doesn't
+override your volume buttons or the system panel, just sits on top. A Quick
+Settings tile toggles it straight from the notification shade. Free, no ads,
+no tracking, open source under GPL-3.0.
 
 Play Store: https://play.google.com/store/apps/details?id=granularvolume.com
 Source: https://github.com/Rzuss/granular-volume
 
-I would genuinely appreciate honest feedback, good or critical, this is a
-brand new listing and a real review helps more than I can easily explain.
-Happy to answer anything about how it works or what is coming next.
+Brand new listing, so honest feedback (good or critical) and a real review
+would genuinely help. Happy to answer anything.
 
 ---
 
 ## r/androidapps
 
-Title: Granular Volume, a free and open source app for volume below Android's minimum
+Title: Volume Control: Quiet Dial, a free and open source app for volume below Android's minimum
 
 Body:
 I built a small app that fixes something that bothered me for years. On many
-phones the lowest volume step is still too loud for a quiet room or for sensitive
-headphones, and Android will not let you go lower. Granular Volume adds finer
-steps below that minimum, through a small dial that floats over any app. Drag it
-anywhere, tuck it to an edge, close it with one tap.
+phones the lowest volume step is still too loud for a quiet room or sensitive
+headphones, and Android won't let you go lower. Volume Control: Quiet Dial adds
+finer steps below that minimum, through a small dial that floats over any app.
+Drag it anywhere, tuck it to an edge, close it with one tap.
 
-It does one thing on purpose. No equalizer, no presets, no account. It does not
-take over your volume buttons or your system volume panel, it just sits on top.
-There's also a Quick Settings tile, so you can turn it on or off from the
-notification shade without opening the app. Free, no ads, no tracking, open
-source under GPL-3.0.
+One thing, done on purpose. No equalizer, no presets, no account. Doesn't take
+over your volume buttons or the system panel, just sits on top. A Quick
+Settings tile toggles it straight from the shade. Free, no ads, no tracking,
+open source under GPL-3.0.
 
 Play: https://play.google.com/store/apps/details?id=granularvolume.com
 Source and demo in the comments. Happy to hear what would make it more useful.
@@ -100,11 +98,11 @@ Source and demo in the comments. Happy to hear what would make it more useful.
 
 ## r/fossandroid
 
-Title: Granular Volume: open source volume control for the quiet end of the dial (GPL-3.0)
+Title: Volume Control: Quiet Dial, open source volume control for the quiet end of the dial (GPL-3.0)
 
 Body:
 A single purpose, no tracking app for when the lowest hardware volume step is
-still too loud. It adds fine attenuation below the minimum and floats a small dial
+still too loud. Adds fine attenuation below the minimum, floats a small dial
 over any app, with a Quick Settings tile to toggle it straight from the shade.
 No ads, no analytics, no network access at all, GPL-3.0.
 
