@@ -5,7 +5,18 @@ They differ from store-assets/COMMUNITY-POSTS.md, which was for recruiting teste
 
 Rules: read each community's self promotion rules first, lead with the problem
 and the help, always disclose it is your app, no em dashes, nothing that reads as
-machine written. Put the Play link and demo in the first comment, not the title.
+machine written. Put the Play link and demo in the first comment, not the title,
+UNLESS the community bans Google-hosted links entirely (r/degoogle does — see
+its section below, F-Droid + GitHub only there).
+
+**Verify before every post, every time**: open the sub, read its sidebar rules,
+and check for account-level gates (karma, account age, verified email) as well
+as content rules. Three real, hard lessons from 2026-07-13 that justify this:
+r/androidapps bans this content outright (confirmed by an actual removal
+notice), r/droidappshowcase requires account karma we didn't have (confirmed by
+an actual submission attempt), and r/fossandroid doesn't exist at all (confirmed
+by an actual 404). None of that was visible without checking live, cold, right
+before posting.
 
 Links:
 - Play: https://play.google.com/store/apps/details?id=granularvolume.com
@@ -23,11 +34,11 @@ post body. Per most subs' self-promo rules, move the Play link to the first
 comment instead of the body if the sub requires that (check each sub's rules
 before posting, and adjust the title if a sub bans "app is out now" style titles).
 
-Title: Granular Volume is live: an open source app for volume below Android's minimum
+Title: Volume Control: Quiet Dial is live: an open source app for volume below Android's minimum
 
 Body:
-After a good while of building and testing, Granular Volume is now public on
-Google Play. It is a small floating dial that adds volume steps below your
+After a good while of building and testing, Volume Control: Quiet Dial is now
+public on Google Play. It is a small floating dial that adds volume steps below your
 phone or tablet's usual hardware minimum, for anyone who has ever found even
 the lowest setting too loud (quiet rooms, sensitive headphones, a sleeping
 baby, late night listening).
@@ -75,16 +86,17 @@ would genuinely help. Happy to answer anything.
 
 ---
 
-## r/droidappshowcase (use instead of r/androidapps — see note below)
+## r/droidappshowcase — BLOCKED for now (account doesn't meet karma requirement)
 
-r/androidapps Rule 2 bans self-promotion, tester requests, and app feedback
-outright, and its own removal message points to this sister sub instead. This
-sub explicitly allows the same content, but requires: a clear, descriptive
-title (not "Check out my app"), a meaningful description, the correct flair
-(this looks like a "Showcase" or "Promo" flair based on other posts), and
-before posting, confirm your account meets its Account Age & Karma
-Requirements and Verified Email rules (both are account-level gates only you
-can check, in the sidebar rules).
+Confirmed 2026-07-13: attempted to post and got "You can't contribute in this
+community yet... r/droidappshowcase requires accounts to meet certain activity
+requirements... Total karma: Earn more by posting or commenting across
+Reddit." This is a real, live gate, not a formatting issue. Do not retry here
+until the account's total karma has grown (genuine comments/posts elsewhere,
+including the other subs in this file, will raise it naturally). Re-check by
+just trying to post again in a week or two. The rest of this sub's rules
+(clear title, meaningful description, correct flair, no vague titles) still
+apply whenever it becomes postable.
 
 Title: Volume Control: Quiet Dial — a floating dial that adds volume steps below Android's hardware minimum (free, open source)
 
@@ -135,20 +147,55 @@ Source and demo in the comments. Happy to hear what would make it more useful.
 
 ---
 
-## r/fossandroid
+## r/fossandroid — DOES NOT EXIST, remove from rotation
 
-Title: Volume Control: Quiet Dial, open source volume control for the quiet end of the dial (GPL-3.0)
+Confirmed 2026-07-13: navigating to r/fossandroid returns "We couldn't find
+that community." This subreddit is gone or never existed under this exact
+name — the draft that used to live here (calling for a "GPL-3.0, no tracking"
+audience) has been replaced below by r/degoogle, a real, huge, well-matched
+community found and verified in its place. Do not search for or reference
+r/fossandroid again.
 
-Body:
-A single purpose, no tracking app for when the lowest hardware volume step is
-still too loud. Adds fine attenuation below the minimum, floats a small dial
-over any app, with a Quick Settings tile to toggle it straight from the shade.
-No ads, no analytics, no network access at all, GPL-3.0.
+---
 
-Source: https://github.com/Rzuss/granular-volume
-Play: https://play.google.com/store/apps/details?id=granularvolume.com
+## r/degoogle (371K members — post as a COMMENT in the pinned weekly thread, not a new post)
+
+Verified 2026-07-13. This is a large, well-matched, but strict community:
+
+- **Do not create a standalone post.** Rule/mod policy: all project promotion
+  must go in the current week's pinned "Degoogle Showcase" megathread (posted
+  every Saturday 10:00 AM ET, pinned at the top of the sub). Standalone promo
+  posts get removed and redirected there. Find the current week's thread
+  pinned at the top of https://www.reddit.com/r/degoogle/, or search "Degoogle
+  Showcase" if it's not pinned when you check.
+- **Prefix the comment with `[DEV]`** since you're the developer, per the
+  showcase rules. Your comment will be held for mod review before it's
+  visible publicly — don't panic if it doesn't appear instantly.
+- **Do not link Google Play or the YouTube demo here.** Rule 5 of the sub is
+  "No First Party Google Hosted Links (AMP/Youtube/Google)" — both of those
+  count. Link F-Droid and GitHub only, which is a genuine strength here since
+  the whole audience is specifically people avoiding Google services.
+- F-Droid currently serves v1.1.2 (Play is ahead, on 1.3.0/versionCode 7,
+  pending the flavor-split fix in Trigger B of DEFERRED-WORK-REGISTER.md) — if
+  anyone asks why F-Droid looks a version behind, that's the honest reason,
+  it's being tracked, not abandoned.
+
+Comment to paste (as a reply inside the current week's Showcase thread):
+
+[DEV]
+
+On many phones and tablets, the lowest volume step is still too loud for a
+quiet room, sensitive headphones, or a sleeping baby, and Android won't go any
+lower. I built Volume Control: Quiet Dial to add finer steps below that
+minimum, through a small dial that floats over any app. No Google sign-in, no
+account, no network access at all needed to run it.
+
+Free, no ads, no tracking, open source under GPL-3.0.
+
 F-Droid: https://f-droid.org/en/packages/granularvolume.com/
-Feedback and issues welcome on GitHub.
+Source: https://github.com/Rzuss/granular-volume
+
+Happy to answer anything about how the attenuation works or what's next.
 
 ---
 
