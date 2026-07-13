@@ -21,7 +21,7 @@ before posting.
 Links:
 - Play: https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo: https://www.youtube.com/watch?v=8dR0nNhW27g
+- Demo: https://www.youtube.com/watch?v=DrpbF3r2bhs
 - Site: https://rzuss.github.io/granular-volume
 
 ---
@@ -309,18 +309,139 @@ Happy to answer questions about the audio approach or the overlay handling.
 
 ---
 
-## XDA forums and F-Droid forum
+## XDA forums — "Android Apps and Games" subforum (verified 2026-07-13)
 
-There are existing threads asking how to lower Android below its minimum volume,
-and an F-Droid feature request for a volume fine tuner. Reply to those directly,
-which is far better than a cold post.
+Post URL (create new thread here): https://xdaforums.com/f/android-apps-and-games.530/
 
-Reply text:
-This is exactly the gap I built Granular Volume for. It adds fine volume steps
-below the lowest hardware step, through a small overlay dial, without overriding
-your volume buttons or the system UI. Free, no ads, no tracking, open source under
-GPL-3.0. Source: https://github.com/Rzuss/granular-volume and on Google Play at
-https://play.google.com/store/apps/details?id=granularvolume.com
+Verified live:
+- Direct Play Store links in the opening post are explicitly allowed (confirmed
+  from live threads there).
+- XDA's documented "10 Post Rule" requires 10 posts elsewhere on the site before
+  posting in development forums — enforcement looked inconsistent in a live
+  sample, but treat it as real. If the post gets blocked, build 10 posts in
+  general XDA discussion first, then come back.
+- Forum Rules (quoted): rule 15 explicitly bans AI-generated posts ("Using AI to
+  generate content in the forums is not permitted") — hand-edit the draft below,
+  change some phrasing to your own voice, before posting. Rule 11 allows free-app
+  developers to post for feedback/support, just not "with the intention of
+  selling" (fine, the app is free).
+- Convention: bracket-tag title, then About / Features / Screenshots / Download /
+  Permissions / FAQ sections. No enforced template.
+
+Title: [APP][FREE][Android 8+] Volume Control: Quiet Dial — volume steps below the hardware minimum
+
+Body (hand-edit before posting, per XDA's no-AI-content rule):
+
+**About**
+On a lot of phones and tablets, the lowest volume step Android allows is still
+too loud for a quiet room, sensitive headphones, or a sleeping baby, and there's
+no way to go lower from the system settings. I built this to add the missing
+steps underneath that floor.
+
+**Features**
+- Adds volume steps below the hardware minimum, on phones and tablets
+- Small floating dial, drag it anywhere, tuck it to a corner, close with one tap
+- Doesn't override your volume buttons or replace the system volume panel
+- Quick Settings tile for a one-tap toggle from the notification shade
+- Free, no ads, no tracking, open source under GPL-3.0, no root
+
+**Download**
+Play Store: https://play.google.com/store/apps/details?id=granularvolume.com
+Source: https://github.com/Rzuss/granular-volume
+F-Droid: https://f-droid.org/en/packages/granularvolume.com/
+
+**FAQ**
+Q: Does it need root? No.
+Q: Does it read or send any data? No network access at all, everything stays on
+the device.
+
+Happy to answer anything about how the attenuation works.
+
+---
+
+## Android Central Forums — "Developer Spotlight" (verified 2026-07-13, best option: no account gate, link is mandatory not just allowed)
+
+Post URL (create new thread here): https://forums.androidcentral.com/forums/developer-spotlight.727/
+
+Verified live, quoted from their Developer Rules page
+(https://forums.androidcentral.com/help/developerrules/):
+- "Your post must contain at least 1 working link to one of the mentioned
+  stores/sites [Google Play, Amazon, Slide Me] to be acceptable." — a Play Store
+  link isn't just allowed here, it's required.
+- One thread per application, only. You must identify yourself as the developer
+  and keep answering questions in the thread afterward.
+- No URL shorteners, no zip/file-host links, no compensation-for-review offers.
+- Must include a screenshot or short video of the app in action.
+- No documented account-age or post-count gate (a live thread I checked was
+  posted by a 4-post "New member" account with no issue).
+
+Title: [APP][Free] Volume Control: Quiet Dial — adds volume steps below Android's hardware minimum
+
+Body:
+Hi, I'm the developer. On a lot of phones and tablets, the lowest volume step
+Android allows is still too loud for a quiet room, sensitive headphones, or a
+sleeping baby, with no way to go lower. I built Volume Control: Quiet Dial to
+add the missing steps underneath that floor.
+
+Features:
+- Adds volume levels below the hardware minimum, on phones and tablets alike
+- Small floating dial, drag it anywhere, tuck it to a corner, it turns
+  translucent when parked so it stays out of the way
+- Doesn't override your volume buttons or the system volume panel
+- Quick Settings tile for a one-tap toggle
+- Free, no ads, no tracking, open source under GPL-3.0
+
+[attach a screenshot of the dial here before posting, per the forum's rules]
+
+Play Store link: https://play.google.com/store/apps/details?id=granularvolume.com
+Source: https://github.com/Rzuss/granular-volume
+
+Happy to answer any questions and keep supporting this thread.
+
+---
+
+## Samsung Community forums — OPEN threads found, but DO NOT post a link here (verified 2026-07-13)
+
+Live-verified real complaint threads matching this exact problem, all currently
+open for new replies. However, Samsung Community/Members guidelines explicitly
+ban self-promotion/advertising ("not allowed to sell products and services,
+advertise products and services"), enforced with escalating suspensions
+(7/30/90/180 days). **Do not paste a Play Store link into these.** If replying
+at all, keep it to genuine, non-promotional troubleshooting help with no app
+name and no link — the marketing value of breaking this rule is not worth an
+account suspension.
+
+- https://eu.community.samsung.com/t5/galaxy-s24-series/speaker-volume-too-loud-even-at-minimum-uncomfortable-listening/td-p/12302196
+  (Galaxy S24 FE, posted 2025-05-06, active through mid-May 2025, OPEN)
+- https://eu.community.samsung.com/t5/galaxy-s23-series/loud-notification-sound-on-lowest-setting-s23-ultra/td-p/8859111
+  (Galaxy S23 Ultra, posted 2024-01-04, still getting replies through 2025-09-18, OPEN)
+- https://eu.community.samsung.com/t5/galaxy-s24-series/help-s24-fe-bluetooth-speaker-far-too-loud-even-on-lowest-volume/td-p/11193484
+  (Galaxy S24 FE, posted 2024-12-07, a fresh unresolved reply came in 2025-11-12, OPEN)
+
+**Flag, needs your input:** a fourth thread,
+https://r2.community.samsung.com/t5/Galaxy-S/In-call-volume-too-loud/td-p/18112176
+(Samsung Members India, "In call volume too loud!!", posted 2025-01-28), already
+has a reply posted very recently that says *"Fixed it for myself with a small
+free app... Disclosure, it's my app: https://play.google.com/store/apps/details?id=granularvolume.com"*
+— i.e. this exact app and link, posted by someone else (or possibly you,
+outside this session). This was found already live on the page, not something
+this session posted. Worth checking whether that was you — if not, it's
+already violating that forum's anti-advertising rule under your app's name, on
+an account you may not control, which is worth knowing about either way.
+
+## Reddit — could not be independently searched or verified this session
+
+Both the research agent and this session's own browser tool are blocked from
+fetching reddit.com directly (policy block on WebFetch and the Browser pane
+alike). This means no new Reddit complaint threads could be found or
+verified as still open in this pass, despite a genuine attempt. The
+already-verified Reddit channels from 2026-07-13 (r/FreeAppReviews and the
+r/degoogle weekly Showcase thread, both above) remain the only Reddit venues
+confirmed viable — if you want to add fresh Reddit complaint threads to reply
+to, search Reddit yourself (e.g. "volume too loud minimum" within specific
+phone subreddits) and paste the thread URL here for a rules check before
+replying, the same way the r/androidapps and r/droidappshowcase blocks were
+caught earlier.
 
 ---
 
@@ -353,11 +474,50 @@ https://play.google.com/store/apps/details?id=granularvolume.com
 
 ---
 
-## AlternativeTo.net
+## AlternativeTo.net (verified 2026-07-13, live from their own FAQ at alternativeto.net/faq/)
 
-Submit as an alternative in the volume control / audio utility category. (Note: AlternativeTo.net's own submission form asks you to name specific apps yours is an alternative to. That naming happens on their site directly, at submission time, not in this doc.)
+This is a real, active, high-traffic discovery site: 147,551 apps, over 2 million
+user opinions. It works two ways, and the SECOND one is the actual "we show up
+when people search related apps" mechanic:
 
-Short description:
+1. **Our own listing page** (`Suggest new application`) — a standalone page for
+   the app, findable by direct search and tag browsing.
+2. **Attaching our app as a "Suggested Alternative" on OTHER already-popular
+   apps' pages** — this is what makes us surface on someone else's page when
+   they're comparing options, e.g. showing up on a big EQ app's "Alternatives"
+   list. This is almost certainly what was meant by "we'll pop up when people
+   search related apps."
+
+**Exact process, quoted from their own FAQ:**
+- To create our own page: click the user icon (top right) → "Suggest new
+  application" → fill Platforms, License, Description, Tags → "Submit the
+  application." Review takes a few days to about a week.
+- **Hard gate:** *"New users must wait a week after the creation of their
+  account to submit a new app page"* (anti-spam policy, confirmed on their FAQ
+  page directly, not a search snippet). This does NOT block the second action
+  below, only creating a brand-new standalone page.
+- To attach us as an alternative to an existing app: go to that app's page →
+  "Contribute to this page" → "Suggest Alternatives" → "Add a new application
+  as a new alternative" → fill the same fields.
+
+**Account requirement — this needs you, not me:** creating accounts on your
+behalf is something I never do. If you don't already have an AlternativeTo
+account, create one yourself whenever you get a chance — the 1-week clock for
+submitting our own page only starts once the account exists, so the earlier
+you create it, the sooner the standalone listing becomes possible. Once you're
+logged in, tell me and I can help fill in the submission fields with you
+watching, but the account and the final submit click need to be yours.
+
+**Two real, verified, well-matched target pages to attach us to as an
+alternative** (both confirmed live, not guessed):
+- https://alternativeto.net/software/32steps/about/ — "Override Android's
+  default volume steps with custom step counts." This is the closest direct
+  category match found on the entire site.
+- https://alternativeto.net/software/wavelet/about/ — a large, popular
+  Android headphone-EQ app in the same general audio-utility space, higher
+  traffic than 32steps.
+
+Short description (for the submission form):
 Free, open source Android app that goes below the phone's minimum volume, on
 both phones and tablets. A small floating dial adds fine attenuation steps under
 the hardware floor. No ads, no tracking, no account, GPL-3.0.
@@ -365,12 +525,18 @@ the hardware floor. No ads, no tracking, no account, GPL-3.0.
 Tags: volume control, audio, accessibility, open source, android
 
 Long description (for the detail box):
-Granular Volume adds volume steps below what Android's hardware minimum allows,
-through a small overlay dial that floats over any app. Unlike volume boosters,
-it goes the other direction: quieter, for sensitive IEMs, sleeping next to a
-baby, or a quiet room. Works the same on phones and tablets. It does not
-override the physical volume buttons or replace the system volume panel, it
-just sits on top and does one thing. Free, no ads, no tracking, open source.
+Volume Control: Quiet Dial adds volume steps below what Android's hardware
+minimum allows, through a small overlay dial that floats over any app. Unlike
+volume boosters, it goes the other direction: quieter, for sensitive IEMs,
+sleeping next to a baby, or a quiet room. Works the same on phones and tablets.
+It does not override the physical volume buttons or replace the system volume
+panel, it just sits on top and does one thing. Free, no ads, no tracking, open
+source under GPL-3.0.
+
+Platforms: Android, Android Tablet
+License: Open Source (GPL-3.0)
+Links: Play Store https://play.google.com/store/apps/details?id=granularvolume.com,
+Source https://github.com/Rzuss/granular-volume
 
 ---
 

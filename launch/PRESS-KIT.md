@@ -46,7 +46,7 @@ sensitive IEMs and bone conduction headphones, and anyone in a quiet room.
 
 - Google Play: https://play.google.com/store/apps/details?id=granularvolume.com
 - Source: https://github.com/Rzuss/granular-volume
-- Demo video: https://www.youtube.com/watch?v=8dR0nNhW27g
+- Demo video: https://www.youtube.com/watch?v=DrpbF3r2bhs
 - Site: https://rzuss.github.io/granular-volume
 
 ## Assets
