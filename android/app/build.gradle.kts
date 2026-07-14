@@ -24,8 +24,19 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 35          // Play requires API 35 (Android 15) for new apps in 2025+
-        versionCode = 7
-        versionName = "1.3.0"
+        versionCode = 8
+        versionName = "1.3.1"
+    }
+
+    // Distribution flavors: "play" keeps the Play-only in-app review prompt;
+    // "fdroid" carries zero com.google.android.play code so the F-Droid build
+    // reproduces cleanly (see https://github.com/Rzuss/granular-volume/issues/1).
+    // Neither flavor sets applicationId/applicationIdSuffix — both must resolve
+    // to the exact same applicationId as defaultConfig above.
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("play")   { dimension = "distribution" }
+        create("fdroid") { dimension = "distribution" }
     }
 
     signingConfigs {
@@ -76,10 +87,13 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.lifecycle:lifecycle-service:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    // In-app review prompt. Verified: adds no manifest permissions (binds to the
-    // Play Store app via a local service connection, no direct network access
-    // from this app's own process) — confirmed via a merged-manifest dump of a
-    // real build plus an on-device run before adding this to the shipping code.
-    implementation("com.google.android.play:review:2.0.2")
-    implementation("com.google.android.play:review-ktx:2.0.2")
+    // In-app review prompt. Play-only: F-Droid forbids this proprietary library
+    // (see issue #1), so it's scoped to the "play" flavor's own classpath via
+    // playImplementation rather than implementation. Verified: adds no manifest
+    // permissions (binds to the Play Store app via a local service connection,
+    // no direct network access from this app's own process) — confirmed via a
+    // merged-manifest dump of a real build plus an on-device run before adding
+    // this to the shipping code.
+    "playImplementation"("com.google.android.play:review:2.0.2")
+    "playImplementation"("com.google.android.play:review-ktx:2.0.2")
 }
