@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiet Phone Volume for Libraries, Shared Offices, and Meditation on Android</title>
+<meta name="description" content="If your phone's minimum volume is still too loud for a library, a shared office, or meditation, here's why, and how to get genuinely quiet audio without headphones-only compromises.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rzuss.github.io/granular-volume/use-cases/quiet-rooms-libraries.html">
+<meta property="og:title" content="Quiet Phone Volume for Libraries and Shared Spaces">
+<meta property="og:description" content="When your phone's lowest volume is still too loud for a quiet shared space. Why it happens, and the actual fix.">
+<meta property="og:image" content="../img/feature.png">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Quiet Phone Volume for Libraries, Shared Offices, and Meditation",
+  "description": "Why a phone's lowest volume setting is often still too loud for genuinely quiet shared spaces, and what actually fixes it.",
+  "image": "https://rzuss.github.io/granular-volume/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
+  "datePublished": "2026-07-14",
+  "dateModified": "2026-07-14",
+  "mainEntityOfPage": "https://rzuss.github.io/granular-volume/use-cases/quiet-rooms-libraries.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it obvious to people around me that I'm using this?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The dial is small and, once tucked into a corner of the screen, turns semi-transparent, so it reads as a minor UI element rather than anything conspicuous. There's no sound, animation, or notification beyond the standard foreground-service icon in the status bar."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it apply to notification and media sounds together, or just media playback?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The attenuation is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I set one quiet level and reuse it every time without resetting it?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same attenuation you left it at, rather than resetting to zero each time."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(32px,6vw,48px);font-weight:900;letter-spacing:-.7px;line-height:1.1;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+  article{padding:36px 0;}
+  article h2{font-size:24px;font-weight:800;margin:40px 0 14px;letter-spacing:-.2px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Use cases</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
+    <h1>Quiet phone volume for libraries, shared offices, and meditation</h1>
+    <p class="dek">Some spaces need audio to be almost inaudible, not just "on low." A phone's lowest volume step usually isn't built for that.</p>
+    <p class="meta">Updated July 14, 2026 · 4 min read</p>
+  </header>
+
+  <article>
+    <p class="lead-p">A library, a shared office, a meditation session, or anywhere else that needs genuine quiet has a lower bar than most phones are designed to meet. The lowest non-mute volume step on a typical phone or tablet is loud enough to be heard by someone a few seats away, which is exactly the wrong loudness for these settings.</p>
+
+    <p>This isn't inconsistent behavior from your phone — it's how Android's volume system works everywhere. The lowest step above mute is a fixed fraction of the device's maximum output, calibrated for average listening conditions, not for a room where any audible phone is too much.</p>
+
+    <div class="quickfix">
+      <div class="kicker">The actual fix</div>
+      <p><strong>Granular Volume</strong> adds real volume steps below your device's hardware minimum. Set it low, tuck the dial into a corner where it turns semi-transparent, and it stays out of the way.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
+      </div>
+    </div>
+
+    <h2>Why "just turn it all the way down" isn't enough</h2>
+    <p>The instinct to turn the volume slider all the way down assumes the lowest setting is quiet enough for any situation. For most quiet shared spaces, it isn't — and the usual fallback of "use headphones" isn't always practical, whether that's a meditation app meant to play softly into a room, or a notification you'd rather hear faintly than miss entirely.</p>
+    <p>Apps that offer more volume steps don't help here either. They subdivide the same existing range into finer clicks, so the quietest setting available stays exactly where it already was — just reached through more taps.</p>
+
+    <h2>What actually gets you there</h2>
+    <p>An attenuation effect applied underneath the existing volume range, rather than more steps within it, is what changes the actual floor. Granular Volume applies this as a small floating dial over whatever app is playing sound, with real steps below what the phone's own slider can reach.</p>
+    <ul>
+      <li>Set a level once and it's remembered — reopening the dial from the Quick Settings tile brings back the same quiet setting, not a reset to zero.</li>
+      <li>Tucked into a corner, the dial turns semi-transparent and doesn't draw attention on screen.</li>
+      <li>No account, no ads, no network access — nothing about it needs setting up more than once.</li>
+    </ul>
+
+    <div class="callout">
+      <h2>The quiet setting your phone doesn't have</h2>
+      <p>Free, open source, no ads, no tracking, no account. Works the same way on phones and tablets, and doesn't require headphones to get genuinely quiet output.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="../index.html">See how it works</a>
+      </div>
+    </div>
+
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">
+      <dt>Is it obvious to people around me that I'm using this?</dt>
+      <dd>The dial is small and, once tucked into a corner of the screen, turns semi-transparent, so it reads as a minor UI element rather than anything conspicuous. There's no sound, animation, or notification beyond the standard foreground-service icon in the status bar.</dd>
+
+      <dt>Does it apply to notification and media sounds together, or just media playback?</dt>
+      <dd>The attenuation is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app.</dd>
+
+      <dt>Can I set one quiet level and reuse it every time without resetting it?</dt>
+      <dd>Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same attenuation you left it at, rather than resetting to zero each time.</dd>
+    </dl>
+  </article>
+
+</div>
+<footer>
+  <div class="wrap">
+    Part of <a href="../index.html">Granular Volume</a>, free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    See also: <a href="../guide/lower-android-volume-below-minimum.html">the full guide</a> ·
+    <a href="night-audiobooks-podcasts.html">falling asleep to audio</a> ·
+    <a href="sleeping-baby-white-noise.html">quiet white noise for a sleeping baby</a>.
+  </div>
+</footer>
+</body>
+</html>
