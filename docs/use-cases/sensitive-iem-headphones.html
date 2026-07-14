@@ -117,13 +117,13 @@
   </header>
 
   <article>
-    <p class="lead-p">In-ear monitors are usually far more sensitive than the earbuds or headphones a phone's volume curve was tuned around, often specified in decibels of output per milliwatt of input rather than the rougher "loud/quiet" range typical consumer earbuds are designed for. Bone conduction headphones have a different problem: at low volumes the vibration itself can feel uncomfortable in a way that's separate from perceived loudness. Both end up in the same place — the phone's lowest non-mute step is genuinely too much.</p>
+    <p class="lead-p">In-ear monitors are usually far more sensitive than the earbuds or headphones a phone's volume curve was tuned around, often specified in decibels of output per milliwatt of input rather than the rougher "loud/quiet" range typical consumer earbuds are designed for. Bone conduction headphones have a different problem: at low volumes the vibration itself can feel uncomfortable in a way that's separate from perceived loudness. Both end up in the same place: the phone's lowest non-mute step is genuinely too much.</p>
 
     <p>This isn't a flaw specific to your headphones. Android's volume steps are calibrated against the device's own maximum output level, not against whatever is actually plugged in. The lowest step is a fixed fraction of that maximum, and no amount of headphone sensitivity is factored into where that floor sits.</p>
 
     <div class="quickfix">
       <div class="kicker">The actual fix</div>
-      <p><strong>Granular Volume</strong> adds real attenuation steps below the hardware minimum, applied cleanly to the output before it reaches your headphones — wired or Bluetooth, IEMs or bone conduction, it doesn't matter which.</p>
+      <p><strong>Granular Volume</strong> adds real attenuation steps below the hardware minimum, applied cleanly to the output before it reaches your headphones, wired or Bluetooth, IEMs or bone conduction, it doesn't matter which.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
@@ -131,13 +131,13 @@
     </div>
 
     <h2>Why "more precise" volume apps don't solve this</h2>
-    <p>The most common suggestion for this problem is an app that adds more volume steps — a hundred clicks instead of fifteen. That helps with smoother transitions between existing levels, but it doesn't extend the range below the current minimum. For headphones sensitive enough that step 1 of 15 is already too loud, step 1 of 100 covering the exact same range lands at essentially the same loudness. More resolution within an unchanged range isn't a lower floor.</p>
+    <p>The most common suggestion for this problem is an app that adds more volume steps: a hundred clicks instead of fifteen. That helps with smoother transitions between existing levels, but it doesn't extend the range below the current minimum. For headphones sensitive enough that step 1 of 15 is already too loud, step 1 of 100 covering the exact same range lands at essentially the same loudness. More resolution within an unchanged range isn't a lower floor.</p>
 
     <h2>What actually changes the floor</h2>
-    <p>An attenuation effect applied through Android's own audio framework — rather than a remapped step count — genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>
+    <p>An attenuation effect applied through Android's own audio framework, rather than a remapped step count, genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>
     <ul>
       <li>Works identically for wired IEMs, USB-C DACs, and Bluetooth output, since the attenuation is applied before the signal reaches whichever output path is active.</li>
-      <li>Doesn't touch your physical volume buttons — you still control the "normal" range exactly as before, this just adds headroom underneath it.</li>
+      <li>Doesn't touch your physical volume buttons. You still control the "normal" range exactly as before, this just adds headroom underneath it.</li>
       <li>No equalizer curve, no compression, so it doesn't change the tonal balance you're used to, only the overall level.</li>
     </ul>
 

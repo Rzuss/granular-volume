@@ -117,13 +117,13 @@
   </header>
 
   <article>
-    <p class="lead-p">White noise and lullaby apps are one of the most common reasons people go looking for a quieter volume setting than their phone offers. The problem isn't the app playing the sound — it's that the device's lowest non-mute volume step is calibrated for normal listening, not for something meant to be barely audible next to a sleeping baby.</p>
+    <p class="lead-p">White noise and lullaby apps are one of the most common reasons people go looking for a quieter volume setting than their phone offers. The problem isn't the app playing the sound. It's that the device's lowest non-mute volume step is calibrated for normal listening, not for something meant to be barely audible next to a sleeping baby.</p>
 
     <p>Android's volume system divides the range between silence and full output into a fixed number of steps, and the first step above mute is a fixed <em>fraction</em> of the device's maximum volume, not a fixed loudness. A phone or tablet with a louder maximum ends up with a louder floor too, even though every device shows the same "step 1 of however many" on the slider. This is exactly why the same white-noise app can sound fine at minimum volume on one phone and be uncomfortably loud on another, or on a tablet versus a phone from the same person's own house.</p>
 
     <div class="quickfix">
       <div class="kicker">The actual fix</div>
-      <p><strong>Granular Volume</strong> adds real volume steps below your device's hardware minimum — not more clicks within the existing range, genuine additional headroom underneath it. Set it once, tuck the dial into a corner, and it stays there.</p>
+      <p><strong>Granular Volume</strong> adds real volume steps below your device's hardware minimum, not more clicks within the existing range, genuine additional headroom underneath it. Set it once, tuck the dial into a corner, and it stays there.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
@@ -131,15 +131,15 @@
     </div>
 
     <h2>Why turning the volume all the way down still isn't quiet enough</h2>
-    <p>It's tempting to assume any remaining loudness at the lowest step is a hardware limitation that can't be worked around. It isn't — it's a software limitation, specifically the fact that stock Android has no control for anything quieter than step 1. The fix has to live outside the volume slider itself, applying attenuation <em>underneath</em> the existing floor rather than trying to subdivide it further.</p>
+    <p>It's tempting to assume any remaining loudness at the lowest step is a hardware limitation that can't be worked around. It isn't. It's a software limitation, specifically the fact that stock Android has no control for anything quieter than step 1. The fix has to live outside the volume slider itself, applying attenuation <em>underneath</em> the existing floor rather than trying to subdivide it further.</p>
     <p>Apps that add "more precise" volume steps (100 clicks instead of 15, for example) don't help here, even though they're the most commonly recommended fix online. More clicks between mute and the same step 1 still bottom out at exactly the same loudness step 1 always had.</p>
 
     <h2>What actually works for this specific case</h2>
-    <p>An attenuation app that applies negative gain through Android's own audio effect framework — rather than remapping the existing volume steps — genuinely produces output quieter than the hardware floor. That's the entire mechanism behind Granular Volume: a small floating dial that sits over your white noise or lullaby app, with steps that go below what the device's own slider can reach.</p>
+    <p>An attenuation app that applies negative gain through Android's own audio effect framework, rather than remapping the existing volume steps, genuinely produces output quieter than the hardware floor. That's the entire mechanism behind Granular Volume: a small floating dial that sits over your white noise or lullaby app, with steps that go below what the device's own slider can reach.</p>
     <ul>
       <li>Drag the dial to a corner of the screen once you've set the level, and it turns semi-transparent so it's out of the way for the rest of the night.</li>
       <li>It doesn't override the phone's physical volume buttons or the system panel, so your normal volume controls still work exactly as before for anything else.</li>
-      <li>No account, no ads, no network permission — nothing to configure beyond finding the level that works and leaving it there.</li>
+      <li>No account, no ads, no network permission. Nothing to configure beyond finding the level that works and leaving it there.</li>
     </ul>
 
     <div class="callout">

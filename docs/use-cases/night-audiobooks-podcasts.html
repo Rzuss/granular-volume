@@ -34,7 +34,7 @@
     {
       "@type": "Question",
       "name": "Does the overlay turn itself off automatically overnight?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No, it stays exactly at the level you set until you change it or close it — there's no automatic timeout. If you want it off by morning, closing it with one tap or using the Quick Settings tile before you fall asleep is the way to do that."}
+      "acceptedAnswer": {"@type": "Answer", "text": "No, it stays exactly at the level you set until you change it or close it, there's no automatic timeout. If you want it off by morning, closing it with one tap or using the Quick Settings tile before you fall asleep is the way to do that."}
     },
     {
       "@type": "Question",
@@ -117,7 +117,7 @@
   </header>
 
   <article>
-    <p class="lead-p">Falling asleep to a podcast or an audiobook only works if it's quiet enough not to become the thing that keeps someone else awake instead. For a lot of phones and tablets, the lowest non-mute volume step doesn't get there — it's calibrated for normal daytime listening, not for something meant to fade into the background of a dark, quiet bedroom.</p>
+    <p class="lead-p">Falling asleep to a podcast or an audiobook only works if it's quiet enough not to become the thing that keeps someone else awake instead. For a lot of phones and tablets, the lowest non-mute volume step doesn't get there. It's calibrated for normal daytime listening, not for something meant to fade into the background of a dark, quiet bedroom.</p>
 
     <p>This comes down to how Android's volume system is built: the lowest step above mute is a fixed fraction of the device's maximum output, not a fixed loudness. There's no separate "bedtime" calibration, and no setting in stock Android that changes where that floor sits, regardless of what's actually playing through it.</p>
 
@@ -131,10 +131,10 @@
     </div>
 
     <h2>Why the usual advice doesn't fix this</h2>
-    <p>The most common suggestion — an app that adds more volume steps for finer control — doesn't actually lower the floor. It subdivides the same range into smaller increments, so the quietest possible setting stays exactly where it already was. If step 1 of 15 was too loud for a shared bedroom, step 1 of 100 covering the same range is still that same loudness, just reached in smaller increments on the way up.</p>
+    <p>The most common suggestion, an app that adds more volume steps for finer control, doesn't actually lower the floor. It subdivides the same range into smaller increments, so the quietest possible setting stays exactly where it already was. If step 1 of 15 was too loud for a shared bedroom, step 1 of 100 covering the same range is still that same loudness, just reached in smaller increments on the way up.</p>
 
     <h2>What actually gets you quieter</h2>
-    <p>An attenuation effect applied underneath the existing volume range — rather than more clicks within it — is the only mechanism that changes the actual floor. That's what Granular Volume does: a small floating dial over your audiobook or podcast app, with real steps below what the phone's own slider allows.</p>
+    <p>An attenuation effect applied underneath the existing volume range, rather than more clicks within it, is the only mechanism that changes the actual floor. That's what Granular Volume does: a small floating dial over your audiobook or podcast app, with real steps below what the phone's own slider allows.</p>
     <ul>
       <li>Set the level once, tuck the dial to a corner where it turns semi-transparent, and it stays exactly there through the night.</li>
       <li>Runs as a normal foreground service, so playback and attenuation both continue fine with the screen off or the phone locked, same as any other audio app.</li>
@@ -153,7 +153,7 @@
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
       <dt>Does the overlay turn itself off automatically overnight?</dt>
-      <dd>No, it stays exactly at the level you set until you change it or close it — there's no automatic timeout. If you want it off by morning, closing it with one tap or using the Quick Settings tile before you fall asleep is the way to do that.</dd>
+      <dd>No, it stays exactly at the level you set until you change it or close it, there's no automatic timeout. If you want it off by morning, closing it with one tap or using the Quick Settings tile before you fall asleep is the way to do that.</dd>
 
       <dt>Does running it all night drain the battery noticeably?</dt>
       <dd>The overlay itself is a lightweight foreground service with no continuous processing beyond holding the audio effect active, so it doesn't add meaningful battery drain on top of whatever the audiobook or podcast app itself already uses to play audio.</dd>

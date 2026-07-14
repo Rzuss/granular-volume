@@ -1,0 +1,1 @@
+Behind-the-scenes rebuild: the app is now built as separate Play and F-Droid editions from one codebase, so the F-Droid version has zero proprietary dependencies. No visible changes to how the app works or looks.
