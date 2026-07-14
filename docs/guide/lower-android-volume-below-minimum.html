@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-13",
+  "dateModified": "2026-07-14",
   "mainEntityOfPage": "https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -55,6 +55,106 @@
       "@type": "Question",
       "name": "Does this work for calls, not just media?",
       "acceptedAnswer": {"@type": "Answer", "text": "It depends on the app and the Android version's audio session APIs. Granular Volume targets the media output; call audio uses a separate voice stream that most third-party attenuation tools, including this one, do not currently reach."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does an attenuation app like this drain the battery?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work the same way on tablets as on phones?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, identically. Tablets often have an even higher minimum volume step than phones, which makes this problem worse, but the underlying fix, negative gain applied through Android's audio effect framework, works the same way on both form factors."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is this specific to Samsung, Pixel, or another brand, or does it work on any Android device?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It works on any device running a supported Android version, because it uses Android's own audio effect APIs rather than a manufacturer-specific feature like Samsung's Good Lock. Unlike Sound Assistant, there's no brand restriction."}
+    },
+    {
+      "@type": "Question",
+      "name": "What's the minimum Android version required?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Granular Volume requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it need root, Accessibility permission, or Device Admin access?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. It needs a display-over-other-apps permission for the floating dial and standard audio/notification permissions, nothing more invasive. No root, no Accessibility Service, no Device Admin."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can pushing negative gain like this damage my speaker or headphones?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it affect ringtone and alarm volume, or only media?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It targets the general media/output audio session. Ringtone and alarm volume route through separate audio streams in Android and are not affected, the same limitation described above for call audio."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will attenuating the output this way add hiss, distortion, or reduce audio quality?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. It's the same audio, turned down further than the phone's own slider is able to go."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it conflict with equalizer apps or other volume-control apps installed at the same time?",
+      "acceptedAnswer": {"@type": "Answer", "text": "There are no known conflicts. It layers a gain-reduction effect on top of whatever else is already processing the audio, rather than replacing or overriding another app's effect chain."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is Granular Volume free, or does it have a paid tier or in-app purchases?",
+      "acceptedAnswer": {"@type": "Answer", "text": "As of this writing it's entirely free, with no in-app purchases, subscriptions, or ads."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does the app collect any personal data or require an account?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. There's no account, no analytics, and no network permission in the app at all, so it has no technical means of sending data anywhere even if it wanted to."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is the source code available to verify these claims?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Granular Volume is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why isn't sub-minimum volume just built into Android already?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an attenuation app like this fills in, rather than something Android exposes natively."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to reopen the app after restarting my phone?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. The floating dial can be brought back after a reboot from the Quick Settings tile with one tap, without having to find and open the full app first."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a faster way to turn it on than opening the app?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Swiping down to Quick Settings and tapping the Granular Volume tile toggles the floating dial on or off directly, without navigating into the app itself."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does it override or disable my phone's physical volume buttons?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. It doesn't take over the volume buttons or the system volume panel. It adds an additional, lower range underneath what those controls already reach."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is Granular Volume available on F-Droid, or only on Google Play?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It's available on both. The F-Droid build is fully open source with the proprietary Play-only components removed, and may occasionally lag a version behind the Google Play release while F-Droid's own build and metadata pipeline catches up."}
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a \"volume booster\" app?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Granular Volume does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will this work if my phone is in Do Not Disturb or Bedtime mode?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the attenuation."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does closing the app or swiping it away from recent apps turn off the attenuation?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the attenuation stays active. It's designed to keep running independent of whether the main app screen is open."}
     }
   ]
 }
@@ -149,7 +249,7 @@
     <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated July 13, 2026 · 7 min read</p>
+    <p class="meta">Updated July 14, 2026 · 10 min read</p>
   </header>
 
   <article>
@@ -251,6 +351,66 @@
 
       <dt>Does this work for calls, not just media?</dt>
       <dd>It depends on the app and Android's audio session APIs. Call audio uses a separate voice stream that most third-party attenuation tools, including Granular Volume, don't currently reach.</dd>
+
+      <dt>Does an attenuation app like this drain the battery?</dt>
+      <dd>Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio.</dd>
+
+      <dt>Does it work the same way on tablets as on phones?</dt>
+      <dd>Yes, identically. Tablets often have an even higher minimum volume step than phones, which makes this problem worse, but the underlying fix works the same way on both form factors.</dd>
+
+      <dt>Is this specific to Samsung, Pixel, or another brand, or does it work on any Android device?</dt>
+      <dd>It works on any device running a supported Android version, because it uses Android's own audio effect APIs rather than a manufacturer-specific feature like Samsung's Good Lock. Unlike Sound Assistant, there's no brand restriction.</dd>
+
+      <dt>What's the minimum Android version required?</dt>
+      <dd>Granular Volume requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff.</dd>
+
+      <dt>Does it need root, Accessibility permission, or Device Admin access?</dt>
+      <dd>No. It needs a display-over-other-apps permission for the floating dial and standard audio/notification permissions, nothing more invasive. No root, no Accessibility Service, no Device Admin.</dd>
+
+      <dt>Can pushing negative gain like this damage my speaker or headphones?</dt>
+      <dd>No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
+
+      <dt>Does it affect ringtone and alarm volume, or only media?</dt>
+      <dd>It targets the general media/output audio session. Ringtone and alarm volume route through separate audio streams in Android and are not affected, the same limitation described above for call audio.</dd>
+
+      <dt>Will attenuating the output this way add hiss, distortion, or reduce audio quality?</dt>
+      <dd>No. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. It's the same audio, turned down further than the phone's own slider is able to go.</dd>
+
+      <dt>Does it conflict with equalizer apps or other volume-control apps installed at the same time?</dt>
+      <dd>There are no known conflicts. It layers a gain-reduction effect on top of whatever else is already processing the audio, rather than replacing or overriding another app's effect chain.</dd>
+
+      <dt>Is Granular Volume free, or does it have a paid tier or in-app purchases?</dt>
+      <dd>As of this writing it's entirely free, with no in-app purchases, subscriptions, or ads.</dd>
+
+      <dt>Does the app collect any personal data or require an account?</dt>
+      <dd>No. There's no account, no analytics, and no network permission in the app at all, so it has no technical means of sending data anywhere even if it wanted to.</dd>
+
+      <dt>Is the source code available to verify these claims?</dt>
+      <dd>Yes. Granular Volume is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust.</dd>
+
+      <dt>Why isn't sub-minimum volume just built into Android already?</dt>
+      <dd>Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an attenuation app like this fills in, rather than something Android exposes natively.</dd>
+
+      <dt>Do I need to reopen the app after restarting my phone?</dt>
+      <dd>No. The floating dial can be brought back after a reboot from the Quick Settings tile with one tap, without having to find and open the full app first.</dd>
+
+      <dt>Is there a faster way to turn it on than opening the app?</dt>
+      <dd>Yes. Swiping down to Quick Settings and tapping the Granular Volume tile toggles the floating dial on or off directly, without navigating into the app itself.</dd>
+
+      <dt>Does it override or disable my phone's physical volume buttons?</dt>
+      <dd>No. It doesn't take over the volume buttons or the system volume panel. It adds an additional, lower range underneath what those controls already reach.</dd>
+
+      <dt>Is Granular Volume available on F-Droid, or only on Google Play?</dt>
+      <dd>It's available on both. The F-Droid build is fully open source with the proprietary Play-only components removed, and may occasionally lag a version behind the Google Play release while F-Droid's own build and metadata pipeline catches up.</dd>
+
+      <dt>How is this different from a "volume booster" app?</dt>
+      <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Granular Volume does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction.</dd>
+
+      <dt>Will this work if my phone is in Do Not Disturb or Bedtime mode?</dt>
+      <dd>Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the attenuation.</dd>
+
+      <dt>Does closing the app or swiping it away from recent apps turn off the attenuation?</dt>
+      <dd>No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the attenuation stays active. It's designed to keep running independent of whether the main app screen is open.</dd>
     </dl>
   </article>
 
