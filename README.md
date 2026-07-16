@@ -6,6 +6,8 @@
 
 **Volume below Android's minimum. A floating control that stays above any app.**
 
+*Listed on Google Play as "Volume Control: Quiet Dial". Same app, same developer.*
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](#)
 [![Min SDK](https://img.shields.io/badge/minSdk-28-orange.svg)](#)
