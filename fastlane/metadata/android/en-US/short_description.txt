@@ -1,1 +1,1 @@
-Fix volume that's too loud at the minimum. Phones, tablets & calls, no root.
+Reduce Android volume below the lowest step. Phones, tablets, calls. No root.

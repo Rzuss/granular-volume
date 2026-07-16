@@ -1,4 +1,4 @@
-Volume too loud even at the lowest setting, on calls, media, or notifications? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
+Is your Android volume still too loud even at the lowest setting, on calls, media, or notifications? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
 
 A small floating volume control appears above any app. Seven steps from no change down to a full 30 dB below your hardware minimum. One tap to move. Drag it anywhere on screen, tuck it to an edge, close it when you are done. Your position is saved.
 
