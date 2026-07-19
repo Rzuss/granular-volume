@@ -109,11 +109,15 @@ In the interest of being straightforward about what this app does and doesn't do
 
 ## Demo
 
-<a href="https://www.youtube.com/watch?v=DrpbF3r2bhs">
-<img src="store-assets/screenshot_2.png" width="220" alt="Watch the demo on YouTube">
+Android's own slider runs out of room, then the dial keeps going below it. The
+audio in the video drops with every step shown on screen, so you can hear the
+difference rather than just read about it.
+
+<a href="https://www.youtube.com/watch?v=NvyF30YuZsw">
+<img src="https://i.ytimg.com/vi/NvyF30YuZsw/maxresdefault.jpg" width="560" alt="Quiet Dial: lower your Android volume below the minimum">
 </a>
 
-[Watch the demo on YouTube](https://www.youtube.com/watch?v=DrpbF3r2bhs)
+[Watch on YouTube](https://www.youtube.com/watch?v=NvyF30YuZsw)
 
 ## Compatibility
 
