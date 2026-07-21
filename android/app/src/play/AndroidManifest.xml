@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      Play-flavor only. Declares the transparent host activity for the Google Play
+      in-app review dialog. Merged into the "play" build's manifest; the F-Droid
+      build never sees it, keeping that build free of any Play-review surface.
+
+      - not exported: only this app launches it, from the QS tile.
+      - noHistory + excludeFromRecents + no launcher filter: it must never appear in
+        recents or the launcher, and must not linger on the back stack.
+      - translucent theme: no visible window of its own; it just fronts the review card.
+      - no permissions are added here; the review library binds to the Play Store app
+        via a local service connection, so the app's zero-network profile is unchanged.
+    -->
+    <application>
+        <activity
+            android:name=".ReviewActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    </application>
+</manifest>

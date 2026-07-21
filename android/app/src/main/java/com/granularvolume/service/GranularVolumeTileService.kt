@@ -8,6 +8,7 @@ import android.service.quicksettings.TileService
 import com.granularvolume.MainActivity
 import com.granularvolume.util.PermissionHelper
 import com.granularvolume.util.Prefs
+import com.granularvolume.util.ReviewHelper
 
 /**
  * Quick Settings tile that toggles the VolumeControlService on/off.
@@ -41,6 +42,11 @@ class GranularVolumeTileService : TileService() {
         } else {
             startForegroundService(Intent(this, VolumeControlService::class.java))
             syncTile(active = true)
+            // The control is now running — the real "moment of value" for tile-only
+            // users. After enough activations this offers the in-app review once
+            // (Play flavor); reviewIntentIfDue returns null until then, and always
+            // on F-Droid, so nothing here disturbs the user in the normal case.
+            ReviewHelper.reviewIntentIfDue(applicationContext)?.let { startActivityAndCollapseCompat(it) }
         }
     }
 
@@ -52,8 +58,17 @@ class GranularVolumeTileService : TileService() {
     }
 
     private fun launchMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivityAndCollapseCompat(
+            Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
+    }
+
+    /**
+     * Starts an activity from the tile the sanctioned way. On Android 14+ the
+     * PendingIntent overload is required; older versions take the Intent directly.
+     * Both collapse the Quick Settings panel so the launched activity comes forward.
+     */
+    private fun startActivityAndCollapseCompat(intent: Intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             val pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
             startActivityAndCollapse(pi)

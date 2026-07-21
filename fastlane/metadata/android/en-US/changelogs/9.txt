@@ -1,0 +1,1 @@
+The Play edition now offers its optional review prompt at a more natural moment, after you have actually used the Quick Settings tile a few times, instead of only when you reopen the main screen. It still appears at most once, and never on first setup. No change to how the volume control itself works, and the F-Droid edition is unaffected.

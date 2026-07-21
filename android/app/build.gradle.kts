@@ -24,8 +24,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 35          // Play requires API 35 (Android 15) for new apps in 2025+
-        versionCode = 8
-        versionName = "1.3.1"
+        versionCode = 9
+        versionName = "1.3.2"
     }
 
     // Distribution flavors: "play" keeps the Play-only in-app review prompt;

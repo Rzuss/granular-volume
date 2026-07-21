@@ -19,6 +19,7 @@ object Prefs {
     private const val KEY_COLLAPSED        = "overlay_collapsed"
     private const val KEY_QS_TILE_OFFERED  = "qs_tile_offered"
     private const val KEY_LAUNCH_COUNT     = "launch_count"
+    private const val KEY_TILE_ACTIVATIONS = "tile_activations"
     private const val KEY_REVIEW_REQUESTED = "review_flow_requested"
 
     /** Current attenuation in dB (0.0 = none, -30.0 = near-silent) */
@@ -74,6 +75,17 @@ object Prefs {
     fun incrementAndGetLaunchCount(context: Context): Int {
         val next = prefs(context).getInt(KEY_LAUNCH_COUNT, 0) + 1
         prefs(context).edit { putInt(KEY_LAUNCH_COUNT, next) }
+        return next
+    }
+
+    /**
+     * Counts Quick Settings tile "turn on" taps. This is the real usage signal for
+     * tile-driven users who rarely reopen [com.granularvolume.MainActivity], and is
+     * used to decide when to (once ever) offer the in-app review prompt.
+     */
+    fun incrementAndGetTileActivations(context: Context): Int {
+        val next = prefs(context).getInt(KEY_TILE_ACTIVATIONS, 0) + 1
+        prefs(context).edit { putInt(KEY_TILE_ACTIVATIONS, next) }
         return next
     }
 
