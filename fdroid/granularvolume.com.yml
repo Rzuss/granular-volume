@@ -8,7 +8,7 @@ Changelog: https://github.com/Rzuss/granular-volume/releases
 
 AutoName: Granular Volume
 
-Summary: Volume dial quieter than your phone's minimum
+Summary: Lower volume below your phone's minimum when it's still too loud
 Description: |-
   Sometimes the lowest volume setting is still too loud. Granular Volume adds
   the volume levels your phone leaves out, below the hardware minimum, through
