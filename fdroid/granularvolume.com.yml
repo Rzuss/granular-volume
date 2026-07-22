@@ -31,8 +31,18 @@ Builds:
     subdir: android/app
     gradle:
       - release
+  # From versionCode 8 the app builds as separate play/fdroid flavors from one
+  # codebase; the F-Droid build uses the "fdroid" flavor, which carries zero
+  # proprietary dependencies. F-Droid auto-generates intermediate build entries
+  # from tags (AutoUpdateMode: Version); this entry documents the current recipe.
+  - versionName: '1.3.3'
+    versionCode: 10
+    commit: v1.3.3
+    subdir: android/app
+    gradle:
+      - fdroid
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: '1.1.2'
-CurrentVersionCode: 4
+CurrentVersion: '1.3.3'
+CurrentVersionCode: 10

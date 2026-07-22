@@ -1,0 +1,1 @@
+Updated to build against the latest Android version (Android 16). No new permissions, and no change to how the volume dial works. This is a maintenance release to stay current with Android and app store requirements.
