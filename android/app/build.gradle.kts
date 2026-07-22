@@ -18,14 +18,14 @@ val hasReleaseSigning = releaseKeystorePath.isNotEmpty()
 
 android {
     namespace = "com.granularvolume"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "granularvolume.com"
         minSdk = 28
-        targetSdk = 35          // Play requires API 35 (Android 15) for new apps in 2025+
-        versionCode = 9
-        versionName = "1.3.2"
+        targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
+        versionCode = 10
+        versionName = "1.3.3"
     }
 
     // Distribution flavors: "play" keeps the Play-only in-app review prompt;
