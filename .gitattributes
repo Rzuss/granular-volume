@@ -22,3 +22,16 @@ gradlew     text eol=lf
 *.mp4       binary
 *.keystore  binary
 *.jks       binary
+
+# GitHub Linguist language detection.
+# The shipped app is Kotlin (in android/). Everything below is build-time
+# tooling — asset/thumbnail/promo-video generators, the legal-doc builder,
+# CI, and signing scripts — not app code. Exclude it from language stats so
+# the repo's detected language is Kotlin, not Python or Shell (which have more
+# raw bytes than the app itself). Fixes the "Written in Python" mislabel that
+# propagates to third-party listings (e.g. AlternativeTo).
+store-assets/**  linguist-vendored
+video/**         linguist-vendored
+legal/**         linguist-vendored
+*.py             linguist-vendored
+*.sh             linguist-vendored
