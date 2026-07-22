@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lowest Volume Too Loud for Sensitive Ears? A Quieter Android Floor (2026)</title>
+<meta name="description" content="If the lowest volume step is still too loud for sensitive hearing or tinnitus-prone ears, Android gives you no level below it. A floating dial adds real steps below the minimum. A comfort utility, not a medical device.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rzuss.github.io/granular-volume/use-cases/tinnitus-sensitive-hearing.html">
+<meta property="og:title" content="Lowest Volume Too Loud for Sensitive Ears? A Quieter Android Floor">
+<meta property="og:description" content="When even the lowest volume step is too loud for sensitive hearing, an attenuation dial adds real steps below Android's minimum. A comfort utility, not a medical device.">
+<meta property="og:image" content="../img/feature.png">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Lowest Volume Too Loud for Sensitive Ears? A Quieter Android Floor",
+  "description": "When even the lowest volume step is too loud for sensitive hearing, a floating attenuation dial adds real steps below Android's minimum. A comfort utility, not a medical device.",
+  "image": "https://rzuss.github.io/granular-volume/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
+  "datePublished": "2026-07-22",
+  "dateModified": "2026-07-22",
+  "mainEntityOfPage": "https://rzuss.github.io/granular-volume/use-cases/tinnitus-sensitive-hearing.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Why is even the lowest volume too loud for my sensitive ears?","acceptedAnswer":{"@type":"Answer","text":"Android's lowest step above mute is a fixed fraction of the device's maximum output, not a fixed loudness. On a device tuned for a loud maximum, that first step can be well above a comfortable level, and stock Android provides no setting to place a level below it."}},
+    {"@type":"Question","name":"Is this a treatment for tinnitus or a hearing-protection device?","acceptedAnswer":{"@type":"Answer","text":"No. It is a convenience utility that lets you set media output quieter than your phone's own minimum. It is not a medical device, not hearing protection, and not a treatment for any condition. For medical concerns, consult a qualified professional."}},
+    {"@type":"Question","name":"How does it get quieter than the minimum setting?","acceptedAnswer":{"@type":"Answer","text":"It applies negative gain to Android's media output using the DynamicsProcessing audio-effect framework, which produces output below the lowest hardware step. It only reduces level; it never boosts past the device maximum."}},
+    {"@type":"Question","name":"Does it add hiss or change the sound?","acceptedAnswer":{"@type":"Answer","text":"No. It is a clean gain-reduction stage, not an equalizer, compressor, or limiter, so it does not reshape the signal. It is the same audio, turned down further than the slider can go."}},
+    {"@type":"Question","name":"Can I use it for quiet masking sounds at night?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many people use it to keep white noise, rain sounds, or soft audio barely audible through earbuds or a speaker when the lowest normal step is too loud to relax to. You choose the level; use your own judgment on what is comfortable."}},
+    {"@type":"Question","name":"Does it work with sensitive IEMs and low-impedance headphones?","acceptedAnswer":{"@type":"Answer","text":"Yes. Sensitive IEMs are exactly the case where the first step is often already too loud. Because the attenuation is applied to the output, it works with any headphones, wired or wireless."}},
+    {"@type":"Question","name":"Is it free, private, and open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all, so it cannot send data anywhere. It is open source under GPL-3.0."}}
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .note{background:rgba(245,185,66,.08);border:1px solid rgba(245,185,66,.32);border-radius:14px;
+    padding:16px 20px;margin:22px 0;font-size:15px;color:#f0e3c8;}
+  .note strong{color:var(--warn);}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Use cases</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
+    <h1>When the lowest volume is still too loud for sensitive ears</h1>
+    <p class="dek">If even the quietest step is uncomfortable, and you have searched for a way to go lower, Android gives you nothing below it. A floating dial adds the missing quiet levels. A comfort utility, not a medical device.</p>
+    <p class="meta">Updated July 22, 2026 · 6 min read</p>
+  </header>
+
+  <article>
+    <p class="lead-p">People with sensitive hearing, or ears that ring after too much sound, often find that even the lowest volume step on their phone is still too loud, especially through in-ear headphones. It is a common, genuine frustration: you want to listen quietly, or keep a masking sound barely audible, and there is simply no setting quieter than the minimum. This page explains why, and the one honest way to add levels below it.</p>
+
+    <div class="note">
+      <strong>Please note.</strong> This is a convenience utility for setting media output quieter than your phone allows. It is not a medical device, not hearing protection, and not a treatment for tinnitus or any condition. If sound sensitivity or ringing is affecting you, please talk to a qualified audiologist or doctor. Use your own judgment with any volume level.
+    </div>
+
+    <div class="quickfix">
+      <div class="kicker">Short on time? Here's the answer</div>
+      <p><strong>Granular Volume</strong> adds real steps below Android's lowest media step, so you can settle at a level quieter than the minimum. It only ever turns the sound down, never up. Free, no ads, no account, no internet permission.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#why">Why the minimum is still too loud</a>
+      </div>
+    </div>
+
+    <h2 id="why">Why the lowest step is still too loud</h2>
+    <p>Android divides the range between silence and full output into a fixed number of steps. The lowest step above mute is a fixed fraction of the maximum, not a fixed loudness. Phones and tablets are tuned for a loud maximum, so that first fraction can be well above what sensitive ears want, and it is worse through in-ear headphones that sit directly in the ear canal. Stock Android has no setting to place a level below that step. That gap is the entire problem.</p>
+
+    <h2>What doesn't solve it</h2>
+    <p>Apps that add more volume steps, like Sound Assistant's 1% increments or custom step-count apps, only subdivide the range you already have. If the lowest step was too loud, a finer lowest step is still the same loudness. Lowering the equalizer or disabling audio enhancements helps a little on some devices as a side effect, but not reliably. None of these place a level below the floor.</p>
+
+    <h2>What does: attenuation below the floor</h2>
+    <p>The one method that genuinely gets quieter applies negative gain to Android's media output through its own DynamicsProcessing framework. Because it attenuates the audio itself rather than working inside the existing steps, it produces output below the hardware minimum. It only reduces level and never boosts, so there is no distortion or added loudness in that direction. It works with any headphones, wired or wireless, and on phones and tablets alike.</p>
+    <p><a href="../index.html">Granular Volume</a> works this way: a small floating dial with seven steps, from no change down to 30&nbsp;dB below your hardware minimum. You pick the level that is comfortable for you, keep a masking sound barely there, or turn media down further than the slider allows, without touching your volume buttons or the system panel.</p>
+
+    <div class="callout">
+      <h2>The quiet levels your phone leaves out</h2>
+      <p>If the minimum has always been too loud for you, this adds the levels below it, so you can listen at a level that is comfortable. Free, open source, no ads, no tracking, no account. A comfort utility, not a medical device.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="sensitive-iem-headphones.html">For sensitive IEMs</a>
+      </div>
+    </div>
+
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">
+      <dt>Why is even the lowest volume too loud for my sensitive ears?</dt>
+      <dd>The lowest step above mute is a fixed fraction of the maximum, not a fixed loudness. On a device tuned for a loud maximum, that first step can be well above comfortable, and Android has no setting below it.</dd>
+      <dt>Is this a treatment for tinnitus or a hearing-protection device?</dt>
+      <dd>No. It is a convenience utility to set media quieter than your phone's minimum. It is not a medical device, not hearing protection, and not a treatment for any condition. For medical concerns, consult a qualified professional.</dd>
+      <dt>How does it get quieter than the minimum setting?</dt>
+      <dd>It applies negative gain to Android's media output using the DynamicsProcessing framework, producing output below the lowest hardware step. It only reduces level; it never boosts past the maximum.</dd>
+      <dt>Does it add hiss or change the sound?</dt>
+      <dd>No. It is a clean gain-reduction stage, not an equalizer or compressor, so it does not reshape the signal. It is the same audio, turned down further than the slider can go.</dd>
+      <dt>Can I use it for quiet masking sounds at night?</dt>
+      <dd>Yes. Many people keep white noise or soft audio barely audible when the lowest normal step is too loud. You choose the level; use your own judgment on what is comfortable.</dd>
+      <dt>Does it work with sensitive IEMs and low-impedance headphones?</dt>
+      <dd>Yes. Those are exactly the case where the first step is often already too loud. The attenuation is applied to the output, so it works with any headphones.</dd>
+      <dt>Is it free, private, and open source?</dt>
+      <dd>Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all. Open source under GPL-3.0.</dd>
+    </dl>
+  </article>
+
+</div>
+<footer>
+  <div class="wrap">
+    Part of <a href="../index.html">Granular Volume</a>, free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> ·
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a>.
+  </div>
+</footer>
+</body>
+</html>
