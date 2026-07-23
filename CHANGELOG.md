@@ -2,6 +2,10 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.3.3 (versionCode 10)
+
+Maintenance release: the app now targets Android 16 (API 36), meeting Google Play's target-API requirement ahead of the August 31, 2026 deadline. `compileSdk` and `targetSdk` were bumped to 36, and the release was verified on an Android 16 emulator (overlay, Quick Settings tile, foreground service, and attenuation all behave identically). No new permissions, no behavior changes, and the F-Droid flavor remains free of proprietary dependencies.
+
 ## 1.3.2 (versionCode 9)
 
 The Play flavor's optional in-app review prompt now has a second, more effective trigger point. It was previously offered only on a return visit to the main screen, which tile-driven users almost never make. It is now also offered after the user has turned the Quick Settings tile on a few times (the real usage signal), hosted by a transparent, no-UI `ReviewActivity` that the tile launches via `startActivityAndCollapse`.

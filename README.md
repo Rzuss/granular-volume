@@ -11,7 +11,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](#)
 [![Min SDK](https://img.shields.io/badge/minSdk-28-orange.svg)](#)
-[![Target SDK](https://img.shields.io/badge/targetSdk-35-orange.svg)](#)
+[![Target SDK](https://img.shields.io/badge/targetSdk-36-orange.svg)](#)
 [![Language](https://img.shields.io/badge/Kotlin-100%25-7F52FF.svg)](#)
 
 </div>
