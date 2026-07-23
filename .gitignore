@@ -51,3 +51,6 @@ $RECYCLE.BIN/
 __pycache__/
 *.pyc
 node_modules/
+
+# ----- F-Droid release staging (signed APK, never commit) -----
+.fdroid-release/

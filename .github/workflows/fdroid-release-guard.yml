@@ -1,0 +1,65 @@
+name: F-Droid release guard
+
+# Every version tag needs a matching vX.Y.Z-fdroid release carrying a signed
+# app-fdroid-release.apk, because fdroiddata's Binaries: field points straight at
+# that URL. When it is missing, F-Droid's build fails on their side and the release
+# never ships, with no signal on ours. That is exactly how 1.3.3 stalled until an
+# F-Droid maintainer opened issue #3 to chase it.
+#
+# This job holds no signing key. It only checks that the reference APK is where
+# fdroiddata expects it, and fails loudly (which emails the repo owner) when it is not.
+# Procedure to fix a failure: launch/FDROID-RELEASE-RUNBOOK.md
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the newest version tag has its F-Droid reference APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Newest tag matching fdroiddata's UpdateCheckMode: Tags ^v[\d.]+$
+          TAG=$(gh api "repos/$REPO/tags" --paginate --jq '.[].name' \
+                | grep -E '^v[0-9]+(\.[0-9]+)*$' \
+                | sort -V | tail -1)
+          if [ -z "$TAG" ]; then
+            echo "No version tag found, nothing to check."
+            exit 0
+          fi
+
+          VER="${TAG#v}"
+          URL="https://github.com/$REPO/releases/download/v$VER-fdroid/app-fdroid-release.apk"
+          echo "Newest version tag : $TAG"
+          echo "Expected binary at : $URL"
+
+          CODE=$(curl -sIL -o /dev/null -w '%{http_code}' "$URL")
+          echo "HTTP status        : $CODE"
+
+          if [ "$CODE" != "200" ]; then
+            {
+              echo "## F-Droid reference APK missing"
+              echo ""
+              echo "Tag \`$TAG\` has no reachable reference APK."
+              echo ""
+              echo "Expected: \`$URL\` (got HTTP $CODE)"
+              echo ""
+              echo "F-Droid cannot verify or publish this version until that asset exists."
+              echo "Follow \`launch/FDROID-RELEASE-RUNBOOK.md\` to sign the CI artifact and cut the release."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::F-Droid reference APK missing for $TAG (HTTP $CODE at $URL)"
+            exit 1
+          fi
+
+          echo "OK: reference APK is published for $TAG."
+          echo "F-Droid reference APK present for \`$TAG\`." >> "$GITHUB_STEP_SUMMARY"
