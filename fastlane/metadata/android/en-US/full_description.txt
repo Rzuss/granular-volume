@@ -5,7 +5,7 @@ A small floating volume control appears above any app. Seven steps from no chang
 This is a convenience utility, not hearing protection equipment. Actual loudness depends on your device and headphones, so use good judgment with volume changes.
 
 LOWER THAN YOUR PHONE OR TABLET ALLOWS
-Every other volume app goes one direction: louder. Granular Volume goes the other way. It reduces volume below the lowest step your device's hardware allows, using Android's audio engine, on phones and tablets alike. No root required. No volume button override. No system volume panel replacement. Just the quiet end of the dial, without touching anything else.
+Most volume apps are built to go louder. Granular Volume is built for the other end: it reduces volume below the lowest step your device's hardware allows, using Android's audio engine, on phones and tablets alike. No root required. No volume button override. No system volume panel replacement. No ads, no account, no internet permission at all. Just the quiet end of the dial, without touching anything else.
 
 BUILT FOR TABLETS TOO
 Tablets often have an even higher minimum volume than phones, especially through their built in speakers or over headphones. Granular Volume works exactly the same way on Android tablets as it does on phones, so tablet users get the same quiet floor.

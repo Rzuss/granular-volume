@@ -18,11 +18,11 @@ Secondary line for store search and headers:
 
 Almost every volume app on the store goes one direction: louder. Boosters, amplifiers, gain. The opposite direction, quieter than the hardware minimum, is nearly empty, yet people actively search for it (forum threads, an F-Droid feature request, blog write ups all asking how to lower Android below its minimum). That uncontested space is the brand.
 
-## Why we win against the leader
+## Why we win
 
-The category leader, Precise Volume, is a maximalist audio suite (EQ, 1000 steps, presets, automation) that overrides the system volume UI and the volume buttons, and reviews report that exact override layer is where it gets unstable. Our wedge:
+Most volume apps in this category are maximalist audio suites (EQ, hundreds of steps, presets, automation) that override the system volume UI and the volume buttons, which can behave inconsistently across devices. Our wedge:
 
-| | Precise Volume | Granular Volume |
+| | Typical volume app | Granular Volume |
 |---|---|---|
 | Philosophy | Swiss army knife for audio | One thing, done perfectly: quiet below minimum |
 | Invasiveness | Overrides volume buttons and system UI | Touches nothing, sits on top as an overlay |
