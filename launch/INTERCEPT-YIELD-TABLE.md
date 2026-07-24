@@ -21,3 +21,14 @@ link (never bare store link), NO review ask in the first reply (two-touch rule),
   filter strip, just needs clean resubmit.
 - Reply lands on the thread's LAST page; verify with a logged-in view (anonymous curl shows cached
   pages without the fresh reply).
+
+## F5Bot — verified and closed (2026-07-24, founder-login session)
+The 07-23 fear that the keyword recalibration "did not save" was WRONG — the dashboard shows all
+five precision phrases live with whole-words flags; the old-keyword alerts that day were queued
+sends from before the change. Improvement applied in-session: removed "volume below minimum"
+(solution-phrasing, near-zero recall — nobody complains in those words, and whole-words missed
+"below THE minimum") and added "even at the lowest volume" (the canonical complaint phrasing).
+Final set, all enabled, 0 noise hits in 7 days:
+1. even at the lowest volume · 2. lowest volume too · 3. minimum volume too ·
+4. too loud at the lowest · 5. volume steps too big
+Any future alert from these = probable true positive → 24h reply SLA applies.
