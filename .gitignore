@@ -54,3 +54,6 @@ node_modules/
 
 # ----- F-Droid release staging (signed APK, never commit) -----
 .fdroid-release/
+
+# ----- competitor device-test staging (large APKs/tone, never commit) -----
+.competitor-test/
