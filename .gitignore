@@ -60,3 +60,9 @@ node_modules/
 
 # internal planning notes, not part of the source distribution
 launch/
+
+# ----- internal operating manual (PUBLIC REPO: never commit) -----
+CLAUDE.md
+
+# ----- legal drafts / lawyer package (never commit) -----
+legal/
