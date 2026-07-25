@@ -57,3 +57,6 @@ node_modules/
 
 # ----- competitor device-test staging (large APKs/tone, never commit) -----
 .competitor-test/
+
+# internal planning notes, not part of the source distribution
+launch/
