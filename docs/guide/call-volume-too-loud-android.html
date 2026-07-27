@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Call Volume Too Loud on Android, Even at the Lowest Setting? Real Fix (2026)</title>
+<meta name="description" content="Earpiece or speakerphone still too loud at the minimum during calls? Why the in-call volume floor is separate from media, what the built-in settings cannot do, and the method that lowers it further. No root.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rzuss.github.io/granular-volume/guide/call-volume-too-loud-android.html">
+<meta property="og:title" content="Call Volume Too Loud on Android Even at the Lowest Setting? Real Fix">
+<meta property="og:description" content="Why the earpiece and speakerphone stay too loud at the minimum on Android calls, and the method that adds a quieter level below it.">
+<meta property="og:image" content="../img/feature.png">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Call Volume Too Loud on Android, Even at the Lowest Setting? The Real Fix",
+  "description": "Why the in-call earpiece and speakerphone floor stays too loud on Android, what the built-in settings cannot change, and the method that lowers it further.",
+  "image": "https://rzuss.github.io/granular-volume/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
+  "datePublished": "2026-07-27",
+  "dateModified": "2026-07-27",
+  "mainEntityOfPage": "https://rzuss.github.io/granular-volume/guide/call-volume-too-loud-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Why is my call volume too loud even at the lowest setting on Android?","acceptedAnswer":{"@type":"Answer","text":"Call audio uses its own volume scale, separate from media, and that scale has its own lowest step. Like the media floor, the lowest in-call step is a fixed fraction of the maximum output rather than a fixed loudness. On a phone with a loud earpiece or a loud speaker, that fraction can still be uncomfortable in a quiet room, and Android provides no built-in setting to place a level below it."}},
+    {"@type":"Question","name":"Why do the volume buttons not go lower during a call?","acceptedAnswer":{"@type":"Answer","text":"During a call the volume keys control the call stream, not media, and Android does not allow that stream to be muted with the keys. The lowest position is the quietest step the system offers, and there is nothing below it in the stock settings."}},
+    {"@type":"Question","name":"Does the 85 dB volume limit or Safe Listening help with loud calls?","acceptedAnswer":{"@type":"Answer","text":"Generally not. Those features are hearing-safety limiters aimed at sustained loud media playback through headphones. They cap the top of the range rather than lowering the bottom of it, so if your complaint is that the quietest available level is already too loud, a limiter does not change that."}},
+    {"@type":"Question","name":"Can an equalizer make calls quieter?","acceptedAnswer":{"@type":"Answer","text":"Not usefully. An equalizer changes tonal balance rather than overall level, and most equalizer apps only affect media output, not the call path. Turning bands down can make audio sound thinner without meaningfully lowering how loud the call is."}},
+    {"@type":"Question","name":"Does Granular Volume lower call volume?","acceptedAnswer":{"@type":"Answer","text":"Yes. It applies attenuation through Android's own audio framework, and the developer verified on real hardware during a live call that the call volume audibly drops with the dial active. It is a flat attenuation, so it lowers the level without changing tone."}},
+    {"@type":"Question","name":"Will it make me miss the other person or hear nothing?","acceptedAnswer":{"@type":"Answer","text":"The dial is adjustable in steps rather than being a single on or off switch, so you choose how far down to go and can change it mid-call. Start with a small reduction and go further only if you want to. It is not a mute."}},
+    {"@type":"Question","name":"Does it need root or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio-effect framework, needs only a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
+    {"@type":"Question","name":"Is it free and private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all, so it cannot send data anywhere. It is open source under GPL-3.0."}}
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Guide</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
+    <h1>Call volume too loud, even at the lowest setting?</h1>
+    <p class="dek">Why the earpiece and speakerphone have their own volume floor, why the safety limiter and the equalizer do not touch it, and the method that adds a quieter level below Android's minimum. No root.</p>
+    <p class="meta">Updated July 27, 2026 &middot; 6 min read</p>
+  </header>
+
+  <article>
+    <p class="lead-p">You are on a call in a quiet room. You press the volume key down until it stops, and the other person is still uncomfortably loud in your ear, or the speakerphone still fills the room. Some people end up holding the phone away from their head. This is a real limit rather than a setting you have missed, and it is separate from the media volume problem even though it feels identical.</p>
+
+    <div class="quickfix">
+      <div class="kicker">Short on time? Here's the answer</div>
+      <p><strong>Granular Volume</strong> adds attenuation underneath Android's own minimum, and it applies during calls as well as media. Verified on real hardware during a live call: with the dial active, call volume audibly drops. Free, no root, set up in a minute.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div>On this page</div>
+      <ol>
+        <li><a href="#why">Why calls have their own volume floor</a></li>
+        <li><a href="#keys">Why the volume keys stop where they stop</a></li>
+        <li><a href="#limiter">The 85 dB limit and Safe Listening</a></li>
+        <li><a href="#eq">Equalizers and sound profiles</a></li>
+        <li><a href="#fix">The fix: a level below the minimum</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </div>
+
+    <h2 id="why">Why calls have their own volume floor</h2>
+    <p>Android keeps call audio on a separate volume scale from media. That is why turning your music down has no effect on how loud the person on the other end sounds, and why the volume keys behave differently the moment a call connects. Each scale has its own number of steps and its own lowest step.</p>
+    <p>The problem is what that lowest step actually is. It is not a fixed loudness. It is a fixed fraction of what that particular phone can output, so on a device with a powerful earpiece or a loud speaker, the quietest step the system offers can still be past comfortable, especially in a silent room or late at night. Nothing in the stock settings places a level underneath it.</p>
+    <p>People describe the result the same way across every forum where this comes up. One Fairphone owner put it plainly: in an environment that is even slightly quiet, the minimum speaker volume is too loud, and holding the phone to your head is no better, so you end up keeping it at a distance.</p>
+
+    <h2 id="keys">Why the volume keys stop where they stop</h2>
+    <div class="fixcard">
+      <h3>Pressing volume down during a call <span class="verdict v-doesnt">Already at the bottom</span></h3>
+      <p>During a call the volume keys control the call stream rather than media, and Android does not let that stream be muted with the keys. So the lowest position you can reach is the system's quietest step, and holding the key longer does nothing further. If that step is too loud, the keys have no answer for you.</p>
+    </div>
+
+    <h2 id="limiter">The 85 dB limit and Safe Listening</h2>
+    <div class="fixcard">
+      <h3>Hearing-safety limiters <span class="verdict v-doesnt">Caps the top, not the bottom</span></h3>
+      <p>These features exist to protect you from sustained loud media through headphones. They put a ceiling on the range. If your complaint is that the quietest available level is already uncomfortable, lowering the ceiling changes nothing about where the floor sits. This is one of the most common things people try first, and one of the most common to report as having made no noticeable difference.</p>
+    </div>
+
+    <h2 id="eq">Equalizers and sound profiles</h2>
+    <div class="fixcard">
+      <h3>EQ presets, Soft mode, adaptive sound <span class="verdict v-partial">Changes tone, not level</span></h3>
+      <p>An equalizer shifts the balance between frequencies. It can take some harshness out of a voice, which is worth trying if your discomfort is about sharpness rather than volume. But it is not a level control, and most equalizer features only apply to media output rather than the call path. Pulling every band down tends to make audio sound thin and hollow long before it makes a call meaningfully quieter.</p>
+    </div>
+
+    <h2 id="fix">The fix: a level below the minimum</h2>
+    <div class="fixcard">
+      <h3>Below-floor attenuation through Android's audio framework <span class="verdict v-works">Actually works</span></h3>
+      <p>Rather than trying to add steps inside the existing range, this method applies negative gain through Android's own audio effect framework. Because it reduces the level after the system has already applied its own minimum, it can place the output below where the volume keys stop.</p>
+      <p>This is what <a href="../index.html">Granular Volume</a> does: a small floating dial you can open during a call, with steps from no change down to well below your hardware minimum. It was verified on real hardware during a live call that the call volume audibly drops with the dial active. It is a flat reduction, so it makes things quieter without changing how they sound.</p>
+      <p>Two honest notes. It lowers the level, so use it in steps rather than going straight to the bottom, and adjust mid-call if you have gone too far. And it does not change tone, so if your real complaint is that voices sound harsh or sharp rather than loud, this addresses the loudness half of that and not the sharpness half.</p>
+    </div>
+
+    <div class="callout">
+      <h2>Take a call in a quiet room without wincing</h2>
+      <p>If the lowest call volume on your phone is still too loud, this adds the levels underneath it, for the earpiece and the speaker. Free, open source, no ads, no tracking, no account, and no internet permission at all.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="lower-android-volume-below-minimum.html">The full below-minimum guide</a>
+      </div>
+    </div>
+
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">
+      <dt>Why is my call volume too loud even at the lowest setting on Android?</dt>
+      <dd>Call audio has its own volume scale with its own lowest step, and that step is a fixed fraction of the phone's maximum output rather than a fixed loudness. On a loud earpiece or speaker it can still be uncomfortable, and Android has no built-in setting for a level below it.</dd>
+      <dt>Why do the volume buttons not go lower during a call?</dt>
+      <dd>During a call the keys control the call stream, which Android does not allow to be muted with the keys. The lowest position is the quietest step the system offers, and there is nothing below it in stock settings.</dd>
+      <dt>Does the 85 dB limit or Safe Listening help?</dt>
+      <dd>Generally not. Those are hearing-safety limiters that cap the top of the range. They do not lower the bottom of it, which is the part causing the problem here.</dd>
+      <dt>Can an equalizer make calls quieter?</dt>
+      <dd>Not usefully. An equalizer changes tone rather than level, and most equalizer features only affect media rather than the call path.</dd>
+      <dt>Does Granular Volume lower call volume?</dt>
+      <dd>Yes. Verified on real hardware during a live call: with the dial active, the call volume audibly drops. It is a flat attenuation, so it lowers the level without changing tone.</dd>
+      <dt>Will it make me miss the other person entirely?</dt>
+      <dd>It is a stepped dial rather than an on or off switch, so you choose how far down to go and can change it during the call. Start small and go further only if you want to. It is not a mute.</dd>
+      <dt>Does it need root or a computer?</dt>
+      <dd>No. It uses Android's own audio-effect framework, needs only a display-over-other-apps permission and standard audio permissions, and requires no root, ADB, or computer.</dd>
+      <dt>Is it free and private?</dt>
+      <dd>Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0.</dd>
+    </dl>
+  </article>
+
+</div>
+<footer>
+  <div class="wrap">
+    Part of <a href="../index.html">Granular Volume</a>, free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a>.
+  </div>
+</footer>
+</body>
+</html>

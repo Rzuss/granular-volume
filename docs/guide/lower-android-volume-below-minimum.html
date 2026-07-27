@@ -54,7 +54,7 @@
     {
       "@type": "Question",
       "name": "Does this work for calls, not just media?",
-      "acceptedAnswer": {"@type": "Answer", "text": "It depends on the app and the Android version's audio session APIs. Granular Volume targets the media output; call audio uses a separate voice stream that most third-party attenuation tools, including this one, do not currently reach."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Call audio runs on its own volume scale, separate from media, and this was tested directly on real hardware: during a live call with no media playing, moving the dial down and back up several times audibly lowered and raised the call volume each time. There is a dedicated guide covering the in-call floor, why the volume keys stop where they do, and why the 85 dB limiter and equalizer presets do not help with it."}
     },
     {
       "@type": "Question",
@@ -351,7 +351,7 @@
       <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can attenuate output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
 
       <dt>Does this work for calls, not just media?</dt>
-      <dd>It depends on the app and Android's audio session APIs. Call audio uses a separate voice stream that most third-party attenuation tools, including Granular Volume, don't currently reach.</dd>
+      <dd>Yes. Call audio runs on its own volume scale, separate from media, and this was tested directly: during a live call with no media playing, moving the dial down and back up several times lowered and raised the call volume each time. There is a <a href="call-volume-too-loud-android.html">separate guide for the in-call floor</a> covering why the volume keys stop where they do and why the 85&nbsp;dB limiter does not help.</dd>
 
       <dt>Does an attenuation app like this drain the battery?</dt>
       <dd>Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio.</dd>
