@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-14",
+  "dateModified": "2026-07-27",
   "mainEntityOfPage": "https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -89,7 +89,7 @@
     {
       "@type": "Question",
       "name": "Does it affect ringtone and alarm volume, or only media?",
-      "acceptedAnswer": {"@type": "Answer", "text": "It targets the general media/output audio session. Ringtone and alarm volume route through separate audio streams in Android and are not affected, the same limitation described above for call audio."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Media is what it is built around, and call audio is confirmed to be affected as well. Ringtone and alarm volume run on their own separate Android streams and have not been tested, so we would rather say we do not know than guess in either direction. If a quiet ringtone or alarm is your main goal, try it and judge for yourself."}
     },
     {
       "@type": "Question",
@@ -272,6 +272,8 @@
         <li><a href="#soundassistant">Sound Assistant (Samsung only)</a></li>
         <li><a href="#stepapps">Custom step-count apps (Precise Volume, 32steps, and similar)</a></li>
         <li><a href="#eq">Disabling Dolby Atmos / lowering the equalizer</a></li>
+        <li><a href="#normalize">Normalize Volume and loudness levelling</a></li>
+        <li><a href="#limiters">Volume limiter apps and the 85 dB safety limit</a></li>
         <li><a href="#firmware">Updating firmware</a></li>
         <li><a href="#adb">Editing the audio curve over ADB</a></li>
         <li><a href="#attenuation">Attenuation apps that actually go below the floor</a></li>
@@ -308,19 +310,39 @@
       <p>This isn't a real minimum-volume control: it depends heavily on the device and audio path, doesn't work at all on many phones, and costs you the enhancement itself as a trade-off rather than giving you an independent quiet setting.</p>
     </div>
 
-    <h2 id="firmware">5. Updating firmware</h2>
+    <h2 id="normalize">5. Normalize Volume and loudness levelling</h2>
+    <div class="fixcard">
+      <h3>Normalize Volume, Adapt Sound, loudness equalisation <span class="verdict v-doesnt">Evens out peaks, floor unchanged</span></h3>
+      <p>These settings exist to stop one track or video being much louder than the next. They compress the difference between quiet and loud passages so everything sits closer to the same level. That is genuinely useful if your problem is sudden jumps between sources.</p>
+      <p>It is not a floor control. Levelling works relative to the volume you have already set, so if the lowest step is uncomfortable, normalising simply keeps everything uniformly at that uncomfortable level. Some people find it makes things feel slightly louder overall, because quiet passages get lifted rather than left quiet.</p>
+    </div>
+
+    <h2 id="limiters">6. Volume limiter apps and the 85 dB safety limit</h2>
+    <div class="fixcard">
+      <h3>Media volume limiters, Safe Listening, the 85 dB cap <span class="verdict v-doesnt">Caps the top, not the bottom</span></h3>
+      <p>This is the single most common thing people try, and the reason it disappoints is worth stating clearly: a limiter sets a <em>ceiling</em>. It stops the volume going above a point you choose. If your complaint is that the quietest available level is already too loud, lowering the ceiling does nothing at all to the floor, because you were never near the ceiling to begin with.</p>
+      <p>Most apps sold as volume limiters work by capping the system volume index rather than by attenuating the output, which is why people report installing one, setting it to its strictest setting, and hearing no difference whatsoever at the bottom of the range.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>What this looks like when someone has tried everything <span class="verdict v-partial">A real example</span></h3>
+      <p>A Galaxy S24 FE owner posted a detailed account on Samsung's own community forum after working through the list: third-party volume limiter apps, the 85&nbsp;dB limit, every built-in equalizer preset including Soft mode plus manual EQ, Normalize Volume, and Sound Assistant configured for single-step volume adjustment instead of the default ten steps.</p>
+      <p>Their conclusion after all of it, in their own words, describes the exact problem this page is about: <em>"either the volume is too low to hear anything, or the next step up is already too loud"</em>, and it is <em>"really hard to find a comfortable middle ground"</em>. More steps inside the same range did not help, because the range itself was the problem.</p>
+    </div>
+
+    <h2 id="firmware">7. Updating firmware</h2>
     <div class="fixcard">
       <h3>Settings → System update <span class="verdict v-partial">Anecdotal, not guaranteed</span></h3>
       <p>Some users report the problem improving after an Android version update, particularly older reports of Android 9 to Android 10. This isn't a documented fix and isn't consistent across devices, but it costs nothing to be on the latest update regardless.</p>
     </div>
 
-    <h2 id="adb">6. Editing the volume curve over ADB</h2>
+    <h2 id="adb">8. Editing the volume curve over ADB</h2>
     <div class="fixcard">
       <h3>Modify audio config files via a computer <span class="verdict v-partial">Works, technical, no root needed</span></h3>
       <p>On a computer with USB debugging enabled, it's possible to modify the device's audio volume curve files directly through ADB to change how loud each step is, without root. This genuinely works and doesn't require root access, but it requires comfort with a command line, a computer, and is easy to get wrong. It's also undone by a factory reset or sometimes a system update.</p>
     </div>
 
-    <h2 id="attenuation">7. Attenuation apps: the one method that actually lowers the floor</h2>
+    <h2 id="attenuation">9. Attenuation apps: the one method that actually lowers the floor</h2>
     <div class="fixcard">
       <h3>Apps using DynamicsProcessing or LoudnessEnhancer with negative gain <span class="verdict v-works">Actually works</span></h3>
       <p>A small category of apps takes a fundamentally different approach: instead of remapping the existing volume steps, they apply an audio effect with negative gain on top of the lowest system step, using Android's own audio effect framework (DynamicsProcessing, or LoudnessEnhancer as a fallback on older versions). This genuinely produces output quieter than the hardware minimum allows, because it isn't working within the existing step range at all.</p>
@@ -372,7 +394,7 @@
       <dd>No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
-      <dd>It targets the general media/output audio session. Ringtone and alarm volume route through separate audio streams in Android and are not affected, the same limitation described above for call audio.</dd>
+      <dd>Media is what it is built around, and <a href="call-volume-too-loud-android.html">call audio is confirmed to be affected</a> as well. Ringtone and alarm volume run on their own separate Android streams and have not been tested, so we would rather say we do not know than guess in either direction. If a quiet ringtone or alarm is your main goal, try it and judge for yourself.</dd>
 
       <dt>Will attenuating the output this way add hiss, distortion, or reduce audio quality?</dt>
       <dd>No. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. It's the same audio, turned down further than the phone's own slider is able to go.</dd>
