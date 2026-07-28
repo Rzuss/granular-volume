@@ -41,6 +41,62 @@ video/shots/
 *.mov
 *.mkv
 
+# ----- Video pipeline working files / iterations (never final assets) -----
+video/ai_v6/
+video/ai_v7/
+video/mo/
+video/pf2/
+video/pf3/
+video/pf4/
+video/pf5/
+video/preview_frames/
+video/scan/
+video/latenight/
+video/tiktok/
+video/assets/inter_x/
+video/assets/vo/
+video/assets/*.zip
+video/assets/compose_music_v3.py
+video/assets/gen_cards_v3.py
+video/assets/gen_hero_bg.py
+video/build_v3.sh
+video/build_v4_insert.sh
+video/build_v5.sh
+video/build_v5_horizontal.sh
+video/build_v6.sh
+video/build_v7.sh
+video/build_v8.sh
+video/build_v9.sh
+video/build_v10.sh
+video/verify_v3.sh
+video/promo-v6-storyboard.md
+video/ambient_audio.wav
+
+# ----- Store-asset generation drafts / outputs not part of the published set -----
+store-assets/STORE-LISTING-v3.md
+store-assets/gen_short_thumbnail.py
+store-assets/gen_video_thumbnail.py
+store-assets/privacy-policy-PRO-READY.html
+store-assets/reddit_promo_card.html
+store-assets/reddit_promo_card.png
+store-assets/short_thumbnail_1080x1920.png
+
+video/assets/cap_a.png
+video/assets/cap_b.png
+video/assets/cap_c.png
+video/assets/cap_d.png
+video/assets/cap_e.png
+video/assets/cap_f.png
+video/assets/hero_bg.png
+video/assets/music_v3.wav
+video/assets/outro_card_v3.png
+video/assets/phone_mask.png
+video/assets/proof_cards.png
+video/assets/title_card_v3.png
+
+# ----- Stray temp files -----
+*.tmp
+
 # ----- OS noise -----
 Thumbs.db
 ehthumbs.db
