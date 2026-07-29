@@ -61,8 +61,8 @@
     <li><strong>Foreground service</strong> (<code>FOREGROUND_SERVICE</code>,
         <code>FOREGROUND_SERVICE_SPECIAL_USE</code>), to keep the control running reliably
         while you use other apps, with a persistent notification. The service maintains an audio effect and the overlay; it does not play media itself, which is why it is declared as a special-use foreground service rather than a media-playback one.</li>
-    <li><strong>Run at startup</strong> (<code>RECEIVE_BOOT_COMPLETED</code>), optional, to
-        restore the control after the device restarts.</li>
+    <li><strong>Run at startup</strong> (<code>RECEIVE_BOOT_COMPLETED</code>), optional, declared so
+        the control can be restored after the device restarts.</li>
     <li><strong>Notifications</strong> (<code>POST_NOTIFICATIONS</code>), to display the
         ongoing service notification required by Android for foreground services.</li>
   </ul>
