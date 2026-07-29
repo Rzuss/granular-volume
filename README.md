@@ -42,7 +42,7 @@ So: sensitive IEMs, bone-conduction headphones, tablet speakers (which often hav
 
 ## What Granular Volume does
 
-Granular Volume adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range (which is what most "precise volume" apps actually do; they subdivide the same floor into finer clicks, which doesn't make the floor itself any quieter), but genuine additional headroom underneath it.
+Granular Volume adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range (which is what most step-count apps actually do; they subdivide the same floor into finer clicks, which doesn't make the floor itself any quieter), but genuine additional headroom underneath it.
 
 It's a small floating dial that sits over any app:
 
@@ -71,7 +71,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 - **Quiet rooms**: a library, a shared office, meditation, or anywhere that needs genuine calm rather than "quieter than before."
 - **Sound sensitivity and tinnitus**: situations where the standard volume floor is simply above a comfortable threshold.
 
-## How this compares to a typical "volume booster" or "precise volume" app
+## How this compares to a typical volume booster or step-count app
 
 Most apps in this space solve the opposite problem, or a different problem that looks similar on the surface:
 

@@ -79,7 +79,7 @@ Free, forever. Enjoy.
 ```
 First release of Granular Volume.
 
-• 7 precise volume sub-steps (0 to -30 dB)
+• 7 fine attenuation sub-steps (0 to -30 dB)
 • Floating overlay — drag anywhere, works on top of any app
 • Persistent notification shows current level
 • Free, no ads, no data collected, no internet access

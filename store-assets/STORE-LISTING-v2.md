@@ -2,7 +2,7 @@
 
 Primary angle: functional led ("quieter than minimum"), comfort layered underneath.
 No em dashes anywhere. ASO keywords woven naturally: quieter, lower volume, minimum
-too loud, fine volume control, sleep, white noise, sensitive ears, headphones.
+too loud, sleep, white noise, sensitive ears, headphones.
 
 ---
 
@@ -59,6 +59,9 @@ If the lowest setting has ever been too loud, this is the volume you were missin
 
 ## ASO keyword bank (for the listing and future updates)
 
-lower volume, reduce volume, quieter, minimum volume too loud, fine volume control,
+lower volume, reduce volume, quieter, minimum volume too loud,
 volume attenuator, low volume, sleep volume, white noise volume, sensitive ears,
 quiet headphones, IEM volume, volume below minimum, soft volume, volume reducer
+
+**Never target a competitor's product name as an ASO keyword.** It breaches the standing
+no-competitor rule and sits directly against Play's trademark policy for store metadata.

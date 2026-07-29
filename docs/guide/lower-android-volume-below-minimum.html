@@ -43,8 +43,8 @@
     },
     {
       "@type": "Question",
-      "name": "Do apps like Precise Volume or Sound Assistant lower the volume floor?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Their step features don't, and that's the common misunderstanding. Adding more volume steps (Sound Assistant's 1% increments, Precise Volume's custom step count) subdivides the existing range into finer clicks; it does not extend the range below the hardware minimum. Precise Volume does separately offer a post-gain slider inside its Graphic EQ that can reduce overall output (down to about -17.7 dB in our July 2026 test), though it lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
+      "name": "Do custom step-count apps or Sound Assistant lower the volume floor?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Their step features don't, and that's the common misunderstanding. Adding more volume steps, whether that's Sound Assistant's 1% increments or a third-party app's custom step count, subdivides the existing range into finer clicks; it does not extend the range below the hardware minimum. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
     },
     {
       "@type": "Question",
@@ -270,7 +270,7 @@
       <ol>
         <li><a href="#bluetooth">Disable Absolute Volume (Bluetooth only)</a></li>
         <li><a href="#soundassistant">Sound Assistant (Samsung only)</a></li>
-        <li><a href="#stepapps">Custom step-count apps (Precise Volume, 32steps, and similar)</a></li>
+        <li><a href="#stepapps">Custom step-count apps</a></li>
         <li><a href="#eq">Disabling Dolby Atmos / lowering the equalizer</a></li>
         <li><a href="#normalize">Normalize Volume and loudness levelling</a></li>
         <li><a href="#limiters">Volume limiter apps and the 85 dB safety limit</a></li>
@@ -295,12 +295,12 @@
       <p>It does not lower the minimum. If the lowest 10% step was too loud, the lowest 1% step is still the same fraction of the same maximum, so it lands at almost exactly the same loudness. More steps make the climb from mute smoother, not quieter at the bottom. See the dedicated guide for <a href="samsung-galaxy-volume-too-loud-minimum.html">Samsung Galaxy volume too loud at minimum</a>.</p>
     </div>
 
-    <h2 id="stepapps">3. Custom step-count apps (Precise Volume, 32steps, and similar)</h2>
+    <h2 id="stepapps">3. Custom step-count apps</h2>
     <div class="fixcard">
       <h3>Apps that let you set your own step count <span class="verdict v-partial">Steps don't lower the floor; buried EQ option partially does</span></h3>
-      <p>Several well-known apps, including Precise Volume and 32steps, override Android's default 15 to 25 steps with a custom count, up to 1000 in some cases. They're often the top suggestion for this exact problem, and they're good apps for what they do.</p>
+      <p>Several well-known apps override Android's default 15 to 25 volume steps with a custom count, up to 1000 in some cases. They're often the top suggestion for this exact problem, and they're good at what they do.</p>
       <p>The step feature itself subdivides the existing range into finer increments using the same mechanism as the stock slider. It does not extend the range past the existing minimum: if step 1 of 15 was too loud, step 1 of 1000 covering the same range is still the same loudness. That's the most common misunderstanding in advice for this problem.</p>
-      <p>To be fair and precise: Precise Volume also has a separate post-gain slider inside its Graphic EQ that genuinely reduces overall output. When we tested it in July 2026, its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and its floor is roughly half the additional headroom a dedicated tool provides (Granular Volume reaches -30 dB, one tap from the dial).</p>
+      <p>To be fair and precise: some apps in this category also carry a separate post-gain slider inside their graphic equalizer that genuinely reduces overall output. We measured the deepest one we could find in July 2026, and its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and that floor is roughly half the additional headroom a dedicated tool provides (Granular Volume reaches -30 dB, one tap from the dial).</p>
     </div>
 
     <h2 id="eq">4. Disabling Dolby Atmos or lowering the equalizer</h2>
@@ -367,8 +367,8 @@
       <dt>Does lowering the equalizer or turning off Dolby Atmos actually fix it?</dt>
       <dd>Sometimes, partially, and inconsistently. It can reduce output on some devices because those effects add gain, but many devices see no change at all, and it's a side effect of disabling a feature rather than a real minimum-volume control.</dd>
 
-      <dt>Do apps like Precise Volume or Sound Assistant lower the volume floor?</dt>
-      <dd>Their step features don't: subdividing the existing range into finer steps doesn't extend it below the hardware minimum. Precise Volume does separately offer a post-gain slider inside its Graphic EQ that can reduce output (about -17.7 dB at its lowest in our July 2026 test), though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
+      <dt>Do custom step-count apps or Sound Assistant lower the volume floor?</dt>
+      <dd>Their step features don't: subdividing the existing range into finer steps doesn't extend it below the hardware minimum. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
 
       <dt>Is there a way to do this without root?</dt>
       <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can attenuate output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
