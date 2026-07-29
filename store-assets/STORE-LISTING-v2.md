@@ -9,8 +9,12 @@ too loud, sleep, white noise, sensitive ears, headphones.
 ## App title (30 char max)
 
 ```
-Granular Volume: Quiet Dial
+Volume Control: Quiet Dial
 ```
+
+Unified across Play and F-Droid on 2026-07-29. Both stores now show this exact string.
+The in-app name (`strings.xml` `app_name`) is still `Granular Volume` and can only change
+in a new release; see the register for the plan to align it to `Quiet Dial`.
 
 ## Short description (80 char max)
 
