@@ -217,7 +217,7 @@ fdroid-reference/               Reproducible-build verification artifacts for F-
 
 ## Building from source
 
-Requirements: JDK 17 and the Android SDK (compileSdk 35).
+Requirements: JDK 17 and the Android SDK (compileSdk 36).
 
 ```bash
 cd android

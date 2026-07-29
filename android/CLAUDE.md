@@ -1,5 +1,27 @@
 # CLAUDE.md — Granular Sub-Volume Controller for Android Tablets
 
+> # ⚠️ HISTORICAL DESIGN SPEC — SUPERSEDED. DO NOT BUILD FROM THIS FILE.
+>
+> This is the **original pre-release design document**. It is kept because it explains the
+> reasoning behind the architecture, but several of its concrete numbers were changed before
+> the app shipped and are now **wrong**. It is deliberately not rewritten, because falsifying a
+> historical design doc is worse than annotating it.
+>
+> **Where this document disagrees with the shipped app, the shipped app is correct.**
+> The authoritative sources are `android/app/build.gradle.kts`,
+> `android/app/src/main/AndroidManifest.xml`, and `OverlayManager.STEP_DB`.
+>
+> | This document says | Shipped reality | Authority |
+> |---|---|---|
+> | 10 steps of -3.33 dB (lines 48, 219, 295) | **7 steps of 5 dB**, `[-30,-25,-20,-15,-10,-5, 0]` | `OverlayManager.kt` `STEP_DB` |
+> | `targetSdk = 34` / `compileSdk = 34` (lines 104-105) | **36 / 36** | `build.gradle.kts` |
+> | `FOREGROUND_SERVICE_MEDIA_PLAYBACK` (line 155) | **`FOREGROUND_SERVICE_SPECIAL_USE`** | `AndroidManifest.xml` |
+> | "for Android Tablets" (title) | Ships for **phones and tablets** alike | Play listing, `docs/` |
+>
+> **Note on scope:** this file is public (it is served from the repo) *and* it is named
+> `CLAUDE.md`, so it is picked up as working instructions inside `android/`. Both are reasons the
+> divergences above must stay flagged at the top rather than buried.
+>
 > **Read this file completely before writing a single line of code.**
 > This document is the authoritative specification. Deviate only if a technical constraint forces it — and document the deviation inline.
 

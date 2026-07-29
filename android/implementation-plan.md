@@ -1,6 +1,16 @@
 # Implementation Plan — Granular Sub-Volume Controller
 ## Android App | Production-Ready | Claude Code Execution Guide
 
+> # ⚠️ HISTORICAL BUILD PLAN — ALREADY EXECUTED AND SUPERSEDED.
+>
+> The app shipped in 2026 and is live on Google Play and F-Droid. This plan describes how it was
+> originally built; it is **not** a description of the current codebase. Two values here are now
+> wrong: `targetSdk = 34` (line 80) is really **36**, and
+> `FOREGROUND_SERVICE_MEDIA_PLAYBACK` (line 146) is really **`FOREGROUND_SERVICE_SPECIAL_USE`**.
+>
+> See the divergence table at the top of `android/CLAUDE.md`. Where this file disagrees with
+> `build.gradle.kts` or `AndroidManifest.xml`, those files are correct.
+
 > **How to use this file**: Open this project folder in Claude Code and say:
 > *"Read CLAUDE.md and implementation-plan.md, then execute Phase 1."*
 > Work one phase at a time. Each phase ends with a verification step before proceeding.

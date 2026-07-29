@@ -1,6 +1,17 @@
-# Granular Volume — Google Play Store Listing
+# Granular Volume — Google Play Store Listing (v1, SUPERSEDED)
 
-Copy-paste ready. Primary: **English (US)**. Hebrew translation below.
+> ⚠️ **This is the original v1 draft, kept for history. Do not copy from it.**
+>
+> The listing that is actually published is generated from
+> `fastlane/metadata/android/en-US/` (`title.txt`, `short_description.txt`,
+> `full_description.txt`). That directory is the single source of truth for store copy.
+>
+> Known differences between this draft and the shipped product: the Play title is now
+> **Volume Control: Quiet Dial**, and the positioning here describes sub-steps *within* the
+> existing range, which is the opposite of what the app does. Corrected inline below, but treat
+> the whole file as historical.
+
+Primary: **English (US)**. Hebrew translation below.
 
 ---
 
@@ -8,12 +19,13 @@ Copy-paste ready. Primary: **English (US)**. Hebrew translation below.
 
 | Field | Value |
 |-------|-------|
-| **App name** (max 30) | `Granular Volume` |
-| **Package name** | `com.granularvolume` |
+| **App name** (max 30) | `Volume Control: Quiet Dial` (Play) · `Granular Volume` (project and in-app) |
+| **Package name / applicationId** | `granularvolume.com` |
+| **Kotlin namespace** (not the package name) | `com.granularvolume` |
 | **Category** | Tools |
 | **Tags** | volume, audio, sound, control |
 | **Contact email** | rotemzus@gmail.com |
-| **Privacy policy URL** | *(host privacy-policy.html → paste URL here)* |
+| **Privacy policy URL** | https://rzuss.github.io/granular-volume-privacy/ |
 
 ---
 
@@ -29,9 +41,9 @@ Volume too loud even at step 1? Add 7 precise sub-steps below Android's minimum.
 ```
 Is your Android device too loud — even at the very lowest volume step?
 
-Android only gives you ~15 hardware volume steps, and the jump between each one can be huge. On many phones and tablets, even step 1 above silent is still too loud for late-night listening, headphones, or a quiet room.
+Android gives you a limited number of hardware volume steps, commonly somewhere around 15 but it varies by manufacturer, and the jump between each one can be huge. On many phones and tablets, even step 1 above silent is still too loud for late-night listening, headphones, or a quiet room.
 
-Granular Volume solves this with a floating, always-on-top control that adds 7 precise software sub-steps between any hardware level — so you can finally land on the volume that's just right.
+Granular Volume solves this with a floating, always-on-top control that adds 7 attenuation steps *below* your hardware minimum, not more steps squeezed inside the existing range, so you can finally land on the volume that's just right.
 
 ──────────────────────────────
 HOW IT WORKS

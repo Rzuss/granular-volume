@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-07-22",
+  "dateModified": "2026-07-29",
   "mainEntityOfPage": "https://rzuss.github.io/granular-volume/guide/samsung-galaxy-volume-too-loud-minimum.html"
 }
 </script>
@@ -37,7 +37,7 @@
     {"@type":"Question","name":"Do I need Good Lock or a Samsung account to fix this?","acceptedAnswer":{"@type":"Answer","text":"No. The method that actually lowers the floor uses Android's own audio-effect framework, which is present on every Galaxy device regardless of Good Lock, Sound Assistant, or a Samsung account. It is not a Samsung-specific feature."}},
     {"@type":"Question","name":"Does this work on Samsung tablets like the Tab S series?","acceptedAnswer":{"@type":"Answer","text":"Yes, and tablets are where it matters most. Galaxy Tab speakers and headphone output often have an even higher minimum step than phones, so the same below-floor attenuation applies identically and is usually more noticeable."}},
     {"@type":"Question","name":"Does it need root or ADB on a Galaxy device?","acceptedAnswer":{"@type":"Answer","text":"No. It needs a display-over-other-apps permission for the floating dial plus standard audio permissions. No root, no ADB, no editing of system files, and nothing that trips Knox or affects Samsung Pay or secure folder."}},
-    {"@type":"Question","name":"Will this affect calls or only media on my Galaxy?","acceptedAnswer":{"@type":"Answer","text":"It targets the media output stream. Call audio, ringtones, and alarms route through separate Android audio streams and are not changed, the same limitation that applies to most third-party volume tools."}},
+    {"@type":"Question","name":"Will this affect calls or only media on my Galaxy?","acceptedAnswer":{"@type":"Answer","text":"Calls as well as media. Call audio runs on its own volume scale, separate from media, and this was tested directly on real hardware: during a live call with no media playing, moving the dial down and back up several times audibly lowered and raised the call volume each time. Ringtones and alarms have not been tested, so try those yourself before relying on them."}},
     {"@type":"Question","name":"Is it free, and does it collect any data?","acceptedAnswer":{"@type":"Answer","text":"It is free with no ads, no account, and no in-app purchases. It has no internet permission at all, so it cannot send data anywhere, and it is open source under GPL-3.0 so that can be verified."}}
   ]
 }
@@ -132,7 +132,7 @@
     <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
     <h1>Samsung Galaxy volume too loud at minimum?</h1>
     <p class="dek">Why the lowest step on Galaxy phones, tablets, and Buds is still too loud, why Sound Assistant doesn't fix it, and the one method that actually goes below Samsung's hardware floor. No root, no Good Lock.</p>
-    <p class="meta">Updated July 22, 2026 · 8 min read</p>
+    <p class="meta">Updated July 29, 2026 · 8 min read</p>
   </header>
 
   <article>
@@ -210,7 +210,7 @@
       <dt>Does it need root or ADB on a Galaxy device?</dt>
       <dd>No. It needs a display-over-other-apps permission and standard audio permissions. No root, no ADB, nothing that affects Knox, Samsung Pay, or Secure Folder.</dd>
       <dt>Will this affect calls or only media on my Galaxy?</dt>
-      <dd>It targets the media output stream. Calls, ringtones, and alarms use separate Android audio streams and are not changed.</dd>
+      <dd>Calls as well as media. Call audio runs on its own volume scale, separate from media, and this was tested directly on real hardware: during a live call with no media playing, moving the dial down and back up several times audibly lowered and raised the call volume each time. There is a <a href="call-volume-too-loud-android.html">dedicated guide for call volume</a> covering the in-call floor in detail. Ringtones and alarms have not been tested, so try those yourself before relying on them.</dd>
       <dt>Is it free, and does it collect any data?</dt>
       <dd>Free, no ads, no account, no in-app purchases. It has no internet permission at all, so it cannot send data anywhere, and it is open source under GPL-3.0.</dd>
     </dl>
