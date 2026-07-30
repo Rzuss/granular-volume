@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-27",
+  "dateModified": "2026-07-30",
   "mainEntityOfPage": "https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -89,7 +89,7 @@
     {
       "@type": "Question",
       "name": "Does it affect ringtone and alarm volume, or only media?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Media is what it is built around, and call audio is confirmed to be affected as well. Ringtone and alarm volume run on their own separate Android streams and have not been tested, so we would rather say we do not know than guess in either direction. If a quiet ringtone or alarm is your main goal, try it and judge for yourself."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Media is what it is built around, and call audio, ringtones, and notifications are confirmed to be affected as well, tested directly by moving the dial through its steps while playing the ringtone and notification preview tones and hearing the level drop each time. Alarm volume runs on its own separate Android stream and has not been tested, so we would rather say we do not know than guess. If a quiet alarm is your main goal, try it and judge for yourself."}
     },
     {
       "@type": "Question",
@@ -249,7 +249,7 @@
     <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated July 14, 2026 · 10 min read</p>
+    <p class="meta">Updated July 30, 2026 · 10 min read</p>
   </header>
 
   <article>
@@ -395,7 +395,7 @@
       <dd>No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
-      <dd>Media is what it is built around, and <a href="call-volume-too-loud-android.html">call audio is confirmed to be affected</a> as well. Ringtone and alarm volume run on their own separate Android streams and have not been tested, so we would rather say we do not know than guess in either direction. If a quiet ringtone or alarm is your main goal, try it and judge for yourself.</dd>
+      <dd>Media is what it is built around, and <a href="call-volume-too-loud-android.html">call audio is confirmed to be affected</a>, along with ringtones and notifications, tested directly by moving the dial through its steps while playing the ringtone and notification preview tones and hearing the level drop each time. Alarm volume runs on its own separate Android stream and has not been tested, so we would rather say we do not know than guess. If a quiet alarm is your main goal, try it and judge for yourself.</dd>
 
       <dt>Will attenuating the output this way add hiss, distortion, or reduce audio quality?</dt>
       <dd>No. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. It's the same audio, turned down further than the phone's own slider is able to go.</dd>
