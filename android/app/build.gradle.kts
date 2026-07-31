@@ -24,8 +24,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
-        versionCode = 10
-        versionName = "1.3.3"
+        versionCode = 11
+        versionName = "1.3.4"
     }
 
     // Distribution flavors: "play" keeps the Play-only in-app review prompt;

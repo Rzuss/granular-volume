@@ -2,6 +2,12 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.3.4 (versionCode 11)
+
+The volume control now survives a reboot. Previously, the service's `onDestroy` cleared the "was running" flag unconditionally, and since a device shutdown also destroys the service, `BootReceiver` always found the flag false and never restored the control. The flag is now cleared only on user-intended stops — the notification's Stop action, dismissing the overlay, or toggling the Quick Settings tile off — so a control that was on at shutdown comes back after boot at its saved attenuation level, while a control the user stopped stays stopped.
+
+The on-device app name is now "Quiet Dial", aligning with the store title ("Volume Control: Quiet Dial") while staying short enough for launcher and Quick Settings labels. The QS tile label now references `@string/app_name` instead of a hardcoded string (in two places: the manifest and the tile's `syncTile`), so it can never drift again. No new permissions, no change to the dial itself, and the F-Droid flavor remains free of proprietary dependencies.
+
 ## 1.3.3 (versionCode 10)
 
 Maintenance release: the app now targets Android 16 (API 36), meeting Google Play's target-API requirement ahead of the August 31, 2026 deadline. `compileSdk` and `targetSdk` were bumped to 36, and the release was verified on an Android 16 emulator (overlay, Quick Settings tile, foreground service, and attenuation all behave identically). No new permissions, no behavior changes, and the F-Droid flavor remains free of proprietary dependencies.

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Granular Volume</string>
+    <string name="app_name">Quiet Dial</string>
     <string name="gv_subtitle">Precise per-stream volume, always within reach</string>
 
     <!-- Permission setup screen -->

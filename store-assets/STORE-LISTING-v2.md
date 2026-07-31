@@ -54,7 +54,7 @@ PERMISSIONS, EXPLAINED
 - Display over other apps, so the dial can float above your apps
 - Modify audio settings, to apply the volume attenuation
 - Run a foreground service, to keep the control reliable while you listen
-- Start on boot: declared so the control can be restored after a restart. In the current release, bring it back with one tap from the Quick Settings tile
+- Start on boot: restores the control after a restart if it was on before shutdown, so it is ready when you need it
 
 If the lowest setting has ever been too loud, this is the volume you were missing.
 ```

@@ -59,7 +59,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
 - **Quick Settings tile**: toggle the overlay on or off from the notification shade without opening the app.
 - **One tap dismiss** and a clean, native feeling control surface.
-- **One tap back after a restart** from the Quick Settings tile, without having to find and open the app.
+- **Comes back on its own after a restart.** If the control was on when the device shut down, it restores itself after boot, at the same level. Turned it off yourself? It stays off.
 - **Lightweight**, single purpose, written in pure Kotlin with no Compose runtime.
 
 ## Use cases
@@ -254,7 +254,7 @@ The debug build needs no signing setup and is the recommended loop for local tes
 | `SYSTEM_ALERT_WINDOW` | Draw the floating volume control over other apps. Granted manually in system settings. |
 | `MODIFY_AUDIO_SETTINGS` | Apply the audio attenuation effect. |
 | `FOREGROUND_SERVICE` / `FOREGROUND_SERVICE_SPECIAL_USE` | Keep the effect and overlay alive reliably. |
-| `RECEIVE_BOOT_COMPLETED` | Declared so the control can be restored after a reboot. Automatic restore is not active in the current release; bring the control back with one tap from the Quick Settings tile. |
+| `RECEIVE_BOOT_COMPLETED` | Restores the control after a reboot, if it was on before shutdown. A control you stopped yourself stays stopped. |
 | `POST_NOTIFICATIONS` | Show the foreground service notification (Android 13+). |
 
 The overlay permission cannot be granted at runtime by the app. The setup screen guides you to the system toggle.

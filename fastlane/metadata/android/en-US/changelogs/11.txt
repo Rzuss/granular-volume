@@ -1,0 +1,3 @@
+The volume control now comes back on its own after a device restart. If the dial was on when the phone shut down, it restores itself after boot at the same level. A control you stopped yourself stays stopped.
+
+The app's on-device name is now Quiet Dial, matching the store listing. Same app, same package, no new permissions.

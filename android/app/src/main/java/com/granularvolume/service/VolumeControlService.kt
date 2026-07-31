@@ -54,6 +54,15 @@ class VolumeControlService : Service() {
     private lateinit var audioController: AudioController
     private lateinit var overlayManager: OverlayManager
 
+    /**
+     * True only when the user explicitly asked to stop (notification Stop action or
+     * overlay dismiss). onDestroy also runs on device shutdown and OS kills, and those
+     * must NOT clear the boot-restore flag — otherwise BootReceiver always sees false
+     * and the control never comes back after a reboot.
+     */
+    @Volatile
+    private var stopRequestedByUser = false
+
     override fun onCreate() {
         super.onCreate()
         Log.i(tag, "Service starting")
@@ -80,7 +89,10 @@ class VolumeControlService : Service() {
             context         = applicationContext,
             audioController = audioController,
             scope           = serviceScope,
-            onDismiss       = { stopSelf() }
+            onDismiss       = {
+                stopRequestedByUser = true
+                stopSelf()
+            }
         )
 
         serviceScope.launch(Dispatchers.Default) {
@@ -108,17 +120,23 @@ class VolumeControlService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent?.action == ACTION_STOP) {
             Log.i(tag, "Stop action received")
+            stopRequestedByUser = true
             stopSelf()
         }
         return START_STICKY
     }
 
     override fun onDestroy() {
-        Log.i(tag, "Service stopping")
+        Log.i(tag, "Service stopping (userRequested=$stopRequestedByUser)")
         overlayManager.hide()
         audioController.release()
         serviceScope.cancel()
-        Prefs.setServiceWasRunning(applicationContext, false)
+        // Only a user-intended stop clears the boot-restore flag. A system-initiated
+        // destroy (device shutdown, OS kill) leaves it set, so BootReceiver restores
+        // the control after the next boot.
+        if (stopRequestedByUser) {
+            Prefs.setServiceWasRunning(applicationContext, false)
+        }
         super.onDestroy()
     }
 

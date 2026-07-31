@@ -37,6 +37,10 @@ class GranularVolumeTileService : TileService() {
 
         val running = Prefs.wasServiceRunning(applicationContext)
         if (running) {
+            // stopService() bypasses ACTION_STOP, and the service's onDestroy no longer
+            // clears the boot-restore flag (a device shutdown runs onDestroy too, and that
+            // case must stay restorable). This is a user-intended stop, so clear it here.
+            Prefs.setServiceWasRunning(applicationContext, false)
             stopService(Intent(this, VolumeControlService::class.java))
             syncTile(active = false)
         } else {
@@ -53,7 +57,7 @@ class GranularVolumeTileService : TileService() {
     private fun syncTile(active: Boolean = Prefs.wasServiceRunning(applicationContext)) {
         val tile = qsTile ?: return
         tile.state = if (active) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
-        tile.label = "Granular Volume"
+        tile.label = getString(com.granularvolume.R.string.app_name)
         tile.updateTile()
     }
 
