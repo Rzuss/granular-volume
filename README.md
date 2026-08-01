@@ -71,6 +71,19 @@ No ads. No tracking. No account. No network permission requested at all. The app
 - **Quiet rooms**: a library, a shared office, meditation, or anywhere that needs genuine calm rather than "quieter than before."
 - **Sound sensitivity and tinnitus**: situations where the standard volume floor is simply above a comfortable threshold.
 
+## Guides
+
+Longer write-ups on why Android's volume floor exists, what people usually try first, and why most of those attempts do not move it. These are written to be useful on their own, whether or not you install anything.
+
+- [How to lower Android volume below the minimum setting](https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html) covers the whole picture: what actually lowers the floor, what only adds steps inside the existing range, and what is Samsung specific.
+- [Tried everything and the volume is still too loud at minimum](https://rzuss.github.io/granular-volume/guide/tried-everything-volume-still-too-loud-android.html) goes through volume limiter apps, the 85 dB limit, equalizer presets, fine step tools and Normalize Volume, and explains why each one fails at this particular problem.
+- [Bluetooth earbuds too loud at the lowest volume](https://rzuss.github.io/granular-volume/guide/bluetooth-earbuds-volume-too-loud-lowest.html) explains Absolute Volume, why disabling it only half helps, and why wireless often feels worse than wired.
+- [Alarm too loud at the lowest volume](https://rzuss.github.io/granular-volume/guide/alarm-too-loud-lowest-volume-android.html) covers the alarm stream's own floor, and why Do Not Disturb and gentle wake alarms do not address it. Also covers ringtones and notifications.
+- [Call volume too loud on Android](https://rzuss.github.io/granular-volume/guide/call-volume-too-loud-android.html) and the [Pixel specific version](https://rzuss.github.io/granular-volume/guide/pixel-call-volume-too-loud-lowest-setting.html) cover the in-call floor, which runs on a separate scale from media.
+- [Samsung Galaxy volume too loud at minimum](https://rzuss.github.io/granular-volume/guide/samsung-galaxy-volume-too-loud-minimum.html) covers Sound Assistant, Good Lock, Adaptive Sound and the 1% step feature, and what each one really changes.
+
+Use case pages: [sensitive IEMs and bone conduction](https://rzuss.github.io/granular-volume/use-cases/sensitive-iem-headphones.html), [a sleeping baby](https://rzuss.github.io/granular-volume/use-cases/sleeping-baby-white-noise.html), [night audiobooks and podcasts](https://rzuss.github.io/granular-volume/use-cases/night-audiobooks-podcasts.html), [quiet rooms and libraries](https://rzuss.github.io/granular-volume/use-cases/quiet-rooms-libraries.html), [sound sensitivity and tinnitus](https://rzuss.github.io/granular-volume/use-cases/tinnitus-sensitive-hearing.html).
+
 ## How this compares to a typical volume booster or step-count app
 
 Most apps in this space solve the opposite problem, or a different problem that looks similar on the surface:
