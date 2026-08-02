@@ -222,7 +222,7 @@
     <div class="fixcard">
       <h3>Keyboard clicks and interface touch sounds <span class="verdict v-doesnt">Cannot be reached, by anyone</span></h3>
       <p>Keyboard taps and UI click sounds travel a different route through Android. They are played on a dedicated low-latency path built so that a tap makes a sound immediately, and that path deliberately skips audio post-processing, because processing costs time and instant response is the whole point of it.</p>
-      <p>The practical consequence: any app that lowers volume by attaching an effect to the system output, which is the only way to do this without root, structurally cannot touch those sounds. This one is not a missing feature or a bug to be fixed in a later version. It is a boundary in Android's audio architecture. If an app claims it can quiet your keyboard clicks, be sceptical. In the meantime, turning keyboard sounds off entirely in your keyboard's own settings is the only real option.</p>
+      <p>The practical consequence: any app that lowers volume by attaching an effect to the system output, which is how this is normally done without root, structurally cannot touch those sounds. This one is not a missing feature or a bug to be fixed in a later version. It is a boundary in Android's audio architecture. If an app claims it can quiet your keyboard clicks, be sceptical. In the meantime, turning keyboard sounds off entirely in your keyboard's own settings is the only real option.</p>
     </div>
 
     <div class="callout">

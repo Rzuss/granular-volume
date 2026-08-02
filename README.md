@@ -172,7 +172,7 @@ Not currently. The app is free and open source under GPL-3.0.
 F-Droid requires that everything in its build be free and open source, including build dependencies. The `play` flavor includes Google's proprietary in-app review library (only used to occasionally ask for a Play Store rating); the `fdroid` flavor has zero Google Play code and is otherwise functionally identical. See [`build.gradle.kts`](android/app/build.gradle.kts) for the exact flavor split.
 
 **Why not just make Android's default minimum volume lower?**
-That's not something a regular app can change. The per-step volume curve is defined by the device manufacturer at the OS/firmware level, not exposed to third-party apps through any public API. Adding attenuation on top, outside the standard volume steps entirely, is the only mechanism available to an app that isn't the device's own system software.
+That's not something a regular app can change. The per-step volume curve is defined by the device manufacturer at the OS/firmware level, not exposed to third-party apps through any public API. Adding attenuation on top, outside the standard volume steps entirely, is the practical mechanism available to an app that isn't the device's own system software. Re-encoding a file to be quieter also works, but only per file and never for streaming.
 
 **Can I use this alongside an equalizer app?**
 Generally yes, since Granular Volume applies a gain-only stage rather than reshaping frequencies, but behavior with other apps that also attach global audio effects (some EQ apps do) depends on Android's effect-chaining order on that specific device, which isn't something a third-party app controls.
@@ -181,7 +181,7 @@ Generally yes, since Granular Volume applies a gain-only stage rather than resha
 Closing the floating dial (the one-tap dismiss) stops the foreground service entirely, which releases the audio effect. Attenuation goes back to whatever the system's own volume step was already set to. The Quick Settings tile is the fast way to bring it back.
 
 **Why doesn't the app just ask for a lower default step 1 instead of building an overlay?**
-Because that setting doesn't exist as something a third-party app can request or change. The step curve lives in the OEM's audio HAL/policy configuration, well below any public Android API surface. An overlay with its own attenuation effect is the only mechanism actually available outside of modifying the device's firmware.
+Because that setting doesn't exist as something a third-party app can request or change. The step curve lives in the OEM's audio HAL/policy configuration, well below any public Android API surface. An overlay with its own attenuation effect is the mechanism actually available outside of modifying the device's firmware or editing each audio file by hand.
 
 **Is the attenuation curve linear or logarithmic?**
 The steps are applied as decibel offsets (roughly 5 dB per step down to about -30 dB), which corresponds much more closely to how loudness is actually perceived than a linear percentage scale would, matching the general approach Android's own volume curve uses, just extended further down.
