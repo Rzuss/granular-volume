@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Samsung Galaxy Volume Too Loud at Minimum? The Real Fix (2026)</title>
-<meta name="description" content="Galaxy phone, tablet, or Buds still too loud at the lowest volume step? Why Sound Assistant and 1% steps don't lower the floor, and the one fix that actually goes below it. No root, no Good Lock needed.">
+<meta name="description" content="Galaxy phone, tablet, or Buds still too loud at the lowest volume step? Why Sound Assistant and 1% steps only get you so far, and the fix that actually goes below the floor. No root, no Good Lock needed.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://rzuss.github.io/granular-volume/guide/samsung-galaxy-volume-too-loud-minimum.html">
 <meta property="og:title" content="Samsung Galaxy Volume Too Loud at Minimum? The Real Fix">
@@ -32,7 +32,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     {"@type":"Question","name":"Why is the lowest volume on my Samsung Galaxy still too loud?","acceptedAnswer":{"@type":"Answer","text":"Android divides the range between mute and full output into a fixed number of steps, and the first step above mute is a fixed fraction of the maximum, not a fixed loudness. Galaxy phones and tablets tend to have a loud maximum, so that first step lands loud. One UI has no setting to move where the floor sits."}},
-    {"@type":"Question","name":"Does Samsung Sound Assistant lower the minimum volume?","acceptedAnswer":{"@type":"Answer","text":"No. Sound Assistant (through Good Lock) changes the step increment from about 10% to 1%, giving you many more steps. That makes the climb from mute smoother, but the lowest 1% step is still the same fraction of the same maximum as before, so it lands at almost exactly the same loudness. It adds steps within the range; it does not extend the range below the floor."}},
+    {"@type":"Question","name":"Does Samsung Sound Assistant lower the minimum volume?","acceptedAnswer":{"@type":"Answer","text":"Partly, and it is worth trying first because it is free and built by Samsung. Sound Assistant (through Good Lock) changes the step increment from about 10% to 1%, so its first step above mute does sit lower than the stock slider's first step, and for some people that is enough. What it cannot do is take you below the bottom of the range the slider covers. It divides that range more finely rather than extending it downwards. If the quietest level your device can reach is itself too loud, adding steps inside the same range will not change that."}},
     {"@type":"Question","name":"Why are my Galaxy Buds too loud even at one bar?","acceptedAnswer":{"@type":"Answer","text":"Galaxy Buds share the phone's media volume range over Bluetooth, and the lowest non-mute step is again a fraction of the maximum. On sensitive in-ear drivers even that first bar can be too loud. Disabling Absolute Volume in Developer options can help the steps land differently over Bluetooth, but it does not lower the floor itself."}},
     {"@type":"Question","name":"Do I need Good Lock or a Samsung account to fix this?","acceptedAnswer":{"@type":"Answer","text":"No. The method that actually lowers the floor uses Android's own audio-effect framework, which is present on every Galaxy device regardless of Good Lock, Sound Assistant, or a Samsung account. It is not a Samsung-specific feature."}},
     {"@type":"Question","name":"Does this work on Samsung tablets like the Tab S series?","acceptedAnswer":{"@type":"Answer","text":"Yes, and tablets are where it matters most. Galaxy Tab speakers and headphone output often have an even higher minimum step than phones, so the same below-floor attenuation applies identically and is usually more noticeable."}},
@@ -131,7 +131,7 @@
     <div class="crumb"><a href="../index.html">Granular Volume</a> / Guide</div>
     <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
     <h1>Samsung Galaxy volume too loud at minimum?</h1>
-    <p class="dek">Why the lowest step on Galaxy phones, tablets, and Buds is still too loud, why Sound Assistant doesn't fix it, and the one method that actually goes below Samsung's hardware floor. No root, no Good Lock.</p>
+    <p class="dek">Why the lowest step on Galaxy phones, tablets, and Buds is still too loud, why Sound Assistant helps but only so far, and the method that actually goes below Samsung's hardware floor. No root, no Good Lock.</p>
     <p class="meta">Updated July 30, 2026 · 8 min read</p>
   </header>
 
@@ -151,7 +151,7 @@
       <div>On this page</div>
       <ol>
         <li><a href="#why">Why Galaxy's lowest volume is so loud</a></li>
-        <li><a href="#soundassistant">Why Sound Assistant doesn't lower it</a></li>
+        <li><a href="#soundassistant">Why Sound Assistant only gets you so far</a></li>
         <li><a href="#buds">Galaxy Buds too loud at one bar</a></li>
         <li><a href="#tablets">Galaxy Tab: the worst offender</a></li>
         <li><a href="#fix">The fix that actually goes below the floor</a></li>
@@ -162,11 +162,12 @@
     <h2 id="why">Why the lowest volume on a Galaxy is still too loud</h2>
     <p>One UI, like all of Android, splits the range between silence and full output into a fixed number of steps. The lowest step above mute is a fixed <em>fraction</em> of the maximum, not a fixed loudness. Galaxy phones and tablets are tuned for a loud maximum so they sound good in a store or outdoors, which means that first fraction lands loud too. There is no setting anywhere in One UI to move where that floor sits. That is the whole problem, and it is why turning it down as far as the slider goes still is not far enough.</p>
 
-    <h2 id="soundassistant">Why Sound Assistant and 1% steps don't fix it</h2>
+    <h2 id="soundassistant">Why Sound Assistant and 1% steps only get you so far</h2>
     <div class="fixcard">
-      <h3>Good Lock &rarr; Sound Assistant <span class="verdict v-doesnt">Doesn't lower the floor</span></h3>
+      <h3>Good Lock &rarr; Sound Assistant <span class="verdict v-doesnt">Helps, but bounded by the range</span></h3>
       <p>Sound Assistant, from Samsung's Good Lock suite, is the most common suggestion, and it is a genuinely useful tool. It changes the volume increment from roughly 10% to 1%, so you get about 100 steps instead of ten.</p>
-      <p>But more steps is not the same as a lower floor. The lowest 1% step is still 1% of the same loud maximum, which lands at almost exactly the same loudness as before. It makes the climb from mute smoother; it does not add any level that is quieter than the quietest step you already had. If step one was too loud, a finer step one is still too loud.</p>
+      <p>That does buy you something real, and it is worth trying before anything else because it is free and made by Samsung. A first step of 1% sits lower than a first step of 10%, and for plenty of people that alone is enough.</p>
+      <p>What it cannot do is take you past the bottom of the range the slider covers. It divides that range more finely; it does not extend it downwards. So if the quietest level your Galaxy can produce is itself louder than you want, no number of extra steps inside that same range will get you under it. That is the case this page is about, and it is why people who have already installed Sound Assistant still end up searching for this.</p>
     </div>
     <div class="fixcard">
       <h3>Disable Absolute Volume (Bluetooth only) <span class="verdict v-partial">Situational</span></h3>
@@ -200,7 +201,7 @@
       <dt>Why is the lowest volume on my Samsung Galaxy still too loud?</dt>
       <dd>The first step above mute is a fixed fraction of the maximum, not a fixed loudness, and Galaxy devices are tuned for a loud maximum. One UI has no setting to move where that floor sits.</dd>
       <dt>Does Samsung Sound Assistant lower the minimum volume?</dt>
-      <dd>No. It changes the increment to 1% for many more steps, but the lowest step is still the same fraction of the same maximum. It adds steps within the range; it does not extend the range below the floor.</dd>
+      <dd>Partly, and it is worth trying first because it is free and made by Samsung. Going from 10% increments to 1% does put its first step above mute lower than the stock slider's first step, and for some people that is enough. What it cannot do is take you below the bottom of the range the slider covers: it divides that range more finely rather than extending it downwards. If the quietest level your device reaches is itself too loud, adding steps inside the same range will not change that.</dd>
       <dt>Why are my Galaxy Buds too loud even at one bar?</dt>
       <dd>The Buds share the phone's media volume over Bluetooth, and even the first bar is a fraction of a loud maximum played on sensitive in-ear drivers. Disabling Absolute Volume can help the mapping but does not lower the floor.</dd>
       <dt>Do I need Good Lock or a Samsung account to fix this?</dt>
