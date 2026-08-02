@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo bajar el volumen de Android por debajo del mínimo (guía 2026)</title>
+<meta name="description" content="¿El volumen mínimo sigue siendo muy alto? Qué baja de verdad el suelo de volumen, qué solo añade más pasos y qué es exclusivo de Samsung. Sin root, explicado con honestidad.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rzuss.github.io/granular-volume/es/bajar-volumen-por-debajo-del-minimo-android.html">
+<link rel="alternate" hreflang="es" href="https://rzuss.github.io/granular-volume/es/bajar-volumen-por-debajo-del-minimo-android.html">
+<link rel="alternate" hreflang="de" href="https://rzuss.github.io/granular-volume/de/lautstaerke-unter-minimum-android.html">
+<link rel="alternate" hreflang="en" href="https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html">
+<link rel="alternate" hreflang="x-default" href="https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html">
+<meta property="og:title" content="Cómo bajar el volumen de Android por debajo del mínimo">
+<meta property="og:description" content="Por qué el volumen mínimo sigue siendo alto y qué hay realmente por debajo.">
+<meta property="og:image" content="https://rzuss.github.io/granular-volume/img/feature.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "inLanguage": "es",
+  "headline": "Cómo bajar el volumen de Android por debajo del mínimo",
+  "description": "Por qué el paso más bajo de volumen en Android sigue sonando fuerte, qué consejos bajan de verdad el suelo y cuáles solo dividen los pasos.",
+  "image": "https://rzuss.github.io/granular-volume/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "mainEntityOfPage": "https://rzuss.github.io/granular-volume/es/bajar-volumen-por-debajo-del-minimo-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Por qué el volumen más bajo de mi móvil sigue sonando tan fuerte?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Android divide el rango entre el silencio y la salida máxima en un número fijo de pasos, normalmente entre 15 y 25. El paso más bajo por encima del silencio es una fracción fija de ese máximo, no un volumen absoluto. En dispositivos con un máximo potente, ese primer paso sigue siendo incómodo. En los ajustes de Android no existe ninguna opción para mover ese suelo."}
+    },
+    {
+      "@type": "Question",
+      "name": "¿Sound Assistant baja el suelo de volumen?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No, y es la confusión más habitual. Sound Assistant, dentro de Good Lock de Samsung, permite ajustar el volumen en pasos del 1 por ciento. Eso divide el rango existente con más finura, pero no lo extiende hacia abajo. El punto audible más bajo sigue siendo exactamente el mismo, solo que necesitas más toques para llegar. Si tu problema son los saltos bruscos, es la solución correcta. Si el problema es el suelo, no lo es."}
+    },
+    {
+      "@type": "Question",
+      "name": "¿Sirve desactivar Dolby Atmos o el ecualizador?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A veces, un poco. Las mejoras de sonido como Dolby Atmos añaden ganancia, y desactivarlas puede reducir la salida de forma audible en algunos dispositivos. No es fiable: en muchos móviles no cambia nada, y donde ayuda estás renunciando a una función que quizá quieras conservar."}
+    },
+    {
+      "@type": "Question",
+      "name": "¿Se puede hacer sin root?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Sí. Android expone una interfaz de efectos de audio con la que una aplicación puede aplicar ganancia negativa a la mezcla de salida, por debajo de los pasos de volumen. No hace falta root, ni ADB, ni modificar archivos del sistema."}
+    },
+    {
+      "@type": "Question",
+      "name": "¿También baja las llamadas, la alarma y las notificaciones?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Sí. El contenido multimedia, las llamadas, los tonos, las notificaciones y la alarma pasan todos por la misma ruta de salida mezclada y bajan con ella. Los tonos del teclado y los sonidos de la interfaz no, como se explica más abajo."}
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué no bajan los tonos del teclado?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Los clics del teclado y los sonidos de la interfaz usan una ruta separada de baja latencia que se salta los efectos de audio a propósito, porque los efectos añaden retardo. Es un límite del propio Android, no de una aplicación concreta. Ninguna aplicación que trabaje con un efecto sobre la mezcla de salida puede alcanzarlos."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .warn{background:rgba(245,185,66,.10);border:1px solid rgba(245,185,66,.38);
+    border-radius:16px;padding:22px 26px;margin:26px 0;}
+  .warn .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin-bottom:8px;}
+  .warn p{margin-bottom:0;font-size:16.5px;color:#e3e5f7;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Guía</div>
+    <div class="icon"><img src="../img/icon.png" alt="Icono de Granular Volume"></div>
+    <h1>Cómo bajar el volumen de Android por debajo del mínimo</h1>
+    <p class="dek">Tienes el volumen en el paso más bajo y sigue sonando demasiado fuerte. No es un ajuste que se te haya pasado por alto. Android tiene un suelo de volumen, y desde los ajustes no hay forma de pasar por debajo.</p>
+    <p class="meta">Publicado el 2 de agosto de 2026 &middot; 8 min de lectura</p>
+  </header>
+
+  <div class="quickfix">
+    <div class="kicker">La respuesta corta</div>
+    <p>Casi todos los consejos que encontrarás hacen los pasos <strong>más finos</strong>, no el suelo <strong>más bajo</strong>. Son dos problemas distintos. Si el paso 1 ya te resulta alto, dividirlo más no ayuda: el punto audible más bajo sigue siendo el mismo. Lo que sí ayuda es aplicar ganancia negativa por debajo de los pasos.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Gratis en Play Store</a>
+      <a class="btn btn-ghost" href="#metodos">Ver todos los métodos</a>
+    </div>
+  </div>
+
+  <article>
+
+    <p class="lead-p">Pasa al dormirte, en el autobús, en una oficina compartida, al lado de un niño dormido. Pulsas bajar volumen hasta el final y la siguiente pulsación lo silencia del todo. Entre demasiado alto y nada no hay nada.</p>
+
+    <div class="toc">
+      <div>Contenido</div>
+      <ol>
+        <li><a href="#porque">Por qué el paso más bajo sigue sonando alto</a></li>
+        <li><a href="#metodos">Qué funciona de verdad, valorado con honestidad</a></li>
+        <li><a href="#teclado">Por qué los tonos del teclado nunca bajan</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ol>
+    </div>
+
+    <h2 id="porque">Por qué el paso más bajo sigue sonando alto</h2>
+
+    <p>El control de volumen de Android divide el rango entre el silencio y la salida máxima en un número fijo de pasos, normalmente entre 15 y 25 según el dispositivo. El paso más bajo por encima del silencio es una <strong>fracción fija de ese máximo</strong>, no un volumen absoluto.</p>
+
+    <p>Eso explica dos cosas a la vez. Primera: cuanto más alto puede sonar tu dispositivo, más alto suena también su paso más bajo. Por eso las tablets y los móviles con altavoces potentes suelen ser peores. Segunda: si una actualización del sistema sube el volumen general, el suelo sube con él sin que tú hayas tocado nada.</p>
+
+    <p>Y como es una fracción, en los ajustes no hay ningún control para ello. Sencillamente no existe nada que mover.</p>
+
+    <h2 id="metodos">Qué funciona de verdad, valorado con honestidad</h2>
+
+    <div class="fixcard">
+      <h3>Arrastrar el deslizador del panel de volumen en vez de usar los botones <span class="verdict v-partial">Parcial</span></h3>
+      <p>En muchos dispositivos el deslizador se puede ajustar con más finura de lo que saltan los botones. Es una mejora real si tu problema son los <em>saltos bruscos</em>.</p>
+      <p>Pero no baja el suelo. El punto más bajo al que puedes llegar es el mismo de antes.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Más pasos de volumen, por ejemplo con Sound Assistant de Good Lock <span class="verdict v-partial">Parcial</span></h3>
+      <p>En dispositivos Samsung, Sound Assistant permite ajustar el volumen en pasos del 1 por ciento. Es justo lo que más se recomienda en foros y artículos en español, y para la pregunta correcta es también la respuesta correcta.</p>
+      <p>Pero más pasos dividen el mismo rango con más finura, no lo extienden hacia abajo. Si el paso 1 te resulta alto, el 1 por ciento te resultará igual de alto. Solo necesitarás más toques para llegar al mismo punto.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Desactivar Dolby Atmos, Sonido adaptativo o el ecualizador <span class="verdict v-partial">Parcial</span></h3>
+      <p>Las mejoras de sonido añaden ganancia. Desactivarlas puede reducir la salida de forma audible en algunos dispositivos, y merece la pena probarlo porque no cuesta nada.</p>
+      <p>No es fiable. En muchos móviles no cambia nada, y donde ayuda estás renunciando a una función que quizá quieras conservar.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Desactivar el volumen absoluto en opciones de desarrollador <span class="verdict v-partial">Parcial, solo Bluetooth</span></h3>
+      <p>Afecta únicamente a Bluetooth. Después, el móvil y los auriculares controlan su volumen por separado, lo que suele dar más pasos útiles porque dos controles se multiplican.</p>
+      <p>Para auriculares con cable y para el altavoz interno no cambia nada. Y es un ajuste de desarrollador que algunos dispositivos restablecen tras una actualización.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Bajar el volumen del propio archivo de audio <span class="verdict v-works">Funciona</span></h3>
+      <p>Renderizar un tono o una alarma más bajo en un editor de audio y usar la versión silenciosa. Funciona de verdad, porque estás bajando la señal antes de que los pasos de volumen la vean siquiera.</p>
+      <p>El precio es trabajo manual por cada archivo, y para llamadas, vídeos o música de un servicio de streaming no sirve.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Aplicar ganancia negativa a la mezcla de salida <span class="verdict v-works">Funciona</span></h3>
+      <p>La misma idea que el archivo renderizado más bajo, pero automática y para todo. Android expone una interfaz de efectos de audio con la que una aplicación puede atenuar la salida <strong>por debajo</strong> de los pasos de volumen. Sin root, sin ADB, sin tocar archivos del sistema.</p>
+      <p>Así funciona la aplicación detrás de esta página. Siete pasos desde sin cambio hasta 30 dB por debajo de tu mínimo de hardware, con un pequeño control flotante que se sitúa sobre cualquier aplicación.</p>
+    </div>
+
+    <div class="warn">
+      <div class="kicker">Con franqueza</div>
+      <p>Yo escribí esta aplicación, así que no soy neutral aquí. Por eso arriba está también lo que funciona sin ella. Si tu problema son los saltos bruscos, usa Sound Assistant, es la solución más adecuada. Esta página es para el otro caso: cuando el suelo en sí está demasiado alto.</p>
+    </div>
+
+    <h2 id="teclado">Por qué los tonos del teclado nunca bajan</h2>
+
+    <p>Hay algo que ninguna aplicación de este tipo puede resolver, y conviene saberlo antes: <strong>los clics del teclado y los sonidos de la interfaz siguen sonando fuerte.</strong></p>
+
+    <p>Android tiene varias rutas de salida. El contenido multimedia, los tonos, las notificaciones y la alarma pasan por la ruta mezclada principal, donde los efectos de audio sí actúan. Los tonos del teclado pasan por una ruta separada de baja latencia que <strong>se salta los efectos a propósito</strong>, porque los efectos añaden retardo y es justo lo que ahí se quiere evitar.</p>
+
+    <p>Es un límite del propio Android, no una carencia de una aplicación concreta. Si lo único que te molesta son los tonos del teclado, se pueden desactivar por separado en los ajustes de sonido. Esa es la única solución que existe para eso.</p>
+
+    <div class="warn">
+      <div class="kicker">Importante con la alarma</div>
+      <p>Si bajas la alarma, pruébalo unas cuantas noches antes de confiar en ello. Bajar una alarma es exactamente el tipo de cambio en el que equivocarse te cuesta quedarte dormido. Empieza un paso por encima del mínimo y ve bajando poco a poco.</p>
+    </div>
+
+    <div class="callout">
+      <h2>Resumen</h2>
+      <p>Más pasos y un suelo más bajo son dos cosas distintas. Casi todo lo que se recomienda por ahí resuelve lo primero. Si el paso más bajo ya te resulta alto, necesitas atenuación por debajo de los pasos.</p>
+      <p>Gratis, código abierto, sin anuncios, sin cuenta y sin permiso de internet. 2,7 MB.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Ver en Play Store</a>
+        <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">Código en GitHub</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Preguntas frecuentes</h2>
+
+    <dl class="faq">
+      <dt>¿Por qué el volumen más bajo de mi móvil sigue sonando tan fuerte?</dt>
+      <dd>Porque es una fracción fija del volumen máximo, no un volumen absoluto. En un dispositivo con un máximo potente, el primer paso por encima del silencio también suena fuerte. En los ajustes de Android no hay forma de cambiarlo.</dd>
+
+      <dt>¿Sound Assistant baja el suelo de volumen?</dt>
+      <dd>No. Divide el rango existente en pasos del 1 por ciento, pero no lo extiende hacia abajo. Para saltos bruscos es la solución correcta, para un suelo demasiado alto no.</dd>
+
+      <dt>¿Sirve desactivar Dolby Atmos o el ecualizador?</dt>
+      <dd>A veces un poco, porque esos efectos añaden ganancia. No es fiable, y en muchos dispositivos no cambia nada.</dd>
+
+      <dt>¿Se puede hacer sin root?</dt>
+      <dd>Sí. La interfaz de efectos de audio de Android es suficiente. Sin root, sin ADB y sin modificar archivos del sistema.</dd>
+
+      <dt>¿También baja las llamadas, la alarma y las notificaciones?</dt>
+      <dd>Sí. Multimedia, llamadas, tonos, notificaciones y alarma pasan por la misma ruta de salida mezclada y bajan con ella.</dd>
+
+      <dt>¿Por qué no bajan los tonos del teclado?</dt>
+      <dd>Usan una ruta separada de baja latencia que se salta los efectos de audio a propósito. Es un límite de Android y ninguna aplicación puede sortearlo. Eso sí, se pueden desactivar por separado en los ajustes de sonido.</dd>
+
+      <dt>¿Funciona también en tablets?</dt>
+      <dd>Sí, y ahí el efecto suele notarse más, porque las tablets suelen tener un mínimo aún más alto que los móviles debido a sus altavoces más grandes.</dd>
+
+      <dt>¿Vuelve el ajuste después de reiniciar?</dt>
+      <dd>Sí, si el control estaba activo al apagar, se restaura tras el reinicio en el mismo nivel. Si lo paraste tú, sigue parado.</dd>
+    </dl>
+
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    Parte de <a href="../index.html">Granular Volume</a>, software libre bajo la
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacidad</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Términos de uso</a>.
+    <br>
+    Otros idiomas:
+    <a href="../guide/lower-android-volume-below-minimum.html" hreflang="en">English</a> &middot;
+    <a href="../de/lautstaerke-unter-minimum-android.html" hreflang="de">Deutsch</a>.
+  </div>
+</footer>
+</body>
+</html>

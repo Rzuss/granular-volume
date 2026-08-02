@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Android Lautstärke unter das Minimum senken (Anleitung 2026)</title>
+<meta name="description" content="Niedrigste Stufe immer noch zu laut? Was den Lautstärke-Boden wirklich senkt, was nur mehr Stufen hinzufügt und was nur bei Samsung geht. Ohne Root, ehrlich erklärt.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rzuss.github.io/granular-volume/de/lautstaerke-unter-minimum-android.html">
+<link rel="alternate" hreflang="de" href="https://rzuss.github.io/granular-volume/de/lautstaerke-unter-minimum-android.html">
+<link rel="alternate" hreflang="es" href="https://rzuss.github.io/granular-volume/es/bajar-volumen-por-debajo-del-minimo-android.html">
+<link rel="alternate" hreflang="en" href="https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html">
+<link rel="alternate" hreflang="x-default" href="https://rzuss.github.io/granular-volume/guide/lower-android-volume-below-minimum.html">
+<meta property="og:title" content="Android Lautstärke unter das Minimum senken">
+<meta property="og:description" content="Warum die niedrigste Stufe immer noch zu laut ist, und was tatsächlich darunter kommt.">
+<meta property="og:image" content="https://rzuss.github.io/granular-volume/img/feature.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="de_DE">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "inLanguage": "de",
+  "headline": "Android Lautstärke unter das Minimum senken",
+  "description": "Warum die niedrigste Lautstärkestufe auf Android immer noch zu laut ist, welche Tipps den Boden wirklich senken und welche nur die Stufen verfeinern.",
+  "image": "https://rzuss.github.io/granular-volume/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://rzuss.github.io/granular-volume/img/icon.png"}},
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "mainEntityOfPage": "https://rzuss.github.io/granular-volume/de/lautstaerke-unter-minimum-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "de",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Warum ist die niedrigste Lautstärkestufe meines Handys immer noch so laut?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Android teilt den Bereich zwischen Stille und maximaler Ausgabe in eine feste Anzahl Stufen auf, meist 15 bis 25. Die niedrigste Stufe über stumm ist ein fester Bruchteil des Maximums, keine absolute Lautstärke. Auf Geräten mit lautem Maximum ist diese erste Stufe deshalb immer noch unangenehm laut. In den Android-Einstellungen gibt es keine Möglichkeit, diesen Boden zu verschieben."}
+    },
+    {
+      "@type": "Question",
+      "name": "Senkt Sound Assistant den Lautstärke-Boden?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Nein, und das ist das häufigste Missverständnis. Sound Assistant aus Samsungs Good Lock kann die Lautstärke in 1-Prozent-Schritten regeln. Das unterteilt den vorhandenen Bereich feiner, verlängert ihn aber nicht nach unten. Der leiseste hörbare Punkt bleibt genau derselbe, du brauchst nur mehr Tipps, um dorthin zu kommen. Für zu grobe Sprünge ist es die richtige Lösung, für einen zu hohen Boden nicht."}
+    },
+    {
+      "@type": "Question",
+      "name": "Hilft es, Dolby Atmos oder den Equalizer auszuschalten?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Manchmal ein wenig. Klangverbesserungen wie Dolby Atmos fügen Verstärkung hinzu, und sie abzuschalten kann die Ausgabe auf manchen Geräten hörbar senken. Verlässlich ist es nicht: viele Geräte zeigen gar keinen Unterschied, und wo es hilft, ist es ein Nebeneffekt des Abschaltens einer Funktion, die du vielleicht behalten willst."}
+    },
+    {
+      "@type": "Question",
+      "name": "Geht das ohne Root?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Ja. Android stellt eine Audioeffekt-Schnittstelle bereit, über die eine App negative Verstärkung auf die Ausgabemischung legen kann, unterhalb der Lautstärkestufen. Das braucht kein Root, kein ADB und keine Änderung an Systemdateien."}
+    },
+    {
+      "@type": "Question",
+      "name": "Werden auch Anrufe, Wecker und Benachrichtigungen leiser?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Ja. Medien, Anrufe, Klingeltöne, Benachrichtigungen und der Wecker laufen alle über denselben gemischten Ausgabepfad und werden mitgesenkt. Tastentöne und UI-Klicks dagegen nicht, siehe unten."}
+    },
+    {
+      "@type": "Question",
+      "name": "Warum werden Tastentöne nicht leiser?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Tastaturklicks und UI-Töne laufen über einen separaten Pfad mit niedriger Latenz, der Audioeffekte bewusst überspringt, weil Effekte Verzögerung verursachen. Das ist eine Grenze von Android selbst, nicht einer einzelnen App. Keine App, die über einen Effekt auf der Ausgabemischung arbeitet, erreicht diese Töne."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .warn{background:rgba(245,185,66,.10);border:1px solid rgba(245,185,66,.38);
+    border-radius:16px;padding:22px 26px;margin:26px 0;}
+  .warn .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin-bottom:8px;}
+  .warn p{margin-bottom:0;font-size:16.5px;color:#e3e5f7;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Anleitung</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume Symbol"></div>
+    <h1>Android Lautstärke unter das Minimum senken</h1>
+    <p class="dek">Die niedrigste Stufe ist eingestellt und es ist immer noch zu laut. Das ist keine Einstellung, die du übersehen hast. Android hat einen Lautstärke-Boden, und in den Einstellungen führt kein Weg darunter.</p>
+    <p class="meta">Veröffentlicht am 2. August 2026 &middot; 8 Min. Lesezeit</p>
+  </header>
+
+  <div class="quickfix">
+    <div class="kicker">Die kurze Antwort</div>
+    <p>Die meisten Tipps, die du online findest, machen die Stufen <strong>feiner</strong>, nicht den Boden <strong>tiefer</strong>. Das sind zwei verschiedene Probleme. Wenn dir schon Stufe 1 zu laut ist, hilft eine feinere Unterteilung nicht: Der leiseste hörbare Punkt bleibt derselbe. Was hilft, ist negative Verstärkung unterhalb der Stufen.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Kostenlos im Play Store</a>
+      <a class="btn btn-ghost" href="#methoden">Alle Methoden ansehen</a>
+    </div>
+  </div>
+
+  <article>
+
+    <p class="lead-p">Es passiert beim Einschlafen, im Bus, im Büro, neben einem schlafenden Kind. Du drückst die Leiser-Taste bis zum Anschlag, und der nächste Druck schaltet stumm. Zwischen zu laut und gar nichts liegt nichts.</p>
+
+    <div class="toc">
+      <div>Inhalt</div>
+      <ol>
+        <li><a href="#warum">Warum die niedrigste Stufe trotzdem laut ist</a></li>
+        <li><a href="#methoden">Was wirklich funktioniert, ehrlich bewertet</a></li>
+        <li><a href="#tastentoene">Warum Tastentöne nie leiser werden</a></li>
+        <li><a href="#faq">Häufige Fragen</a></li>
+      </ol>
+    </div>
+
+    <h2 id="warum">Warum die niedrigste Stufe trotzdem laut ist</h2>
+
+    <p>Androids Lautstärkeregler teilt den Bereich zwischen Stille und maximaler Ausgabe in eine feste Anzahl Stufen auf, je nach Gerät meist 15 bis 25. Die niedrigste Stufe über stumm ist dabei ein <strong>fester Bruchteil des Maximums</strong>, keine absolute Lautstärke.</p>
+
+    <p>Das erklärt zwei Dinge auf einmal. Erstens: Je lauter dein Gerät maximal kann, desto lauter ist auch seine leiseste Stufe. Tablets und Geräte mit kräftigen Lautsprechern sind deshalb oft schlimmer als kleine Handys. Zweitens: Wenn ein Systemupdate die Gesamtlautstärke anhebt, wandert der Boden mit nach oben, ohne dass du etwas geändert hast.</p>
+
+    <p>Und weil es ein Bruchteil ist, gibt es in den Einstellungen keinen Schalter dafür. Es gibt schlicht nichts, was man verstellen könnte.</p>
+
+    <h2 id="methoden">Was wirklich funktioniert, ehrlich bewertet</h2>
+
+    <div class="fixcard">
+      <h3>Den Regler im Lautstärke-Panel ziehen statt die Tasten zu drücken <span class="verdict v-partial">Teilweise</span></h3>
+      <p>Auf vielen Geräten lässt sich der Schieberegler feiner ziehen, als die Tasten springen. Das ist ein echter Gewinn, wenn dein Problem <em>zu grobe Sprünge</em> sind.</p>
+      <p>Es senkt aber nicht den Boden. Der leiseste Punkt, den du erreichen kannst, ist derselbe wie vorher.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Mehr Lautstärkestufen, etwa mit Sound Assistant aus Good Lock <span class="verdict v-partial">Teilweise</span></h3>
+      <p>Auf Samsung-Geräten kann Sound Assistant die Lautstärke in 1-Prozent-Schritten regeln. Genau das wird in deutschsprachigen Foren am häufigsten empfohlen, und für die richtige Frage ist es auch die richtige Antwort.</p>
+      <p>Aber: mehr Stufen unterteilen denselben Bereich feiner, sie verlängern ihn nicht nach unten. Wenn dir Stufe 1 zu laut ist, ist dir 1 Prozent genauso zu laut. Du brauchst dann nur mehr Tipps, um an denselben Punkt zu kommen.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Dolby Atmos, Adaptiver Klang oder den Equalizer abschalten <span class="verdict v-partial">Teilweise</span></h3>
+      <p>Klangverbesserungen fügen Verstärkung hinzu. Sie abzuschalten kann die Ausgabe auf manchen Geräten hörbar senken, und das ist einen Versuch wert, weil es nichts kostet.</p>
+      <p>Verlässlich ist es nicht. Viele Geräte zeigen keinen Unterschied, und wo es hilft, gibst du dafür eine Funktion auf, die du vielleicht behalten möchtest.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Absolute Lautstärke in den Entwickleroptionen deaktivieren <span class="verdict v-partial">Teilweise, nur Bluetooth</span></h3>
+      <p>Betrifft ausschließlich Bluetooth. Danach regeln Handy und Kopfhörer ihre Lautstärke getrennt, was oft mehr nutzbare Stufen ergibt, weil sich zwei Regler multiplizieren.</p>
+      <p>Für kabelgebundene Kopfhörer und den eingebauten Lautsprecher ändert es nichts. Und es ist eine Entwicklereinstellung, die manche Geräte nach einem Update zurücksetzen.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Die Audiodatei selbst leiser machen <span class="verdict v-works">Funktioniert</span></h3>
+      <p>Einen Klingelton oder Wecker in einem Audioprogramm leiser rendern und die leise Fassung verwenden. Das funktioniert wirklich, denn du senkst das Signal, bevor die Lautstärkestufen es überhaupt sehen.</p>
+      <p>Der Preis ist Handarbeit pro Datei, und für Anrufe, Videos oder Musik von einem Streamingdienst geht es gar nicht.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Negative Verstärkung auf die Ausgabemischung legen <span class="verdict v-works">Funktioniert</span></h3>
+      <p>Dieselbe Idee wie die leiser gerenderte Datei, nur automatisch und für alles. Android stellt eine Audioeffekt-Schnittstelle bereit, über die eine App die Ausgabe absenken kann, <strong>unterhalb</strong> der Lautstärkestufen. Kein Root, kein ADB, keine Systemdateien.</p>
+      <p>Genau so arbeitet die App hinter dieser Seite. Sieben Stufen von unverändert bis 30 dB unter deinem Hardware-Minimum, über einen kleinen schwebenden Regler, der über jeder App liegt.</p>
+    </div>
+
+    <div class="warn">
+      <div class="kicker">Ehrlich gesagt</div>
+      <p>Ich habe diese App geschrieben, bin hier also nicht neutral. Deshalb steht oben auch, was ohne sie funktioniert. Wenn dein Problem zu grobe Sprünge sind, nimm Sound Assistant, das ist die passendere Lösung. Diese Seite ist für den anderen Fall: wenn der Boden selbst zu hoch liegt.</p>
+    </div>
+
+    <h2 id="tastentoene">Warum Tastentöne nie leiser werden</h2>
+
+    <p>Eine Sache, die keine App dieser Art lösen kann, und es ist besser, das vorher zu wissen: <strong>Tastaturklicks und UI-Töne bleiben laut.</strong></p>
+
+    <p>Android hat mehrere Ausgabepfade. Medien, Klingeltöne, Benachrichtigungen und der Wecker laufen über den gemischten Hauptpfad, auf dem Audioeffekte greifen. Tastentöne laufen über einen separaten Pfad mit niedriger Latenz, der Effekte <strong>bewusst überspringt</strong>, weil Effekte Verzögerung erzeugen und genau die dort vermieden werden soll.</p>
+
+    <p>Das ist eine Grenze von Android selbst, keine Schwäche einer bestimmten App. Wenn dich nur die Tastentöne stören, lassen sie sich in den Toneinstellungen separat abschalten. Das ist die einzige Lösung, die es dafür gibt.</p>
+
+    <div class="warn">
+      <div class="kicker">Wichtig beim Wecker</div>
+      <p>Wenn du den Wecker leiser stellst, teste das ein paar Nächte, bevor du dich darauf verlässt. Einen Wecker leiser zu machen ist genau die Art Änderung, bei der ein Fehler dich verschlafen lässt. Fang eine Stufe unter dem Maximum an und taste dich nach unten.</p>
+    </div>
+
+    <div class="callout">
+      <h2>Die kurze Fassung</h2>
+      <p>Mehr Stufen und ein tieferer Boden sind zwei verschiedene Dinge. Fast alles, was online empfohlen wird, löst das erste Problem. Wenn dir schon die leiseste Stufe zu laut ist, brauchst du Absenkung unterhalb der Stufen.</p>
+      <p>Kostenlos, quelloffen, ohne Werbung, ohne Konto und ohne Internet-Berechtigung. 2,7 MB.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Im Play Store ansehen</a>
+        <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">Quellcode auf GitHub</a>
+      </div>
+    </div>
+
+    <h2 id="faq">Häufige Fragen</h2>
+
+    <dl class="faq">
+      <dt>Warum ist die niedrigste Lautstärkestufe meines Handys immer noch so laut?</dt>
+      <dd>Weil sie ein fester Bruchteil der maximalen Lautstärke ist, keine absolute Lautstärke. Auf einem Gerät mit lautem Maximum ist auch die erste Stufe über stumm entsprechend laut. In den Android-Einstellungen gibt es keinen Weg, das zu ändern.</dd>
+
+      <dt>Senkt Sound Assistant den Lautstärke-Boden?</dt>
+      <dd>Nein. Er unterteilt den vorhandenen Bereich in 1-Prozent-Schritte, verlängert ihn aber nicht nach unten. Für zu grobe Sprünge ist er die richtige Lösung, für einen zu hohen Boden nicht.</dd>
+
+      <dt>Hilft es, Dolby Atmos oder den Equalizer auszuschalten?</dt>
+      <dd>Manchmal ein wenig, weil solche Effekte Verstärkung hinzufügen. Verlässlich ist es nicht, und auf vielen Geräten ändert sich gar nichts.</dd>
+
+      <dt>Geht das ohne Root?</dt>
+      <dd>Ja. Die Audioeffekt-Schnittstelle von Android reicht dafür aus. Kein Root, kein ADB, keine Änderung an Systemdateien.</dd>
+
+      <dt>Werden auch Anrufe, Wecker und Benachrichtigungen leiser?</dt>
+      <dd>Ja. Medien, Anrufe, Klingeltöne, Benachrichtigungen und Wecker laufen über denselben gemischten Ausgabepfad und werden mitgesenkt.</dd>
+
+      <dt>Warum werden Tastentöne nicht leiser?</dt>
+      <dd>Sie laufen über einen separaten Pfad mit niedriger Latenz, der Audioeffekte bewusst überspringt. Das ist eine Grenze von Android, keine App kann sie umgehen. Tastentöne lassen sich aber in den Toneinstellungen separat abschalten.</dd>
+
+      <dt>Funktioniert das auch auf Tablets?</dt>
+      <dd>Ja, und dort ist der Effekt oft am deutlichsten, weil Tablets wegen ihrer größeren Lautsprecher häufig ein noch höheres Minimum haben als Handys.</dd>
+
+      <dt>Kommt die Einstellung nach einem Neustart zurück?</dt>
+      <dd>Ja, wenn der Regler beim Ausschalten aktiv war, stellt er sich nach dem Neustart auf derselben Stufe wieder her. Hast du ihn selbst gestoppt, bleibt er gestoppt.</dd>
+    </dl>
+
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    Teil von <a href="../index.html">Granular Volume</a>, freie Software unter der
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Datenschutz</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Nutzungsbedingungen</a>.
+    <br>
+    Andere Sprachen:
+    <a href="../guide/lower-android-volume-below-minimum.html" hreflang="en">English</a> &middot;
+    <a href="../es/bajar-volumen-por-debajo-del-minimo-android.html" hreflang="es">Español</a>.
+  </div>
+</footer>
+</body>
+</html>
