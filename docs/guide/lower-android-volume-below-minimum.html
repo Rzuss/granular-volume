@@ -48,7 +48,7 @@
     {
       "@type": "Question",
       "name": "Do custom step-count apps or Sound Assistant lower the volume floor?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Their step features don't, and that's the common misunderstanding. Adding more volume steps, whether that's Sound Assistant's 1% increments or a third-party app's custom step count, subdivides the existing range into finer clicks; it does not extend the range below the hardware minimum. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
+      "acceptedAnswer": {"@type": "Answer", "text": "A little, and then they stop. Android maps each volume step onto a fixed attenuation curve by its position in the range, so the first step of 100 does sit lower than the first step of 15. Measured on one Android 16 configuration in August 2026, that was worth about 5 dB. But the curve has a fixed bottom that no step count goes past, so once you reach it, extra steps add nothing at all. If that bottom is still louder than you need, more steps cannot get you there. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
     },
     {
       "@type": "Question",
@@ -294,16 +294,17 @@
 
     <h2 id="soundassistant">2. Sound Assistant, for Samsung phones</h2>
     <div class="fixcard">
-      <h3>Samsung Good Lock → Sound Assistant <span class="verdict v-partial">Samsung only, doesn't lower the floor</span></h3>
+      <h3>Samsung Good Lock → Sound Assistant <span class="verdict v-partial">Samsung only, lowers it a few dB then stops</span></h3>
       <p>Sound Assistant is a genuine Samsung tool (via the Good Lock app) that changes the step increment from 10% to 1%, giving you 100 steps instead of 10. It's a real, useful app for Samsung owners.</p>
-      <p>It does not lower the minimum. If the lowest 10% step was too loud, the lowest 1% step is still the same fraction of the same maximum, so it lands at almost exactly the same loudness. More steps make the climb from mute smoother, not quieter at the bottom. See the dedicated guide for <a href="samsung-galaxy-volume-too-loud-minimum.html">Samsung Galaxy volume too loud at minimum</a>.</p>
+      <p>It lowers the minimum a little, then stops. A first step of 1% does land lower on Android's volume curve than a first step of 10%, so it is worth trying, and for some people it is enough on its own. What it cannot do is take you past the bottom of that curve, which is fixed no matter how many steps you add. If the quietest level your phone can produce is itself too loud, this will not get you under it. See the dedicated guide for <a href="samsung-galaxy-volume-too-loud-minimum.html">Samsung Galaxy volume too loud at minimum</a>.</p>
     </div>
 
     <h2 id="stepapps">3. Custom step-count apps</h2>
     <div class="fixcard">
-      <h3>Apps that let you set your own step count <span class="verdict v-partial">Steps don't lower the floor; buried EQ option partially does</span></h3>
+      <h3>Apps that let you set your own step count <span class="verdict v-partial">Steps help a few dB then stop; buried EQ option goes deeper</span></h3>
       <p>Several well-known apps override Android's default 15 to 25 volume steps with a custom count, up to 1000 in some cases. They're often the top suggestion for this exact problem, and they're good at what they do.</p>
-      <p>The step feature itself subdivides the existing range into finer increments using the same mechanism as the stock slider. It does not extend the range past the existing minimum: if step 1 of 15 was too loud, step 1 of 1000 covering the same range is still the same loudness. That's the most common misunderstanding in advice for this problem.</p>
+      <p>The step feature uses the same mechanism as the stock slider, and it does buy you something real. Android places each step on a fixed attenuation curve according to its position in the range, so step 1 of 100 sits lower than step 1 of 15. Measured on one Android 16 configuration in August 2026, the gain from that was about 5 dB.</p>
+      <p>Then it stops dead. The curve has a fixed bottom, and no step count reaches past it. Beyond roughly 100 steps the extra ones are not merely useless: on that same configuration a 1000-step scale left the first nine steps silent, with the tenth landing on exactly the level 100 steps already gave. So more steps is a real but small and hard-capped win, and if the bottom of the curve is still too loud for you, no number of steps will fix it.</p>
       <p>To be fair and precise: some apps in this category also carry a separate post-gain slider inside their graphic equalizer that genuinely reduces overall output. We measured the deepest one we could find in July 2026, and its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and that floor is roughly half the additional headroom a dedicated tool provides (Granular Volume reaches -30 dB, one tap from the dial).</p>
     </div>
 
@@ -372,7 +373,7 @@
       <dd>Sometimes, partially, and inconsistently. It can reduce output on some devices because those effects add gain, but many devices see no change at all, and it's a side effect of disabling a feature rather than a real minimum-volume control.</dd>
 
       <dt>Do custom step-count apps or Sound Assistant lower the volume floor?</dt>
-      <dd>Their step features don't: subdividing the existing range into finer steps doesn't extend it below the hardware minimum. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
+      <dd>A little, then they stop. The first step of 100 sits lower on Android's attenuation curve than the first step of 15, worth roughly 5 dB on one configuration we measured in August 2026. But the curve has a fixed bottom that no step count passes, so if that bottom is still too loud, more steps cannot help. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
 
       <dt>Is there a way to do this without root?</dt>
       <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can attenuate output below the hardware minimum without root, without modifying system files, and without ADB.</dd>

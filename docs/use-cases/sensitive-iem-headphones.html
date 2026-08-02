@@ -131,7 +131,7 @@
     </div>
 
     <h2>Why "more precise" volume apps don't solve this</h2>
-    <p>The most common suggestion for this problem is an app that adds more volume steps: a hundred clicks instead of fifteen. That helps with smoother transitions between existing levels, but it doesn't extend the range below the current minimum. For headphones sensitive enough that step 1 of 15 is already too loud, step 1 of 100 covering the exact same range lands at essentially the same loudness. More resolution within an unchanged range isn't a lower floor.</p>
+    <p>The most common suggestion for this problem is an app that adds more volume steps: a hundred clicks instead of fifteen. That does two things: it smooths the transitions, and it lowers the first step a little, because Android places each step on a fixed attenuation curve according to its position in the range. On one configuration we measured, going from 15 steps to 100 bought about 5 dB. Then it stops, because the curve has a fixed bottom that no step count passes. On drivers sensitive enough that the stock first step is already too loud, a few dB often is not the gap you need to close.</p>
 
     <h2>What actually changes the floor</h2>
     <p>An attenuation effect applied through Android's own audio framework, rather than a remapped step count, genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>

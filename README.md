@@ -42,7 +42,7 @@ So: sensitive IEMs, bone-conduction headphones, tablet speakers (which often hav
 
 ## What Granular Volume does
 
-Granular Volume adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range (which is what most step-count apps actually do; they subdivide the same floor into finer clicks, which doesn't make the floor itself any quieter), but genuine additional headroom underneath it.
+Granular Volume adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range. Step-count apps do lower the first step somewhat, because Android places each step on a fixed attenuation curve by its position in the range, but that curve has a fixed bottom they cannot pass. Granular Volume adds genuine headroom underneath it instead.
 
 It's a small floating dial that sits over any app:
 
@@ -96,7 +96,7 @@ Most apps in this space solve the opposite problem, or a different problem that 
 | Setup | One dial, drag it, done | Frequently an equalizer, presets, or an account |
 | Cost model | Free, open source, no ads, no tracking | Often paid, ad-supported, or both |
 
-The distinction matters because "more steps" and "a lower floor" are not the same fix. An app that adds 30 finer clicks between mute and your phone's existing step 1 still bottoms out at exactly the same loudness step 1 always had. It just takes more taps to get there. Only attenuation applied *underneath* that floor actually changes the quietest sound the device can produce.
+The distinction matters because "more steps" and "a lower floor" are not the same fix, though they overlap more than is usually admitted. A longer step scale does put its first step lower on Android's attenuation curve: on one Android 16 configuration measured in August 2026, going from 15 steps to 100 was worth about 5 dB. What it cannot do is pass the bottom of that curve, which is fixed regardless of step count, and past roughly 100 steps the extra ones sit at mute rather than adding anything. Only attenuation applied *underneath* that floor actually changes the quietest sound the device can produce.
 
 ## Known limitations
 

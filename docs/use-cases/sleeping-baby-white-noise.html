@@ -132,7 +132,7 @@
 
     <h2>Why turning the volume all the way down still isn't quiet enough</h2>
     <p>It's tempting to assume any remaining loudness at the lowest step is a hardware limitation that can't be worked around. It isn't. It's a software limitation, specifically the fact that stock Android has no control for anything quieter than step 1. The fix has to live outside the volume slider itself, applying attenuation <em>underneath</em> the existing floor rather than trying to subdivide it further.</p>
-    <p>Apps that add "more precise" volume steps (100 clicks instead of 15, for example) don't help here, even though they're the most commonly recommended fix online. More clicks between mute and the same step 1 still bottom out at exactly the same loudness step 1 always had.</p>
+    <p>Apps that add "more precise" volume steps (100 clicks instead of 15, for example) help a few dB and then stop, because Android's attenuation curve has a fixed bottom that no step count passes. More clicks between mute and the same step 1 still bottom out at exactly the same loudness step 1 always had.</p>
 
     <h2>What actually works for this specific case</h2>
     <p>An attenuation app that applies negative gain through Android's own audio effect framework, rather than remapping the existing volume steps, genuinely produces output quieter than the hardware floor. That's the entire mechanism behind Granular Volume: a small floating dial that sits over your white noise or lullaby app, with steps that go below what the device's own slider can reach.</p>

@@ -46,7 +46,7 @@
     {
       "@type": "Question",
       "name": "¿Sound Assistant baja el suelo de volumen?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No, y es la confusión más habitual. Sound Assistant, dentro de Good Lock de Samsung, permite ajustar el volumen en pasos del 1 por ciento. Eso divide el rango existente con más finura, pero no lo extiende hacia abajo. El punto audible más bajo sigue siendo exactamente el mismo, solo que necesitas más toques para llegar. Si tu problema son los saltos bruscos, es la solución correcta. Si el problema es el suelo, no lo es."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Un poco, y luego deja de bajar. Sound Assistant, dentro de Good Lock de Samsung, permite ajustar el volumen en pasos del 1 por ciento, y ese primer paso sí queda más bajo que el primero de diez, porque Android sitúa cada paso en una curva de atenuación fija según su posición en el rango: unos 5 dB en una configuración de Android 16 que medimos en agosto de 2026. Esa curva tiene un fondo fijo que ningún número de pasos rebasa. Si tu problema son los saltos bruscos, es la solución correcta. Si el problema es el suelo, no lo es."}
     },
     {
       "@type": "Question",
@@ -171,7 +171,7 @@
 
   <div class="quickfix">
     <div class="kicker">La respuesta corta</div>
-    <p>Casi todos los consejos que encontrarás hacen los pasos <strong>más finos</strong>, no el suelo <strong>más bajo</strong>. Son dos problemas distintos. Si el paso 1 ya te resulta alto, dividirlo más no ayuda: el punto audible más bajo sigue siendo el mismo. Lo que sí ayuda es aplicar ganancia negativa por debajo de los pasos.</p>
+    <p>Casi todos los consejos que encontrarás hacen los pasos <strong>más finos</strong>, no el suelo <strong>más bajo</strong>. Son dos problemas distintos. Dividirlo más baja el punto audible más bajo solo unos pocos decibelios y luego choca con un suelo fijo. Lo que sí ayuda es aplicar ganancia negativa por debajo de los pasos.</p>
     <div class="cta">
       <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Gratis en Play Store</a>
       <a class="btn btn-ghost" href="#metodos">Ver todos los métodos</a>
@@ -211,7 +211,7 @@
     <div class="fixcard">
       <h3>Más pasos de volumen, por ejemplo con Sound Assistant de Good Lock <span class="verdict v-partial">Parcial</span></h3>
       <p>En dispositivos Samsung, Sound Assistant permite ajustar el volumen en pasos del 1 por ciento. Es justo lo que más se recomienda en foros y artículos en español, y para la pregunta correcta es también la respuesta correcta.</p>
-      <p>Pero más pasos dividen el mismo rango con más finura, no lo extienden hacia abajo. Si el paso 1 te resulta alto, el 1 por ciento te resultará igual de alto. Solo necesitarás más toques para llegar al mismo punto.</p>
+      <p>Pero más pasos bajan el suelo solo hasta cierto punto. Android sitúa cada paso en una curva de atenuación fija según su posición dentro del rango, así que el primer paso de 100 sí queda más bajo que el primero de 15: unos 5 dB en una configuración de Android 16 que medimos en agosto de 2026. A partir de ahí se acaba, porque esa curva tiene un fondo fijo que ningún número de pasos rebasa. Si ese fondo sigue siendo demasiado alto para ti, dividir más no te servirá.</p>
     </div>
 
     <div class="fixcard">
@@ -273,7 +273,7 @@
       <dd>Porque es una fracción fija del volumen máximo, no un volumen absoluto. En un dispositivo con un máximo potente, el primer paso por encima del silencio también suena fuerte. En los ajustes de Android no hay forma de cambiarlo.</dd>
 
       <dt>¿Sound Assistant baja el suelo de volumen?</dt>
-      <dd>No. Divide el rango existente en pasos del 1 por ciento, pero no lo extiende hacia abajo. Para saltos bruscos es la solución correcta, para un suelo demasiado alto no.</dd>
+      <dd>Un poco, y luego deja de bajar. El primer paso de 100 queda más bajo que el primero de diez, unos 5 dB en la configuración que medimos. Más allá no llega, porque la curva de atenuación de Android tiene un fondo fijo. Si ese fondo ya te resulta alto, no te ayudará.</dd>
 
       <dt>¿Sirve desactivar Dolby Atmos o el ecualizador?</dt>
       <dd>A veces un poco, porque esos efectos añaden ganancia. No es fiable, y en muchos dispositivos no cambia nada.</dd>
