@@ -44,7 +44,7 @@
     {
       "@type": "Question",
       "name": "Does the attenuation introduce distortion or hiss at very low levels?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't add artifacts the way pushing an amplifier below its usable range sometimes does. It's the same signal, just turned down further than the device's own hardware step normally allows."}
+      "acceptedAnswer": {"@type": "Answer", "text": "It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline attenuator on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step."}
     }
   ]
 }
@@ -159,7 +159,7 @@
       <dd>Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the attenuation applies before the signal is sent to the Bluetooth stack.</dd>
 
       <dt>Does the attenuation introduce distortion or hiss at very low levels?</dt>
-      <dd>No. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't add artifacts the way pushing an amplifier below its usable range sometimes does. It's the same signal, just turned down further than the device's own hardware step normally allows.</dd>
+      <dd>It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline attenuator on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step.</dd>
     </dl>
   </article>
 
