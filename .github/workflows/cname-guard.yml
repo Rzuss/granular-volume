@@ -2,7 +2,21 @@ name: CNAME guard
 
 # The custom domain lives in docs/CNAME. If that file is deleted or its contents
 # change, GitHub Pages silently unsets the custom domain and the site starts
-# returning 404 with no error reported anywhere. This job fails loudly instead.
+# returning 404 with no error reported anywhere. This workflow fails loudly.
+#
+# Two jobs on purpose, because they answer different questions and have very
+# different reliability:
+#
+#   file  - a pure repository check. Deterministic, instant, no network. Runs on
+#           every push and pull request, because that is exactly when the file
+#           can be removed by accident.
+#
+#   live  - HTTP checks against the deployed site. Deliberately does NOT run on
+#           push. A push triggers a Pages deployment that takes tens of seconds,
+#           so a live check racing that deployment reports a failure that is not
+#           real. That happened on the first run: the guard checked at 06:02:14Z
+#           and Pages finished at 06:02:44Z. A guard that cries wolf gets ignored,
+#           which defeats the point of having one.
 
 on:
   push:
@@ -13,7 +27,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  cname:
+  file:
+    name: docs/CNAME is intact
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,24 +46,59 @@ jobs:
             echo "::error::docs/CNAME contains '$ACTUAL', expected '$EXPECTED'."
             exit 1
           fi
-          echo "docs/CNAME OK: $ACTUAL"
-
-      - name: The live site must answer on the custom domain
-        run: |
-          set -euo pipefail
-          CODE="$(curl -s -o /dev/null -w '%{http_code}' -L https://granularvolume.com/)"
-          echo "https://granularvolume.com/ -> $CODE"
-          if [ "$CODE" != "200" ]; then
-            echo "::error::granularvolume.com returned $CODE, expected 200."
+          if [ -n "$(tr -d '\n' < docs/CNAME | tr -d '[:print:]')" ]; then
+            echo "::error::docs/CNAME contains non-printable characters. A stray carriage return breaks Pages."
             exit 1
           fi
+          echo "docs/CNAME OK: $ACTUAL"
 
-      - name: Old GitHub Pages URLs must still redirect
+  live:
+    name: the deployed site answers on the custom domain
+    # Never on push. See the note at the top of this file.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Custom domain serves 200, with retries
         run: |
           set -euo pipefail
-          LOC="$(curl -s -o /dev/null -w '%{redirect_url}' https://rzuss.github.io/granular-volume/)"
+          for i in 1 2 3 4 5; do
+            CODE="$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 https://granularvolume.com/ || echo 000)"
+            echo "attempt $i: https://granularvolume.com/ -> $CODE"
+            [ "$CODE" = "200" ] && exit 0
+            sleep 15
+          done
+          echo "::error::granularvolume.com did not return 200 after 5 attempts."
+          exit 1
+
+      - name: HTTPS is enforced
+        run: |
+          set -euo pipefail
+          CODE="$(curl -s -o /dev/null -w '%{http_code}' http://granularvolume.com/ || echo 000)"
+          if [ "$CODE" != "301" ]; then
+            echo "::warning::http://granularvolume.com/ returned $CODE, expected a 301 to https. Check Enforce HTTPS in Pages settings."
+          else
+            echo "HTTPS enforced"
+          fi
+
+      - name: Old GitHub Pages URLs still redirect
+        run: |
+          set -euo pipefail
+          LOC="$(curl -s -o /dev/null -w '%{redirect_url}' https://rzuss.github.io/granular-volume/ || true)"
           echo "old URL redirects to: $LOC"
           case "$LOC" in
             *granularvolume.com*) echo "redirect OK" ;;
-            *) echo "::warning::old GitHub Pages URL did not redirect to the custom domain. Every previously published link depends on this." ;;
+            *) echo "::error::the old GitHub Pages URL no longer redirects to the custom domain. Every previously published link depends on this."; exit 1 ;;
           esac
+
+      - name: The flagship page is reachable
+        run: |
+          set -euo pipefail
+          URL="https://granularvolume.com/guide/lower-android-volume-below-minimum.html"
+          for i in 1 2 3; do
+            CODE="$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 "$URL" || echo 000)"
+            echo "attempt $i: $URL -> $CODE"
+            [ "$CODE" = "200" ] && exit 0
+            sleep 10
+          done
+          echo "::error::the flagship guide page did not return 200."
+          exit 1
