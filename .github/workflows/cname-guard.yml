@@ -1,0 +1,54 @@
+name: CNAME guard
+
+# The custom domain lives in docs/CNAME. If that file is deleted or its contents
+# change, GitHub Pages silently unsets the custom domain and the site starts
+# returning 404 with no error reported anywhere. This job fails loudly instead.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  cname:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: docs/CNAME must exist and contain exactly the custom domain
+        run: |
+          set -euo pipefail
+          EXPECTED="granularvolume.com"
+          if [ ! -f docs/CNAME ]; then
+            echo "::error::docs/CNAME is missing. GitHub Pages will drop the custom domain and the site will 404."
+            exit 1
+          fi
+          ACTUAL="$(tr -d '\r\n' < docs/CNAME)"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "::error::docs/CNAME contains '$ACTUAL', expected '$EXPECTED'."
+            exit 1
+          fi
+          echo "docs/CNAME OK: $ACTUAL"
+
+      - name: The live site must answer on the custom domain
+        run: |
+          set -euo pipefail
+          CODE="$(curl -s -o /dev/null -w '%{http_code}' -L https://granularvolume.com/)"
+          echo "https://granularvolume.com/ -> $CODE"
+          if [ "$CODE" != "200" ]; then
+            echo "::error::granularvolume.com returned $CODE, expected 200."
+            exit 1
+          fi
+
+      - name: Old GitHub Pages URLs must still redirect
+        run: |
+          set -euo pipefail
+          LOC="$(curl -s -o /dev/null -w '%{redirect_url}' https://rzuss.github.io/granular-volume/)"
+          echo "old URL redirects to: $LOC"
+          case "$LOC" in
+            *granularvolume.com*) echo "redirect OK" ;;
+            *) echo "::warning::old GitHub Pages URL did not redirect to the custom domain. Every previously published link depends on this." ;;
+          esac
