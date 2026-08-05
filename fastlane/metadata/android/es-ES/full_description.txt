@@ -1,0 +1,23 @@
+¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en medios, llamadas o notificaciones? Tu móvil o tablet se detiene en el mínimo del hardware. Granular Volume baja por debajo.
+
+Un pequeño control flotante aparece sobre cualquier aplicación. Siete pasos, desde sin cambio hasta 30 dB por debajo del mínimo de tu hardware. Un toque para cambiar. Arrástralo donde quieras, pégalo a un borde, ciérralo con un toque. La posición se guarda.
+
+Es una utilidad de comodidad, no un equipo de protección auditiva. El volumen real depende de tu dispositivo y auriculares; usa el sentido común.
+
+MÁS BAJO DE LO QUE TU DISPOSITIVO PERMITE
+La mayoría de las apps de volumen están hechas para subir. Granular Volume está hecha para el otro extremo: reduce el volumen por debajo del paso más bajo que permite el hardware, usando el propio motor de audio de Android, en móviles y tablets. Sin root. No toma los botones de volumen ni sustituye el panel del sistema. Sin anuncios, sin cuenta, sin permiso de internet en absoluto.
+
+TAMBIÉN PARA TABLETS
+Las tablets suelen tener un mínimo aún más alto que los móviles, sobre todo por sus altavoces. Granular Volume funciona igual en tablets que en móviles.
+
+MOSAICO DE AJUSTES RÁPIDOS
+Desliza hacia abajo, un toque: activa o desactiva el control sin abrir la app.
+
+PARA MOMENTOS DE SILENCIO
+- Llamadas (teléfono, WhatsApp, videollamadas) donde el auricular o el altavoz siguen demasiado altos
+- Auriculares in-ear sensibles, donde incluso el paso 1 es demasiado
+- Ruido blanco o nanas para un bebé dormido, apenas audible
+- Escuchar de noche junto a alguien que duerme
+- Bibliotecas, salas silenciosas, meditación
+
+Libre y de código abierto (GPL-3.0), 2,7 MB, sin anuncios, sin rastreo, sin permiso de internet.

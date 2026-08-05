@@ -1,0 +1,23 @@
+Ist die niedrigste Lautstärkestufe auf Ihrem Android-Gerät immer noch zu laut, bei Medien, Anrufen oder Benachrichtigungen? Ihr Handy oder Tablet stoppt am Hardware-Minimum. Granular Volume geht darunter.
+
+Ein kleiner schwebender Lautstärkeregler erscheint über jeder App. Sieben Stufen, von unverändert bis 30 dB unter Ihrem Hardware-Minimum. Ein Tipp zum Wechseln. Frei verschiebbar, an den Rand anlegbar, mit einem Tipp geschlossen. Die Position wird gespeichert.
+
+Dies ist ein Komfort-Werkzeug, kein Gehörschutz. Die tatsächliche Lautstärke hängt von Gerät und Kopfhörern ab, bitte mit Bedacht verwenden.
+
+LEISER ALS IHR GERÄT ERLAUBT
+Die meisten Lautstärke-Apps machen lauter. Granular Volume ist für das andere Ende gebaut: Es senkt die Lautstärke unter die niedrigste Stufe, die die Hardware erlaubt, über Androids eigene Audio-Engine, auf Handys und Tablets. Ohne Root. Keine Übernahme der Lautstärketasten, kein Ersatz des System-Panels. Keine Werbung, kein Konto, überhaupt keine Internet-Berechtigung.
+
+AUCH FÜR TABLETS
+Tablets haben oft ein noch höheres Minimum als Handys, besonders über die eingebauten Lautsprecher. Granular Volume funktioniert auf Tablets genauso wie auf Handys.
+
+SCHNELLEINSTELLUNGS-KACHEL
+Herunterwischen, einmal tippen: Overlay ein- oder ausschalten, ohne die App zu öffnen.
+
+FÜR LEISE MOMENTE GEMACHT
+- Anrufe (Telefon, WhatsApp, Videoanrufe), bei denen Hörer oder Lautsprecher zu laut bleiben
+- Empfindliche In-Ear-Kopfhörer, bei denen schon Stufe 1 zu laut ist
+- Weißes Rauschen oder Schlaflieder für ein schlafendes Baby, kaum hörbar
+- Hören spät in der Nacht neben einem schlafenden Partner
+- Bibliotheken, ruhige Räume, Meditation
+
+Frei und quelloffen (GPL-3.0), 2,7 MB, keine Werbung, kein Tracking, keine Internet-Berechtigung.
