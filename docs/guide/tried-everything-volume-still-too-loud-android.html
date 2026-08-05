@@ -195,7 +195,7 @@
 
     <h2 id="fix">The one mechanism that actually lowers the floor</h2>
     <div class="fixcard">
-      <h3>Attenuation below the system's own minimum <span class="verdict v-works">Actually works</span></h3>
+      <h3>A volume cut below the system's own minimum <span class="verdict v-works">Actually works</span></h3>
       <p>Every option above operates inside the volume range Android already exposes: it caps the top, reshapes the tone, adds steps between the existing bounds, or smooths out inconsistency. None of them touch the floor itself.</p>
       <p><a href="../index.html">Granular Volume</a> takes a different approach: it attaches an audio effect (Android's own DynamicsProcessing, or LoudnessEnhancer as a fallback) directly to the system's global output mix, and applies negative gain <em>after</em> the system has already applied its own minimum. That's the part that matters. It isn't rearranging the existing steps, it's adding new ones underneath all of them, in a small floating dial, all the way down to 30 dB below the hardware floor.</p>
       <p>One honest note: this is a flat volume reduction, not a tone fix. If harshness or sharpness is part of what bothers you, that's a separate problem an equalizer is better positioned to help with. But if the core issue is "the quietest the phone can go is still too loud," this is the one mechanism on this list built specifically to answer that.</p>

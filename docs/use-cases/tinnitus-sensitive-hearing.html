@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://granularvolume.com/use-cases/tinnitus-sensitive-hearing.html">
 <meta property="og:title" content="Lowest Volume Too Loud for Sensitive Ears? A Quieter Android Floor">
-<meta property="og:description" content="When even the lowest volume step is too loud for sensitive hearing, an attenuation dial adds real steps below Android's minimum. A comfort utility, not a medical device.">
+<meta property="og:description" content="When even the lowest volume step is too loud for sensitive hearing, an dial adds real steps below Android's minimum. A comfort utility, not a medical device.">
 <meta property="og:image" content="../img/feature.png">
 <meta property="og:type" content="article">
 <link rel="icon" href="../img/icon.png">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Lowest Volume Too Loud for Sensitive Ears? A Quieter Android Floor",
-  "description": "When even the lowest volume step is too loud for sensitive hearing, a floating attenuation dial adds real steps below Android's minimum. A comfort utility, not a medical device.",
+  "description": "When even the lowest volume step is too loud for sensitive hearing, a floating dial adds real steps below Android's minimum. A comfort utility, not a medical device.",
   "image": "https://granularvolume.com/img/feature.png",
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://granularvolume.com/img/icon.png"}},
@@ -36,7 +36,7 @@
     {"@type":"Question","name":"How does it get quieter than the minimum setting?","acceptedAnswer":{"@type":"Answer","text":"It applies negative gain to Android's media output using the DynamicsProcessing audio-effect framework, which produces output below the lowest hardware step. It only reduces level; it never boosts past the device maximum."}},
     {"@type":"Question","name":"Does it add hiss or change the sound?","acceptedAnswer":{"@type":"Answer","text":"It does not add hiss of its own. It is a clean gain-reduction stage, not an equalizer, compressor, or limiter, so it does not reshape the signal. It cannot remove a hiss that your headphones or amplifier already produce, though, because it turns the audio down in software before the signal reaches them, which can leave that background noise relatively easier to hear once the music itself is quiet."}},
     {"@type":"Question","name":"Can I use it for quiet masking sounds at night?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many people use it to keep white noise, rain sounds, or soft audio barely audible through earbuds or a speaker when the lowest normal step is too loud to relax to. You choose the level; use your own judgment on what is comfortable."}},
-    {"@type":"Question","name":"Does it work with sensitive IEMs and low-impedance headphones?","acceptedAnswer":{"@type":"Answer","text":"Yes. Sensitive IEMs are exactly the case where the first step is often already too loud. Because the attenuation is applied to the output, it works with any headphones, wired or wireless."}},
+    {"@type":"Question","name":"Does it work with sensitive IEMs and low-impedance headphones?","acceptedAnswer":{"@type":"Answer","text":"Yes. Sensitive IEMs are exactly the case where the first step is often already too loud. Because the reduction is applied to the output, it works with any headphones, wired or wireless."}},
     {"@type":"Question","name":"Is it free, private, and open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all, so it cannot send data anywhere. It is open source under GPL-3.0."}}
   ]
 }
@@ -142,10 +142,10 @@
     <p>Android divides the range between silence and full output into a fixed number of steps. The lowest step above mute is a fixed fraction of the maximum, not a fixed loudness. Phones and tablets are tuned for a loud maximum, so that first fraction can be well above what sensitive ears want, and it is worse through in-ear headphones that sit directly in the ear canal. Stock Android has no setting to place a level below that step. That gap is the entire problem.</p>
 
     <h2>What doesn't solve it</h2>
-    <p>Apps that add more volume steps, like Sound Assistant's 1% increments or custom step-count apps, lower the first step a little and then stop. A finer first step does sit lower on Android's attenuation curve, by a few dB, but the curve has a fixed bottom that no step count passes. Lowering the equalizer or disabling audio enhancements helps a little on some devices as a side effect, but not reliably. None of these place a level below the floor.</p>
+    <p>Apps that add more volume steps, like Sound Assistant's 1% increments or custom step-count apps, lower the first step a little and then stop. A finer first step does sit lower on Android's loudness curve, by a few dB, but the curve has a fixed bottom that no step count passes. Lowering the equalizer or disabling audio enhancements helps a little on some devices as a side effect, but not reliably. None of these place a level below the floor.</p>
 
-    <h2>What does: attenuation below the floor</h2>
-    <p>The one method that genuinely gets quieter applies negative gain to Android's media output through its own DynamicsProcessing framework. Because it attenuates the audio itself rather than working inside the existing steps, it produces output below the hardware minimum. It only reduces level and never boosts, so there is no distortion or added loudness in that direction. It works with any headphones, wired or wireless, and on phones and tablets alike.</p>
+    <h2>What does: going below the floor itself</h2>
+    <p>The one method that genuinely gets quieter applies negative gain to Android's media output through its own DynamicsProcessing framework. Because it lowers the audio itself rather than working inside the existing steps, it produces output below the hardware minimum. It only reduces level and never boosts, so there is no distortion or added loudness in that direction. It works with any headphones, wired or wireless, and on phones and tablets alike.</p>
     <p><a href="../index.html">Granular Volume</a> works this way: a small floating dial with seven steps, from no change down to 30&nbsp;dB below your hardware minimum. You pick the level that is comfortable for you, keep a masking sound barely there, or turn media down further than the slider allows, without touching your volume buttons or the system panel.</p>
 
     <div class="callout">
@@ -170,7 +170,7 @@
       <dt>Can I use it for quiet masking sounds at night?</dt>
       <dd>Yes. Many people keep white noise or soft audio barely audible when the lowest normal step is too loud. You choose the level; use your own judgment on what is comfortable.</dd>
       <dt>Does it work with sensitive IEMs and low-impedance headphones?</dt>
-      <dd>Yes. Those are exactly the case where the first step is often already too loud. The attenuation is applied to the output, so it works with any headphones.</dd>
+      <dd>Yes. Those are exactly the case where the first step is often already too loud. The reduction is applied to the output, so it works with any headphones.</dd>
       <dt>Is it free, private, and open source?</dt>
       <dd>Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all. Open source under GPL-3.0.</dd>
     </dl>

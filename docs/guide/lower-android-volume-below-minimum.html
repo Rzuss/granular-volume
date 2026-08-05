@@ -48,12 +48,12 @@
     {
       "@type": "Question",
       "name": "Do custom step-count apps or Sound Assistant lower the volume floor?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A little, and then they stop. Android maps each volume step onto a fixed attenuation curve by its position in the range, so the first step of 100 does sit lower than the first step of 15. Measured on one Android 16 configuration in August 2026, that was worth about 5 dB. But the curve has a fixed bottom that no step count goes past, so once you reach it, extra steps add nothing at all. If that bottom is still louder than you need, more steps cannot get you there. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
+      "acceptedAnswer": {"@type": "Answer", "text": "A little, and then they stop. Android maps each volume step onto a fixed loudness curve by its position in the range, so the first step of 100 does sit lower than the first step of 15. Measured on one Android 16 configuration in August 2026, that was worth about 5 dB. But the curve has a fixed bottom that no step count goes past, so once you reach it, extra steps add nothing at all. If that bottom is still louder than you need, more steps cannot get you there. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
     },
     {
       "@type": "Question",
       "name": "Is there a way to do this without root?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Apps that apply negative gain through Android's own audio effect framework (DynamicsProcessing or LoudnessEnhancer) can attenuate output below the hardware minimum without root, without modifying system files, and without ADB. Granular Volume works this way."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Apps that apply negative gain through Android's own audio effect framework (DynamicsProcessing or LoudnessEnhancer) can lower output below the hardware minimum without root, without modifying system files, and without ADB. Granular Volume works this way."}
     },
     {
       "@type": "Question",
@@ -62,7 +62,7 @@
     },
     {
       "@type": "Question",
-      "name": "Does an attenuation app like this drain the battery?",
+      "name": "Does an app like this drain the battery?",
       "acceptedAnswer": {"@type": "Answer", "text": "Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio."}
     },
     {
@@ -88,7 +88,7 @@
     {
       "@type": "Question",
       "name": "Can pushing negative gain like this damage my speaker or headphones?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume."}
+      "acceptedAnswer": {"@type": "Answer", "text": "No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume."}
     },
     {
       "@type": "Question",
@@ -97,8 +97,8 @@
     },
     {
       "@type": "Question",
-      "name": "Will attenuating the output this way add hiss, distortion, or reduce audio quality?",
-      "acceptedAnswer": {"@type": "Answer", "text": "It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline attenuator on the cable is what addresses that."}
+      "name": "Will lowering the output this way add hiss, distortion, or reduce audio quality?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline volume control on the cable is what addresses that."}
     },
     {
       "@type": "Question",
@@ -123,7 +123,7 @@
     {
       "@type": "Question",
       "name": "Why isn't sub-minimum volume just built into Android already?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an attenuation app like this fills in, rather than something Android exposes natively."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an app like this fills in, rather than something Android exposes natively."}
     },
     {
       "@type": "Question",
@@ -153,12 +153,12 @@
     {
       "@type": "Question",
       "name": "Will this work if my phone is in Do Not Disturb or Bedtime mode?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the attenuation."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the volume reduction."}
     },
     {
       "@type": "Question",
-      "name": "Does closing the app or swiping it away from recent apps turn off the attenuation?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the attenuation stays active. It's designed to keep running independent of whether the main app screen is open."}
+      "name": "Does closing the app or swiping it away from recent apps turn off the effect?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the effect stays active. It's designed to keep running independent of whether the main app screen is open."}
     }
   ]
 }
@@ -280,7 +280,7 @@
         <li><a href="#limiters">Volume limiter apps and the 85 dB safety limit</a></li>
         <li><a href="#firmware">Updating firmware</a></li>
         <li><a href="#adb">Editing the audio curve over ADB</a></li>
-        <li><a href="#attenuation">Attenuation apps that actually go below the floor</a></li>
+        <li><a href="#attenuation">Apps that actually go below the floor</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ol>
     </div>
@@ -303,7 +303,7 @@
     <div class="fixcard">
       <h3>Apps that let you set your own step count <span class="verdict v-partial">Steps help a few dB then stop; buried EQ option goes deeper</span></h3>
       <p>Several well-known apps override Android's default 15 to 25 volume steps with a custom count, up to 1000 in some cases. They're often the top suggestion for this exact problem, and they're good at what they do.</p>
-      <p>The step feature uses the same mechanism as the stock slider, and it does buy you something real. Android places each step on a fixed attenuation curve according to its position in the range, so step 1 of 100 sits lower than step 1 of 15. Measured on one Android 16 configuration in August 2026, the gain from that was about 5 dB.</p>
+      <p>The step feature uses the same mechanism as the stock slider, and it does buy you something real. Android places each step on a fixed loudness curve according to its position in the range, so step 1 of 100 sits lower than step 1 of 15. Measured on one Android 16 configuration in August 2026, the gain from that was about 5 dB.</p>
       <p>Then it stops dead. The curve has a fixed bottom, and no step count reaches past it. Beyond roughly 100 steps the extra ones are not merely useless: on that same configuration a 1000-step scale left the first nine steps silent, with the tenth landing on exactly the level 100 steps already gave. So more steps is a real but small and hard-capped win, and if the bottom of the curve is still too loud for you, no number of steps will fix it.</p>
       <p>To be fair and precise: some apps in this category also carry a separate post-gain slider inside their graphic equalizer that genuinely reduces overall output. We measured the deepest one we could find in July 2026, and its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and that floor is roughly half the additional headroom a dedicated tool provides (Granular Volume reaches -30 dB, one tap from the dial).</p>
     </div>
@@ -326,7 +326,7 @@
     <div class="fixcard">
       <h3>Media volume limiters, Safe Listening, the 85 dB cap <span class="verdict v-doesnt">Caps the top, not the bottom</span></h3>
       <p>This is the single most common thing people try, and the reason it disappoints is worth stating clearly: a limiter sets a <em>ceiling</em>. It stops the volume going above a point you choose. If your complaint is that the quietest available level is already too loud, lowering the ceiling does nothing at all to the floor, because you were never near the ceiling to begin with.</p>
-      <p>Most apps sold as volume limiters work by capping the system volume index rather than by attenuating the output, which is why people report installing one, setting it to its strictest setting, and hearing no difference whatsoever at the bottom of the range.</p>
+      <p>Most apps sold as volume limiters work by capping the system volume index rather than by lowering the output itself, which is why people report installing one, setting it to its strictest setting, and hearing no difference whatsoever at the bottom of the range.</p>
     </div>
 
     <div class="fixcard">
@@ -348,11 +348,11 @@
       <p>On a computer with USB debugging enabled, it's possible to modify the device's audio volume curve files directly through ADB to change how loud each step is, without root. This genuinely works and doesn't require root access, but it requires comfort with a command line, a computer, and is easy to get wrong. It's also undone by a factory reset or sometimes a system update.</p>
     </div>
 
-    <h2 id="attenuation">9. Attenuation apps: the one method that actually lowers the floor</h2>
+    <h2 id="attenuation">9. Apps that go below the floor: the one method that actually lowers it</h2>
     <div class="fixcard">
       <h3>Apps using DynamicsProcessing or LoudnessEnhancer with negative gain <span class="verdict v-works">Actually works</span></h3>
       <p>A small category of apps takes a fundamentally different approach: instead of remapping the existing volume steps, they apply an audio effect with negative gain on top of the lowest system step, using Android's own audio effect framework (DynamicsProcessing, or LoudnessEnhancer as a fallback on older versions). This genuinely produces output quieter than the hardware minimum allows, because it isn't working within the existing step range at all.</p>
-      <p>This is how <a href="../index.html">Granular Volume</a> works: a small floating dial that sits over any app and adds attenuation steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel, it just adds the missing quiet end of the range.</p>
+      <p>This is how <a href="../index.html">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel, it just adds the missing quiet end of the range.</p>
     </div>
 
     <div class="callout">
@@ -373,15 +373,15 @@
       <dd>Sometimes, partially, and inconsistently. It can reduce output on some devices because those effects add gain, but many devices see no change at all, and it's a side effect of disabling a feature rather than a real minimum-volume control.</dd>
 
       <dt>Do custom step-count apps or Sound Assistant lower the volume floor?</dt>
-      <dd>A little, then they stop. The first step of 100 sits lower on Android's attenuation curve than the first step of 15, worth roughly 5 dB on one configuration we measured in August 2026. But the curve has a fixed bottom that no step count passes, so if that bottom is still too loud, more steps cannot help. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
+      <dd>A little, then they stop. The first step of 100 sits lower on Android's loudness curve than the first step of 15, worth roughly 5 dB on one configuration we measured in August 2026. But the curve has a fixed bottom that no step count passes, so if that bottom is still too loud, more steps cannot help. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
 
       <dt>Is there a way to do this without root?</dt>
-      <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can attenuate output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
+      <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can lower output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
 
       <dt>Does this work for calls, not just media?</dt>
       <dd>Yes. Call audio runs on its own volume scale, separate from media, and this was tested directly: during a live call with no media playing, moving the dial down and back up several times lowered and raised the call volume each time. There is a <a href="call-volume-too-loud-android.html">separate guide for the in-call floor</a> covering why the volume keys stop where they do and why the 85&nbsp;dB limiter does not help.</dd>
 
-      <dt>Does an attenuation app like this drain the battery?</dt>
+      <dt>Does an app like this drain the battery?</dt>
       <dd>Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio.</dd>
 
       <dt>Does it work the same way on tablets as on phones?</dt>
@@ -397,13 +397,13 @@
       <dd>No. It needs a display-over-other-apps permission for the floating dial and standard audio/notification permissions, nothing more invasive. No root, no Accessibility Service, no Device Admin.</dd>
 
       <dt>Can pushing negative gain like this damage my speaker or headphones?</dt>
-      <dd>No. Attenuation only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
+      <dd>No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
       <dd>Media is what it is built around, and <a href="call-volume-too-loud-android.html">call audio is confirmed to be affected</a>, along with ringtones, notifications, and alarms, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains the one category of sound that no app can lower.</dd>
 
-      <dt>Will attenuating the output this way add hiss, distortion, or reduce audio quality?</dt>
-      <dd>It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline attenuator on the cable is what addresses that.</dd>
+      <dt>Will lowering the output this way add hiss, distortion, or reduce audio quality?</dt>
+      <dd>It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline volume control on the cable is what addresses that.</dd>
 
       <dt>Does it conflict with equalizer apps or other volume-control apps installed at the same time?</dt>
       <dd>There are no known conflicts. It layers a gain-reduction effect on top of whatever else is already processing the audio, rather than replacing or overriding another app's effect chain.</dd>
@@ -418,7 +418,7 @@
       <dd>Yes. Granular Volume is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust.</dd>
 
       <dt>Why isn't sub-minimum volume just built into Android already?</dt>
-      <dd>Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an attenuation app like this fills in, rather than something Android exposes natively.</dd>
+      <dd>Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an app like this fills in, rather than something Android exposes natively.</dd>
 
       <dt>Do I need to reopen the app after restarting my phone?</dt>
       <dd>No. The floating dial can be brought back after a reboot from the Quick Settings tile with one tap, without having to find and open the full app first.</dd>
@@ -436,10 +436,10 @@
       <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Granular Volume does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction.</dd>
 
       <dt>Will this work if my phone is in Do Not Disturb or Bedtime mode?</dt>
-      <dd>Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the attenuation.</dd>
+      <dd>Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the volume reduction.</dd>
 
-      <dt>Does closing the app or swiping it away from recent apps turn off the attenuation?</dt>
-      <dd>No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the attenuation stays active. It's designed to keep running independent of whether the main app screen is open.</dd>
+      <dt>Does closing the app or swiping it away from recent apps turn off the effect?</dt>
+      <dd>No, as long as the floating dial itself is still visible or the foreground-service notification is showing, the effect stays active. It's designed to keep running independent of whether the main app screen is open.</dd>
     </dl>
   </article>
 

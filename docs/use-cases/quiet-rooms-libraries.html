@@ -39,12 +39,12 @@
     {
       "@type": "Question",
       "name": "Does it apply to notification and media sounds together, or just media playback?",
-      "acceptedAnswer": {"@type": "Answer", "text": "The attenuation is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app."}
+      "acceptedAnswer": {"@type": "Answer", "text": "The reduction is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app."}
     },
     {
       "@type": "Question",
       "name": "Can I set one quiet level and reuse it every time without resetting it?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same attenuation you left it at, rather than resetting to zero each time."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same level you left it at, rather than resetting to zero each time."}
     }
   ]
 }
@@ -132,10 +132,10 @@
 
     <h2>Why "just turn it all the way down" isn't enough</h2>
     <p>The instinct to turn the volume slider all the way down assumes the lowest setting is quiet enough for any situation. For most quiet shared spaces, it isn't, and the usual fallback of "use headphones" isn't always practical, whether that's a meditation app meant to play softly into a room, or a notification you'd rather hear faintly than miss entirely.</p>
-    <p>Apps that offer more volume steps help a little and then stop. The first step of a longer scale sits lower on Android's attenuation curve than the first step of a short one, worth a few dB. Past that the curve has a fixed bottom, and no number of steps goes below it. If the quietest available level is still audible across the room, that is the wall you have hit.</p>
+    <p>Apps that offer more volume steps help a little and then stop. The first step of a longer scale sits lower on Android's loudness curve than the first step of a short one, worth a few dB. Past that the curve has a fixed bottom, and no number of steps goes below it. If the quietest available level is still audible across the room, that is the wall you have hit.</p>
 
     <h2>What actually gets you there</h2>
-    <p>An attenuation effect applied underneath the existing volume range, rather than more steps within it, is what changes the actual floor. Granular Volume applies this as a small floating dial over whatever app is playing sound, with real steps below what the phone's own slider can reach.</p>
+    <p>A volume reduction applied underneath the existing volume range, rather than more steps within it, is what changes the actual floor. Granular Volume applies this as a small floating dial over whatever app is playing sound, with real steps below what the phone's own slider can reach.</p>
     <ul>
       <li>Set a level once and it's remembered: reopening the dial from the Quick Settings tile brings back the same quiet setting, not a reset to zero.</li>
       <li>Tucked into a corner, the dial turns semi-transparent and doesn't draw attention on screen.</li>
@@ -157,10 +157,10 @@
       <dd>The dial is small and, once tucked into a corner of the screen, turns semi-transparent, so it reads as a minor UI element rather than anything conspicuous. There's no sound, animation, or notification beyond the standard foreground-service icon in the status bar.</dd>
 
       <dt>Does it apply to notification and media sounds together, or just media playback?</dt>
-      <dd>The attenuation is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app.</dd>
+      <dd>The reduction is applied to the device's global output mix rather than to one specific app's stream, so it affects whatever is currently playing through that mix, not a single allow-listed app.</dd>
 
       <dt>Can I set one quiet level and reuse it every time without resetting it?</dt>
-      <dd>Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same attenuation you left it at, rather than resetting to zero each time.</dd>
+      <dd>Yes. The level you set is remembered, so reopening the dial from the Quick Settings tile brings back the same level you left it at, rather than resetting to zero each time.</dd>
     </dl>
   </article>
 

@@ -34,17 +34,17 @@
     {
       "@type": "Question",
       "name": "Does this work with wired IEMs through a USB-C or 3.5mm DAC?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The attenuation is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The reduction is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output."}
     },
     {
       "@type": "Question",
       "name": "Does it work with Bluetooth IEMs and TWS earbuds?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the attenuation applies before the signal is sent to the Bluetooth stack."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the reduction applies before the signal is sent to the Bluetooth stack."}
     },
     {
       "@type": "Question",
-      "name": "Does the attenuation introduce distortion or hiss at very low levels?",
-      "acceptedAnswer": {"@type": "Answer", "text": "It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline attenuator on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step."}
+      "name": "Does going that low introduce distortion or hiss at very low levels?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline volume control on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step."}
     }
   ]
 }
@@ -123,7 +123,7 @@
 
     <div class="quickfix">
       <div class="kicker">The actual fix</div>
-      <p><strong>Granular Volume</strong> adds real attenuation steps below the hardware minimum, applied cleanly to the output before it reaches your headphones, wired or Bluetooth, IEMs or bone conduction, it doesn't matter which.</p>
+      <p><strong>Granular Volume</strong> adds real volume steps below the hardware minimum, applied cleanly to the output before it reaches your headphones, wired or Bluetooth, IEMs or bone conduction, it doesn't matter which.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
@@ -131,12 +131,12 @@
     </div>
 
     <h2>Why "more precise" volume apps don't solve this</h2>
-    <p>The most common suggestion for this problem is an app that adds more volume steps: a hundred clicks instead of fifteen. That does two things: it smooths the transitions, and it lowers the first step a little, because Android places each step on a fixed attenuation curve according to its position in the range. On one configuration we measured, going from 15 steps to 100 bought about 5 dB. Then it stops, because the curve has a fixed bottom that no step count passes. On drivers sensitive enough that the stock first step is already too loud, a few dB often is not the gap you need to close.</p>
+    <p>The most common suggestion for this problem is an app that adds more volume steps: a hundred clicks instead of fifteen. That does two things: it smooths the transitions, and it lowers the first step a little, because Android places each step on a fixed loudness curve according to its position in the range. On one configuration we measured, going from 15 steps to 100 bought about 5 dB. Then it stops, because the curve has a fixed bottom that no step count passes. On drivers sensitive enough that the stock first step is already too loud, a few dB often is not the gap you need to close.</p>
 
     <h2>What actually changes the floor</h2>
-    <p>An attenuation effect applied through Android's own audio framework, rather than a remapped step count, genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>
+    <p>A volume reduction applied through Android's own audio framework, rather than a remapped step count, genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>
     <ul>
-      <li>Works identically for wired IEMs, USB-C DACs, and Bluetooth output, since the attenuation is applied before the signal reaches whichever output path is active.</li>
+      <li>Works identically for wired IEMs, USB-C DACs, and Bluetooth output, since the reduction is applied before the signal reaches whichever output path is active.</li>
       <li>Doesn't touch your physical volume buttons. You still control the "normal" range exactly as before, this just adds headroom underneath it.</li>
       <li>No equalizer curve, no compression, so it doesn't change the tonal balance you're used to, only the overall level.</li>
     </ul>
@@ -153,13 +153,13 @@
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
       <dt>Does this work with wired IEMs through a USB-C or 3.5mm DAC?</dt>
-      <dd>Yes. The attenuation is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output.</dd>
+      <dd>Yes. The reduction is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output.</dd>
 
       <dt>Does it work with Bluetooth IEMs and TWS earbuds?</dt>
-      <dd>Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the attenuation applies before the signal is sent to the Bluetooth stack.</dd>
+      <dd>Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the reduction applies before the signal is sent to the Bluetooth stack.</dd>
 
-      <dt>Does the attenuation introduce distortion or hiss at very low levels?</dt>
-      <dd>It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline attenuator on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step.</dd>
+      <dt>Does going that low introduce distortion or hiss at very low levels?</dt>
+      <dd>It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline volume control on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step.</dd>
     </dl>
   </article>
 
