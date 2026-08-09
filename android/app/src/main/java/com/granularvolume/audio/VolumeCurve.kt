@@ -57,6 +57,20 @@ class VolumeCurve private constructor(
             out.add(Rung(idx, target - relDb[idx], target))
             target -= RUNG_DB
         }
+
+        // SEAM FIX (2026-08-09): anchor the last rung EXACTLY on the device floor.
+        // Without this the ladder stops at the last 5 dB multiple above the floor, so crossing
+        // the line jumps by (floor - lastRung) — anywhere from 0 to 5 dB — at precisely the one
+        // place the product promises continuity. Measured on the API 36 emulator: last rung -50,
+        // floor -53.26, a 3.26 dB step at the seam.
+        // The cost is one shorter step at the very bottom of the upper zone, which is far less
+        // noticeable than a discontinuity mid-slider. This final rung is the SAME loudness as the
+        // quiet zone's 0 dB step (hardware at floor, no gain), and the chevron logic already
+        // skips that duplicate when crossing.
+        val last = out.lastOrNull()
+        if (last == null || last.totalDb - floor > SEAM_EPSILON_DB) {
+            out.add(Rung(minAudibleIndex, 0f, floor))
+        }
         return out
     }
 
@@ -69,6 +83,12 @@ class VolumeCurve private constructor(
 
         /** Ladder spacing — matches STEP_DB spacing in the quiet zone so the scale reads as one. */
         const val RUNG_DB = 5f
+
+        /**
+         * If the last 5 dB rung already sits within this of the floor, do not add a floor rung —
+         * it would be an inaudible duplicate step.
+         */
+        private const val SEAM_EPSILON_DB = 0.5f
 
         // Sanity bounds: a curve whose full range is outside these is OEM nonsense — reject it
         // and let the caller fall back to plain hardware-index behaviour (spec decision).
