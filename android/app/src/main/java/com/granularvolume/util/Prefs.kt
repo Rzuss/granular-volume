@@ -21,6 +21,8 @@ object Prefs {
     private const val KEY_LAUNCH_COUNT     = "launch_count"
     private const val KEY_TILE_ACTIVATIONS = "tile_activations"
     private const val KEY_REVIEW_REQUESTED = "review_flow_requested"
+    private const val KEY_LINE_TOOLTIP_SHOWN = "line_tooltip_shown"
+    private const val KEY_TERMS_ACCEPTED_VERSION = "terms_accepted_version"
 
     /** Current attenuation in dB (0.0 = none, -30.0 = near-silent) */
     const val ATTENUATION_DEFAULT = 0f
@@ -94,5 +96,25 @@ object Prefs {
 
     fun setReviewFlowRequested(context: Context, requested: Boolean) {
         prefs(context).edit { putBoolean(KEY_REVIEW_REQUESTED, requested) }
+    }
+
+    /** One-time "drag below the line" tooltip on the first overlay display (full-range spec). */
+    fun wasLineTooltipShown(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_LINE_TOOLTIP_SHOWN, false)
+
+    fun setLineTooltipShown(context: Context) {
+        prefs(context).edit { putBoolean(KEY_LINE_TOOLTIP_SHOWN, true) }
+    }
+
+    /**
+     * Version number of the Terms the user actively accepted via the consent gate (clickwrap).
+     * 0 = never accepted. Versioned (not boolean) so a future material Terms change can
+     * re-prompt — locked design, see the Pro plan's A2b item.
+     */
+    fun getTermsAcceptedVersion(context: Context): Int =
+        prefs(context).getInt(KEY_TERMS_ACCEPTED_VERSION, 0)
+
+    fun setTermsAcceptedVersion(context: Context, version: Int) {
+        prefs(context).edit { putInt(KEY_TERMS_ACCEPTED_VERSION, version) }
     }
 }

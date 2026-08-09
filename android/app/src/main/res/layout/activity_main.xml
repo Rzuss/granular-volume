@@ -199,6 +199,71 @@
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Consent gate (clickwrap). Sits ABOVE the permission CTA and gates it, so the
+             user actively accepts before anything is granted. No new screen, by design.
+             Hidden once the current Terms version has been accepted. -->
+        <LinearLayout
+            android:id="@+id/gv_consent_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="14dp"
+            android:background="@drawable/bg_card">
+
+            <TextView
+                android:id="@+id/tv_consent_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gv_consent_text"
+                android:textSize="12sp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/gv_text_secondary" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tv_link_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gv_terms_link"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:padding="4dp"
+                    android:textColor="@color/gv_accent" />
+
+                <TextView
+                    android:id="@+id/tv_link_privacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gv_privacy_link"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:padding="4dp"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/gv_accent" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_accept_terms"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/gv_accept_continue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:textColor="@color/gv_btn_primary_text"
+                android:background="@drawable/bg_btn_primary"
+                android:stateListAnimator="@null"
+                android:elevation="0dp"
+                android:maxLines="1"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
         <!-- Contextual hint -->
         <TextView
             android:id="@+id/tv_hint"

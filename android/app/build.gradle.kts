@@ -24,8 +24,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
-        versionCode = 11
-        versionName = "1.3.4"
+        versionCode = 12
+        versionName = "1.4.0"
     }
 
     // Distribution flavors: "play" keeps the Play-only in-app review prompt;
@@ -46,6 +46,15 @@ android {
                 storePassword = localProps.getProperty("keystore.storePassword", "")
                 keyAlias = localProps.getProperty("keystore.keyAlias", "granularvolume")
                 keyPassword = localProps.getProperty("keystore.keyPassword", "")
+                // Declared explicitly rather than left to AGP defaults. Caught by the cold
+                // check before 1.4.0: a Gradle-signed build came out v2-only, while every
+                // artifact F-Droid has accepted so far was v3-signed (they were signed by
+                // hand with apksigner per the release runbook). Requiring both removes the
+                // difference between the two paths, so the reference APK is valid whichever
+                // way it was produced.
+                enableV1Signing = false   // minSdk 28; v1 adds nothing and slows verification
+                enableV2Signing = true
+                enableV3Signing = true
             }
         }
     }
@@ -64,6 +73,10 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             isDebuggable = true
+            // Test product only. Makes the installed build identifiable at a glance during
+            // device testing, so a stale install can never be mistaken for the current one.
+            // Never reaches a release artifact — this block is the debug build type.
+            versionNameSuffix = "-test"
         }
     }
 

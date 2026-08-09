@@ -20,6 +20,18 @@
     <string name="gv_drag_handle">Drag to reposition</string>
     <string name="gv_louder">Louder — reduce attenuation</string>
     <string name="gv_quieter">Quieter — increase attenuation</string>
+    <string name="gv_mute">Mute media</string>
+    <string name="gv_divider_desc">Device minimum volume line</string>
+    <string name="gv_line_tooltip">below the line:\nquieter than your\ndevice minimum</string>
+    <string name="gv_upper_bar_desc">Volume level</string>
+    <string name="gv_label_muted">MUTED</string>
+
+    <!-- Consent gate (clickwrap) -->
+    <string name="gv_consent_text">This is a convenience utility, not hearing protection equipment. By continuing you agree to the Terms of Use and confirm you have read the Privacy Policy.</string>
+    <string name="gv_terms_link">Terms of Use</string>
+    <string name="gv_privacy_link">Privacy Policy</string>
+    <string name="gv_accept_continue">Agree and continue</string>
+    <string name="gv_legal">Legal</string>
     <string name="gv_step_label_0db">Volume step: 0 dB (full)</string>
     <string name="gv_step_label_5db">Volume step: −5 dB</string>
     <string name="gv_step_label_10db">Volume step: −10 dB</string>

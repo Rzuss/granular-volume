@@ -2,6 +2,14 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.0 (versionCode 12)
+
+Full-range mode. The dial is now one continuous scale instead of a quiet-only one: above the device's minimum line it controls normal system volume, replacing the physical volume buttons for anyone whose buttons are broken, stiff, or hard to reach; below the line it does exactly what it always did, down to -30 dB. The whole scale moves in uniform 5 dB steps, built at runtime from the device's own volume curve via `AudioManager.getStreamVolumeDb`, so a step means the same thing on every handset. The slider drives whichever stream the volume buttons would drive: media while audio is playing, ringtone otherwise. No new permissions.
+
+Above the line the hardware volume index does the coarse work and the audio effect supplies only the sub-step remainder, so if the effect is ever unavailable the level can move by at most one hardware step. The last rung sits exactly on the device floor, which makes the crossing between the two zones continuous, and that level is drawn once so every press moves the highlight by exactly one bar. A mute control on the overlay silences media only, leaving alarms audible, and restores the previous level on a second tap. Volume-button presses inside the quiet zone are absorbed into the scale rather than fighting it, and any correction we make can only ever lower the hardware volume, never raise it.
+
+The overlay keeps its previous footprint: the step bars and chevrons were made smaller to make room. This release also adds the consent gate and the Terms of Use and Privacy Policy links to the setup screen, so the app's terms are actively accepted rather than merely published. The F-Droid flavor remains free of proprietary dependencies.
+
 ## 1.3.4 (versionCode 11)
 
 The volume control now survives a reboot. Previously, the service's `onDestroy` cleared the "was running" flag unconditionally, and since a device shutdown also destroys the service, `BootReceiver` always found the flag false and never restored the control. The flag is now cleared only on user-intended stops — the notification's Stop action, dismissing the overlay, or toggling the Quick Settings tile off — so a control that was on at shutdown comes back after boot at its saved attenuation level, while a control the user stopped stays stopped.
