@@ -6,6 +6,9 @@
 
 **Volume below Android's minimum. A floating control that stays above any app.**
 
+*It also stands in for broken volume buttons: the slider drives normal system volume above the
+device-minimum line, in even 5 dB steps, and keeps going below it.*
+
 *Listed on Google Play as "Volume Control: Quiet Dial". Same app, same developer.*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
@@ -23,6 +26,12 @@
 On a lot of phones and tablets, the lowest non-mute volume step is still too loud. Not "a little loud": genuinely uncomfortable, next to a sleeping baby, through sensitive in-ear monitors, or in a quiet room at night. Android's own Settings app has no control for this. The volume slider stops where it stops, and there is nothing below it.
 
 This isn't a bug. It's a structural limit in how Android's volume system is built, and it means the fix has to live outside the volume slider entirely, which is what this app does.
+
+### A second problem, same control
+
+Volume keys are among the most-used moving parts on a phone, and they wear out, stiffen, or get held down by a case. Android's built-in answers (the notification-shade slider, the Accessibility Menu) work, but both are somewhere you go rather than something that is simply there, and neither can reach below the device minimum.
+
+Since 1.4.0 the dial covers both problems on one scale: above the device-minimum line it sets normal system volume, so it stands in for the buttons; below the line it does what it always did. Every step is 5 dB, built at runtime from the device's own volume curve rather than from its uneven hardware steps.
 
 ## How Android volume actually works
 

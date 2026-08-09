@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volume Buttons Not Working on Android? Every Fix, Plus an On-Screen Replacement (2026)</title>
+<meta name="description" content="Volume button stuck, stiff or completely dead? Work through the free fixes first, then put a full volume slider on screen. No root, no computer, and it keeps working when the hardware does not.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://granularvolume.com/guide/volume-buttons-not-working-android.html">
+<meta property="og:title" content="Volume Buttons Not Working on Android? Every Fix, Plus an On-Screen Replacement">
+<meta property="og:description" content="Free fixes first, then a floating volume slider that stands in for broken volume buttons. No root, no computer.">
+<meta property="og:image" content="../img/feature.png">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Volume Buttons Not Working on Android? Every Fix, Plus an On-Screen Replacement",
+  "description": "A triage guide for stuck, stiff or dead Android volume buttons: the free software and hardware checks that fix most cases, and what to do when the button is genuinely gone.",
+  "image": "https://granularvolume.com/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://granularvolume.com/img/icon.png"}},
+  "datePublished": "2026-08-09",
+  "dateModified": "2026-08-09",
+  "mainEntityOfPage": "https://granularvolume.com/guide/volume-buttons-not-working-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How do I change the volume on Android without the buttons?","acceptedAnswer":{"@type":"Answer","text":"Three ways, from quickest to most complete. Pull down the notification shade and use the volume slider there. Turn on Android's Accessibility Menu, which adds an on-screen button with volume controls behind it. Or install a floating volume slider that stays available on top of whatever you are using, which is the closest thing to having the buttons back."}},
+    {"@type":"Question","name":"Is my volume button broken or is it a software problem?","acceptedAnswer":{"@type":"Answer","text":"Restart the phone first, since a stuck key can be a software state rather than a physical fault. Then take the case off and press the button directly. If it feels mushy, does not click, or the volume moves on its own, that points at hardware. If the button clicks normally but nothing happens, it is more likely software or a remapping setting."}},
+    {"@type":"Question","name":"Can an app really replace the volume buttons?","acceptedAnswer":{"@type":"Answer","text":"Yes, for everything except the recovery-mode key combinations that run before Android starts. Android lets an app set the volume of the active audio stream, which is exactly what the buttons do. A floating slider gives you the same control on screen and does not depend on the hardware key working."}},
+    {"@type":"Question","name":"Does Android have a built-in on-screen volume control?","acceptedAnswer":{"@type":"Answer","text":"Yes. The notification shade has a volume slider, and Settings, Accessibility, Accessibility Menu adds a floating button with volume up and down inside it. Both are free and built in. They take a few taps each time and cannot go below the device's minimum, which is where a dedicated slider helps."}},
+    {"@type":"Question","name":"Will using an on-screen slider stop my volume buttons wearing out?","acceptedAnswer":{"@type":"Answer","text":"It reduces how often you press them, which is the main cause of wear on a key that is already getting stiff. It does not repair a button that has already failed, but many people move volume to the screen specifically to stop a marginal button from getting worse."}},
+    {"@type":"Question","name":"Does it need root, ADB, or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio APIs, needs a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
+    {"@type":"Question","name":"Does it survive a restart?","acceptedAnswer":{"@type":"Answer","text":"Yes, if it was running when the device shut down it comes back by itself after the restart. If you stopped it deliberately it stays stopped. That matters when the slider is your only way to change the volume."}},
+    {"@type":"Question","name":"Is it free and private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free, no ads, no account, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0."}}
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .quote{border-left:3px solid var(--accent2);padding:2px 0 2px 18px;margin:20px 0;color:var(--txt);font-style:italic;font-size:16.5px;}
+  .quote cite{display:block;margin-top:8px;font-style:normal;font-size:13px;color:var(--muted);}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style></head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Guide</div>
+    <div class="icon"><img src="../img/icon.png" alt="Granular Volume icon"></div>
+    <h1>Volume buttons not working on Android?</h1>
+    <p class="dek">Stuck, stiff, unresponsive, or pressing itself. Work through the free fixes first, because a good share of these are not broken hardware at all. Then, if the key really is gone, put a full volume slider on screen instead.</p>
+    <p class="meta">Published August 9, 2026 &middot; 8 min read</p>
+  </header>
+
+  <article>
+    <p class="lead-p">A volume button fails in a few recognisable ways, and they do not all mean the same thing. It might click normally and do nothing. It might feel mushy and half-work. It might be fine until you put the case on. It might change the volume on its own without being touched. Each of those points somewhere different, so the order below goes from the fixes that cost nothing to the one that assumes the hardware is genuinely finished.</p>
+
+    <div class="quickfix">
+      <div class="kicker">Need volume right now, before troubleshooting?</div>
+      <p>Pull down the notification shade and use the volume slider there. That works on every Android phone and needs nothing installed. It is fiddly for everyday use, but it will get you sound while you work through the rest of this page.</p>
+    </div>
+
+    <div class="toc">
+      <div>On this page</div>
+      <ol>
+        <li><a href="#triage">First: is it hardware or software?</a></li>
+        <li><a href="#free">The free fixes, in order</a></li>
+        <li><a href="#builtin">Android's built-in on-screen volume controls</a></li>
+        <li><a href="#slider">When the button is genuinely dead: a slider that replaces it</a></li>
+        <li><a href="#wear">Using the screen to stop a stiff button getting worse</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </div>
+
+    <h2 id="triage">First: is it hardware or software?</h2>
+    <p>Two minutes here saves an unnecessary repair, and tells you which half of this page you actually need.</p>
+    <div class="fixcard">
+      <h3>Restart the phone <span class="verdict v-partial">Fixes a real share of cases</span></h3>
+      <p>A volume key that has stopped responding is not always a physical fault. The input layer can get into a bad state, and a restart clears it. This is worth doing before anything else precisely because it costs nothing and it works often enough to be the first step rather than an afterthought.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Take the case off and press the bare button <span class="verdict v-partial">Common and easy to miss</span></h3>
+      <p>Cases press on volume keys more often than people expect, especially thicker ones and ones that have been on the phone a long time. A case can hold a key slightly depressed, which makes it feel dead, or make it need a much harder press than usual. If the button behaves normally without the case, you have found it.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Read what the failure feels like <span class="verdict v-works">Tells you where to go next</span></h3>
+      <p>If the key <em>clicks properly</em> but nothing happens on screen, suspect software: a remap setting, an accessibility tool, or a system glitch. If the key feels <em>mushy, sunken, or does not click</em>, or the volume moves without you touching it, that is a physical fault and no setting will fix it. Sort yourself into one of those two before spending more time.</p>
+    </div>
+
+    <h2 id="free">The free fixes, in order</h2>
+    <div class="fixcard">
+      <h3>Clean around the key <span class="verdict v-partial">Worth trying on a stiff button</span></h3>
+      <p>Dust and pocket lint pack into the gap around a button and stop it travelling properly. Compressed air, or a soft dry brush around the edge of the key, is the safe version of this. Do not push liquid into the gap. If a button is stiff rather than dead, this is a genuine fix a fair number of times.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Check whether something has remapped the key <span class="verdict v-partial">Rare, but free to rule out</span></h3>
+      <p>Some phones let you reassign the volume keys, for example to skip tracks with the screen off, and some camera and accessibility apps claim them too. Look through Settings for anything mentioning the volume keys or side key, and check whether a recently installed app took them over. If the key clicks but does nothing, this is worth ruling out.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Check for a system update <span class="verdict v-partial">Occasionally the actual cause</span></h3>
+      <p>Volume key regressions do show up after system updates, and they usually get fixed in a later one. If the button stopped working right after an update rather than gradually, check whether another update is waiting.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Safe mode, to test for a misbehaving app <span class="verdict v-partial">Diagnostic, not a fix</span></h3>
+      <p>Booting into Safe mode runs Android without third-party apps. If the volume keys work there and not normally, an installed app is interfering, and you can narrow it down by removing recent installs. If they fail in Safe mode too, the problem is the hardware or the system itself.</p>
+    </div>
+
+    <h2 id="builtin">Android's built-in on-screen volume controls</h2>
+    <p>Before installing anything, know what the phone already gives you, because for some people that is enough.</p>
+    <div class="fixcard">
+      <h3>The notification shade slider <span class="verdict v-partial">Always available, awkward daily</span></h3>
+      <p>Swipe down and there is a volume slider. It works everywhere, on every phone, with nothing installed. The catch is that it takes a swipe and a tap every time, it covers what you were looking at, and in a full-screen video or game it interrupts you.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Accessibility Menu <span class="verdict v-partial">Built in, a few taps deep</span></h3>
+      <p>Settings, Accessibility, Accessibility Menu adds a floating button that opens a large menu containing volume up and volume down, among other controls. It is free, it is built into Android, and it genuinely replaces the keys. It is also a menu rather than a slider: you open it, find the control, tap repeatedly, then close it again.</p>
+    </div>
+    <p>Both of these are real answers, and if the built-in options suit you then you do not need anything else. The gap they leave is the same one in both cases: they are somewhere you go rather than something that is simply there, and neither can take the volume below the device's own minimum.</p>
+
+    <h2 id="slider">When the button is genuinely dead: a slider that replaces it</h2>
+    <div class="fixcard">
+      <h3>A floating volume slider <span class="verdict v-works">Closest thing to having the keys back</span></h3>
+      <p><a href="../index.html">Granular Volume: Quiet Dial</a> puts a small slider on top of whatever you are doing. Drag it up and the volume rises, drag it down and it falls, in even 5 dB steps. It does not open a menu and it does not cover the screen, so it behaves the way the buttons behaved: always within reach, one movement, done.</p>
+      <p>Two things are worth knowing before you install it. First, the steps are built from your own device's volume curve at runtime, which is why each step is the same size as the last rather than the uneven jumps hardware keys often give you near the bottom of the range. Second, the slider does not stop where your buttons stopped: past the line marking your device's minimum it keeps going, down to 30 dB below it, for the times when the quietest the phone can manage is still too loud.</p>
+      <p>It also comes back on its own after a restart if it was running when the phone shut down, which matters more than it sounds when the slider is your only way to change the volume. And there is a mute control that silences media without touching your alarms.</p>
+      <p>One honest limitation: nothing installed inside Android can help with the key combinations that run <em>before</em> Android starts, such as entering recovery mode. Those need the physical key. If that specific ability matters to you, a repair is the only route.</p>
+    </div>
+
+    <div class="callout">
+      <h2>Put the volume back within reach</h2>
+      <p>A floating slider that stands in for broken volume buttons, in even steps, and keeps going below your device's minimum when you need it quieter than the phone allows. No root, no computer, no ads, no tracking, no account, and no internet permission at all.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dguide%26utm_campaign%3Dguide-buttons">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="lower-android-volume-below-minimum.html">Or: going below the minimum</a>
+      </div>
+    </div>
+
+    <h2 id="wear">Using the screen to stop a stiff button getting worse</h2>
+    <p>Not everyone reading this has a dead button. A good number have one that has started to feel wrong: harder to press than it was, or occasionally missing a press. Volume keys are among the most-used moving parts on a phone, and once one starts to go it does not come back.</p>
+    <p>Moving day-to-day volume changes to the screen does not repair anything, and it would be dishonest to suggest otherwise. What it does is reduce the number of presses a marginal key has to survive, which is worth doing while it still works. The same applies on large phones where the keys sit somewhere your thumb does not comfortably reach, and on phones used with one hand.</p>
+
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">
+      <dt>How do I change the volume on Android without the buttons?</dt>
+      <dd>Pull down the notification shade and use the slider there, turn on Settings, Accessibility, Accessibility Menu for an on-screen button with volume controls inside, or install a floating slider that stays available on top of whatever you are using.</dd>
+      <dt>Is my volume button broken, or is it software?</dt>
+      <dd>Restart first, then take the case off and press the bare key. A key that clicks normally but does nothing points at software or a remap. A key that feels mushy, does not click, or moves the volume on its own is a hardware fault.</dd>
+      <dt>Can an app really replace the volume buttons?</dt>
+      <dd>Yes, for everything inside Android. An app can set the volume of the active audio stream, which is what the buttons do. The exception is the key combinations that run before Android starts, such as recovery mode.</dd>
+      <dt>Does Android have a built-in on-screen volume control?</dt>
+      <dd>Yes, two: the notification shade slider, and the Accessibility Menu. Both are free and built in. Both take a few taps each time and neither can go below the device's minimum.</dd>
+      <dt>Will an on-screen slider stop my volume buttons wearing out?</dt>
+      <dd>It reduces how often you press them, which is the main cause of wear on a key that is already stiffening. It cannot repair a key that has already failed.</dd>
+      <dt>Does it need root, ADB, or a computer?</dt>
+      <dd>No. It uses Android's own audio APIs and needs a display-over-other-apps permission plus standard audio permissions.</dd>
+      <dt>Does it survive a restart?</dt>
+      <dd>Yes. If it was running when the device shut down it comes back by itself. If you stopped it deliberately it stays stopped.</dd>
+      <dt>Is it free and private?</dt>
+      <dd>Yes. Free, no ads, no account, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0.</dd>
+    </dl>
+  </article>
+
+</div>
+<footer>
+  <div class="wrap">
+    Part of <a href="../index.html">Granular Volume</a>, free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a>.
+    <br>
+    See also:
+    <a href="lower-android-volume-below-minimum.html">every method for going below the minimum, ranked</a> &middot;
+    <a href="tried-everything-volume-still-too-loud-android.html">if you have already tried everything</a> &middot;
+    <a href="alarm-too-loud-lowest-volume-android.html">if the problem is the alarm</a>.
+  </div>
+</footer>
+</body>
+</html>
