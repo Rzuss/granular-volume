@@ -137,7 +137,17 @@ class FullRangeCoordinator(
         notifyUi()
     }
 
-    fun inQuietZone(): Boolean = audioController.attenuationDb.value < 0f
+    /**
+     * Which zone the user is in. MUST read the authoritative flag, never the gain's sign:
+     * our gain is also active ABOVE the line (it carries the sub-rung remainder that makes the
+     * 5 dB ladder uniform), so a negative gain does NOT imply the quiet zone.
+     *
+     * Getting this wrong caused a real fault, reported from hardware 2026-08-09: on the second
+     * rung from the bottom — the first one with a non-zero remainder — the absorb policy
+     * believed it was defending the quiet zone, saw the volume rise, and "corrected" it back to
+     * the floor. The dial snapped down a rung on its own, intermittently.
+     */
+    fun inQuietZone(): Boolean = zoneQuiet
 
     /**
      * Number of selectable positions in the upper zone for the CURRENT mode.
@@ -219,7 +229,7 @@ class FullRangeCoordinator(
      * Applies the locked policy. Never raises hardware volume.
      */
     fun onExternalVolumeChange(stream: Int, from: Int, to: Int) {
-        if (streamVol.wasSelfChange(stream)) return
+        if (streamVol.wasSelfChange(stream, to)) return
         if (!inQuietZone() || stream != AudioManager.STREAM_MUSIC) {
             // Upper zone / other stream: display sync only.
             notifyUi()

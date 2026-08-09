@@ -23,8 +23,9 @@ class StreamVolumeController(context: Context) {
     private val tag = "GranularVolume:StreamVol"
     private val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    /** Timestamp of our last write, per stream — the self-change flag. */
-    private val lastSelfChangeMs = HashMap<Int, Long>()
+    /** Our last write per stream: the value we wrote and when. */
+    private data class SelfWrite(val index: Int, val atMs: Long)
+    private val lastSelfWrite = HashMap<Int, SelfWrite>()
 
     /** Stream the physical buttons would currently drive. */
     fun activeStream(): Int =
@@ -60,12 +61,18 @@ class StreamVolumeController(context: Context) {
     }
 
     /**
-     * True if a volume change observed "now-ish" on [stream] was caused by our own write.
-     * The window is deliberately short: external changes arriving later must not be eaten.
+     * True if the volume change observed on [stream] landing at [observedIndex] was our own.
+     *
+     * Matches the VALUE we wrote as well as the time. A time-only window raced with system
+     * broadcast delivery: a late broadcast for our own write was read as an external change,
+     * which fired the absorb policy and moved the dial by itself. Requiring the value to match
+     * removes that race, so the window can be generous without ever eating a real user press
+     * (a real press lands on a different index than the one we just wrote).
      */
-    fun wasSelfChange(stream: Int): Boolean {
-        val t = lastSelfChangeMs[stream] ?: return false
-        return SystemClock.elapsedRealtime() - t <= SELF_CHANGE_WINDOW_MS
+    fun wasSelfChange(stream: Int, observedIndex: Int): Boolean {
+        val w = lastSelfWrite[stream] ?: return false
+        return w.index == observedIndex &&
+                SystemClock.elapsedRealtime() - w.atMs <= SELF_CHANGE_WINDOW_MS
     }
 
     /**
@@ -86,7 +93,7 @@ class StreamVolumeController(context: Context) {
     }
 
     private fun write(stream: Int, index: Int) {
-        lastSelfChangeMs[stream] = SystemClock.elapsedRealtime()
+        lastSelfWrite[stream] = SelfWrite(index, SystemClock.elapsedRealtime())
         try {
             // FLAG_0: no system volume UI — the overlay IS the UI.
             am.setStreamVolume(stream, index, 0)
@@ -99,6 +106,7 @@ class StreamVolumeController(context: Context) {
     }
 
     companion object {
-        private const val SELF_CHANGE_WINDOW_MS = 500L
+        // Generous, because the value must also match — see wasSelfChange.
+        private const val SELF_CHANGE_WINDOW_MS = 1_500L
     }
 }
