@@ -59,6 +59,56 @@ class FullRangeCoordinator(
     private var preMuteIndex: Int = -1
     private var preMuteAttenuation: Float = 0f
 
+    /**
+     * Which zone the user is logically in. Needed because the gain alone is ambiguous:
+     * a small negative gain can be either a quiet-zone step or an upper-zone remainder.
+     * Initialised from the persisted attenuation so the 110 existing users land exactly
+     * where they left off (zero-write migration, final-audit decision #2).
+     */
+    @Volatile
+    var zoneQuiet: Boolean = audioController.attenuationDb.value < 0f
+        private set
+
+    /** Snapshot the overlay renders from. One source of truth, computed on demand. */
+    data class UiState(
+        val muted: Boolean,
+        val zoneQuiet: Boolean,
+        val quietDb: Float,
+        val upperPos: Int,
+        val upperCount: Int,
+        val percent: Int,
+        val ringMode: Boolean
+    )
+
+    fun uiState(): UiState {
+        val stream = streamVol.activeStream()
+        val ringMode = stream != AudioManager.STREAM_MUSIC
+        val idx = streamVol.index(stream)
+        val max = streamVol.maxIndex(stream)
+        val percent = if (max > 0) (idx * 100) / max else 0
+        return UiState(
+            muted = isMuted,
+            zoneQuiet = zoneQuiet,
+            quietDb = audioController.attenuationDb.value,
+            upperPos = currentUpperPos(stream, idx),
+            upperCount = upperPositionCount(),
+            percent = percent,
+            ringMode = ringMode
+        )
+    }
+
+    /** Position (0 = loudest) that best matches the CURRENT hardware state. */
+    private fun currentUpperPos(stream: Int, idx: Int): Int {
+        val curve = mediaCurve
+        return if (stream == AudioManager.STREAM_MUSIC && curve != null) {
+            val safeIdx = idx.coerceIn(0, curve.maxIndex)
+            val totalDb = curve.relDb[safeIdx] + audioController.attenuationDb.value
+            curve.nearestRung(totalDb)
+        } else {
+            (streamVol.maxIndex(stream) - idx).coerceAtLeast(0)
+        }
+    }
+
     // Fight-loop breaker state.
     private var correctionTimesMs = ArrayDeque<Long>()
     @Volatile
@@ -106,6 +156,7 @@ class FullRangeCoordinator(
             streamVol.setIndex(stream, (top - pos).coerceAtLeast(streamVol.minAudibleIndex(stream)))
             audioController.setAttenuation(0f)
         }
+        zoneQuiet = false
         notifyUi()
     }
 
@@ -118,6 +169,7 @@ class FullRangeCoordinator(
         val media = AudioManager.STREAM_MUSIC
         streamVol.lowerTo(media, streamVol.minAudibleIndex(media))
         audioController.setAttenuation(stepDb)
+        zoneQuiet = true
         notifyUi()
     }
 

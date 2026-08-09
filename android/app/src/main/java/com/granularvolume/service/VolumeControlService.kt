@@ -5,8 +5,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ServiceInfo
+import android.media.AudioDeviceCallback
+import android.media.AudioDeviceInfo
+import android.media.AudioManager
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -17,6 +23,8 @@ import androidx.core.app.NotificationCompat
 import com.granularvolume.MainActivity
 import com.granularvolume.R
 import com.granularvolume.audio.AudioController
+import com.granularvolume.audio.FullRangeCoordinator
+import com.granularvolume.audio.StreamVolumeController
 import com.granularvolume.overlay.OverlayManager
 import com.granularvolume.util.Prefs
 import kotlinx.coroutines.CoroutineName
@@ -45,6 +53,12 @@ class VolumeControlService : Service() {
         private const val CHANNEL_ID   = "gv_volume_control"
         private const val NOTIFICATION_ID = 1001
         const val ACTION_STOP = "com.granularvolume.ACTION_STOP"
+
+        // Hidden-but-stable system broadcast + extras (no public constants exist for these).
+        private const val VOLUME_CHANGED_ACTION = "android.media.VOLUME_CHANGED_ACTION"
+        private const val EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE"
+        private const val EXTRA_VOLUME_STREAM_VALUE = "android.media.EXTRA_VOLUME_STREAM_VALUE"
+        private const val EXTRA_PREV_VOLUME_STREAM_VALUE = "android.media.EXTRA_PREV_VOLUME_STREAM_VALUE"
     }
 
     private val serviceScope = CoroutineScope(
@@ -52,7 +66,34 @@ class VolumeControlService : Service() {
     )
 
     private lateinit var audioController: AudioController
+    private lateinit var streamVolumeController: StreamVolumeController
+    private lateinit var coordinator: FullRangeCoordinator
     private lateinit var overlayManager: OverlayManager
+
+    /**
+     * VOLUME_CHANGED_ACTION is undocumented but long-stable and the standard listening
+     * mechanism for volume apps — spec accepts it with a real-hardware verification gate.
+     * Feeds the coordinator's absorb policy; our own writes are filtered there.
+     */
+    private val volumeChangeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action != VOLUME_CHANGED_ACTION) return
+            val stream = intent.getIntExtra(EXTRA_VOLUME_STREAM_TYPE, -1)
+            if (stream < 0) return
+            val to = intent.getIntExtra(EXTRA_VOLUME_STREAM_VALUE, -1)
+            val from = intent.getIntExtra(EXTRA_PREV_VOLUME_STREAM_VALUE, to)
+            if (to < 0) return
+            coordinator.onExternalVolumeChange(stream, from, to)
+        }
+    }
+
+    /** The volume curve differs per output route — re-read it on every route change (spec). */
+    private val deviceCallback = object : AudioDeviceCallback() {
+        override fun onAudioDevicesAdded(added: Array<out AudioDeviceInfo>?) =
+            coordinator.refreshCurve()
+        override fun onAudioDevicesRemoved(removed: Array<out AudioDeviceInfo>?) =
+            coordinator.refreshCurve()
+    }
 
     /**
      * True only when the user explicitly asked to stop (notification Stop action or
@@ -85,9 +126,12 @@ class VolumeControlService : Service() {
         }
 
         audioController = AudioController(applicationContext)
+        streamVolumeController = StreamVolumeController(applicationContext)
+        coordinator = FullRangeCoordinator(applicationContext, audioController, streamVolumeController)
         overlayManager  = OverlayManager(
             context         = applicationContext,
             audioController = audioController,
+            coordinator     = coordinator,
             scope           = serviceScope,
             onDismiss       = {
                 stopRequestedByUser = true
@@ -100,7 +144,21 @@ class VolumeControlService : Service() {
             if (!audioController.isEffectAvailable) {
                 Log.e(tag, "No audio effect available — service will run without audio attenuation")
             }
+            // Read the device's volume curve AFTER the effect is up (update semantics:
+            // reads only, writes nothing until the user touches the slider).
+            coordinator.refreshCurve()
         }
+
+        // API 34+ requires an explicit export flag on context-registered receivers.
+        // NOT_EXPORTED still receives system broadcasts (they come from the system UID).
+        androidx.core.content.ContextCompat.registerReceiver(
+            this,
+            volumeChangeReceiver,
+            IntentFilter(VOLUME_CHANGED_ACTION),
+            androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+        (getSystemService(Context.AUDIO_SERVICE) as AudioManager)
+            .registerAudioDeviceCallback(deviceCallback, Handler(Looper.getMainLooper()))
 
         try {
             overlayManager.show()
@@ -128,6 +186,11 @@ class VolumeControlService : Service() {
 
     override fun onDestroy() {
         Log.i(tag, "Service stopping (userRequested=$stopRequestedByUser)")
+        runCatching { unregisterReceiver(volumeChangeReceiver) }
+        runCatching {
+            (getSystemService(Context.AUDIO_SERVICE) as AudioManager)
+                .unregisterAudioDeviceCallback(deviceCallback)
+        }
         overlayManager.hide()
         audioController.release()
         serviceScope.cancel()

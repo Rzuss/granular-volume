@@ -45,36 +45,70 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Louder: reduces attenuation → higher perceived volume -->
+        <!-- Louder: one step up the combined full-range scale -->
         <ImageButton
             android:id="@+id/gv_btn_up"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@null"
             android:src="@drawable/ic_chevron_up"
             android:tint="#EEFFFFFF"
-            android:padding="12dp"
+            android:padding="8dp"
             android:scaleType="centerInside"
             android:contentDescription="@string/gv_louder" />
 
-        <!-- 7 discrete volume step bars
-             Arranged top → bottom = loudest → quietest
-             gv_step_bar_6 = 0 dB (top),  gv_step_bar_0 = -30 dB (bottom) -->
+        <!-- UPPER ZONE: normal system volume, replaces the physical buttons.
+             Bars are created dynamically — their count is the device's real 5 dB rung
+             count (media) or its hardware step count (ring / fallback), so the container
+             height is FIXED and only bar density varies (no-growth size cap). -->
+        <LinearLayout
+            android:id="@+id/gv_upper_container"
+            android:layout_width="48dp"
+            android:layout_height="84dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="2dp" />
+
+        <!-- The device-minimum line: everything below it is territory the hardware
+             cannot reach. The visual centerpiece of full-range mode. -->
+        <View
+            android:id="@+id/gv_divider"
+            android:layout_width="48dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="2dp"
+            android:background="#FF9800"
+            android:contentDescription="@string/gv_divider_desc" />
+
+        <!-- One-time hint, shown on first overlay display only, gone on first touch. -->
+        <TextView
+            android:id="@+id/gv_line_tooltip"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gv_line_tooltip"
+            android:textColor="#FFB74D"
+            android:textSize="8sp"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <!-- QUIET ZONE: 7 discrete dB step bars, behaviourally identical to the
+             existing product. Arranged top → bottom = loudest → quietest:
+             gv_step_bar_6 = 0 dB (at the device floor), gv_step_bar_0 = -30 dB -->
         <LinearLayout
             android:id="@+id/gv_steps_container"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="4dp">
 
             <!-- step 6 = 0 dB -->
             <View
                 android:id="@+id/gv_step_bar_6"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -84,8 +118,8 @@
             <View
                 android:id="@+id/gv_step_bar_5"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -95,8 +129,8 @@
             <View
                 android:id="@+id/gv_step_bar_4"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -106,8 +140,8 @@
             <View
                 android:id="@+id/gv_step_bar_3"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -117,8 +151,8 @@
             <View
                 android:id="@+id/gv_step_bar_2"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -128,8 +162,8 @@
             <View
                 android:id="@+id/gv_step_bar_1"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginBottom="3dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -139,7 +173,7 @@
             <View
                 android:id="@+id/gv_step_bar_0"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="11dp"
                 android:background="@drawable/bg_step_bar"
                 android:clickable="true"
                 android:focusable="true"
@@ -147,28 +181,51 @@
 
         </LinearLayout>
 
-        <!-- Quieter: increases attenuation → lower perceived volume -->
+        <!-- Quieter: one step down the combined full-range scale -->
         <ImageButton
             android:id="@+id/gv_btn_down"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@null"
             android:src="@drawable/ic_chevron_down"
             android:tint="#99FFFFFF"
-            android:padding="12dp"
+            android:padding="8dp"
             android:scaleType="centerInside"
             android:contentDescription="@string/gv_quieter" />
 
-        <!-- Current attenuation label -->
-        <TextView
-            android:id="@+id/gv_label_db"
+        <!-- Bottom row: media-mute toggle + current level label.
+             Mute is MEDIA-STREAM mute (alarms keep ringing) — the one sanctioned
+             path to true silence, always an explicit action, never a slide. -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 dB"
-            android:textColor="#88FFFFFF"
-            android:textSize="10sp"
-            android:fontFamily="monospace"
-            android:layout_marginTop="2dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp">
+
+            <ImageButton
+                android:id="@+id/gv_btn_mute"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@null"
+                android:src="@drawable/ic_volume_off"
+                android:tint="#99FFFFFF"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/gv_mute" />
+
+            <!-- Percentage above the line, dB below it (locked label spec). -->
+            <TextView
+                android:id="@+id/gv_label_db"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 dB"
+                android:textColor="#88FFFFFF"
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:layout_marginStart="4dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

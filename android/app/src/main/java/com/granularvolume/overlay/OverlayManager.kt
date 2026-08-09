@@ -13,61 +13,54 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.granularvolume.R
 import com.granularvolume.audio.AudioController
+import com.granularvolume.audio.FullRangeCoordinator
 import com.granularvolume.util.Prefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.max
-import kotlin.math.min
 
 /**
- * Floating overlay: 7 discrete dB step bars + up/down chevrons + dB label + close.
+ * Floating overlay — FULL-RANGE mode.
  *
- * Touch architecture:
- *  - A SINGLE unified touch handler on the root makes the ENTIRE pill draggable from anywhere,
- *    while short taps select a step / step the chevrons / close.
- *  - Child views are made non-clickable so every touch reaches the root handler; tap targets
- *    are resolved by on-screen hit-testing.
- *  - FLAG_NOT_TOUCH_MODAL keeps touches OUTSIDE the pill flowing to the app below, so the
- *    control never interferes with a full-screen app (e.g. YouTube).
+ * One logical scale, two zones:
+ *  - UPPER ZONE: dynamic bars (device 5 dB rungs for media / hardware steps for ring),
+ *    normal system volume — the physical buttons' replacement.
+ *  - the orange device-minimum line
+ *  - QUIET ZONE: the classic 7 dB step bars (0 .. −30), behaviourally identical to 1.3.4.
+ * Plus a media-mute toggle at the bottom (alarms survive — media-stream mute, never global).
  *
- * Hiding (drag the pill off an edge — the old, simple behaviour, but bounded):
- *  - DOWN: the pill can be pushed down until only its top quarter (the close button + handle)
- *    stays visible ABOVE the navigation bar. The rest slides off below. The close button never
- *    descends onto the Home / Back keys, so it always stays tappable and the keys keep working.
- *  - LEFT / RIGHT: the pill can be tucked off a side edge, leaving a grabbable sliver.
- *  - TOP: never past the status bar, so the close button is always reachable.
+ * Touch architecture (unchanged from 1.3.4):
+ *  - a SINGLE unified touch handler on the root makes the ENTIRE pill draggable from anywhere,
+ *    while short taps are hit-tested to whatever control sits under the finger.
+ *  - FLAG_NOT_TOUCH_MODAL keeps touches OUTSIDE the pill flowing to the app below.
  *
- *  - After a few idle seconds the pill dims so it stops distracting, and wakes on touch.
- *  - UI updates always run on the main thread (flow collected on Dispatchers.Main).
+ * Bounds behaviour (hide off edges, never onto the Home keys) and idle dimming are unchanged.
  */
 class OverlayManager(
     private val context: Context,
     private val audioController: AudioController,
+    private val coordinator: FullRangeCoordinator,
     private val scope: CoroutineScope,
     private val onDismiss: () -> Unit
 ) {
 
     companion object {
-        // Step index 0 = quietest (−30 dB), index 6 = no attenuation (0 dB).
+        // Step index 0 = quietest (−30 dB), index 6 = no attenuation (0 dB, at the floor).
         val STEP_DB = floatArrayOf(-30f, -25f, -20f, -15f, -10f, -5f, 0f)
 
         private const val DEFAULT_X = 24
         private const val DEFAULT_Y = 200
         private const val DRAG_SLOP_PX = 12
         private const val ANIM_MS = 120L
-        // Sliver kept on-screen when the pill is tucked off a SIDE edge (so it can be grabbed).
         private const val SIDE_PEEK_DP = 50
-        // When pushed to the bottom, this fraction of the pill stays visible above the nav bar.
-        // The rest hides below. 4 → a quarter remains (the close button + handle).
         private const val BOTTOM_VISIBLE_FRACTION = 4
-        // Idle dimming.
         private const val IDLE_FADE_DELAY_MS = 3500L
         private const val IDLE_FADE_MS = 380L
         private const val WAKE_MS = 120L
@@ -77,17 +70,25 @@ class OverlayManager(
         private const val ALPHA_CURRENT  = 1.00f
         private const val ALPHA_ACTIVE   = 0.50f
         private const val ALPHA_INACTIVE = 0.10f
+
+        // Upper-zone bar geometry: the container height is FIXED (84dp in XML) — only bar
+        // density varies with the device's rung count, per the no-growth size cap.
+        private const val UPPER_CONTAINER_DP = 84
+        private const val UPPER_BAR_GAP_DP = 2
+        private const val UPPER_BAR_MIN_DP = 3
     }
 
     private val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private val density = context.resources.displayMetrics.density
-    // The close button is intentionally small; expand its tap area so it stays easy to hit.
     private val dismissHitSlop = (12 * density).toInt()
     private var overlayView: View? = null
     private var flowJob: Job? = null
-    private var currentStep = STEP_DB.size - 1   // Start at 0 dB
 
-    /** Dims the pill once it has sat idle, so it stops competing for attention. */
+    /** Quiet-zone step currently selected (meaningful only while zoneQuiet). */
+    private var currentStep = STEP_DB.size - 1
+
+    private val upperBars = ArrayList<View>()
+
     private val idleFadeRunnable = Runnable {
         overlayView?.animate()?.alpha(IDLE_ALPHA)?.setDuration(IDLE_FADE_MS)?.start()
     }
@@ -109,22 +110,21 @@ class OverlayManager(
     /** Inflate and attach the overlay. Throws on failure so the caller can report it. */
     fun show() {
         if (overlayView != null) return
-        // applicationContext has no theme — ContextThemeWrapper supplies ?attr/* resolution.
         val themedCtx = ContextThemeWrapper(context, R.style.Theme_GranularVolume)
         val view = LayoutInflater.from(themedCtx).inflate(R.layout.overlay_slider, null)
         overlayView = view
         setupView(view)
         wm.addView(view, layoutParams)
 
-        // Once measured, pull the saved position back inside the allowed bounds.
         view.post {
             if (clampToBounds(view)) applyLayout()
             scheduleIdleFade(view)
         }
 
-        // Observe attenuation changes ON THE MAIN THREAD (views must not be touched off-thread).
+        // One render pipeline: any state change (gain flow or coordinator revision) re-renders.
         flowJob = scope.launch(Dispatchers.Main) {
-            audioController.attenuationDb.collect { dB -> updateFromDb(view, dB) }
+            launch { audioController.attenuationDb.collect { render(view) } }
+            launch { coordinator.uiRevision.collect { render(view) } }
         }
     }
 
@@ -143,34 +143,70 @@ class OverlayManager(
     // ────────────────────────────────────────────────────────────────
 
     private fun setupView(view: View) {
-        val stepBars   = collectStepBars(view)
-        val labelDb    = view.findViewById<TextView>(R.id.gv_label_db)
+        val quietBars  = collectStepBars(view)
         val btnUp      = view.findViewById<ImageButton>(R.id.gv_btn_up)
         val btnDown    = view.findViewById<ImageButton>(R.id.gv_btn_down)
         val btnDismiss = view.findViewById<ImageButton>(R.id.gv_btn_dismiss)
+        val btnMute    = view.findViewById<ImageButton>(R.id.gv_btn_mute)
+
+        buildUpperBars(view)
 
         // Disable child click handling so EVERY touch reaches the root unified handler.
-        // This is what lets the whole pill be dragged from anywhere.
-        for (b in stepBars) { b.isClickable = false; b.isFocusable = false }
+        for (b in quietBars) { b.isClickable = false; b.isFocusable = false }
         btnUp.isClickable = false
         btnDown.isClickable = false
         btnDismiss.isClickable = false
+        btnMute.isClickable = false
 
-        setupUnifiedTouch(view, stepBars, labelDb, btnUp, btnDown, btnDismiss)
-        updateStepUI(stepBars, labelDb, currentStep)
+        // One-time hint next to the line (full-range onboarding spec: this is ALL of it).
+        if (!Prefs.wasLineTooltipShown(context)) {
+            view.findViewById<TextView>(R.id.gv_line_tooltip).visibility = View.VISIBLE
+        }
+
+        setupUnifiedTouch(view, quietBars, btnUp, btnDown, btnDismiss, btnMute)
+        render(view)
     }
 
     /**
-     * One listener to rule them all: drag the entire pill, or — if the finger barely
-     * moved — treat it as a tap and route it to whatever control sits under the finger.
+     * Creates the upper-zone bars for the CURRENT device/mode. Bar height is computed so the
+     * fixed 84dp container is always exactly filled — density varies, footprint never does.
+     * Re-run whenever the rung count changes (route change, media/ring mode flip).
      */
+    private fun buildUpperBars(view: View) {
+        val container = view.findViewById<LinearLayout>(R.id.gv_upper_container)
+        val count = coordinator.upperPositionCount().coerceAtLeast(1)
+        if (count == upperBars.size) return
+        container.removeAllViews()
+        upperBars.clear()
+
+        val gapPx = (UPPER_BAR_GAP_DP * density).toInt()
+        val totalPx = (UPPER_CONTAINER_DP * density).toInt()
+        val barPx = max(
+            (UPPER_BAR_MIN_DP * density).toInt(),
+            (totalPx - gapPx * (count - 1)) / count
+        )
+
+        for (i in 0 until count) {
+            val bar = View(container.context).apply {
+                background = container.context.getDrawable(R.drawable.bg_step_bar)
+                contentDescription = container.context.getString(R.string.gv_upper_bar_desc)
+                isClickable = false
+                isFocusable = false
+            }
+            val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, barPx)
+            if (i < count - 1) lp.bottomMargin = gapPx
+            container.addView(bar, lp)
+            upperBars.add(bar)
+        }
+    }
+
     private fun setupUnifiedTouch(
         root: View,
-        bars: Array<View>,
-        label: TextView,
+        quietBars: Array<View>,
         btnUp: View,
         btnDown: View,
-        btnDismiss: ImageButton
+        btnDismiss: ImageButton,
+        btnMute: ImageButton
     ) {
         var initialX = 0
         var initialY = 0
@@ -181,7 +217,8 @@ class OverlayManager(
         root.setOnTouchListener { _, e ->
             when (e.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    wake(root)                       // restore full opacity immediately
+                    wake(root)
+                    dismissTooltipIfShown(root)
                     initialX = layoutParams.x
                     initialY = layoutParams.y
                     downRawX = e.rawX
@@ -209,7 +246,7 @@ class OverlayManager(
                         applyLayout()
                         savePosition()
                     } else {
-                        handleTap(e.rawX, e.rawY, bars, label, btnUp, btnDown, btnDismiss)
+                        handleTap(root, e.rawX, e.rawY, quietBars, btnUp, btnDown, btnDismiss, btnMute)
                     }
                     scheduleIdleFade(root)
                     dragging = false
@@ -221,25 +258,74 @@ class OverlayManager(
     }
 
     private fun handleTap(
+        root: View,
         rawX: Float,
         rawY: Float,
-        bars: Array<View>,
-        label: TextView,
+        quietBars: Array<View>,
         btnUp: View,
         btnDown: View,
-        btnDismiss: ImageButton
+        btnDismiss: ImageButton,
+        btnMute: ImageButton
     ) {
         if (hit(btnDismiss, rawX, rawY, dismissHitSlop)) {
             flash(btnDismiss); onDismiss(); return
         }
+        if (hit(btnMute, rawX, rawY, dismissHitSlop)) {
+            flash(btnMute); coordinator.toggleMute(); return
+        }
         if (hit(btnUp, rawX, rawY)) {
-            flash(btnUp); setStep(min(currentStep + 1, STEP_DB.lastIndex), bars, label); return
+            flash(btnUp); stepCombined(+1); return
         }
         if (hit(btnDown, rawX, rawY)) {
-            flash(btnDown); setStep(max(currentStep - 1, 0), bars, label); return
+            flash(btnDown); stepCombined(-1); return
         }
-        for (i in bars.indices) {
-            if (hit(bars[i], rawX, rawY)) { setStep(i, bars, label); return }
+        for (i in upperBars.indices) {
+            if (hit(upperBars[i], rawX, rawY)) { coordinator.applyUpper(i); return }
+        }
+        for (i in quietBars.indices) {
+            if (hit(quietBars[i], rawX, rawY)) { selectQuiet(i); return }
+        }
+    }
+
+    /**
+     * Chevron stepping across the COMBINED scale: upper rungs, then the quiet steps.
+     * The last upper rung and quiet bar 6 (0 dB at the floor) are the same loudness, so
+     * crossing the line skips the duplicate.
+     */
+    private fun stepCombined(direction: Int) {
+        val s = coordinator.uiState()
+        if (s.muted) { coordinator.toggleMute(); return }
+        if (s.zoneQuiet) {
+            val next = currentStep + direction
+            when {
+                next in STEP_DB.indices -> selectQuiet(next)
+                // Up from 0 dB at the floor: cross the line into the upper zone.
+                next > STEP_DB.lastIndex && s.upperCount >= 2 ->
+                    coordinator.applyUpper(s.upperCount - 2)
+                // Down from −30: nothing (true silence is the mute button's job only).
+            }
+        } else {
+            val next = s.upperPos - direction   // pos 0 = loudest, so "up" lowers pos
+            when {
+                next in 0 until s.upperCount -> coordinator.applyUpper(next)
+                // Down past the last rung: cross into the quiet zone at −5 dB
+                // (skipping quiet bar 6, which duplicates the floor loudness).
+                next >= s.upperCount -> selectQuiet(STEP_DB.lastIndex - 1)
+                // Up past rung 0: already at max, nothing.
+            }
+        }
+    }
+
+    private fun selectQuiet(step: Int) {
+        currentStep = step
+        coordinator.applyQuiet(STEP_DB[step])
+    }
+
+    private fun dismissTooltipIfShown(root: View) {
+        val tip = root.findViewById<TextView>(R.id.gv_line_tooltip) ?: return
+        if (tip.visibility == View.VISIBLE) {
+            tip.visibility = View.GONE
+            Prefs.setLineTooltipShown(context)
         }
     }
 
@@ -258,17 +344,70 @@ class OverlayManager(
     }
 
     // ────────────────────────────────────────────────────────────────
-    // Bounds — the "hide it, but never onto the Home keys" behaviour
+    // Rendering — one function, driven by the coordinator's snapshot
     // ────────────────────────────────────────────────────────────────
 
-    /**
-     * Coerce [layoutParams] into the allowed range. Returns true if the position changed.
-     *
-     *  - X: may tuck off a side edge, keeping [SIDE_PEEK_DP] on-screen.
-     *  - Y top: never above the status bar.
-     *  - Y bottom: may push down until only the top 1/[BOTTOM_VISIBLE_FRACTION] of the pill is
-     *    left above the navigation bar — so the close button stays above the Home keys.
-     */
+    private fun render(view: View) {
+        val s = coordinator.uiState()
+        buildUpperBars(view)   // no-op unless the rung count changed (mode/route flip)
+
+        val quietBars = collectStepBars(view)
+        val label = view.findViewById<TextView>(R.id.gv_label_db)
+        val btnMute = view.findViewById<ImageButton>(R.id.gv_btn_mute)
+
+        if (s.zoneQuiet) currentStep = dbToStep(s.quietDb)
+
+        // Upper bars: list index 0 = loudest. Fill from the bottom up to the current level.
+        for (i in upperBars.indices) {
+            val alpha = when {
+                s.zoneQuiet || s.muted -> ALPHA_INACTIVE
+                i == s.upperPos        -> ALPHA_CURRENT
+                i > s.upperPos         -> ALPHA_ACTIVE
+                else                   -> ALPHA_INACTIVE
+            }
+            upperBars[i].animate().alpha(alpha).setDuration(ANIM_MS).start()
+        }
+
+        // Quiet bars: exactly the 1.3.4 scheme.
+        for (i in quietBars.indices) {
+            val alpha = when {
+                !s.zoneQuiet || s.muted -> ALPHA_INACTIVE
+                i == currentStep        -> ALPHA_CURRENT
+                i < currentStep         -> ALPHA_ACTIVE
+                else                    -> ALPHA_INACTIVE
+            }
+            quietBars[i].animate().alpha(alpha).setDuration(ANIM_MS).start()
+        }
+
+        // Label: % above the line, dB below, MUTE while muted (locked label spec).
+        label.text = when {
+            s.muted     -> context.getString(R.string.gv_label_muted)
+            s.zoneQuiet -> formatDb(STEP_DB[currentStep])
+            else        -> "${s.percent}%"
+        }
+        btnMute.alpha = if (s.muted) 1.0f else 0.6f
+    }
+
+    private fun dbToStep(dB: Float): Int =
+        STEP_DB.indices.minByOrNull { abs(STEP_DB[it] - dB) } ?: STEP_DB.lastIndex
+
+    private fun formatDb(dB: Float) =
+        if (dB == 0f) "0 dB" else "%.0f dB".format(dB)
+
+    private fun collectStepBars(view: View): Array<View> = arrayOf(
+        view.findViewById(R.id.gv_step_bar_0),
+        view.findViewById(R.id.gv_step_bar_1),
+        view.findViewById(R.id.gv_step_bar_2),
+        view.findViewById(R.id.gv_step_bar_3),
+        view.findViewById(R.id.gv_step_bar_4),
+        view.findViewById(R.id.gv_step_bar_5),
+        view.findViewById(R.id.gv_step_bar_6)
+    )
+
+    // ────────────────────────────────────────────────────────────────
+    // Bounds — the "hide it, but never onto the Home keys" behaviour (unchanged)
+    // ────────────────────────────────────────────────────────────────
+
     private fun clampToBounds(view: View): Boolean {
         val w = view.width
         val h = view.height
@@ -282,7 +421,6 @@ class OverlayManager(
         val minX = -(w - sidePeek)
         val maxX = max(minX, screen.width() - sidePeek)
         val minY = statusBarHeight()
-        // Lowest top-position: the pill's visible portion above the nav bar shrinks to a quarter.
         val maxY = max(minY, navTop - visibleAtBottom)
 
         val newX = layoutParams.x.coerceIn(minX, maxX)
@@ -293,7 +431,6 @@ class OverlayManager(
         return changed
     }
 
-    /** Full physical display rectangle in pixels (includes system bars). */
     private fun fullDisplayBounds(): Rect {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return Rect(wm.currentWindowMetrics.bounds)
@@ -314,7 +451,6 @@ class OverlayManager(
         return if (id > 0) context.resources.getDimensionPixelSize(id) else 0
     }
 
-    /** Height of the bottom navigation / gesture bar, so the pill never overlaps the Home keys. */
     private fun navBarHeight(): Int {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val bottom = wm.currentWindowMetrics.windowInsets
@@ -333,7 +469,6 @@ class OverlayManager(
         Prefs.setOverlayPosition(context, layoutParams.x, layoutParams.y)
     }
 
-    /** Restore full opacity and hold off the idle dim while the user is interacting. */
     private fun wake(root: View) {
         root.removeCallbacks(idleFadeRunnable)
         root.animate().alpha(ACTIVE_ALPHA).setDuration(WAKE_MS).start()
@@ -343,49 +478,4 @@ class OverlayManager(
         root.removeCallbacks(idleFadeRunnable)
         root.postDelayed(idleFadeRunnable, IDLE_FADE_DELAY_MS)
     }
-
-    // ────────────────────────────────────────────────────────────────
-    // State
-    // ────────────────────────────────────────────────────────────────
-
-    private fun setStep(step: Int, bars: Array<View>, label: TextView) {
-        currentStep = step
-        audioController.setAttenuation(STEP_DB[step])
-        updateStepUI(bars, label, step)
-    }
-
-    private fun updateStepUI(bars: Array<View>, label: TextView, step: Int) {
-        for (i in bars.indices) {
-            val alpha = when {
-                i == step -> ALPHA_CURRENT
-                i < step  -> ALPHA_ACTIVE
-                else      -> ALPHA_INACTIVE
-            }
-            bars[i].animate().alpha(alpha).setDuration(ANIM_MS).start()
-        }
-        label.text = formatDb(STEP_DB[step])
-    }
-
-    private fun updateFromDb(view: View, dB: Float) {
-        val step = dbToStep(dB)
-        if (step == currentStep) return
-        currentStep = step
-        updateStepUI(collectStepBars(view), view.findViewById(R.id.gv_label_db), step)
-    }
-
-    private fun dbToStep(dB: Float): Int =
-        STEP_DB.indices.minByOrNull { abs(STEP_DB[it] - dB) } ?: STEP_DB.lastIndex
-
-    private fun formatDb(dB: Float) =
-        if (dB == 0f) "0 dB" else "%.0f dB".format(dB)
-
-    private fun collectStepBars(view: View): Array<View> = arrayOf(
-        view.findViewById(R.id.gv_step_bar_0),
-        view.findViewById(R.id.gv_step_bar_1),
-        view.findViewById(R.id.gv_step_bar_2),
-        view.findViewById(R.id.gv_step_bar_3),
-        view.findViewById(R.id.gv_step_bar_4),
-        view.findViewById(R.id.gv_step_bar_5),
-        view.findViewById(R.id.gv_step_bar_6)
-    )
 }
