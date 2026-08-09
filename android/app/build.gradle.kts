@@ -64,6 +64,10 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             isDebuggable = true
+            // Test product only. Makes the installed build identifiable at a glance during
+            // device testing, so a stale install can never be mistaken for the current one.
+            // Never reaches a release artifact — this block is the debug build type.
+            versionNameSuffix = "-test"
         }
     }
 
