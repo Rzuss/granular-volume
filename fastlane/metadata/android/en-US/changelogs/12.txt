@@ -1,0 +1,5 @@
+Full-range mode. The dial is now one continuous scale: above your device's minimum line it controls normal volume, so it can stand in for the physical volume buttons; below the line it goes quieter than your device allows, down to -30 dB. Uniform 5 dB steps throughout.
+
+Also new: a mute control that silences media while leaving alarms audible.
+
+No new permissions. No ads, no tracking, no accounts.
