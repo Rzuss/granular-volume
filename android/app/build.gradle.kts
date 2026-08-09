@@ -46,6 +46,15 @@ android {
                 storePassword = localProps.getProperty("keystore.storePassword", "")
                 keyAlias = localProps.getProperty("keystore.keyAlias", "granularvolume")
                 keyPassword = localProps.getProperty("keystore.keyPassword", "")
+                // Declared explicitly rather than left to AGP defaults. Caught by the cold
+                // check before 1.4.0: a Gradle-signed build came out v2-only, while every
+                // artifact F-Droid has accepted so far was v3-signed (they were signed by
+                // hand with apksigner per the release runbook). Requiring both removes the
+                // difference between the two paths, so the reference APK is valid whichever
+                // way it was produced.
+                enableV1Signing = false   // minSdk 28; v1 adds nothing and slows verification
+                enableV2Signing = true
+                enableV3Signing = true
             }
         }
     }
