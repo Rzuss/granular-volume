@@ -103,15 +103,21 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="4dp">
 
-            <!-- step 6 = 0 dB -->
+            <!-- step 6 = 0 dB attenuation = the device floor.
+                 HIDDEN ON PURPOSE: after the seam fix the LAST rung of the upper zone is
+                 already exactly this loudness (hardware at min index, no gain). Rendering
+                 both meant two bars for one level, which forced the chevrons to skip a bar
+                 on every crossing — audibly right, visually wrong. One loudness, one bar.
+                 The quiet zone is "below the minimum", so a "zero below the minimum" bar
+                 was redundant to begin with. Kept in the layout (not deleted) because
+                 STEP_DB index 6 still exists and the Pro gate math is indexed against it. -->
             <View
                 android:id="@+id/gv_step_bar_6"
                 android:layout_width="match_parent"
                 android:layout_height="11dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/bg_step_bar"
-                android:clickable="true"
-                android:focusable="true"
+                android:visibility="gone"
                 android:contentDescription="@string/gv_step_label_0db" />
 
             <!-- step 5 = -5 dB -->

@@ -55,6 +55,13 @@ class OverlayManager(
         // Step index 0 = quietest (−30 dB), index 6 = no attenuation (0 dB, at the floor).
         val STEP_DB = floatArrayOf(-30f, -25f, -20f, -15f, -10f, -5f, 0f)
 
+        /**
+         * Highest quiet step the user can actually select: −5 dB (index 5).
+         * Index 6 (0 dB) is the floor, already shown as the last upper rung, so its bar is
+         * hidden and the ladder crosses straight from −5 dB to that rung.
+         */
+        private const val QUIET_TOP_VISIBLE = 5
+
         private const val DEFAULT_X = 24
         private const val DEFAULT_Y = 200
         private const val DRAG_SLOP_PX = 12
@@ -289,8 +296,11 @@ class OverlayManager(
 
     /**
      * Chevron stepping across the COMBINED scale: upper rungs, then the quiet steps.
-     * The last upper rung and quiet bar 6 (0 dB at the floor) are the same loudness, so
-     * crossing the line skips the duplicate.
+     *
+     * The device floor is rendered exactly ONCE — as the last upper rung — so quiet bar 6
+     * (0 dB) is hidden (see the layout comment). Every press therefore moves the highlight
+     * by exactly one visible bar, in both directions, with no skipped bar and no press that
+     * changes nothing.
      */
     private fun stepCombined(direction: Int) {
         val s = coordinator.uiState()
@@ -298,19 +308,18 @@ class OverlayManager(
         if (s.zoneQuiet) {
             val next = currentStep + direction
             when {
-                next in STEP_DB.indices -> selectQuiet(next)
-                // Up from 0 dB at the floor: cross the line into the upper zone.
-                next > STEP_DB.lastIndex && s.upperCount >= 2 ->
-                    coordinator.applyUpper(s.upperCount - 2)
+                next in 0..QUIET_TOP_VISIBLE -> selectQuiet(next)
+                // Up from −5 dB: cross the line onto the last upper rung, which IS the floor.
+                next > QUIET_TOP_VISIBLE && s.upperCount >= 1 ->
+                    coordinator.applyUpper(s.upperCount - 1)
                 // Down from −30: nothing (true silence is the mute button's job only).
             }
         } else {
             val next = s.upperPos - direction   // pos 0 = loudest, so "up" lowers pos
             when {
                 next in 0 until s.upperCount -> coordinator.applyUpper(next)
-                // Down past the last rung: cross into the quiet zone at −5 dB
-                // (skipping quiet bar 6, which duplicates the floor loudness).
-                next >= s.upperCount -> selectQuiet(STEP_DB.lastIndex - 1)
+                // Down past the floor rung: the first level genuinely below the minimum.
+                next >= s.upperCount -> selectQuiet(QUIET_TOP_VISIBLE)
                 // Up past rung 0: already at max, nothing.
             }
         }
@@ -355,7 +364,8 @@ class OverlayManager(
         val label = view.findViewById<TextView>(R.id.gv_label_db)
         val btnMute = view.findViewById<ImageButton>(R.id.gv_btn_mute)
 
-        if (s.zoneQuiet) currentStep = dbToStep(s.quietDb)
+        // Never let the hidden floor step become the selection; -5 dB is the visible top.
+        if (s.zoneQuiet) currentStep = dbToStep(s.quietDb).coerceAtMost(QUIET_TOP_VISIBLE)
 
         // Upper bars: list index 0 = loudest. Fill from the bottom up to the current level.
         for (i in upperBars.indices) {
