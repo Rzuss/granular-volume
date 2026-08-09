@@ -115,6 +115,21 @@ class FullRangeCoordinator(
     var surrendered: Boolean = false
         private set
 
+    /**
+     * Playback started or stopped, so [StreamVolumeController.activeStream] may have flipped
+     * between media and ring. The ladder and the label both depend on it, so re-render.
+     * Cheap and idempotent: a no-op if the active stream did not actually change.
+     */
+    fun onActiveStreamMayHaveChanged() {
+        val stream = streamVol.activeStream()
+        if (stream == lastActiveStream) return
+        lastActiveStream = stream
+        Log.i(tag, "Active stream -> ${if (stream == AudioManager.STREAM_MUSIC) "MEDIA" else "RING"}")
+        notifyUi()
+    }
+
+    private var lastActiveStream: Int = -1
+
     /** (Re)read the media curve. Call on service start and on every output-route change. */
     fun refreshCurve() {
         mediaCurve = VolumeCurve.read(am, AudioManager.STREAM_MUSIC)

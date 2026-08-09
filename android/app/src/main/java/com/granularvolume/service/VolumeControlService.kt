@@ -96,6 +96,21 @@ class VolumeControlService : Service() {
     }
 
     /**
+     * The slider follows the ACTIVE stream (media while audio plays, ring otherwise), so the
+     * overlay must re-render the moment playback starts or stops. Found on the emulator during
+     * Round A: nothing else signals that flip — starting playback changes no volume, so the
+     * VOLUME_CHANGED receiver never fires and the pill kept showing the ring ladder over
+     * playing media.
+     */
+    private val playbackCallback = object : AudioManager.AudioPlaybackCallback() {
+        override fun onPlaybackConfigChanged(
+            configs: MutableList<android.media.AudioPlaybackConfiguration>?
+        ) {
+            coordinator.onActiveStreamMayHaveChanged()
+        }
+    }
+
+    /**
      * True only when the user explicitly asked to stop (notification Stop action or
      * overlay dismiss). onDestroy also runs on device shutdown and OS kills, and those
      * must NOT clear the boot-restore flag — otherwise BootReceiver always sees false
@@ -157,8 +172,10 @@ class VolumeControlService : Service() {
             IntentFilter(VOLUME_CHANGED_ACTION),
             androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
         )
-        (getSystemService(Context.AUDIO_SERVICE) as AudioManager)
-            .registerAudioDeviceCallback(deviceCallback, Handler(Looper.getMainLooper()))
+        val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val mainHandler = Handler(Looper.getMainLooper())
+        am.registerAudioDeviceCallback(deviceCallback, mainHandler)
+        am.registerAudioPlaybackCallback(playbackCallback, mainHandler)
 
         try {
             overlayManager.show()
@@ -188,8 +205,9 @@ class VolumeControlService : Service() {
         Log.i(tag, "Service stopping (userRequested=$stopRequestedByUser)")
         runCatching { unregisterReceiver(volumeChangeReceiver) }
         runCatching {
-            (getSystemService(Context.AUDIO_SERVICE) as AudioManager)
-                .unregisterAudioDeviceCallback(deviceCallback)
+            val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            am.unregisterAudioDeviceCallback(deviceCallback)
+            am.unregisterAudioPlaybackCallback(playbackCallback)
         }
         overlayManager.hide()
         audioController.release()
