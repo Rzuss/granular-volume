@@ -2,6 +2,12 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.1 (versionCode 13)
+
+Bluetooth correctness fix, reported from the field one day after 1.4.0 shipped. On wireless routes (Bluetooth A2DP, LE Audio, hearing aids) with Absolute Volume active, Android forwards the volume index to the headset and the headset applies its own loudness curve, so the per-index dB table the phone reports is not what actually plays. The 1.4.0 upper zone built its uniform 5 dB ladder from that table, which could paint lit bars over headset silence: steps remained on screen after the sound was already gone. The upper zone now uses raw hardware indices on those routes, one bar per real step, exactly what the volume keys do, so nothing on screen can be a step the ear never hears. When the user has disabled Absolute Volume in developer options, the phone-side curve is authoritative again and the uniform ladder returns.
+
+Route detection now also recognizes LE Audio headsets, hearing aids and SCO, which previously fell through to the built-in speaker's curve. And unmuting after switching outputs re-anchors to the new route's own level instead of restoring the previous route's index, which could have been a loud surprise. The quiet zone is untouched: its attenuation is applied to the signal inside the phone, before any wireless encoding, and was never affected.
+
 ## 1.4.0 (versionCode 12)
 
 Full-range mode. The dial is now one continuous scale instead of a quiet-only one: above the device's minimum line it controls normal system volume, replacing the physical volume buttons for anyone whose buttons are broken, stiff, or hard to reach; below the line it does exactly what it always did, down to -30 dB. The whole scale moves in uniform 5 dB steps, built at runtime from the device's own volume curve via `AudioManager.getStreamVolumeDb`, so a step means the same thing on every handset. The slider drives whichever stream the volume buttons would drive: media while audio is playing, ringtone otherwise. No new permissions.

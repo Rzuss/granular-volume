@@ -1,0 +1,1 @@
+Bluetooth fix: on wireless routes with Absolute Volume, the upper zone now uses your device's real volume steps, so every bar on screen is a step you can hear. If you disabled Absolute Volume in developer options, the even 5 dB ladder is used as before. Also safer unmute after switching outputs. The quiet zone is unchanged.

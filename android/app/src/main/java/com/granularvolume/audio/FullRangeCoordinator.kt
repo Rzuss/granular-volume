@@ -41,6 +41,7 @@ class FullRangeCoordinator(
 ) {
 
     private val tag = "GranularVolume:FullRange"
+    private val appContext = context.applicationContext
     private val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     /** Media curve for the current output route; null = fallback to raw indices. */
@@ -132,9 +133,46 @@ class FullRangeCoordinator(
 
     /** (Re)read the media curve. Call on service start and on every output-route change. */
     fun refreshCurve() {
-        mediaCurve = VolumeCurve.read(am, AudioManager.STREAM_MUSIC)
+        // Wireless routes with Bluetooth Absolute Volume active (the modern default): the
+        // phone forwards the index and the HEADSET applies its own loudness curve, so the
+        // table getStreamVolumeDb reports is not what plays. Building the 5 dB ladder from
+        // it painted live bars over headset silence (field report, 2026-08-10). Raw indices
+        // are the honest scale there: every bar is a real hardware step, exactly what the
+        // volume keys do, so nothing on screen can be a step the ear never hears.
+        // If the user disabled Absolute Volume in developer options, the phone-side curve
+        // is back in charge and the uniform ladder is trustworthy again.
+        val wireless = VolumeCurve.isWirelessRoute(am)
+        mediaCurve = if (wireless && !absoluteVolumeDisabled()) {
+            Log.i(tag, "Wireless route with Absolute Volume: raw-index upper zone")
+            null
+        } else {
+            VolumeCurve.read(am, AudioManager.STREAM_MUSIC)
+        }
+        if (isMuted) {
+            // The saved pre-mute level belonged to the previous route, and indices are per
+            // route: restoring a headset level onto the speaker would be a loud surprise.
+            // Re-anchor to whatever the new route is already set to; if the mute itself
+            // carried over as zero, fall back to the minimum audible step instead of
+            // "unmute to silence".
+            val current = streamVol.index(AudioManager.STREAM_MUSIC)
+            preMuteIndex = if (current > 0) current
+                           else streamVol.minAudibleIndex(AudioManager.STREAM_MUSIC)
+        }
         surrendered = false
         notifyUi()
+    }
+
+    /**
+     * The developer option "Disable absolute volume". The settings key string is stable
+     * AOSP since Android 8. Absent or unreadable means the feature is in its default
+     * state, which is ON, so we return false and stay conservative.
+     */
+    private fun absoluteVolumeDisabled(): Boolean = try {
+        android.provider.Settings.Global.getInt(
+            appContext.contentResolver, "bluetooth_disable_absolute_volume", 0
+        ) == 1
+    } catch (e: Exception) {
+        false
     }
 
     /**

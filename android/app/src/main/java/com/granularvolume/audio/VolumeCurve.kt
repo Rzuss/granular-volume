@@ -141,13 +141,35 @@ class VolumeCurve private constructor(
         }
 
         /**
+         * Output device types whose loudness the PHONE does not control when Bluetooth
+         * Absolute Volume is active: the index is forwarded over the link and the headset
+         * applies its own curve, so getStreamVolumeDb describes a scale that is not in
+         * effect. The constants above API 28 are plain ints, safe to reference at any
+         * runtime level; older devices simply never report them.
+         */
+        private val WIRELESS_TYPES = setOf(
+            AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+            AudioDeviceInfo.TYPE_BLUETOOTH_SCO,
+            AudioDeviceInfo.TYPE_HEARING_AID,   // API 28
+            AudioDeviceInfo.TYPE_BLE_HEADSET,   // API 31
+            AudioDeviceInfo.TYPE_BLE_SPEAKER,   // API 31
+            AudioDeviceInfo.TYPE_BLE_BROADCAST  // API 33
+        )
+
+        /** True when any wireless output is connected and likely carrying media. */
+        fun isWirelessRoute(am: AudioManager): Boolean =
+            am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).any { it.type in WIRELESS_TYPES }
+
+        /**
          * Best guess at the active output device type, preferring the route audio actually
-         * takes when several are connected: Bluetooth A2DP > wired > USB > built-in speaker.
+         * takes when several are connected: wireless > wired > USB > built-in speaker.
          * The curve differs per route (spec: re-read on every route change).
          */
         private fun currentOutputDeviceType(am: AudioManager): Int {
             val devices = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
             val priority = listOf(
+                AudioDeviceInfo.TYPE_BLE_HEADSET,
+                AudioDeviceInfo.TYPE_HEARING_AID,
                 AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
                 AudioDeviceInfo.TYPE_WIRED_HEADPHONES,
                 AudioDeviceInfo.TYPE_WIRED_HEADSET,
