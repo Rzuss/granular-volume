@@ -95,20 +95,10 @@ class VolumeControlService : Service() {
             coordinator.refreshCurve()
     }
 
-    /**
-     * The slider follows the ACTIVE stream (media while audio plays, ring otherwise), so the
-     * overlay must re-render the moment playback starts or stops. Found on the emulator during
-     * Round A: nothing else signals that flip — starting playback changes no volume, so the
-     * VOLUME_CHANGED receiver never fires and the pill kept showing the ring ladder over
-     * playing media.
-     */
-    private val playbackCallback = object : AudioManager.AudioPlaybackCallback() {
-        override fun onPlaybackConfigChanged(
-            configs: MutableList<android.media.AudioPlaybackConfiguration>?
-        ) {
-            coordinator.onActiveStreamMayHaveChanged()
-        }
-    }
+    // 1.4.2: the AudioPlaybackCallback that re-rendered the pill on playback start/stop is
+    // gone WITH its reason: the dial no longer flips between media and ring (it always drives
+    // media, matching AOSP's own no-playback default), so playback changes affect nothing the
+    // overlay renders.
 
     /**
      * True only when the user explicitly asked to stop (notification Stop action or
@@ -175,7 +165,6 @@ class VolumeControlService : Service() {
         val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val mainHandler = Handler(Looper.getMainLooper())
         am.registerAudioDeviceCallback(deviceCallback, mainHandler)
-        am.registerAudioPlaybackCallback(playbackCallback, mainHandler)
 
         try {
             overlayManager.show()
@@ -207,7 +196,6 @@ class VolumeControlService : Service() {
         runCatching {
             val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             am.unregisterAudioDeviceCallback(deviceCallback)
-            am.unregisterAudioPlaybackCallback(playbackCallback)
         }
         overlayManager.hide()
         audioController.release()

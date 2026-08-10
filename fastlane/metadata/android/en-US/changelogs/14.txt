@@ -1,0 +1,1 @@
+Idle-state fix: the dial now always controls media volume, matching what the physical volume keys actually do. Previously, with no audio playing, the keys moved nothing on the dial and dragging the upper zone silently changed the ringtone volume instead. The app no longer touches the ringtone stream at all. Quiet zone unchanged.

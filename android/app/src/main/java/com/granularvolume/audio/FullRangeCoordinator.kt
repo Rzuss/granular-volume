@@ -12,12 +12,11 @@ import kotlinx.coroutines.flow.asStateFlow
  * The brain of full-range mode: one logical scale built from two mechanisms.
  *
  *  UPPER ZONE (above the device-minimum line)
- *    Media mode: uniform 5 dB rungs from [VolumeCurve] — hardware index does the coarse work,
- *    the DynamicsProcessing gain fills the sub-5 dB remainder. If the curve was rejected
- *    (OEM nonsense), falls back to raw hardware indices with zero gain.
- *    Ring mode: raw hardware indices ONLY, gain pinned to 0 — the gain is global (session 0),
- *    so a remainder tuned for the ring stream would distort media that starts later
- *    (final-audit decision #1, 2026-08-09).
+ *    Always the MEDIA stream (1.4.2 — see [StreamVolumeController] KDoc for the AOSP proof
+ *    that the physical keys drive media even when nothing plays). Uniform 5 dB rungs from
+ *    [VolumeCurve] — hardware index does the coarse work, the DynamicsProcessing gain fills
+ *    the sub-5 dB remainder. If the curve was rejected (OEM nonsense) or the route is
+ *    wireless with Absolute Volume, falls back to raw hardware indices with zero gain.
  *
  *  QUIET ZONE (below the line)
  *    Exactly today's product: hardware pinned at the floor, gain runs 0..-30 dB in 5 dB steps.
@@ -77,13 +76,11 @@ class FullRangeCoordinator(
         val quietDb: Float,
         val upperPos: Int,
         val upperCount: Int,
-        val percent: Int,
-        val ringMode: Boolean
+        val percent: Int
     )
 
     fun uiState(): UiState {
         val stream = streamVol.activeStream()
-        val ringMode = stream != AudioManager.STREAM_MUSIC
         val idx = streamVol.index(stream)
         val max = streamVol.maxIndex(stream)
         val percent = if (max > 0) (idx * 100) / max else 0
@@ -93,15 +90,14 @@ class FullRangeCoordinator(
             quietDb = audioController.attenuationDb.value,
             upperPos = currentUpperPos(stream, idx),
             upperCount = upperPositionCount(),
-            percent = percent,
-            ringMode = ringMode
+            percent = percent
         )
     }
 
     /** Position (0 = loudest) that best matches the CURRENT hardware state. */
     private fun currentUpperPos(stream: Int, idx: Int): Int {
         val curve = mediaCurve
-        return if (stream == AudioManager.STREAM_MUSIC && curve != null) {
+        return if (curve != null) {
             val safeIdx = idx.coerceIn(0, curve.maxIndex)
             val totalDb = curve.relDb[safeIdx] + audioController.attenuationDb.value
             curve.nearestRung(totalDb)
@@ -115,21 +111,6 @@ class FullRangeCoordinator(
     @Volatile
     var surrendered: Boolean = false
         private set
-
-    /**
-     * Playback started or stopped, so [StreamVolumeController.activeStream] may have flipped
-     * between media and ring. The ladder and the label both depend on it, so re-render.
-     * Cheap and idempotent: a no-op if the active stream did not actually change.
-     */
-    fun onActiveStreamMayHaveChanged() {
-        val stream = streamVol.activeStream()
-        if (stream == lastActiveStream) return
-        lastActiveStream = stream
-        Log.i(tag, "Active stream -> ${if (stream == AudioManager.STREAM_MUSIC) "MEDIA" else "RING"}")
-        notifyUi()
-    }
-
-    private var lastActiveStream: Int = -1
 
     /** (Re)read the media curve. Call on service start and on every output-route change. */
     fun refreshCurve() {
@@ -188,13 +169,13 @@ class FullRangeCoordinator(
     fun inQuietZone(): Boolean = zoneQuiet
 
     /**
-     * Number of selectable positions in the upper zone for the CURRENT mode.
-     * Media with a valid curve: the 5 dB rung count. Otherwise: raw hardware indices.
+     * Number of selectable positions in the upper zone.
+     * With a valid curve: the 5 dB rung count. Otherwise: raw hardware indices.
      */
     fun upperPositionCount(): Int {
         val stream = streamVol.activeStream()
         val curve = mediaCurve
-        return if (stream == AudioManager.STREAM_MUSIC && curve != null) {
+        return if (curve != null) {
             curve.rungs.size
         } else {
             streamVol.maxIndex(stream) - streamVol.minAudibleIndex(stream) + 1
@@ -209,12 +190,13 @@ class FullRangeCoordinator(
         if (isMuted) cancelMute()
         val stream = streamVol.activeStream()
         val curve = mediaCurve
-        if (stream == AudioManager.STREAM_MUSIC && curve != null) {
+        if (curve != null) {
             val rung = curve.rungs[pos.coerceIn(0, curve.rungs.lastIndex)]
             streamVol.setIndex(stream, rung.hardwareIndex)
             audioController.setAttenuation(rung.remainderDb)
         } else {
-            // Ring mode or fallback: raw indices, gain MUST stay 0 (see class KDoc).
+            // Raw-index fallback (rejected curve, or wireless Absolute Volume): gain MUST
+            // stay 0 — every position is a real hardware step, nothing to fill in.
             val top = streamVol.maxIndex(stream)
             streamVol.setIndex(stream, (top - pos).coerceAtLeast(streamVol.minAudibleIndex(stream)))
             audioController.setAttenuation(0f)

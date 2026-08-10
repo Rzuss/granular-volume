@@ -9,10 +9,13 @@ import android.util.Log
  * Hardware volume control for the full-range upper zone.
  *
  * Responsibilities, per the locked spec:
- *  - Drive whatever stream the physical buttons would drive: MEDIA while audio plays,
- *    RING otherwise ([activeStream]) — restoring lost button behaviour, not inventing new.
- *  - Floor the ring stream at index 1, NEVER 0: driving ring to zero toggles silent/DND mode,
- *    which requires ACCESS_NOTIFICATION_POLICY. Staying above zero keeps us at zero permissions.
+ *  - Drive the MEDIA stream, always ([activeStream]). The 1.4.0/1.4.1 rule "media while audio
+ *    plays, ring otherwise" was built on a false premise: AOSP's own
+ *    AudioService.getActiveStreamType falls through to DEFAULT_VOL_STREAM_NO_PLAYBACK ==
+ *    STREAM_MUSIC when nothing is playing (frameworks/base, line 733), so the physical keys
+ *    drive MEDIA in the idle case too. Our ring branch made the dial freeze on the home screen
+ *    and silently wrote the ringer (field report + AOSP source, 2026-08-10). Never touching
+ *    the ring stream also retires the silent/DND permission concern entirely.
  *  - Mark every write we make ([wasSelfChange]) so the volume-change receiver can tell our own
  *    writes from external ones and never loops.
  *  - THE INVARIANT (spec, 2026-08-09): corrections issued through [lowerTo] may only ever
@@ -27,14 +30,19 @@ class StreamVolumeController(context: Context) {
     private data class SelfWrite(val index: Int, val atMs: Long)
     private val lastSelfWrite = HashMap<Int, SelfWrite>()
 
-    /** Stream the physical buttons would currently drive. */
-    fun activeStream(): Int =
-        if (am.isMusicActive) AudioManager.STREAM_MUSIC else AudioManager.STREAM_RING
+    /**
+     * Stream the dial drives: MEDIA, always. Matches AOSP's no-playback default (see class
+     * KDoc) and keeps the app off the ring stream entirely.
+     */
+    fun activeStream(): Int = AudioManager.STREAM_MUSIC
 
     fun index(stream: Int): Int = am.getStreamVolume(stream)
     fun maxIndex(stream: Int): Int = am.getStreamMaxVolume(stream)
 
-    /** Lowest index that still produces sound; ring additionally floored at 1 (DND rule above). */
+    /**
+     * Lowest index that still produces sound, floored at 1: the slider must never produce
+     * hardware mute (index 0) — true silence is exclusively the mute button's job.
+     */
     fun minAudibleIndex(stream: Int): Int = maxOf(1, am.getStreamMinVolume(stream))
 
     /**
@@ -98,7 +106,7 @@ class StreamVolumeController(context: Context) {
             // FLAG_0: no system volume UI — the overlay IS the UI.
             am.setStreamVolume(stream, index, 0)
         } catch (e: SecurityException) {
-            // Defensive: should be unreachable given the >=1 ring floor, but an OEM surprise
+            // Defensive: media-stream writes need no special permission, but an OEM surprise
             // here must degrade to "no hardware write", never crash the service.
             Log.e(tag, "setStreamVolume rejected: ${e.message}")
         }

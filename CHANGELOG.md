@@ -2,6 +2,12 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.2 (versionCode 14)
+
+Idle-state fix, found during hardware verification of 1.4.1. Since 1.4.0 the dial followed the rule "media stream while audio plays, ringtone stream otherwise". Android itself does not work that way: when nothing is playing, the physical volume keys adjust media volume, not ringtone volume. The mismatch had two effects. With no audio playing, pressing the volume keys moved nothing on the dial, so it looked frozen. Worse, dragging the upper zone while idle silently changed the ringtone volume instead of the media volume.
+
+The dial now always drives the media stream, matching what the volume keys actually do. A side benefit: the app never touches the ringtone stream at all anymore, which removes the only code path that could have interacted with silent mode. The quiet zone, mute, and Bluetooth behavior are unchanged.
+
 ## 1.4.1 (versionCode 13)
 
 Bluetooth correctness fix, reported from the field one day after 1.4.0 shipped. On wireless routes (Bluetooth A2DP, LE Audio, hearing aids) with Absolute Volume active, Android forwards the volume index to the headset and the headset applies its own loudness curve, so the per-index dB table the phone reports is not what actually plays. The 1.4.0 upper zone built its uniform 5 dB ladder from that table, which could paint lit bars over headset silence: steps remained on screen after the sound was already gone. The upper zone now uses raw hardware indices on those routes, one bar per real step, exactly what the volume keys do, so nothing on screen can be a step the ear never hears. When the user has disabled Absolute Volume in developer options, the phone-side curve is authoritative again and the uniform ladder returns.
