@@ -1,0 +1,1 @@
+During a phone or VoIP call, the upper zone now controls the call volume, exactly like the physical volume keys do in a call, and returns to media volume when the call ends. The quiet zone keeps working in calls as before, reaching below the device minimum. Outside calls nothing changes.

@@ -31,10 +31,22 @@ class StreamVolumeController(context: Context) {
     private val lastSelfWrite = HashMap<Int, SelfWrite>()
 
     /**
-     * Stream the dial drives: MEDIA, always. Matches AOSP's no-playback default (see class
-     * KDoc) and keeps the app off the ring stream entirely.
+     * Stream the dial drives. MEDIA in every ordinary state — matching AOSP's no-playback
+     * default (see class KDoc) — and the VOICE CALL stream while a call is in progress,
+     * matching what the physical keys do in a call (AOSP getActiveStreamType's
+     * isInCommunication branch). Evaluated LIVE on every use, exactly like AOSP evaluates
+     * it per keypress, so no phone-state permission and no listener is needed for control
+     * correctness. MODE_RINGTONE (incoming ring, not yet answered) deliberately stays on
+     * MEDIA: the ringer is the one stream this app never touches (1.4.2 decision).
      */
-    fun activeStream(): Int = AudioManager.STREAM_MUSIC
+    fun activeStream(): Int = when (am.mode) {
+        AudioManager.MODE_IN_CALL,
+        AudioManager.MODE_IN_COMMUNICATION -> AudioManager.STREAM_VOICE_CALL
+        else -> AudioManager.STREAM_MUSIC
+    }
+
+    /** True while a cellular or VoIP call is in progress (same condition as [activeStream]). */
+    fun inCall(): Boolean = activeStream() == AudioManager.STREAM_VOICE_CALL
 
     fun index(stream: Int): Int = am.getStreamVolume(stream)
     fun maxIndex(stream: Int): Int = am.getStreamMaxVolume(stream)

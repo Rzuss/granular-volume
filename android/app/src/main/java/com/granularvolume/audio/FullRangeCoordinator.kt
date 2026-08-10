@@ -94,10 +94,14 @@ class FullRangeCoordinator(
         )
     }
 
-    /** Position (0 = loudest) that best matches the CURRENT hardware state. */
+    /**
+     * Position (0 = loudest) that best matches the CURRENT hardware state.
+     * The curve describes the MEDIA stream only — in a call the dial drives the voice
+     * stream, whose loudness table is different, so raw indices are the honest scale there.
+     */
     private fun currentUpperPos(stream: Int, idx: Int): Int {
         val curve = mediaCurve
-        return if (curve != null) {
+        return if (stream == AudioManager.STREAM_MUSIC && curve != null) {
             val safeIdx = idx.coerceIn(0, curve.maxIndex)
             val totalDb = curve.relDb[safeIdx] + audioController.attenuationDb.value
             curve.nearestRung(totalDb)
@@ -111,6 +115,16 @@ class FullRangeCoordinator(
     @Volatile
     var surrendered: Boolean = false
         private set
+
+    /**
+     * The audio mode flipped (call started or ended), so [StreamVolumeController.activeStream]
+     * may now resolve differently and the upper-zone ladder must re-render. Control paths do
+     * not need this — they evaluate the stream live — this is display-freshness only.
+     */
+    fun onAudioModeChanged() {
+        Log.i(tag, "Audio mode changed — re-rendering (inCall=${streamVol.inCall()})")
+        notifyUi()
+    }
 
     /** (Re)read the media curve. Call on service start and on every output-route change. */
     fun refreshCurve() {
@@ -169,13 +183,14 @@ class FullRangeCoordinator(
     fun inQuietZone(): Boolean = zoneQuiet
 
     /**
-     * Number of selectable positions in the upper zone.
-     * With a valid curve: the 5 dB rung count. Otherwise: raw hardware indices.
+     * Number of selectable positions in the upper zone for the CURRENT stream.
+     * Media with a valid curve: the 5 dB rung count. In a call, or with a rejected curve:
+     * raw hardware indices of the active stream.
      */
     fun upperPositionCount(): Int {
         val stream = streamVol.activeStream()
         val curve = mediaCurve
-        return if (curve != null) {
+        return if (stream == AudioManager.STREAM_MUSIC && curve != null) {
             curve.rungs.size
         } else {
             streamVol.maxIndex(stream) - streamVol.minAudibleIndex(stream) + 1
@@ -190,13 +205,15 @@ class FullRangeCoordinator(
         if (isMuted) cancelMute()
         val stream = streamVol.activeStream()
         val curve = mediaCurve
-        if (curve != null) {
+        if (stream == AudioManager.STREAM_MUSIC && curve != null) {
             val rung = curve.rungs[pos.coerceIn(0, curve.rungs.lastIndex)]
             streamVol.setIndex(stream, rung.hardwareIndex)
             audioController.setAttenuation(rung.remainderDb)
         } else {
-            // Raw-index fallback (rejected curve, or wireless Absolute Volume): gain MUST
-            // stay 0 — every position is a real hardware step, nothing to fill in.
+            // Raw-index path: in a call (voice stream — the media curve does not describe
+            // it), rejected curve, or wireless Absolute Volume. Gain MUST stay 0 in call
+            // mode — the gain is global (session 0) and belongs to the media scale; here
+            // every position is a real hardware step, nothing to fill in.
             val top = streamVol.maxIndex(stream)
             streamVol.setIndex(stream, (top - pos).coerceAtLeast(streamVol.minAudibleIndex(stream)))
             audioController.setAttenuation(0f)

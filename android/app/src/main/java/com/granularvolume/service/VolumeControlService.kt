@@ -101,6 +101,18 @@ class VolumeControlService : Service() {
     // overlay renders.
 
     /**
+     * 1.4.3: in a call the upper zone drives the voice-call stream, so the ladder must
+     * re-render when a call starts or ends. Control correctness never depends on this —
+     * activeStream() is evaluated live per use — this is display freshness only. The
+     * listener API exists from 31; on 28-30 the display catches up on the next volume
+     * broadcast or touch, which in practice is the moment the call audio starts.
+     */
+    private val modeListener =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            AudioManager.OnModeChangedListener { coordinator.onAudioModeChanged() }
+        else null
+
+    /**
      * True only when the user explicitly asked to stop (notification Stop action or
      * overlay dismiss). onDestroy also runs on device shutdown and OS kills, and those
      * must NOT clear the boot-restore flag — otherwise BootReceiver always sees false
@@ -165,6 +177,9 @@ class VolumeControlService : Service() {
         val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val mainHandler = Handler(Looper.getMainLooper())
         am.registerAudioDeviceCallback(deviceCallback, mainHandler)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && modeListener != null) {
+            am.addOnModeChangedListener({ r -> mainHandler.post(r) }, modeListener)
+        }
 
         try {
             overlayManager.show()
@@ -196,6 +211,9 @@ class VolumeControlService : Service() {
         runCatching {
             val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             am.unregisterAudioDeviceCallback(deviceCallback)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && modeListener != null) {
+                am.removeOnModeChangedListener(modeListener)
+            }
         }
         overlayManager.hide()
         audioController.release()

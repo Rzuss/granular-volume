@@ -2,6 +2,12 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.3 (versionCode 15)
+
+In-call control, closing the one case where the dial and the physical keys still disagreed. During a cellular or VoIP call, Android routes the physical volume keys to the call volume, a third scale separate from media and ringtone. The dial's upper zone stayed on media volume, so moving it during a call changed nothing audible. The upper zone now follows the same rule as the keys: during a call it drives the call volume, using the call scale's real hardware steps, and the moment the call ends it returns to media volume. The call state is evaluated at the moment of each interaction, the same way Android itself resolves the keys, so this needs no new permissions.
+
+The quiet zone is untouched and keeps its unique property in calls: because it attenuates the signal itself rather than moving any volume scale, it reaches below the call scale's minimum, which no volume key can do. The ringtone stream remains completely untouched, as decided in 1.4.2.
+
 ## 1.4.2 (versionCode 14)
 
 Idle-state fix, found during hardware verification of 1.4.1. Since 1.4.0 the dial followed the rule "media stream while audio plays, ringtone stream otherwise". Android itself does not work that way: when nothing is playing, the physical volume keys adjust media volume, not ringtone volume. The mismatch had two effects. With no audio playing, pressing the volume keys moved nothing on the dial, so it looked frozen. Worse, dragging the upper zone while idle silently changed the ringtone volume instead of the media volume.
