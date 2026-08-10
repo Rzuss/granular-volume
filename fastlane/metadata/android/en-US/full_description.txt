@@ -31,7 +31,7 @@ MADE FOR QUIET MOMENTS
 - Anyone who searched for lower volume than the minimum Android setting
 
 DESIGNED TO STAY OUT OF THE WAY
-Granular Volume does not take over your volume buttons. It does not replace your system volume panel. It does not add an equalizer suite you did not ask for. It sits quietly on top as an overlay and does one thing: make the output quieter than your hardware minimum.
+Granular Volume does not intercept your volume keys, so they keep working exactly as they always did. It does not replace your system volume panel and it does not add an equalizer suite you did not ask for. It sits quietly on top as an overlay and changes one thing: the level, from normal volume all the way below your hardware minimum.
 
 FREE, PRIVATE, OPEN SOURCE
 No ads. No tracking. No internet permission, so the app cannot connect to anything. No account, no sign in, no analytics. Open source under the GPL-3.0 license.

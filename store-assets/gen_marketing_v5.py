@@ -828,6 +828,10 @@ def c_mute(d, sx, sy, sw, sh):
 
 # --- Main --------------------------------------------------------------------
 print("Generating Granular Volume marketing assets v5 (full-range dial)...")
+# Play allows a maximum of EIGHT phone screenshots, so the set is eight, not nine.
+# The screen that used to say "It touches nothing else / No system takeover" was cut:
+# 1.4.0 sets system volume above the device-minimum line, so that claim no longer holds.
+# c_noninvasive is kept in the file for reference but is deliberately not built.
 make_feature()
 build(1, ["When the lowest setting", "is still too loud"],
       "Granular Volume picks up where Android stops", c_hook)
@@ -841,10 +845,8 @@ build(5, ["Mutes media,", "never your alarms"],
       "One tap to silence. One tap to bring it back.", c_mute)
 build(6, ["Always within reach"],
       "Drag it anywhere. Close it with one tap.", c_drag)
-build(7, ["It touches nothing else"],
-      "No button override. No system takeover.", c_noninvasive, accent=CYAN)
-build(8, ["One tap from", "Quick Settings"],
+build(7, ["One tap from", "Quick Settings"],
       "Turn it on or off without opening the app", c_qstile)
-build(9, ["Free, private, open"],
+build(8, ["Free, private, open"],
       "No ads. No tracking. GPL-3.0.", c_trust)
 print("Done. Assets saved to:", OUT)
