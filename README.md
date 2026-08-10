@@ -31,7 +31,7 @@ This isn't a bug. It's a structural limit in how Android's volume system is buil
 
 Volume keys are among the most-used moving parts on a phone, and they wear out, stiffen, or get held down by a case. Android's built-in answers (the notification-shade slider, the Accessibility Menu) work, but both are somewhere you go rather than something that is simply there, and neither can reach below the device minimum.
 
-Since 1.4.0 the dial covers both problems on one scale: above the device-minimum line it sets normal system volume, so it stands in for the buttons; below the line it does what it always did. Every step is 5 dB, built at runtime from the device's own volume curve rather than from its uneven hardware steps.
+Since 1.4.0 the dial covers both problems on one scale: above the device-minimum line it sets normal system volume, so it stands in for the buttons; below the line it does what it always did. On the speaker and wired routes, every step is 5 dB, built at runtime from the device's own volume curve rather than from its uneven hardware steps. On Bluetooth with Absolute Volume, where the headset applies its own loudness curve and the phone's table does not describe what actually plays, the dial follows your device's real hardware steps instead, one bar each, so every bar on screen is a step you can hear.
 
 ## How Android volume actually works
 
