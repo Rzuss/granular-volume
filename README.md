@@ -135,11 +135,11 @@ Android's own slider runs out of room, then the dial keeps going below it. The
 audio in the video drops with every step shown on screen, so you can hear the
 difference rather than just read about it.
 
-<a href="https://www.youtube.com/shorts/pC4Zd8xtCOE">
-<img src="https://i.ytimg.com/vi/pC4Zd8xtCOE/hqdefault.jpg" width="320" alt="Quiet Dial: lower your Android volume below the minimum">
+<a href="https://www.youtube.com/shorts/_c5YBBeVgaU">
+<img src="https://i.ytimg.com/vi/_c5YBBeVgaU/hqdefault.jpg" width="320" alt="Quiet Dial: lower your Android volume below the minimum">
 </a>
 
-[Watch on YouTube](https://www.youtube.com/shorts/pC4Zd8xtCOE)
+[Watch on YouTube](https://www.youtube.com/shorts/_c5YBBeVgaU)
 
 ## Compatibility
 
