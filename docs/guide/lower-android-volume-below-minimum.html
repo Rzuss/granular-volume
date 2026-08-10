@@ -138,7 +138,7 @@
     {
       "@type": "Question",
       "name": "Does it override or disable my phone's physical volume buttons?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. It doesn't take over the volume buttons or the system volume panel. It adds an additional, lower range underneath what those controls already reach."}
+      "acceptedAnswer": {"@type": "Answer", "text": "No. It doesn't take over the volume buttons or the system volume panel. The slider covers your normal range above the device minimum and adds a lower range underneath what those controls reach."}
     },
     {
       "@type": "Question",
@@ -352,7 +352,7 @@
     <div class="fixcard">
       <h3>Apps using DynamicsProcessing or LoudnessEnhancer with negative gain <span class="verdict v-works">Actually works</span></h3>
       <p>A small category of apps takes a fundamentally different approach: instead of remapping the existing volume steps, they apply an audio effect with negative gain on top of the lowest system step, using Android's own audio effect framework (DynamicsProcessing, or LoudnessEnhancer as a fallback on older versions). This genuinely produces output quieter than the hardware minimum allows, because it isn't working within the existing step range at all.</p>
-      <p>This is how <a href="../index.html">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel, it just adds the missing quiet end of the range.</p>
+      <p>This is how <a href="../index.html">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even 5 dB steps, so it can stand in for worn or broken volume buttons too.</p>
     </div>
 
     <div class="callout">
@@ -427,7 +427,7 @@
       <dd>Yes. Swiping down to Quick Settings and tapping the Granular Volume tile toggles the floating dial on or off directly, without navigating into the app itself.</dd>
 
       <dt>Does it override or disable my phone's physical volume buttons?</dt>
-      <dd>No. It doesn't take over the volume buttons or the system volume panel. It adds an additional, lower range underneath what those controls already reach.</dd>
+      <dd>No. It doesn't take over the volume buttons or the system volume panel. The slider covers your normal range above the device minimum and adds a lower range underneath what those controls reach.</dd>
 
       <dt>Is Granular Volume available on F-Droid, or only on Google Play?</dt>
       <dd>It's available on both. The F-Droid build is fully open source with the proprietary Play-only components removed, and may occasionally lag a version behind the Google Play release while F-Droid's own build and metadata pipeline catches up.</dd>

@@ -58,18 +58,22 @@ It's a small floating dial that sits over any app:
 - **Drag it anywhere** on screen and it stays there across restarts.
 - **Tuck it into a corner** and it turns semi-transparent, staying out of the way without fully disappearing.
 - **Close it with one tap**, or reopen it from a **Quick Settings tile** without leaving the app you're in.
-- **Doesn't override your physical volume buttons** or replace the system volume panel. It sits on top and does one additional thing, nothing else.
+- **Covers your normal range too.** Above the line marking your device's minimum, the slider sets regular system volume in even 5 dB steps, so it stands in for worn or broken volume buttons.
+- **Mutes media without touching alarms.** One tap silences media; your wake-up alarm still rings.
+- **Doesn't take over your physical volume buttons** or replace the system volume panel. The buttons keep working; inside the quiet zone the dial folds their presses into its own finer scale.
 
 No ads. No tracking. No account. No network permission requested at all. The app has no way to send or receive data even if it wanted to.
 
 ## Features
 
+- **One slider, the whole range**: normal system volume above the device-minimum line in even 5 dB steps, and the quiet zone below it.
 - **Fine grained attenuation** from 0 dB (pass through, i.e. Android's own step 1) down to about -30 dB in steps, applied to the global output mix.
+- **Media mute that spares alarms**: one tap silences media playback and leaves alarm streams untouched.
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
 - **Quick Settings tile**: toggle the overlay on or off from the notification shade without opening the app.
 - **One tap dismiss** and a clean, native feeling control surface.
 - **Comes back on its own after a restart.** If the control was on when the device shut down, it restores itself after boot, at the same level. Turned it off yourself? It stays off.
-- **Lightweight**, single purpose, written in pure Kotlin with no Compose runtime.
+- **Lightweight**, focused on one job (your volume level), written in pure Kotlin with no Compose runtime.
 
 ## Use cases
 
@@ -101,7 +105,7 @@ Most apps in this space solve the opposite problem, or a different problem that 
 |---|---|---|
 | Direction | Goes **quieter** than the hardware minimum | Usually makes things **louder**, or adds more clicks within the *existing* range |
 | Mechanism | Independent output-gain effect, applied underneath the existing volume steps | Often remaps or subdivides the same step range you already have |
-| Touches volume buttons? | No, buttons and system panel work exactly as before | Sometimes overrides or intercepts them |
+| Touches volume buttons? | No takeover: buttons and panel keep working; in the quiet zone their presses fold into the dial's finer scale | Sometimes overrides or intercepts them |
 | Setup | One dial, drag it, done | Frequently an equalizer, presets, or an account |
 | Cost model | Free, open source, no ads, no tracking | Often paid, ad-supported, or both |
 
@@ -120,23 +124,24 @@ In the interest of being straightforward about what this app does and doesn't do
 
 <table>
 <tr>
-<th>Setup</th><th>Overlay</th><th>In use</th>
+<th>The problem</th><th>The whole range</th><th>Broken buttons</th>
 </tr>
 <tr>
-<td><img src="store-assets/screenshot_1.png" width="260" alt="Setup screen"></td>
-<td><img src="store-assets/screenshot_2.png" width="260" alt="Overlay with seven attenuation steps"></td>
-<td><img src="store-assets/screenshot_3.png" width="260" alt="Overlay in use over another app"></td>
+<td><img src="store-assets/screenshot_1.png" width="260" alt="When the lowest setting is still too loud"></td>
+<td><img src="store-assets/screenshot_2.png" width="260" alt="One slider, the whole volume range"></td>
+<td><img src="store-assets/screenshot_3.png" width="260" alt="Works when your volume buttons do not"></td>
 </tr>
 </table>
 
 ## Demo
 
-Android's own slider runs out of room, then the dial keeps going below it. The
-audio in the video drops with every step shown on screen, so you can hear the
-difference rather than just read about it.
+Android's own slider runs out of room, then one on-screen slider carries the
+whole range: up through normal volume, and on below the minimum. The audio in
+the video drops with every step shown on screen, so you can hear the difference
+rather than just read about it.
 
 <a href="https://www.youtube.com/shorts/_c5YBBeVgaU">
-<img src="https://i.ytimg.com/vi/_c5YBBeVgaU/hqdefault.jpg" width="320" alt="Quiet Dial: lower your Android volume below the minimum">
+<img src="https://i.ytimg.com/vi/_c5YBBeVgaU/hqdefault.jpg" width="320" alt="Quiet Dial: your whole Android volume range on one slider">
 </a>
 
 [Watch on YouTube](https://www.youtube.com/shorts/_c5YBBeVgaU)
@@ -151,7 +156,7 @@ difference rather than just read about it.
 ## FAQ
 
 **Does this override my physical volume buttons?**
-No. The buttons and the system volume panel work exactly as before. The overlay is an independent control that sits on top and applies additional attenuation underneath whatever the system volume is already set to.
+No. The buttons and the system volume panel keep working. Above the device-minimum line the dial sets normal system volume, the same setting your buttons change. Below the line it applies additional attenuation underneath the minimum, and button presses inside that zone are folded into the dial's finer scale.
 
 **Why not just use an equalizer app's preamp/gain control instead?**
 That works as a rough approximation of the same idea, but it's less precise and easier to overshoot into distortion, since preamp controls are built for tone shaping, not for a clean, predictable volume floor.
