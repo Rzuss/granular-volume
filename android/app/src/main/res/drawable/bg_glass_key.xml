@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 1.4.4 option B "Sculpted Glass" chevron key.
-     Stadium shape (radius = half the 30dp height), vertical glass gradient with a soft
-     top sheen. Pressed state is driven MANUALLY from OverlayManager.pressPulse() because
-     children are non-clickable by design (the unified root touch handler owns all input),
-     so the system never sets state_pressed on its own. -->
+     Stadium shape (radius = half the 30dp height), single vertical glass gradient.
+     Deliberately ONE shape: an earlier layer-list "top sheen" left a squared band
+     visible behind the stadium (owner hardware report, 2026-08-15) because the inset
+     layer's corners cannot be clipped by the layer below. The brighter gradient start
+     provides the sheen instead, with zero clipping artifacts.
+     Pressed state is driven MANUALLY from OverlayManager.pressPulse() because children
+     are non-clickable by design (the unified root touch handler owns all input). -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
@@ -12,28 +15,14 @@
         </shape>
     </item>
     <item>
-        <layer-list>
-            <!-- Glass body -->
-            <item>
-                <shape android:shape="rectangle">
-                    <gradient
-                        android:angle="270"
-                        android:startColor="#1CFFFFFF"
-                        android:endColor="#09FFFFFF" />
-                    <corners android:radius="15dp" />
-                    <stroke android:width="1dp" android:color="#1FFFFFFF" />
-                </shape>
-            </item>
-            <!-- Top highlight: a sheen fading out over the upper half -->
-            <item android:bottom="15dp">
-                <shape android:shape="rectangle">
-                    <gradient
-                        android:angle="270"
-                        android:startColor="#30FFFFFF"
-                        android:endColor="#00FFFFFF" />
-                    <corners android:radius="15dp" />
-                </shape>
-            </item>
-        </layer-list>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="#2EFFFFFF"
+                android:centerColor="#14FFFFFF"
+                android:endColor="#0AFFFFFF" />
+            <corners android:radius="15dp" />
+            <stroke android:width="1dp" android:color="#24FFFFFF" />
+        </shape>
     </item>
 </selector>
