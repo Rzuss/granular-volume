@@ -45,15 +45,20 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Louder: one step up the combined full-range scale -->
+        <!-- Louder: one step up the combined full-range scale.
+             1.4.4 option B "Sculpted Glass": wide stadium key, 48x30. The 10dp saved
+             versus the old 40dp-tall chevron is spent as 2+2dp margins here (and on the
+             down key) so the pill's OUTER envelope does not move — the tuned tuck-to-edge
+             geometry is a locked constraint. -->
         <ImageButton
             android:id="@+id/gv_btn_up"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@null"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/bg_glass_key"
             android:src="@drawable/ic_chevron_up"
-            android:tint="#EEFFFFFF"
-            android:padding="8dp"
+            android:tint="#F2F4FF"
+            android:padding="5dp"
             android:scaleType="centerInside"
             android:contentDescription="@string/gv_louder" />
 
@@ -190,46 +195,65 @@
         <!-- Quieter: one step down the combined full-range scale -->
         <ImageButton
             android:id="@+id/gv_btn_down"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@null"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/bg_glass_key"
             android:src="@drawable/ic_chevron_down"
-            android:tint="#99FFFFFF"
-            android:padding="8dp"
+            android:tint="#D5D9EC"
+            android:padding="5dp"
             android:scaleType="centerInside"
             android:contentDescription="@string/gv_quieter" />
 
-        <!-- Bottom row: media-mute toggle + current level label.
+        <!-- 1.4.4 option B bottom block: the dB label centred ABOVE a full-width mute bar.
              Mute is MEDIA-STREAM mute (alarms keep ringing) — the one sanctioned
-             path to true silence, always an explicit action, never a slide. -->
-        <LinearLayout
+             path to true silence, always an explicit action, never a slide.
+             The bar is deliberately unlike anything else in the pill (shape, position,
+             size) so a chevron tap cannot plausibly land on it. -->
+
+        <!-- Percentage above the line, dB below it (locked label spec).
+             Mirrors the mute state in colour AND text, so mute is carried by three
+             redundant channels: bar colour, glyph, and this label. -->
+        <TextView
+            android:id="@+id/gv_label_db"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="2dp">
+            android:layout_marginTop="2dp"
+            android:text="0 dB"
+            android:textColor="#88FFFFFF"
+            android:textSize="10sp"
+            android:fontFamily="monospace" />
 
-            <ImageButton
-                android:id="@+id/gv_btn_mute"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@null"
+        <LinearLayout
+            android:id="@+id/gv_btn_mute"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_mute_bar"
+            android:contentDescription="@string/gv_mute">
+
+            <ImageView
+                android:id="@+id/gv_mute_glyph"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:src="@drawable/ic_volume_off"
                 android:tint="#99FFFFFF"
-                android:padding="4dp"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/gv_mute" />
+                android:importantForAccessibility="no" />
 
-            <!-- Percentage above the line, dB below it (locked label spec). -->
             <TextView
-                android:id="@+id/gv_label_db"
+                android:id="@+id/gv_mute_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 dB"
-                android:textColor="#88FFFFFF"
-                android:textSize="10sp"
-                android:fontFamily="monospace"
-                android:layout_marginStart="4dp" />
+                android:layout_marginStart="3dp"
+                android:text="@string/gv_mute_bar_label"
+                android:textColor="#99FFFFFF"
+                android:textSize="7sp"
+                android:letterSpacing="0.2"
+                android:fontFamily="sans-serif-medium"
+                android:importantForAccessibility="no" />
 
         </LinearLayout>
 

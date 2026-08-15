@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1.4.4 option B full-width mute bar. Deliberately unlike every other control in the
+     pill (shape, position, size) so a tap aimed at a chevron cannot plausibly land here —
+     that mis-tap was the defect option B exists to fix.
+     state_selected = muted (set from render(), not by the system: children are
+     non-clickable under the unified touch handler). -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF5A5F" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#0AFFFFFF" />
+            <corners android:radius="12dp" />
+            <stroke android:width="2dp" android:color="#38FFFFFF" />
+        </shape>
+    </item>
+</selector>

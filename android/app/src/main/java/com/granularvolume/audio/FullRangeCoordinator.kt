@@ -52,6 +52,33 @@ class FullRangeCoordinator(
     private val _uiRevision = MutableStateFlow(0)
     val uiRevision: StateFlow<Int> = _uiRevision.asStateFlow()
 
+    /**
+     * 1.4.4: what the overlay should FLASH after a physical key press that changed nothing
+     * visible. A press that lands inside the current 5 dB rung moves the hardware index but
+     * not the highlighted bar, which reads as "the app ignored me" — the measured
+     * comprehension defect. The flash acknowledges the press.
+     *
+     * [FlashTarget.QUIET_FIRST] is the owner-approved boundary behaviour: pressing DOWN while
+     * already on the lowest upper rung flashes the first bar BELOW the orange line instead of
+     * the current bar — an invitation into the quiet zone, not a wall. This is the exact
+     * moment the 1-star Motorola review got stuck at.
+     *
+     * Detection limit, stated honestly: VOLUME_CHANGED_ACTION only fires when the hardware
+     * index actually changes. On a device whose media minimum equals the current index, a
+     * down-press at the very floor produces NO broadcast and cannot be detected. The
+     * invitation therefore fires on every down-press WITHIN the lowest rung's index span
+     * (common: rungs span several indices) but not on the silent final press.
+     */
+    enum class FlashTarget { UPPER_CURRENT, QUIET_CURRENT, QUIET_FIRST }
+    data class FlashSignal(val id: Int, val target: FlashTarget?)
+
+    private val _flash = MutableStateFlow(FlashSignal(0, null))
+    val flash: StateFlow<FlashSignal> = _flash.asStateFlow()
+
+    private fun emitFlash(target: FlashTarget) {
+        _flash.value = FlashSignal(_flash.value.id + 1, target)
+    }
+
     /** True while the media stream is muted by our mute button. */
     @Volatile
     var isMuted: Boolean = false
@@ -268,13 +295,18 @@ class FullRangeCoordinator(
     fun onExternalVolumeChange(stream: Int, from: Int, to: Int) {
         if (streamVol.wasSelfChange(stream, to)) return
         if (!inQuietZone() || stream != AudioManager.STREAM_MUSIC) {
-            // Upper zone / other stream: display sync only.
+            // Upper zone / other stream: display sync only — plus the 1.4.4 press
+            // acknowledgement when the press moved the index but not the visible bar.
+            maybeFlashUpper(stream, from, to)
             notifyUi()
             return
         }
         if (isMuted) { notifyUi(); return }
         if (to <= from) {
             // Downward external change (safe-volume, user intent to be quieter): never fought.
+            // 1.4.4: a genuine down-press here changes nothing the quiet bars render, so
+            // acknowledge it on the current quiet bar (to == from never broadcasts).
+            if (to < from) emitFlash(FlashTarget.QUIET_CURRENT)
             notifyUi()
             return
         }
@@ -299,6 +331,24 @@ class FullRangeCoordinator(
             Log.i(tag, "Defended quiet zone against jump $from -> $to")
         }
         notifyUi()
+    }
+
+    /**
+     * Upper-zone press acknowledgement (1.4.4). Fires only when the rung DIDN'T change:
+     * a rung change already moves the highlighted bar, which is its own acknowledgement.
+     * Both positions are computed with the same current gain — no write happened between
+     * [from] and [to], the change was external.
+     */
+    private fun maybeFlashUpper(stream: Int, from: Int, to: Int) {
+        if (isMuted || zoneQuiet) return
+        if (stream != streamVol.activeStream()) return
+        val posFrom = currentUpperPos(stream, from)
+        val posTo = currentUpperPos(stream, to)
+        if (posFrom != posTo) return
+        val lowest = upperPositionCount() - 1
+        val invite = to < from && posTo >= lowest &&
+                stream == AudioManager.STREAM_MUSIC && !streamVol.inCall()
+        emitFlash(if (invite) FlashTarget.QUIET_FIRST else FlashTarget.UPPER_CURRENT)
     }
 
     /** Sliding window rate limit. @return false when the fight-loop breaker should trip. */

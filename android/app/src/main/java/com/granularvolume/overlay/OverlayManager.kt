@@ -1,18 +1,22 @@
 package com.granularvolume.overlay
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.os.Build
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.Gravity
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.granularvolume.R
@@ -83,11 +87,36 @@ class OverlayManager(
         private const val UPPER_CONTAINER_DP = 84
         private const val UPPER_BAR_GAP_DP = 2
         private const val UPPER_BAR_MIN_DP = 3
+
+        // 1.4.4 option B: manual hit-test slops, re-derived for the new geometry.
+        // Chevron keys are 48x30 — 9dp slop makes the effective target 66x48 (≥48dp).
+        // Mute bar is 56x24 — 12dp slop makes it 80x48. Contested slop space between the
+        // down key and the mute bar is decided by TEST ORDER: chevrons before mute, because
+        // the mis-tap option B exists to prevent is a chevron tap landing on mute.
+        private const val CHEVRON_SLOP_DP = 9
+        private const val MUTE_SLOP_DP = 12
+
+        // 1.4.4 press feedback + key-press flash.
+        private const val PRESS_SCALE = 0.96f
+        private const val PRESS_MS = 120L
+        // Flash starts after render()'s ANIM_MS alpha animations settle, so the two never
+        // fight over the same View's animator.
+        private const val FLASH_DELAY_MS = 140L
+        private const val FLASH_IN_MS = 90L
+        private const val FLASH_HOLD_MS = 60L
+        private const val FLASH_OUT_MS = 220L
+
+        private const val COLOR_LABEL_NORMAL = 0x88FFFFFF.toInt()
+        private const val COLOR_MUTED_ACCENT = 0xFFFF5A5F.toInt()
+        private const val COLOR_MUTE_CONTENT = 0x99FFFFFF.toInt()
+        private const val COLOR_MUTE_INVERTED = 0xFF1A1A2E.toInt()
     }
 
     private val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private val density = context.resources.displayMetrics.density
     private val dismissHitSlop = (12 * density).toInt()
+    private val chevronHitSlop = (CHEVRON_SLOP_DP * density).toInt()
+    private val muteHitSlop = (MUTE_SLOP_DP * density).toInt()
     private var overlayView: View? = null
     private var flowJob: Job? = null
 
@@ -132,6 +161,12 @@ class OverlayManager(
         flowJob = scope.launch(Dispatchers.Main) {
             launch { audioController.attenuationDb.collect { render(view) } }
             launch { coordinator.uiRevision.collect { render(view) } }
+            // 1.4.4: key-press flash acknowledgements (id 0 is the initial empty signal).
+            launch {
+                coordinator.flash.collect { sig ->
+                    if (sig.id > 0 && sig.target != null) onFlash(view, sig.target)
+                }
+            }
         }
     }
 
@@ -154,7 +189,8 @@ class OverlayManager(
         val btnUp      = view.findViewById<ImageButton>(R.id.gv_btn_up)
         val btnDown    = view.findViewById<ImageButton>(R.id.gv_btn_down)
         val btnDismiss = view.findViewById<ImageButton>(R.id.gv_btn_dismiss)
-        val btnMute    = view.findViewById<ImageButton>(R.id.gv_btn_mute)
+        // 1.4.4: the mute control is a full-width bar (LinearLayout), no longer an ImageButton.
+        val btnMute    = view.findViewById<View>(R.id.gv_btn_mute)
 
         buildUpperBars(view)
 
@@ -213,7 +249,7 @@ class OverlayManager(
         btnUp: View,
         btnDown: View,
         btnDismiss: ImageButton,
-        btnMute: ImageButton
+        btnMute: View
     ) {
         var initialX = 0
         var initialY = 0
@@ -264,6 +300,12 @@ class OverlayManager(
         }
     }
 
+    /**
+     * 1.4.4 hit-test order, re-derived for the option B geometry: dismiss, then BOTH
+     * chevrons, then mute, then bars. Chevrons win any contested slop space against the
+     * mute bar — the mis-tap this design exists to prevent is a chevron tap landing on
+     * mute, and an accidental mute is worse than an accidental step.
+     */
     private fun handleTap(
         root: View,
         rawX: Float,
@@ -272,25 +314,25 @@ class OverlayManager(
         btnUp: View,
         btnDown: View,
         btnDismiss: ImageButton,
-        btnMute: ImageButton
+        btnMute: View
     ) {
         if (hit(btnDismiss, rawX, rawY, dismissHitSlop)) {
             flash(btnDismiss); onDismiss(); return
         }
-        if (hit(btnMute, rawX, rawY, dismissHitSlop)) {
-            flash(btnMute); coordinator.toggleMute(); return
+        if (hit(btnUp, rawX, rawY, chevronHitSlop)) {
+            pressPulse(btnUp); tick(root); stepCombined(+1); return
         }
-        if (hit(btnUp, rawX, rawY)) {
-            flash(btnUp); stepCombined(+1); return
+        if (hit(btnDown, rawX, rawY, chevronHitSlop)) {
+            pressPulse(btnDown); tick(root); stepCombined(-1); return
         }
-        if (hit(btnDown, rawX, rawY)) {
-            flash(btnDown); stepCombined(-1); return
+        if (hit(btnMute, rawX, rawY, muteHitSlop)) {
+            pressPulse(btnMute); confirmHaptic(root); coordinator.toggleMute(); return
         }
         for (i in upperBars.indices) {
-            if (hit(upperBars[i], rawX, rawY)) { coordinator.applyUpper(i); return }
+            if (hit(upperBars[i], rawX, rawY)) { tick(root); coordinator.applyUpper(i); return }
         }
         for (i in quietBars.indices) {
-            if (hit(quietBars[i], rawX, rawY)) { selectQuiet(i); return }
+            if (hit(quietBars[i], rawX, rawY)) { tick(root); selectQuiet(i); return }
         }
     }
 
@@ -362,7 +404,9 @@ class OverlayManager(
 
         val quietBars = collectStepBars(view)
         val label = view.findViewById<TextView>(R.id.gv_label_db)
-        val btnMute = view.findViewById<ImageButton>(R.id.gv_btn_mute)
+        val btnMute = view.findViewById<View>(R.id.gv_btn_mute)
+        val muteGlyph = view.findViewById<ImageView>(R.id.gv_mute_glyph)
+        val muteText = view.findViewById<TextView>(R.id.gv_mute_text)
 
         // Never let the hidden floor step become the selection; -5 dB is the visible top.
         if (s.zoneQuiet) currentStep = dbToStep(s.quietDb).coerceAtMost(QUIET_TOP_VISIBLE)
@@ -390,12 +434,127 @@ class OverlayManager(
         }
 
         // Label: % above the line, dB below, MUTE while muted (locked label spec).
+        // 1.4.4: the label also mirrors the muted state in COLOUR, so mute is carried by
+        // three redundant channels (bar fill, glyph, label) — never by colour alone.
         label.text = when {
             s.muted     -> context.getString(R.string.gv_label_muted)
             s.zoneQuiet -> formatDb(STEP_DB[currentStep])
             else        -> "${s.percent}%"
         }
-        btnMute.alpha = if (s.muted) 1.0f else 0.6f
+        label.setTextColor(if (s.muted) COLOR_MUTED_ACCENT else COLOR_LABEL_NORMAL)
+
+        // 1.4.4 option B mute bar: state_selected drives the red fill in bg_mute_bar;
+        // glyph and text invert onto it. Announced to TalkBack as a STATE via the
+        // container's contentDescription, not as new text.
+        btnMute.isSelected = s.muted
+        muteGlyph.setColorFilter(if (s.muted) COLOR_MUTE_INVERTED else COLOR_MUTE_CONTENT)
+        muteText.setTextColor(if (s.muted) COLOR_MUTE_INVERTED else COLOR_MUTE_CONTENT)
+        muteText.text = context.getString(
+            if (s.muted) R.string.gv_mute_bar_label_active else R.string.gv_mute_bar_label
+        )
+        btnMute.contentDescription = context.getString(
+            if (s.muted) R.string.gv_label_muted else R.string.gv_mute
+        )
+    }
+
+    // ────────────────────────────────────────────────────────────────
+    // 1.4.4: press feedback, haptics, key-press flash
+    // ────────────────────────────────────────────────────────────────
+
+    /**
+     * Animations globally disabled by the user (the platform's reduced-motion signal):
+     * every animated affordance falls back to an instant, non-animated equivalent.
+     */
+    private fun animationsEnabled(): Boolean = try {
+        Settings.Global.getFloat(
+            context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f
+        ) != 0f
+    } catch (e: Exception) {
+        true
+    }
+
+    /**
+     * Option B pressed feedback for the glass keys and the mute bar. The system never sets
+     * state_pressed itself (children are non-clickable under the unified touch handler),
+     * so it is driven here: pressed drawable + scale 0.96, released after PRESS_MS.
+     */
+    private fun pressPulse(v: View) {
+        v.isPressed = true
+        if (animationsEnabled()) {
+            v.animate().scaleX(PRESS_SCALE).scaleY(PRESS_SCALE).setDuration(PRESS_MS / 2)
+                .withEndAction {
+                    v.isPressed = false
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(PRESS_MS).start()
+                }.start()
+        } else {
+            v.postDelayed({ v.isPressed = false }, PRESS_MS)
+        }
+    }
+
+    private fun tick(root: View) {
+        root.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
+    }
+
+    private fun confirmHaptic(root: View) {
+        val constant = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.LONG_PRESS
+        root.performHapticFeedback(constant)
+    }
+
+    /**
+     * A physical key press changed the hardware index but not the highlighted bar — flash
+     * the bar the coordinator named, so the press never reads as ignored.
+     * QUIET_FIRST (the owner-approved boundary case) pulses TWICE on the first bar below
+     * the orange line: an invitation downward, not a wall.
+     * Runs FLASH_DELAY_MS after the render pass so the two never fight one View's animator.
+     */
+    private fun onFlash(view: View, target: FullRangeCoordinator.FlashTarget) {
+        view.postDelayed({
+            if (overlayView == null) return@postDelayed
+            val s = coordinator.uiState()
+            val bar: View? = when (target) {
+                FullRangeCoordinator.FlashTarget.UPPER_CURRENT ->
+                    upperBars.getOrNull(s.upperPos)
+                FullRangeCoordinator.FlashTarget.QUIET_CURRENT ->
+                    view.findViewById(quietBarId(currentStep))
+                FullRangeCoordinator.FlashTarget.QUIET_FIRST ->
+                    view.findViewById(R.id.gv_step_bar_5)
+            }
+            bar ?: return@postDelayed
+            val pulses = if (target == FullRangeCoordinator.FlashTarget.QUIET_FIRST) 2 else 1
+            pulseBar(view, bar, pulses)
+        }, FLASH_DELAY_MS)
+    }
+
+    private fun pulseBar(root: View, bar: View, pulses: Int) {
+        if (!animationsEnabled()) {
+            // Reduced motion: one instant blink, no interpolation.
+            bar.alpha = ALPHA_CURRENT
+            bar.postDelayed({ overlayView?.let { render(it) } }, FLASH_IN_MS + FLASH_HOLD_MS + FLASH_OUT_MS)
+            return
+        }
+        bar.animate().alpha(ALPHA_CURRENT).setDuration(FLASH_IN_MS).withEndAction {
+            bar.postDelayed({
+                if (pulses > 1) {
+                    bar.animate().alpha(ALPHA_INACTIVE).setDuration(FLASH_OUT_MS).withEndAction {
+                        pulseBar(root, bar, pulses - 1)
+                    }.start()
+                } else {
+                    // Hand the bar back to the render pipeline's truth.
+                    overlayView?.let { render(it) }
+                }
+            }, FLASH_HOLD_MS)
+        }.start()
+    }
+
+    private fun quietBarId(step: Int): Int = when (step) {
+        0 -> R.id.gv_step_bar_0
+        1 -> R.id.gv_step_bar_1
+        2 -> R.id.gv_step_bar_2
+        3 -> R.id.gv_step_bar_3
+        4 -> R.id.gv_step_bar_4
+        5 -> R.id.gv_step_bar_5
+        else -> R.id.gv_step_bar_6
     }
 
     private fun dbToStep(dB: Float): Int =

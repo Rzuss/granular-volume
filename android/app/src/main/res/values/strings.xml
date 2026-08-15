@@ -25,6 +25,8 @@
     <string name="gv_line_tooltip">below the line:\nquieter than your\ndevice minimum</string>
     <string name="gv_upper_bar_desc">Volume level</string>
     <string name="gv_label_muted">MUTED</string>
+    <string name="gv_mute_bar_label">MUTE</string>
+    <string name="gv_mute_bar_label_active">MUTED</string>
 
     <!-- Consent gate (clickwrap) -->
     <string name="gv_consent_text">This is a convenience utility, not hearing protection equipment. By continuing you agree to the Terms of Use and confirm you have read the Privacy Policy.</string>
