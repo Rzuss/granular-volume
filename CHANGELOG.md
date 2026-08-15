@@ -2,6 +2,18 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.4 (versionCode 16)
+
+Interface release. Two changes, both aimed at the same measured problem: users were not understanding the two-zone scale they could already see.
+
+The controls were redesigned. The chevrons became wide sculpted glass keys, and the mute control became a full-width bar at the bottom of the pill, below a centred level label. Mute is now unlike every other control in shape, position and size, so a tap aimed at a chevron can no longer plausibly land on it, and the muted state is carried by three redundant channels at once: the bar fills, the glyph and text invert, and the label above turns red and reads MUTED. Nothing is signalled by colour alone. The manual hit regions were re-derived for the new geometry, and the chevrons are tested before the mute bar so contested space between them can never resolve to mute.
+
+The overlay's outer size is unchanged. That was a hard constraint rather than an accident: the geometry was tuned so the control can be tucked against the screen edge, stay usable, and never cover the navigation buttons. Measured against the previous release on the same device, the width is identical and the height differs by one pixel.
+
+A physical volume key press that lands inside a step used to look like nothing happened, because the hardware index moved but the highlighted bar did not. The bar now gives a short flash to acknowledge the press. On the lowest step above the device-minimum line, a downward press flashes the first step below the line instead, so the boundary reads as an invitation into the quiet range rather than as the end of the scale. One limitation is worth stating: when the hardware is already at its own floor a press produces no system broadcast at all, so that final press cannot be detected or acknowledged.
+
+Volume behaviour is untouched. The step values, the 5 dB rungs, the audio effect and the absorb policy are byte-identical to 1.4.3.
+
 ## 1.4.3 (versionCode 15)
 
 In-call control, closing the one case where the dial and the physical keys still disagreed. During a cellular or VoIP call, Android routes the physical volume keys to the call volume, a third scale separate from media and ringtone. The dial's upper zone stayed on media volume, so moving it during a call changed nothing audible. The upper zone now follows the same rule as the keys: during a call it drives the call volume, using the call scale's real hardware steps, and the moment the call ends it returns to media volume. The call state is evaluated at the moment of each interaction, the same way Android itself resolves the keys, so this needs no new permissions.

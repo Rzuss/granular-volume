@@ -1,0 +1,5 @@
+The dial has been redesigned. The up and down keys are now wide sculpted glass keys, and mute is a full-width bar at the bottom, so a tap meant for a key can no longer land on mute by mistake.
+
+Pressing a physical volume key inside a step now flashes the bar you are on, so the press never looks ignored. Press down on the lowest step above the line and the first step below it flashes, showing the quiet range continues underneath.
+
+Same size as before, so it still tucks to the edge as it did.
