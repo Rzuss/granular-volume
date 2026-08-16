@@ -31,6 +31,14 @@ class AudioController(private val context: Context) {
         private set
 
     /**
+     * True while the preferred DynamicsProcessing strategy holds the effect. False means
+     * either no strategy at all or the LoudnessEnhancer fallback, whose negative-gain
+     * support is OEM-dependent — both states that a caller may want to retry out of.
+     */
+    val usingPreferredStrategy: Boolean
+        get() = strategy is DynamicsProcessingStrategy
+
+    /**
      * Initializes the best available AudioEffect strategy.
      * Call this from Service.onCreate() — never from UI thread.
      * @return true if any strategy initialized successfully

@@ -2,6 +2,8 @@ package com.granularvolume.audio
 
 import android.content.Context
 import android.media.AudioManager
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -155,7 +157,54 @@ class FullRangeCoordinator(
         // Rebuild the effect so policy can re-attach it to the output that is live NOW.
         // Runs on both edges (call start AND end) so media coverage is restored after
         // hang-up too. Attenuation is preserved inside reattach().
+        reattachNow("mode-edge")
+        // The mode flips BEFORE telephony finishes opening its output on some devices, so an
+        // immediate reattach can lose the race and land on the old output. A second pass
+        // after the routing has settled makes the placement independent of that timing.
+        // Field signature this closes: control works in some calls and not in others.
+        scheduleSettleReattach()
+    }
+
+    /**
+     * The output route changed (speaker toggle, Bluetooth connect, wired plug). Media needs
+     * no help here — policy moves music-strategy effects with the music output on its own,
+     * which is why media attenuation always survived route changes. Call audio gets no such
+     * courtesy, so while in a call every route change must re-place the effect chain onto
+     * whichever output now carries the voice. Called by the service's AudioDeviceCallback.
+     */
+    fun onRouteChanged() {
+        if (!streamVol.inCall()) return
+        reattachNow("route-change")
+        scheduleSettleReattach()
+    }
+
+    // ── Reattach plumbing: one immediate pass, one settle pass, and a retry ladder for
+    //    transient init failures (a busy HAL during call setup must not strand the app on
+    //    the OEM-dependent LoudnessEnhancer fallback for the rest of the call). ──
+    private val handler = Handler(Looper.getMainLooper())
+    private var retriesLeft = MAX_REATTACH_RETRIES
+    private val settleReattach = Runnable { reattachNow("settle") }
+    private val retryReattach = Runnable {
+        if (!audioController.usingPreferredStrategy) reattachNow("retry")
+    }
+
+    private fun scheduleSettleReattach() {
+        handler.removeCallbacks(settleReattach)
+        handler.postDelayed(settleReattach, REATTACH_SETTLE_MS)
+    }
+
+    private fun reattachNow(reason: String) {
+        Log.i(tag, "Reattach($reason)")
         audioController.reattach()
+        if (audioController.usingPreferredStrategy) {
+            retriesLeft = MAX_REATTACH_RETRIES
+            handler.removeCallbacks(retryReattach)
+        } else if (retriesLeft > 0) {
+            retriesLeft--
+            Log.w(tag, "Reattach($reason) landed on fallback — retrying ($retriesLeft left)")
+            handler.removeCallbacks(retryReattach)
+            handler.postDelayed(retryReattach, REATTACH_RETRY_MS)
+        }
         notifyUi()
     }
 
@@ -375,5 +424,12 @@ class FullRangeCoordinator(
         // Tuned on real hardware during Round A; spec placeholders until then.
         private const val FIGHT_WINDOW_MS = 5_000L
         private const val MAX_CORRECTIONS_IN_WINDOW = 3
+
+        // Reattach timing. Settle: long enough for telephony/Bluetooth routing to finish
+        // opening its output after a mode or device event, short enough that at most the
+        // first second of a call can be missed. Retry: spacing for transient init failures.
+        private const val REATTACH_SETTLE_MS = 1_000L
+        private const val REATTACH_RETRY_MS = 1_500L
+        private const val MAX_REATTACH_RETRIES = 3
     }
 }

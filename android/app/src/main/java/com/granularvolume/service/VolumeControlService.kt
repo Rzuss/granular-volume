@@ -87,12 +87,21 @@ class VolumeControlService : Service() {
         }
     }
 
-    /** The volume curve differs per output route — re-read it on every route change (spec). */
+    /**
+     * The volume curve differs per output route — re-read it on every route change (spec).
+     * 1.4.6: a route change during a call also moves the voice audio to a different output,
+     * so the coordinator must re-place the effect chain there too (onRouteChanged is a
+     * no-op outside calls; media effects follow the music output by policy on their own).
+     */
     private val deviceCallback = object : AudioDeviceCallback() {
-        override fun onAudioDevicesAdded(added: Array<out AudioDeviceInfo>?) =
+        override fun onAudioDevicesAdded(added: Array<out AudioDeviceInfo>?) {
             coordinator.refreshCurve()
-        override fun onAudioDevicesRemoved(removed: Array<out AudioDeviceInfo>?) =
+            coordinator.onRouteChanged()
+        }
+        override fun onAudioDevicesRemoved(removed: Array<out AudioDeviceInfo>?) {
             coordinator.refreshCurve()
+            coordinator.onRouteChanged()
+        }
     }
 
     // 1.4.2: the AudioPlaybackCallback that re-rendered the pill on playback start/stop is
