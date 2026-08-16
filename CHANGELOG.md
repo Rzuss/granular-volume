@@ -2,6 +2,16 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.5 (versionCode 17)
+
+In-call fix for the quiet zone, from two matching field reports reproduced at the audio-engine layer. A global audio effect lives on one output path, chosen by the system when the effect is created, and that choice follows where music plays. Call audio, both cellular and VoIP, travels a different output path on many phones, so the quiet zone's attenuation never reached it: steps below the line did nothing during calls while working normally for media on the same device.
+
+The fix re-creates the effect on every audio-mode transition, call start and call end alike, giving the system the chance to attach it to the output path that is actually carrying sound. The chosen attenuation level is preserved across the swap, and the same re-attach on hang-up restores normal media coverage afterwards. Verified on real hardware: quiet-zone steps now audibly lower both regular cellular calls and VoIP calls on the test device.
+
+Stated honestly, two boundaries remain. The audio-mode listener this fix relies on exists from Android 12; on Android 9 to 11 the re-attach does not trigger and in-call behaviour is unchanged. And on devices that route call audio entirely in hardware, past every software output, no app-level effect can reach it; the fix covers the cases where call audio is in software on a different path, which both field devices turned out to be.
+
+No other changes: the interface, step values, permissions and size are identical to 1.4.4.
+
 ## 1.4.4 (versionCode 16)
 
 Interface release. Two changes, both aimed at the same measured problem: users were not understanding the two-zone scale they could already see.

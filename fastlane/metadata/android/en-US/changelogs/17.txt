@@ -1,0 +1,5 @@
+In-call fix for the quiet zone. The steps below the line could have no effect during phone and app calls, because the audio engine kept the volume reduction attached to the sound path used for music, and on many phones call audio travels a different path.
+
+The control now re-attaches itself the moment a call starts or ends, following the sound to whichever path is live. Your chosen level is preserved across the switch.
+
+Nothing else changed: same look, same size, same permissions.
