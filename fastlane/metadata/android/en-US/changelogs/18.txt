@@ -1,0 +1,3 @@
+Makes call control reliable. The previous update re-attached the volume control when a call starts, but it did so once, at one moment, and on some phones the call's sound path opens a beat later, so control worked in some calls and not in others.
+
+The control now re-attaches twice, immediately and again after the routing settles, re-attaches whenever you switch to speaker or Bluetooth mid-call, and retries if the audio engine was briefly busy. Your level is kept through every switch.

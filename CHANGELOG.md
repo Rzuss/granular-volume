@@ -2,6 +2,14 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.6 (versionCode 18)
+
+Reliability release for in-call control, closing the intermittency 1.4.5 left behind. That release re-attached the audio effect once, at the instant the audio mode changed, and that single moment can lose three races: on some phones the call's output path opens a beat after the mode flips, so the re-attach landed on the old path; switching to speaker or Bluetooth mid-call moved the voice audio to an output the effect never followed; and a transient effect-initialisation failure during call setup stranded the app on the weaker fallback with no retry. Each race explains the same field report: control worked in some calls and not in others.
+
+All three are closed. Every re-attach now runs twice, immediately and again one second later once routing has settled. Route changes during a call (speaker, Bluetooth, wired) trigger their own re-attach. And if the effect lands on the fallback strategy, the app retries up to three times. Every pass preserves the chosen attenuation level, and all passes are idempotent, so the worst case of an extra pass is a few silent milliseconds.
+
+Verified on real hardware across consecutive calls with mid-call speaker switching, and on an emulator across rapid mode-change stress, a live GSM call, and effect-chain integrity checks: exactly one effect chain at all times, no crashes, level preserved through every transition.
+
 ## 1.4.5 (versionCode 17)
 
 In-call fix for the quiet zone, from two matching field reports reproduced at the audio-engine layer. A global audio effect lives on one output path, chosen by the system when the effect is created, and that choice follows where music plays. Call audio, both cellular and VoIP, travels a different output path on many phones, so the quiet zone's attenuation never reached it: steps below the line did nothing during calls while working normally for media on the same device.
