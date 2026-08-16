@@ -81,6 +81,29 @@ class AudioController(private val context: Context) {
     fun passThrough() = setAttenuation(Prefs.ATTENUATION_MAX)
 
     /**
+     * Tears the effect down and rebuilds it, restoring the current attenuation.
+     *
+     * Why this exists (in-call fix, 2026-08-16): a session-0 effect chain lives on ONE
+     * output thread, chosen by audio policy at effect creation time following the MUSIC
+     * strategy. Call audio (cellular downlink, VoIP playout) is routed to a different
+     * output on many devices, so the running effect never touches it. Re-creating the
+     * effect while the call is active gives policy the chance to attach the chain to the
+     * output that is actually carrying sound right now. Field-measured: quiet zone dead
+     * in calls on two devices while media attenuation worked on both.
+     *
+     * Cheap and safe by construction: [initialize] re-applies the persisted attenuation,
+     * so the audible state is preserved across the swap; on devices where policy re-picks
+     * the same output this is a harmless no-op glitch of a few ms.
+     */
+    fun reattach() {
+        Log.i(tag, "Reattaching audio effect (attenuation=${_attenuationDb.value}dB)")
+        strategy?.release()
+        strategy = null
+        isEffectAvailable = false
+        initialize()
+    }
+
+    /**
      * Releases the underlying AudioEffect. Must be called in Service.onDestroy().
      * After this call, this instance should not be used.
      */

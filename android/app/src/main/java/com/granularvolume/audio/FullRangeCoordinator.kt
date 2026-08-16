@@ -150,6 +150,12 @@ class FullRangeCoordinator(
      */
     fun onAudioModeChanged() {
         Log.i(tag, "Audio mode changed — re-rendering (inCall=${streamVol.inCall()})")
+        // In-call fix (2026-08-16): the effect chain sits on the output thread policy chose
+        // at creation time, and a call moves audio to a different output on many devices.
+        // Rebuild the effect so policy can re-attach it to the output that is live NOW.
+        // Runs on both edges (call start AND end) so media coverage is restored after
+        // hang-up too. Attenuation is preserved inside reattach().
+        audioController.reattach()
         notifyUi()
     }
 
