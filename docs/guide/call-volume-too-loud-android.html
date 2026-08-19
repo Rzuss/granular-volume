@@ -35,7 +35,7 @@
     {"@type":"Question","name":"Why do the volume buttons not go lower during a call?","acceptedAnswer":{"@type":"Answer","text":"During a call the volume keys control the call stream, not media, and Android does not allow that stream to be muted with the keys. The lowest position is the quietest step the system offers, and there is nothing below it in the stock settings."}},
     {"@type":"Question","name":"Does the 85 dB volume limit or Safe Listening help with loud calls?","acceptedAnswer":{"@type":"Answer","text":"Generally not. Those features are hearing-safety limiters aimed at sustained loud media playback through headphones. They cap the top of the range rather than lowering the bottom of it, so if your complaint is that the quietest available level is already too loud, a limiter does not change that."}},
     {"@type":"Question","name":"Can an equalizer make calls quieter?","acceptedAnswer":{"@type":"Answer","text":"Not usefully. An equalizer changes tonal balance rather than overall level, and most equalizer apps only affect media output, not the call path. Turning bands down can make audio sound thinner without meaningfully lowering how loud the call is."}},
-    {"@type":"Question","name":"Does Granular Volume lower call volume?","acceptedAnswer":{"@type":"Answer","text":"Yes. It lowers the volume through Android's own audio framework, and the developer verified on real hardware during a live call that the call volume audibly drops with the dial active. It is a flat, even reduction, so it lowers the level without changing tone."}},
+    {"@type":"Question","name":"Does Granular Volume lower call volume?","acceptedAnswer":{"@type":"Answer","text":"On most phones, yes. Verified on real hardware during a live call: with the dial active, the call volume audibly drops. A small number of devices route call audio through hardware that no app can reach; on those, calls are not affected. It is a flat, even reduction, so it lowers the level without changing tone."}},
     {"@type":"Question","name":"Will it make me miss the other person or hear nothing?","acceptedAnswer":{"@type":"Answer","text":"The dial is adjustable in steps rather than being a single on or off switch, so you choose how far down to go and can change it mid-call. Start with a small reduction and go further only if you want to. It is not a mute."}},
     {"@type":"Question","name":"Does it need root or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio-effect framework, needs only a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
     {"@type":"Question","name":"Is it free and private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free, no ads, no account, no in-app purchases, and no internet permission at all, so it cannot send data anywhere. It is open source under GPL-3.0."}}
@@ -140,7 +140,7 @@
 
     <div class="quickfix">
       <div class="kicker">Short on time? Here's the answer</div>
-      <p><strong>Granular Volume</strong> adds quieter steps underneath Android's own minimum, and it applies during calls as well as media. Verified on real hardware during a live call: with the dial active, call volume audibly drops. Free, no root, set up in a minute.</p>
+      <p><strong>Granular Volume</strong> adds quieter steps underneath Android's own minimum. On most phones this works during calls as well; a small number of devices route call audio through hardware that no app can reach, and on those the quiet steps apply to media, ringtones, notifications and alarms, but not to calls. Free, no root, set up in a minute.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -212,7 +212,7 @@
       <dt>Can an equalizer make calls quieter?</dt>
       <dd>Not usefully. An equalizer changes tone rather than level, and most equalizer features only affect media rather than the call path.</dd>
       <dt>Does Granular Volume lower call volume?</dt>
-      <dd>Yes. Verified on real hardware during a live call: with the dial active, the call volume audibly drops. It is a flat, even reduction, so it lowers the level without changing tone.</dd>
+      <dd>On most phones, yes. Verified on real hardware during a live call: with the dial active, the call volume audibly drops. A small number of devices route call audio through hardware that no app can reach; on those, calls are not affected. It is a flat, even reduction, so it lowers the level without changing tone.</dd>
       <dt>Will it make me miss the other person entirely?</dt>
       <dd>It is a stepped dial rather than an on or off switch, so you choose how far down to go and can change it during the call. Start small and go further only if you want to. It is not a mute.</dd>
       <dt>Does it need root or a computer?</dt>
