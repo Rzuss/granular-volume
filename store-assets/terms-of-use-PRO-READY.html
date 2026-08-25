@@ -1,19 +1,29 @@
 <!--
-  NOT LIVE. Draft Terms of Use prepared for lawyer review.
-  RETIMED 2026-07-10: the medical/injury disclaimer (section 2) and the clickwrap consent
-  gate protect the FREE tier too (hyperacusis/tinnitus audience + audio-bug risk already
-  exist pre-Pro), so this document now publishes at TRIGGER A (production approved), not
-  at Pro launch. Publish everything EXCEPT sections 5-6 ("Optional Pro purchase" and
-  "Purchases by minors") at trigger A, since no purchase exists yet. Add sections 5-6 at
-  trigger C when Billing ships. See launch/DEFERRED-WORK-REGISTER.md and
-  launch/PRO-ROLLOUT-RUNBOOK.md.
+  NOT LIVE. Draft Terms of Use for the full-range (Pro) launch under the UNLOCK-KEY model.
+  REWRITTEN 2026-08-25: the previous draft's purchase sections (5-6) were written for Google
+  Play Billing ("in-app purchase", "purchase token", "restore option"). Under the key model
+  the purchase is a separate paid app ("Volume Control Full Range Key", com.granularvolume.key)
+  bought on its own Google Play listing; the main app never gains INTERNET and processes no
+  payment. Sections 1-4 and 7-15 match the LIVE terms-of-use.html published at trigger A
+  (10 July 2026) except where noted; the deltas for this launch are sections 5-6 and the
+  small additions marked NEW below.
+
+  Publish ONLY at Phase 5 of launch/PRO-ROLLOUT-RUNBOOK-V2.md, after lawyer review
+  (Phase 4.6), replacing terms-of-use.html at the same URL. Fill in the "Last updated" date.
+
+  Consent-gate note for the lawyer: TERMS_VERSION in the app is NOT bumped for this change.
+  Rationale: sections 5-6 govern only the optional purchase and reduce no existing user's
+  rights; free-tier obligations are unchanged; and the purchase itself carries its own
+  express clickwrap in the paywall ("By upgrading, you agree to our Terms of Use", linked),
+  shown at the exact moment of purchase intent. If counsel prefers a re-prompt anyway, bump
+  TERMS_VERSION to 2 in MainActivity and ship it with the same release.
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Granular Volume — Terms of Use</title>
+<title>Granular Volume: Terms of Use</title>
 <style>
   :root { color-scheme: light dark; }
   body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -26,19 +36,27 @@
 </style>
 </head>
 <body>
-  <h1>Terms of Use — Granular Volume</h1>
-  <p class="muted">Last updated: [DATE — fill in at publication]</p>
+  <h1>Terms of Use for Granular Volume</h1>
+  <p class="muted">Last updated: [DATE: fill in at publication]</p>
 
   <p>These Terms of Use ("Terms") govern your use of the <strong>Granular Volume</strong>
   mobile application ("the app"), developed and published by an independent developer
-  (Rotem Zussman, "the developer"). By installing or using the app, you agree to these
-  Terms. If you do not agree, do not install or use the app.</p>
+  (Rotem Zussman, "the developer"), and of the optional companion application
+  <strong>Volume Control Full Range Key</strong> ("the Key App") described in Section 5.
+  By installing or using the app or the Key App, you agree to these Terms. If you do not
+  agree, do not install or use them.</p>
 
   <h2>1. What the app does</h2>
-  <p>The app is a software utility that adds fine-grained, software-level volume steps below
-  your Android device's built-in minimum volume, controlled through a small floating on-screen
-  control. It processes your device's audio output locally, on the device. It is a convenience
-  utility only.</p>
+  <p>The app is a software utility that provides fine-grained, software-level control of your
+  Android device's volume, including steps below the device's built-in minimum volume,
+  through a small floating on-screen control. It processes your device's audio output
+  locally, on the device. It is a convenience utility only.</p>
+  <p>The audible effect of the app depends on your device. Android devices differ in how
+  they route and process audio; on some devices certain sound types (for example, call audio
+  on a small number of phones, or system interface sounds on all phones) are handled in
+  hardware or in audio paths that no application of this kind can reach. The app applies its
+  attenuation to the device's standard mixed audio output; it does not and cannot guarantee
+  an identical audible result on every device, audio route, or sound type.</p>
 
   <h2>2. Not a medical device or safety equipment</h2>
   <p>The app is a convenience utility only. It is not a medical device, is not hearing
@@ -60,63 +78,101 @@
   version 3.0 (GPL-3.0), available at
   <a href="https://github.com/Rzuss/granular-volume">github.com/Rzuss/granular-volume</a>.
   Nothing in these Terms limits, replaces, or overrides any right you have under the GPL-3.0
-  with respect to the source code. These Terms govern your use of the compiled application as
+  with respect to the source code. These Terms govern your use of the compiled applications as
   distributed through Google Play or F-Droid, to the extent they do not conflict with that
   license.</p>
 
   <h2>4. Trademarks and branding</h2>
-  <p>The app's name, logo, and store presence identify the developer's own builds. The GPL-3.0
-  license to the source code does not grant a license to use the app's name or branding on
-  derivative works in a way that suggests they are the developer's official releases.</p>
+  <p>The apps' names, logos, and store presence identify the developer's own builds. The
+  GPL-3.0 license to the source code does not grant a license to use the apps' names or
+  branding on derivative works in a way that suggests they are the developer's official
+  releases.</p>
 
-  <h2>5. Optional Pro purchase (Google Play version only)</h2>
-  <p>The Google Play version of the app offers an optional, one-time in-app purchase ("Pro")
-  that unlocks additional attenuation steps. The following applies to that purchase:</p>
-  <p>The purchase is processed entirely by Google Play Billing under Google's own terms of
-  service and payments policies. The price is displayed in your local currency in Google
-  Play's purchase interface before you confirm. It is a one-time purchase, not a subscription;
-  there is no recurring charge and nothing to cancel. The purchase unlocks the additional
-  steps on devices signed in to the Google account that made the purchase, and can be restored
-  on a new device or after reinstalling via the app's restore option.</p>
-  <p>Refunds: you may request a refund through Google Play's standard refund process, or by
-  contacting the developer directly at the email address below. Statutory rights you have
-  under the consumer-protection law of your country of residence, including any right of
-  withdrawal applicable to digital content, are not affected by these Terms.</p>
-  <p>The version of the app distributed on F-Droid contains no purchase feature; all
-  functionality is included at no charge in that version.</p>
+  <h2>5. The optional full-range unlock (Google Play version only)</h2>
+  <p>The Google Play version of the app includes a defined set of features at no charge,
+  permanently, including volume control across the device's normal range and quiet steps down
+  to 5 dB below the device minimum. Deeper quiet steps are unlocked by an optional, one-time
+  purchase, as follows:</p>
+  <ul style="padding-left:1.3em">
+    <li><strong>What you buy.</strong> The unlock is a separate companion application, Volume
+        Control Full Range Key, sold on its own Google Play listing at the price displayed
+        there in your local currency before you confirm the purchase. Installing the Key App
+        on your device is what unlocks the deeper steps in the app. The Key App's own function
+        is to serve as this unlock and to display its status; it has no other features, and it
+        requires the app to be useful.</li>
+    <li><strong>One-time, not a subscription.</strong> The purchase is a standard Google Play
+        paid-app purchase. There is no recurring charge, no subscription, and nothing to
+        cancel.</li>
+    <li><strong>How it is processed.</strong> The purchase is collected and processed entirely
+        by Google Play under Google's own terms of service and payments policies. The app
+        contains no payment functionality and never handles your payment details.</li>
+    <li><strong>Restoring the purchase.</strong> To restore the unlock on a new device, after a
+        reset, or after reinstalling, install the Key App again from Google Play using the same
+        Google account that bought it. Google Play recognizes the previous purchase and will
+        not charge again. No account with the developer, no code, and no internet access in the
+        app are involved.</li>
+    <li><strong>If the Key App is removed.</strong> Uninstalling the Key App, or a refund of
+        its purchase, returns the app to the free range on that device. Any deeper quiet level
+        that was in use is then adjusted to the deepest free level.</li>
+    <li><strong>Preview.</strong> Before you buy, the app may briefly demonstrate a locked
+        quiet step so you can hear what you would be purchasing. A preview is not a trial or a
+        grant of the feature and ends when you dismiss the purchase screen.</li>
+    <li><strong>Device dependence.</strong> The unlock provides the additional attenuation
+        steps as described. As stated in Sections 1 and 2, the audible effect of any step
+        depends on your device's audio hardware and software; the developer does not warrant a
+        specific audible outcome on a specific device, audio route, or sound type.</li>
+    <li><strong>Refunds.</strong> You may request a refund through Google Play's standard
+        refund process, or by contacting the developer directly at the email address below.
+        Statutory rights you have under the consumer-protection law of your country of
+        residence, including any right of withdrawal, are not affected by these Terms.</li>
+    <li><strong>Long-time users.</strong> Devices on which the app was in use before the paid
+        unlock was introduced keep the full range on that device at no charge, as a goodwill
+        grant. This grant is tied to the device and installation on which it was detected; it
+        is not a purchased right, may not transfer to a new device or a fresh installation, and
+        does not create an obligation to offer the same grant in the future. On a new device,
+        the full range is available through the Key App.</li>
+    <li><strong>F-Droid.</strong> The version of the app distributed on F-Droid contains the
+        full range and no purchase feature; all functionality is included at no charge in that
+        version, permanently.</li>
+  </ul>
 
   <h2>6. Purchases by minors</h2>
-  <p>To make the Pro purchase you must be old enough to form a binding contract in your
-  country of residence, or have the consent of a parent or legal guardian who accepts these
-  Terms on your behalf. Parents and guardians are responsible for supervising purchases made
-  through a Google account or device to which a minor has access, and are encouraged to use
-  Google Play's family and purchase-approval controls.</p>
+  <p>To buy the Key App you must be old enough to form a binding contract in your country of
+  residence, or have the consent of a parent or legal guardian who accepts these Terms on your
+  behalf. Parents and guardians are responsible for supervising purchases made through a
+  Google account or device to which a minor has access, and are encouraged to use Google
+  Play's family and purchase-approval controls.</p>
 
   <h2>7. Acceptable use</h2>
   <p>You agree not to use the app in any unlawful way, and not to misrepresent modified or
   redistributed builds of the app as official releases of the developer.</p>
 
   <h2>8. Disclaimer of warranty</h2>
-  <p><strong>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY KIND,
-  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
-  A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, TO THE FULLEST EXTENT PERMITTED BY APPLICABLE
-  LAW. THE DEVELOPER DOES NOT WARRANT THAT THE APP WILL BE UNINTERRUPTED, ERROR-FREE, OR
-  COMPATIBLE WITH EVERY DEVICE, ANDROID VERSION, OR AUDIO CONFIGURATION.</strong></p>
+  <p><strong>THE APP AND THE KEY APP ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY
+  OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, TO THE FULLEST EXTENT PERMITTED BY
+  APPLICABLE LAW. THE DEVELOPER DOES NOT WARRANT THAT THE APP WILL BE UNINTERRUPTED,
+  ERROR-FREE, OR COMPATIBLE WITH EVERY DEVICE, ANDROID VERSION, OR AUDIO CONFIGURATION.</strong>
+  This disclaimer does not affect your statutory rights as a consumer in relation to the
+  purchase, including any statutory remedy for digital content that fails to conform.</p>
 
   <h2>9. Limitation of liability</h2>
   <p><strong>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPER SHALL NOT BE
   LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT
-  OF OR RELATING TO YOUR USE OF, OR INABILITY TO USE, THE APP. TO THE FULLEST EXTENT PERMITTED
-  BY APPLICABLE LAW, THE DEVELOPER'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO
-  THE APP OR THESE TERMS SHALL NOT EXCEED THE AMOUNT YOU ACTUALLY PAID FOR THE PRO PURCHASE,
-  OR, IF YOU PAID NOTHING, A SUM OF 50 USD.</strong> Nothing in this section excludes or
-  limits any liability that cannot be excluded or limited under applicable law, and nothing in
-  these Terms limits your statutory rights as a consumer.</p>
+  OF OR RELATING TO YOUR USE OF, OR INABILITY TO USE, THE APP OR THE KEY APP. TO THE FULLEST
+  EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPER'S TOTAL AGGREGATE LIABILITY ARISING OUT OF
+  OR RELATING TO THE APP, THE KEY APP, OR THESE TERMS SHALL NOT EXCEED THE AMOUNT YOU ACTUALLY
+  PAID FOR THE KEY APP, OR, IF YOU PAID NOTHING, A SUM OF 50 USD.</strong> Nothing in this
+  section excludes or limits any liability that cannot be excluded or limited under applicable
+  law, and nothing in these Terms limits your statutory rights as a consumer.</p>
 
   <h2>10. No obligation to support; changes to the app and to these Terms</h2>
   <p>The developer has no obligation to provide ongoing technical support, maintenance, bug
-  fixes, or future updates for the app, whether or not you purchased the optional Pro upgrade.
-  The developer may update, change, or discontinue the app or any feature at any time.
+  fixes, or future updates for the app or the Key App, whether or not you purchased the
+  optional unlock. The developer may update, change, or discontinue the app or any feature at
+  any time; features already unlocked by a purchase will not be withdrawn from that purchase
+  on that device by a later update, except as required by law or by changes outside the
+  developer's control (such as changes to Android itself or to Google Play).
   If these Terms change, the updated version will be posted at this address with a revised
   "Last updated" date. Material changes will be reflected here before or at the same time as
   they take effect.</p>
@@ -125,7 +181,9 @@
   <p>You agree to indemnify, defend, and hold harmless the developer from and against any and
   all claims, liabilities, damages, losses, costs, and expenses (including reasonable legal
   fees) arising out of or in any way connected with your use of the app, your violation of
-  these Terms, or your violation of any third-party rights.</p>
+  these Terms, or your violation of any third-party rights, except to the extent a claim
+  results from the developer's own breach of these Terms or from liability that cannot be
+  excluded under applicable law.</p>
 
   <h2>12. Severability</h2>
   <p>If any provision of these Terms is found to be unenforceable or invalid under any
@@ -140,9 +198,12 @@
 
   <h2>13. Entire agreement</h2>
   <p>These Terms, together with the Privacy Policy, constitute the entire agreement between
-  you and the developer relating to your use of the app, and supersede all prior or
-  contemporaneous communications and proposals about the app, whether oral or written,
-  including anything stated in marketing materials, community posts, or direct correspondence.</p>
+  you and the developer relating to your use of the app and the Key App, and supersede all
+  prior or contemporaneous communications and proposals about them, whether oral or written,
+  including anything stated in marketing materials, community posts, or direct
+  correspondence. Statements in such materials that were accurate when made (for example,
+  describing the app before the optional unlock existed) do not enlarge the developer's
+  obligations under these Terms.</p>
 
   <h2>14. Governing law and jurisdiction</h2>
   <p>These Terms, and any dispute arising from or relating to them or to your use of the app,
