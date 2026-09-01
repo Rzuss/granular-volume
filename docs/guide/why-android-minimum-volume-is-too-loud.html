@@ -231,7 +231,7 @@
 
     <div class="fixcard">
       <h3>Calls vary by handset</h3>
-      <p>On many devices call audio is attenuated along with everything else. On some it is not, because the handset routes voice through hardware that never passes the mixed output. This has been observed directly on real devices, in both directions. It is a genuine per-device difference and nobody can promise you an outcome here.</p>
+      <p>App calls such as WhatsApp are attenuated along with everything else, because that audio is an ordinary app playing through the mixed output. Regular phone calls are not. Cellular voice is carried on a separate output that runs no audio effects at all, which was read directly from the system audio engine during a live call, so this is a limit of Android rather than a per-device difference.</p>
     </div>
 
     <div class="fixcard">
@@ -270,7 +270,7 @@
       <dd>By working at a different layer: an audio effect attached to session zero, the mixed output of the whole device, after the mixer and before the hardware. A gain applied there is independent of where the volume slider bottoms out.</dd>
 
       <dt>Does this work on every device?</dt>
-      <dd>No, and anyone claiming otherwise is guessing. The mechanism is standard Android, but manufacturers substitute their own processing, call audio varies by handset, and some outputs have their level set by the receiving device rather than the phone.</dd>
+      <dd>No, and anyone claiming otherwise is guessing. The mechanism is standard Android, but manufacturers substitute their own processing, regular phone calls are out of reach entirely, and some outputs have their level set by the receiving device rather than the phone.</dd>
 
       <dt>Does it need root or a computer?</dt>
       <dd>No. The effect API is a normal part of Android from version 9 onwards. It needs permission to draw over other apps and standard audio permissions, and works without root, without ADB and without a computer.</dd>
