@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baisser le volume Android sous le minimum</title>
+<meta name="description" content="Le volume minimum reste trop fort ? Pourquoi la dernière marche est si haute, et ce qui permet vraiment de descendre plus bas, sans root.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://granularvolume.com/fr/baisser-volume-sous-le-minimum-android.html">
+<meta property="og:title" content="Baisser le volume Android sous le minimum">
+<meta property="og:description" content="Le volume minimum reste trop fort ? Pourquoi la dernière marche est si haute, et ce qui permet vraiment de descendre plus bas, sans root.">
+<meta property="og:image" content="../img/feature.png">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Baisser le volume Android sous le minimum",
+  "description": "Le volume minimum reste trop fort ? Pourquoi la dernière marche est si haute, et ce qui permet vraiment de descendre plus bas, sans root.",
+  "image": "https://granularvolume.com/img/feature.png",
+  "author": {"@type": "Person", "name": "Rotem Zussman"},
+  "publisher": {"@type": "Organization", "name": "Granular Apps", "logo": {"@type": "ImageObject", "url": "https://granularvolume.com/img/icon.png"}},
+  "inLanguage": "fr",
+  "datePublished": "2026-09-01",
+  "dateModified": "2026-09-01",
+  "mainEntityOfPage": "https://granularvolume.com/fr/baisser-volume-sous-le-minimum-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "fr",
+  "mainEntity": [
+    {"@type":"Question","name":"Pourquoi le volume minimum de mon téléphone est-il encore trop fort ?","acceptedAnswer":{"@type":"Answer","text":"Parce que la dernière marche avant le silence n'est pas un volume faible, c'est une fraction fixe du volume maximal, choisie par Android puis ajustée par le fabricant. Entre cette marche et le silence complet, il n'y a rien. Sur un téléphone réglé pour un usage en extérieur, une chambre calme sera toujours trop bruyante."}},
+    {"@type":"Question","name":"Comment baisser le volume sous le minimum sans root ?","acceptedAnswer":{"@type":"Answer","text":"En travaillant à un autre niveau que le curseur de volume. Android permet à une application d'attacher un effet audio à la sortie mélangée de l'appareil, après le mixage et avant le matériel. Un gain appliqué là n'est pas limité par la position du curseur. Cela ne demande ni root, ni ordinateur, ni ADB."}},
+    {"@type":"Question","name":"Les applications qui ajoutent des paliers de volume résolvent-elles le problème ?","acceptedAnswer":{"@type":"Answer","text":"Elles résolvent un problème différent, celui des paliers trop espacés. C'est très utile quand le niveau souhaité tombe entre deux marches. C'est une question distincte de celle du plancher, car ces fonctions passent par le volume système d'Android, exactement comme les touches."}},
+    {"@type":"Question","name":"Est-ce que cela fonctionne aussi pour les appels et les alarmes ?","acceptedAnswer":{"@type":"Answer","text":"Les alarmes, les sonneries et les notifications sont concernées, comme la musique et les vidéos. Pour les appels, cela dépend du téléphone : certains modèles font passer la voix par un circuit matériel qu'aucune application n'atteint. Personne ne peut vous garantir le résultat sur votre modèle précis."}},
+    {"@type":"Question","name":"Pourquoi les sons du clavier restent-ils forts ?","acceptedAnswer":{"@type":"Answer","text":"Les clics du clavier et les sons d'interface passent par le chemin audio à faible latence d'Android, qui ignore volontairement tout traitement parce que les effets ajoutent du retard. Aucune application travaillant sur la sortie mélangée ne peut les atteindre. Ils se règlent séparément dans les paramètres de son du système."}},
+    {"@type":"Question","name":"Faut-il un ordinateur ou des autorisations spéciales ?","acceptedAnswer":{"@type":"Answer","text":"Non. Il faut l'autorisation d'affichage par-dessus les autres applications et les autorisations audio standard. Pas de root, pas d'ADB, pas d'ordinateur."}}
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#6C63FF; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#8b7bff);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+  .callout .note{font-size:14.5px;color:var(--muted);margin-top:14px;margin-bottom:0;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+</style></head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../index.html">Granular Volume</a> / Guide</div>
+    <div class="icon"><img src="../img/icon.png" alt="Icône Granular Volume"></div>
+    <h1>Baisser le volume Android sous le minimum</h1>
+    <p class="dek">Vous avez baissé le son jusqu'en bas et c'est encore trop fort. Ce n'est ni une panne ni un réglage caché : la dernière marche avant le silence est placée volontairement haut. Voici pourquoi, et ce qui permet réellement de descendre en dessous.</p>
+    <p class="meta">Publié le 1er septembre 2026 &middot; 7 min de lecture</p>
+  </header>
+
+  <article>
+
+    <p class="lead-p">Le soir, au casque, ou pour un enfant qui regarde une vidéo avant de dormir, le constat est toujours le même : un cran au-dessus du silence, et c'est déjà trop. Le téléphone ne propose que deux choix, trop fort ou muet.</p>
+
+    <div class="toc">
+      <div>Sur cette page</div>
+      <ol>
+        <li><a href="#pourquoi">Pourquoi la dernière marche est si haute</a></li>
+        <li><a href="#methodes">Ce qui marche, évalué honnêtement</a></li>
+        <li><a href="#clavier">Pourquoi les sons du clavier ne baisseront jamais</a></li>
+        <li><a href="#resume">En résumé</a></li>
+        <li><a href="#faq">Questions fréquentes</a></li>
+      </ol>
+    </div>
+
+    <h2 id="pourquoi">Pourquoi la dernière marche est si haute</h2>
+
+    <p>Android ne mémorise pas un niveau sonore, il mémorise un numéro de cran, en général de zéro à quinze environ pour le multimédia. Ce numéro est ensuite converti en gain, c'est-à-dire en une multiplication appliquée au son au moment du mixage.</p>
+
+    <p>Deux conséquences en découlent, et elles expliquent presque tout. D'abord, le bas de l'échelle est une valeur décidée, pas une limite physique : le cran numéro un correspond à une fraction précise du volume maximal, choisie par la plateforme puis ajustée par le fabricant, en imaginant des usages plutôt bruyants. Ensuite, il n'existe rien entre le cran un et le silence. Ce que vous ressentez comme un problème est exactement ce vide.</p>
+
+    <h2 id="methodes">Ce qui marche, évalué honnêtement</h2>
+
+    <div class="fixcard">
+      <h3>Le limiteur de volume média <span class="verdict v-doesnt">Sans effet ici</span></h3>
+      <p>Ce réglage, présent dans les paramètres de son, abaisse le volume <strong>maximal</strong>. Il ne déplace pas le plancher. Il protège l'audition, ce qui est utile en soi, mais il ne rend pas la marche la plus basse plus discrète.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Les paliers de volume plus fins <span class="verdict v-partial">Autre problème</span></h3>
+      <p>Plusieurs fabricants proposent de découper la plage de volume plus finement, Sound Assistant chez Samsung par exemple. C'est une vraie fonction et elle répond à une vraie plainte : le niveau souhaité tombe souvent entre deux crans.</p>
+      <p>C'est une question distincte de celle du plancher. Ces fonctions passent par le volume système d'Android, exactement comme les touches. Si votre besoin est de vous placer entre deux crans, utilisez-les : elles sont intégrées et gratuites.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Les options développeur et les menus de service <span class="verdict v-doesnt">À éviter</span></h3>
+      <p>On lit souvent qu'il faudrait modifier des valeurs dans le menu développeur ou dans un menu caché. Ces réglages ne sont pas prévus pour les utilisateurs, varient d'un modèle à l'autre, disparaissent aux mises à jour, et peuvent déséquilibrer le son de l'appareil. Le gain réel ne justifie pas le risque.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Un effet audio sur la sortie mélangée <span class="verdict v-works">Le bon niveau</span></h3>
+      <p>Android permet à une application d'attacher un effet audio à la session zéro, c'est-à-dire à la sortie mélangée de tout l'appareil, après que le système a combiné le son de toutes les applications et avant l'envoi au matériel.</p>
+      <p>Un gain appliqué à cet endroit multiplie un signal déjà mélangé. Il ne dépend donc pas de la position du curseur de volume, et c'est précisément pour cela qu'il peut descendre sous le plancher. Ni root, ni ordinateur, ni ADB.</p>
+    </div>
+
+    <h2 id="clavier">Pourquoi les sons du clavier ne baisseront jamais</h2>
+
+    <p>Si votre gêne vient des clics du clavier ou des sons d'interface, aucune application de ce type ne vous aidera, et il vaut mieux le savoir avant d'y passer la soirée.</p>
+
+    <p>Le système audio d'Android n'a pas un seul chemin de sortie. La musique, les vidéos, les sonneries, les notifications et les alarmes passent par le mélangeur principal, qui accepte des effets. Les clics du clavier et les sons d'interface passent par un chemin dit à faible latence, qui <strong>ignore volontairement tout traitement</strong>, parce qu'un effet ajoute du retard et que ce chemin existe précisément pour éviter le retard.</p>
+
+    <p>Ces sons se règlent séparément, dans les paramètres de son du système. C'est la seule voie, et elle ne dépend d'aucune application.</p>
+
+    <h2 id="resume">En résumé</h2>
+
+    <ul>
+      <li>Le plancher est une valeur choisie, pas une panne.</li>
+      <li>Le limiteur de volume agit sur le maximum, pas sur le minimum.</li>
+      <li>Des paliers plus fins répondent à un besoin différent, tout aussi légitime.</li>
+      <li>Descendre plus bas suppose de travailler sur la sortie mélangée de l'appareil.</li>
+      <li>Musique, vidéos, sonneries, notifications et alarmes sont concernées. Les appels dépendent du modèle. Le clavier, jamais.</li>
+    </ul>
+
+    <div class="callout">
+      <h2>L'application</h2>
+      <p>Granular Volume est un curseur flottant qui applique exactement ce principe : une atténuation plate sur la sortie mélangée de l'appareil, sept crans de 0 à moins 30 décibels sous le minimum du système, plus la plage de volume habituelle au-dessus, ce qui dépanne aussi ceux dont les touches de volume ne répondent plus.</p>
+      <p>Code source ouvert sous GPL-3.0, 2,7 Mo, sans publicité, sans compte, et <strong>sans aucune autorisation d'accès à Internet</strong>, ce qui signifie qu'elle n'a aucun moyen d'envoyer quoi que ce soit où que ce soit. Cela se vérifie sur le paquet installé, et pas seulement dans une politique de confidentialité.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;hl=fr&amp;referrer=utm_source%3Dsite%26utm_medium%3Dguide%26utm_campaign%3Dguide-fr">Télécharger sur Google Play</a>
+        <a class="btn btn-ghost" href="https://f-droid.org/packages/granularvolume.com/">Sur F-Droid</a>
+      </div>
+      <p class="note">Gratuite sur les deux boutiques, sans publicité, sans compte et sans suivi. Le code source est sur <a href="https://github.com/Rzuss/granular-volume">GitHub</a> sous licence GPL-3.0.</p>
+    </div>
+
+    <h2 id="faq">Questions fréquentes</h2>
+    <dl class="faq">
+      <dt>Pourquoi le volume minimum de mon téléphone est-il encore trop fort ?</dt>
+      <dd>Parce que la dernière marche avant le silence n'est pas un volume faible, c'est une fraction fixe du volume maximal, choisie par Android puis ajustée par le fabricant. Entre cette marche et le silence, il n'y a rien.</dd>
+
+      <dt>Comment baisser le volume sous le minimum sans root ?</dt>
+      <dd>En travaillant à un autre niveau que le curseur : un effet audio attaché à la sortie mélangée de l'appareil, après le mixage et avant le matériel. Ni root, ni ordinateur, ni ADB.</dd>
+
+      <dt>Les applications qui ajoutent des paliers résolvent-elles le problème ?</dt>
+      <dd>Elles résolvent le problème des paliers trop espacés, ce qui est utile mais différent. Elles passent par le volume système d'Android, exactement comme les touches.</dd>
+
+      <dt>Est-ce que cela fonctionne pour les appels et les alarmes ?</dt>
+      <dd>Alarmes, sonneries et notifications, oui, comme la musique et les vidéos. Pour les appels, cela dépend du téléphone : certains modèles font passer la voix par un circuit matériel qu'aucune application n'atteint.</dd>
+
+      <dt>Pourquoi les sons du clavier restent-ils forts ?</dt>
+      <dd>Ils passent par le chemin à faible latence, qui ignore tout traitement audio par conception. Ils se règlent séparément dans les paramètres de son du système.</dd>
+
+      <dt>Faut-il un ordinateur ou des autorisations spéciales ?</dt>
+      <dd>Non. L'autorisation d'affichage par-dessus les autres applications et les autorisations audio standard suffisent.</dd>
+    </dl>
+
+  </article>
+
+</div>
+<footer>
+  <div class="wrap">
+    Fait partie de <a href="../index.html">Granular Volume</a>, logiciel libre sous
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Confidentialité</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Conditions d'utilisation</a>.
+    <br>
+    Voir aussi :
+    <a href="../guide/why-android-minimum-volume-is-too-loud.html">le fonctionnement technique en détail</a> &middot;
+    <a href="../guide/volume-buttons-not-working-android.html">si les touches de volume ne répondent plus</a>.
+  </div>
+</footer>
+</body>
+</html>
