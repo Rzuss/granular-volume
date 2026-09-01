@@ -154,6 +154,13 @@ class VolumeControlService : Service() {
         audioController = AudioController(applicationContext)
         streamVolumeController = StreamVolumeController(applicationContext)
         coordinator = FullRangeCoordinator(applicationContext, audioController, streamVolumeController)
+        coordinator.onQuietUnavailable = {
+            // One short line instead of a bar that would move without the sound moving.
+            // Routed through the existing toast() helper, which already hops to the main
+            // thread — this fires from the overlay's touch handler.
+            Log.i(tag, "Quiet step refused: cellular call carries no effect chain")
+            toast(getString(R.string.gv_quiet_unavailable_in_call))
+        }
         overlayManager  = OverlayManager(
             context         = applicationContext,
             audioController = audioController,

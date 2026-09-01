@@ -41,4 +41,8 @@
     <string name="gv_step_label_20db">Volume step: −20 dB</string>
     <string name="gv_step_label_25db">Volume step: −25 dB</string>
     <string name="gv_step_label_30db">Volume step: −30 dB (quietest)</string>
+    <!-- Shown when a quiet step is tapped during a CELLULAR call, where Android routes
+         the voice through an output that runs no audio effects, so the gain cannot reach
+         it. VoIP calls are unaffected and never show this. -->
+    <string name="gv_quiet_unavailable_in_call">Call audio cannot go below the phone minimum</string>
 </resources>

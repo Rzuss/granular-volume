@@ -48,6 +48,27 @@ class StreamVolumeController(context: Context) {
     /** True while a cellular or VoIP call is in progress (same condition as [activeStream]). */
     fun inCall(): Boolean = activeStream() == AudioManager.STREAM_VOICE_CALL
 
+    /**
+     * True only in a CELLULAR call, where the quiet zone has nothing to give.
+     *
+     * The two call modes are not equivalent for us, and that difference is the whole reason
+     * this method exists. Measured 2026-09-01 on an API 36 image during a live GSM call by
+     * reading AudioFlinger's own thread table: the telephony output carrying the voice
+     * (AUDIO_DEVICE_OUT_TELEPHONY_TX) reports 0 Effect Chains, while our DynamicsProcessing
+     * effect sits enabled on session 0 of the media output. The voice never passes through
+     * the thread the effect is on, so the gain cannot reach it, and stepping every quiet bar
+     * during that call moved the gain (-15, -5, 0) while the voice index stayed pinned at 1.
+     * The owner reproduced exactly this on his own hardware in a speaker call: upper zone
+     * responds, quiet zone does nothing.
+     *
+     * MODE_IN_COMMUNICATION (WhatsApp and every other VoIP app) is the opposite case and must
+     * NOT be caught here: that audio is an ordinary app playing through the mixer, so it runs
+     * the session-0 chain exactly like media. Owner-verified on hardware the same day: in a
+     * WhatsApp call BOTH zones work. Disabling the quiet zone for calls as a category would
+     * have removed a feature that demonstrably works.
+     */
+    fun inCellularCall(): Boolean = am.mode == AudioManager.MODE_IN_CALL
+
     fun index(stream: Int): Int = am.getStreamVolume(stream)
     fun maxIndex(stream: Int): Int = am.getStreamMaxVolume(stream)
 

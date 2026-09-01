@@ -82,6 +82,11 @@ class OverlayManager(
         private const val ALPHA_ACTIVE   = 0.50f
         private const val ALPHA_INACTIVE = 0.10f
 
+        /** Quiet bars during a cellular call: dimmer than inactive, so the zone reads as
+         *  unavailable rather than merely unselected. Still faintly visible, because the
+         *  bars come back the moment the call ends and a gap in the dial would alarm. */
+        private const val ALPHA_UNAVAILABLE = 0.04f
+
         // Upper-zone bar geometry: the container height is FIXED (84dp in XML) — only bar
         // density varies with the device's rung count, per the no-growth size cap.
         private const val UPPER_CONTAINER_DP = 84
@@ -368,7 +373,10 @@ class OverlayManager(
     }
 
     private fun selectQuiet(step: Int) {
-        currentStep = step
+        // Commit the local highlight only when the step can actually be applied. During a
+        // cellular call applyQuiet refuses (and says why), so moving currentStep first would
+        // leave the chevron stepping from a position the dial never reached.
+        if (!coordinator.uiState().quietUnavailable) currentStep = step
         coordinator.applyQuiet(STEP_DB[step])
     }
 
@@ -425,6 +433,11 @@ class OverlayManager(
         // Quiet bars: exactly the 1.3.4 scheme.
         for (i in quietBars.indices) {
             val alpha = when {
+                // Cellular call: the gain cannot reach the telephony output, so every
+                // quiet bar is inert. Render them below the ordinary inactive level so the
+                // zone reads as unavailable rather than merely unselected, and the user is
+                // not invited to tap something that can only disappoint.
+                s.quietUnavailable      -> ALPHA_UNAVAILABLE
                 !s.zoneQuiet || s.muted -> ALPHA_INACTIVE
                 i == currentStep        -> ALPHA_CURRENT
                 i < currentStep         -> ALPHA_ACTIVE

@@ -1,0 +1,10 @@
+Fixes a bug where volume-up presses could keep pulling the volume back down
+instead of raising it. Presses now climb smoothly out of the quiet zone and
+carry on raising the volume normally.
+
+If something else keeps raising the volume while the quiet zone is holding it
+down, a second raise by you now wins immediately.
+
+On a regular phone call the quiet steps are shown dimmed, with a short note.
+Android carries call audio on a path that runs no audio effects, so nothing
+can lower it further. App calls such as WhatsApp keep the full range.
