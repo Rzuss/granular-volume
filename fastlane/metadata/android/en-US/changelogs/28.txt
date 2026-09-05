@@ -1,0 +1,10 @@
+Fixes a bug where volume-up presses could keep pulling the volume back down
+instead of raising it. Presses now climb out of the quiet zone and carry on
+raising the volume normally.
+
+On a regular phone call the quiet steps are shown dimmed, with a short note.
+Android carries call audio on a path that runs no audio effects, so nothing
+can lower it further. App calls such as WhatsApp keep the full range on most
+phones.
+
+Build change for F-Droid: no more Google-encrypted dependency metadata.

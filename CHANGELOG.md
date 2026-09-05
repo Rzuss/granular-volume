@@ -2,6 +2,14 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.4.8 (versionCode 28)
+
+F-Droid build hygiene release, no behaviour change. The Android Gradle Plugin embeds a block of dependency metadata, encrypted with a Google public key, into every APK's signing block. F-Droid now rejects updates that carry it, because nobody but Google can read what is inside. This release sets `dependenciesInfo.includeInApk = false` (and the bundle equivalent) so the block is gone, verified by parsing the signing block of the built APK before and after. Published to F-Droid only; Google Play stays on 1.4.7, which is identical in behaviour.
+
+## 1.4.7 (versionCode 27)
+
+Two fixes on the production line, both first written for the coming 1.5.0 and backported. First, volume-up presses inside the quiet zone could be pulled straight back down by the zone's own defence, so the volume seemed stuck at silence; presses now climb out of the zone, and if some other app keeps forcing the volume up, a second deliberate press by the user wins. Second, the quiet steps are dimmed during a regular cellular call, with a one-line note, because Android carries call audio on an output that runs no audio effects and nothing can lower it further; the earlier claim that the app lowers regular calls was wrong and has been withdrawn everywhere. App calls such as WhatsApp keep the full range on most phones.
+
 ## 1.4.6 (versionCode 18)
 
 Reliability release for in-call control, closing the intermittency 1.4.5 left behind. That release re-attached the audio effect once, at the instant the audio mode changed, and that single moment can lose three races: on some phones the call's output path opens a beat after the mode flips, so the re-attach landed on the old path; switching to speaker or Bluetooth mid-call moved the voice audio to an output the effect never followed; and a transient effect-initialisation failure during call setup stranded the app on the weaker fallback with no retry. Each race explains the same field report: control worked in some calls and not in others.
