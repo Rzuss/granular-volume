@@ -20,7 +20,7 @@ QUICK SETTINGS TILE
 Swipe down, tap once. Add Granular Volume to your Quick Settings panel and toggle the overlay on or off without ever opening the app. No shortcuts to set up, no widgets to place.
 
 MADE FOR QUIET MOMENTS
-- Phone and app calls (regular calls, WhatsApp, video calls) where the earpiece or speaker volume stays too loud no matter what
+- Phone and app calls on most phones. A few devices route call audio in hardware, where no app can reach it
 - Sensitive IEMs and high-sensitivity headphones, where even step 1 is too loud
 - Tablet speakers and headphones, where the minimum step is often even louder than on phones
 - White noise or lullabies for a sleeping baby, kept barely audible

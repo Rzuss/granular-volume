@@ -1,4 +1,4 @@
-¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en llamadas, contenido multimedia o notificaciones? Tu móvil o tablet se detiene en el mínimo del hardware. Granular Volume baja más.
+¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en multimedia, tonos o notificaciones? Tu móvil o tablet se detiene en el mínimo del hardware. Granular Volume baja más.
 
 Un pequeño control flotante aparece sobre cualquier aplicación, con todo tu rango de volumen en un solo deslizador: el volumen normal del sistema por encima de la línea del mínimo de tu dispositivo, y una zona silenciosa por debajo, siete pasos hasta 30 dB completos bajo el mínimo del hardware. Arrástralo a donde quieras, apártalo a un borde, ciérralo al terminar. Tu posición se guarda.
 
@@ -20,7 +20,7 @@ ACCESO DIRECTO EN AJUSTES RÁPIDOS
 Desliza hacia abajo, toca una vez. Añade Granular Volume a tu panel de ajustes rápidos y activa o desactiva el control sin abrir la app.
 
 HECHO PARA MOMENTOS SILENCIOSOS
-- Llamadas de teléfono y de apps (WhatsApp, videollamadas) donde el altavoz sigue demasiado alto
+- Llamadas de apps como WhatsApp en la mayoría de móviles. Las llamadas normales usan una ruta que ninguna app puede bajar
 - IEM sensibles y auriculares de alta sensibilidad, donde incluso el paso 1 es demasiado
 - Altavoces y auriculares de tablet, cuyo mínimo suele ser aún más alto que en el móvil
 - Ruido blanco o nanas para un bebé dormido, apenas audibles
