@@ -1,4 +1,4 @@
-Le volume de votre Android reste trop fort même au niveau le plus bas, en appel, en lecture ou pour les notifications ? Votre téléphone ou tablette s'arrête au minimum matériel. Granular Volume descend en dessous.
+Le volume de votre Android reste trop fort même au niveau le plus bas, en lecture, sonneries ou notifications ? Votre téléphone ou tablette s'arrête au minimum matériel. Granular Volume descend en dessous.
 
 Un petit contrôle flottant apparaît au-dessus de toute application, avec toute votre plage de volume sur un seul curseur : le volume système normal au-dessus de la ligne du minimum de votre appareil, et une zone silencieuse en dessous, sept paliers jusqu'à 30 dB complets sous le minimum matériel. Déplacez-le où vous voulez, rangez-le sur un bord, fermez-le quand c'est fini. Sa position est mémorisée.
 
@@ -20,7 +20,7 @@ TUILE DE RÉGLAGES RAPIDES
 Balayez vers le bas, appuyez une fois. Ajoutez Granular Volume à vos réglages rapides et activez ou coupez le contrôle sans ouvrir l'appli.
 
 FAIT POUR LES MOMENTS CALMES
-- Appels téléphoniques et d'applis (WhatsApp, appels vidéo) où le haut-parleur reste trop fort
+- Appels d'applis comme WhatsApp sur la plupart des téléphones. Les appels classiques restent hors de portée des applis
 - Écouteurs intra sensibles où même le palier 1 est trop fort
 - Haut-parleurs et casques de tablette, au minimum souvent plus fort que sur téléphone
 - Bruit blanc ou berceuses pour un bébé qui dort, à peine audibles

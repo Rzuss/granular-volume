@@ -1,4 +1,4 @@
-Ist die Android-Lautstärke selbst auf der niedrigsten Stufe noch zu laut, bei Anrufen, Medien oder Benachrichtigungen? Ihr Handy oder Tablet stoppt am Hardware-Minimum. Granular Volume geht darunter.
+Ist die Android-Lautstärke selbst auf der niedrigsten Stufe noch zu laut, bei Medien, Klingeltönen oder Benachrichtigungen? Ihr Handy oder Tablet stoppt am Hardware-Minimum. Granular Volume geht darunter.
 
 Ein kleiner schwebender Regler erscheint über jeder App, mit Ihrem gesamten Lautstärkebereich auf einem Schieberegler: normale Systemlautstärke oberhalb der Minimum-Linie Ihres Geräts und eine leise Zone darunter, sieben Stufen bis volle 30 dB unter dem Hardware-Minimum. Frei verschiebbar, an den Rand anlegbar, mit einem Tipp geschlossen. Die Position wird gespeichert.
 
@@ -20,7 +20,7 @@ SCHNELLEINSTELLUNGEN-KACHEL
 Nach unten wischen, einmal tippen. Fügen Sie Granular Volume Ihren Schnelleinstellungen hinzu und schalten Sie das Overlay ein oder aus, ohne die App zu öffnen.
 
 FÜR LEISE MOMENTE GEMACHT
-- Telefon- und App-Anrufe (normale Anrufe, WhatsApp, Videoanrufe), bei denen Hörer oder Lautsprecher zu laut bleiben
+- App-Anrufe wie WhatsApp auf den meisten Handys. Normale Telefonate laufen über einen eigenen Weg, den keine App absenken kann
 - Empfindliche In-Ears und Kopfhörer, bei denen schon Stufe 1 zu laut ist
 - Tablet-Lautsprecher und -Kopfhörer, deren Minimum oft noch lauter ist als am Handy
 - Weißes Rauschen oder Schlaflieder für ein schlafendes Baby, kaum hörbar
