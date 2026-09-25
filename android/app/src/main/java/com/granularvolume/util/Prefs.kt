@@ -13,6 +13,7 @@ object Prefs {
     private const val FILE_NAME = "gv_prefs"
 
     private const val KEY_ATTENUATION_DB   = "attenuation_db"
+    private const val KEY_BLUETOOTH_FLOOR_PREFIX = "bluetooth_floor_"
     private const val KEY_OVERLAY_X        = "overlay_x"
     private const val KEY_OVERLAY_Y        = "overlay_y"
     private const val KEY_SERVICE_WAS_RUNNING = "service_was_running"
@@ -49,6 +50,14 @@ object Prefs {
 
     fun setAttenuation(context: Context, dB: Float) {
         prefs(context).edit { putFloat(KEY_ATTENUATION_DB, dB.coerceIn(ATTENUATION_MIN, ATTENUATION_MAX)) }
+    }
+
+    /** A headset's first audible Android index, chosen by listening during calibration. */
+    fun getBluetoothFloor(context: Context, deviceName: String): Int =
+        prefs(context).getInt(KEY_BLUETOOTH_FLOOR_PREFIX + deviceName, 1)
+
+    fun setBluetoothFloor(context: Context, deviceName: String, index: Int) {
+        prefs(context).edit { putInt(KEY_BLUETOOTH_FLOOR_PREFIX + deviceName, index) }
     }
 
     fun getOverlayX(context: Context, default: Int): Int =

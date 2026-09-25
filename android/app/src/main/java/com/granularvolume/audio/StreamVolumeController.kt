@@ -2,8 +2,12 @@ package com.granularvolume.audio
 
 import android.content.Context
 import android.media.AudioManager
+import android.media.AudioDeviceInfo
+import android.media.AudioAttributes
+import android.os.Build
 import android.os.SystemClock
 import android.util.Log
+import com.granularvolume.util.Prefs
 
 /**
  * Hardware volume control for the full-range upper zone.
@@ -25,6 +29,7 @@ class StreamVolumeController(context: Context) {
 
     private val tag = "GranularVolume:StreamVol"
     private val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    private val appContext = context.applicationContext
 
     /** Our last write per stream: the value we wrote and when. */
     private data class SelfWrite(val index: Int, val atMs: Long)
@@ -72,11 +77,29 @@ class StreamVolumeController(context: Context) {
     fun index(stream: Int): Int = am.getStreamVolume(stream)
     fun maxIndex(stream: Int): Int = am.getStreamMaxVolume(stream)
 
-    /**
-     * Lowest index that still produces sound, floored at 1: the slider must never produce
-     * hardware mute (index 0) — true silence is exclusively the mute button's job.
-     */
-    fun minAudibleIndex(stream: Int): Int = maxOf(1, am.getStreamMinVolume(stream))
+    /** Lowest non-mute index, or the listener's calibrated floor for this headset. */
+    fun minAudibleIndex(stream: Int): Int {
+        val min = maxOf(1, am.getStreamMinVolume(stream))
+        if (stream != AudioManager.STREAM_MUSIC) return min
+        val name = activeBluetoothName() ?: return min
+        return Prefs.getBluetoothFloor(appContext, name).coerceIn(min, maxIndex(stream))
+    }
+
+    /** The media route's Bluetooth output; its acoustic curve is not exposed by Android. */
+    fun activeBluetoothName(): String? {
+        val outputs = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            am.getAudioDevicesForAttributes(
+                AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build()
+            )
+        } else {
+            // Older Android cannot report the prospective media route. Only use a
+            // calibration when exactly one wireless output is connected.
+            am.getDevices(AudioManager.GET_DEVICES_OUTPUTS).toList()
+        }
+        val wireless = outputs.filter { it.type in BLUETOOTH_MEDIA_TYPES }
+        if (wireless.size != 1) return null
+        return wireless.single().productName?.toString()?.takeIf { it.isNotBlank() }
+    }
 
     /**
      * Explicit user-initiated set (slider touch). May move in either direction.
@@ -147,6 +170,12 @@ class StreamVolumeController(context: Context) {
     }
 
     companion object {
+        private val BLUETOOTH_MEDIA_TYPES = setOf(
+            AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+            AudioDeviceInfo.TYPE_BLE_HEADSET,
+            AudioDeviceInfo.TYPE_BLE_SPEAKER,
+            AudioDeviceInfo.TYPE_HEARING_AID
+        )
         // Generous, because the value must also match — see wasSelfChange.
         private const val SELF_CHANGE_WINDOW_MS = 1_500L
     }

@@ -71,6 +71,7 @@ class VolumeControlService : Service() {
         const val ACTION_KEY_INSTALLED = "com.granularvolume.ACTION_KEY_INSTALLED"
         /** 1.5.1: replay the feature tour, sent by the info sheet's "Show the tour" link. */
         const val ACTION_SHOW_TOUR = "com.granularvolume.ACTION_SHOW_TOUR"
+        const val ACTION_PREVIEW_BLUETOOTH_FLOOR = "com.granularvolume.ACTION_PREVIEW_BLUETOOTH_FLOOR"
 
         /**
          * Boot-restore starts carry this so the purchase sheet stays closed. A boot is
@@ -339,6 +340,7 @@ class VolumeControlService : Service() {
             }
             ACTION_KEY_INSTALLED -> onKeyArrived("activity")
             ACTION_SHOW_TOUR -> overlayManager.startTourOnRequest()
+            ACTION_PREVIEW_BLUETOOTH_FLOOR -> coordinator.previewBluetoothFloor()
             // A plain start with a real Intent is a person or the boot receiver turning
             // the control on; a null Intent is only ever the system resurrecting a
             // killed sticky service, which no one asked for and no sheet may answer.

@@ -1,7 +1,9 @@
 package com.granularvolume
 
 import android.content.Intent
+import android.content.Context
 import android.graphics.Typeface
+import android.media.AudioManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
@@ -16,9 +18,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.audio.StreamVolumeController
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.Prefs
 
 /**
  * "Your access": the sheet behind the dial's info button.
@@ -35,7 +39,8 @@ import com.granularvolume.util.ProAccess
  *  - a long-time user who dismissed the one-time card had no route back to supporting us
  *  - the legal texts were reachable only from a screen that closes itself once set up
  *
- * Read-only by design: it reports state and offers Play. It never writes entitlement.
+ * It reports access and offers Play without writing entitlement. The Bluetooth floor
+ * control stores only the listener's calibration for the connected media output.
  */
 class InfoSheetActivity : AppCompatActivity() {
 
@@ -154,6 +159,7 @@ class InfoSheetActivity : AppCompatActivity() {
             State.LOCKED -> R.string.gv_info_body_locked
         }
         root.addView(text(getString(body), 13f, colorRes = R.color.gv_text_secondary).topPad(8))
+        bluetoothFloorControls()?.let { root.addView(it.topPad(18, fill = true)) }
 
         // A buyer is offered nothing: they already paid, and a live "buy" button would read
         // as a second charge. F-Droid is offered nothing either: that build has no key and
@@ -190,6 +196,45 @@ class InfoSheetActivity : AppCompatActivity() {
 
         root.addView(legalRow().topPad(18, fill = true))
         return root.inScroller()
+    }
+
+    private fun bluetoothFloorControls(): View? {
+        val volume = StreamVolumeController(this)
+        val name = volume.activeBluetoothName() ?: return null
+        val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val min = maxOf(1, am.getStreamMinVolume(AudioManager.STREAM_MUSIC))
+        val current = Prefs.getBluetoothFloor(this, name).coerceIn(min, max)
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            addView(text("$name: first audible volume step", 14f, bold = true,
+                colorRes = R.color.gv_text_primary))
+            addView(text("Play audio, then use − or + to find the lowest step you can hear. " +
+                "Each tap previews that step without extra attenuation.", 12f,
+                colorRes = R.color.gv_text_secondary).topPad(4))
+            val row = LinearLayout(this@InfoSheetActivity).apply { gravity = Gravity.CENTER_VERTICAL }
+            val value = text("$current", 16f, bold = true, colorRes = R.color.gv_text_primary)
+            fun change(delta: Int) {
+                val next = (Prefs.getBluetoothFloor(this@InfoSheetActivity, name) + delta)
+                    .coerceIn(min, max)
+                Prefs.setBluetoothFloor(this@InfoSheetActivity, name, next)
+                value.text = "$next"
+                startService(Intent(this@InfoSheetActivity, VolumeControlService::class.java)
+                    .setAction(VolumeControlService.ACTION_PREVIEW_BLUETOOTH_FLOOR))
+            }
+            row.addView(Button(this@InfoSheetActivity).apply {
+                text = "−"
+                contentDescription = "Lower first audible step"
+                setOnClickListener { change(-1) }
+            })
+            row.addView(value.apply { setPadding(dp(18), 0, dp(18), 0) })
+            row.addView(Button(this@InfoSheetActivity).apply {
+                text = "+"
+                contentDescription = "Raise first audible step"
+                setOnClickListener { change(1) }
+            })
+            addView(row.topPad(8))
+        }
     }
 
     /** Terms, Privacy and the licences screen, side by side and always reachable. */
