@@ -49,6 +49,13 @@ android {
     // reproduces cleanly (see https://github.com/Rzuss/granular-volume/issues/1).
     // Neither flavor sets applicationId/applicationIdSuffix — both must resolve
     // to the exact same applicationId as defaultConfig above.
+    sourceSets {
+        maybeCreate("playInternal").apply {
+            java.srcDir("src/playDebug/java")
+            manifest.srcFile("src/playDebug/AndroidManifest.xml")
+        }
+    }
+
     flavorDimensions += "distribution"
     productFlavors {
         create("play")   { dimension = "distribution" }
@@ -85,6 +92,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        // EXPERIMENT exp/iap-proof: release-identical build (same applicationId, R8, release signing)
+        // that also carries the debug-only IapProbeActivity, so the billing code is exercised after
+        // minification under the real package name. Never uploaded to production.
+        create("internal") {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
+            versionNameSuffix = "-iap"
         }
         debug {
             applicationIdSuffix = ".debug"
@@ -127,4 +142,13 @@ dependencies {
     // this to the shipping code.
     "playImplementation"("com.google.android.play:review:2.0.2")
     "playImplementation"("com.google.android.play:review-ktx:2.0.2")
+    // EXPERIMENT (branch exp/iap-proof, never merged without the owner's decision): Play Billing
+    // for an in-app purchase instead of the separate key app. The billing library itself adds only
+    // com.android.vending.BILLING; INTERNET and ACCESS_NETWORK_STATE arrive transitively through
+    // Google's datatransport telemetry. Billing wraps every telemetry call in catch (Throwable)
+    // (verified by disassembly of 9.1.0, classes zzdt/zzds), so the telemetry is excluded outright:
+    // no upload code, no job service, no network permission.
+    "playImplementation"("com.android.billingclient:billing:9.1.0") {
+        exclude(group = "com.google.android.datatransport")
+    }
 }

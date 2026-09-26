@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+      EXPERIMENT exp/iap-proof: belt and braces. The telemetry that would add these is excluded in
+      build.gradle.kts; these lines guarantee no other dependency can ever merge them back in.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
 
     <!--
       Full-range gate (1.5.0): package visibility for the paid unlock-key app.
