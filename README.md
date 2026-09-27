@@ -180,7 +180,7 @@ Yes. The attenuation is applied to the audio session before it reaches whatever 
 The underlying mechanism is identical. Tablets often have a louder minimum step to begin with (see [Why the minimum step exists](#why-the-minimum-step-exists-and-why-its-still-too-loud) above), so the extra headroom tends to matter even more there.
 
 **Is there a Pro or paid version?**
-There is no separate Pro build. On Google Play the complete app comes with a seven-day trial, and after that a one-time key purchase keeps every feature; nothing renews and there is no subscription. On F-Droid every feature is included at no charge, permanently. Either way the code is open source under GPL-3.0.
+There is no separate Pro build. On Google Play the complete app comes with a seven-day trial, and after that a one-time purchase inside the app keeps every feature; nothing renews and there is no subscription. On F-Droid every feature is included at no charge, permanently. Either way the code is open source under GPL-3.0.
 
 **Why is there a Play flavor and an F-Droid flavor?**
 F-Droid requires that everything in its build be free and open source, including build dependencies. The `play` flavor includes Google's proprietary in-app review library (only used to occasionally ask for a Play Store rating); the `fdroid` flavor has zero Google Play code. The two differ in one other way that is deliberate rather than technical: the Play build comes with a seven-day trial and then needs a one-time unlock, while **the F-Droid build is free and complete, permanently**, with every step included and nothing to buy. Its `KeyCheck` stub simply answers true. See [`build.gradle.kts`](android/app/build.gradle.kts) for the exact flavor split.

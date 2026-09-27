@@ -2,6 +2,27 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.6.0 (versionCode 39)
+
+### Changed
+- Google Play version: the full-range unlock can now be bought inside the app. The unlock button on
+  the access sheet, the paywall and the trial card opens Google Play's own purchase window; the
+  price shown on the button is the one Google Play reports for the account and region. A "Restore"
+  link brings a purchase back on a new phone or after a reinstall. The purchase is re-checked
+  against Google Play's record each time the control starts, so a refund locks the range again.
+- The separate Full Range Key app still unlocks the app exactly as before, and is offered as the
+  fallback when Google Play cannot run a purchase on a device. A key owner is thanked for the key
+  and offered nothing to buy.
+- The access sheet and the paywall carry a state badge beside the headline: a closed padlock when
+  the range is locked, an open padlock with a check when it is open, a clock during the free week.
+- No new network access: the app still has no INTERNET permission. Google's billing library is
+  built in without its telemetry component; the only new permission is com.android.vending.BILLING
+  (Google Play version only). The F-Droid build has no billing code and stays free and complete.
+
+### Unchanged on purpose
+- Trial length and its anchor, the long-time-user grant, the tour, the dial and the audio engine
+  are byte-identical to 1.5.3.
+
 ## 1.5.3 (versionCode 36)
 
 ### Fixed

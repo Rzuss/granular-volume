@@ -1,0 +1,3 @@
+Google Play version: the full-range unlock can now be bought inside the app, with a restore link for a new phone. The access sheet shows a clear locked or unlocked mark.
+
+This F-Droid build stays free and complete, with no billing code.

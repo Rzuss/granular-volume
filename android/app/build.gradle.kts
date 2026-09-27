@@ -32,7 +32,7 @@ android {
         minSdk = 28
         targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
         versionCode = 39
-        versionName = "1.6.0-pilot3"   // exp/iap-proof: in-app purchase pilot, never uploaded as is
+        versionName = "1.6.0"
         // Grandfather cutoff, 2026-10-01T00:00:00Z (1.5.1, mock-trial order item 40: the
         // 1.5.0 rollout reached 100% on 2026-09-23 10:28 UTC, plus seven days, rounded up
         // to the next UTC midnight). An UPDATE whose first install predates this is
@@ -49,13 +49,6 @@ android {
     // reproduces cleanly (see https://github.com/Rzuss/granular-volume/issues/1).
     // Neither flavor sets applicationId/applicationIdSuffix — both must resolve
     // to the exact same applicationId as defaultConfig above.
-    sourceSets {
-        maybeCreate("playInternal").apply {
-            java.srcDir("src/playDebug/java")
-            manifest.srcFile("src/playDebug/AndroidManifest.xml")
-        }
-    }
-
     flavorDimensions += "distribution"
     productFlavors {
         create("play")   { dimension = "distribution" }
@@ -92,14 +85,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-        // EXPERIMENT exp/iap-proof: release-identical build (same applicationId, R8, release signing)
-        // that also carries the debug-only IapProbeActivity, so the billing code is exercised after
-        // minification under the real package name. Never uploaded to production.
-        create("internal") {
-            initWith(getByName("release"))
-            matchingFallbacks += listOf("release")
-            versionNameSuffix = "-iap"
         }
         debug {
             applicationIdSuffix = ".debug"
@@ -142,12 +127,12 @@ dependencies {
     // this to the shipping code.
     "playImplementation"("com.google.android.play:review:2.0.2")
     "playImplementation"("com.google.android.play:review-ktx:2.0.2")
-    // EXPERIMENT (branch exp/iap-proof, never merged without the owner's decision): Play Billing
-    // for an in-app purchase instead of the separate key app. The billing library itself adds only
-    // com.android.vending.BILLING; INTERNET and ACCESS_NETWORK_STATE arrive transitively through
-    // Google's datatransport telemetry. Billing wraps every telemetry call in catch (Throwable)
-    // (verified by disassembly of 9.1.0, classes zzdt/zzds), so the telemetry is excluded outright:
-    // no upload code, no job service, no network permission.
+    // 1.6.0: Play Billing for the in-app purchase (the separate key app remains a second route).
+    // The billing library itself adds only com.android.vending.BILLING; INTERNET and
+    // ACCESS_NETWORK_STATE would arrive transitively through Google's datatransport telemetry.
+    // Billing wraps every telemetry call in catch (Throwable) (verified by disassembly of 9.1.0,
+    // classes zzdt/zzds), so the telemetry is excluded outright: no upload code, no job service,
+    // no network permission. The play manifest removes both permissions again, belt and braces.
     "playImplementation"("com.android.billingclient:billing:9.1.0") {
         exclude(group = "com.google.android.datatransport")
     }

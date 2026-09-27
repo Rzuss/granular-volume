@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--
-      EXPERIMENT exp/iap-proof: belt and braces. The telemetry that would add these is excluded in
+      1.6.0, belt and braces: the billing telemetry that would add these is excluded in
       build.gradle.kts; these lines guarantee no other dependency can ever merge them back in.
     -->
     <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
