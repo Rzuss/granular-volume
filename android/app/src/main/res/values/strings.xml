@@ -95,7 +95,7 @@
     <string name="gv_info_state_grandfathered">Every step is yours, free, always</string>
     <string name="gv_info_state_unlocked">Unlocked with the Full Range Key</string>
     <string name="gv_info_state_locked">The dial is locked</string>
-    <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be. If the app matters to you, buying the key is a way to support it.</string>
+    <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be. If the app matters to you, a one-time payment is a way to support it.</string>
     <string name="gv_info_body_trial">Everything is open while you try it. When the week is up, keeping the control takes one payment, once, on this account. Nothing renews and nothing is charged on its own.</string>
     <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial locks. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again.</string>
     <string name="gv_info_body_unlocked">Thank you. Every step, the whole range and mute stay open on this account, with nothing to renew.</string>
@@ -122,7 +122,7 @@
 
     <!-- Grandfather tip-jar card (1.5.0) -->
     <string name="gv_tipjar_title">You have the full range, free, always</string>
-    <string name="gv_tipjar_body">You were here before the paid unlock existed, so every step stays yours. If this app matters to you, the key on Google Play is a way to support it.</string>
+    <string name="gv_tipjar_body">You were here before the paid unlock existed, so every step stays yours. If this app matters to you, a one-time payment on Google Play is a way to support it.</string>
     <string name="gv_tipjar_support">Support</string>
     <string name="gv_tipjar_dismiss">Dismiss</string>
 

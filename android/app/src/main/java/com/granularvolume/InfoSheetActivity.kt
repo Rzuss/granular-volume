@@ -20,6 +20,7 @@ import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.PurchaseFlow
+import com.granularvolume.util.StatusHeader
 
 /**
  * "Your access": the sheet behind the dial's info button.
@@ -154,7 +155,15 @@ class InfoSheetActivity : AppCompatActivity() {
                 resources.getQuantityString(R.plurals.gv_trial_days_left, d, d)
             }
         }
-        root.addView(text(headline, 19f, bold = true, colorRes = R.color.gv_text_primary))
+        // 1.6.0: a status badge beside the headline (owner's request), so the state reads at a glance.
+        val kind = when (st) {
+            State.LOCKED -> StatusHeader.Kind.LOCKED
+            State.TRIAL -> StatusHeader.Kind.TRIAL
+            State.UNLOCKED, State.GRANDFATHERED, State.FDROID -> StatusHeader.Kind.OPEN
+        }
+        root.addView(
+            StatusHeader.build(this, text(headline, 19f, bold = true, colorRes = R.color.gv_text_primary), kind)
+        )
 
         val body = when (st) {
             State.FDROID -> R.string.gv_info_body_fdroid

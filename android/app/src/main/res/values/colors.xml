@@ -19,5 +19,7 @@
     <color name="gv_success_dim">#1F3D34</color>
     <color name="gv_warning">#FBBF24</color>
     <color name="gv_warning_dim">#3D341B</color>
+    <!-- 1.6.0 status badge ground for the trial state (accent at low strength on the surface). -->
+    <color name="gv_accent_dim">#262A5E</color>
     <color name="gv_launcher_bg">#1A1A2E</color>
 </resources>

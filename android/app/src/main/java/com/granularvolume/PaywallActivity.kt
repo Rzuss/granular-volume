@@ -19,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.PurchaseFlow
+import com.granularvolume.util.StatusHeader
 
 /**
  * Full-range upgrade sheet (1.5.0). Launched by the coordinator the moment a locked
@@ -122,7 +123,14 @@ class PaywallActivity : AppCompatActivity() {
             setPadding(p, p, p, dp(28))
         }
 
-        root.addView(text(R.string.gv_paywall_title, 19f, bold = true, colorRes = R.color.gv_text_primary))
+        // 1.6.0: the same locked badge the info sheet shows, so both sheets say "locked" the same way.
+        root.addView(
+            StatusHeader.build(
+                this,
+                text(R.string.gv_paywall_title, 19f, bold = true, colorRes = R.color.gv_text_primary),
+                StatusHeader.Kind.LOCKED
+            )
+        )
         root.addView(text(R.string.gv_paywall_depth, 14f, colorRes = R.color.gv_text_secondary).topPad(6))
         root.addView(text(R.string.gv_paywall_body, 13f, colorRes = R.color.gv_text_secondary).topPad(12))
         root.addView(text(R.string.gv_paywall_expectation_iap, 12f, colorRes = R.color.gv_text_muted).topPad(8))
