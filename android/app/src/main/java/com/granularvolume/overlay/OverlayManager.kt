@@ -81,6 +81,15 @@ class OverlayManager(
     var onEngaged: (() -> Unit)? = null
 
     companion object {
+        /**
+         * The tour is shown once per CONTENT version, not once per app version (1.6.0). Until then
+         * the gate compared against versionCode, so the three releases of 2026-09-24 replayed the
+         * same four callouts up to three times in one day. Bump this only when a callout is added
+         * or changed. 34 is the versionCode that introduced the tour, so every device that has
+         * already seen it (pref 34..36) is left alone, and a fresh install (pref 0) still gets it.
+         */
+        const val TOUR_CONTENT_VERSION = 34
+
         // Step index 0 = quietest (−30 dB), index 6 = no attenuation (0 dB, at the floor).
         val STEP_DB = floatArrayOf(-30f, -25f, -20f, -15f, -10f, -5f, 0f)
 
@@ -656,7 +665,7 @@ class OverlayManager(
      * when the range is locked, never during a cellular call, and only over the open dial.
      */
     fun maybeStartTour() {
-        if (Prefs.getTourShownVersion(context) >= BuildConfig.VERSION_CODE) return
+        if (Prefs.getTourShownVersion(context) >= TOUR_CONTENT_VERSION) return
         val dial = overlayView ?: return
         if (coordinator.lockedDisplayProvider() || coordinator.uiState().quietUnavailable) return
         dial.postDelayed({
@@ -677,7 +686,7 @@ class OverlayManager(
     private fun startTour() {
         val dial = overlayView ?: return
         if (tourView != null) return
-        Prefs.setTourShownVersion(context, BuildConfig.VERSION_CODE)
+        Prefs.setTourShownVersion(context, TOUR_CONTENT_VERSION)
         // The tour replaces the old one-line hint next to the line.
         Prefs.setLineTooltipShown(context)
         dial.findViewById<TextView>(R.id.gv_line_tooltip)?.visibility = View.GONE

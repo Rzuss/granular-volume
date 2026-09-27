@@ -50,8 +50,6 @@
     <string name="gv_paywall_title">Your seven days are over</string>
     <string name="gv_paywall_depth">Every quiet step down to −30 dB, the whole normal range, and mute. One payment, once, opens all of it.</string>
     <string name="gv_paywall_body">One-time purchase, yours on this account with nothing to renew. No subscription. The app stays free of ads, tracking and internet access.</string>
-    <string name="gv_paywall_expectation">Google Play will open on a small companion app, Full Range Key. Buying and installing it is the whole unlock: every step opens here as soon as the key is installed.</string>
-    <string name="gv_paywall_cta">Get Full Range Key on Google Play</string>
     <string name="gv_paywall_not_now">Not now</string>
     <string name="gv_paywall_terms">By upgrading, you agree to our Terms of Use</string>
     <string name="gv_paywall_unlocked">Full range unlocked. Enjoy the quiet.</string>
@@ -102,7 +100,6 @@
     <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial locks. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again.</string>
     <string name="gv_info_body_unlocked">Thank you. Every step, the whole range and mute stay open on this account, with nothing to renew.</string>
     <string name="gv_info_body_locked">One payment, once, brings every step back exactly where you left it. Nothing renews and there is no subscription.</string>
-    <string name="gv_info_cta_buy">Get Full Range Key on Google Play</string>
     <string name="gv_info_cta_support">Support this app on Google Play</string>
     <string name="gv_info_restore">New phone or a reinstall? Install the key again from Google Play with the same account. It is never charged twice, and that is the whole restore.</string>
     <string name="gv_info_terms">Terms of Use</string>
@@ -119,7 +116,6 @@
     </plurals>
     <string name="gv_trial_orientation">Everything is open for your first seven days. After that, one payment, once, keeps it, and every step stays exactly where you left it.</string>
     <string name="gv_trial_body">Every step is open while you try it. When the week is up, keeping the control costs a single payment, once, on this account. Nothing renews and nothing is charged on its own.</string>
-    <string name="gv_trial_cta">See the key on Google Play</string>
     <string name="gv_trial_dismiss">Later</string>
     <string name="gv_trial_over_title">Your seven days are over</string>
     <string name="gv_trial_over_body">The dial is locked until you unlock it. One payment, once, and every step comes back exactly where you left it. If it did not turn out to be for you, uninstalling costs nothing and takes nothing with it.</string>
