@@ -18,6 +18,9 @@ import androidx.core.content.edit
  *   last_seen_at      the latest wall clock we have ever observed, for tamper detection
  *   grandfathered_pro sticky verdict for users who had the app before the gate existed
  *   grandfather_evaluated  so the verdict is taken once and never re-litigated
+ *   purchased         1.6.0: the in-app purchase, cached from Google Play's own record and
+ *                     re-verified on every service start (see BillingManager)
+ *   purchase_pending  1.6.0: Play accepted an order whose payment is not complete yet
  */
 object Entitlement {
 
@@ -27,6 +30,8 @@ object Entitlement {
     private const val KEY_LAST_SEEN     = "last_seen_at"
     private const val KEY_GRANDFATHERED = "grandfathered_pro"
     private const val KEY_EVALUATED     = "grandfather_evaluated"
+    private const val KEY_PURCHASED     = "purchased"
+    private const val KEY_PURCHASE_PENDING = "purchase_pending"
 
     const val TRIAL_DAYS = 7L
     const val TRIAL_MS = TRIAL_DAYS * 24L * 60L * 60L * 1000L
@@ -51,6 +56,23 @@ object Entitlement {
 
     fun setGrandfatherEvaluated(context: Context) {
         prefs(context).edit { putBoolean(KEY_EVALUATED, true) }
+    }
+
+    // ── in-app purchase (1.6.0) ─────────────────────────────────────────────
+
+    /** Cached from Play's record; never the last word, see [BillingManager.verifyOwnership]. */
+    fun isPurchased(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_PURCHASED, false)
+
+    fun setPurchased(context: Context, value: Boolean) {
+        prefs(context).edit { putBoolean(KEY_PURCHASED, value) }
+    }
+
+    fun isPurchasePending(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_PURCHASE_PENDING, false)
+
+    fun setPurchasePending(context: Context, value: Boolean) {
+        prefs(context).edit { putBoolean(KEY_PURCHASE_PENDING, value) }
     }
 
     // ── trial ───────────────────────────────────────────────────────────────

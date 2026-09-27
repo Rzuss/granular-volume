@@ -31,6 +31,7 @@ import com.granularvolume.audio.FullRangeCoordinator
 import com.granularvolume.audio.StreamVolumeController
 import com.granularvolume.overlay.OverlayManager
 import com.granularvolume.util.Entitlement
+import com.granularvolume.util.BillingManager
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.Prefs
 import kotlinx.coroutines.CoroutineName
@@ -225,8 +226,12 @@ class VolumeControlService : Service() {
         // through the gate.
         ProAccess.evaluateGrandfather(applicationContext)
         sessionUnlocked = ProAccess.isPro(applicationContext)
-        keyWelcomed = KeyCheck.isKeyInstalled(applicationContext)
+        keyWelcomed = ProAccess.hasPaidUnlock(applicationContext)
         audioController.proProvider = ::unlockedThisSession
+        // 1.6.0: warm Google Play's billing connection, fetch the price for the sheets, and
+        // re-read this account's purchase record (a refund revokes, a restore re-opens).
+        // Asynchronous and failure-tolerant; the latch above decides this session either way.
+        BillingManager.prefetch(applicationContext)
 
         streamVolumeController = StreamVolumeController(applicationContext)
         coordinator = FullRangeCoordinator(applicationContext, audioController, streamVolumeController)
@@ -447,8 +452,9 @@ class VolumeControlService : Service() {
      */
     private fun onKeyArrived(source: String) {
         if (keyWelcomed) return
-        if (!KeyCheck.isKeyInstalled(applicationContext)) {
-            // A key signed by anyone else. KeyCheck has already logged the rejection.
+        if (!ProAccess.hasPaidUnlock(applicationContext)) {
+            // A key signed by anyone else (KeyCheck has already logged the rejection), or a
+            // sheet that resumed without a purchase behind it.
             Log.w(tag, "Key signal ($source), but no valid key installed: ignoring")
             return
         }

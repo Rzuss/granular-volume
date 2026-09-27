@@ -22,9 +22,9 @@ import androidx.core.content.ContextCompat
 import com.granularvolume.service.GranularVolumeTileService
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.Entitlement
-import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.PermissionHelper
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.PurchaseFlow
 import com.granularvolume.util.Prefs
 import com.granularvolume.util.ReviewHelper
 
@@ -157,11 +157,11 @@ class MainActivity : AppCompatActivity() {
         // one card slot serves all three. The purchase confirmation takes priority: it is
         // the one a person paid for.
         //
-        // The condition is the KEY, never [ProAccess.isPro] — that is also true during the
-        // trial, and thanking someone for a purchase they have not made is the fastest way
-        // to lose the sale that was still coming.
+        // The condition is a PAID unlock (the in-app purchase or the key), never
+        // [ProAccess.isPro] — that is also true during the trial, and thanking someone for a
+        // purchase they have not made is the fastest way to lose the sale that was still coming.
         if (BuildConfig.FLAVOR == "play" && !Entitlement.isGrandfathered(this) &&
-            !Prefs.wasUnlockAcknowledged(this) && KeyCheck.isKeyInstalled(this)
+            !Prefs.wasUnlockAcknowledged(this) && ProAccess.hasPaidUnlock(this)
         ) {
             card.visibility = View.VISIBLE
             findViewById<TextView>(R.id.tv_card_title).setText(R.string.gv_unlocked_title)
@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.btn_tipjar_support).setOnClickListener {
                 Prefs.setTipjarCardShown(this)
                 card.visibility = View.GONE
-                openUrl("market://details?id=com.granularvolume.key")
+                PurchaseFlow.start(this) { }
             }
             return true
         }
@@ -254,8 +254,8 @@ class MainActivity : AppCompatActivity() {
             title.text = resources.getQuantityString(R.plurals.gv_trial_days_left, daysLeft, daysLeft)
             body.setText(R.string.gv_trial_body)
             support.visibility = View.VISIBLE
-            support.setText(R.string.gv_trial_cta)
-            support.setOnClickListener { openUrl("market://details?id=com.granularvolume.key") }
+            support.setText(R.string.gv_trial_cta_iap)
+            support.setOnClickListener { PurchaseFlow.start(this) { setupTipjarCard() } }
             dismiss.setText(R.string.gv_trial_dismiss)
             dismiss.setOnClickListener { card.visibility = View.GONE }
             return true
@@ -267,8 +267,8 @@ class MainActivity : AppCompatActivity() {
         title.setText(R.string.gv_trial_over_title)
         body.setText(R.string.gv_trial_over_body)
         support.visibility = View.VISIBLE
-        support.setText(R.string.gv_trial_cta)
-        support.setOnClickListener { openUrl("market://details?id=com.granularvolume.key") }
+        support.setText(PurchaseFlow.ctaLabel(this))
+        support.setOnClickListener { PurchaseFlow.start(this) { setupTipjarCard() } }
         dismiss.visibility = View.GONE
         return true
     }

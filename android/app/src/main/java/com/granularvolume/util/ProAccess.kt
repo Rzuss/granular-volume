@@ -19,9 +19,13 @@ import com.granularvolume.BuildConfig
  *     app, gate included, so the decision to buy is made after living with the thing
  *     rather than after reading a description of it.
  *
- *  3. **Key installed** — the paid unlock-key app is present and its signing
+ *  3. **Paid** — either the in-app purchase is cached from Google Play's own record
+ *     ([Entitlement.isPurchased], 1.6.0, re-verified on every service start by
+ *     [BillingManager]), or the separate unlock-key app is present and its signing
  *     certificate matches the pinned set ([KeyCheck], flavor-split: the F-Droid
  *     flavor is fully unlocked by a stub, keeping that build free and complete).
+ *     Both stay valid forever; the key app is also the fallback when Play cannot run
+ *     a purchase on a device.
  *
  * This object lives in src/main and is GPL-published like everything else: the
  * check is possession of the key app, not a secret. Nothing here needs hiding.
@@ -78,7 +82,14 @@ object ProAccess {
     fun isPro(context: Context): Boolean =
         Entitlement.isGrandfathered(context) ||
             Entitlement.isTrialActive(context) ||
-            KeyCheck.isKeyInstalled(context)
+            hasPaidUnlock(context)
+
+    /**
+     * A buyer, by either receipt. The cached in-app purchase is a prefs read; the key app
+     * is the package-manager lookup, so it goes second.
+     */
+    fun hasPaidUnlock(context: Context): Boolean =
+        Entitlement.isPurchased(context) || KeyCheck.isKeyInstalled(context)
 
     /**
      * True when the ONLY reason the range is open is the trial still running.
@@ -87,12 +98,12 @@ object ProAccess {
      */
     fun isOnTrial(context: Context): Boolean =
         !Entitlement.isGrandfathered(context) &&
-            !KeyCheck.isKeyInstalled(context) &&
+            !hasPaidUnlock(context) &&
             Entitlement.isTrialActive(context)
 
     /** True once a trial has run out and nothing else has opened the range. */
     fun isTrialExpired(context: Context): Boolean =
         !Entitlement.isGrandfathered(context) &&
-            !KeyCheck.isKeyInstalled(context) &&
+            !hasPaidUnlock(context) &&
             !Entitlement.isTrialActive(context)
 }

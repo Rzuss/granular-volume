@@ -19,6 +19,7 @@ import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.PurchaseFlow
 
 /**
  * "Your access": the sheet behind the dial's info button.
@@ -35,7 +36,9 @@ import com.granularvolume.util.ProAccess
  *  - a long-time user who dismissed the one-time card had no route back to supporting us
  *  - the legal texts were reachable only from a screen that closes itself once set up
  *
- * Read-only by design: it reports state and offers Play. It never writes entitlement.
+ * Read-only by design: it reports state and offers Play. It never writes entitlement
+ * itself; 1.6.0's purchase route ([PurchaseFlow]) opens Google Play's own sheet over this
+ * one, and the cache it writes belongs to [com.granularvolume.util.BillingManager].
  */
 class InfoSheetActivity : AppCompatActivity() {
 
@@ -75,6 +78,12 @@ class InfoSheetActivity : AppCompatActivity() {
         }
     }
 
+    /** After an in-app purchase or restore: the service was already told by PurchaseFlow; just re-render. */
+    private fun rerender() {
+        if (isFinishing || isDestroyed) return
+        dialog?.setContentView(buildSheet())
+    }
+
     override fun onDestroy() {
         dialog?.setOnCancelListener(null)
         dialog?.dismiss()
@@ -98,7 +107,7 @@ class InfoSheetActivity : AppCompatActivity() {
         // for a purchase that never happened, on the one surface whose audience checks.
         BuildConfig.FLAVOR != "play" -> State.FDROID
         Entitlement.isGrandfathered(this) -> State.GRANDFATHERED
-        KeyCheck.isKeyInstalled(this) -> State.UNLOCKED
+        ProAccess.hasPaidUnlock(this) -> State.UNLOCKED
         Entitlement.isTrialActive(this) -> State.TRIAL
         else -> State.LOCKED
     }
@@ -134,7 +143,11 @@ class InfoSheetActivity : AppCompatActivity() {
         val headline = when (st) {
             State.FDROID -> getString(R.string.gv_info_state_fdroid)
             State.GRANDFATHERED -> getString(R.string.gv_info_state_grandfathered)
-            State.UNLOCKED -> getString(R.string.gv_info_state_unlocked)
+            // A key owner is thanked for the key; an in-app buyer for the account the purchase lives on.
+            State.UNLOCKED -> getString(
+                if (KeyCheck.isKeyInstalled(this)) R.string.gv_info_state_unlocked
+                else R.string.gv_info_state_purchased
+            )
             State.LOCKED -> getString(R.string.gv_info_state_locked)
             State.TRIAL -> {
                 val d = Entitlement.daysLeftInTrial(this)
@@ -161,15 +174,21 @@ class InfoSheetActivity : AppCompatActivity() {
         // Everyone else gets one honest route to Play, worded as support for the people
         // who owe us nothing.
         if (st != State.UNLOCKED && st != State.FDROID) {
-            val cta = if (st == State.GRANDFATHERED) R.string.gv_info_cta_support
-            else R.string.gv_info_cta_buy
+            // Grandfathered: wording kept by the owner's order (2026-09-25); the route is the same sheet.
+            val label = if (st == State.GRANDFATHERED) getString(R.string.gv_info_cta_support)
+            else PurchaseFlow.ctaLabel(this)
             root.addView(Button(this).apply {
-                text = getString(cta)
+                text = label
                 isAllCaps = false
                 setTextColor(ContextCompat.getColor(context, R.color.gv_on_accent))
                 setBackgroundColor(ContextCompat.getColor(context, R.color.gv_accent))
-                setOnClickListener { openStore() }
+                setOnClickListener { PurchaseFlow.start(this@InfoSheetActivity) { rerender() } }
             }.topPad(18, fill = true))
+            if (st != State.GRANDFATHERED) {
+                root.addView(link(getString(R.string.gv_purchase_restore_link)) {
+                    PurchaseFlow.restore(this) { rerender() }
+                }.apply { gravity = Gravity.CENTER }.topPad(2, fill = true))
+            }
         }
 
         // The restore note must describe the reader's OWN restore. A grandfathered user
@@ -182,9 +201,15 @@ class InfoSheetActivity : AppCompatActivity() {
                 text(getString(R.string.gv_info_restore_grandfathered), 12f, colorRes = R.color.gv_text_muted)
                     .topPad(14)
             )
+            // A key owner restores by reinstalling the key; everyone else by signing in to Play.
             else -> root.addView(
-                text(getString(R.string.gv_info_restore), 12f, colorRes = R.color.gv_text_muted)
-                    .topPad(if (st == State.UNLOCKED) 18 else 14)
+                text(
+                    getString(
+                        if (KeyCheck.isKeyInstalled(this)) R.string.gv_info_restore
+                        else R.string.gv_info_restore_iap
+                    ),
+                    12f, colorRes = R.color.gv_text_muted
+                ).topPad(if (st == State.UNLOCKED) 18 else 14)
             )
         }
 
@@ -226,19 +251,6 @@ class InfoSheetActivity : AppCompatActivity() {
         setOnClickListener { action() }
     }
 
-    private fun openStore() {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$KEY_APP_ID")))
-        } catch (_: Exception) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$KEY_APP_ID")
-                )
-            )
-        }
-    }
-
     private fun openUrl(url: String) {
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
     }
@@ -262,7 +274,6 @@ class InfoSheetActivity : AppCompatActivity() {
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
     private companion object {
-        const val KEY_APP_ID = "com.granularvolume.key"
         const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
         const val URL_PRIVACY = "https://rzuss.github.io/granular-volume-privacy/"
     }

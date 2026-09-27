@@ -18,6 +18,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.PurchaseFlow
 
 /**
  * Full-range upgrade sheet (1.5.0). Launched by the coordinator the moment a locked
@@ -35,8 +36,11 @@ import com.granularvolume.util.ProAccess
  *    session and re-applies the step that was refused); onResume re-checks ProAccess
  *    and sends ACTION_KEY_INSTALLED as the fallback, then closes.
  *
- * No price is rendered in-app: the store listing shows the local price, so nothing
- * here can go stale.
+ * 1.6.0: the CTA opens Google Play's own purchase sheet over this one ([PurchaseFlow]);
+ * nothing leaves the app. The price on the button is the one Play reported for this
+ * account and region, so it cannot go stale; until Play has answered, the button carries
+ * no number. The separate key app remains the fallback Play itself offers when it cannot
+ * run a purchase here, and a key owner is unlocked exactly as before.
  */
 class PaywallActivity : AppCompatActivity() {
 
@@ -64,16 +68,21 @@ class PaywallActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
-        if (ProAccess.isPro(this)) {
-            // Since 2026-09-10 the service learns of the key from the package broadcast the
-            // moment its install completes, and announces the purchase itself (one toast, the
-            // dial lights up, the refused step lands). This signal is the fallback door and a
-            // no-op when that already happened. No toast here, or a buyer would get two.
-            serviceAction(VolumeControlService.ACTION_KEY_INSTALLED)
-            dialog?.setOnCancelListener(null)
-            dialog?.dismiss()
-            finish()
-        }
+        if (ProAccess.isPro(this)) closeUnlocked()
+    }
+
+    /**
+     * The range is open (in-app purchase, restore, or the key app): tell the service and leave.
+     * Since 2026-09-10 the service learns of the key from the package broadcast the moment its
+     * install completes, and announces the purchase itself (one toast, the dial lights up, the
+     * refused step lands). This signal is the fallback door and a no-op when that already
+     * happened. No toast here, or a buyer would get two.
+     */
+    private fun closeUnlocked() {
+        serviceAction(VolumeControlService.ACTION_KEY_INSTALLED)
+        dialog?.setOnCancelListener(null)
+        dialog?.dismiss()
+        finish()
     }
 
     override fun onDestroy() {
@@ -85,16 +94,6 @@ class PaywallActivity : AppCompatActivity() {
 
     private fun serviceAction(action: String) {
         startService(Intent(this, VolumeControlService::class.java).setAction(action))
-    }
-
-    private fun openStore() {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$KEY_APP_ID")))
-        } catch (_: Exception) {
-            startActivity(
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$KEY_APP_ID"))
-            )
-        }
     }
 
     // ── sheet UI, programmatic — matches the app palette, adds no layout file ──
@@ -126,15 +125,21 @@ class PaywallActivity : AppCompatActivity() {
         root.addView(text(R.string.gv_paywall_title, 19f, bold = true, colorRes = R.color.gv_text_primary))
         root.addView(text(R.string.gv_paywall_depth, 14f, colorRes = R.color.gv_text_secondary).topPad(6))
         root.addView(text(R.string.gv_paywall_body, 13f, colorRes = R.color.gv_text_secondary).topPad(12))
-        root.addView(text(R.string.gv_paywall_expectation, 12f, colorRes = R.color.gv_text_muted).topPad(8))
+        root.addView(text(R.string.gv_paywall_expectation_iap, 12f, colorRes = R.color.gv_text_muted).topPad(8))
 
         root.addView(Button(this).apply {
-            text = getString(R.string.gv_paywall_cta)
+            text = PurchaseFlow.ctaLabel(context)
             isAllCaps = false
             setTextColor(ContextCompat.getColor(context, R.color.gv_on_accent))
             setBackgroundColor(ContextCompat.getColor(context, R.color.gv_accent))
-            setOnClickListener { openStore() }
+            setOnClickListener { PurchaseFlow.start(this@PaywallActivity) { closeUnlocked() } }
         }.topPad(18, fill = true))
+        root.addView(text(R.string.gv_purchase_restore_link, 13f, colorRes = R.color.gv_accent_text).apply {
+            gravity = Gravity.CENTER
+            setPadding(0, dp(10), 0, dp(4))
+            asButtonForAccessibility()
+            setOnClickListener { PurchaseFlow.restore(this@PaywallActivity) { closeUnlocked() } }
+        }.topPad(4, fill = true))
 
         root.addView(text(R.string.gv_paywall_terms, 13f, colorRes = R.color.gv_accent_text).apply {
             gravity = Gravity.CENTER
@@ -194,7 +199,6 @@ class PaywallActivity : AppCompatActivity() {
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
     private companion object {
-        const val KEY_APP_ID = "com.granularvolume.key"
         // Same document the consent gate links to (MainActivity.URL_TERMS).
         const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
     }
