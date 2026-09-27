@@ -193,7 +193,10 @@ object BillingManager {
         client(context).queryProductDetailsAsync(params) { r, result ->
             val found = result.productDetailsList.firstOrNull { it.productId == PRODUCT_ID }
             if (found != null) details = found
-            Log.i(TAG, "Product details: code=${r.responseCode} found=${found != null} price=${found?.oneTimePurchaseOfferDetails?.formattedPrice}")
+            // Why a product is missing is only in the unfetched list (Billing 8+): 3 = not found or not yet
+            // propagated, 4 = found but no purchase option eligible for this user or region.
+            val unfetched = result.unfetchedProductList.joinToString { "${it.productId}:${it.statusCode}" }
+            Log.i(TAG, "Product details: code=${r.responseCode} found=${found != null} price=${found?.oneTimePurchaseOfferDetails?.formattedPrice} unfetched=[$unfetched]")
             cb(found)
         }
     }
