@@ -81,6 +81,9 @@ class VolumeControlService : Service() {
          */
         const val EXTRA_FROM_BOOT = "com.granularvolume.EXTRA_FROM_BOOT"
 
+        /** How long after the dial is up the billing warm-up may start (1.6.0). */
+        private const val BILLING_PREFETCH_DELAY_MS = 1500L
+
         /** The paid key app. Must match KeyCheck and the play manifest's <queries> entry. */
         private const val KEY_APP_PACKAGE = "com.granularvolume.key"
 
@@ -228,10 +231,6 @@ class VolumeControlService : Service() {
         sessionUnlocked = ProAccess.isPro(applicationContext)
         keyWelcomed = ProAccess.hasPaidUnlock(applicationContext)
         audioController.proProvider = ::unlockedThisSession
-        // 1.6.0: warm Google Play's billing connection, fetch the price for the sheets, and
-        // re-read this account's purchase record (a refund revokes, a restore re-opens).
-        // Asynchronous and failure-tolerant; the latch above decides this session either way.
-        BillingManager.prefetch(applicationContext)
 
         streamVolumeController = StreamVolumeController(applicationContext)
         coordinator = FullRangeCoordinator(applicationContext, audioController, streamVolumeController)
@@ -328,6 +327,12 @@ class VolumeControlService : Service() {
             toast("Couldn't show the control: ${e.message}. Check 'Display over other apps'.")
         }
         Prefs.setServiceWasRunning(applicationContext, true)
+
+        // 1.6.0: warm Google Play's billing connection, fetch the price for the sheets, and
+        // re-read this account's purchase record (a refund revokes, a restore re-opens). Off
+        // the main thread inside BillingManager, and posted after the dial is up so the first
+        // frames of the control never wait for Play. The latch decided this session already.
+        mainHandler.postDelayed({ BillingManager.prefetch(applicationContext) }, BILLING_PREFETCH_DELAY_MS)
 
         // Update notification when attenuation changes
         audioController.attenuationDb

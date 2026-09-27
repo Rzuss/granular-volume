@@ -3,6 +3,7 @@ package com.granularvolume.util
 import android.app.Activity
 import android.content.Context
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
@@ -39,6 +40,13 @@ import com.android.billingclient.api.QueryPurchasesParams
  *
  * The separate Full Range Key app stays a valid unlock forever ([KeyCheck]); it is also the
  * fallback the sheets offer when Play cannot run a purchase here.
+ *
+ * Threading: nothing here runs on the main thread except the one call Play requires there,
+ * [BillingClient.launchBillingFlow]. Building the client and opening the connection do
+ * synchronous package-manager work, and the 2026-09-27 pilot run caught that work inside
+ * the service's onCreate on a loaded emulator, in the ANR trace of the activity waiting for
+ * it. Every entry point hops to a private worker thread first; results reach callers on the
+ * main thread.
  */
 object BillingManager {
 
@@ -50,6 +58,14 @@ object BillingManager {
     private const val TAG = "GranularVolume:Billing"
 
     private val main = Handler(Looper.getMainLooper())
+    private val worker: Handler by lazy {
+        Handler(HandlerThread("GranularVolume:Billing").apply { start() }.looper)
+    }
+
+    /** Runs [block] on the billing worker; immediately if already there. */
+    private fun onWorker(block: () -> Unit) {
+        if (Looper.myLooper() == worker.looper) block() else worker.post(block)
+    }
     private var client: BillingClient? = null
     private var appContext: Context? = null
     private var details: ProductDetails? = null
@@ -153,7 +169,7 @@ object BillingManager {
      * Warms the connection, fetches the price for the sheets and re-checks ownership.
      * Called from the service on start; every step is asynchronous and failure-tolerant.
      */
-    fun prefetch(context: Context) {
+    fun prefetch(context: Context) = onWorker {
         ensureConnected(context) { r ->
             if (r.responseCode != BillingClient.BillingResponseCode.OK) {
                 Log.i(TAG, "Purchase verify: unavailable (code ${r.responseCode}), cache kept")
@@ -186,7 +202,7 @@ object BillingManager {
      * Reads Play's record for this account and updates the cache.
      * [onResult]: true = owned, false = Play answered and it is not owned, null = no answer.
      */
-    fun verifyOwnership(context: Context, onResult: ((Boolean?) -> Unit)?) {
+    fun verifyOwnership(context: Context, onResult: ((Boolean?) -> Unit)?) = onWorker {
         ensureConnected(context) { r ->
             if (r.responseCode != BillingClient.BillingResponseCode.OK) {
                 Log.i(TAG, "Purchase verify: unavailable (code ${r.responseCode}), cache kept")
@@ -263,7 +279,7 @@ object BillingManager {
     fun launchPurchase(activity: Activity, listener: (PurchaseOutcome) -> Unit) {
         val ctx = activity.applicationContext
         activeListener = listener
-        ensureConnected(ctx) { r ->
+        onWorker { ensureConnected(ctx) { r ->
             if (r.responseCode != BillingClient.BillingResponseCode.OK) {
                 deliver(PurchaseOutcome.Unavailable(r.responseCode, r.debugMessage))
                 return@ensureConnected
@@ -293,7 +309,7 @@ object BillingManager {
                     // OK: the sheet is up; purchasesListener delivers the outcome.
                 }
             }
-        }
+        } }
     }
 
     /** Manual restore: the same query the service runs on start, with a result for the sheet. */
