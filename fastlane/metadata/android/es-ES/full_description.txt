@@ -1,6 +1,6 @@
 ¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en multimedia, tonos o notificaciones? Tu móvil o tablet se detiene en el mínimo del hardware. Granular Volume baja más.
 
-Un pequeño control flotante aparece sobre cualquier aplicación, con todo tu rango de volumen en un solo deslizador: el volumen normal del sistema por encima de la línea del mínimo de tu dispositivo, y una zona silenciosa por debajo, siete pasos hasta 30 dB completos bajo el mínimo del hardware. Arrástralo a donde quieras, apártalo a un borde, ciérralo al terminar. Tu posición se guarda.
+Un pequeño control flotante aparece sobre cualquier aplicación, con todo tu rango de volumen en un solo deslizador: el volumen normal del sistema por encima de la línea del mínimo de tu dispositivo, y una zona silenciosa por debajo, seis pasos de 5 dB hasta 30 dB completos bajo el mínimo del hardware. Arrástralo a donde quieras, apártalo a un borde, ciérralo al terminar. Tu posición se guarda.
 
 Es una utilidad de comodidad, no protección auditiva. El volumen real depende de tu dispositivo y auriculares, usa el buen juicio.
 

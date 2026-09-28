@@ -256,7 +256,7 @@
     <div class="fixcard">
       <h3>A volume cut applied after the system's own minimum <span class="verdict v-works">Actually works</span></h3>
       <p>Every option above works inside the range Android exposes. To get below the floor, something has to reduce the level <em>after</em> Android has already decided what its minimum is.</p>
-      <p><a href="../">Granular Volume</a> does that. It attaches an audio effect, Android's own DynamicsProcessing, to the system's global output mix and applies negative gain there, in seven steps down to 30 dB below the hardware floor, from a small floating dial you can park at the edge of the screen. Because it sits on the mixed output rather than on one app, it reaches the alarm stream along with ringtones, notifications and media.</p>
+      <p><a href="../">Granular Volume</a> does that. It attaches an audio effect, Android's own DynamicsProcessing, to the system's global output mix and applies negative gain there, in 5 dB steps down to 30 dB below the hardware floor, from a small floating dial you can park at the edge of the screen. Because it sits on the mixed output rather than on one app, it reaches the alarm stream along with ringtones, notifications and media.</p>
       <p>Each of those was checked the same way: play the sound, move the dial down through its steps, listen. The level drops every time. No root, no ADB, no computer, and no internet permission in the app at all.</p>
     </div>
 

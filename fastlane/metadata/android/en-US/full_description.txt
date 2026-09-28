@@ -1,6 +1,6 @@
 Is your Android volume still too loud even at the lowest setting, in media, ringtones, or notifications? Your phone or tablet stops at its hardware minimum. Granular Volume goes below it.
 
-A small floating control appears above any app, with your whole volume range on one slider: normal system volume above your device's minimum line, and a quiet zone below it, seven steps down to a full 30 dB under the hardware minimum. Drag it anywhere, tuck it to an edge, close it when done. Your position is saved.
+A small floating control appears above any app, with your whole volume range on one slider: normal system volume above your device's minimum line, and a quiet zone below it, six steps of 5 dB down to a full 30 dB under the hardware minimum. Drag it anywhere, tuck it to an edge, close it when done. Your position is saved.
 
 This is a convenience utility, not hearing protection equipment. Actual loudness depends on your device and headphones, so use good judgment with volume changes.
 

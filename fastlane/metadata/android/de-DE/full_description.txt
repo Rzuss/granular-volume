@@ -1,6 +1,6 @@
 Ist die Android-Lautstärke selbst auf der niedrigsten Stufe noch zu laut, bei Medien, Klingeltönen oder Benachrichtigungen? Ihr Handy oder Tablet stoppt am Hardware-Minimum. Granular Volume geht darunter.
 
-Ein kleiner schwebender Regler erscheint über jeder App, mit Ihrem gesamten Lautstärkebereich auf einem Schieberegler: normale Systemlautstärke oberhalb der Minimum-Linie Ihres Geräts und eine leise Zone darunter, sieben Stufen bis volle 30 dB unter dem Hardware-Minimum. Frei verschiebbar, an den Rand anlegbar, mit einem Tipp geschlossen. Die Position wird gespeichert.
+Ein kleiner schwebender Regler erscheint über jeder App, mit Ihrem gesamten Lautstärkebereich auf einem Schieberegler: normale Systemlautstärke oberhalb der Minimum-Linie Ihres Geräts und eine leise Zone darunter, sechs Stufen zu je 5 dB bis volle 30 dB unter dem Hardware-Minimum. Frei verschiebbar, an den Rand anlegbar, mit einem Tipp geschlossen. Die Position wird gespeichert.
 
 Dies ist ein Komfort-Werkzeug, kein Gehörschutz. Die tatsächliche Lautstärke hängt von Gerät und Kopfhörern ab, bitte mit Bedacht verwenden.
 

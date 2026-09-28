@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Audiobooks Too Loud at Night? Quieter Android Volume</title>
-<meta name="description" content="Fall asleep to audiobooks or podcasts without waking your partner. How to set an Android volume below the lowest step. No root, no ads.">
+<meta name="description" content="Audiobook or podcast too loud at night, even at the lowest volume? Why Android stops there and how to go below it without waking your partner.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://granularvolume.com/use-cases/night-audiobooks-podcasts.html">
 <meta property="og:title" content="Audiobooks Too Loud at Night? Quieter Android Volume">
-<meta property="og:description" content="Fall asleep to audiobooks or podcasts without waking your partner. How to set an Android volume below the lowest step. No root, no ads.">
+<meta property="og:description" content="Audiobook or podcast too loud at night, even at the lowest volume? Why Android stops there and how to go below it without waking your partner.">
 <meta property="og:image" content="../img/feature.png">
 <meta property="og:type" content="article">
 <link rel="icon" href="../img/icon.png">
@@ -17,12 +17,12 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Audiobooks Too Loud at Night? Quieter Android Volume",
-  "description": "Fall asleep to audiobooks or podcasts without waking your partner. How to set an Android volume below the lowest step. No root, no ads.",
+  "description": "Audiobook or podcast too loud at night, even at the lowest volume? Why Android stops there and how to go below it without waking your partner.",
   "image": "https://granularvolume.com/img/feature.png",
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-14",
-  "dateModified": "2026-07-14",
+  "dateModified": "2026-09-28",
   "mainEntityOfPage": "https://granularvolume.com/use-cases/night-audiobooks-podcasts.html"
 }
 </script>
@@ -39,12 +39,22 @@
     {
       "@type": "Question",
       "name": "Does running it all night drain the battery noticeably?",
-      "acceptedAnswer": {"@type": "Answer", "text": "The overlay itself is a lightweight foreground service with no continuous processing beyond holding the audio effect active, so it doesn't add meaningful battery drain on top of whatever the audiobook or podcast app itself already uses to play audio."}
+      "acceptedAnswer": {"@type": "Answer", "text": "The app itself does very little while it runs: it keeps one audio effect on the phone's output and waits for you. That effect works on the audio that is already playing, so it adds a small amount of processing on top of playback. We have not measured the battery cost separately."}
     },
     {
       "@type": "Question",
       "name": "Will it keep working if I lock the phone screen?",
       "acceptedAnswer": {"@type": "Answer", "text": "Yes. It runs as a foreground service specifically so the volume reduction and playback continue normally with the screen off or locked, the same way any other audio app keeps playing after you lock your phone."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will my morning alarm be quieter too?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, if the dial is still below the line when the alarm rings. The quiet steps lower media, ringtones, notifications and alarms together. The mute button is different: it silences media only and leaves alarms alone. If you wake up to your phone's alarm, bring the dial back to the line or close it when you finish listening, or check once that your alarm is still loud enough at the step you use."}
+    },
+    {
+      "@type": "Question",
+      "name": "What if someone calls during the night?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The ringtone follows the quiet step. The call itself does not: Android plays regular phone calls on a separate path that no app can lower, so a regular call is at your phone's normal call volume."}
     }
   ]
 }
@@ -100,6 +110,13 @@
     border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
   .callout h2{margin-top:0;}
   .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+  .glance{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;overflow-x:auto;}
+  .glance .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .glance p{margin-bottom:14px;}
+  .glance table{width:100%;border-collapse:collapse;font-size:15px;}
+  .glance th,.glance td{text-align:left;vertical-align:top;padding:9px 8px;border-top:1px solid var(--line);}
+  .glance th{color:var(--muted);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border-top:none;}
+  @media (max-width:480px){.glance{padding:18px 14px;}.glance table{font-size:14px;}.glance th,.glance td{padding:8px 5px;}.glance th{font-size:11.5px;letter-spacing:.02em;}}
   .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
   .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
   footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
@@ -160,7 +177,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Audiobooks too loud at night? Fall asleep without waking your partner</h1>
     <p class="dek">A phone's lowest volume step is loud enough to hear from across a room, which is exactly the wrong loudness for something meant to be almost inaudible next to someone sleeping.</p>
-    <p class="meta">Updated July 14, 2026 · 4 min read</p>
+    <p class="meta">Updated September 28, 2026 · 5 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -168,6 +185,23 @@
     <p class="lead-p">Falling asleep to a podcast or an audiobook only works if it's quiet enough not to become the thing that keeps someone else awake instead. For a lot of phones and tablets, the lowest non-mute volume step doesn't get there. It's calibrated for normal daytime listening, not for something meant to fade into the background of a dark, quiet bedroom.</p>
 
     <p>This comes down to how Android's volume system is built: the lowest step above mute is a fixed fraction of the device's maximum output, not a fixed loudness. There's no separate "bedtime" calibration, and no setting in stock Android that changes where that floor sits, regardless of what's actually playing through it.</p>
+
+    <div class="glance">
+      <div class="kicker">The short answer</div>
+      <p>Android's lowest volume step is a fixed fraction of your phone's maximum, and no setting moves it. A sleep timer ends playback and sleep headphones keep the sound near you, but neither lowers that floor. To listen quietly enough not to wake your partner, the output has to be reduced below the system's own minimum, which is the last row here.</p>
+      <table>
+        <thead><tr><th scope="col">Method</th><th scope="col">What it does at night</th><th scope="col">Lowers the floor?</th></tr></thead>
+        <tbody>
+          <tr><td>Sleep timer in your podcast or audiobook app</td><td>Stops playback after a set time</td><td>No, it plays just as loud until it stops</td></tr>
+          <tr><td>Sleep headphones or a pillow speaker</td><td>Keeps the sound near you instead of in the room</td><td>No, and with earbuds the lowest step is often still too loud</td></tr>
+          <tr><td>Bedtime mode, Do Not Disturb</td><td>Silences notifications and dims the screen</td><td>No, media volume stays where it was</td></tr>
+          <tr><td>More volume steps, <a href="../guide/samsung-galaxy-volume-too-loud-minimum.html">Sound Assistant on Samsung</a></td><td>Makes the steps finer</td><td>A few dB, then the same floor</td></tr>
+          <tr><td>Equalizer, sound enhancements off</td><td>Changes the tone</td><td>Inconsistent, depends on the phone</td></tr>
+          <tr><td><a href="../guide/bluetooth-earbuds-volume-too-loud-lowest.html">Disable absolute volume</a></td><td>Changes how the steps map to Bluetooth headphones</td><td>Sometimes, over Bluetooth only</td></tr>
+          <tr><td>Below-floor attenuation (Granular Volume)</td><td>Reduces the output after the system's own minimum</td><td>Yes, down to 30 dB below it</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="quickfix">
       <div class="kicker">The actual fix</div>
@@ -185,14 +219,15 @@
     <h2>What actually gets you quieter</h2>
     <p>A volume reduction applied underneath the existing volume range, rather than more clicks within it, is what actually changes the floor. You can also get there by re-encoding a file to be quieter before you play it, which genuinely works but has to be done per file and is no help for streaming. That's what Granular Volume does: a small floating dial over your audiobook or podcast app, with real steps below what the phone's own slider allows.</p>
     <ul>
-      <li>Set the level once, tuck the dial to a corner where it turns semi-transparent, and it stays exactly there through the night.</li>
+      <li>Set the level once, then minimize the dial to a small tab at the edge of the screen. The level stays exactly where you left it through the night.</li>
       <li>Runs as a normal foreground service, so playback and the volume reduction both continue fine with the screen off or the phone locked, same as any other audio app.</li>
-      <li>Doesn't override your physical volume buttons, so if you want to bump it back up in the morning, the normal controls still work as they always have.</li>
+      <li>Your volume buttons keep working. Below the line, each press of volume up eases the level one quiet step, so in the morning you can press your way back up, or just drag the dial.</li>
+      <li>The quiet steps lower notification sounds, ringtones and alarms too, not only the audiobook. Read the alarm question below before you rely on your phone to wake you.</li>
     </ul>
 
     <div class="callout">
       <h2>The quiet setting your phone doesn't have</h2>
-      <p>Open source, no ads, no tracking, no account. Works the same on phones and tablets alike.</p>
+      <p>Free to install with seven days of the complete app, then one payment, once, inside the app. Open source, no ads, no tracking, no account, no internet permission. For phones and tablets.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dnight-audiobooks-podcasts" data-goatcounter-click="play-cta-night-audiobooks-podcasts">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../">See how it works</a>
@@ -206,10 +241,16 @@
       <dd>No, it stays exactly at the level you set until you change it or close it, there's no automatic timeout. If you want it off by morning, closing it with one tap or using the Quick Settings tile before you fall asleep is the way to do that.</dd>
 
       <dt>Does running it all night drain the battery noticeably?</dt>
-      <dd>The overlay itself is a lightweight foreground service with no continuous processing beyond holding the audio effect active, so it doesn't add meaningful battery drain on top of whatever the audiobook or podcast app itself already uses to play audio.</dd>
+      <dd>The app itself does very little while it runs: it keeps one audio effect on the phone's output and waits for you. That effect works on the audio that is already playing, so it adds a small amount of processing on top of playback. We have not measured the battery cost separately.</dd>
 
       <dt>Will it keep working if I lock the phone screen?</dt>
       <dd>Yes. It runs as a foreground service specifically so the volume reduction and playback continue normally with the screen off or locked, the same way any other audio app keeps playing after you lock your phone.</dd>
+
+      <dt>Will my morning alarm be quieter too?</dt>
+      <dd>Yes, if the dial is still below the line when the alarm rings. The quiet steps lower media, ringtones, notifications and alarms together. The mute button is different: it silences media only and leaves alarms alone. If you wake up to your phone's alarm, bring the dial back to the line or close it when you finish listening, or check once that your alarm is still loud enough at the step you use.</dd>
+
+      <dt>What if someone calls during the night?</dt>
+      <dd>The ringtone follows the quiet step. The call itself does not: Android plays regular phone calls on a separate path that no app can lower, so a regular call is at your phone's normal call volume.</dd>
     </dl>
   </article>
 
