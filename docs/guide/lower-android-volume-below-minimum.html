@@ -27,7 +27,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-07-30",
+  "dateModified": "2026-09-28",
   "mainEntityOfPage": "https://granularvolume.com/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -36,6 +36,11 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does dragging the on-screen slider go lower than the buttons?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. Android stores each volume as a whole-number step, so the on-screen slider and the volume buttons land on exactly the same steps. Tools such as Sound Assistant change the step size itself, for the buttons and the slider alike, but the bottom of the range stays where it was."}
+    },
     {
       "@type": "Question",
       "name": "Why is my phone's lowest volume setting still so loud?",
@@ -219,6 +224,14 @@
   article li{margin-bottom:8px;}
   .lead-p{font-size:18px;color:var(--txt);}
 
+  .glance{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .glance .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .glance p{margin-bottom:14px;}
+  .glance table{width:100%;border-collapse:collapse;font-size:15px;}
+  .glance th,.glance td{text-align:left;vertical-align:top;padding:9px 8px;border-top:1px solid var(--line);}
+  .glance th{color:var(--muted);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border-top:none;}
+  .glance td:first-child a{color:var(--txt);text-decoration:none;}
+  .glance td:first-child a:hover{color:var(--accent2);}
   .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
   .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
   .toc ol{margin:0 0 0 20px;font-size:15px;}
@@ -301,13 +314,32 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated July 30, 2026 · 10 min read</p>
+    <p class="meta">Updated September 28, 2026 · 10 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
   <article>
     <p class="lead-p">If the lowest step on your phone or tablet's volume slider is still too loud for a quiet room, a sleeping baby, or sensitive headphones, you are not imagining it and you are not doing anything wrong. Android's volume range is divided into a fixed number of steps between silence and full output, and the first step above mute is a fixed fraction of the maximum, not a fixed loudness. On a phone or tablet with a loud maximum, that first step can be genuinely too loud. Stock Android has no setting to move it.</p>
     <p>This guide covers every real method people use to work around it, including the ones that don't actually work the way they're usually described. That distinction matters, because most of what ranks for this question online recommends apps and settings that make the steps <em>finer</em> without making the <em>floor</em> any lower.</p>
+
+    <div class="glance">
+      <div class="kicker">The short answer</div>
+      <p>Android's lowest volume step is a fixed fraction of your device's maximum, and no setting moves it. Tools that make the steps finer get a few dB lower and then hit the same floor. To go truly below it without root, the output has to be reduced after the system's own minimum, which is what the last method in this table does.</p>
+      <table>
+        <thead><tr><th scope="col">Method</th><th scope="col">What it changes</th><th scope="col">Lowers the floor?</th></tr></thead>
+        <tbody>
+        <tr><td><a href="#bluetooth">Disable Absolute Volume (Bluetooth)</a></td><td>How the phone's steps map to the headphones</td><td>Sometimes, over Bluetooth only</td></tr>
+        <tr><td><a href="#soundassistant">Sound Assistant (Samsung)</a></td><td>Makes the steps finer</td><td>A few dB, then stops</td></tr>
+        <tr><td><a href="#stepapps">Custom step-count apps</a></td><td>Makes the steps finer; some add a post-gain deep in their equalizer</td><td>A few dB from the steps; the deepest post-gain we measured stopped near -17.7 dB</td></tr>
+        <tr><td><a href="#eq">Dolby Atmos off, lower equalizer</a></td><td>Tone</td><td>Inconsistent side effect</td></tr>
+        <tr><td><a href="#normalize">Normalize Volume, Adapt Sound</a></td><td>Evens out peaks</td><td>No</td></tr>
+        <tr><td><a href="#limiters">Volume limits, the 85 dB cap</a></td><td>The top of the range</td><td>No</td></tr>
+        <tr><td><a href="#firmware">Firmware updates</a></td><td>Anecdotal</td><td>Not guaranteed</td></tr>
+        <tr><td><a href="#adb">Volume curve over ADB</a></td><td>The curve itself</td><td>Yes, but needs a computer and care</td></tr>
+        <tr><td><a href="#attenuation">Below-floor attenuation (Granular Volume)</a></td><td>Reduces output after the system's own minimum</td><td>Yes, down to 30 dB below it, no computer</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="quickfix">
       <div class="kicker">Short on time? Here's the answer</div>
@@ -417,6 +449,8 @@
 
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
+      <dt>Does dragging the on-screen slider go lower than the buttons?</dt>
+      <dd>No. Android stores each volume as a whole-number step, so the on-screen slider and the volume buttons land on exactly the same steps. Tools such as Sound Assistant change the step size itself, for the buttons and the slider alike, but the bottom of the range stays where it was.</dd>
       <dt>Why is my phone's lowest volume setting still so loud?</dt>
       <dd>Android divides the range between silence and full output into a fixed number of steps, usually 15 to 25. The lowest non-mute step is a fixed fraction of the maximum, not a fixed loudness, so on a device with a loud maximum, that first step can still be uncomfortable. Stock Android has no setting to move it.</dd>
 
