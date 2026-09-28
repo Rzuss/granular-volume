@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baixar o volume do Android abaixo do mínimo</title>
+<meta name="description" content="O volume mínimo ainda está alto demais? Como descer abaixo do nível mais baixo do Android, até -30 dB. Sem root.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://granularvolume.com/pt/baixar-volume-abaixo-do-minimo-android.html">
+<link rel="alternate" hreflang="en" href="https://granularvolume.com/guide/lower-android-volume-below-minimum.html">
+<link rel="alternate" hreflang="de" href="https://granularvolume.com/de/lautstaerke-unter-minimum-android.html">
+<link rel="alternate" hreflang="es" href="https://granularvolume.com/es/bajar-volumen-por-debajo-del-minimo-android.html">
+<link rel="alternate" hreflang="fr" href="https://granularvolume.com/fr/baisser-volume-sous-le-minimum-android.html">
+<link rel="alternate" hreflang="it" href="https://granularvolume.com/it/abbassare-volume-sotto-il-minimo-android.html">
+<link rel="alternate" hreflang="pt-BR" href="https://granularvolume.com/pt/baixar-volume-abaixo-do-minimo-android.html">
+<link rel="alternate" hreflang="x-default" href="https://granularvolume.com/guide/lower-android-volume-below-minimum.html">
+<meta property="og:title" content="Baixar o volume do Android abaixo do mínimo">
+<meta property="og:description" content="O volume mínimo ainda está alto demais? Como descer abaixo do nível mais baixo do Android, até -30 dB. Sem root.">
+<meta property="og:image" content="https://granularvolume.com/img/feature.png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "inLanguage": "pt-BR",
+  "headline": "Baixar o volume do Android abaixo do mínimo",
+  "description": "O volume mínimo ainda está alto demais? Como descer abaixo do nível mais baixo do Android, até -30 dB. Sem root.",
+  "image": "https://granularvolume.com/img/feature.png",
+  "author": {
+    "@type": "Person",
+    "name": "Rotem Zussman"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Rotem Zussman",
+    "alternateName": "Granular Apps"
+  },
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-28",
+  "mainEntityOfPage": "https://granularvolume.com/pt/baixar-volume-abaixo-do-minimo-android.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "pt-BR",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Por que o volume mais baixo do meu celular ainda soa tão alto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Porque é uma fração fixa do volume máximo, não um volume absoluto. Num aparelho com um máximo potente, até o primeiro nível acima do mudo soa alto. Nas configurações do Android não há como mudar isso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O Sound Assistant baixa o piso do volume?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Um pouco, e depois para de baixar. O primeiro nível de 100 fica mais baixo que o primeiro de dez, cerca de 5 dB na configuração que medimos. Além disso não chega, porque a curva de atenuação do Android tem um fundo fixo. Se esse fundo já parece alto para você, não vai ajudar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Adianta desativar o Dolby Atmos ou o equalizador?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Às vezes um pouco, porque esses efeitos adicionam ganho. Não é confiável, e em muitos aparelhos nada muda."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Dá para fazer sem root?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. A interface de efeitos de áudio do Android é suficiente. Sem root, sem ADB e sem modificar arquivos do sistema."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Também baixa chamadas, alarme e notificações?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mídia, toques, notificações e alarme passam pela mesma rota de saída mixada e baixam com ela. Chamadas de apps como o WhatsApp também, se o celular as reproduzir por essa mesma rota, o que depende do modelo. Chamadas telefônicas comuns não: em qualquer celular, o Android leva a voz da rede móvel por uma rota separada que nenhum app alcança."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Por que os sons do teclado não abaixam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usam uma rota separada de baixa latência que pula os efeitos de áudio de propósito. É um limite do Android e nenhum app consegue contorná-lo. Mas dá para desativá-los separadamente nas configurações de som."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Funciona também em tablets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "É feito para celulares e tablets da mesma forma, e nos tablets o efeito costuma ser mais perceptível, porque muitas vezes eles têm um mínimo ainda mais alto. O comportamento ainda depende do aparelho, então teste no seu durante os sete dias grátis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "É gratuito?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A instalação é gratuita e os primeiros sete dias são o app completo. Depois, para continuar usando o controle, é um pagamento único, uma vez só, dentro do app pelo Google Play. Sem assinatura. A versão no F-Droid inclui tudo sem custo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O controle volta depois de reiniciar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, se estava ativo ao desligar, ele volta sozinho depois de reiniciar. Se você o parou, continua parado."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#5046E5; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#5B52F0);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .setup-note{margin-top:12px;font-size:14px;line-height:1.5;opacity:.85;}
+.cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .warn{background:rgba(245,185,66,.10);border:1px solid rgba(245,185,66,.38);
+    border-radius:16px;padding:22px 26px;margin:26px 0;}
+  .warn .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin-bottom:8px;}
+  .warn p{margin-bottom:0;font-size:16.5px;color:#e3e5f7;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+
+  /* Keyboard accessibility. Nothing here changes the page for mouse users. */
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:999;padding:12px 20px;
+    background:var(--accent2);color:var(--bg0);font-weight:700;text-decoration:none;
+    border-radius:0 0 10px 0;}
+  .skip-link:focus{left:0;}
+  :focus-visible{outline:3px solid var(--accent2);outline-offset:3px;border-radius:4px;}
+  main:focus{outline:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{transition:none !important;animation:none !important;}
+  }
+</style>
+<script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style id="gv-a11y-style">
+  /* Accessibility button and panel, self-hosted (a11y.js). No third-party code, no cookies. */
+  .gv-a11y-fab{position:fixed;left:16px;bottom:16px;z-index:1000;width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:#5046E5;color:#fff;border:2px solid #fff;
+    box-shadow:0 6px 18px rgba(0,0,0,.45);cursor:pointer;padding:0;text-decoration:none;}
+  .gv-a11y-fab svg{width:30px;height:30px;fill:currentColor;}
+  .gv-a11y-fab:focus-visible,.gv-a11y-btn:focus-visible,.gv-a11y-link:focus-visible{outline:3px solid #22d3ee;outline-offset:3px;}
+  .gv-a11y-panel{position:fixed;left:16px;bottom:78px;z-index:1000;width:min(300px,calc(100vw - 32px));
+    max-height:calc(100vh - 100px);overflow:auto;background:#161232;color:#f4f6ff;border:1px solid rgba(255,255,255,.35);
+    border-radius:14px;padding:14px;box-shadow:0 12px 32px rgba(0,0,0,.55);font:16px/1.4 "Segoe UI",system-ui,sans-serif;text-align:left;}
+  .gv-a11y-title{font-weight:800;font-size:17px;margin:0 0 10px;}
+  .gv-a11y-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .gv-a11y-label{flex:1;}
+  .gv-a11y-value{min-width:46px;text-align:center;}
+  .gv-a11y-btn{display:block;width:100%;min-height:44px;margin:0 0 8px;padding:8px 12px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.35);background:#232a55;color:#f4f6ff;font:inherit;text-align:left;cursor:pointer;}
+  .gv-a11y-step{width:52px;margin:0;text-align:center;font-weight:700;}
+  .gv-a11y-btn[aria-pressed="true"]{background:#5046E5;border-color:#fff;}
+  .gv-a11y-btn[aria-pressed="true"]::after{content:" \2713";}
+  .gv-a11y-btn:disabled{opacity:.45;cursor:default;}
+  .gv-a11y-link{display:block;margin:4px 0 10px;color:#22d3ee;}
+  .gv-a11y-close{margin-bottom:0;}
+  html.gv-hc body,html.gv-hc body *:not(img):not(svg):not(path){background:#000 !important;
+    border-color:#fff !important;text-shadow:none !important;box-shadow:none !important;}
+  html.gv-hc body,html.gv-hc body *{color:#fff !important;}
+  html.gv-hc body a,html.gv-hc body a *{color:#ff0 !important;}
+  html.gv-hc .gv-a11y-btn[aria-pressed="true"]{outline:3px solid #ff0;}
+  html.gv-ul a{text-decoration:underline !important;}
+  html.gv-rf body,html.gv-rf body *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.02em;word-spacing:.06em;}
+  @media print{.gv-a11y{display:none !important;}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../">Granular Volume</a> / Guia</div>
+    <div class="icon"><img src="../img/icon.webp" alt="Ícone do Granular Volume"></div>
+    <h1>Como baixar o volume do Android abaixo do mínimo</h1>
+    <p class="dek">Seu volume está no nível mais baixo e ainda está alto demais. Não é uma configuração que você deixou passar. O Android tem um piso de volume, e pelas configurações não há como descer além dele.</p>
+    <p class="meta">Publicado em 28 de setembro de 2026 &middot; 8 min de leitura</p>
+  </header>
+<main id="main" tabindex="-1">
+
+  <div class="quickfix">
+    <div class="kicker">A resposta curta</div>
+    <p>Quase todas as dicas que você encontra deixam os níveis <strong>mais finos</strong>, não o piso <strong>mais baixo</strong>. São dois problemas diferentes. Dividir mais baixa o ponto audível mais baixo só alguns decibéis e depois bate num piso fixo. O que ajuda de verdade é aplicar ganho negativo abaixo dos níveis.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbaixar-volume-abaixo-do-minimo-android" data-goatcounter-click="play-cta-baixar-volume-abaixo-do-minimo-android">No Google Play</a>
+      <a class="btn btn-ghost" href="#metodi">Todos os métodos</a>
+    </div>
+      <p class="setup-note">Depois de instalar, abra uma vez e permita a exibição sobre outros apps. Essa é toda a configuração.</p>
+  </div>
+
+  <article>
+
+    <p class="lead-p">Acontece na hora de dormir, no ônibus, num escritório compartilhado, ao lado de um bebê dormindo. Você aperta o botão de volume até o fim e o próximo toque deixa tudo mudo. Entre alto demais e nada, não existe nada.</p>
+
+    <div class="toc">
+      <div>Conteúdo</div>
+      <ol>
+        <li><a href="#perche">Por que o nível mais baixo ainda soa alto</a></li>
+        <li><a href="#metodi">O que funciona de verdade, avaliado com honestidade</a></li>
+        <li><a href="#tastiera">Por que os sons do teclado nunca abaixam</a></li>
+        <li><a href="#faq">Perguntas frequentes</a></li>
+      </ol>
+    </div>
+
+    <h2 id="perche">Por que o nível mais baixo ainda soa alto</h2>
+
+    <p>O controle de volume do Android divide a faixa entre o silêncio e a saída máxima em um número fixo de níveis, geralmente entre 15 e 25, conforme o aparelho. O nível mais baixo acima do mudo é uma <strong>fração fixa desse máximo</strong>, não um volume absoluto.</p>
+
+    <p>Isso explica duas coisas ao mesmo tempo. Primeiro: quanto mais alto o seu aparelho consegue tocar, mais alto soa também o nível mais baixo. Por isso tablets e celulares com alto-falantes potentes costumam ser piores. Segundo: se uma atualização do sistema aumenta o volume geral, o piso sobe junto sem você ter mexido em nada.</p>
+
+    <p>E como é uma fração, não existe nenhum controle nas configurações para isso. Simplesmente não há nada para mover.</p>
+
+    <h2 id="metodi">O que funciona de verdade, avaliado com honestidade</h2>
+
+    <div class="fixcard">
+      <h3>Arrastar o controle deslizante do painel de volume em vez de usar os botões <span class="verdict v-partial">Parcial</span></h3>
+      <p>Em muitos aparelhos o controle deslizante pode ser ajustado com mais precisão do que os saltos dos botões. É um ganho real se o seu problema são os <em>saltos bruscos</em>.</p>
+      <p>Mas ele não baixa o piso. O ponto mais baixo que você alcança continua o mesmo.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Mais níveis de volume, por exemplo com o Sound Assistant do Good Lock <span class="verdict v-partial">Parcial</span></h3>
+      <p>Em aparelhos Samsung, o Sound Assistant permite ajustar o volume em passos de 1 por cento. É a dica mais comum, e para a pergunta certa também é a resposta certa.</p>
+      <p>Mas mais níveis baixam o piso só até certo ponto. O Android posiciona cada nível numa curva de atenuação fixa conforme sua posição na faixa, então o primeiro nível de 100 fica mais baixo que o primeiro de 15: cerca de 5 dB numa configuração do Android 16 que medimos em agosto de 2026. Depois disso para, porque essa curva tem um fundo fixo que nenhum número de níveis ultrapassa. Se esse fundo ainda é alto demais para você, dividir mais não vai adiantar.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Desativar o Dolby Atmos, o som adaptável ou o equalizador <span class="verdict v-partial">Parcial</span></h3>
+      <p>Os aprimoramentos de som adicionam ganho. Desativá-los pode reduzir a saída de forma audível em alguns aparelhos, e vale a pena testar porque não custa nada.</p>
+      <p>Não é confiável. Em muitos celulares nada muda, e onde ajuda você abre mão de um recurso que talvez queira manter.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Desativar o volume absoluto nas opções do desenvolvedor <span class="verdict v-partial">Parcial, só Bluetooth</span></h3>
+      <p>Afeta apenas o Bluetooth. Depois disso, celular e fones controlam o volume separadamente, o que costuma dar mais níveis úteis porque dois controles se multiplicam.</p>
+      <p>Para fones com fio e para o alto-falante interno nada muda. E é uma configuração de desenvolvedor que alguns aparelhos restauram após uma atualização.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Baixar o volume do próprio arquivo de áudio <span class="verdict v-works">Funciona</span></h3>
+      <p>Exportar um toque ou alarme mais baixo num editor de áudio e usar a versão silenciosa. Funciona de verdade, porque você baixa o sinal antes mesmo de os níveis de volume o verem.</p>
+      <p>O preço é trabalho manual para cada arquivo, e para chamadas, vídeos ou música de streaming não serve.</p>
+    </div>
+
+    <div class="fixcard">
+      <h3>Aplicar ganho negativo à mixagem de saída <span class="verdict v-works">Funciona</span></h3>
+      <p>A mesma ideia do arquivo exportado mais baixo, mas automática e para tudo. O Android oferece uma interface de efeitos de áudio com a qual um app pode atenuar a saída <strong>abaixo</strong> dos níveis de volume. Sem root, sem ADB, sem mexer em arquivos do sistema.</p>
+      <p>É assim que funciona o app por trás desta página. Sete níveis, de nenhuma mudança até 30 dB abaixo do seu mínimo de hardware, com um pequeno controle flutuante sobre qualquer app. O mesmo controle cobre também a faixa normal acima do mínimo do aparelho, em passos uniformes de 5 dB, então pode substituir botões de volume gastos ou quebrados.</p>
+    </div>
+
+    <div class="warn">
+      <div class="kicker">Com franqueza</div>
+      <p>Eu escrevi este app, então aqui não sou neutro. Por isso acima também está o que funciona sem ele. Se o seu problema são os saltos bruscos, use o Sound Assistant, é a solução mais adequada. Esta página é para o outro caso: quando o próprio piso está alto demais.</p>
+    </div>
+
+    <h2 id="tastiera">Por que os sons do teclado nunca abaixam</h2>
+
+    <p>Há uma coisa que nenhum app desse tipo resolve, e é bom saber antes: <strong>os cliques do teclado e os sons da interface continuam altos.</strong></p>
+
+    <p>O Android tem várias rotas de saída. Mídia, toques, notificações e alarme passam pela rota principal mixada, onde os efeitos de áudio atuam. Os sons do teclado passam por uma rota separada de baixa latência que <strong>pula os efeitos de propósito</strong>, porque os efeitos adicionam atraso, e é exatamente isso que ali se quer evitar.</p>
+
+    <p>É um limite do próprio Android, não uma falha de um app específico. Se o que incomoda são só os sons do teclado, dá para desativá-los separadamente nas configurações de som. É a única solução que existe para isso.</p>
+
+    <div class="warn">
+      <div class="kicker">Importante com o alarme</div>
+      <p>Se você baixar o alarme, teste por algumas noites antes de confiar nele. Baixar um alarme é exatamente o tipo de mudança em que errar faz você perder a hora. Comece um nível acima do mínimo e vá descendo aos poucos.</p>
+    </div>
+
+    <div class="callout">
+      <h2>Resumo</h2>
+      <p>Mais níveis e um piso mais baixo são coisas diferentes. Quase tudo o que se recomenda por aí resolve a primeira. Se o nível mais baixo já parece alto para você, você precisa de atenuação abaixo dos níveis.</p>
+      <p>Código aberto, sem anúncios, sem conta e sem permissão de internet. Menos de 3 MB.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbaixar-volume-abaixo-do-minimo-android" data-goatcounter-click="play-cta-baixar-volume-abaixo-do-minimo-android">Ver no Google Play</a>
+        <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">Código no GitHub</a>
+      </div>
+      <p class="setup-note">Depois de instalar, abra uma vez e permita a exibição sobre outros apps. Essa é toda a configuração.</p>
+    </div>
+
+    <h2 id="faq">Perguntas frequentes</h2>
+
+    <dl class="faq">
+      <dt>Por que o volume mais baixo do meu celular ainda soa tão alto?</dt>
+      <dd>Porque é uma fração fixa do volume máximo, não um volume absoluto. Num aparelho com um máximo potente, até o primeiro nível acima do mudo soa alto. Nas configurações do Android não há como mudar isso.</dd>
+
+      <dt>O Sound Assistant baixa o piso do volume?</dt>
+      <dd>Um pouco, e depois para de baixar. O primeiro nível de 100 fica mais baixo que o primeiro de dez, cerca de 5 dB na configuração que medimos. Além disso não chega, porque a curva de atenuação do Android tem um fundo fixo. Se esse fundo já parece alto para você, não vai ajudar.</dd>
+
+      <dt>Adianta desativar o Dolby Atmos ou o equalizador?</dt>
+      <dd>Às vezes um pouco, porque esses efeitos adicionam ganho. Não é confiável, e em muitos aparelhos nada muda.</dd>
+
+      <dt>Dá para fazer sem root?</dt>
+      <dd>Sim. A interface de efeitos de áudio do Android é suficiente. Sem root, sem ADB e sem modificar arquivos do sistema.</dd>
+
+      <dt>Também baixa chamadas, alarme e notificações?</dt>
+      <dd>Mídia, toques, notificações e alarme passam pela mesma rota de saída mixada e baixam com ela. Chamadas de apps como o WhatsApp também, se o celular as reproduzir por essa mesma rota, o que depende do modelo. Chamadas telefônicas comuns não: em qualquer celular, o Android leva a voz da rede móvel por uma rota separada que nenhum app alcança.</dd>
+
+      <dt>Por que os sons do teclado não abaixam?</dt>
+      <dd>Usam uma rota separada de baixa latência que pula os efeitos de áudio de propósito. É um limite do Android e nenhum app consegue contorná-lo. Mas dá para desativá-los separadamente nas configurações de som.</dd>
+
+      <dt>Funciona também em tablets?</dt>
+      <dd>É feito para celulares e tablets da mesma forma, e nos tablets o efeito costuma ser mais perceptível, porque muitas vezes eles têm um mínimo ainda mais alto. O comportamento ainda depende do aparelho, então teste no seu durante os sete dias grátis.</dd>
+
+      <dt>É gratuito?</dt>
+      <dd>A instalação é gratuita e os primeiros sete dias são o app completo. Depois, para continuar usando o controle, é um pagamento único, uma vez só, dentro do app pelo Google Play. Sem assinatura. A versão no F-Droid inclui tudo sem custo.</dd>
+
+      <dt>O controle volta depois de reiniciar?</dt>
+      <dd>Sim, se estava ativo ao desligar, ele volta sozinho depois de reiniciar. Se você o parou, continua parado.</dd>
+    </dl>
+
+  </article>
+</main>
+</div>
+
+<footer>
+  <div class="wrap">
+    Parte do <a href="../">Granular Volume</a>, software livre sob a licença
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacidade</a> &middot;
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Termos de uso</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Reembolsos</a> &middot;
+    <a href="../accessibility.html">Acessibilidade</a>.
+    <br>
+    Outros idiomas:
+    <a href="../guide/lower-android-volume-below-minimum.html" hreflang="en" lang="en">English</a> &middot;
+    <a href="../de/lautstaerke-unter-minimum-android.html" hreflang="de" lang="de">Deutsch</a> &middot;
+    <a href="../es/bajar-volumen-por-debajo-del-minimo-android.html" hreflang="es" lang="es">Español</a> &middot;
+    <a href="../fr/baisser-volume-sous-le-minimum-android.html" hreflang="fr" lang="fr">Français</a> &middot;
+    <a href="../it/abbassare-volume-sotto-il-minimo-android.html" hreflang="it" lang="it">Italiano</a>.
+  <br>  Este site conta visitas com o GoatCounter, sem cookies e sem guardar endereços IP ou outros dados pessoais.
+  </div>
+</footer>
+<a class="gv-a11y gv-a11y-fab" id="gv-a11y-fab" href="../accessibility.html" aria-label="Acessibilidade"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm8.5 5.6-5.5 1.1v4.1l2.4 7.4a1 1 0 0 1-1.9.6L13.3 15h-2.6l-2.2 5.8a1 1 0 0 1-1.9-.6l2.4-7.4V8.7L3.5 7.6a1 1 0 1 1 .4-2l6.2 1.2h3.8l6.2-1.2a1 1 0 1 1 .4 2z"/></svg></a>
+<script src="../a11y.js" defer></script>
+</body>
+</html>
