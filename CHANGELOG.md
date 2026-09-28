@@ -2,6 +2,13 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.6.1 (versionCode 40)
+
+### Changed
+- One way to buy. When Google Play cannot complete a purchase on a device, the message now offers
+  a retry only; the app no longer points anyone at the separate Full Range Key app. A key that is
+  already installed still unlocks the app exactly as before, forever.
+
 ## 1.6.0 (versionCode 39)
 
 ### Changed

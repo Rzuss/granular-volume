@@ -3,7 +3,6 @@ package com.granularvolume.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,7 +19,6 @@ import com.granularvolume.service.VolumeControlService
 object PurchaseFlow {
 
     private const val TAG = "GranularVolume:Purchase"
-    private const val KEY_APP_ID = "com.granularvolume.key"
 
     /** Button label: the live price when Play has told us, a plain label until then. */
     fun ctaLabel(context: Context): String {
@@ -66,8 +64,10 @@ object PurchaseFlow {
     }
 
     /**
-     * Play could not run the purchase here. One honest line, a retry, and the separate key
-     * app as the route that always exists.
+     * Play could not run the purchase here. One honest line and a retry. Since 1.6.1 the app
+     * never points anyone at the separate key app: the in-app purchase is the only route
+     * offered, so nobody is sent to buy a second app (owner's decision, 2026-09-28). A key that
+     * is already installed still unlocks, see [ProAccess.hasPaidUnlock].
      */
     private fun showUnavailable(activity: Activity, onUnlocked: () -> Unit) {
         if (activity.isFinishing || activity.isDestroyed) return
@@ -75,11 +75,10 @@ object PurchaseFlow {
             .setTitle(R.string.gv_purchase_unavailable)
             .setMessage(R.string.gv_purchase_unavailable_hint)
             .setPositiveButton(R.string.gv_purchase_retry) { _, _ -> start(activity, onUnlocked) }
-            .setNeutralButton(R.string.gv_purchase_use_key) { _, _ -> openKeyAppStore(activity) }
             .setNegativeButton(R.string.gv_paywall_not_now, null)
             .show()
         // Sentence case, like every other button in the app; the theme's default shouts.
-        for (which in intArrayOf(AlertDialog.BUTTON_POSITIVE, AlertDialog.BUTTON_NEUTRAL, AlertDialog.BUTTON_NEGATIVE)) {
+        for (which in intArrayOf(AlertDialog.BUTTON_POSITIVE, AlertDialog.BUTTON_NEGATIVE)) {
             dialog.getButton(which)?.isAllCaps = false
         }
     }
@@ -90,22 +89,5 @@ object PurchaseFlow {
             Intent(context, VolumeControlService::class.java)
                 .setAction(VolumeControlService.ACTION_KEY_INSTALLED)
         )
-    }
-
-    /** The separate key app's listing: the fallback unlock, and a valid one forever. */
-    fun openKeyAppStore(context: Context) {
-        try {
-            context.startActivity(
-                Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$KEY_APP_ID"))
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-        } catch (_: Exception) {
-            runCatching {
-                context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$KEY_APP_ID"))
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
-            }
-        }
     }
 }

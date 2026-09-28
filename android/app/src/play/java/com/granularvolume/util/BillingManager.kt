@@ -38,8 +38,8 @@ import com.android.billingclient.api.QueryPurchasesParams
  *  - Acknowledgement is retried on every query: Google refunds a purchase that is not
  *    acknowledged within three days.
  *
- * The separate Full Range Key app stays a valid unlock forever ([KeyCheck]); it is also the
- * fallback the sheets offer when Play cannot run a purchase here.
+ * The separate Full Range Key app stays a valid unlock forever ([KeyCheck]). Since 1.6.1 it is
+ * no longer offered anywhere in the app, not even when Play cannot run a purchase here.
  *
  * Threading: nothing here runs on the main thread except the one call Play requires there,
  * [BillingClient.launchBillingFlow]. Building the client and opening the connection do

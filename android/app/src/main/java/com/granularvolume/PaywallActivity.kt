@@ -31,17 +31,16 @@ import com.granularvolume.util.StatusHeader
  *
  * Lifecycle contract with the service:
  *  - Dismissed without buying (Not now, tap outside, back, swipe): nothing to undo.
- *  - CTA opens the key app's Play listing; this activity stays alive underneath
- *    (no noHistory), so returning from the store lands back HERE. The service has
- *    usually handled the purchase already, from the package broadcast (it unlocks the
- *    session and re-applies the step that was refused); onResume re-checks ProAccess
- *    and sends ACTION_KEY_INSTALLED as the fallback, then closes.
+ *  - CTA opens Google Play's purchase sheet over this activity (1.6.0); a completed
+ *    purchase closes it through closeUnlocked(). onResume still re-checks ProAccess and
+ *    sends ACTION_KEY_INSTALLED, which covers a key app that was installed earlier by
+ *    someone who already owns it; the app itself no longer points anyone at the key app.
  *
  * 1.6.0: the CTA opens Google Play's own purchase sheet over this one ([PurchaseFlow]);
  * nothing leaves the app. The price on the button is the one Play reported for this
  * account and region, so it cannot go stale; until Play has answered, the button carries
- * no number. The separate key app remains the fallback Play itself offers when it cannot
- * run a purchase here, and a key owner is unlocked exactly as before.
+ * no number. Since 1.6.1 the key app is not offered as a fallback; a key owner is unlocked
+ * exactly as before.
  */
 class PaywallActivity : AppCompatActivity() {
 

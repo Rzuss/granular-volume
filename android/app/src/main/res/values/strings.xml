@@ -63,9 +63,8 @@
     <string name="gv_purchase_restored">Already yours. Restored.</string>
     <string name="gv_purchase_not_found">No purchase found on this Google account.</string>
     <string name="gv_purchase_unavailable">Google Play could not complete this right now</string>
-    <string name="gv_purchase_unavailable_hint">Check the connection and try again, or get the Full Range Key app on Google Play instead. Either one unlocks every step.</string>
+    <string name="gv_purchase_unavailable_hint">Check the connection and that Google Play is up to date, then try again.</string>
     <string name="gv_purchase_retry">Try again</string>
-    <string name="gv_purchase_use_key">Use the key app</string>
     <string name="gv_info_state_purchased">Unlocked on this Google account</string>
     <string name="gv_info_restore_iap">New phone or a reinstall? Sign in to Google Play with the same account and open the app. The purchase comes back by itself, and it is never charged twice.</string>
     <string name="gv_trial_cta_iap">See the price</string>

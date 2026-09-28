@@ -24,8 +24,8 @@ import com.granularvolume.BuildConfig
  *     [BillingManager]), or the separate unlock-key app is present and its signing
  *     certificate matches the pinned set ([KeyCheck], flavor-split: the F-Droid
  *     flavor is fully unlocked by a stub, keeping that build free and complete).
- *     Both stay valid forever; the key app is also the fallback when Play cannot run
- *     a purchase on a device.
+ *     Both stay valid forever. Since 1.6.1 the key app is no longer offered anywhere in
+ *     the app; a key that is already installed keeps unlocking.
  *
  * This object lives in src/main and is GPL-published like everything else: the
  * check is possession of the key app, not a secret. Nothing here needs hiding.
