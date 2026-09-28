@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-08-09",
-  "dateModified": "2026-08-09",
+  "dateModified": "2026-09-28",
   "mainEntityOfPage": "https://granularvolume.com/guide/volume-buttons-not-working-android.html"
 }
 </script>
@@ -31,10 +31,10 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"How do I change the volume on Android without the buttons?","acceptedAnswer":{"@type":"Answer","text":"Three ways, from quickest to most complete. Pull down the notification shade and use the volume slider there. Turn on Android's Accessibility Menu, which adds an on-screen button with volume controls behind it. Or install a floating volume slider that stays available on top of whatever you are using, which is the closest thing to having the buttons back."}},
+    {"@type":"Question","name":"How do I change the volume on Android without the buttons?","acceptedAnswer":{"@type":"Answer","text":"Three ways, from quickest to most complete. Open Settings, then Sound, and use the media volume slider there. Turn on Android's Accessibility Menu, which adds an on-screen button with volume controls behind it. Or install a floating volume slider that stays available on top of whatever you are using, which is the closest thing to having the buttons back."}},
     {"@type":"Question","name":"Is my volume button broken or is it a software problem?","acceptedAnswer":{"@type":"Answer","text":"Restart the phone first, since a stuck key can be a software state rather than a physical fault. Then take the case off and press the button directly. If it feels mushy, does not click, or the volume moves on its own, that points at hardware. If the button clicks normally but nothing happens, it is more likely software or a remapping setting."}},
     {"@type":"Question","name":"Can an app really replace the volume buttons?","acceptedAnswer":{"@type":"Answer","text":"Yes, for everything except the recovery-mode key combinations that run before Android starts. Android lets an app set the volume of the active audio stream, which is exactly what the buttons do. A floating slider gives you the same control on screen and does not depend on the hardware key working."}},
-    {"@type":"Question","name":"Does Android have a built-in on-screen volume control?","acceptedAnswer":{"@type":"Answer","text":"Yes. The notification shade has a volume slider, and Settings, Accessibility, Accessibility Menu adds a floating button with volume up and down inside it. Both are free and built in. They take a few taps each time and cannot go below the device's minimum, which is where a dedicated slider helps."}},
+    {"@type":"Question","name":"Does Android have a built-in on-screen volume control?","acceptedAnswer":{"@type":"Answer","text":"Yes. Settings, then Sound, has a media volume slider, and Settings, Accessibility, Accessibility Menu adds a floating button with volume up and down inside it. Both are free and built in. They take a few taps each time and cannot go below the device's minimum, which is where a dedicated slider helps."}},
     {"@type":"Question","name":"Will using an on-screen slider stop my volume buttons wearing out?","acceptedAnswer":{"@type":"Answer","text":"It reduces how often you press them, which is the main cause of wear on a key that is already getting stiff. It does not repair a button that has already failed, but many people move volume to the screen specifically to stop a marginal button from getting worse."}},
     {"@type":"Question","name":"Does it need root, ADB, or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio APIs, needs a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
     {"@type":"Question","name":"Does it survive a restart?","acceptedAnswer":{"@type":"Answer","text":"Yes, if it was running when the device shut down it comes back by itself after the restart. If you stopped it deliberately it stays stopped. That matters when the slider is your only way to change the volume."}},
@@ -181,7 +181,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Volume buttons not working on Android?</h1>
     <p class="dek">Stuck, stiff, unresponsive, or pressing itself. Work through the free fixes first, because a good share of these are not broken hardware at all. Then, if the key really is gone, put a full volume slider on screen instead.</p>
-    <p class="meta">Published August 9, 2026 &middot; 8 min read</p>
+    <p class="meta">Updated September 28, 2026 &middot; 8 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -190,7 +190,7 @@
 
     <div class="quickfix">
       <div class="kicker">Need volume right now, before troubleshooting?</div>
-      <p>Pull down the notification shade and use the volume slider there. That works on every Android phone and needs nothing installed. It is fiddly for everyday use, but it will get you sound while you work through the rest of this page.</p>
+      <p>Open Settings, then Sound (on Samsung, Sounds and vibration, then Volume), and use the media volume slider there. It needs nothing installed. It is fiddly for everyday use, but it will get you sound while you work through the rest of this page.</p>
     </div>
 
     <div class="toc">
@@ -241,8 +241,8 @@
     <h2 id="builtin">Android's built-in on-screen volume controls</h2>
     <p>Before installing anything, know what the phone already gives you, because for some people that is enough.</p>
     <div class="fixcard">
-      <h3>The notification shade slider <span class="verdict v-partial">Always available, awkward daily</span></h3>
-      <p>Swipe down and there is a volume slider. It works everywhere, on every phone, with nothing installed. The catch is that it takes a swipe and a tap every time, it covers what you were looking at, and in a full-screen video or game it interrupts you.</p>
+      <h3>The volume slider in Settings <span class="verdict v-partial">Always there, awkward daily</span></h3>
+      <p>Settings, then Sound (on Samsung, Sounds and vibration, then Volume), has a media volume slider, with nothing installed. Do not look for one in the pull-down panel: on stock Android that panel has a brightness slider but no volume slider. The catch is that Settings takes several taps every time, it takes you out of what you were doing, and in a full-screen video or game it interrupts you.</p>
     </div>
     <div class="fixcard">
       <h3>Accessibility Menu <span class="verdict v-partial">Built in, a few taps deep</span></h3>
@@ -276,13 +276,13 @@
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
       <dt>How do I change the volume on Android without the buttons?</dt>
-      <dd>Pull down the notification shade and use the slider there, turn on Settings, Accessibility, Accessibility Menu for an on-screen button with volume controls inside, or install a floating slider that stays available on top of whatever you are using.</dd>
+      <dd>Use the media volume slider in Settings, under Sound, turn on Settings, Accessibility, Accessibility Menu for an on-screen button with volume controls inside, or install a floating slider that stays available on top of whatever you are using.</dd>
       <dt>Is my volume button broken, or is it software?</dt>
       <dd>Restart first, then take the case off and press the bare key. A key that clicks normally but does nothing points at software or a remap. A key that feels mushy, does not click, or moves the volume on its own is a hardware fault.</dd>
       <dt>Can an app really replace the volume buttons?</dt>
       <dd>Yes, for everything inside Android. An app can set the volume of the active audio stream, which is what the buttons do. The exception is the key combinations that run before Android starts, such as recovery mode.</dd>
       <dt>Does Android have a built-in on-screen volume control?</dt>
-      <dd>Yes, two: the notification shade slider, and the Accessibility Menu. Both are free and built in. Both take a few taps each time and neither can go below the device's minimum.</dd>
+      <dd>Yes, two: the media volume slider in Settings, and the Accessibility Menu. Both are free and built in. Both take a few taps each time and neither can go below the device's minimum.</dd>
       <dt>Will an on-screen slider stop my volume buttons wearing out?</dt>
       <dd>It reduces how often you press them, which is the main cause of wear on a key that is already stiffening. It cannot repair a key that has already failed.</dd>
       <dt>Does it need root, ADB, or a computer?</dt>
