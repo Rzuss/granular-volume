@@ -66,7 +66,7 @@
     {
       "@type": "Question",
       "name": "Does this work for calls, not just media?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Call audio runs on its own volume scale, separate from media, and this was tested directly on real hardware: during a live call with no media playing, moving the dial down and back up several times audibly lowered and raised the call volume each time. There is a dedicated guide covering the in-call floor, why the volume keys stop where they do, and why the 85 dB limiter and equalizer presets do not help with it."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Partly. Media, ringtones, notifications and alarms, yes. Calls made through apps such as WhatsApp, on phones that play them through the media output, which varies by phone. Regular phone calls, no: Android carries cellular voice on a separate path that no app can reach, so they keep your phone's own lowest step. There is a dedicated guide covering the in-call floor, why the volume keys stop where they do, and why the 85 dB limiter and equalizer presets do not help with it."}
     },
     {
       "@type": "Question",
@@ -101,7 +101,7 @@
     {
       "@type": "Question",
       "name": "Does it affect ringtone and alarm volume, or only media?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Media is what it is built around, and call audio, ringtones, notifications, and alarms are confirmed to be affected as well, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Media is what it is built around, and ringtones, notifications, and alarms are affected as well, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. Regular phone calls are the exception: they run on a separate path that no app can lower."}
     },
     {
       "@type": "Question",
@@ -466,7 +466,7 @@
       <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can lower output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
 
       <dt>Does this work for calls, not just media?</dt>
-      <dd>Yes. Call audio runs on its own volume scale, separate from media, and this was tested directly: during a live call with no media playing, moving the dial down and back up several times lowered and raised the call volume each time. There is a <a href="call-volume-too-loud-android.html">separate guide for the in-call floor</a> covering why the volume keys stop where they do and why the 85&nbsp;dB limiter does not help.</dd>
+      <dd>Partly. Media, ringtones, notifications and alarms, yes. Calls made through apps such as WhatsApp, on phones that play them through the media output, which varies by phone. Regular phone calls, no: Android carries cellular voice on a separate path that no app can reach, so they keep your phone's own lowest step. There is a <a href="call-volume-too-loud-android.html">separate guide for the in-call floor</a> covering why the volume keys stop where they do and why the 85&nbsp;dB limiter does not help.</dd>
 
       <dt>Does an app like this drain the battery?</dt>
       <dd>Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio.</dd>
@@ -487,7 +487,7 @@
       <dd>No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
-      <dd>Media is what it is built around, and <a href="call-volume-too-loud-android.html">call audio is confirmed to be affected</a>, along with ringtones, notifications, and alarms, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains the one category of sound that no app can lower.</dd>
+      <dd>Media is what it is built around, and ringtones, notifications, and alarms are affected too, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. <a href="call-volume-too-loud-android.html">Regular phone calls</a> are the exception: they run on a separate path that no app can lower. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains the one category of sound that no app can lower.</dd>
 
       <dt>Will lowering the output this way add hiss, distortion, or reduce audio quality?</dt>
       <dd>It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline volume control on the cable is what addresses that.</dd>

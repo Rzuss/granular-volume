@@ -33,8 +33,8 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Does this work with wired IEMs through a USB-C or 3.5mm DAC?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The reduction is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output."}
+      "name": "Does this work with wired IEMs, a 3.5mm jack or a USB-C DAC?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The phone's speaker and Bluetooth headphones work on the phones we have tested. A 3.5 mm headphone jack normally uses the same main output, so it should work too, though we have not measured it separately. USB audio, such as USB-C adapters and DACs, has not been verified: USB output can run on a separate path, and the one USB route we tested, a car connected over USB, was not reached. Whatever you use, check it on yours during the seven free days."}
     },
     {
       "@type": "Question",
@@ -185,7 +185,7 @@
     <h2>What actually changes the floor</h2>
     <p>A volume reduction applied through Android's own audio framework, rather than a remapped step count, genuinely produces output below what the hardware's own minimum step allows. It's a clean gain-reduction stage, not an equalizer or a compressor, so it doesn't reshape the signal your headphones receive, it just turns all of it down further than the phone's own slider is able to.</p>
     <ul>
-      <li>Works identically for wired IEMs, USB-C DACs, and Bluetooth output, since the reduction is applied before the signal reaches whichever output path is active.</li>
+      <li>Works through the phone's speaker and Bluetooth on the phones we have tested; a 3.5 mm jack should work the same way. USB-C DACs are not verified yet, so check yours during the free days.</li>
       <li>Doesn't take over your physical volume buttons. The slider covers your normal range too, and adds the quiet headroom underneath it.</li>
       <li>No equalizer curve, no compression, so it doesn't change the tonal balance you're used to, only the overall level.</li>
     </ul>
@@ -202,8 +202,8 @@
 
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
-      <dt>Does this work with wired IEMs through a USB-C or 3.5mm DAC?</dt>
-      <dd>Yes. The reduction is applied to the audio session before it reaches whichever output path is active, wired DAC included, since it works at the operating system's audio effect layer rather than on a specific hardware output.</dd>
+      <dt>Does this work with wired IEMs, a 3.5mm jack or a USB-C DAC?</dt>
+      <dd>The phone's speaker and Bluetooth headphones work on the phones we have tested. A 3.5 mm headphone jack normally uses the same main output, so it should work too, though we have not measured it separately. USB audio, such as USB-C adapters and DACs, has not been verified: USB output can run on a separate path, and the one USB route we tested, a car connected over USB, was not reached. Whatever you use, check it on yours during the seven free days.</dd>
 
       <dt>Does it work with Bluetooth IEMs and TWS earbuds?</dt>
       <dd>Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the reduction applies before the signal is sent to the Bluetooth stack.</dd>
