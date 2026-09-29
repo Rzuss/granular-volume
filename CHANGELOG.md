@@ -2,6 +2,24 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.6.2 (versionCode 41)
+
+### Changed
+- Google Play version: the end of the free week is now explained, never silent. Two quiet notes in
+  the notification shade, at most once each per install: one within the last 24 hours of the week,
+  and one when the week has ended. The second says plainly what happens next: a control that is
+  running keeps working until it is stopped or the phone restarts, and a control that did not come
+  back after a restart is paused, not broken. Each note is skipped when the app has already said the
+  same thing on screen, never makes a sound, and opens the access sheet on a tap.
+- Nobody who has the full range for good ever sees either note: long-time users, buyers, key owners
+  and the F-Droid build. With notifications turned off for the app, nothing is shown.
+- The trial-over card ends on "Nothing renews and there is no subscription."
+- The feature tour counts six quiet steps below the orange line, as the dial shows (it said seven).
+
+### Unchanged on purpose
+- Trial length and its anchor, the long-time-user grant, the purchase flow, the dial and the audio
+  engine. A trial that ends while the dial runs still takes effect at the next start, never mid-use.
+
 ## 1.6.1 (versionCode 40)
 
 ### Changed

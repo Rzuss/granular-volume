@@ -35,6 +35,9 @@ object Prefs {
     private const val KEY_UNLOCK_ACKNOWLEDGED    = "unlock_acknowledged"
     private const val KEY_TRIAL_CARD_DAY         = "trial_card_shown_for_day"
     private const val KEY_LAST_DAY_NUDGE_SHOWN   = "last_day_nudge_shown"
+    // 1.6.2: the two one-time notices of the free week (see TrialNotices)
+    private const val KEY_LAST_DAY_NOTICE_POSTED = "last_day_notice_posted"
+    private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
 
     /** Current attenuation in dB (0.0 = none, -30.0 = near-silent) */
     const val ATTENUATION_DEFAULT = 0f
@@ -221,6 +224,22 @@ object Prefs {
 
     fun setLastDayNudgeShown(context: Context) {
         prefs(context).edit { putBoolean(KEY_LAST_DAY_NUDGE_SHOWN, true) }
+    }
+
+    /** 1.6.2: the last-day notice went to the shade (once per install, never re-armed). */
+    fun wasLastDayNoticePosted(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_LAST_DAY_NOTICE_POSTED, false)
+
+    fun setLastDayNoticePosted(context: Context) {
+        prefs(context).edit { putBoolean(KEY_LAST_DAY_NOTICE_POSTED, true) }
+    }
+
+    /** 1.6.2: the ended notice was posted, or made redundant by the locked sheet (once per install). */
+    fun wasEndedNoticePosted(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_ENDED_NOTICE_POSTED, false)
+
+    fun setEndedNoticePosted(context: Context) {
+        prefs(context).edit { putBoolean(KEY_ENDED_NOTICE_POSTED, true) }
     }
 
     /** One-time grandfather tip-jar card in MainActivity: shown once, never again. */

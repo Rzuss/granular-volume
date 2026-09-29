@@ -19,6 +19,7 @@ import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.TrialNotices
 import com.granularvolume.util.PurchaseFlow
 import com.granularvolume.util.StatusHeader
 
@@ -55,6 +56,20 @@ class InfoSheetActivity : AppCompatActivity() {
             setOnCancelListener { finish() }
             show()
         }
+        syncNotices()
+    }
+
+    /**
+     * 1.6.2: keeps the free-week notices honest with what this sheet just showed. Locked: the
+     * person has now been told in the app, so the one-time ended notice has nothing to add.
+     * Unlocked: a notice still waiting in the shade would now be wrong.
+     */
+    private fun syncNotices() {
+        when (lastState) {
+            State.LOCKED -> TrialNotices.markEndedToldInApp(this)
+            State.UNLOCKED -> TrialNotices.cancel(this)
+            else -> Unit
+        }
     }
 
     /**
@@ -70,6 +85,7 @@ class InfoSheetActivity : AppCompatActivity() {
         val before = lastState
         dialog?.setContentView(buildSheet())
         val after = lastState
+        syncNotices()
         if (after == State.UNLOCKED && before != null && before != State.UNLOCKED) {
             startService(
                 Intent(this, VolumeControlService::class.java)

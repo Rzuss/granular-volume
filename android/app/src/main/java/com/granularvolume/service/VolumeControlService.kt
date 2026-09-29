@@ -27,6 +27,7 @@ import com.granularvolume.InfoSheetActivity
 import com.granularvolume.PaywallActivity
 import com.granularvolume.audio.AudioController
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.TrialNotices
 import com.granularvolume.audio.FullRangeCoordinator
 import com.granularvolume.audio.StreamVolumeController
 import com.granularvolume.overlay.OverlayManager
@@ -80,6 +81,9 @@ class VolumeControlService : Service() {
          * app must never make.
          */
         const val EXTRA_FROM_BOOT = "com.granularvolume.EXTRA_FROM_BOOT"
+
+        /** 1.6.2: grace before the last-day notice, so a start's own last-day sheet goes first. */
+        private const val LAST_DAY_NOTICE_DELAY_MS = 4000L
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
         private const val BILLING_PREFETCH_DELAY_MS = 1500L
@@ -280,6 +284,14 @@ class VolumeControlService : Service() {
         // info, the one action that armed the broken assignment. A21 now covers this path.
         overlayManager.onEngaged = { mainHandler.post { maybeLastDayNudge() } }
 
+        // 1.6.2: arm the two free-week notices (a no-op for anyone not on the trial). When the
+        // start already falls inside the last day, the notice waits a moment so a person's own
+        // start can show the last-day sheet first; the notice then sees it and stays silent.
+        TrialNotices.arm(applicationContext)
+        if (ProAccess.isOnTrial(applicationContext)) {
+            mainHandler.postDelayed({ TrialNotices.maybePostLastDay(applicationContext) }, LAST_DAY_NOTICE_DELAY_MS)
+        }
+
         serviceScope.launch(Dispatchers.Default) {
             audioController.initialize()
             // initialize() re-applies the persisted level THROUGH the gate, so a locked
@@ -354,6 +366,10 @@ class VolumeControlService : Service() {
             // killed sticky service, which no one asked for and no sheet may answer.
             null -> if (intent != null) {
                 onOpenedByUser(fromBoot = intent.getBooleanExtra(EXTRA_FROM_BOOT, false))
+            } else if (ProAccess.isTrialExpired(applicationContext)) {
+                // 1.6.2: the system brought a killed control back after the week ended. It runs
+                // locked and nobody asked for it, so no sheet; the one-time notice says why.
+                TrialNotices.maybePostEnded(applicationContext, stillRunning = false)
             }
         }
         return START_STICKY
@@ -467,6 +483,7 @@ class VolumeControlService : Service() {
         keyWelcomed = true
         unlockedThisSession()
         Log.i(tag, "Key arrived ($source), session was ${if (wasLocked) "locked" else "open"}")
+        TrialNotices.cancel(applicationContext)   // 1.6.2
         if (wasLocked) landAfterUnlock() else pendingQuietStepDb = null
         if (!Entitlement.isGrandfathered(applicationContext)) {
             Prefs.setUnlockAcknowledged(applicationContext)

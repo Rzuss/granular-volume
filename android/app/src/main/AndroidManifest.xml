@@ -91,6 +91,11 @@
             </intent-filter>
         </receiver>
 
+        <!-- 1.6.2: the two one-time free-week notices, armed by TrialNotices. Own PendingIntents only. -->
+        <receiver
+            android:name=".receiver.TrialNoticeReceiver"
+            android:exported="false" />
+
         <!-- Quick Settings tile — toggles the overlay on/off from the notification shade -->
         <service
             android:name=".service.GranularVolumeTileService"

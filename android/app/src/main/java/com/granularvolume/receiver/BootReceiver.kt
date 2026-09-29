@@ -7,6 +7,7 @@ import android.util.Log
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.Prefs
 import com.granularvolume.util.ProAccess
+import com.granularvolume.util.TrialNotices
 
 /**
  * Receives BOOT_COMPLETED and restarts the service if it was running before shutdown,
@@ -44,6 +45,10 @@ class BootReceiver : BroadcastReceiver() {
             }
         } else if (Prefs.wasServiceRunning(context)) {
             Log.i("GranularVolume:Boot", "Not restarting after boot: the dial is locked")
+            // 1.6.2: the control that was on before the restart does not come back, so say why,
+            // once. Before this the quiet level simply vanished after the first locked restart,
+            // which reads as "it stopped working". No sheet: a boot is not the user's action.
+            TrialNotices.maybePostEnded(context, stillRunning = false)
         }
     }
 }

@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.TrialNotices
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.PurchaseFlow
 import com.granularvolume.util.StatusHeader
@@ -53,6 +54,9 @@ class PaywallActivity : AppCompatActivity() {
             setOnCancelListener { finish() }
             show()
         }
+        // 1.6.2: the paywall only opens on a locked gesture, so the person now knows the week is
+        // over; the one-time ended notice has nothing left to say.
+        TrialNotices.markEndedToldInApp(this)
     }
 
     /**

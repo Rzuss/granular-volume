@@ -85,6 +85,7 @@ object PurchaseFlow {
 
     /** The service re-applies the refused step, plays the unlock wave and repaints the shade. */
     private fun notifyService(context: Context) {
+        TrialNotices.cancel(context)   // 1.6.2: a free-week notice still in the shade is now wrong
         context.startService(
             Intent(context, VolumeControlService::class.java)
                 .setAction(VolumeControlService.ACTION_KEY_INSTALLED)

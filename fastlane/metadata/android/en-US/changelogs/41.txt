@@ -1,0 +1,1 @@
+Google Play version: a clearer end to the free week, with one quiet note before it ends and one when it has ended. Nothing changes in this F-Droid build, which stays free and complete. The tour now counts six quiet steps below the line, as the dial shows.
