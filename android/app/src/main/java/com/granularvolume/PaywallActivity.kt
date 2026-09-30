@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.TrialNotices
@@ -52,6 +53,12 @@ class PaywallActivity : AppCompatActivity() {
         dialog = BottomSheetDialog(this).apply {
             setContentView(buildSheet())
             setOnCancelListener { finish() }
+            // 1.6.3: open fully in every orientation. On a wide, short screen (a tablet or a phone
+            // held sideways) Material's automatic peek height is its 64dp minimum, so the sheet
+            // opened as a title strip and the price and the buy button sat below the taskbar
+            // until the reader thought to drag it up. Swipe down still closes it.
+            behavior.skipCollapsed = true
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
             show()
         }
         // 1.6.2: the paywall only opens on a locked gesture, so the person now knows the week is

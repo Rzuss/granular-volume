@@ -31,8 +31,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
-        versionCode = 41
-        versionName = "1.6.2"
+        versionCode = 42
+        versionName = "1.6.3"
         // Grandfather cutoff, 2026-10-01T00:00:00Z (1.5.1, mock-trial order item 40: the
         // 1.5.0 rollout reached 100% on 2026-09-23 10:28 UTC, plus seven days, rounded up
         // to the next UTC midnight). An UPDATE whose first install predates this is

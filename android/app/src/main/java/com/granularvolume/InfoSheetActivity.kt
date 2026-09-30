@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.Entitlement
@@ -54,6 +55,10 @@ class InfoSheetActivity : AppCompatActivity() {
         dialog = BottomSheetDialog(this).apply {
             setContentView(buildSheet())
             setOnCancelListener { finish() }
+            // 1.6.3: open fully in every orientation (same reason as PaywallActivity): in landscape
+            // the automatic peek was 64dp, a title strip with the offer hidden below the taskbar.
+            behavior.skipCollapsed = true
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
             show()
         }
         syncNotices()

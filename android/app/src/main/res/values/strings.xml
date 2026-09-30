@@ -79,7 +79,7 @@
     <!-- 1.5.1 feature tour: four callouts on the live dial, once per install or update. -->
     <string name="gv_tour_1_title">Your normal volume</string>
     <string name="gv_tour_1_body">Above the line, the dial sets the system volume in even steps. Handy when the buttons are worn out. The hardware buttons still work and walk every step.</string>
-    <string name="gv_tour_2_title">Quieter than your phone allows</string>
+    <string name="gv_tour_2_title">Quieter than your device allows</string>
     <string name="gv_tour_2_body">Below the orange line are six extra steps, down to −30 dB. Media, ringtones, notifications and alarms all follow.</string>
     <string name="gv_tour_3_title">Mute, the safe way</string>
     <string name="gv_tour_3_body">Silences media only. Alarms still ring.</string>

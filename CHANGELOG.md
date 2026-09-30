@@ -2,6 +2,14 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.6.3 (versionCode 42)
+
+### Fixed
+- Tablets, and phones held sideways: the access sheet and the full-range sheet opened as a thin
+  title strip, with the explanation and the buttons hidden below the screen edge until the sheet was
+  dragged up. Both now open fully in every orientation and still close with a swipe down.
+- The feature tour says "Quieter than your device allows" (it said phone, on tablets too).
+
 ## 1.6.2 (versionCode 41)
 
 ### Changed

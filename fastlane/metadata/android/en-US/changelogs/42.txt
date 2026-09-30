@@ -1,0 +1,1 @@
+Tablets and phones held sideways: the access sheet and the full-range sheet now open fully, so nothing sits hidden below the screen edge. The tour says device, not phone. Nothing else changes in this F-Droid build.
