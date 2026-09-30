@@ -282,7 +282,7 @@ The debug build needs no signing setup and is the recommended loop for local tes
 | `MODIFY_AUDIO_SETTINGS` | Apply the audio attenuation effect. |
 | `FOREGROUND_SERVICE` / `FOREGROUND_SERVICE_SPECIAL_USE` | Keep the effect and overlay alive reliably. |
 | `RECEIVE_BOOT_COMPLETED` | Restores the control after a reboot, if it was on before shutdown. A control you stopped yourself stays stopped. |
-| `POST_NOTIFICATIONS` | Show the foreground service notification (Android 13+). |
+| `POST_NOTIFICATIONS` | Show the foreground service notification (Android 13+). In the Google Play version, also at most two one-time notes about the free week: one before it ends and one when it has ended. Both are created on the device; nothing is sent anywhere. |
 
 The overlay permission cannot be granted at runtime by the app. The setup screen guides you to the system toggle.
 
