@@ -22,7 +22,7 @@ Swipe down, tap once. Add Granular Volume to your Quick Settings panel and toggl
 MADE FOR QUIET MOMENTS
 - App calls such as WhatsApp, on phones that play them through the media output, which varies by phone. Regular phone calls never do: Android carries those on a separate path that no app can lower further, so there the control gives you your phone's own steps and the quiet steps are shown dimmed
 - Sensitive IEMs and high-sensitivity headphones, where even step 1 is too loud
-- Tablet speakers and headphones, where the minimum step is often even louder than on phones
+- Tablet speakers and headphones, where on some models the minimum step is even louder than on a phone
 - White noise or lullabies for a sleeping baby, kept barely audible
 - Late-night listening next to a sleeping partner
 - Quiet rooms, libraries, open offices, and meditation

@@ -22,7 +22,7 @@ Desliza hacia abajo, toca una vez. Añade Granular Volume a tu panel de ajustes 
 HECHO PARA MOMENTOS SILENCIOSOS
 - Llamadas de apps como WhatsApp, si el móvil las reproduce por la salida multimedia, lo que depende del modelo. Las llamadas normales usan una ruta que ninguna app puede bajar
 - IEM sensibles y auriculares de alta sensibilidad, donde incluso el paso 1 es demasiado
-- Altavoces y auriculares de tablet, cuyo mínimo suele ser aún más alto que en el móvil
+- Altavoces y auriculares de tablet, cuyo mínimo en algunos modelos es aún más alto que en el móvil
 - Ruido blanco o nanas para un bebé dormido, apenas audibles
 - Escuchar de noche junto a alguien que duerme
 - Salas silenciosas, bibliotecas, oficinas abiertas y meditación
