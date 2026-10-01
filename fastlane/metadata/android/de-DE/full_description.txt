@@ -11,7 +11,7 @@ WENN IHRE LAUTSTÄRKETASTEN NICHT MEHR FUNKTIONIEREN
 Tasten nutzen sich ab, klemmen oder werden von einer Hülle gedrückt. Oberhalb der Linie, die das Minimum Ihres Geräts markiert, stellt der Regler die normale Systemlautstärke ein und ersetzt so die Tasten: nach oben ziehen für lauter, nach unten für leiser, in gleichmäßigen 5-dB-Schritten aus der Lautstärkekurve Ihres eigenen Geräts. Unterhalb der Linie geht es weiter, leiser als das Handy erlaubt. Die Stummschaltung lässt den Wecker in Ruhe, aber die leisen Stufen senken auch Wecker und Klingeltöne.
 
 AUCH FÜR TABLETS
-Tablets haben oft ein noch höheres Minimum als Handys. Granular Volume funktioniert auf Android-Tablets genauso, mit demselben leisen Boden.
+Bei manchen Tablets ist die niedrigste Stufe sogar lauter als beim Handy, je nach Modell. Granular Volume funktioniert auf Android-Tablets genauso, mit demselben leisen Boden.
 
 EIN SCHWEBENDER REGLER, IMMER GRIFFBEREIT
 Der Regler liegt über allem, was Sie gerade tun. App öffnen, Audio starten, und er ist da. Frei platzierbar oder zwischendurch am Rand geparkt. Ein Tipp schließt ihn. Die letzte Position wird gemerkt.

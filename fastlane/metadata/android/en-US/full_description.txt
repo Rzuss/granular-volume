@@ -11,7 +11,7 @@ WHEN YOUR VOLUME BUTTONS DO NOT WORK
 Volume keys wear out, stiffen, or get held down by a case. Above the line marking your device's minimum, the dial sets normal system volume, so it stands in for the buttons: drag up for louder, drag down for quieter, in even 5 dB steps built from your own device's volume curve. Below the line it keeps going, quieter than the phone allows. Mute leaves alarms alone, but the quiet steps lower alarms and ringtones too.
 
 BUILT FOR TABLETS TOO
-Tablets often have an even higher minimum volume than phones. Granular Volume works the same way on Android tablets, so tablet users get the same quiet floor.
+On some tablets the lowest volume is even louder than on a phone, depending on the model. Granular Volume works the same way on Android tablets, so tablet users get the same quiet floor.
 
 A FLOATING VOLUME CONTROL, ALWAYS IN REACH
 The control lives above whatever you are doing. Open any app, start any audio, and it is there when you need it. Drag it anywhere, or tuck it to an edge between uses. One tap closes it. Your last position is remembered next time.

@@ -76,7 +76,7 @@
     {
       "@type": "Question",
       "name": "Does it work the same way on tablets as on phones?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes, identically. Tablets often have an even higher minimum volume step than phones, which makes this problem worse, but the underlying fix, negative gain applied through Android's audio effect framework, works the same way on both form factors."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, identically. On some tablets the lowest volume step is even louder than on a phone, depending on the model, and the underlying fix, negative gain applied through Android's audio effect framework, works the same way on both form factors."}
     },
     {
       "@type": "Question",
@@ -472,7 +472,7 @@
       <dd>Not meaningfully. It runs as a lightweight foreground service that holds the audio effect active; there's no continuous background processing beyond that, so it doesn't add noticeable drain on top of whatever is already playing the audio.</dd>
 
       <dt>Does it work the same way on tablets as on phones?</dt>
-      <dd>Yes, identically. Tablets often have an even higher minimum volume step than phones, which makes this problem worse, but the underlying fix works the same way on both form factors.</dd>
+      <dd>Yes, identically. On some tablets the lowest volume step is even louder than on a phone, depending on the model, and the underlying fix works the same way on both form factors.</dd>
 
       <dt>Is this specific to Samsung, Pixel, or another brand, or does it work on any Android device?</dt>
       <dd>It is not tied to one brand. It uses Android's own audio effect APIs rather than a manufacturer-specific feature like Samsung's Good Lock, so unlike Sound Assistant there is no brand restriction. How far below the minimum it reaches still depends on the device and the kind of audio, as the guide on why the minimum is too loud explains.</dd>

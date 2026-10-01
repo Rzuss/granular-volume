@@ -11,7 +11,7 @@ CUANDO TUS BOTONES DE VOLUMEN NO FUNCIONAN
 Los botones se desgastan, se endurecen o quedan presionados por una funda. Por encima de la línea que marca el mínimo de tu dispositivo, el control ajusta el volumen normal del sistema y sustituye a los botones: arrastra hacia arriba para subir, hacia abajo para bajar, en pasos uniformes de 5 dB construidos a partir de la curva de volumen de tu propio dispositivo. Por debajo de la línea sigue bajando, más silencioso de lo que el móvil permite. El silencio no toca las alarmas, pero los pasos silenciosos también bajan alarmas y tonos de llamada.
 
 TAMBIÉN PARA TABLETS
-Las tablets suelen tener un mínimo aún más alto que los móviles. Granular Volume funciona igual en tablets Android, con el mismo suelo silencioso.
+En algunas tablets el volumen mínimo es aún más alto que en un móvil, según el modelo. Granular Volume funciona igual en tablets Android, con el mismo suelo silencioso.
 
 UN CONTROL FLOTANTE, SIEMPRE AL ALCANCE
 El control vive sobre lo que estés haciendo. Abre cualquier app, inicia cualquier audio, y está ahí. Un toque lo cierra. Tu última posición se recuerda.

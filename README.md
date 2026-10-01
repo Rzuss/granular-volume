@@ -177,7 +177,7 @@ Android requires a foreground service to keep a real-time audio effect and an on
 Yes. The attenuation is applied to the audio session before it reaches whatever output device is active, Bluetooth included.
 
 **Does it work differently on tablets versus phones?**
-The underlying mechanism is identical. Tablets often have a louder minimum step to begin with (see [Why the minimum step exists](#why-the-minimum-step-exists-and-why-its-still-too-loud) above), so the extra headroom tends to matter even more there.
+The underlying mechanism is identical. On some tablets the minimum step is louder than on a phone (see [Why the minimum step exists](#why-the-minimum-step-exists-and-why-its-still-too-loud) above). It depends on the model, and where it is the case, the extra headroom matters even more.
 
 **Is there a Pro or paid version?**
 There is no separate Pro build. On Google Play the complete app comes with a seven-day trial, and after that a one-time purchase inside the app keeps every feature; nothing renews and there is no subscription. On F-Droid every feature is included at no charge, permanently. Either way the code is open source under GPL-3.0.
