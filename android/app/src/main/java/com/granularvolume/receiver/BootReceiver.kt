@@ -12,11 +12,20 @@ import com.granularvolume.util.TrialNotices
 /**
  * Receives BOOT_COMPLETED and restarts the service if it was running before shutdown,
  * unless the dial is locked: a locked control has nothing to apply.
+ *
+ * 1.6.4: also receives MY_PACKAGE_REPLACED, under exactly the same rules. An app update kills
+ * the process and Android does not bring a sticky service back after a package replace
+ * (measured 2026-10-01: service and effect gone 90 s after `install -r`, pref still "running").
+ * The quiet level vanished with every update and nothing said why. An update is the machine's
+ * doing, like a boot: no sheet, no tour, and a control the person stopped stays stopped.
  */
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action != Intent.ACTION_BOOT_COMPLETED &&
+        val afterUpdate = intent.action == Intent.ACTION_MY_PACKAGE_REPLACED
+        if (!afterUpdate &&
+            intent.action != Intent.ACTION_BOOT_COMPLETED &&
             intent.action != "android.intent.action.QUICKBOOT_POWERON") return
+        val why = if (afterUpdate) "an app update" else "boot"
 
         // The one-time grandfather decision runs before the lock is read: after an update
         // from 1.4.x this receiver can be the first entry point, and a long-time user must
@@ -25,7 +34,7 @@ class BootReceiver : BroadcastReceiver() {
         // A locked control does not come back on its own after a restart; the user reopens
         // it and meets the purchase sheet then.
         if (Prefs.wasServiceRunning(context) && !ProAccess.isTrialExpired(context)) {
-            Log.i("GranularVolume:Boot", "Restarting VolumeControlService after boot")
+            Log.i("GranularVolume:Boot", "Restarting VolumeControlService after $why")
             // 1.5.3: a boot broadcast delivered while the system does not grant the
             // background-start exemption (seen when BOOT_COMPLETED is re-delivered to a package
             // after a force-stop) made startForegroundService throw
@@ -41,10 +50,10 @@ class BootReceiver : BroadcastReceiver() {
                 )
             } catch (e: IllegalStateException) {
                 // ForegroundServiceStartNotAllowedException (API 31+) extends IllegalStateException.
-                Log.w("GranularVolume:Boot", "Restart after boot refused by the system: ${e.message}")
+                Log.w("GranularVolume:Boot", "Restart after $why refused by the system: ${e.message}")
             }
         } else if (Prefs.wasServiceRunning(context)) {
-            Log.i("GranularVolume:Boot", "Not restarting after boot: the dial is locked")
+            Log.i("GranularVolume:Boot", "Not restarting after $why: the dial is locked")
             // 1.6.2: the control that was on before the restart does not come back, so say why,
             // once. Before this the quiet level simply vanished after the first locked restart,
             // which reads as "it stopped working". No sheet: a boot is not the user's action.

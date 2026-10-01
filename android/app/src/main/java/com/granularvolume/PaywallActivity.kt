@@ -18,6 +18,8 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.BillingManager
+import com.granularvolume.util.Entitlement
 import com.granularvolume.util.TrialNotices
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.PurchaseFlow
@@ -64,7 +66,15 @@ class PaywallActivity : AppCompatActivity() {
         // 1.6.2: the paywall only opens on a locked gesture, so the person now knows the week is
         // over; the one-time ended notice has nothing left to say.
         TrialNotices.markEndedToldInApp(this)
+        // 1.6.4: the price is asked for as the sheet opens; the button is redrawn when the
+        // answer differs from what it says (it opened with no number on a cold process).
+        BillingManager.refreshPrice(this) { price ->
+            if (price != shownPrice && !isFinishing && !isDestroyed) dialog?.setContentView(buildSheet())
+        }
     }
+
+    /** The price label this sheet last drew on its buy button (null: no number yet). */
+    private var shownPrice: String? = null
 
     /**
      * Re-checked on EVERY resume, not only on the first return from the store.
@@ -145,6 +155,11 @@ class PaywallActivity : AppCompatActivity() {
         root.addView(text(R.string.gv_paywall_body, 13f, colorRes = R.color.gv_text_secondary).topPad(12))
         root.addView(text(R.string.gv_paywall_expectation_iap, 12f, colorRes = R.color.gv_text_muted).topPad(8))
 
+        // 1.6.4: a payment Play is still confirming is said here, not only in a passing toast.
+        if (Entitlement.isPurchasePending(this)) {
+            root.addView(text(R.string.gv_purchase_pending, 13f, colorRes = R.color.gv_text_primary).topPad(10))
+        }
+        shownPrice = BillingManager.priceOrNull(this)
         root.addView(Button(this).apply {
             text = PurchaseFlow.ctaLabel(context)
             isAllCaps = false

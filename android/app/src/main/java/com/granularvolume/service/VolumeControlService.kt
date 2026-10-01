@@ -596,7 +596,7 @@ class VolumeControlService : Service() {
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_volume_slider)
-            .setContentTitle("Sub-Volume Control")
+            .setContentTitle(getString(R.string.app_name))
             .setContentText(dbText)
             .setContentIntent(tapIntent)
             .addAction(R.drawable.ic_close, "Stop", stopIntent)

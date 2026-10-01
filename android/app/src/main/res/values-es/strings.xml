@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+     English on purpose, and the Terms line stays English (it points at the English legal text). -->
+<resources>
+    <string name="gv_paywall_title">Tus siete días han terminado</string>
+    <string name="gv_paywall_depth">Todos los pasos silenciosos hasta −30 dB, todo el rango normal y el silencio. Un pago, una sola vez, lo abre todo.</string>
+    <string name="gv_paywall_body">Compra única, tuya en esta cuenta, sin nada que renovar. Sin suscripción. La app sigue sin anuncios, sin rastreo y sin acceso a internet.</string>
+    <string name="gv_paywall_not_now">Ahora no</string>
+    <string name="gv_paywall_unlocked">Rango completo desbloqueado. Disfruta del silencio.</string>
+    <string name="gv_purchase_cta">Desbloquear el rango completo</string>
+    <string name="gv_purchase_cta_price">Desbloquear el rango completo, %1$s</string>
+    <string name="gv_paywall_expectation_iap">Google Play abre aquí su propia ventana de compra. Confírmala y todos los pasos se abren al instante.</string>
+    <string name="gv_purchase_restore_link">¿Ya lo compraste? Restaurar</string>
+    <string name="gv_purchase_pending">Pago pendiente. Todos los pasos se abren en cuanto Google Play lo confirme.</string>
+    <string name="gv_purchase_restored">Ya es tuyo. Restaurado.</string>
+    <string name="gv_purchase_not_found">No se encontró ninguna compra en esta cuenta de Google.</string>
+    <string name="gv_purchase_unavailable">Google Play no pudo completar esto ahora</string>
+    <string name="gv_purchase_unavailable_hint">Comprueba la conexión y que Google Play esté actualizado, y vuelve a intentarlo.</string>
+    <string name="gv_purchase_unavailable_billing_hint">Las compras de Google Play no están disponibles ahora en este dispositivo o cuenta. Comprueba que has iniciado sesión en Google Play y vuelve a intentarlo.</string>
+    <string name="gv_purchase_retry">Reintentar</string>
+    <string name="gv_info_state_purchased">Desbloqueado en esta cuenta de Google</string>
+    <string name="gv_info_restore_iap">¿Teléfono nuevo o reinstalación? Inicia sesión en Google Play con la misma cuenta y abre la app. La compra vuelve sola y nunca se cobra dos veces.</string>
+    <string name="gv_info_title">Tu acceso</string>
+    <string name="gv_info_state_locked">Tu semana gratuita ha terminado</string>
+    <string name="gv_info_body_trial">Todo está abierto mientras lo pruebas. Cuando termine la semana, conservar el control requiere un pago, una sola vez, en esta cuenta. Nada se renueva y nada se cobra por sí solo.</string>
+    <string name="gv_info_body_trial_last_day">Tu semana gratuita termina en menos de 24 horas y el control se bloquea. Un pago, una sola vez, lo mantiene todo abierto, sin nada que renovar. Cada paso queda exactamente como lo tienes.</string>
+    <string name="gv_info_body_unlocked">Gracias. Todos los pasos, el rango completo y el silencio quedan abiertos en esta cuenta, sin nada que renovar.</string>
+    <string name="gv_info_body_locked">Los siete días gratuitos han terminado, por eso el control está bloqueado. Un pago, una sola vez, devuelve cada paso exactamente adonde lo dejaste. Nada se renueva y no hay suscripción.</string>
+    <string name="gv_notif_locked">Tu semana gratuita ha terminado. Toca para ver los detalles.</string>
+    <string name="gv_trial_orientation">Todo está abierto durante tus primeros siete días. Después, un pago, una sola vez, lo conserva, y cada paso queda exactamente donde lo dejaste.</string>
+    <string name="gv_trial_body">Todos los pasos están abiertos mientras lo pruebas. Cuando termine la semana, conservar el control cuesta un único pago, una sola vez, en esta cuenta. Nada se renueva y nada se cobra por sí solo.</string>
+    <string name="gv_trial_dismiss">Más tarde</string>
+    <string name="gv_trial_over_title">Tus siete días han terminado</string>
+    <string name="gv_trial_over_body">El control está bloqueado hasta que lo desbloquees. Un pago, una sola vez, y cada paso vuelve exactamente adonde lo dejaste. Nada se renueva y no hay suscripción.</string>
+    <string name="gv_unlocked_title">Rango completo desbloqueado</string>
+    <string name="gv_unlocked_body">Gracias. Todos los pasos hasta −30 dB están abiertos ahora en este dispositivo. Inicia el control y elige cualquier paso por debajo de la línea naranja.</string>
+    <string name="gv_unlocked_dismiss">Entendido</string>
+    <string name="gv_notice_channel_name">Semana gratuita</string>
+    <string name="gv_notice_channel_desc">Un aviso antes de que termine tu semana gratuita y otro cuando haya terminado. Nunca más.</string>
+    <string name="gv_notice_last_day_title">Tu semana gratuita termina en menos de 24 horas</string>
+    <string name="gv_notice_last_day_body">Un pago, una sola vez, conserva todos los pasos. Nada se renueva. Toca para ver los detalles.</string>
+    <string name="gv_notice_ended_title">Tu semana gratuita ha terminado</string>
+    <string name="gv_notice_ended_running_body">El control sigue funcionando hasta que se detenga o se reinicie el teléfono. Un pago, una sola vez, conserva todos los pasos. Toca para ver los detalles.</string>
+    <string name="gv_notice_ended_paused_body">Los pasos silenciosos están en pausa. Un pago, una sola vez, devuelve cada paso exactamente adonde lo dejaste. Toca para ver los detalles.</string>
+    <plurals name="gv_trial_days_left">
+        <item quantity="one">Queda un día de acceso completo</item>
+        <item quantity="other">Quedan %d días de acceso completo</item>
+    </plurals>
+</resources>

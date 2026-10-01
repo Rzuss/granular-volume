@@ -23,6 +23,9 @@ object BillingManager {
     fun prefetch(context: Context) = Unit
 
     @Suppress("UNUSED_PARAMETER")
+    fun refreshPrice(context: Context, onPrice: (String?) -> Unit) = onPrice(null)
+
+    @Suppress("UNUSED_PARAMETER")
     fun verifyOwnership(context: Context, onResult: ((Boolean?) -> Unit)?) {
         onResult?.invoke(null)
     }

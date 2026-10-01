@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.granularvolume.service.GranularVolumeTileService
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.BillingManager
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.PermissionHelper
 import com.granularvolume.util.ProAccess
@@ -254,7 +255,10 @@ class MainActivity : AppCompatActivity() {
             title.text = resources.getQuantityString(R.plurals.gv_trial_days_left, daysLeft, daysLeft)
             body.setText(R.string.gv_trial_body)
             support.visibility = View.VISIBLE
-            support.setText(R.string.gv_trial_cta_iap)
+            // 1.6.4: the button says what it does and, once Play has answered, what it costs
+            // ("See the price" made the reader open a purchase window to learn a number).
+            support.setText(PurchaseFlow.ctaLabel(this))
+            refreshCardPrice(support)
             support.setOnClickListener { PurchaseFlow.start(this) { setupTipjarCard() } }
             dismiss.setText(R.string.gv_trial_dismiss)
             dismiss.setOnClickListener { card.visibility = View.GONE }
@@ -268,9 +272,21 @@ class MainActivity : AppCompatActivity() {
         body.setText(R.string.gv_trial_over_body)
         support.visibility = View.VISIBLE
         support.setText(PurchaseFlow.ctaLabel(this))
+        refreshCardPrice(support)
         support.setOnClickListener { PurchaseFlow.start(this) { setupTipjarCard() } }
         dismiss.visibility = View.GONE
         return true
+    }
+
+    /**
+     * 1.6.4: asks Play for the price and relabels the card's button when it arrives. Only the
+     * label changes; re-running the card setup would spend the once-per-day guard of the
+     * trial card and hide it.
+     */
+    private fun refreshCardPrice(button: TextView) {
+        BillingManager.refreshPrice(this) {
+            if (!isFinishing && !isDestroyed) button.text = PurchaseFlow.ctaLabel(this)
+        }
     }
 
     // -------------------------------------------------------------------------

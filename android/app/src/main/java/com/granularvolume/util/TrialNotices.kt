@@ -45,13 +45,16 @@ object TrialNotices {
         if (!ProAccess.isOnTrial(context)) return false
         if (Entitlement.millisLeftInTrial(context) > DAY_MS) return false
         if (Prefs.wasLastDayNudgeShown(context) || Prefs.wasLastDayNoticePosted(context)) return false
-        Prefs.setLastDayNoticePosted(context)
-        return post(
+        // 1.6.4: the once-per-install flag is spent only when the notice really went up. It used
+        // to be set first, so a person with notifications off at that moment lost the notice for good.
+        val posted = post(
             context,
             context.getString(R.string.gv_notice_last_day_title),
             context.getString(R.string.gv_notice_last_day_body),
             "last-day"
         )
+        if (posted) Prefs.setLastDayNoticePosted(context)
+        return posted
     }
 
     /**
@@ -62,8 +65,7 @@ object TrialNotices {
     fun maybePostEnded(context: Context, stillRunning: Boolean): Boolean {
         if (!ProAccess.isTrialExpired(context)) return false
         if (Prefs.wasEndedNoticePosted(context)) return false
-        Prefs.setEndedNoticePosted(context)
-        return post(
+        val posted = post(
             context,
             context.getString(R.string.gv_notice_ended_title),
             context.getString(
@@ -72,6 +74,8 @@ object TrialNotices {
             ),
             if (stillRunning) "ended-running" else "ended-paused"
         )
+        if (posted) Prefs.setEndedNoticePosted(context)   // 1.6.4: spent only on success, see above
+        return posted
     }
 
     /** The person has now seen the locked sheet in the app: the ended notice has nothing to add. */

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+     English on purpose, and the Terms line stays English (it points at the English legal text). -->
+<resources>
+    <string name="gv_paywall_title">Deine sieben Tage sind vorbei</string>
+    <string name="gv_paywall_depth">Jede leise Stufe bis −30 dB, der ganze normale Bereich und Stumm. Eine Zahlung, einmalig, öffnet alles.</string>
+    <string name="gv_paywall_body">Einmaliger Kauf, auf diesem Konto für immer deins, ohne Verlängerung. Kein Abo. Die App bleibt frei von Werbung, Tracking und Internetzugriff.</string>
+    <string name="gv_paywall_not_now">Nicht jetzt</string>
+    <string name="gv_paywall_unlocked">Voller Bereich freigeschaltet. Genieß die Ruhe.</string>
+    <string name="gv_purchase_cta">Vollen Bereich freischalten</string>
+    <string name="gv_purchase_cta_price">Vollen Bereich freischalten, %1$s</string>
+    <string name="gv_paywall_expectation_iap">Google Play öffnet hier sein eigenes Kauffenster. Bestätige dort, und jede Stufe ist sofort offen.</string>
+    <string name="gv_purchase_restore_link">Schon gekauft? Wiederherstellen</string>
+    <string name="gv_purchase_pending">Zahlung ausstehend. Jede Stufe öffnet sich, sobald Google Play sie bestätigt.</string>
+    <string name="gv_purchase_restored">Gehört dir bereits. Wiederhergestellt.</string>
+    <string name="gv_purchase_not_found">Kein Kauf auf diesem Google-Konto gefunden.</string>
+    <string name="gv_purchase_unavailable">Google Play konnte das gerade nicht abschließen</string>
+    <string name="gv_purchase_unavailable_hint">Prüfe die Verbindung und ob Google Play aktuell ist, und versuche es dann erneut.</string>
+    <string name="gv_purchase_unavailable_billing_hint">Käufe über Google Play sind auf diesem Gerät oder Konto gerade nicht verfügbar. Prüfe, ob du bei Google Play angemeldet bist, und versuche es dann erneut.</string>
+    <string name="gv_purchase_retry">Erneut versuchen</string>
+    <string name="gv_info_state_purchased">Auf diesem Google-Konto freigeschaltet</string>
+    <string name="gv_info_restore_iap">Neues Handy oder Neuinstallation? Melde dich mit demselben Konto bei Google Play an und öffne die App. Der Kauf kommt von selbst zurück und wird nie doppelt berechnet.</string>
+    <string name="gv_info_title">Dein Zugang</string>
+    <string name="gv_info_state_locked">Deine kostenlose Woche ist vorbei</string>
+    <string name="gv_info_body_trial">Alles ist offen, solange du testest. Wenn die Woche um ist, kostet das Behalten des Reglers eine Zahlung, einmalig, auf diesem Konto. Nichts verlängert sich und nichts wird von selbst abgebucht.</string>
+    <string name="gv_info_body_trial_last_day">Deine kostenlose Woche endet in weniger als 24 Stunden, dann wird der Regler gesperrt. Eine Zahlung, einmalig, hält alles offen, ohne Verlängerung. Jede Stufe bleibt genau so, wie du sie eingestellt hast.</string>
+    <string name="gv_info_body_unlocked">Danke. Jede Stufe, der ganze Bereich und Stumm bleiben auf diesem Konto offen, ohne Verlängerung.</string>
+    <string name="gv_info_body_locked">Die sieben kostenlosen Tage sind vorbei, deshalb ist der Regler gesperrt. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Nichts verlängert sich und es gibt kein Abo.</string>
+    <string name="gv_notif_locked">Deine kostenlose Woche ist vorbei. Für Details tippen.</string>
+    <string name="gv_trial_orientation">In deinen ersten sieben Tagen ist alles offen. Danach hält eine Zahlung, einmalig, alles offen, und jede Stufe bleibt genau dort, wo du sie gelassen hast.</string>
+    <string name="gv_trial_body">Jede Stufe ist offen, solange du testest. Wenn die Woche um ist, kostet das Behalten des Reglers eine einzige Zahlung, einmalig, auf diesem Konto. Nichts verlängert sich und nichts wird von selbst abgebucht.</string>
+    <string name="gv_trial_dismiss">Später</string>
+    <string name="gv_trial_over_title">Deine sieben Tage sind vorbei</string>
+    <string name="gv_trial_over_body">Der Regler ist gesperrt, bis du ihn freischaltest. Eine Zahlung, einmalig, und jede Stufe kommt genau dorthin zurück, wo du sie gelassen hast. Nichts verlängert sich und es gibt kein Abo.</string>
+    <string name="gv_unlocked_title">Voller Bereich freigeschaltet</string>
+    <string name="gv_unlocked_body">Danke. Jede Stufe bis −30 dB ist auf diesem Gerät jetzt offen. Starte den Regler und wähle eine beliebige Stufe unter der orangefarbenen Linie.</string>
+    <string name="gv_unlocked_dismiss">Verstanden</string>
+    <string name="gv_notice_channel_name">Kostenlose Woche</string>
+    <string name="gv_notice_channel_desc">Ein Hinweis, bevor deine kostenlose Woche endet, und einer, wenn sie vorbei ist. Nie mehr.</string>
+    <string name="gv_notice_last_day_title">Deine kostenlose Woche endet in weniger als 24 Stunden</string>
+    <string name="gv_notice_last_day_body">Eine Zahlung, einmalig, behält jede Stufe. Nichts verlängert sich. Für Details tippen.</string>
+    <string name="gv_notice_ended_title">Deine kostenlose Woche ist vorbei</string>
+    <string name="gv_notice_ended_running_body">Der Regler läuft weiter, bis er gestoppt oder das Handy neu gestartet wird. Eine Zahlung, einmalig, behält jede Stufe. Für Details tippen.</string>
+    <string name="gv_notice_ended_paused_body">Die leisen Stufen sind pausiert. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Für Details tippen.</string>
+    <plurals name="gv_trial_days_left">
+        <item quantity="one">Noch ein Tag voller Zugang</item>
+        <item quantity="other">Noch %d Tage voller Zugang</item>
+    </plurals>
+</resources>

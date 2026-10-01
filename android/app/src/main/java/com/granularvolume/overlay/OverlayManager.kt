@@ -81,6 +81,15 @@ class OverlayManager(
     var onEngaged: (() -> Unit)? = null
 
     companion object {
+        /**
+         * The version of the tour's CONTENT, not of the app (1.6.4). The tour used to be gated on
+         * the app's versionCode, so every update replayed it; three releases in a day showed it
+         * three times. 34 is the versionCode that introduced the tour, so everyone who has seen
+         * it at any version already satisfies the gate and this change itself replays nothing.
+         * Raise it only when the tour says something a returning user needs to be shown.
+         */
+        const val TOUR_CONTENT_VERSION = 34
+
         // Step index 0 = quietest (−30 dB), index 6 = no attenuation (0 dB, at the floor).
         val STEP_DB = floatArrayOf(-30f, -25f, -20f, -15f, -10f, -5f, 0f)
 
@@ -651,12 +660,12 @@ class OverlayManager(
     ).apply { gravity = Gravity.TOP or Gravity.START }
 
     /**
-     * Once per install or update, on a start the PERSON made: the service calls this only
+     * Once per install (per [TOUR_CONTENT_VERSION]), on a start the PERSON made: the service calls this only
      * off a real start intent, never off the boot receiver (the anti-adware rule). Also never
      * when the range is locked, never during a cellular call, and only over the open dial.
      */
     fun maybeStartTour() {
-        if (Prefs.getTourShownVersion(context) >= BuildConfig.VERSION_CODE) return
+        if (Prefs.getTourShownVersion(context) >= TOUR_CONTENT_VERSION) return
         val dial = overlayView ?: return
         if (coordinator.lockedDisplayProvider() || coordinator.uiState().quietUnavailable) return
         dial.postDelayed({
@@ -677,7 +686,7 @@ class OverlayManager(
     private fun startTour() {
         val dial = overlayView ?: return
         if (tourView != null) return
-        Prefs.setTourShownVersion(context, BuildConfig.VERSION_CODE)
+        Prefs.setTourShownVersion(context, TOUR_CONTENT_VERSION)
         // The tour replaces the old one-line hint next to the line.
         Prefs.setLineTooltipShown(context)
         dial.findViewById<TextView>(R.id.gv_line_tooltip)?.visibility = View.GONE

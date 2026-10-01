@@ -19,6 +19,8 @@ import com.granularvolume.service.VolumeControlService
 object PurchaseFlow {
 
     private const val TAG = "GranularVolume:Purchase"
+    /** BillingClient.BillingResponseCode.BILLING_UNAVAILABLE; a literal because this file is flavor-neutral. */
+    private const val BILLING_UNAVAILABLE = 3
 
     /** Button label: the live price when Play has told us, a plain label until then. */
     fun ctaLabel(context: Context): String {
@@ -43,7 +45,7 @@ object PurchaseFlow {
                 PurchaseOutcome.Pending ->
                     Toast.makeText(activity, R.string.gv_purchase_pending, Toast.LENGTH_LONG).show()
                 PurchaseOutcome.Canceled -> Unit
-                is PurchaseOutcome.Unavailable -> showUnavailable(activity, onUnlocked)
+                is PurchaseOutcome.Unavailable -> showUnavailable(activity, onUnlocked, outcome.code)
             }
         }
     }
@@ -69,11 +71,16 @@ object PurchaseFlow {
      * offered, so nobody is sent to buy a second app (owner's decision, 2026-09-28). A key that
      * is already installed still unlocks, see [ProAccess.hasPaidUnlock].
      */
-    private fun showUnavailable(activity: Activity, onUnlocked: () -> Unit) {
+    private fun showUnavailable(activity: Activity, onUnlocked: () -> Unit, code: Int = -1) {
         if (activity.isFinishing || activity.isDestroyed) return
         val dialog = AlertDialog.Builder(activity)
             .setTitle(R.string.gv_purchase_unavailable)
-            .setMessage(R.string.gv_purchase_unavailable_hint)
+            // 1.6.4: Play saying "billing is not available here" (3) is not a connection problem, and
+            // telling that person to check the connection sent them the wrong way.
+            .setMessage(
+                if (code == BILLING_UNAVAILABLE) R.string.gv_purchase_unavailable_billing_hint
+                else R.string.gv_purchase_unavailable_hint
+            )
             .setPositiveButton(R.string.gv_purchase_retry) { _, _ -> start(activity, onUnlocked) }
             .setNegativeButton(R.string.gv_paywall_not_now, null)
             .show()

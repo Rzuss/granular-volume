@@ -1,0 +1,1 @@
+The control now comes back by itself after an app update, as it does after a restart, and the tour is shown once instead of after every update. Nothing else changes in this F-Droid build, which stays free and complete.

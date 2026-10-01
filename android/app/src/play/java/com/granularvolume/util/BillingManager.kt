@@ -180,8 +180,33 @@ object BillingManager {
         }
     }
 
+    /**
+     * 1.6.4: asks Play for the price NOW and answers on the main thread with the label, or
+     * null when Play cannot say. Every surface with a buy button calls this as it opens.
+     * Until this existed the price was fetched only by the service, 1.5 s after it started,
+     * and kept for the life of the process: a locked start opened its sheet before the answer
+     * (a button with no number), and a long-lived process kept showing a price that had since
+     * changed in the Console.
+     */
+    fun refreshPrice(context: Context, onPrice: (String?) -> Unit) {
+        val ctx = context.applicationContext
+        onWorker {
+            ensureConnected(ctx) { r ->
+                if (r.responseCode != BillingClient.BillingResponseCode.OK) {
+                    main.post { onPrice(priceOrNull(ctx)) }
+                    return@ensureConnected
+                }
+                fetchDetails(ctx) { main.post { onPrice(priceOrNull(ctx)) } }
+            }
+        }
+    }
+
+    /**
+     * Always asks Play (1.6.4): a ProductDetails kept from an earlier query carries the price
+     * of that moment. When the query finds nothing, the last good answer is still used, so an
+     * outage never takes a working buy button away.
+     */
     private fun fetchDetails(context: Context, cb: (ProductDetails?) -> Unit) {
-        details?.let { cb(it); return }
         val params = QueryProductDetailsParams.newBuilder().setProductList(
             listOf(
                 QueryProductDetailsParams.Product.newBuilder()
@@ -197,7 +222,7 @@ object BillingManager {
             // propagated, 4 = found but no purchase option eligible for this user or region.
             val unfetched = result.unfetchedProductList.joinToString { "${it.productId}:${it.statusCode}" }
             Log.i(TAG, "Product details: code=${r.responseCode} found=${found != null} price=${found?.oneTimePurchaseOfferDetails?.formattedPrice} unfetched=[$unfetched]")
-            cb(found)
+            cb(found ?: details)
         }
     }
 

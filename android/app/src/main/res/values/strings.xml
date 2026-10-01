@@ -11,7 +11,7 @@
     <string name="gv_perm_audio_desc">Lets the app fine-tune output level</string>
     <string name="gv_state_granted">Granted</string>
     <string name="gv_state_needed">Needed</string>
-    <string name="gv_hint_grant_first">Grant overlay access to continue</string>
+    <string name="gv_hint_grant_first">Grant overlay access to continue. If a list of apps opens, choose Quiet Dial.</string>
     <string name="gv_hint_ready">You\'re all set, start the control</string>
     <string name="gv_app_glyph">App icon</string>
 
@@ -57,17 +57,17 @@
     <!-- In-app purchase (1.6.0): Google Play's own sheet opens over the app; nothing leaves it -->
     <string name="gv_purchase_cta">Unlock the full range</string>
     <string name="gv_purchase_cta_price">Unlock the full range, %1$s</string>
-    <string name="gv_paywall_expectation_iap">Google Play opens its own purchase window right here. Confirm it, and every step opens at once. One payment, once, on this Google account.</string>
+    <string name="gv_paywall_expectation_iap">Google Play opens its own purchase window right here. Confirm it, and every step opens at once.</string>
     <string name="gv_purchase_restore_link">Already bought it? Restore</string>
     <string name="gv_purchase_pending">Payment pending. Every step opens as soon as Google Play confirms it.</string>
     <string name="gv_purchase_restored">Already yours. Restored.</string>
     <string name="gv_purchase_not_found">No purchase found on this Google account.</string>
     <string name="gv_purchase_unavailable">Google Play could not complete this right now</string>
     <string name="gv_purchase_unavailable_hint">Check the connection and that Google Play is up to date, then try again.</string>
+    <string name="gv_purchase_unavailable_billing_hint">Google Play purchases are not available on this device or account right now. Check that you are signed in to Google Play, then try again.</string>
     <string name="gv_purchase_retry">Try again</string>
     <string name="gv_info_state_purchased">Unlocked on this Google account</string>
     <string name="gv_info_restore_iap">New phone or a reinstall? Sign in to Google Play with the same account and open the app. The purchase comes back by itself, and it is never charged twice.</string>
-    <string name="gv_trial_cta_iap">See the price</string>
 
     <!-- Info sheet, opened from the dial's info button (1.5.0) -->
     <string name="gv_info">About this app and your access. Drag anywhere on the control to move it.</string>
@@ -93,12 +93,12 @@
     <string name="gv_info_title">Your access</string>
     <string name="gv_info_state_grandfathered">Every step is yours, free, always</string>
     <string name="gv_info_state_unlocked">Unlocked with the Full Range Key</string>
-    <string name="gv_info_state_locked">The dial is locked</string>
+    <string name="gv_info_state_locked">Your free week is over</string>
     <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be. If the app matters to you, a one-time payment is a way to support it.</string>
     <string name="gv_info_body_trial">Everything is open while you try it. When the week is up, keeping the control takes one payment, once, on this account. Nothing renews and nothing is charged on its own.</string>
     <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial locks. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again.</string>
     <string name="gv_info_body_unlocked">Thank you. Every step, the whole range and mute stay open on this account, with nothing to renew.</string>
-    <string name="gv_info_body_locked">One payment, once, brings every step back exactly where you left it. Nothing renews and there is no subscription.</string>
+    <string name="gv_info_body_locked">The seven free days have ended, so the dial is locked. One payment, once, brings every step back exactly where you left it. Nothing renews and there is no subscription.</string>
     <string name="gv_info_cta_support">Support this app on Google Play</string>
     <string name="gv_info_restore">New phone or a reinstall? Install the key again from Google Play with the same account. It is never charged twice, and that is the whole restore.</string>
     <string name="gv_info_terms">Terms of Use</string>
@@ -106,7 +106,7 @@
     <string name="gv_info_state_fdroid">Free and complete, always</string>
     <string name="gv_info_body_fdroid">This F-Droid build includes everything: the full dial, every quiet step and mute, at no charge, permanently. There is nothing to buy and nothing to unlock.</string>
     <string name="gv_info_restore_grandfathered">New phone? Your free access travels with your own Google account backup, so it normally follows you there by itself.</string>
-    <string name="gv_notif_locked">The dial is locked. Tap for details.</string>
+    <string name="gv_notif_locked">Your free week is over. Tap for details.</string>
 
     <!-- Trial (1.5.0) -->
     <plurals name="gv_trial_days_left">

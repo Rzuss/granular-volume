@@ -2,6 +2,31 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.6.4 (versionCode 43)
+
+### Fixed
+- Google Play version: the buy button now always carries the price. It is asked from Google Play as each
+  sheet opens; before, a sheet opened right after a start could show the button with no number, and a
+  long-running app could keep showing a price that had since changed.
+- The access sheet of a finished free week says so: "Your free week is over", with the reason first. It
+  used to read "The dial is locked", which looked like a fault.
+- An app update no longer switches the control off. It comes back by itself under the same rules as a
+  restart: only if it was on, never if you stopped it, and a locked control stays off.
+- The feature tour is shown once. It used to replay after every update.
+- A payment that Google Play is still confirming is shown on the sheets, not only in a passing message.
+- When Google Play purchases are not available on a device or account, the message says that, instead of
+  suggesting a connection problem.
+- The two free-week notes are only counted as shown when they were really shown.
+- The ongoing notification is titled with the app's name.
+
+### Added
+- The purchase, access, free-week and notice texts in German, Spanish, French, Brazilian Portuguese,
+  Indonesian and Polish. The rest of the app stays in English for now.
+- The last-three-days card shows the price on its button once Google Play has reported it.
+
+### Unchanged on purpose
+- Trial length, the long-time-user grant, the price, the dial and the audio engine.
+
 ## 1.6.3 (versionCode 42)
 
 ### Fixed

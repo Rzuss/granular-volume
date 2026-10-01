@@ -17,6 +17,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.BillingManager
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.ProAccess
@@ -62,6 +63,21 @@ class InfoSheetActivity : AppCompatActivity() {
             show()
         }
         syncNotices()
+        refreshPriceLabel()
+    }
+
+    /** The price label this sheet last drew on its buy button (null: no number yet). */
+    private var shownPrice: String? = null
+
+    /**
+     * 1.6.4: asks Play for the price as the sheet opens and redraws when the answer differs
+     * from what the button says. A locked start opens this sheet before the service has
+     * fetched anything, so the button used to carry no number at all.
+     */
+    private fun refreshPriceLabel() {
+        BillingManager.refreshPrice(this) { price ->
+            if (price != shownPrice) rerender()
+        }
     }
 
     /**
@@ -203,6 +219,12 @@ class InfoSheetActivity : AppCompatActivity() {
         // pointing its users at Google Play would betray the promise the listing makes.
         // Everyone else gets one honest route to Play, worded as support for the people
         // who owe us nothing.
+        // 1.6.4: a payment Play is still confirming (cash, bank transfer) is said on the sheet
+        // itself; until now only a toast said so, once, and the sheet went on reading "locked".
+        if (st != State.UNLOCKED && st != State.FDROID && Entitlement.isPurchasePending(this)) {
+            root.addView(text(getString(R.string.gv_purchase_pending), 13f, colorRes = R.color.gv_text_primary).topPad(10))
+        }
+        shownPrice = BillingManager.priceOrNull(this)
         if (st != State.UNLOCKED && st != State.FDROID) {
             // Grandfathered: wording kept by the owner's order (2026-09-25); the route is the same sheet.
             val label = if (st == State.GRANDFATHERED) getString(R.string.gv_info_cta_support)
