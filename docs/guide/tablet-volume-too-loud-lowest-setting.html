@@ -29,7 +29,7 @@
     "alternateName": "Granular Apps"
   },
   "datePublished": "2026-09-28",
-  "dateModified": "2026-09-28",
+  "dateModified": "2026-10-01",
   "mainEntityOfPage": "https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html"
 }
 </script>
@@ -76,6 +76,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "It is built for phones and tablets alike and uses Android's own audio effect framework rather than a feature of one brand. It lowers media, such as videos, music, audiobooks and white noise, plus notifications and alarms. How it behaves still depends on the device, so try it during the seven free days before paying."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on a Lenovo, Xiaomi, Redmi or Pixel tablet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is not tied to a brand. It uses Android's standard audio effect framework and needs Android 9 or later. We have not tested every model and behaviour varies by device, so use the seven free days to check it on your own tablet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on an Amazon Fire tablet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not through official channels today. Fire tablets use Amazon's Appstore, where the app is not published, and we have not tested it on Fire OS."
       }
     },
     {
@@ -234,7 +250,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Tablet too loud, even at the lowest volume?</h1>
     <p class="dek">Why an Android tablet's quietest step can be louder than a phone's, what the built-in settings can and cannot change, and the method that adds quieter levels below the minimum. No root.</p>
-    <p class="meta">Updated September 28, 2026 &middot; 6 min read</p>
+    <p class="meta">Updated October 1, 2026 &middot; 7 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -256,6 +272,7 @@
       <ol>
         <li><a href="#why">Why a tablet's lowest step is so loud</a></li>
         <li><a href="#builtin">What the built-in settings can do</a></li>
+        <li><a href="#brands">By brand: Samsung, Lenovo, Xiaomi, Pixel, Fire</a></li>
         <li><a href="#limits">Volume limits and kids' headphones</a></li>
         <li><a href="#inapp">Turning it down inside the app</a></li>
         <li><a href="#fix">The fix: a level below the minimum</a></li>
@@ -274,12 +291,36 @@
       <p>The volume keys and the media slider in Settings, under Sound (on Samsung, Sounds and vibration, then Volume), move through the same fixed steps. The last one before mute is the floor, and holding the key longer does nothing further.</p>
     </div>
     <div class="fixcard">
+      <h3>Dolby Atmos, sound modes and equalizers <span class="verdict v-partial">Changes tone, not level</span></h3>
+      <p>Many tablets have a sound mode or equalizer, such as Dolby Atmos. These change the balance between frequencies. They can take some harshness out of the sound, but they are not a level control, and pulling every band down makes audio thin long before it makes it meaningfully quieter.</p>
+    </div>
+
+    <h2 id="brands">By brand: what your tablet has built in</h2>
+    <p>Each maker adds its own sound tools on top of Android. Here is what the common tablet brands offer, checked against the makers' own support pages, and what that means for a floor that is too loud.</p>
+    <div class="fixcard">
       <h3>Samsung Galaxy Tab: Sound Assistant <span class="verdict v-partial">Finer steps, same floor</span></h3>
       <p>On a Galaxy Tab, Samsung's Sound Assistant from Good Lock can divide the volume into much smaller steps, and its first step above mute sits lower than the stock slider's first step. That is worth trying first. What it cannot do is go below the bottom of the range: it divides the range more finely rather than extending it downwards. The <a href="samsung-galaxy-volume-too-loud-minimum.html">Samsung guide</a> covers it in detail.</p>
     </div>
     <div class="fixcard">
-      <h3>Dolby Atmos, sound modes and equalizers <span class="verdict v-partial">Changes tone, not level</span></h3>
-      <p>Many tablets have a sound mode or equalizer, such as Dolby Atmos. These change the balance between frequencies. They can take some harshness out of the sound, but they are not a level control, and pulling every band down makes audio thin long before it makes it meaningfully quieter.</p>
+      <h3>Lenovo Tab: Dolby Atmos <span class="verdict v-partial">Shapes sound, not level</span></h3>
+      <p>Many Lenovo tablets include Dolby Atmos. On recent models such as the Tab M10 Plus (3rd Gen), Lenovo support places it in Settings, under Sound. It is a sound feature that shapes how audio sounds, not a volume control, so it is not the place to look for a quieter last step.</p>
+      <p>One separate case: a report on Lenovo's own forum describes a Tab P11 Pro that stayed loud in Meet, Zoom and Teams while YouTube, Netflix and Spotify adjusted normally. Call audio runs separately from media, and our app reaches app calls only on some devices, so we do not promise a fix for that one.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Xiaomi Pad and Redmi Pad: per-app sound <span class="verdict v-partial">One app at a time</span></h3>
+      <p>Xiaomi has a setting for the sound of individual apps. On the REDMI Pad SE 8.7, Xiaomi's support lists it under Settings, Sound &amp; vibration, Additional settings, as Adjust media sound in multiple apps. It lets you set the level of each app while more than one is playing. It is worth trying when a single app is the loud one. We have not measured whether it takes that app below the tablet's lowest step, and by its name it covers media sound in apps, not alarms or notifications. Other Xiaomi and Redmi tablets may place it elsewhere in Settings.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Google Pixel Tablet <span class="verdict v-doesnt">Stops at the floor</span></h3>
+      <p>Google's help page for the Pixel Tablet lists the volume button and separate sliders for media, call, ring, notification and alarm volume. It lists no setting that changes the number of steps or goes below the lowest one.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Amazon Fire tablets <span class="verdict v-doesnt">Not covered by our app</span></h3>
+      <p>Fire tablets get their apps from Amazon's Appstore, not from Google Play. Granular Volume is not published there, and we have not tested it on Fire OS, so we cannot tell you it works on a Fire tablet. A player's own volume control, described below, is the option that applies.</p>
+    </div>
+    <div class="fixcard">
+      <h3>Other and lower-cost tablets <span class="verdict v-doesnt">Usually nothing extra</span></h3>
+      <p>If your tablet has only the volume keys and the sliders under Sound in Settings, with no extra sound tools from the maker, there is nothing built in that goes lower than the last step. That is where a level below the minimum, described further down, is the remaining route.</p>
     </div>
 
     <h2 id="limits">Volume limits and kids' headphones</h2>
@@ -324,6 +365,10 @@
       <dd>Sometimes. Players with their own volume control, such as some video and audiobook apps, can turn their own audio down below what the system allows. That works only inside that one app, it resets in some apps, and it does nothing for notifications, alarms or any other app.</dd>
       <dt>Does Granular Volume work on tablets?</dt>
       <dd>It is built for phones and tablets alike and uses Android's own audio effect framework rather than a feature of one brand. It lowers media, such as videos, music, audiobooks and white noise, plus notifications and alarms. How it behaves still depends on the device, so try it during the seven free days before paying.</dd>
+      <dt>Does it work on a Lenovo, Xiaomi, Redmi or Pixel tablet?</dt>
+      <dd>It is not tied to a brand. It uses Android's standard audio effect framework and needs Android 9 or later. We have not tested every model and behaviour varies by device, so use the seven free days to check it on your own tablet.</dd>
+      <dt>Does it work on an Amazon Fire tablet?</dt>
+      <dd>Not through official channels today. Fire tablets use Amazon's Appstore, where the app is not published, and we have not tested it on Fire OS.</dd>
       <dt>Does it need root or a computer?</dt>
       <dd>No. It needs the display-over-other-apps permission for the floating dial and standard audio permissions. No root, no ADB, and no computer.</dd>
       <dt>Is it free and private?</dt>
