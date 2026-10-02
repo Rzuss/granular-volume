@@ -47,7 +47,7 @@ The stepped design exists for a real reason: discrete steps are predictable and 
 
 The problem is that "predictable steps" and "quiet enough" are different goals, and Android's volume system was only ever designed to solve the first one. Manufacturers set the step curve based on the device's overall loudness range, not based on any accessibility or comfort floor. There is no requirement that step 1 be quiet in any absolute sense, only that it be quieter than step 2.
 
-So: sensitive IEMs, bone-conduction headphones, tablet speakers (which often have an even higher minimum than phone speakers, because tablets are usually driven louder to fill more room), a sleeping baby a few feet away, tinnitus, a library, 2 a.m.: all of these need something below step 1, and Android's own settings simply do not offer it.
+So: sensitive IEMs, bone-conduction headphones, tablet speakers (on some tablets the minimum step is louder than on a phone, depending on the model), a sleeping baby a few feet away, tinnitus, a library, 2 a.m.: all of these need something below step 1, and Android's own settings simply do not offer it.
 
 ## What Granular Volume does
 
@@ -79,7 +79,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 
 - **A sleeping baby or partner nearby**: white noise or a lullaby that needs to be barely audible, not just "quiet."
 - **Sensitive in-ear monitors or bone-conduction headphones**: where even a couple of percent of the device's output is already too much.
-- **Tablet speakers**: tablets frequently ship with an even louder minimum step than phones, since they're built to fill a bigger room.
+- **Tablet speakers**: on some tablets the minimum step is louder than on a phone, depending on the model.
 - **Late-night podcasts or audiobooks**: falling asleep to something without it waking anyone else.
 - **Quiet rooms**: a library, a shared office, meditation, or anywhere that needs genuine calm rather than "quieter than before."
 - **Sound sensitivity and tinnitus**: situations where the standard volume floor is simply above a comfortable threshold.
