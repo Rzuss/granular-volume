@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html">
 <meta property="og:title" content="Tablet Volume Too Loud at the Lowest Setting? Android">
 <meta property="og:description" content="Tablet too loud at the minimum volume? Why tablets can have a louder floor, what built-in settings can and cannot do, and how to go quieter. No root.">
-<meta property="og:image" content="../img/feature.png">
+<meta property="og:image" content="https://granularvolume.com/img/feature.png">
 <meta property="og:type" content="article">
 <link rel="icon" href="../img/icon.png">
 <script type="application/ld+json">
@@ -29,7 +29,7 @@
     "alternateName": "Granular Apps"
   },
   "datePublished": "2026-09-28",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-02",
   "mainEntityOfPage": "https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html"
 }
 </script>
@@ -207,6 +207,15 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  .tablewrap{overflow-x:auto;margin:18px 0;}
+  table.cmp{width:100%;border-collapse:collapse;font-size:15px;background:var(--card);border:1px solid var(--line);border-radius:12px;}
+  table.cmp th,table.cmp td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:#e3e5f7;}
+  table.cmp thead th{color:var(--txt);font-weight:700;}
+  table.cmp tbody th{color:var(--muted);font-weight:600;min-width:130px;}
+  table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:0;}
+  figure.shot{margin:22px 0;}
+  figure.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;}
+  figure.shot figcaption{color:var(--muted);font-size:14px;margin-top:8px;}
 </style>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style id="gv-a11y-style">
@@ -250,7 +259,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Tablet too loud, even at the lowest volume?</h1>
     <p class="dek">Why an Android tablet's quietest step can be louder than a phone's, what the built-in settings can and cannot change, and the method that adds quieter levels below the minimum. No root.</p>
-    <p class="meta">Updated October 1, 2026 &middot; 7 min read</p>
+    <p class="meta">Updated October 2, 2026 &middot; 7 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -258,8 +267,8 @@
     <p class="lead-p">It is late. A child is falling asleep to an audiobook on the tablet, or you are watching something in bed next to someone who is already asleep. You press volume down to the last step before mute and it is still too loud. One more press and it is silent. There is nothing in between. This is a real limit of how Android sets its volume floor, not a setting you have missed.</p>
 
     <div class="quickfix">
-      <div class="kicker">Short on time? Here's the answer</div>
-      <p><strong>Granular Volume</strong> adds quieter steps underneath your tablet's own minimum, down to 30 dB below it, through a small floating dial. It covers media such as videos, music, audiobooks and white noise, plus notifications and alarms. It is built for phones and tablets alike and needs no root. Set up in a minute.</p>
+      <div class="kicker">Short answer</div>
+      <p>An Android tablet's lowest volume step is a fraction of its full output, set by the manufacturer, and no built-in setting goes below it. <strong>Granular Volume</strong> adds six quieter steps underneath that minimum, down to 30 dB below it, through a small floating dial. It covers media such as videos, music, audiobooks and white noise, plus notifications and alarms. It is built for phones and tablets alike and needs no root. Amazon Fire tablets are not covered.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dtablet-volume-too-loud-lowest-setting" data-goatcounter-click="play-cta-tablet-volume-too-loud-lowest-setting">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -272,6 +281,7 @@
       <ol>
         <li><a href="#why">Why a tablet's lowest step is so loud</a></li>
         <li><a href="#builtin">What the built-in settings can do</a></li>
+        <li><a href="#compare">What each option does, at a glance</a></li>
         <li><a href="#brands">By brand: Samsung, Lenovo, Xiaomi, Pixel, Fire</a></li>
         <li><a href="#limits">Volume limits and kids' headphones</a></li>
         <li><a href="#inapp">Turning it down inside the app</a></li>
@@ -293,6 +303,20 @@
     <div class="fixcard">
       <h3>Dolby Atmos, sound modes and equalizers <span class="verdict v-partial">Changes tone, not level</span></h3>
       <p>Many tablets have a sound mode or equalizer, such as Dolby Atmos. These change the balance between frequencies. They can take some harshness out of the sound, but they are not a level control, and pulling every band down makes audio thin long before it makes it meaningfully quieter.</p>
+    </div>
+
+    <h2 id="compare">What each option does, at a glance</h2>
+    <div class="tablewrap">
+    <table class="cmp">
+      <thead><tr><th scope="col">Option</th><th scope="col">What it changes</th><th scope="col">Goes below the lowest step</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Volume keys and the Settings slider</th><td>Moves through the fixed steps</td><td>No</td></tr>
+        <tr><th scope="row">Sound modes and equalizers</th><td>Tone, not level</td><td>No</td></tr>
+        <tr><th scope="row">Samsung Sound Assistant</th><td>Splits the same range into finer steps</td><td>No</td></tr>
+        <tr><th scope="row">A player's own volume control</th><td>That one app</td><td>In some apps</td></tr>
+        <tr><th scope="row">Below-floor reduction</th><td>Media, notifications and alarms</td><td>Yes, six steps down to 30 dB below</td></tr>
+      </tbody>
+    </table>
     </div>
 
     <h2 id="brands">By brand: what your tablet has built in</h2>
@@ -339,7 +363,8 @@
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio framework <span class="verdict v-works">Actually works</span></h3>
       <p>Rather than re-slicing the existing steps, this method applies a negative gain through Android's own audio effect framework, after the system has already applied its lowest step. That is why it can take the output below where the keys stop.</p>
-      <p>This is what <a href="../">Granular Volume</a> does: a small floating dial with seven steps, from no change down to 30 dB below your tablet's minimum, as a flat reduction that makes things quieter without changing how they sound. Above the minimum line the same dial sets the normal volume in even steps, so it also stands in for volume keys that are hard to reach when the tablet sits in a stand or a case.</p>
+      <p>This is what <a href="../">Granular Volume</a> does: a small floating dial with seven steps, from no change down to 30 dB below your tablet's minimum, as a flat reduction that makes things quieter without changing how they sound. Above the minimum line the same dial sets the normal volume in even steps, so it also stands in for volume keys that are worn out, or hard to reach when the tablet sits in a stand or a case. The <a href="volume-buttons-not-working-android.html#tablet">guide to volume buttons that are not working</a> covers that side.</p>
+      <figure class="shot"><img src="../img/tablet-dial-bedtime.webp" width="1280" height="800" loading="lazy" alt="Illustration of a tablet playing a bedtime story with the floating volume dial at the right edge, set below the minimum line"><figcaption>Illustration: the dial on a tablet, set below the minimum line.</figcaption></figure>
       <p>Two honest notes. It reaches media, notifications and alarms, but not keyboard and touch sounds, which Android plays on a separate path that no app can lower. And how it behaves depends on the device, so use the seven free days to check it on your own tablet.</p>
     </div>
 

@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bluetooth Earbuds Too Loud on the Lowest Setting?</title>
+<title>Bluetooth Headphones or Earbuds Too Loud at Lowest Volume?</title>
 <meta name="description" content="Earbuds, headphones or a speaker still too loud at the lowest step? Why Absolute Volume only half helps, and how to get below the floor. No root.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html">
-<meta property="og:title" content="Bluetooth Earbuds Too Loud on the Lowest Setting?">
+<meta property="og:title" content="Bluetooth Headphones or Earbuds Too Loud at Lowest Volume?">
 <meta property="og:description" content="Earbuds, headphones or a speaker still too loud at the lowest step? Why Absolute Volume only half helps, and how to get below the floor. No root.">
-<meta property="og:image" content="../img/feature.png">
+<meta property="og:image" content="https://granularvolume.com/img/feature.png">
 <meta property="og:type" content="article">
 <link rel="icon" href="../img/icon.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Bluetooth Earbuds Too Loud on the Lowest Setting?",
+  "headline": "Bluetooth Headphones or Earbuds Too Loud at Lowest Volume?",
   "description": "Earbuds, headphones or a speaker still too loud at the lowest step? Why Absolute Volume only half helps, and how to get below the floor. No root.",
   "image": "https://granularvolume.com/img/feature.png",
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-07-22",
+  "dateModified": "2026-10-02",
   "mainEntityOfPage": "https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html"
 }
 </script>
@@ -34,7 +34,7 @@
     {"@type":"Question","name":"Why is one Bluetooth volume step such a big jump on Android?","acceptedAnswer":{"@type":"Answer","text":"Android maps its volume range onto a fixed number of steps, and over Bluetooth that range is often divided into even fewer usable steps. Each press can move the level a lot, so the gap between one step and the next is large, and the lowest non-mute step can already be past a comfortable level."}},
     {"@type":"Question","name":"Does disabling Absolute Volume fix earbuds being too loud?","acceptedAnswer":{"@type":"Answer","text":"Partly. Turning off Absolute Volume in Developer options separates the phone's volume from the earbuds' own volume, which gives finer control and can help the steps land better. It does not lower the floor, so if the quietest usable level is still too loud, this alone will not solve it."}},
     {"@type":"Question","name":"Why are my earbuds still too loud at the lowest setting even with the media volume all the way down?","acceptedAnswer":{"@type":"Answer","text":"Because the lowest non-mute step is a fixed fraction of the maximum, not a fixed loudness. On sensitive earbuds sitting directly in your ear, that fraction is still loud. There is no built-in Android setting to place a level below that step."}},
-    {"@type":"Question","name":"Does this work with AirPods, Galaxy Buds, Pixel Buds, and other brands on Android?","acceptedAnswer":{"@type":"Answer","text":"Yes. The fix lowers Android's own media output before it reaches the Bluetooth device, so it is brand-agnostic. It works the same with any wireless earbuds or headphones paired to an Android phone or tablet, and with wired ones too."}},
+    {"@type":"Question","name":"Does this work with AirPods, Galaxy Buds, Pixel Buds, and other brands on Android?","acceptedAnswer":{"@type":"Answer","text":"In most cases, yes. The fix lowers Android's own media output before it reaches the Bluetooth device, so it does not depend on the brand, and it applies to wired headphones too. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, because the audio takes a path that Android's audio effects do not reach. We cannot list those combinations, so use the seven free days to check with your own pair."}},
     {"@type":"Question","name":"Why is one of my earbuds louder than the other?","acceptedAnswer":{"@type":"Answer","text":"Usually earwax or dust on the mesh in front of the driver on the quieter side, which a soft dry brush clears. The second most common cause is Android's own stereo balance slider being knocked off centre, under Settings, Accessibility, Audio balance. Uneven battery on true wireless earbuds can also do it, so charge both fully and retest. If the same side stays quieter after all three checks, and on more than one device, the driver is likely failing and it becomes a warranty question."}},
     {"@type":"Question","name":"Will a volume app fix one earbud being louder than the other?","acceptedAnswer":{"@type":"Answer","text":"No. Volume-lowering apps, including Granular Volume, lower both channels by the same amount, so the difference between the left and right sides stays exactly as it was. Fix the imbalance first using the balance slider and by cleaning the mesh. A below-minimum volume app solves the separate problem of the quietest available level still being too loud."}},
     {"@type":"Question","name":"Will it also help with wired headphones and the phone speaker?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because it lowers the media output itself rather than a Bluetooth-specific setting, the same quieter floor applies to wired headphones and the built-in speaker as well."}},
@@ -138,6 +138,15 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  .tablewrap{overflow-x:auto;margin:18px 0;}
+  table.cmp{width:100%;border-collapse:collapse;font-size:15px;background:var(--card);border:1px solid var(--line);border-radius:12px;}
+  table.cmp th,table.cmp td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:#e3e5f7;}
+  table.cmp thead th{color:var(--txt);font-weight:700;}
+  table.cmp tbody th{color:var(--muted);font-weight:600;min-width:130px;}
+  table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:0;}
+  figure.shot{margin:22px 0;}
+  figure.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;}
+  figure.shot figcaption{color:var(--muted);font-size:14px;margin-top:8px;}
 </style>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style id="gv-a11y-style">
@@ -179,9 +188,9 @@
   <header class="top">
     <div class="crumb"><a href="../">Granular Volume</a> / Guide</div>
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
-    <h1>Bluetooth earbuds too loud at the lowest volume?</h1>
-    <p class="dek">Why one Bluetooth step is such a big jump, why disabling Absolute Volume only half-helps, and the method that adds real steps below the lowest, on any wireless or wired earbuds. No root.</p>
-    <p class="meta">Updated July 22, 2026 · 7 min read</p>
+    <h1>Bluetooth headphones or earbuds too loud at the lowest volume?</h1>
+    <p class="dek">Why one Bluetooth step is such a big jump, why disabling Absolute Volume only half-helps, and the method that adds real steps below the lowest, whatever brand your earbuds are. No root.</p>
+    <p class="meta">Updated October 2, 2026 · 8 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -189,8 +198,8 @@
     <p class="lead-p">You turn the media volume all the way down, and the last step before mute is still too loud in your ears, or the jump between two steps is so big that one is too quiet and the next is too loud. It is one of the most common complaints about wireless earbuds on Android, across every brand, and it has a specific cause and a real fix.</p>
 
     <div class="quickfix">
-      <div class="kicker">Short on time? Here's the answer</div>
-      <p><strong>Granular Volume</strong> adds real steps below Android's lowest media step, so you can settle between "too loud" and mute. It lowers the output itself, so it works with any earbuds, any brand, wired or wireless. No root, set up in a minute.</p>
+      <div class="kicker">Short answer</div>
+      <p>Android's lowest Bluetooth step is a fixed fraction of full output, so on sensitive earbuds it can still be too loud. Turning off Absolute Volume makes the steps finer but does not lower that floor. <strong>Granular Volume</strong> adds six quieter steps below it by lowering Android's own output before it reaches the earbuds, so it does not depend on the brand, and it applies to wired headphones too. No root, set up in a minute.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbluetooth-earbuds-volume-too-loud-lowest" data-goatcounter-click="play-cta-bluetooth-earbuds-volume-too-loud-lowest">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -204,6 +213,7 @@
         <li><a href="#why">Why one Bluetooth step is such a big jump</a></li>
         <li><a href="#absolute">Disable Absolute Volume: helpful, not enough</a></li>
         <li><a href="#appvol">Turning the app's own volume down</a></li>
+        <li><a href="#compare">The three options, compared</a></li>
         <li><a href="#fix">The fix that adds steps below the lowest</a></li>
         <li><a href="#imbalance">One earbud louder than the other</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -226,10 +236,25 @@
       <p>Some apps have their own volume slider that multiplies on top of the system volume. Where it exists, it can help a little. But many apps have no such slider, the ones that do are often just as coarse, and it only affects that one app. It is not a system-wide floor.</p>
     </div>
 
+    <h2 id="compare">The three options, compared</h2>
+    <div class="tablewrap">
+    <table class="cmp">
+      <thead><tr><th scope="col"></th><th scope="col">Absolute Volume off</th><th scope="col">The app's own slider</th><th scope="col">Below-floor reduction</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Makes the steps finer</th><td>Yes</td><td>Sometimes</td><td>Yes, 5 dB steps</td></tr>
+        <tr><th scope="row">Goes below the lowest step</th><td>No</td><td>Only inside that app</td><td>Yes, down to 30 dB below</td></tr>
+        <tr><th scope="row">Applies to every app</th><td>Yes</td><td>No</td><td>Yes</td></tr>
+        <tr><th scope="row">Needs an install</th><td>No, Developer options</td><td>No</td><td>Yes</td></tr>
+        <tr><th scope="row">Cost</th><td>Free</td><td>Free</td><td>Seven days free, then one payment</td></tr>
+      </tbody>
+    </table>
+    </div>
+
     <h2 id="fix">The fix: real steps below the lowest</h2>
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio engine <span class="verdict v-works">Actually works</span></h3>
-      <p>Instead of remapping the Bluetooth steps, this method applies a negative-gain audio effect to Android's media output using the DynamicsProcessing framework. Because it lowers the audio itself before it reaches the earbuds, it produces levels quieter than the lowest step, and it is brand-agnostic: the same fix works with any wireless earbuds, wired ones, or the phone speaker.</p>
+      <p>Instead of remapping the Bluetooth steps, this method applies a negative-gain audio effect to Android's media output using the DynamicsProcessing framework. Because it lowers the audio itself before it reaches the earbuds, it produces levels quieter than the lowest step, and it does not depend on the brand of the earbuds. Wired headphones and the device speaker are lowered in the same way.</p>
+      <p>One limit to know. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, because the audio takes a path that Android's audio effects do not reach. We cannot list those combinations, so use the seven free days to check with your own pair.</p>
       <p>This is what <a href="../">Granular Volume</a> does: a floating dial with your whole volume range on one slider: normal volume above the device minimum, and six quiet steps below it, 5&nbsp;dB each, down to 30&nbsp;dB under the hardware minimum, all without leaving whatever you are listening to. Pair it with Absolute Volume disabled for the smoothest possible low-end control.</p>
     </div>
 
@@ -259,7 +284,7 @@
 
     <div class="callout">
       <h2>Settle between too loud and mute</h2>
-      <p>If your earbuds jump from too loud straight to silence, this adds the levels in between: real steps below Android's minimum, for any earbuds or headphones. Open source, no ads, no tracking, no account.</p>
+      <p>If your earbuds jump from too loud straight to silence, this adds the levels in between: real steps below Android's minimum, whatever brand your earbuds or headphones are. Open source, no ads, no tracking, no account.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbluetooth-earbuds-volume-too-loud-lowest" data-goatcounter-click="play-cta-bluetooth-earbuds-volume-too-loud-lowest">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../use-cases/sensitive-iem-headphones.html">For sensitive IEMs</a>
@@ -276,7 +301,7 @@
       <dt>Why are my earbuds still too loud at the lowest setting with media volume all the way down?</dt>
       <dd>The lowest non-mute step is a fixed fraction of the maximum, and on in-ear buds that fraction is still loud. Android has no built-in setting for a level below that step.</dd>
       <dt>Does this work with AirPods, Galaxy Buds, Pixel Buds, and other brands on Android?</dt>
-      <dd>Yes. It lowers Android's media output before it reaches the Bluetooth device, so it is brand-agnostic and works with any wireless or wired earbuds.</dd>
+      <dd>In most cases, yes. The fix lowers Android's own media output before it reaches the Bluetooth device, so it does not depend on the brand, and it applies to wired headphones too. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, because the audio takes a path that Android's audio effects do not reach. We cannot list those combinations, so use the seven free days to check with your own pair.</dd>
       <dt>Why is one of my earbuds louder than the other?</dt>
       <dd>Usually earwax or dust on the mesh in front of the driver on the quieter side, which a soft dry brush clears. Next most common is Android's stereo balance slider being off centre, under Settings, Accessibility, Audio balance. Uneven battery on true wireless buds can also do it. If the same side stays quieter after all three checks, the driver is likely failing. Full detail in <a href="#imbalance">the section above</a>.</dd>
       <dt>Will a volume app fix one earbud being louder than the other?</dt>
