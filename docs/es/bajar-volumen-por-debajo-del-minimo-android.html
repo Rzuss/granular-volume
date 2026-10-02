@@ -31,7 +31,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-08-02",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-02",
   "mainEntityOfPage": "https://granularvolume.com/es/bajar-volumen-por-debajo-del-minimo-android.html"
 }
 </script>
@@ -44,32 +44,58 @@
     {
       "@type": "Question",
       "name": "¿Por qué el volumen más bajo de mi móvil sigue sonando tan fuerte?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Android divide el rango entre el silencio y la salida máxima en un número fijo de pasos, normalmente entre 15 y 25. El paso más bajo por encima del silencio es una fracción fija de ese máximo, no un volumen absoluto. En dispositivos con un máximo potente, ese primer paso sigue siendo incómodo. En los ajustes de Android no existe ninguna opción para mover ese suelo."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Android divide el rango entre el silencio y la salida máxima en un número fijo de pasos, normalmente entre 15 y 25. El paso más bajo por encima del silencio es una fracción fija de ese máximo, no un volumen absoluto. En dispositivos con un máximo potente, ese primer paso sigue siendo incómodo. En los ajustes de Android no existe ninguna opción para mover ese suelo."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Sound Assistant baja el suelo de volumen?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Un poco, y luego deja de bajar. Sound Assistant, dentro de Good Lock de Samsung, permite ajustar el volumen en pasos del 1 por ciento, y ese primer paso sí queda más bajo que el primero de diez, porque Android sitúa cada paso en una curva de atenuación fija según su posición en el rango: unos 5 dB en una configuración de Android 16 que medimos en agosto de 2026. Esa curva tiene un fondo fijo que ningún número de pasos rebasa. Si tu problema son los saltos bruscos, es la solución correcta. Si el problema es el suelo, no lo es."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un poco, y luego deja de bajar. Sound Assistant, dentro de Good Lock de Samsung, permite ajustar el volumen en pasos del 1 por ciento, y ese primer paso sí queda más bajo que el primero de diez, porque Android sitúa cada paso en una curva de atenuación fija según su posición en el rango: unos 5 dB en una configuración de Android 16 que medimos en agosto de 2026. Esa curva tiene un fondo fijo que ningún número de pasos rebasa. Si tu problema son los saltos bruscos, es la solución correcta. Si el problema es el suelo, no lo es."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Sirve desactivar Dolby Atmos o el ecualizador?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A veces, un poco. Las mejoras de sonido como Dolby Atmos añaden ganancia, y desactivarlas puede reducir la salida de forma audible en algunos dispositivos. No es fiable: en muchos móviles no cambia nada, y donde ayuda estás renunciando a una función que quizá quieras conservar."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A veces, un poco. Las mejoras de sonido como Dolby Atmos añaden ganancia, y desactivarlas puede reducir la salida de forma audible en algunos dispositivos. No es fiable: en muchos móviles no cambia nada, y donde ayuda estás renunciando a una función que quizá quieras conservar."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Se puede hacer sin root?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Sí. Android expone una interfaz de efectos de audio con la que una aplicación puede aplicar ganancia negativa a la mezcla de salida, por debajo de los pasos de volumen. No hace falta root, ni ADB, ni modificar archivos del sistema."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Android expone una interfaz de efectos de audio con la que una aplicación puede aplicar ganancia negativa a la mezcla de salida, por debajo de los pasos de volumen. No hace falta root, ni ADB, ni modificar archivos del sistema."
+      }
     },
     {
       "@type": "Question",
       "name": "¿También baja las llamadas, la alarma y las notificaciones?",
-      "acceptedAnswer": {"@type": "Answer", "text": "El contenido multimedia, los tonos, las notificaciones y la alarma pasan por la misma ruta de salida mezclada y bajan con ella. Las llamadas de apps como WhatsApp también, si el teléfono las reproduce por esa misma ruta, lo que depende del modelo. Las llamadas telefónicas normales no: en cualquier teléfono, Android lleva la voz de la red móvil por una ruta aparte que ninguna app alcanza. Los tonos del teclado y los sonidos de la interfaz no, como se explica más abajo."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El contenido multimedia, los tonos, las notificaciones y la alarma pasan por la misma ruta de salida mezclada y bajan con ella. Las llamadas de apps como WhatsApp también, si el teléfono las reproduce por esa misma ruta, lo que depende del modelo. Las llamadas telefónicas normales no: en cualquier teléfono, Android lleva la voz de la red móvil por una ruta aparte que ninguna app alcanza. Los tonos del teclado y los sonidos de la interfaz no, como se explica más abajo."
+      }
     },
     {
       "@type": "Question",
       "name": "¿Por qué no bajan los tonos del teclado?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Los clics del teclado y los sonidos de la interfaz usan una ruta separada de baja latencia que se salta los efectos de audio a propósito, porque los efectos añaden retardo. Es un límite del propio Android, no de una aplicación concreta. Ninguna aplicación que trabaje con un efecto sobre la mezcla de salida puede alcanzarlos."}
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los clics del teclado y los sonidos de la interfaz usan una ruta separada de baja latencia que se salta los efectos de audio a propósito, porque los efectos añaden retardo. Es un límite del propio Android, no de una aplicación concreta. Ninguna aplicación que trabaje con un efecto sobre la mezcla de salida puede alcanzarlos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La instalación es gratuita y los primeros siete días tras instalarla son la app completa. Después, el control necesita un pago único dentro de la app a través de Google Play. Nada se renueva y no hay suscripción. Sin anuncios, sin cuenta y sin permiso de internet."
+      }
     }
   ]
 }
@@ -227,7 +253,7 @@
       <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbajar-volumen-por-debajo-del-minimo-android" data-goatcounter-click="play-cta-bajar-volumen-por-debajo-del-minimo-android">En Play Store</a>
       <a class="btn btn-ghost" href="#metodos">Ver todos los métodos</a>
     </div>
-      <p class="setup-note">Después de instalar, ábrela una vez y permite que se muestre sobre otras apps. Esa es toda la configuración.</p>
+      <p class="setup-note">Después de instalar, ábrela una vez y permite que se muestre sobre otras apps. Esa es toda la configuración. Durante siete días todo está abierto; después, el control necesita un pago único dentro de la app, sin suscripción.</p>
   </div>
 
   <article>
@@ -316,7 +342,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dbajar-volumen-por-debajo-del-minimo-android" data-goatcounter-click="play-cta-bajar-volumen-por-debajo-del-minimo-android">Ver en Play Store</a>
         <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">Código en GitHub</a>
       </div>
-      <p class="setup-note">Después de instalar, ábrela una vez y permite que se muestre sobre otras apps. Esa es toda la configuración.</p>
+      <p class="setup-note">Después de instalar, ábrela una vez y permite que se muestre sobre otras apps. Esa es toda la configuración. Durante siete días todo está abierto; después, el control necesita un pago único dentro de la app, sin suscripción.</p>
     </div>
 
     <h2 id="faq">Preguntas frecuentes</h2>
@@ -345,6 +371,8 @@
 
       <dt>¿Vuelve el ajuste después de reiniciar?</dt>
       <dd>Sí, si el control estaba activo al apagar, se restaura tras el reinicio en el mismo nivel. Si lo paraste tú, sigue parado.</dd>
+      <dt>¿Es gratis?</dt>
+      <dd>La instalación es gratuita y los primeros siete días tras instalarla son la app completa. Después, el control necesita un pago único dentro de la app a través de Google Play. Nada se renueva y no hay suscripción. Sin anuncios, sin cuenta y sin permiso de internet.</dd>
     </dl>
 
   </article>
