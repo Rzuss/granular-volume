@@ -36,6 +36,7 @@
     {"@type":"Question","name":"Can an app really replace the volume buttons?","acceptedAnswer":{"@type":"Answer","text":"Yes, for everything except the recovery-mode key combinations that run before Android starts. Android lets an app set the volume of the active audio stream, which is exactly what the buttons do. A floating slider gives you the same control on screen and does not depend on the hardware key working."}},
     {"@type":"Question","name":"Does Android have a built-in on-screen volume control?","acceptedAnswer":{"@type":"Answer","text":"Yes. Settings, then Sound, has a media volume slider, and Settings, Accessibility, Accessibility Menu adds a floating button with volume up and down inside it. Both are free and built in. They take a few taps each time and cannot go below the device's minimum, which is where a dedicated slider helps."}},
     {"@type":"Question","name":"Will using an on-screen slider stop my volume buttons wearing out?","acceptedAnswer":{"@type":"Answer","text":"It reduces how often you press them, which is the main cause of wear on a key that is already getting stiff. It does not repair a button that has already failed, but many people move volume to the screen specifically to stop a marginal button from getting worse."}},
+    {"@type":"Question","name":"Why do my volume buttons change the Accessibility volume instead of media?","acceptedAnswer":{"@type":"Answer","text":"In January 2026 Google confirmed a bug on devices with Select to Speak turned on: the volume keys adjusted the Accessibility volume instead of media. Google's workaround is to turn off the Select to Speak shortcut in Settings, Accessibility. If you need the feature on, an on-screen slider sets the media volume directly without a key press."}},
     {"@type":"Question","name":"Does this work on an Android tablet?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Settings slider, the Accessibility Menu and a floating slider all work the same way on Android tablets, including with the tablet in a stand or a case. Amazon Fire tablets are the exception for the app, because they do not have Google Play."}},
     {"@type":"Question","name":"What can an on-screen volume slider not do?","acceptedAnswer":{"@type":"Answer","text":"It cannot help before Android starts (recovery mode), with key combinations such as the screenshot shortcut, or with a key that is physically stuck pressed. It sets media volume, and call volume during a call. Ringtone, notification and alarm levels stay in Settings."}},
     {"@type":"Question","name":"Does it need root, ADB, or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio APIs, needs a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
@@ -220,6 +221,7 @@
         <li><a href="#without">How to change the volume without the buttons, compared</a></li>
         <li><a href="#slider">When the button is genuinely dead: a slider that replaces it</a></li>
         <li><a href="#tablet">On a tablet: a worn rocker, or buttons you cannot reach</a></li>
+        <li><a href="#accessibility-volume">Volume keys change the Accessibility volume instead of media</a></li>
         <li><a href="#intermittent">Buttons that work only some of the time</a></li>
         <li><a href="#wear">Using the screen to stop a stiff button getting worse</a></li>
         <li><a href="#limits">What an on-screen slider cannot do</a></li>
@@ -313,6 +315,11 @@
     <figure class="shot"><img src="../img/tablet-dial-stand.webp" width="1280" height="800" loading="lazy" alt="Illustration of a tablet in a stand playing a cartoon, with the floating volume dial at the left edge of the screen"><figcaption>Illustration: with the tablet in a stand, the volume is set on screen.</figcaption></figure>
     <p>If the tablet is also too loud at its lowest step, which happens on some models, that is the other half of what the slider does. The <a href="tablet-volume-too-loud-lowest-setting.html">tablet guide</a> covers it by brand. One exception: Amazon Fire tablets do not have Google Play, so this app is not available there.</p>
 
+    <h2 id="accessibility-volume">Volume keys change the Accessibility volume instead of media</h2>
+    <p>This one is not a hardware fault at all. In January 2026 Google confirmed a bug on Android devices with Select to Speak turned on: pressing the volume keys adjusted the Accessibility volume instead of the media volume, so music and video stayed at the same level however often you pressed. <a href="https://www.bleepingcomputer.com/news/google/google-confirms-android-bug-causing-volume-key-issues/" rel="noopener">BleepingComputer reported Google's statement</a> on January 13, 2026.</p>
+    <p>Google's workaround was to switch the feature off: Settings, Accessibility, Select to Speak, then turn its shortcut off. If you do not use Select to Speak, do that and the keys go back to media. We do not know whether every device has received a fix since then, so check for a system update and an update to Android Accessibility Suite as well.</p>
+    <p>If you rely on Select to Speak and want to keep it on, an on-screen control gets around the problem, because it sets the media volume directly and does not send a key press. We checked this on Android 14 with Select to Speak turned on: the floating slider changed the media volume and left the accessibility volume where it was. In that same check the keys themselves behaved normally, so we could not reproduce the bug itself, only confirm that the slider does not depend on it.</p>
+
     <h2 id="intermittent">Buttons that work only some of the time</h2>
     <p>A key that works on Monday and ignores you on Tuesday is harder to diagnose than a dead one, and it is often how a failing button behaves before it stops for good.</p>
     <ul>
@@ -350,6 +357,8 @@
       <dd>Yes, two: the media volume slider in Settings, and the Accessibility Menu. Both are free and built in. Both take a few taps each time and neither can go below the device's minimum.</dd>
       <dt>Will an on-screen slider stop my volume buttons wearing out?</dt>
       <dd>It reduces how often you press them, which is the main cause of wear on a key that is already stiffening. It cannot repair a key that has already failed.</dd>
+      <dt>Why do my volume buttons change the Accessibility volume instead of media?</dt>
+      <dd>In January 2026 Google confirmed a bug on devices with Select to Speak turned on: the volume keys adjusted the Accessibility volume instead of media. Google's workaround is to turn off the Select to Speak shortcut in Settings, Accessibility. If you need the feature on, an on-screen slider sets the media volume directly without a key press.</dd>
       <dt>Does this work on an Android tablet?</dt>
       <dd>Yes. The Settings slider, the Accessibility Menu and a floating slider all work the same way on Android tablets, including with the tablet in a stand or a case. Amazon Fire tablets are the exception for the app, because they do not have Google Play.</dd>
       <dt>What can an on-screen volume slider not do?</dt>
