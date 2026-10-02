@@ -5,10 +5,10 @@ Un pequeño control flotante aparece sobre cualquier aplicación, con todo tu ra
 Es una utilidad de comodidad, no protección auditiva. El volumen real depende de tu dispositivo y auriculares, usa el buen juicio.
 
 MÁS BAJO DE LO QUE TU DISPOSITIVO PERMITE
-La mayoría de las apps de volumen están hechas para subir. Granular Volume está hecha para el otro extremo: reduce el volumen por debajo del paso más bajo que permite el hardware, usando el motor de audio de Android, en móviles y tablets por igual. Sin root. No reemplaza el panel de volumen del sistema. Sin anuncios, sin cuenta, sin permiso de internet en absoluto. La zona silenciosa es el corazón de la app, y el mismo deslizador cubre también tu rango normal.
+Granular Volume está hecha para el extremo silencioso: reduce el volumen por debajo del paso más bajo que permite el hardware, usando el motor de audio de Android, en móviles y tablets por igual. Sin root. No reemplaza el panel de volumen del sistema. Sin anuncios, sin cuenta, sin permiso de internet en absoluto. La zona silenciosa es el corazón de la app, y el mismo deslizador cubre también tu rango normal.
 
-CUANDO TUS BOTONES DE VOLUMEN NO FUNCIONAN
-Los botones se desgastan, se endurecen o quedan presionados por una funda. Por encima de la línea que marca el mínimo de tu dispositivo, el control ajusta el volumen normal del sistema y sustituye a los botones: arrastra hacia arriba para subir, hacia abajo para bajar, en pasos uniformes de 5 dB construidos a partir de la curva de volumen de tu propio dispositivo. Por debajo de la línea sigue bajando, más silencioso de lo que el móvil permite. El silencio no toca las alarmas, pero los pasos silenciosos también bajan alarmas y tonos de llamada.
+CUANDO TUS BOTONES DE VOLUMEN ESTÁN ROTOS O NO FUNCIONAN
+Los botones de volumen se desgastan, se endurecen, dejan de responder o quedan bajo una funda. El control es un control de volumen en pantalla que los sustituye. Por encima de la línea que marca el mínimo de tu dispositivo, ajusta el volumen normal del sistema: arrastra hacia arriba para subir, hacia abajo para bajar, en pasos uniformes de 5 dB construidos a partir de la curva de volumen de tu propio dispositivo. Por debajo de la línea sigue bajando, más silencioso de lo que el móvil permite. El silencio no toca las alarmas, pero los pasos silenciosos también bajan alarmas y tonos de llamada.
 
 TAMBIÉN PARA TABLETS
 En algunas tablets el volumen mínimo es aún más alto que en un móvil, según el modelo. Granular Volume funciona igual en tablets Android, con el mismo suelo silencioso.

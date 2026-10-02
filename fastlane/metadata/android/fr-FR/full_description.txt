@@ -5,10 +5,10 @@ Un petit contrôle flottant apparaît au-dessus de toute application, avec toute
 C'est un utilitaire de confort, pas une protection auditive. Le volume réel dépend de votre appareil et de vos écouteurs, restez prudent.
 
 PLUS BAS QUE CE QUE VOTRE APPAREIL PERMET
-La plupart des applis de volume sont faites pour monter. Granular Volume est faite pour l'autre extrémité : elle réduit le volume sous le palier le plus bas que le matériel autorise, via le moteur audio d'Android, sur téléphones comme sur tablettes. Sans root. Ne remplace pas le panneau de volume du système. Sans publicité, sans compte, sans aucune permission internet. La zone silencieuse est le cœur de l'appli, et le même curseur couvre aussi votre plage normale.
+Granular Volume est faite pour le bas de l'échelle : elle réduit le volume sous le palier le plus bas que le matériel autorise, via le moteur audio d'Android, sur téléphones comme sur tablettes. Sans root. Ne remplace pas le panneau de volume du système. Sans publicité, sans compte, sans aucune permission internet. La zone silencieuse est le cœur de l'appli, et le même curseur couvre aussi votre plage normale.
 
-QUAND VOS BOUTONS DE VOLUME NE FONCTIONNENT PLUS
-Les boutons s'usent, se coincent ou restent enfoncés par une coque. Au-dessus de la ligne marquant le minimum de votre appareil, le curseur règle le volume système normal et remplace les boutons : glissez vers le haut pour monter, vers le bas pour baisser, par paliers réguliers de 5 dB construits à partir de la courbe de volume de votre propre appareil. Sous la ligne, il continue, plus bas que ce que le téléphone permet. La commande muet ne touche pas aux alarmes, mais les paliers silencieux baissent aussi alarmes et sonneries.
+QUAND VOS BOUTONS DE VOLUME SONT CASSÉS OU NE FONCTIONNENT PLUS
+Les boutons de volume s'usent, se coincent, ne répondent plus ou se retrouvent sous une coque. Le curseur est un contrôle du volume à l'écran qui les remplace. Au-dessus de la ligne marquant le minimum de votre appareil, il règle le volume système normal : glissez vers le haut pour monter, vers le bas pour baisser, par paliers réguliers de 5 dB construits à partir de la courbe de volume de votre propre appareil. Sous la ligne, il continue, plus bas que ce que le téléphone permet. La commande muet ne touche pas aux alarmes, mais les paliers silencieux baissent aussi alarmes et sonneries.
 
 CONÇU AUSSI POUR LES TABLETTES
 Sur certaines tablettes, le volume minimum est encore plus fort que sur un téléphone, selon le modèle. Granular Volume fonctionne de la même façon sur tablette Android, avec le même plancher silencieux.

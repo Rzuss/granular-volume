@@ -5,10 +5,10 @@ A small floating control appears above any app, with your whole volume range on 
 This is a convenience utility, not hearing protection equipment. Actual loudness depends on your device and headphones, so use good judgment with volume changes.
 
 LOWER THAN YOUR PHONE OR TABLET ALLOWS
-Most volume apps are built to go louder. Granular Volume is built for the other end: it reduces volume below the lowest step your device's hardware allows, using Android's audio engine, on phones and tablets alike. No root required. No system volume panel replacement. No ads, no account, no internet permission at all. The quiet zone is the heart of the app, and the same slider covers your normal range too.
+Granular Volume is built for the quiet end: it reduces volume below the lowest step your device's hardware allows, using Android's audio engine, on phones and tablets alike. No root required. No system volume panel replacement. No ads, no account, no internet permission at all. The quiet zone is the heart of the app, and the same slider covers your normal range too.
 
-WHEN YOUR VOLUME BUTTONS DO NOT WORK
-Volume keys wear out, stiffen, or get held down by a case. Above the line marking your device's minimum, the dial sets normal system volume, so it stands in for the buttons: drag up for louder, drag down for quieter, in even 5 dB steps built from your own device's volume curve. Below the line it keeps going, quieter than the phone allows. Mute leaves alarms alone, but the quiet steps lower alarms and ringtones too.
+WHEN YOUR VOLUME BUTTONS ARE BROKEN OR NOT WORKING
+Volume buttons wear out, stiffen, stop responding, or sit under a case. The dial is an on-screen volume control that stands in for them. Above the line marking your device's minimum, it sets normal system volume: drag up for louder, drag down for quieter, in even 5 dB steps built from your own device's volume curve. Below the line it keeps going, quieter than the phone allows. Mute leaves alarms alone, but the quiet steps lower alarms and ringtones too.
 
 BUILT FOR TABLETS TOO
 On some tablets the lowest volume is even louder than on a phone, depending on the model. Granular Volume works the same way on Android tablets, so tablet users get the same quiet floor.
