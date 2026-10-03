@@ -81,6 +81,26 @@ class FullRangeCoordinator(
      */
     var lockedDisplayProvider: () -> Boolean = { lockedProvider() }
 
+    /**
+     * 1.7.0: what the dial should LOOK like, which is no longer a yes or no.
+     *
+     *  OPEN    every bar is live.
+     *  HELD    the free week ended while the control was on. The level that is applied stays
+     *          and is drawn lit; every other bar is drawn as unavailable, because choosing
+     *          another level on the dial asks for the unlock. The physical keys are untouched
+     *          by this state: [onExternalVolumeChange] runs as always, so volume-up still makes
+     *          the sound louder one step at a time and is the free way out of the quiet zone.
+     *          The user is never held at a low level. Nothing here is called "locked".
+     *  LOCKED  nothing is applied and nothing can be chosen.
+     *
+     * Read-only like [lockedDisplayProvider], and defaults to it, so an unwired instance
+     * renders exactly as before.
+     */
+    enum class LockDisplay { OPEN, HELD, LOCKED }
+
+    var lockDisplayProvider: () -> LockDisplay =
+        { if (lockedDisplayProvider()) LockDisplay.LOCKED else LockDisplay.OPEN }
+
     /** A locked gesture. Carries the quiet step the user reached for, or null for upper/mute. */
     var onLockedInteraction: ((pendingQuietStepDb: Float?) -> Unit)? = null
 

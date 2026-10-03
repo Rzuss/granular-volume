@@ -20,7 +20,7 @@ object BillingManager {
     fun priceOrNull(context: Context): String? = null
 
     @Suppress("UNUSED_PARAMETER")
-    fun prefetch(context: Context) = Unit
+    fun prefetch(context: Context, onOwnership: ((Boolean?) -> Unit)? = null) = Unit
 
     @Suppress("UNUSED_PARAMETER")
     fun refreshPrice(context: Context, onPrice: (String?) -> Unit) = onPrice(null)

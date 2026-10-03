@@ -50,6 +50,13 @@ class AudioController(private val context: Context) {
         private set
 
     /**
+     * 1.7.0: told after every [initialize], including the ones [reattach] runs: whether any
+     * effect is attached, and whether it is the preferred one. The service publishes it so
+     * "Your access" can say when this device is the reason the quiet steps do nothing.
+     */
+    var onEffectState: ((available: Boolean, preferred: Boolean) -> Unit)? = null
+
+    /**
      * True while the preferred DynamicsProcessing strategy holds the effect. False means
      * either no strategy at all or the LoudnessEnhancer fallback, whose negative-gain
      * support is OEM-dependent — both states that a caller may want to retry out of.
@@ -76,12 +83,14 @@ class AudioController(private val context: Context) {
                 // Apply persisted attenuation immediately, THROUGH the gate: a stale
                 // deep level from a refunded or pre-gate state re-clamps at service start.
                 setAttenuation(_attenuationDb.value, GainSource.SYSTEM)
+                onEffectState?.invoke(true, usingPreferredStrategy)
                 return true
             }
         }
 
         Log.e(tag, "No AudioEffect strategy available on this device")
         isEffectAvailable = false
+        onEffectState?.invoke(false, false)
         return false
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+<!-- 1.6.4, updated 1.7.0: the purchase, access, trial and notice strings only. Everything else falls back to
      English on purpose, and the Terms line stays English (it points at the English legal text). -->
 <resources>
-    <string name="gv_paywall_title">Tujuh hari Anda sudah berakhir</string>
+    <string name="gv_paywall_title">Minggu gratis sudah berakhir</string>
     <string name="gv_paywall_depth">Semua langkah senyap hingga −30 dB, seluruh rentang normal, dan bisu. Satu pembayaran, sekali saja, membuka semuanya.</string>
-    <string name="gv_paywall_body">Pembelian sekali, milik Anda di akun ini, tanpa perpanjangan. Tanpa langganan. Aplikasi tetap bebas iklan, pelacakan, dan akses internet.</string>
+    <string name="gv_paywall_body">Pembelian sekali, milik Anda di akun Google ini, tanpa perpanjangan. Tanpa langganan. Tanpa itu, kontrol tetap terkunci dan kontrol volume bawaan perangkat Anda berfungsi seperti biasa. Aplikasi tetap bebas iklan, pelacakan, dan akses internet.</string>
     <string name="gv_paywall_not_now">Nanti saja</string>
     <string name="gv_paywall_unlocked">Rentang penuh terbuka. Nikmati ketenangannya.</string>
     <string name="gv_purchase_cta">Buka rentang penuh</string>
@@ -19,29 +19,43 @@
     <string name="gv_purchase_unavailable_billing_hint">Pembelian Google Play saat ini tidak tersedia di perangkat atau akun ini. Pastikan Anda sudah masuk ke Google Play, lalu coba lagi.</string>
     <string name="gv_purchase_retry">Coba lagi</string>
     <string name="gv_info_state_purchased">Terbuka di akun Google ini</string>
-    <string name="gv_info_restore_iap">Ponsel baru atau instal ulang? Masuk ke Google Play dengan akun yang sama dan buka aplikasi. Pembelian kembali dengan sendirinya dan tidak pernah ditagih dua kali.</string>
+    <string name="gv_info_restore_iap">Perangkat baru atau instal ulang? Masuk ke Google Play dengan akun yang sama dan buka aplikasi. Pembelian kembali dengan sendirinya dan tidak pernah ditagih dua kali.</string>
     <string name="gv_info_title">Akses Anda</string>
-    <string name="gv_info_state_locked">Minggu gratis Anda sudah berakhir</string>
-    <string name="gv_info_body_trial">Semuanya terbuka selama Anda mencoba. Setelah seminggu, mempertahankan kontrol memerlukan satu pembayaran, sekali saja, di akun ini. Tidak ada yang diperpanjang dan tidak ada yang ditagih dengan sendirinya.</string>
+    <string name="gv_info_state_locked">Minggu gratis sudah berakhir</string>
+    <string name="gv_info_body_trial">Semuanya terbuka selama Anda mencoba. Anda bisa memilikinya selamanya kapan saja, atau menunggu sampai minggu ini berakhir. Satu pembayaran, sekali saja, di akun Google ini. Tidak ada yang diperpanjang dan tidak ada yang ditagih dengan sendirinya.</string>
     <string name="gv_info_body_trial_last_day">Minggu gratis Anda berakhir dalam kurang dari 24 jam, lalu kontrol terkunci. Satu pembayaran, sekali saja, menjaga semuanya tetap terbuka, tanpa perpanjangan. Setiap langkah tetap persis seperti yang Anda atur.</string>
     <string name="gv_info_body_unlocked">Terima kasih. Semua langkah, seluruh rentang, dan bisu tetap terbuka di akun ini, tanpa perpanjangan.</string>
-    <string name="gv_info_body_locked">Tujuh hari gratis sudah berakhir, jadi kontrol terkunci. Satu pembayaran, sekali saja, mengembalikan setiap langkah persis ke tempat Anda meninggalkannya. Tidak ada yang diperpanjang dan tidak ada langganan.</string>
-    <string name="gv_notif_locked">Minggu gratis Anda sudah berakhir. Ketuk untuk detailnya.</string>
-    <string name="gv_trial_orientation">Semuanya terbuka selama tujuh hari pertama Anda. Setelah itu, satu pembayaran, sekali saja, mempertahankannya, dan setiap langkah tetap persis di tempat Anda meninggalkannya.</string>
-    <string name="gv_trial_body">Semua langkah terbuka selama Anda mencoba. Setelah seminggu, mempertahankan kontrol memerlukan satu pembayaran, sekali saja, di akun ini. Tidak ada yang diperpanjang dan tidak ada yang ditagih dengan sendirinya.</string>
+    <string name="gv_info_body_locked">Tujuh hari gratis dihitung sejak pemasangan dan sudah berakhir, jadi kontrol terkunci. Satu pembayaran, sekali saja, mengembalikan setiap langkah persis ke tempat Anda meninggalkannya. Tanpa itu, kontrol tetap terkunci dan kontrol volume bawaan perangkat Anda berfungsi seperti biasa. Tidak ada yang diperpanjang dan tidak ada langganan.</string>
+    <string name="gv_notif_locked">Minggu gratis sudah berakhir. Ketuk untuk detailnya.</string>
+    <string name="gv_trial_body">Semua langkah terbuka selama Anda mencoba. Anda bisa memilikinya selamanya kapan saja, atau menunggu sampai minggu ini berakhir. Satu pembayaran, sekali saja, di akun Google ini. Tidak ada yang diperpanjang dan tidak ada yang ditagih dengan sendirinya.</string>
     <string name="gv_trial_dismiss">Nanti</string>
-    <string name="gv_trial_over_title">Tujuh hari Anda sudah berakhir</string>
-    <string name="gv_trial_over_body">Kontrol terkunci sampai Anda membukanya. Satu pembayaran, sekali saja, dan setiap langkah kembali persis ke tempat Anda meninggalkannya. Tidak ada yang diperpanjang dan tidak ada langganan.</string>
+    <string name="gv_trial_over_title">Minggu gratis sudah berakhir</string>
+    <string name="gv_trial_over_body">Tujuh hari gratis dihitung sejak pemasangan dan sudah berakhir, jadi kontrol terkunci. Satu pembayaran, sekali saja, dan setiap langkah kembali persis ke tempat Anda meninggalkannya. Tanpa itu, kontrol tetap terkunci dan kontrol volume bawaan perangkat Anda berfungsi seperti biasa. Tidak ada yang diperpanjang dan tidak ada langganan.</string>
     <string name="gv_unlocked_title">Rentang penuh terbuka</string>
-    <string name="gv_unlocked_body">Terima kasih. Semua langkah hingga −30 dB sekarang terbuka di perangkat ini. Mulai kontrol dan pilih langkah mana pun di bawah garis oranye.</string>
+    <string name="gv_unlocked_body">Terima kasih. Semua langkah hingga −30 dB sekarang terbuka di akun Google ini. Mulai kontrol dan pilih langkah mana pun di bawah garis oranye.</string>
     <string name="gv_unlocked_dismiss">Mengerti</string>
     <string name="gv_notice_channel_name">Minggu gratis</string>
     <string name="gv_notice_channel_desc">Satu catatan sebelum minggu gratis Anda berakhir, dan satu saat sudah berakhir. Tidak pernah lebih.</string>
     <string name="gv_notice_last_day_title">Minggu gratis Anda berakhir dalam kurang dari 24 jam</string>
     <string name="gv_notice_last_day_body">Satu pembayaran, sekali saja, mempertahankan semua langkah. Tidak ada yang diperpanjang. Ketuk untuk detailnya.</string>
-    <string name="gv_notice_ended_title">Minggu gratis Anda sudah berakhir</string>
-    <string name="gv_notice_ended_running_body">Kontrol tetap berfungsi sampai dihentikan atau ponsel dimulai ulang. Satu pembayaran, sekali saja, mempertahankan semua langkah. Ketuk untuk detailnya.</string>
+    <string name="gv_notice_ended_title">Minggu gratis sudah berakhir</string>
+    <string name="gv_notice_ended_running_body">Level Anda tetap seperti sekarang sampai kontrol dihentikan atau perangkat dimulai ulang. Untuk mengubahnya, buka kunci kontrol: satu pembayaran, sekali saja. Ketuk untuk detailnya.</string>
     <string name="gv_notice_ended_paused_body">Langkah senyap dijeda. Satu pembayaran, sekali saja, mengembalikan setiap langkah persis ke tempat Anda meninggalkannya. Ketuk untuk detailnya.</string>
+    <!-- 1.7.0 -->
+    <string name="gv_paywall_held">Level Anda tetap persis seperti sekarang. Untuk mengubahnya, kontrol perlu dibuka.</string>
+    <string name="gv_purchase_cta_keep">Miliki selamanya</string>
+    <string name="gv_purchase_cta_keep_price">Miliki selamanya, %1$s</string>
+    <string name="gv_purchase_opening">Membuka Google Play…</string>
+    <string name="gv_purchase_not_found_hint">Google Play tidak menemukan pembelian di akun yang sedang digunakannya. Jika Anda membeli dengan akun Google lain, beralihlah ke akun itu di Google Play, lalu ketuk Pulihkan lagi.</string>
+    <string name="gv_purchase_not_for_sale_title">Tidak tersedia di sini</string>
+    <string name="gv_purchase_not_for_sale">Pembelian ini saat ini tidak tersedia untuk akun Google Play atau negara Anda. Tidak ada yang ditagih.</string>
+    <string name="gv_dialog_close">Tutup</string>
+    <string name="gv_info_body_held">Tujuh hari gratis dihitung sejak pemasangan dan sudah berakhir. Level Anda tetap persis seperti sekarang sampai kontrol dihentikan atau perangkat dimulai ulang. Untuk mengubahnya, buka kunci kontrol: satu pembayaran, sekali saja. Tidak ada yang diperpanjang dan tidak ada langganan.</string>
+    <string name="gv_notif_held">%1$s. Minggu gratis sudah berakhir. Ketuk untuk detailnya.</string>
+    <string name="gv_trial_grace">Minggu gratis dihitung sejak pemasangan dan sudah lewat. Semuanya terbuka selama 24 jam mulai sekarang. Setelah itu kontrol terkunci sampai satu pembayaran, sekali saja, membukanya selamanya. Tanpa langganan.</string>
+    <plurals name="gv_trial_orientation_days">
+        <item quantity="other">Semuanya terbuka selama %d hari lagi. Setelah itu kontrol terkunci sampai satu pembayaran, sekali saja, membukanya selamanya. Tanpa langganan.</item>
+    </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="other">Tersisa %d hari akses penuh</item>
     </plurals>

@@ -14,18 +14,18 @@
         android:gravity="center_horizontal"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
-        android:paddingTop="48dp"
-        android:paddingBottom="40dp">
+        android:paddingTop="28dp"
+        android:paddingBottom="32dp">
 
         <!-- Hero glyph -->
         <FrameLayout
-            android:layout_width="76dp"
-            android:layout_height="76dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/bg_hero_circle">
 
             <ImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_volume_slider"
                 android:contentDescription="@string/gv_app_glyph" />
@@ -39,7 +39,7 @@
             android:textColor="@color/gv_text_primary"
             android:textStyle="bold"
             android:letterSpacing="-0.01"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="14dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -63,7 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="@string/gv_trial_orientation"
             android:textSize="13sp"
             android:textColor="@color/gv_text_muted"
             android:gravity="center"
@@ -82,7 +81,7 @@
             android:paddingRight="16dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:layout_marginTop="32dp">
+            android:layout_marginTop="20dp">
 
             <!-- Overlay permission row -->
             <LinearLayout
@@ -90,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp">
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
 
                 <FrameLayout
                     android:layout_width="42dp"
@@ -160,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp">
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
 
                 <FrameLayout
                     android:layout_width="42dp"
@@ -218,6 +217,79 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gv_surface_stroke" />
+
+            <!-- Notifications row (1.7.0). Optional, and said so: the control works without it.
+                 The system asks for it after "Start", with no explanation of its own, so the
+                 reason is given here, before the question. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
+
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_icon_chip">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_info"
+                        android:tint="@color/gv_text_secondary"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_notif_title"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gv_text_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_notif_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gv_perm_notif_desc"
+                        android:textSize="12sp"
+                        android:textColor="@color/gv_text_muted"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_notif_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_state_pill"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/gv_state_off"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gv_text_secondary"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Consent gate (clickwrap). Sits ABOVE the permission CTA and gates it, so the
@@ -225,65 +297,9 @@
              Hidden once the current Terms version has been accepted. -->
         <!-- Grandfather tip-jar card (1.5.0): play flavor, grandfathered users,
              shown until dismissed once, then never again. -->
-        <LinearLayout
-            android:id="@+id/gv_tipjar_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_card"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_card_title"
-                android:text="@string/gv_tipjar_title"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/gv_text_primary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_card_body"
-                android:text="@string/gv_tipjar_body"
-                android:textSize="12sp"
-                android:textColor="@color/gv_text_secondary"
-                android:layout_marginTop="4dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:id="@+id/btn_tipjar_dismiss"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gv_tipjar_dismiss"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gv_text_muted"
-                    android:padding="8dp" />
-
-                <TextView
-                    android:id="@+id/btn_tipjar_support"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gv_tipjar_support"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gv_accent_text"
-                    android:padding="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp" />
-            </LinearLayout>
-        </LinearLayout>
-
+        <!-- 1.7.0: the consent block now sits ABOVE the card. With the card first, a user who
+             had to accept the Terms while a card was showing found "Agree and continue" below
+             the fold (harness A9, 2026-10-03). Agreement is the gate; it comes first. -->
         <LinearLayout
             android:id="@+id/gv_consent_block"
             android:layout_width="match_parent"
@@ -346,6 +362,80 @@
                 android:layout_marginTop="10dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/gv_tipjar_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_card_title"
+                android:text="@string/gv_tipjar_title"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/gv_text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_card_body"
+                android:text="@string/gv_tipjar_body"
+                android:textSize="12sp"
+                android:textColor="@color/gv_text_secondary"
+                android:layout_marginTop="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/btn_tipjar_dismiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gv_tipjar_dismiss"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gv_text_muted"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:id="@+id/btn_tipjar_support"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gv_tipjar_support"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/gv_accent_text"
+                    android:padding="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
+
+            <!-- 1.7.0: a locked main screen had a buy button and no way to say "I already paid". -->
+            <TextView
+                android:id="@+id/btn_card_restore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/gv_purchase_restore_link"
+                android:textSize="13sp"
+                android:textColor="@color/gv_accent_text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
         <!-- Contextual hint -->
         <TextView
             android:id="@+id/tv_hint"
@@ -355,7 +445,7 @@
             android:textSize="13sp"
             android:textColor="@color/gv_text_secondary"
             android:gravity="center"
-            android:layout_marginTop="22dp" />
+            android:layout_marginTop="18dp" />
 
         <!-- Primary CTA -->
         <Button
@@ -373,7 +463,9 @@
             android:maxLines="1"
             android:layout_marginTop="14dp" />
 
-        <!-- Secondary action -->
+        <!-- The second step. 1.7.0: only ONE of these two buttons is on screen at a time (the
+             one that can be pressed). With the third status row both no longer fitted above
+             the fold, and the one that mattered was the one that fell off. -->
         <Button
             android:id="@+id/btn_start_service"
             android:layout_width="match_parent"
@@ -390,18 +482,55 @@
             android:layout_marginTop="12dp" />
 
 
-        <!-- Persistent legal footer. The consent block disappears once accepted, so the
-             licences screen needs a way in that does not. -->
+        <!-- 1.7.0: shown only while the system may put this app to sleep. The usual reason a
+             control "stops by itself" is the device's battery manager, and nothing said so. -->
         <TextView
-            android:id="@+id/tv_link_licenses"
+            android:id="@+id/tv_battery_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gv_battery_hint"
+            android:textSize="12sp"
+            android:textColor="@color/gv_text_muted"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
+            android:layout_marginTop="18dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:visibility="gone" />
+
+        <!-- Persistent footer. The consent block disappears once accepted, so the
+             licences screen needs a way in that does not. 1.7.0: Help sits beside it. -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/gv_open_licenses"
-            android:textSize="12sp"
-            android:textColor="@color/gv_text_muted"
-            android:padding="12dp"
-            android:layout_marginTop="10dp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/tv_link_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/gv_help"
+                android:textSize="12sp"
+                android:textColor="@color/gv_accent_text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/tv_link_licenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/gv_open_licenses"
+                android:textSize="12sp"
+                android:textColor="@color/gv_text_muted"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,7 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import com.granularvolume.MainActivity
+import com.granularvolume.util.ControlLive
 import com.granularvolume.util.PermissionHelper
 import com.granularvolume.util.Prefs
 import com.granularvolume.util.ProAccess
@@ -46,7 +47,10 @@ class GranularVolumeTileService : TileService() {
             return
         }
 
-        val running = Prefs.wasServiceRunning(applicationContext)
+        // 1.7.0: the live flag, not the stored one. After the system killed the control the
+        // stored flag still said "running": the tile showed On, and the first tap "stopped" a
+        // control that was not there, so turning it on took two taps.
+        val running = ControlLive.running
         if (running) {
             // stopService() bypasses ACTION_STOP, and the service's onDestroy no longer
             // clears the boot-restore flag (a device shutdown runs onDestroy too, and that
@@ -65,7 +69,7 @@ class GranularVolumeTileService : TileService() {
         }
     }
 
-    private fun syncTile(active: Boolean = Prefs.wasServiceRunning(applicationContext)) {
+    private fun syncTile(active: Boolean = ControlLive.running) {
         val tile = qsTile ?: return
         tile.state = if (active) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
         tile.label = getString(com.granularvolume.R.string.app_name)

@@ -36,7 +36,8 @@ import com.android.billingclient.api.QueryPurchasesParams
  *    query that cannot answer (no Play, no account) leaves the cache alone: an outage must
  *    never lock a buyer out.
  *  - Acknowledgement is retried on every query: Google refunds a purchase that is not
- *    acknowledged within three days.
+ *    acknowledged within three days. 1.7.0: a failed acknowledgement is also retried by
+ *    itself a few times, spaced out, instead of waiting for the next service start.
  *
  * The separate Full Range Key app stays a valid unlock forever ([KeyCheck]). Since 1.6.1 it is
  * no longer offered anywhere in the app, not even when Play cannot run a purchase here.
@@ -168,15 +169,19 @@ object BillingManager {
     /**
      * Warms the connection, fetches the price for the sheets and re-checks ownership.
      * Called from the service on start; every step is asynchronous and failure-tolerant.
+     * 1.7.0: [onOwnership] gets Play's answer on the main thread (true = owned, false = not
+     * owned, null = no answer), so a purchase this session did not know about opens the dial
+     * now and not at the next start.
      */
-    fun prefetch(context: Context) = onWorker {
+    fun prefetch(context: Context, onOwnership: ((Boolean?) -> Unit)? = null) = onWorker {
         ensureConnected(context) { r ->
             if (r.responseCode != BillingClient.BillingResponseCode.OK) {
                 Log.i(TAG, "Purchase verify: unavailable (code ${r.responseCode}), cache kept")
+                onOwnership?.let { main.post { it(null) } }
                 return@ensureConnected
             }
-            fetchDetails(context) { }
-            verifyOwnership(context, null)
+            fetchDetails(context) { _, _ -> }
+            verifyOwnership(context, onOwnership)
         }
     }
 
@@ -196,7 +201,7 @@ object BillingManager {
                     main.post { onPrice(priceOrNull(ctx)) }
                     return@ensureConnected
                 }
-                fetchDetails(ctx) { main.post { onPrice(priceOrNull(ctx)) } }
+                fetchDetails(ctx) { _, _ -> main.post { onPrice(priceOrNull(ctx)) } }
             }
         }
     }
@@ -206,7 +211,7 @@ object BillingManager {
      * of that moment. When the query finds nothing, the last good answer is still used, so an
      * outage never takes a working buy button away.
      */
-    private fun fetchDetails(context: Context, cb: (ProductDetails?) -> Unit) {
+    private fun fetchDetails(context: Context, cb: (ProductDetails?, Int) -> Unit) {
         val params = QueryProductDetailsParams.newBuilder().setProductList(
             listOf(
                 QueryProductDetailsParams.Product.newBuilder()
@@ -222,7 +227,9 @@ object BillingManager {
             // propagated, 4 = found but no purchase option eligible for this user or region.
             val unfetched = result.unfetchedProductList.joinToString { "${it.productId}:${it.statusCode}" }
             Log.i(TAG, "Product details: code=${r.responseCode} found=${found != null} price=${found?.oneTimePurchaseOfferDetails?.formattedPrice} unfetched=[$unfetched]")
-            cb(found ?: details)
+            // The response code travels with the answer (1.7.0): "Play answered and has no such
+            // product for this account" and "Play did not answer" need different words.
+            cb(found ?: details, r.responseCode)
         }
     }
 
@@ -293,12 +300,33 @@ object BillingManager {
         return strongest
     }
 
-    private fun acknowledge(context: Context, p: Purchase) {
-        val params = AcknowledgePurchaseParams.newBuilder().setPurchaseToken(p.purchaseToken).build()
-        client(context).acknowledgePurchase(params) { r ->
-            Log.i(TAG, "Acknowledge: code=${r.responseCode}")
+    /**
+     * 1.7.0: retried with a growing pause. Until now a failed acknowledgement waited for the
+     * next service start, and a buyer who paid and then left the control alone for three days
+     * would have been refunded by Google and locked again, without a word from us.
+     */
+    private fun acknowledge(context: Context, p: Purchase, attempt: Int = 0) {
+        val token = p.purchaseToken
+        if (attempt == 0 && !acknowledging.add(token)) return   // already on its way
+        val params = AcknowledgePurchaseParams.newBuilder().setPurchaseToken(token).build()
+        try {
+            client(context).acknowledgePurchase(params) { r ->
+                Log.i(TAG, "Acknowledge: code=${r.responseCode} attempt=${attempt + 1}")
+                if (r.responseCode == BillingClient.BillingResponseCode.OK || attempt >= ACK_RETRY_MS.size) {
+                    acknowledging.remove(token)
+                } else {
+                    worker.postDelayed({ acknowledge(context, p, attempt + 1) }, ACK_RETRY_MS[attempt])
+                }
+            }
+        } catch (t: Throwable) {
+            Log.w(TAG, "Acknowledge threw: ${t.message}")
+            acknowledging.remove(token)
         }
     }
+
+    private val acknowledging: MutableSet<String> =
+        java.util.Collections.synchronizedSet(HashSet<String>())
+    private val ACK_RETRY_MS = longArrayOf(3_000L, 15_000L, 60_000L)
 
     /**
      * Opens Google Play's purchase sheet over [activity]. Exactly one [listener] is delivered,
@@ -312,9 +340,17 @@ object BillingManager {
                 deliver(PurchaseOutcome.Unavailable(r.responseCode, r.debugMessage))
                 return@ensureConnected
             }
-            fetchDetails(ctx) { pd ->
+            fetchDetails(ctx) { pd, code ->
                 if (pd == null) {
-                    deliver(PurchaseOutcome.Unavailable(BillingClient.BillingResponseCode.ITEM_UNAVAILABLE, "product not found"))
+                    // Only when Play ANSWERED and has nothing to sell this account here (not
+                    // offered in its country, or not eligible) is it "not for sale". A query
+                    // that failed (no Store, the Store busy) stays the generic "could not
+                    // complete this right now", with its retry.
+                    val notForSale = code == BillingClient.BillingResponseCode.OK
+                    deliver(PurchaseOutcome.Unavailable(
+                        if (notForSale) BillingClient.BillingResponseCode.ITEM_UNAVAILABLE else code,
+                        if (notForSale) "product not offered to this account" else "product query failed"
+                    ))
                     return@fetchDetails
                 }
                 val flow = BillingFlowParams.newBuilder().setProductDetailsParamsList(

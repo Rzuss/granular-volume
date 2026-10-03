@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+<!-- 1.6.4, updated 1.7.0: the purchase, access, trial and notice strings only. Everything else falls back to
      English on purpose, and the Terms line stays English (it points at the English legal text). -->
 <resources>
-    <string name="gv_paywall_title">Vos sept jours sont terminés</string>
+    <string name="gv_paywall_title">La semaine gratuite est terminée</string>
     <string name="gv_paywall_depth">Chaque cran silencieux jusqu\'à −30 dB, toute la plage normale et le mode muet. Un paiement, une seule fois, ouvre tout.</string>
-    <string name="gv_paywall_body">Achat unique, à vous sur ce compte, sans rien à renouveler. Pas d\'abonnement. L\'application reste sans publicité, sans pistage et sans accès à internet.</string>
+    <string name="gv_paywall_body">Achat unique, à vous sur ce compte Google, sans rien à renouveler. Pas d\'abonnement. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. L\'application reste sans publicité, sans pistage et sans accès à internet.</string>
     <string name="gv_paywall_not_now">Pas maintenant</string>
     <string name="gv_paywall_unlocked">Plage complète débloquée. Profitez du calme.</string>
     <string name="gv_purchase_cta">Débloquer la plage complète</string>
@@ -19,29 +19,44 @@
     <string name="gv_purchase_unavailable_billing_hint">Les achats Google Play ne sont pas disponibles sur cet appareil ou ce compte pour le moment. Vérifiez que vous êtes connecté à Google Play, puis réessayez.</string>
     <string name="gv_purchase_retry">Réessayer</string>
     <string name="gv_info_state_purchased">Débloqué sur ce compte Google</string>
-    <string name="gv_info_restore_iap">Nouveau téléphone ou réinstallation ? Connectez-vous à Google Play avec le même compte et ouvrez l\'application. L\'achat revient tout seul et n\'est jamais facturé deux fois.</string>
+    <string name="gv_info_restore_iap">Nouvel appareil ou réinstallation ? Connectez-vous à Google Play avec le même compte et ouvrez l\'application. L\'achat revient tout seul et n\'est jamais facturé deux fois.</string>
     <string name="gv_info_title">Votre accès</string>
-    <string name="gv_info_state_locked">Votre semaine gratuite est terminée</string>
-    <string name="gv_info_body_trial">Tout est ouvert pendant votre essai. Quand la semaine est finie, garder le curseur demande un paiement, une seule fois, sur ce compte. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
+    <string name="gv_info_state_locked">La semaine gratuite est terminée</string>
+    <string name="gv_info_body_trial">Tout est ouvert pendant votre essai. Vous pouvez le garder pour de bon à tout moment, ou attendre la fin de la semaine. Un paiement, une seule fois, sur ce compte Google. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
     <string name="gv_info_body_trial_last_day">Votre semaine gratuite se termine dans moins de 24 heures, puis le curseur se verrouille. Un paiement, une seule fois, garde tout ouvert, sans rien à renouveler. Chaque cran reste exactement comme vous l\'avez réglé.</string>
     <string name="gv_info_body_unlocked">Merci. Chaque cran, toute la plage et le mode muet restent ouverts sur ce compte, sans rien à renouveler.</string>
-    <string name="gv_info_body_locked">Les sept jours gratuits sont terminés, le curseur est donc verrouillé. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
-    <string name="gv_notif_locked">Votre semaine gratuite est terminée. Touchez pour en savoir plus.</string>
-    <string name="gv_trial_orientation">Tout est ouvert pendant vos sept premiers jours. Ensuite, un paiement, une seule fois, garde tout, et chaque cran reste exactement là où vous l\'avez laissé.</string>
-    <string name="gv_trial_body">Chaque cran est ouvert pendant votre essai. Quand la semaine est finie, garder le curseur coûte un seul paiement, une seule fois, sur ce compte. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
+    <string name="gv_info_body_locked">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc verrouillé. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
+    <string name="gv_notif_locked">La semaine gratuite est terminée. Touchez pour en savoir plus.</string>
+    <string name="gv_trial_body">Chaque cran est ouvert pendant votre essai. Vous pouvez le garder pour de bon à tout moment, ou attendre la fin de la semaine. Un paiement, une seule fois, sur ce compte Google. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
     <string name="gv_trial_dismiss">Plus tard</string>
-    <string name="gv_trial_over_title">Vos sept jours sont terminés</string>
-    <string name="gv_trial_over_body">Le curseur est verrouillé jusqu\'à ce que vous le débloquiez. Un paiement, une seule fois, et chaque cran revient exactement là où vous l\'aviez laissé. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
+    <string name="gv_trial_over_title">La semaine gratuite est terminée</string>
+    <string name="gv_trial_over_body">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc verrouillé. Un paiement, une seule fois, et chaque cran revient exactement là où vous l\'aviez laissé. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
     <string name="gv_unlocked_title">Plage complète débloquée</string>
-    <string name="gv_unlocked_body">Merci. Chaque cran jusqu\'à −30 dB est maintenant ouvert sur cet appareil. Lancez le curseur et choisissez n\'importe quel cran sous la ligne orange.</string>
+    <string name="gv_unlocked_body">Merci. Chaque cran jusqu\'à −30 dB est maintenant ouvert sur ce compte Google. Lancez le curseur et choisissez n\'importe quel cran sous la ligne orange.</string>
     <string name="gv_unlocked_dismiss">Compris</string>
     <string name="gv_notice_channel_name">Semaine gratuite</string>
     <string name="gv_notice_channel_desc">Une note avant la fin de votre semaine gratuite, et une quand elle est terminée. Jamais plus.</string>
     <string name="gv_notice_last_day_title">Votre semaine gratuite se termine dans moins de 24 heures</string>
     <string name="gv_notice_last_day_body">Un paiement, une seule fois, garde chaque cran. Rien ne se renouvelle. Touchez pour en savoir plus.</string>
-    <string name="gv_notice_ended_title">Votre semaine gratuite est terminée</string>
-    <string name="gv_notice_ended_running_body">Le curseur continue de fonctionner jusqu\'à ce qu\'il soit arrêté ou que le téléphone redémarre. Un paiement, une seule fois, garde chaque cran. Touchez pour en savoir plus.</string>
+    <string name="gv_notice_ended_title">La semaine gratuite est terminée</string>
+    <string name="gv_notice_ended_running_body">Votre niveau reste tel quel jusqu\'à ce que le curseur soit arrêté ou que l\'appareil redémarre. Pour le modifier, débloquez le curseur : un paiement, une seule fois. Touchez pour en savoir plus.</string>
     <string name="gv_notice_ended_paused_body">Les crans silencieux sont en pause. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Touchez pour en savoir plus.</string>
+    <!-- 1.7.0 -->
+    <string name="gv_paywall_held">Votre niveau reste exactement tel quel. Le modifier demande le déblocage.</string>
+    <string name="gv_purchase_cta_keep">Le garder pour de bon</string>
+    <string name="gv_purchase_cta_keep_price">Le garder pour de bon, %1$s</string>
+    <string name="gv_purchase_opening">Ouverture de Google Play…</string>
+    <string name="gv_purchase_not_found_hint">Google Play n\'a trouvé aucun achat sur le compte qu\'il utilise en ce moment. Si vous avez acheté avec un autre compte Google, passez à ce compte dans Google Play, puis touchez de nouveau Restaurer.</string>
+    <string name="gv_purchase_not_for_sale_title">Indisponible ici</string>
+    <string name="gv_purchase_not_for_sale">Cet achat n\'est pas disponible pour votre compte Google Play ou votre pays pour le moment. Rien n\'a été facturé.</string>
+    <string name="gv_dialog_close">Fermer</string>
+    <string name="gv_info_body_held">Les sept jours gratuits comptent à partir de l\'installation et sont terminés. Votre niveau reste exactement tel quel jusqu\'à ce que le curseur soit arrêté ou que l\'appareil redémarre. Pour le modifier, débloquez le curseur : un paiement, une seule fois. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
+    <string name="gv_notif_held">%1$s. La semaine gratuite est terminée. Touchez pour en savoir plus.</string>
+    <string name="gv_trial_grace">La semaine gratuite compte à partir de l\'installation et elle est déjà passée. Tout est ouvert pendant 24 heures à partir de maintenant. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</string>
+    <plurals name="gv_trial_orientation_days">
+        <item quantity="one">Tout est ouvert encore un jour. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</item>
+        <item quantity="other">Tout est ouvert encore %d jours. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</item>
+    </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Il reste un jour d\'accès complet</item>
         <item quantity="other">Il reste %d jours d\'accès complet</item>

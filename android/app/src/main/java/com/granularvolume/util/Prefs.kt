@@ -15,6 +15,7 @@ object Prefs {
     private const val KEY_ATTENUATION_DB   = "attenuation_db"
     private const val KEY_OVERLAY_X        = "overlay_x"
     private const val KEY_OVERLAY_Y        = "overlay_y"
+    private const val KEY_OVERLAY_LANDSCAPE = "overlay_saved_landscape"
     private const val KEY_SERVICE_WAS_RUNNING = "service_was_running"
     private const val KEY_COLLAPSED        = "overlay_collapsed"
     private const val KEY_BLADE_Y          = "blade_y"
@@ -38,6 +39,18 @@ object Prefs {
     // 1.6.2: the two one-time notices of the free week (see TrialNotices)
     private const val KEY_LAST_DAY_NOTICE_POSTED = "last_day_notice_posted"
     private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
+    // 1.7.0
+    private const val KEY_SESSION_OPEN           = "session_open"
+    private const val KEY_SESSION_OPEN_BOOT      = "session_open_boot_count"
+    private const val KEY_SESSION_CARRY_UNTIL    = "session_carry_until"
+    private const val KEY_NO_EFFECT_TOLD         = "no_effect_told"
+    private const val KEY_SUPPORT_CARD_DONE      = "support_card_done"
+    private const val KEY_UPDATE_CHECKED_AT      = "update_checked_at"
+    private const val KEY_UPDATE_AVAILABLE_FOR   = "update_available_for_vc"
+    private const val KEY_GRACE_UNTIL            = "grace_until"
+
+    /** How long the receiver's "carry this session" note stays valid (1.7.0). */
+    private const val SESSION_CARRY_WINDOW_MS = 60_000L
 
     /** Current attenuation in dB (0.0 = none, -30.0 = near-silent) */
     const val ATTENUATION_DEFAULT = 0f
@@ -60,12 +73,20 @@ object Prefs {
     fun getOverlayY(context: Context, default: Int): Int =
         prefs(context).getInt(KEY_OVERLAY_Y, default)
 
-    fun setOverlayPosition(context: Context, x: Int, y: Int) {
+    fun setOverlayPosition(context: Context, x: Int, y: Int, landscape: Boolean = false) {
         prefs(context).edit {
             putInt(KEY_OVERLAY_X, x)
             putInt(KEY_OVERLAY_Y, y)
+            putBoolean(KEY_OVERLAY_LANDSCAPE, landscape)
         }
     }
+
+    /**
+     * 1.7.0: which way up the screen was when the dial's position was last chosen. Absent on
+     * every earlier install, which reads as portrait: where nearly every dial was placed.
+     */
+    fun wasOverlaySavedInLandscape(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_OVERLAY_LANDSCAPE, false)
 
     fun setServiceWasRunning(context: Context, running: Boolean) {
         prefs(context).edit { putBoolean(KEY_SERVICE_WAS_RUNNING, running) }
@@ -240,6 +261,104 @@ object Prefs {
 
     fun setEndedNoticePosted(context: Context) {
         prefs(context).edit { putBoolean(KEY_ENDED_NOTICE_POSTED, true) }
+    }
+
+    // ── 1.7.0: the session across our own update ────────────────────────────
+
+    /**
+     * Whether the running session's audio gate is open, written by the service whenever it
+     * decides or changes it. Read by exactly one caller: the update receiver, to bring a
+     * control back as it was. The boot count is stored beside it, so a note left before a
+     * restart of the DEVICE can never be read as a session that is still alive.
+     */
+    fun setSessionOpen(context: Context, open: Boolean) {
+        prefs(context).edit {
+            putBoolean(KEY_SESSION_OPEN, open)
+            putInt(KEY_SESSION_OPEN_BOOT, bootCount(context))
+        }
+    }
+
+    fun wasSessionOpenThisBoot(context: Context): Boolean {
+        val p = prefs(context)
+        return p.getBoolean(KEY_SESSION_OPEN, false) &&
+            p.getInt(KEY_SESSION_OPEN_BOOT, -1) == bootCount(context)
+    }
+
+    /** -2 when the system will not say, which never equals a stored count (-1 or a real one). */
+    private fun bootCount(context: Context): Int = try {
+        android.provider.Settings.Global.getInt(
+            context.contentResolver, android.provider.Settings.Global.BOOT_COUNT
+        )
+    } catch (_: Exception) {
+        -2
+    }
+
+    /**
+     * Left by the update receiver just before it restarts a control whose free week is over
+     * but whose session was open: "open this one session as it was". Valid for a minute and
+     * consumed by the first service start, so it can never open a later, unrelated start.
+     */
+    fun setSessionCarry(context: Context, carry: Boolean) {
+        prefs(context).edit {
+            putLong(KEY_SESSION_CARRY_UNTIL, if (carry) System.currentTimeMillis() + SESSION_CARRY_WINDOW_MS else 0L)
+        }
+    }
+
+    fun consumeSessionCarry(context: Context): Boolean {
+        val until = prefs(context).getLong(KEY_SESSION_CARRY_UNTIL, 0L)
+        if (until == 0L) return false
+        prefs(context).edit { putLong(KEY_SESSION_CARRY_UNTIL, 0L) }
+        val now = System.currentTimeMillis()
+        // Inside the window, and not a clock that jumped far back to stretch it.
+        return now <= until && until - now <= SESSION_CARRY_WINDOW_MS
+    }
+
+    /**
+     * 1.7.0: until when a late first open keeps everything open (see Entitlement.trialStart).
+     * Here, in the settings file, and not in the backed-up entitlement file, whose contents
+     * the Privacy Policy lists exactly. 0 = no allowance.
+     */
+    fun getGraceUntil(context: Context): Long =
+        prefs(context).getLong(KEY_GRACE_UNTIL, 0L)
+
+    fun setGraceUntil(context: Context, untilMs: Long) {
+        prefs(context).edit { putLong(KEY_GRACE_UNTIL, untilMs) }
+    }
+
+    /** 1.7.0: the one-time "this device did not attach the quiet steps" message was shown. */
+    fun wasNoEffectTold(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_NO_EFFECT_TOLD, false)
+
+    fun setNoEffectTold(context: Context) {
+        prefs(context).edit { putBoolean(KEY_NO_EFFECT_TOLD, true) }
+    }
+
+    /**
+     * 1.7.0: the support card in "Your access" (free-for-good users) was answered: dismissed,
+     * or followed to Google Play. Either way it never comes back.
+     */
+    fun wasSupportCardDone(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_SUPPORT_CARD_DONE, false)
+
+    fun setSupportCardDone(context: Context) {
+        prefs(context).edit { putBoolean(KEY_SUPPORT_CARD_DONE, true) }
+    }
+
+    // ── 1.7.0: "a newer version is ready" ───────────────────────────────────
+
+    fun getUpdateCheckedAt(context: Context): Long =
+        prefs(context).getLong(KEY_UPDATE_CHECKED_AT, 0L)
+
+    fun setUpdateCheckedAt(context: Context, atMs: Long) {
+        prefs(context).edit { putLong(KEY_UPDATE_CHECKED_AT, atMs) }
+    }
+
+    /** The versionCode Play offered at the last check, or 0 when it offered none. */
+    fun getUpdateAvailableVersion(context: Context): Int =
+        prefs(context).getInt(KEY_UPDATE_AVAILABLE_FOR, 0)
+
+    fun setUpdateAvailableVersion(context: Context, versionCode: Int) {
+        prefs(context).edit { putInt(KEY_UPDATE_AVAILABLE_FOR, versionCode) }
     }
 
     /** One-time grandfather tip-jar card in MainActivity: shown once, never again. */

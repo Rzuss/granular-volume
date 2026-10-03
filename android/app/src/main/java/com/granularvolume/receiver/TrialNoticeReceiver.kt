@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.granularvolume.util.Prefs
+import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.ControlLive
 import com.granularvolume.util.TrialNotices
 
 /**
@@ -18,10 +19,21 @@ class TrialNoticeReceiver : BroadcastReceiver() {
             TrialNotices.ACTION_LAST_DAY -> TrialNotices.maybePostLastDay(context)
             TrialNotices.ACTION_ENDED -> {
                 // Only someone who keeps the control on is told at the moment the week ends; the
-                // session stays open until the next start, which is what the notice says. A person
-                // who had already switched the control off meets the locked sheet on their next start.
-                if (Prefs.wasServiceRunning(context)) TrialNotices.maybePostEnded(context, stillRunning = true)
-                else Log.i("GranularVolume:Notices", "Week ended with the control off: no notice")
+                // level stays as it is until the control is next stopped, which is what the notice
+                // says. A person who had already switched the control off meets the locked sheet on
+                // their next start.
+                // 1.7.0: read from the live flag. The stored "was running" stays true after the
+                // system kills the control, so the notice could describe a dial that was not there.
+                if (ControlLive.running && ControlLive.sessionOpen) {
+                    TrialNotices.maybePostEnded(context, stillRunning = true)
+                    // The dial and the shade were drawn for an open week; repaint them now.
+                    runCatching {
+                        context.startService(
+                            Intent(context, VolumeControlService::class.java)
+                                .setAction(VolumeControlService.ACTION_ACCESS_CHANGED)
+                        )
+                    }
+                } else Log.i("GranularVolume:Notices", "Week ended with the control off: no notice")
             }
         }
     }

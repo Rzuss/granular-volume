@@ -21,6 +21,11 @@ import androidx.core.content.edit
  *   purchased         1.6.0: the in-app purchase, cached from Google Play's own record and
  *                     re-verified on every service start (see BillingManager)
  *   purchase_pending  1.6.0: Play accepted an order whose payment is not complete yet
+ *
+ * 1.7.0: the 24-hour allowance of a late first open is deliberately NOT kept here. The Privacy
+ * Policy lists the values of this backed-up file one by one, so nothing may be added to it
+ * without changing that text; the allowance lives in the ordinary settings file ([Prefs]),
+ * which never leaves the device.
  */
 object Entitlement {
 
@@ -35,6 +40,9 @@ object Entitlement {
 
     const val TRIAL_DAYS = 7L
     const val TRIAL_MS = TRIAL_DAYS * 24L * 60L * 60L * 1000L
+
+    /** The one-time allowance for a first open that finds the week already over (1.7.0). */
+    const val GRACE_MS = 24L * 60L * 60L * 1000L
 
     /** A backwards clock jump larger than this is treated as tampering, not as drift. */
     private const val CLOCK_SLACK_MS = 24L * 60L * 60L * 1000L
@@ -96,9 +104,20 @@ object Entitlement {
      * the floor, so re-taking the minimum could only ever pull an updated install backwards
      * to its original install date, which is the exact failure above, every time it ran.
      *
-     * The one case this still does not cover, on purpose: a fresh install that sits unopened
-     * for more than seven days meets an expired trial. Distinguishing it from Clear Data is
-     * impossible offline (both leave no prefs), and the Clear Data defence is worth more.
+     * The late first open (1.7.0). A fresh install that sat unopened for more than seven days
+     * used to meet "your seven days are over" on its very first launch, having seen nothing.
+     * It now gets [GRACE_MS] of the complete app, once, and the first screen says so. The
+     * allowance is written only in the branch that stores the anchor for the first time, so it
+     * can only ever be decided at the first evaluation: an install whose anchor is already
+     * stored never reaches it.
+     *
+     * Clear Data wipes the anchor too, so it would look like a first open and buy another day
+     * each time. [graceAllowed] closes that: the allowance is given only while the app has
+     * never been allowed to draw over other apps, a system setting that Clear Data does not
+     * reset and that every install that has ever shown its dial has granted. Measured
+     * 2026-10-03 on API 36 and API 34 images: `pm clear` leaves the SYSTEM_ALERT_WINDOW app-op
+     * exactly as it was, in both directions (allow stays allow, default stays default). A
+     * device that used the app and cleared it gets no second day.
      */
     private fun trialStart(context: Context): Long {
         val stored = prefs(context).getLong(KEY_TRIAL_START, 0L)
@@ -109,9 +128,19 @@ object Entitlement {
         } catch (_: Exception) {
             0L
         }
-        val anchor = if (floor != 0L) floor else System.currentTimeMillis()
+        val now = System.currentTimeMillis()
+        val anchor = if (floor != 0L) floor else now
+        val late = now - anchor >= TRIAL_MS && graceAllowed(context)
         prefs(context).edit { putLong(KEY_TRIAL_START, anchor) }
+        if (late) Prefs.setGraceUntil(context, now + GRACE_MS)
         return anchor
+    }
+
+    /** See [trialStart]: only an install that never had the overlay permission is a first open. */
+    private fun graceAllowed(context: Context): Boolean = try {
+        !android.provider.Settings.canDrawOverlays(context)
+    } catch (_: Exception) {
+        false
     }
 
     /**
@@ -134,8 +163,19 @@ object Entitlement {
     fun isTrialActive(context: Context): Boolean = millisLeftInTrial(context) > 0L
 
     fun millisLeftInTrial(context: Context): Long {
-        val elapsed = trustedNow(context) - trialStart(context)
-        return (TRIAL_MS - elapsed).coerceAtLeast(0L)
+        val start = trialStart(context)   // first: it is what may write the allowance below
+        val now = trustedNow(context)
+        val week = TRIAL_MS - (now - start)
+        val grace = Prefs.getGraceUntil(context) - now
+        // The allowance can never be longer than it was written, whatever the clock says now.
+        return maxOf(week, grace.coerceAtMost(GRACE_MS)).coerceAtLeast(0L)
+    }
+
+    /** True while the only thing keeping the range open is the late-first-open allowance (1.7.0). */
+    fun isInGrace(context: Context): Boolean {
+        val start = trialStart(context)
+        val now = trustedNow(context)
+        return TRIAL_MS - (now - start) <= 0L && Prefs.getGraceUntil(context) - now > 0L
     }
 
     /** Whole days left, rounded up, so the last part-day still reads as "1 day left". */

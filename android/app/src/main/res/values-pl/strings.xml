@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+<!-- 1.6.4, updated 1.7.0: the purchase, access, trial and notice strings only. Everything else falls back to
      English on purpose, and the Terms line stays English (it points at the English legal text). -->
 <resources>
-    <string name="gv_paywall_title">Twoje siedem dni dobiegło końca</string>
+    <string name="gv_paywall_title">Bezpłatny tydzień dobiegł końca</string>
     <string name="gv_paywall_depth">Każdy cichy stopień aż do −30 dB, cały zwykły zakres i wyciszenie. Jedna płatność, jednorazowo, otwiera wszystko.</string>
-    <string name="gv_paywall_body">Jednorazowy zakup, Twój na tym koncie, bez odnawiania. Bez subskrypcji. Aplikacja pozostaje bez reklam, śledzenia i dostępu do internetu.</string>
+    <string name="gv_paywall_body">Jednorazowy zakup, Twój na tym koncie Google, bez odnawiania. Bez subskrypcji. Bez niego regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Aplikacja pozostaje bez reklam, śledzenia i dostępu do internetu.</string>
     <string name="gv_paywall_not_now">Nie teraz</string>
     <string name="gv_paywall_unlocked">Pełny zakres odblokowany. Ciesz się ciszą.</string>
     <string name="gv_purchase_cta">Odblokuj pełny zakres</string>
@@ -19,29 +19,46 @@
     <string name="gv_purchase_unavailable_billing_hint">Zakupy w Google Play nie są teraz dostępne na tym urządzeniu lub koncie. Sprawdź, czy jesteś zalogowany w Google Play, a potem spróbuj ponownie.</string>
     <string name="gv_purchase_retry">Spróbuj ponownie</string>
     <string name="gv_info_state_purchased">Odblokowano na tym koncie Google</string>
-    <string name="gv_info_restore_iap">Nowy telefon lub ponowna instalacja? Zaloguj się w Google Play na to samo konto i otwórz aplikację. Zakup wróci sam i nigdy nie jest naliczany dwa razy.</string>
+    <string name="gv_info_restore_iap">Nowe urządzenie lub ponowna instalacja? Zaloguj się w Google Play na to samo konto i otwórz aplikację. Zakup wróci sam i nigdy nie jest naliczany dwa razy.</string>
     <string name="gv_info_title">Twój dostęp</string>
-    <string name="gv_info_state_locked">Twój bezpłatny tydzień dobiegł końca</string>
-    <string name="gv_info_body_trial">Wszystko jest otwarte, dopóki testujesz. Gdy tydzień minie, zachowanie regulatora wymaga jednej płatności, jednorazowo, na tym koncie. Nic się nie odnawia i nic nie jest pobierane samo.</string>
+    <string name="gv_info_state_locked">Bezpłatny tydzień dobiegł końca</string>
+    <string name="gv_info_body_trial">Wszystko jest otwarte, dopóki testujesz. Możesz zachować to na stałe w dowolnej chwili albo poczekać do końca tygodnia. Jedna płatność, jednorazowo, na tym koncie Google. Nic się nie odnawia i nic nie jest pobierane samo.</string>
     <string name="gv_info_body_trial_last_day">Twój bezpłatny tydzień kończy się za mniej niż 24 godziny, a regulator zostanie zablokowany. Jedna płatność, jednorazowo, zostawia wszystko otwarte, bez odnawiania. Każdy stopień zostaje dokładnie tak, jak go ustawiono.</string>
     <string name="gv_info_body_unlocked">Dziękujemy. Każdy stopień, cały zakres i wyciszenie pozostają otwarte na tym koncie, bez odnawiania.</string>
-    <string name="gv_info_body_locked">Siedem bezpłatnych dni dobiegło końca, dlatego regulator jest zablokowany. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Nic się nie odnawia i nie ma subskrypcji.</string>
-    <string name="gv_notif_locked">Twój bezpłatny tydzień dobiegł końca. Dotknij, aby zobaczyć szczegóły.</string>
-    <string name="gv_trial_orientation">Przez pierwsze siedem dni wszystko jest otwarte. Potem jedna płatność, jednorazowo, zachowuje to, a każdy stopień zostaje dokładnie tam, gdzie go zostawiono.</string>
-    <string name="gv_trial_body">Każdy stopień jest otwarty, dopóki testujesz. Gdy tydzień minie, zachowanie regulatora kosztuje jedną płatność, jednorazowo, na tym koncie. Nic się nie odnawia i nic nie jest pobierane samo.</string>
+    <string name="gv_info_body_locked">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest zablokowany. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
+    <string name="gv_notif_locked">Bezpłatny tydzień dobiegł końca. Dotknij, aby zobaczyć szczegóły.</string>
+    <string name="gv_trial_body">Każdy stopień jest otwarty, dopóki testujesz. Możesz zachować to na stałe w dowolnej chwili albo poczekać do końca tygodnia. Jedna płatność, jednorazowo, na tym koncie Google. Nic się nie odnawia i nic nie jest pobierane samo.</string>
     <string name="gv_trial_dismiss">Później</string>
-    <string name="gv_trial_over_title">Twoje siedem dni dobiegło końca</string>
-    <string name="gv_trial_over_body">Regulator jest zablokowany, dopóki go nie odblokujesz. Jedna płatność, jednorazowo, i każdy stopień wraca dokładnie tam, gdzie go zostawiono. Nic się nie odnawia i nie ma subskrypcji.</string>
+    <string name="gv_trial_over_title">Bezpłatny tydzień dobiegł końca</string>
+    <string name="gv_trial_over_body">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest zablokowany. Jedna płatność, jednorazowo, i każdy stopień wraca dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
     <string name="gv_unlocked_title">Pełny zakres odblokowany</string>
-    <string name="gv_unlocked_body">Dziękujemy. Każdy stopień aż do −30 dB jest teraz otwarty na tym urządzeniu. Uruchom regulator i wybierz dowolny stopień poniżej pomarańczowej linii.</string>
+    <string name="gv_unlocked_body">Dziękujemy. Każdy stopień aż do −30 dB jest teraz otwarty na tym koncie Google. Uruchom regulator i wybierz dowolny stopień poniżej pomarańczowej linii.</string>
     <string name="gv_unlocked_dismiss">Rozumiem</string>
     <string name="gv_notice_channel_name">Bezpłatny tydzień</string>
     <string name="gv_notice_channel_desc">Jedna informacja przed końcem bezpłatnego tygodnia i jedna po jego zakończeniu. Nigdy więcej.</string>
     <string name="gv_notice_last_day_title">Twój bezpłatny tydzień kończy się za mniej niż 24 godziny</string>
     <string name="gv_notice_last_day_body">Jedna płatność, jednorazowo, zachowuje każdy stopień. Nic się nie odnawia. Dotknij, aby zobaczyć szczegóły.</string>
-    <string name="gv_notice_ended_title">Twój bezpłatny tydzień dobiegł końca</string>
-    <string name="gv_notice_ended_running_body">Regulator działa dalej, dopóki nie zostanie zatrzymany lub telefon nie uruchomi się ponownie. Jedna płatność, jednorazowo, zachowuje każdy stopień. Dotknij, aby zobaczyć szczegóły.</string>
+    <string name="gv_notice_ended_title">Bezpłatny tydzień dobiegł końca</string>
+    <string name="gv_notice_ended_running_body">Poziom zostaje taki, jaki jest, dopóki regulator nie zostanie zatrzymany lub urządzenie nie uruchomi się ponownie. Aby go zmienić, odblokuj regulator: jedna płatność, jednorazowo. Dotknij, aby zobaczyć szczegóły.</string>
     <string name="gv_notice_ended_paused_body">Ciche stopnie są wstrzymane. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Dotknij, aby zobaczyć szczegóły.</string>
+    <!-- 1.7.0 -->
+    <string name="gv_paywall_held">Poziom zostaje dokładnie taki, jaki jest. Jego zmiana wymaga odblokowania.</string>
+    <string name="gv_purchase_cta_keep">Zachowaj na stałe</string>
+    <string name="gv_purchase_cta_keep_price">Zachowaj na stałe, %1$s</string>
+    <string name="gv_purchase_opening">Otwieranie Google Play…</string>
+    <string name="gv_purchase_not_found_hint">Google Play nie znalazł zakupu na koncie, którego teraz używa. Jeśli zakup zrobiono na innym koncie Google, przełącz się na to konto w Google Play i ponownie dotknij Przywróć.</string>
+    <string name="gv_purchase_not_for_sale_title">Niedostępne tutaj</string>
+    <string name="gv_purchase_not_for_sale">Ten zakup nie jest teraz dostępny dla Twojego konta Google Play lub kraju. Nic nie zostało pobrane.</string>
+    <string name="gv_dialog_close">Zamknij</string>
+    <string name="gv_info_body_held">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca. Poziom zostaje dokładnie taki, jaki jest, dopóki regulator nie zostanie zatrzymany lub urządzenie nie uruchomi się ponownie. Aby go zmienić, odblokuj regulator: jedna płatność, jednorazowo. Nic się nie odnawia i nie ma subskrypcji.</string>
+    <string name="gv_notif_held">%1$s. Bezpłatny tydzień dobiegł końca. Dotknij, aby zobaczyć szczegóły.</string>
+    <string name="gv_trial_grace">Bezpłatny tydzień liczy się od instalacji i już minął. Od teraz wszystko jest otwarte przez 24 godziny. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</string>
+    <plurals name="gv_trial_orientation_days">
+        <item quantity="one">Wszystko jest otwarte jeszcze przez jeden dzień. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
+        <item quantity="few">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
+        <item quantity="many">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
+        <item quantity="other">Wszystko jest otwarte jeszcze przez %d dnia. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
+    </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Został jeden dzień pełnego dostępu</item>
         <item quantity="few">Zostały %d dni pełnego dostępu</item>

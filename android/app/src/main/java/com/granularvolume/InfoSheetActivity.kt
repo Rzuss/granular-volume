@@ -2,11 +2,13 @@ package com.granularvolume
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -17,13 +19,18 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.AccessState
 import com.granularvolume.util.BillingManager
+import com.granularvolume.util.ControlLive
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.KeyCheck
+import com.granularvolume.util.Links
+import com.granularvolume.util.Prefs
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.TrialNotices
 import com.granularvolume.util.PurchaseFlow
 import com.granularvolume.util.StatusHeader
+import com.granularvolume.util.UpdateCheck
 
 /**
  * "Your access": the sheet behind the dial's info button.
@@ -37,8 +44,13 @@ import com.granularvolume.util.StatusHeader
  * It is also the ONLY place several things can be reached at all:
  *  - during the first four days of a trial nothing is locked, so the paywall never opens
  *    and there was otherwise no way for a convinced user to pay us
- *  - a long-time user who dismissed the one-time card had no route back to supporting us
+ *  - a long-time user had no route to supporting us
  *  - the legal texts were reachable only from a screen that closes itself once set up
+ *
+ * 1.7.0: three doors now lead here, not one: the dial's info button, a tap on the control's
+ * notification, and the launcher icon while the control is running. It reads the single
+ * [AccessState] every other surface reads, so a control that is still holding its level
+ * after the free week is told exactly that, and never "locked".
  *
  * Read-only by design: it reports state and offers Play. It never writes entitlement
  * itself; 1.6.0's purchase route ([PurchaseFlow]) opens Google Play's own sheet over this
@@ -49,10 +61,15 @@ class InfoSheetActivity : AppCompatActivity() {
     private var dialog: BottomSheetDialog? = null
 
     /** The state this sheet last rendered, so a resume can tell a purchase from a mere return. */
-    private var lastState: State? = null
+    private var lastState: AccessState? = null
+
+    /** Everything the last render depended on; a re-check redraws only when this changes. */
+    private var lastSignature: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // The sheet can be the first entry point of the process (a tap on a notice).
+        ProAccess.evaluateGrandfather(this)
         dialog = BottomSheetDialog(this).apply {
             setContentView(buildSheet())
             setOnCancelListener { finish() }
@@ -81,14 +98,14 @@ class InfoSheetActivity : AppCompatActivity() {
     }
 
     /**
-     * 1.6.2: keeps the free-week notices honest with what this sheet just showed. Locked: the
-     * person has now been told in the app, so the one-time ended notice has nothing to add.
+     * 1.6.2: keeps the free-week notices honest with what this sheet just showed. Week over:
+     * the person has now been told in the app, so the one-time ended notice has nothing to add.
      * Unlocked: a notice still waiting in the shade would now be wrong.
      */
     private fun syncNotices() {
         when (lastState) {
-            State.LOCKED -> TrialNotices.markEndedToldInApp(this)
-            State.UNLOCKED -> TrialNotices.cancel(this)
+            AccessState.LOCKED, AccessState.WEEK_ENDED_RUNNING -> TrialNotices.markEndedToldInApp(this)
+            AccessState.UNLOCKED -> TrialNotices.cancel(this)
             else -> Unit
         }
     }
@@ -103,18 +120,55 @@ class InfoSheetActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
+        leavingForUpdate = false
         val before = lastState
         dialog?.setContentView(buildSheet())
         val after = lastState
         syncNotices()
-        if (after == State.UNLOCKED && before != null && before != State.UNLOCKED) {
+        if (after == AccessState.UNLOCKED && before != null && before != AccessState.UNLOCKED) {
             startService(
                 Intent(this, VolumeControlService::class.java)
                     .setAction(VolumeControlService.ACTION_KEY_INSTALLED)
             )
             // No toast: the service announces the purchase itself (see PaywallActivity.onResume).
         }
+        recheck()
     }
+
+    /**
+     * 1.7.0: every time the sheet comes forward it asks Google Play for this account's purchase
+     * record, and the Play Store for a newer version. A buyer on a new device, or one whose
+     * payment was confirmed since the last start, is no longer shown a buy button until they
+     * find Restore; a refund is no longer shown as "unlocked" until the next service start.
+     */
+    private fun recheck() {
+        BillingManager.verifyOwnership(applicationContext) { _ ->
+            if (isFinishing || isDestroyed) return@verifyOwnership
+            if (signature() != lastSignature) {
+                rerender()
+                syncNotices()
+                tellService()
+            }
+        }
+        UpdateCheck.checkNow(applicationContext) { _ ->
+            if (!isFinishing && !isDestroyed && signature() != lastSignature) rerender()
+        }
+    }
+
+    /** The running control repaints its dial and its notification, and opens if a purchase arrived. */
+    private fun tellService() {
+        if (!ControlLive.running) return
+        runCatching {
+            startService(
+                Intent(this, VolumeControlService::class.java)
+                    .setAction(VolumeControlService.ACTION_ACCESS_CHANGED)
+            )
+        }
+    }
+
+    private fun signature(): String =
+        "${AccessState.of(this)}|${ProAccess.hasPaidUnlock(this)}|${Entitlement.isPurchasePending(this)}|" +
+            "${UpdateCheck.isKnownAvailable(this)}|${ControlLive.effect}|${Prefs.wasSupportCardDone(this)}"
 
     /** After an in-app purchase or restore: the service was already told by PurchaseFlow; just re-render. */
     private fun rerender() {
@@ -122,32 +176,34 @@ class InfoSheetActivity : AppCompatActivity() {
         dialog?.setContentView(buildSheet())
     }
 
+    /**
+     * 1.7.0: a sheet that has left the screen is closed, not kept.
+     *
+     * It is a translucent activity in the app's own task. Pressing Home with the sheet open
+     * used to leave it there, stopped and invisible (it is excluded from recents). The next
+     * tap on the launcher icon put the setup screen on top of it, the setup screen started
+     * the control and closed itself, and the old sheet reappeared underneath, unasked. Found
+     * by the 1.7.0 regression run: once the icon became a door to this sheet, stale copies of
+     * it surfaced on plain starts.
+     *
+     * Not closed in three cases: a rotation (the activity is being rebuilt), a purchase in
+     * flight (Google Play may cover the screen for a moment and must find the sheet on the
+     * way back), and the update screen the reader just asked for.
+     */
+    override fun onStop() {
+        super.onStop()
+        if (isChangingConfigurations || PurchaseFlow.isInFlight() || leavingForUpdate) return
+        if (!isFinishing) finish()
+    }
+
+    /** Set when Update is pressed, cleared when the sheet is back in front. */
+    private var leavingForUpdate = false
+
     override fun onDestroy() {
         dialog?.setOnCancelListener(null)
         dialog?.dismiss()
         dialog = null
         super.onDestroy()
-    }
-
-    // -- state ----------------------------------------------------------------
-
-    private enum class State { FDROID, GRANDFATHERED, TRIAL, UNLOCKED, LOCKED }
-
-    /**
-     * Order matters and mirrors [ProAccess.isPro]: a grandfathered device that also owns
-     * the key is reported as grandfathered, because that is the promise we made and the
-     * one they would be upset to see disappear.
-     */
-    private fun state(): State = when {
-        // The F-Droid check comes first and is a FLAVOR check, never a KeyCheck one: the
-        // F-Droid KeyCheck stub answers true by design, and reading it here would tell
-        // every F-Droid user "Unlocked with the Full Range Key. Thank you." -- gratitude
-        // for a purchase that never happened, on the one surface whose audience checks.
-        BuildConfig.FLAVOR != "play" -> State.FDROID
-        Entitlement.isGrandfathered(this) -> State.GRANDFATHERED
-        ProAccess.hasPaidUnlock(this) -> State.UNLOCKED
-        Entitlement.isTrialActive(this) -> State.TRIAL
-        else -> State.LOCKED
     }
 
     // -- sheet ----------------------------------------------------------------
@@ -169,8 +225,15 @@ class InfoSheetActivity : AppCompatActivity() {
     }
 
     private fun buildSheet(): View {
-        val st = state()
+        // The F-Droid check inside AccessState is a FLAVOR check, never a KeyCheck one: the
+        // F-Droid KeyCheck stub answers true by design, and reading it here would tell every
+        // F-Droid user "Unlocked with the Full Range Key. Thank you." -- gratitude for a
+        // purchase that never happened, on the one surface whose audience checks.
+        val st = AccessState.of(this)
         lastState = st
+        lastSignature = signature()
+        val paid = ProAccess.hasPaidUnlock(this)
+        val pending = Entitlement.isPurchasePending(this)
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(ContextCompat.getColor(context, R.color.gv_surface))
@@ -178,65 +241,90 @@ class InfoSheetActivity : AppCompatActivity() {
             setPadding(p, p, p, dp(28))
         }
 
+        // 1.7.0: a newer version exists. One quiet row, first thing on the sheet, and nothing
+        // happens until the reader presses Update.
+        if (UpdateCheck.isSupported && UpdateCheck.isKnownAvailable(this)) root.addView(updateRow())
+
         val headline = when (st) {
-            State.FDROID -> getString(R.string.gv_info_state_fdroid)
-            State.GRANDFATHERED -> getString(R.string.gv_info_state_grandfathered)
+            AccessState.FREE_BUILD -> getString(R.string.gv_info_state_fdroid)
+            AccessState.FREE_FOR_GOOD -> getString(R.string.gv_info_state_grandfathered)
             // A key owner is thanked for the key; an in-app buyer for the account the purchase lives on.
-            State.UNLOCKED -> getString(
+            AccessState.UNLOCKED -> getString(
                 if (KeyCheck.isKeyInstalled(this)) R.string.gv_info_state_unlocked
                 else R.string.gv_info_state_purchased
             )
-            State.LOCKED -> getString(R.string.gv_info_state_locked)
-            State.TRIAL -> {
+            // One headline for both: the week has ended. What follows from it differs, and the
+            // body says which: a dial that is locked, or a level that is still being held.
+            AccessState.LOCKED, AccessState.WEEK_ENDED_RUNNING -> getString(R.string.gv_info_state_locked)
+            AccessState.FREE_WEEK, AccessState.LAST_DAY -> {
                 val d = Entitlement.daysLeftInTrial(this)
                 resources.getQuantityString(R.plurals.gv_trial_days_left, d, d)
             }
         }
         // 1.6.0: a status badge beside the headline (owner's request), so the state reads at a glance.
         val kind = when (st) {
-            State.LOCKED -> StatusHeader.Kind.LOCKED
-            State.TRIAL -> StatusHeader.Kind.TRIAL
-            State.UNLOCKED, State.GRANDFATHERED, State.FDROID -> StatusHeader.Kind.OPEN
+            AccessState.LOCKED, AccessState.WEEK_ENDED_RUNNING -> StatusHeader.Kind.LOCKED
+            AccessState.FREE_WEEK, AccessState.LAST_DAY -> StatusHeader.Kind.TRIAL
+            AccessState.UNLOCKED, AccessState.FREE_FOR_GOOD, AccessState.FREE_BUILD -> StatusHeader.Kind.OPEN
         }
         root.addView(
             StatusHeader.build(this, text(headline, 19f, bold = true, colorRes = R.color.gv_text_primary), kind)
         )
 
+        // 1.7.0: the support card for people who keep everything free. It is the body of their
+        // sheet until they answer it, once; afterwards the sheet goes back to the plain
+        // statement with a quiet link, and it never asks again.
+        val supportCard = st == AccessState.FREE_FOR_GOOD && !paid && !Prefs.wasSupportCardDone(this)
+
         val body = when (st) {
-            State.FDROID -> R.string.gv_info_body_fdroid
-            State.GRANDFATHERED -> R.string.gv_info_body_grandfathered
-            State.UNLOCKED -> R.string.gv_info_body_unlocked
+            AccessState.FREE_BUILD -> R.string.gv_info_body_fdroid
+            AccessState.FREE_FOR_GOOD -> when {
+                paid -> R.string.gv_support_thanks
+                supportCard -> R.string.gv_support_card_body
+                else -> R.string.gv_info_body_grandfathered
+            }
+            AccessState.UNLOCKED -> R.string.gv_info_body_unlocked
             // On the final day the generic trial body would bury the one fact that matters.
-            State.TRIAL ->
-                if (Entitlement.daysLeftInTrial(this) <= 1) R.string.gv_info_body_trial_last_day
-                else R.string.gv_info_body_trial
-            State.LOCKED -> R.string.gv_info_body_locked
+            AccessState.LAST_DAY -> R.string.gv_info_body_trial_last_day
+            AccessState.FREE_WEEK -> R.string.gv_info_body_trial
+            AccessState.LOCKED -> R.string.gv_info_body_locked
+            AccessState.WEEK_ENDED_RUNNING -> R.string.gv_info_body_held
         }
         root.addView(text(getString(body), 13f, colorRes = R.color.gv_text_secondary).topPad(8))
+
+        // 1.7.0: when the device is the reason the quiet steps do nothing, say so, here, for as
+        // long as it is true. Only a running control knows; a stopped one says nothing.
+        if (ControlLive.running) {
+            val effectLine = when (ControlLive.effect) {
+                ControlLive.Effect.NONE -> R.string.gv_effect_none
+                ControlLive.Effect.FALLBACK -> R.string.gv_effect_fallback
+                else -> 0
+            }
+            if (effectLine != 0) {
+                root.addView(text(getString(effectLine), 13f, colorRes = R.color.gv_warning).topPad(10))
+            }
+        }
 
         // A buyer is offered nothing: they already paid, and a live "buy" button would read
         // as a second charge. F-Droid is offered nothing either: that build has no key and
         // pointing its users at Google Play would betray the promise the listing makes.
-        // Everyone else gets one honest route to Play, worded as support for the people
-        // who owe us nothing.
         // 1.6.4: a payment Play is still confirming (cash, bank transfer) is said on the sheet
         // itself; until now only a toast said so, once, and the sheet went on reading "locked".
-        if (st != State.UNLOCKED && st != State.FDROID && Entitlement.isPurchasePending(this)) {
+        // 1.7.0: and while it is pending the buy button is gone, so nobody orders twice.
+        val offers = st != AccessState.UNLOCKED && st != AccessState.FREE_BUILD && !paid
+        if (offers && pending) {
             root.addView(text(getString(R.string.gv_purchase_pending), 13f, colorRes = R.color.gv_text_primary).topPad(10))
         }
         shownPrice = BillingManager.priceOrNull(this)
-        if (st != State.UNLOCKED && st != State.FDROID) {
-            // Grandfathered: wording kept by the owner's order (2026-09-25); the route is the same sheet.
-            val label = if (st == State.GRANDFATHERED) getString(R.string.gv_info_cta_support)
-            else PurchaseFlow.ctaLabel(this)
-            root.addView(Button(this).apply {
-                text = label
-                isAllCaps = false
-                setTextColor(ContextCompat.getColor(context, R.color.gv_on_accent))
-                setBackgroundColor(ContextCompat.getColor(context, R.color.gv_accent))
-                setOnClickListener { PurchaseFlow.start(this@InfoSheetActivity) { rerender() } }
-            }.topPad(18, fill = true))
-            if (st != State.GRANDFATHERED) {
+        when {
+            !offers -> Unit
+            supportCard -> root.addView(supportButtons(pending).topPad(18, fill = true))
+            st == AccessState.FREE_FOR_GOOD ->
+                // Answered before: no card, no button, one quiet line that keeps the route open.
+                if (!pending) root.addView(link(getString(R.string.gv_info_cta_support)) { buy() }
+                    .apply { gravity = Gravity.CENTER }.topPad(8, fill = true))
+            else -> {
+                if (!pending) root.addView(buyButton(PurchaseFlow.ctaLabel(this)).topPad(18, fill = true))
                 root.addView(link(getString(R.string.gv_purchase_restore_link)) {
                     PurchaseFlow.restore(this) { rerender() }
                 }.apply { gravity = Gravity.CENTER }.topPad(2, fill = true))
@@ -248,8 +336,8 @@ class InfoSheetActivity : AppCompatActivity() {
         // be false for them -- their access travels with Android backup instead. F-Droid
         // has neither key nor backup story worth a line here, so it gets none.
         when (st) {
-            State.FDROID -> Unit
-            State.GRANDFATHERED -> root.addView(
+            AccessState.FREE_BUILD -> Unit
+            AccessState.FREE_FOR_GOOD -> root.addView(
                 text(getString(R.string.gv_info_restore_grandfathered), 12f, colorRes = R.color.gv_text_muted)
                     .topPad(14)
             )
@@ -261,46 +349,156 @@ class InfoSheetActivity : AppCompatActivity() {
                         else R.string.gv_info_restore_iap
                     ),
                     12f, colorRes = R.color.gv_text_muted
-                ).topPad(if (st == State.UNLOCKED) 18 else 14)
+                ).topPad(if (st == AccessState.UNLOCKED) 18 else 14)
             )
         }
 
-        root.addView(legalRow().topPad(18, fill = true))
+        root.addView(linksBlock().topPad(14, fill = true))
         return root.inScroller()
     }
 
-    /** Terms, Privacy and the licences screen, side by side and always reachable. */
-    private fun legalRow(): View {
+    // -- purchase -------------------------------------------------------------
+
+    /**
+     * One attempt at a time (1.7.0). The tap redraws the sheet at once, so the button reads
+     * "Opening Google Play..." and is disabled until the attempt has an outcome; whatever the
+     * outcome, the sheet is redrawn and the button is back.
+     */
+    private fun buy() {
+        if (PurchaseFlow.isInFlight()) return
+        PurchaseFlow.start(this, onSettled = { rerender() }, onUnlocked = { rerender() })
+        rerender()
+    }
+
+    private fun buyButton(label: String): Button = Button(this).apply {
+        text = label
+        isAllCaps = false
+        isEnabled = !PurchaseFlow.isInFlight()
+        setTextColor(ContextCompat.getColor(context, R.color.gv_on_accent))
+        setBackgroundColor(ContextCompat.getColor(context, R.color.gv_accent))
+        alpha = if (isEnabled) 1f else 0.6f
+        setOnClickListener { buy() }
+    }
+
+    /**
+     * The support card's two answers, side by side and the same size: "Not now" is as easy to
+     * reach as "Support". No countdown, no repeat, nothing held back. "Not now" retires the
+     * card for good; a purchase replaces the whole block with a thank-you.
+     */
+    private fun supportButtons(pending: Boolean): View {
+        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        val half = { LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f) }
+        row.addView(Button(this).apply {
+            text = getString(R.string.gv_paywall_not_now)
+            isAllCaps = false
+            setTextColor(ContextCompat.getColor(context, R.color.gv_text_primary))
+            background = GradientDrawable().apply {
+                cornerRadius = dp(4).toFloat()
+                setColor(ContextCompat.getColor(context, R.color.gv_surface))
+                setStroke(dp(1), ContextCompat.getColor(context, R.color.gv_surface_stroke))
+            }
+            setOnClickListener {
+                Prefs.setSupportCardDone(this@InfoSheetActivity)
+                rerender()
+            }
+        }, half().apply { marginEnd = dp(6) })
+        if (!pending) {
+            val price = BillingManager.priceOrNull(this)
+            val label = when {
+                PurchaseFlow.isInFlight() -> getString(R.string.gv_purchase_opening)
+                price != null -> getString(R.string.gv_support_cta_price, price)
+                else -> getString(R.string.gv_support_cta)
+            }
+            // Opening Google Play and closing it again without paying is not an answer: the
+            // card stays until the reader says "Not now" or pays.
+            row.addView(buyButton(label), half().apply { marginStart = dp(6) })
+        }
+        return row
+    }
+
+    // -- update ---------------------------------------------------------------
+
+    private fun updateRow(): View {
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
+            gravity = Gravity.CENTER_VERTICAL
+            background = GradientDrawable().apply {
+                cornerRadius = dp(10).toFloat()
+                setColor(ContextCompat.getColor(context, R.color.gv_success_dim))
+            }
+            setPadding(dp(14), dp(4), dp(6), dp(4))
         }
+        row.addView(
+            text(getString(R.string.gv_update_ready), 13f, colorRes = R.color.gv_text_primary),
+            LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        )
+        row.addView(link(getString(R.string.gv_update_cta)) {
+            leavingForUpdate = true
+            UpdateCheck.startUpdate(this)
+        }.apply {
+            setTypeface(typeface, Typeface.BOLD)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+            setTextColor(ContextCompat.getColor(context, R.color.gv_success))
+        })
+        row.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply { bottomMargin = dp(16) }
+        return row
+    }
+
+    // -- links ----------------------------------------------------------------
+
+    /**
+     * Two rows (1.7.0). Four links on one line were 12sp text with 8dp of padding: small
+     * targets, and on a narrow screen or a large font the last one fell off the edge. Help
+     * and the tour sit together above the three legal texts, and every link is a 48dp target
+     * announced as a button.
+     */
+    private fun linksBlock(): View {
+        val block = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val first = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER }
         // 1.5.1: replay the feature tour. The service opens the dial if it is docked, then
         // runs the four callouts; the sheet closes so the dial is unobstructed.
-        row.addView(link(getString(R.string.gv_tour_replay)) {
+        first.addView(link(getString(R.string.gv_tour_replay)) {
             startService(
                 Intent(this, VolumeControlService::class.java)
                     .apply { action = VolumeControlService.ACTION_SHOW_TOUR }
             )
             finish()
         })
-        row.addView(link(getString(R.string.gv_info_terms)) { openUrl(URL_TERMS) })
-        row.addView(link(getString(R.string.gv_info_privacy)) { openUrl(URL_PRIVACY) })
-        row.addView(link(getString(R.string.gv_licenses_title)) {
+        first.addView(link(getString(R.string.gv_help)) { Links.open(this, Links.HELP) })
+        val second = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER }
+        second.addView(link(getString(R.string.gv_info_terms)) { openUrl(URL_TERMS) })
+        second.addView(link(getString(R.string.gv_info_privacy)) { openUrl(URL_PRIVACY) })
+        second.addView(link(getString(R.string.gv_licenses_title)) {
             startActivity(
                 Intent(this, LicensesActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
         })
-        return row
+        block.addView(first)
+        block.addView(second)
+        return block
     }
 
     private fun link(label: String, action: () -> Unit): TextView = TextView(this).apply {
         text = label
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
         setTextColor(ContextCompat.getColor(context, R.color.gv_accent_text))
-        setPadding(dp(10), dp(8), dp(10), dp(8))
+        gravity = Gravity.CENTER
+        minHeight = dp(48)
+        minWidth = dp(48)
+        setPadding(dp(10), 0, dp(10), 0)
         setOnClickListener { action() }
+        // A TextView with a click listener is announced as plain text; a reader is never told
+        // it can be activated. Every link on this sheet carries the Button role.
+        isFocusable = true
+        accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                info.className = Button::class.java.name
+            }
+        }
     }
 
     private fun openUrl(url: String) {

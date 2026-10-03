@@ -58,8 +58,9 @@ object TrialNotices {
     }
 
     /**
-     * Ended notice. [stillRunning] = the week ran out while the dial is on (the session stays
-     * open until the next start, so the text must say so); false = the control is paused (a
+     * Ended notice. [stillRunning] = the week ran out while the dial is on (1.7.0: the level
+     * stays as it is until the control is stopped or the device restarts, and changing it
+     * needs the unlock, so the text says exactly that); false = the control is paused (a
      * restart, or the system bringing the service back on its own).
      */
     fun maybePostEnded(context: Context, stillRunning: Boolean): Boolean {

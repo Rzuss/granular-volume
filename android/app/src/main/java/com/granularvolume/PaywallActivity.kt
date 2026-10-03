@@ -18,6 +18,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.util.AccessState
 import com.granularvolume.util.BillingManager
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.TrialNotices
@@ -32,6 +33,10 @@ import com.granularvolume.util.StatusHeader
  * Nothing is playing behind this sheet. The device is held at 0 dB and stays there;
  * the reader has already spent seven days with the full range and needs no reminder
  * of what it sounds like, only a way to get it back.
+ *
+ * 1.7.0: it also opens over a control that is still holding its level after the free week
+ * (the gesture that would change the level is what gets refused). There the level is NOT at
+ * 0 dB and does not move; the sheet says so in one line, and never calls that dial locked.
  *
  * Lifecycle contract with the service:
  *  - Dismissed without buying (Not now, tap outside, back, swipe): nothing to undo.
@@ -89,7 +94,29 @@ class PaywallActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
-        if (ProAccess.isPro(this)) closeUnlocked()
+        if (ProAccess.isPro(this)) { closeUnlocked(); return }
+        // 1.7.0: ask Google Play too. A buyer whose purchase this device has not heard of yet
+        // (new device, reinstall, a payment confirmed since the last start) is let in here,
+        // instead of being shown the price of something they own.
+        BillingManager.verifyOwnership(applicationContext) { _ ->
+            if (isFinishing || isDestroyed) return@verifyOwnership
+            if (ProAccess.isPro(this)) closeUnlocked()
+            else if (Entitlement.isPurchasePending(this) != shownPending) redraw()
+        }
+    }
+
+    /** Whether the sheet as drawn says "payment pending" (and so has no buy button). */
+    private var shownPending = false
+
+    private fun redraw() {
+        if (!isFinishing && !isDestroyed) dialog?.setContentView(buildSheet())
+    }
+
+    /** One attempt at a time (1.7.0): the button says "Opening Google Play..." until it has an outcome. */
+    private fun buy() {
+        if (PurchaseFlow.isInFlight()) return
+        PurchaseFlow.start(this, onSettled = { redraw() }, onUnlocked = { closeUnlocked() })
+        redraw()
     }
 
     /**
@@ -104,6 +131,17 @@ class PaywallActivity : AppCompatActivity() {
         dialog?.setOnCancelListener(null)
         dialog?.dismiss()
         finish()
+    }
+
+    /**
+     * 1.7.0: closed when it leaves the screen, for the reason given at InfoSheetActivity.onStop:
+     * a sheet left behind by the Home key came back, unasked, under the next tap on the app
+     * icon. Kept through a rotation and while a purchase is in flight.
+     */
+    override fun onStop() {
+        super.onStop()
+        if (isChangingConfigurations || PurchaseFlow.isInFlight()) return
+        if (!isFinishing) finish()
     }
 
     override fun onDestroy() {
@@ -151,21 +189,30 @@ class PaywallActivity : AppCompatActivity() {
                 StatusHeader.Kind.LOCKED
             )
         )
+        // 1.7.0: the control is still on and still holding its level. Say that first: the
+        // reader's first question, with a sheet suddenly over their video, is "did it change?".
+        if (AccessState.of(this) == AccessState.WEEK_ENDED_RUNNING) {
+            root.addView(text(R.string.gv_paywall_held, 14f, bold = true, colorRes = R.color.gv_text_primary).topPad(8))
+        }
         root.addView(text(R.string.gv_paywall_depth, 14f, colorRes = R.color.gv_text_secondary).topPad(6))
         root.addView(text(R.string.gv_paywall_body, 13f, colorRes = R.color.gv_text_secondary).topPad(12))
         root.addView(text(R.string.gv_paywall_expectation_iap, 12f, colorRes = R.color.gv_text_muted).topPad(8))
 
         // 1.6.4: a payment Play is still confirming is said here, not only in a passing toast.
-        if (Entitlement.isPurchasePending(this)) {
+        // 1.7.0: and while it is pending the buy button is gone, so nobody orders twice.
+        shownPending = Entitlement.isPurchasePending(this)
+        if (shownPending) {
             root.addView(text(R.string.gv_purchase_pending, 13f, colorRes = R.color.gv_text_primary).topPad(10))
         }
         shownPrice = BillingManager.priceOrNull(this)
-        root.addView(Button(this).apply {
+        if (!shownPending) root.addView(Button(this).apply {
             text = PurchaseFlow.ctaLabel(context)
             isAllCaps = false
+            isEnabled = !PurchaseFlow.isInFlight()
+            alpha = if (isEnabled) 1f else 0.6f
             setTextColor(ContextCompat.getColor(context, R.color.gv_on_accent))
             setBackgroundColor(ContextCompat.getColor(context, R.color.gv_accent))
-            setOnClickListener { PurchaseFlow.start(this@PaywallActivity) { closeUnlocked() } }
+            setOnClickListener { buy() }
         }.topPad(18, fill = true))
         root.addView(text(R.string.gv_purchase_restore_link, 13f, colorRes = R.color.gv_accent_text).apply {
             gravity = Gravity.CENTER

@@ -11,9 +11,28 @@
     <string name="gv_perm_audio_desc">Lets the app fine-tune output level</string>
     <string name="gv_state_granted">Granted</string>
     <string name="gv_state_needed">Needed</string>
-    <string name="gv_hint_grant_first">Grant overlay access to continue. If a list of apps opens, choose Quiet Dial.</string>
+    <string name="gv_hint_grant_first">Tap the button, find Quiet Dial in the list (under Q), turn the switch on, then press back.</string>
     <string name="gv_hint_ready">You\'re all set, start the control</string>
+    <string name="gv_hint_consent">Agree above to continue.</string>
+    <string name="gv_hint_locked">The free week has ended. Unlock above to use the dial again.</string>
+    <string name="gv_perm_notif_title">Notifications (optional)</string>
+    <string name="gv_perm_notif_desc">Shows the control in the shade</string>
+    <string name="gv_perm_notif_desc_trial">Shows the control in the shade, and one note before your free week ends</string>
+    <string name="gv_state_on">On</string>
+    <string name="gv_state_off">Off</string>
+    <string name="gv_toast_overlay_required">Overlay access is needed to show the dial</string>
+    <string name="gv_toast_grant_first">Please grant overlay access first</string>
+    <string name="gv_toast_started">Volume control started</string>
+    <string name="gv_battery_hint">If the control stops by itself, a battery saver on this device may be closing it.</string>
+    <string name="gv_help">Help</string>
     <string name="gv_app_glyph">App icon</string>
+
+    <!-- The running control's notification (1.7.0: out of the code, and "On" instead of "Pass-through"). -->
+    <string name="gv_channel_name">Volume control</string>
+    <string name="gv_channel_desc">Shows that the volume control is on, with a Stop button.</string>
+    <string name="gv_notif_on">On</string>
+    <string name="gv_notif_stop">Stop</string>
+    <string name="gv_toast_dial_failed">Could not show the dial. Check that Quiet Dial may display over other apps.</string>
 
     <!-- Overlay -->
     <string name="gv_dismiss">Close volume control</string>
@@ -29,6 +48,9 @@
     <string name="gv_label_desc_muted">Media muted</string>
     <string name="gv_label_desc_quiet">Volume %1$s, below the device minimum</string>
     <string name="gv_label_desc_normal">Volume %1$d percent</string>
+    <!-- 1.7.0: what a screen reader is told when the free week is over. -->
+    <string name="gv_label_desc_locked">Dial locked. The free week has ended.</string>
+    <string name="gv_label_desc_held">%1$s. The free week has ended, and changing the level needs the unlock.</string>
     <string name="gv_mute_bar_label">MUTE</string>
     <string name="gv_mute_bar_label_active">MUTED</string>
 
@@ -47,9 +69,11 @@
     <string name="gv_step_label_30db">Volume step: −30 dB (quietest)</string>
 
     <!-- Full-range paywall (1.5.0) -->
-    <string name="gv_paywall_title">Your seven days are over</string>
+    <string name="gv_paywall_title">The free week has ended</string>
     <string name="gv_paywall_depth">Every quiet step down to −30 dB, the whole normal range, and mute. One payment, once, opens all of it.</string>
-    <string name="gv_paywall_body">One-time purchase, yours on this account with nothing to renew. No subscription. The app stays free of ads, tracking and internet access.</string>
+    <string name="gv_paywall_body">One-time purchase, yours on this Google account with nothing to renew. No subscription. Without it, the dial stays locked and your device\'s own volume controls work as before. The app stays free of ads, tracking and internet access.</string>
+    <!-- 1.7.0: shown instead of nothing when the control is still holding its level. -->
+    <string name="gv_paywall_held">Your level stays exactly as it is. Changing it needs the unlock.</string>
     <string name="gv_paywall_not_now">Not now</string>
     <string name="gv_paywall_terms">By upgrading, you agree to our Terms of Use</string>
     <string name="gv_paywall_unlocked">Full range unlocked. Enjoy the quiet.</string>
@@ -57,17 +81,25 @@
     <!-- In-app purchase (1.6.0): Google Play's own sheet opens over the app; nothing leaves it -->
     <string name="gv_purchase_cta">Unlock the full range</string>
     <string name="gv_purchase_cta_price">Unlock the full range, %1$s</string>
+    <!-- 1.7.0: during the free week everything is already open, so the button keeps it. -->
+    <string name="gv_purchase_cta_keep">Keep it for good</string>
+    <string name="gv_purchase_cta_keep_price">Keep it for good, %1$s</string>
+    <string name="gv_purchase_opening">Opening Google Play…</string>
     <string name="gv_paywall_expectation_iap">Google Play opens its own purchase window right here. Confirm it, and every step opens at once.</string>
     <string name="gv_purchase_restore_link">Already bought it? Restore</string>
     <string name="gv_purchase_pending">Payment pending. Every step opens as soon as Google Play confirms it.</string>
     <string name="gv_purchase_restored">Already yours. Restored.</string>
     <string name="gv_purchase_not_found">No purchase found on this Google account.</string>
+    <string name="gv_purchase_not_found_hint">Google Play found no purchase on the account it is using right now. If you bought it with another Google account, switch to that account in Google Play, then tap Restore again.</string>
+    <string name="gv_purchase_not_for_sale_title">Not available here</string>
+    <string name="gv_purchase_not_for_sale">This purchase is not available for your Google Play account or country right now. Nothing was charged.</string>
+    <string name="gv_dialog_close">Close</string>
     <string name="gv_purchase_unavailable">Google Play could not complete this right now</string>
     <string name="gv_purchase_unavailable_hint">Check the connection and that Google Play is up to date, then try again.</string>
     <string name="gv_purchase_unavailable_billing_hint">Google Play purchases are not available on this device or account right now. Check that you are signed in to Google Play, then try again.</string>
     <string name="gv_purchase_retry">Try again</string>
     <string name="gv_info_state_purchased">Unlocked on this Google account</string>
-    <string name="gv_info_restore_iap">New phone or a reinstall? Sign in to Google Play with the same account and open the app. The purchase comes back by itself, and it is never charged twice.</string>
+    <string name="gv_info_restore_iap">New device or a reinstall? Sign in to Google Play with the same account and open the app. The purchase comes back by itself, and it is never charged twice.</string>
 
     <!-- Info sheet, opened from the dial's info button (1.5.0) -->
     <string name="gv_info">About this app and your access. Drag anywhere on the control to move it.</string>
@@ -84,7 +116,8 @@
     <string name="gv_tour_3_title">Mute, the safe way</string>
     <string name="gv_tour_3_body">Silences media only. Alarms still ring.</string>
     <string name="gv_tour_4_title">Tuck it away</string>
-    <string name="gv_tour_4_body">Minimize to a tab at the screen edge, or drag the dial to a wall and push. Tap the tab to bring it back.</string>
+    <string name="gv_tour_4_body">Minimize to a tab at the screen edge, or drag the dial to a wall and push. Tap the tab to bring it back. The X turns the control off, and the i opens Your access.</string>
+    <string name="gv_tour_4_body_price">Minimize to a tab at the screen edge, or drag the dial to a wall and push. Tap the tab to bring it back. The X turns the control off, and the i shows your access and the price.</string>
     <string name="gv_tour_skip">Skip</string>
     <string name="gv_tour_next">Next</string>
     <string name="gv_tour_done">Got it</string>
@@ -93,31 +126,51 @@
     <string name="gv_info_title">Your access</string>
     <string name="gv_info_state_grandfathered">Every step is yours, free, always</string>
     <string name="gv_info_state_unlocked">Unlocked with the Full Range Key</string>
-    <string name="gv_info_state_locked">Your free week is over</string>
-    <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be. If the app matters to you, a one-time payment is a way to support it.</string>
-    <string name="gv_info_body_trial">Everything is open while you try it. When the week is up, keeping the control takes one payment, once, on this account. Nothing renews and nothing is charged on its own.</string>
+    <string name="gv_info_state_locked">The free week has ended</string>
+    <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be.</string>
+    <string name="gv_info_body_trial">Everything is open while you try it. You can keep it for good at any time, or wait until the week is up. One payment, once, on this Google account. Nothing renews and nothing is charged on its own.</string>
     <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial locks. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again.</string>
     <string name="gv_info_body_unlocked">Thank you. Every step, the whole range and mute stay open on this account, with nothing to renew.</string>
-    <string name="gv_info_body_locked">The seven free days have ended, so the dial is locked. One payment, once, brings every step back exactly where you left it. Nothing renews and there is no subscription.</string>
+    <string name="gv_info_body_locked">The seven free days run from the install, and they have ended, so the dial is locked. One payment, once, brings every step back exactly where you left it. Without it, the dial stays locked and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
+    <!-- 1.7.0: the week ended while the control was on. Never worded "locked": the level is still applied. -->
+    <string name="gv_info_body_held">The seven free days run from the install, and they have ended. Your level stays exactly as it is until the control is stopped or the device restarts. To change it, unlock the dial: one payment, once. Nothing renews and there is no subscription.</string>
+    <!-- 1.7.0: one voluntary invitation for people who keep everything free. Shown until answered, once. -->
+    <string name="gv_support_card_body">This app stays free for you, for good. If it helps you, you can support its development with one payment, once. Nothing changes if you do not.</string>
+    <string name="gv_support_cta">Support the app</string>
+    <string name="gv_support_cta_price">Support the app, %1$s</string>
+    <string name="gv_support_thanks">Thank you for supporting the app. Everything stays free for you, exactly as before.</string>
+    <!-- 1.7.0: device honesty, shown in the access sheet for as long as it is true. -->
+    <string name="gv_effect_none">This device did not let the app attach its quiet steps. The normal range above the line still works.</string>
+    <string name="gv_effect_fallback">This device is using a fallback audio effect. If the sound does not change when you tap a bar below the line, this device does not support the quiet steps.</string>
+    <!-- 1.7.0: a newer version exists in the store. A row here and a dot on the dial\'s info button. -->
+    <string name="gv_update_ready">A newer version is ready.</string>
+    <string name="gv_update_cta">Update</string>
     <string name="gv_info_cta_support">Support this app on Google Play</string>
-    <string name="gv_info_restore">New phone or a reinstall? Install the key again from Google Play with the same account. It is never charged twice, and that is the whole restore.</string>
+    <string name="gv_info_restore">New device or a reinstall? Install the key again from Google Play with the same account. It is never charged twice, and that is the whole restore.</string>
     <string name="gv_info_terms">Terms of Use</string>
     <string name="gv_info_privacy">Privacy Policy</string>
     <string name="gv_info_state_fdroid">Free and complete, always</string>
     <string name="gv_info_body_fdroid">This F-Droid build includes everything: the full dial, every quiet step and mute, at no charge, permanently. There is nothing to buy and nothing to unlock.</string>
-    <string name="gv_info_restore_grandfathered">New phone? Your free access travels with your own Google account backup, so it normally follows you there by itself.</string>
-    <string name="gv_notif_locked">Your free week is over. Tap for details.</string>
+    <string name="gv_info_restore_grandfathered">New device? Your free access travels with your own Google account backup, so it normally follows you there by itself.</string>
+    <string name="gv_notif_locked">The free week has ended. Tap for details.</string>
+    <string name="gv_notif_held">%1$s. The free week has ended. Tap for details.</string>
 
     <!-- Trial (1.5.0) -->
     <plurals name="gv_trial_days_left">
         <item quantity="one">One day left of full access</item>
         <item quantity="other">%d days left of full access</item>
     </plurals>
-    <string name="gv_trial_orientation">Everything is open for your first seven days. After that, one payment, once, keeps it, and every step stays exactly where you left it.</string>
-    <string name="gv_trial_body">Every step is open while you try it. When the week is up, keeping the control costs a single payment, once, on this account. Nothing renews and nothing is charged on its own.</string>
+    <!-- 1.7.0: the whole deal in one sentence on the first screen. No price here, by the owner\'s decision. -->
+    <plurals name="gv_trial_orientation_days">
+        <item quantity="one">Everything is open for one more day. After that the dial locks until one payment, once, unlocks it for good. No subscription.</item>
+        <item quantity="other">Everything is open for %d more days. After that the dial locks until one payment, once, unlocks it for good. No subscription.</item>
+    </plurals>
+    <!-- 1.7.0: a first open that finds the week already over gets 24 hours, once, and is told so. -->
+    <string name="gv_trial_grace">The free week counts from the install, and it has already passed. Everything is open for 24 hours from now. After that the dial locks until one payment, once, unlocks it for good. No subscription.</string>
+    <string name="gv_trial_body">Every step is open while you try it. You can keep it for good at any time, or wait until the week is up. One payment, once, on this Google account. Nothing renews and nothing is charged on its own.</string>
     <string name="gv_trial_dismiss">Later</string>
-    <string name="gv_trial_over_title">Your seven days are over</string>
-    <string name="gv_trial_over_body">The dial is locked until you unlock it. One payment, once, and every step comes back exactly where you left it. Nothing renews and there is no subscription.</string>
+    <string name="gv_trial_over_title">The free week has ended</string>
+    <string name="gv_trial_over_body">The seven free days run from the install, and they have ended, so the dial is locked. One payment, once, and every step comes back exactly where you left it. Without it, the dial stays locked and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
 
     <!-- Grandfather tip-jar card (1.5.0) -->
     <string name="gv_tipjar_title">You have the full range, free, always</string>
@@ -139,7 +192,7 @@
 
     <!-- Purchase confirmation, shown once, on whichever path the buyer comes back by -->
     <string name="gv_unlocked_title">Full range unlocked</string>
-    <string name="gv_unlocked_body">Thank you. Every step down to −30 dB is open on this device now. Start the control and choose any step below the orange line.</string>
+    <string name="gv_unlocked_body">Thank you. Every step down to −30 dB is open on this Google account now. Start the control and choose any step below the orange line.</string>
     <string name="gv_unlocked_dismiss">Got it</string>
 
     <!-- Shown when a quiet step is tapped during a CELLULAR call, where Android routes the
@@ -150,8 +203,8 @@
     <string name="gv_notice_channel_desc">One note before your free week ends, and one when it has ended. Never more.</string>
     <string name="gv_notice_last_day_title">Your free week ends within 24 hours</string>
     <string name="gv_notice_last_day_body">One payment, once, keeps every step. Nothing renews. Tap for details.</string>
-    <string name="gv_notice_ended_title">Your free week is over</string>
-    <string name="gv_notice_ended_running_body">The dial keeps working until it is stopped or the phone restarts. One payment, once, keeps every step. Tap for details.</string>
+    <string name="gv_notice_ended_title">The free week has ended</string>
+    <string name="gv_notice_ended_running_body">Your level stays as it is until the control is stopped or the device restarts. To change it, unlock the dial: one payment, once. Tap for details.</string>
     <string name="gv_notice_ended_paused_body">The quiet steps are paused. One payment, once, brings every step back exactly where you left it. Tap for details.</string>
-    <string name="gv_quiet_unavailable_in_call">Call audio cannot go below the phone minimum</string>
+    <string name="gv_quiet_unavailable_in_call">Call audio cannot go below the device minimum</string>
 </resources>

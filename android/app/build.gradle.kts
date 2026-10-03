@@ -31,8 +31,8 @@ android {
         applicationId = "granularvolume.com"
         minSdk = 28
         targetSdk = 36          // Play requires API 36 (Android 16) for updates from Aug 31, 2026
-        versionCode = 43
-        versionName = "1.6.4"
+        versionCode = 44
+        versionName = "1.7.0"
         // Grandfather cutoff, 2026-10-01T00:00:00Z (1.5.1, mock-trial order item 40: the
         // 1.5.0 rollout reached 100% on 2026-09-23 10:28 UTC, plus seven days, rounded up
         // to the next UTC midnight). An UPDATE whose first install predates this is
@@ -143,4 +143,9 @@ dependencies {
     "playImplementation"("com.android.billingclient:billing:9.1.0") {
         exclude(group = "com.google.android.datatransport")
     }
+    // 1.7.0: "a newer version is ready". Play-only, like the two libraries above: it asks the
+    // Play Store app on the device over a local service connection, and Play does the download.
+    // It adds no manifest permission (proven on the merged manifest and on the built APK of
+    // every release, see the release checklist); the play manifest removes INTERNET regardless.
+    "playImplementation"("com.google.android.play:app-update:2.1.0")
 }

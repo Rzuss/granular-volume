@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 1.6.4: the purchase, access, trial and notice strings only. Everything else falls back to
+<!-- 1.6.4, updated 1.7.0: the purchase, access, trial and notice strings only. Everything else falls back to
      English on purpose, and the Terms line stays English (it points at the English legal text). -->
 <resources>
-    <string name="gv_paywall_title">Seus sete dias terminaram</string>
+    <string name="gv_paywall_title">A semana grátis terminou</string>
     <string name="gv_paywall_depth">Todos os passos silenciosos até −30 dB, toda a faixa normal e o mudo. Um pagamento, uma única vez, abre tudo.</string>
-    <string name="gv_paywall_body">Compra única, sua nesta conta, sem nada para renovar. Sem assinatura. O app continua sem anúncios, sem rastreamento e sem acesso à internet.</string>
+    <string name="gv_paywall_body">Compra única, sua nesta conta do Google, sem nada para renovar. Sem assinatura. Sem ela, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. O app continua sem anúncios, sem rastreamento e sem acesso à internet.</string>
     <string name="gv_paywall_not_now">Agora não</string>
     <string name="gv_paywall_unlocked">Faixa completa desbloqueada. Aproveite o silêncio.</string>
     <string name="gv_purchase_cta">Desbloquear a faixa completa</string>
@@ -19,29 +19,44 @@
     <string name="gv_purchase_unavailable_billing_hint">As compras do Google Play não estão disponíveis neste aparelho ou nesta conta no momento. Verifique se você entrou no Google Play e tente de novo.</string>
     <string name="gv_purchase_retry">Tentar de novo</string>
     <string name="gv_info_state_purchased">Desbloqueado nesta conta do Google</string>
-    <string name="gv_info_restore_iap">Celular novo ou reinstalação? Entre no Google Play com a mesma conta e abra o app. A compra volta sozinha e nunca é cobrada duas vezes.</string>
+    <string name="gv_info_restore_iap">Aparelho novo ou reinstalação? Entre no Google Play com a mesma conta e abra o app. A compra volta sozinha e nunca é cobrada duas vezes.</string>
     <string name="gv_info_title">Seu acesso</string>
-    <string name="gv_info_state_locked">Sua semana grátis terminou</string>
-    <string name="gv_info_body_trial">Tudo fica aberto enquanto você testa. Quando a semana acabar, manter o controle exige um pagamento, uma única vez, nesta conta. Nada se renova e nada é cobrado sozinho.</string>
+    <string name="gv_info_state_locked">A semana grátis terminou</string>
+    <string name="gv_info_body_trial">Tudo fica aberto enquanto você testa. Você pode ficar com ele de vez a qualquer momento ou esperar a semana acabar. Um pagamento, uma única vez, nesta conta do Google. Nada se renova e nada é cobrado sozinho.</string>
     <string name="gv_info_body_trial_last_day">Sua semana grátis termina em menos de 24 horas, e o controle é bloqueado. Um pagamento, uma única vez, mantém tudo aberto, sem nada para renovar. Cada passo fica exatamente como você deixou.</string>
     <string name="gv_info_body_unlocked">Obrigado. Todos os passos, a faixa completa e o mudo ficam abertos nesta conta, sem nada para renovar.</string>
-    <string name="gv_info_body_locked">Os sete dias grátis terminaram, por isso o controle está bloqueado. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Nada se renova e não há assinatura.</string>
-    <string name="gv_notif_locked">Sua semana grátis terminou. Toque para ver os detalhes.</string>
-    <string name="gv_trial_orientation">Tudo fica aberto nos seus primeiros sete dias. Depois, um pagamento, uma única vez, mantém tudo, e cada passo fica exatamente onde você deixou.</string>
-    <string name="gv_trial_body">Todos os passos ficam abertos enquanto você testa. Quando a semana acabar, manter o controle custa um único pagamento, uma única vez, nesta conta. Nada se renova e nada é cobrado sozinho.</string>
+    <string name="gv_info_body_locked">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está bloqueado. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Sem ele, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
+    <string name="gv_notif_locked">A semana grátis terminou. Toque para ver os detalhes.</string>
+    <string name="gv_trial_body">Todos os passos ficam abertos enquanto você testa. Você pode ficar com ele de vez a qualquer momento ou esperar a semana acabar. Um pagamento, uma única vez, nesta conta do Google. Nada se renova e nada é cobrado sozinho.</string>
     <string name="gv_trial_dismiss">Depois</string>
-    <string name="gv_trial_over_title">Seus sete dias terminaram</string>
-    <string name="gv_trial_over_body">O controle fica bloqueado até você desbloquear. Um pagamento, uma única vez, e cada passo volta exatamente para onde você deixou. Nada se renova e não há assinatura.</string>
+    <string name="gv_trial_over_title">A semana grátis terminou</string>
+    <string name="gv_trial_over_body">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está bloqueado. Um pagamento, uma única vez, e cada passo volta exatamente para onde você deixou. Sem ele, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
     <string name="gv_unlocked_title">Faixa completa desbloqueada</string>
-    <string name="gv_unlocked_body">Obrigado. Todos os passos até −30 dB estão abertos agora neste aparelho. Inicie o controle e escolha qualquer passo abaixo da linha laranja.</string>
+    <string name="gv_unlocked_body">Obrigado. Todos os passos até −30 dB estão abertos agora nesta conta do Google. Inicie o controle e escolha qualquer passo abaixo da linha laranja.</string>
     <string name="gv_unlocked_dismiss">Entendi</string>
     <string name="gv_notice_channel_name">Semana grátis</string>
     <string name="gv_notice_channel_desc">Um aviso antes de a sua semana grátis terminar, e outro quando ela terminar. Nunca mais que isso.</string>
     <string name="gv_notice_last_day_title">Sua semana grátis termina em menos de 24 horas</string>
     <string name="gv_notice_last_day_body">Um pagamento, uma única vez, mantém todos os passos. Nada se renova. Toque para ver os detalhes.</string>
-    <string name="gv_notice_ended_title">Sua semana grátis terminou</string>
-    <string name="gv_notice_ended_running_body">O controle continua funcionando até ser parado ou até o celular reiniciar. Um pagamento, uma única vez, mantém todos os passos. Toque para ver os detalhes.</string>
+    <string name="gv_notice_ended_title">A semana grátis terminou</string>
+    <string name="gv_notice_ended_running_body">Seu nível fica como está até o controle ser parado ou o aparelho reiniciar. Para mudar, desbloqueie o controle: um pagamento, uma única vez. Toque para ver os detalhes.</string>
     <string name="gv_notice_ended_paused_body">Os passos silenciosos estão pausados. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Toque para ver os detalhes.</string>
+    <!-- 1.7.0 -->
+    <string name="gv_paywall_held">Seu nível fica exatamente como está. Para mudar, é preciso desbloquear.</string>
+    <string name="gv_purchase_cta_keep">Ficar com ele de vez</string>
+    <string name="gv_purchase_cta_keep_price">Ficar com ele de vez, %1$s</string>
+    <string name="gv_purchase_opening">Abrindo o Google Play…</string>
+    <string name="gv_purchase_not_found_hint">O Google Play não encontrou nenhuma compra na conta que está usando agora. Se você comprou com outra conta do Google, troque para essa conta no Google Play e toque em Restaurar de novo.</string>
+    <string name="gv_purchase_not_for_sale_title">Indisponível aqui</string>
+    <string name="gv_purchase_not_for_sale">Esta compra não está disponível para a sua conta do Google Play ou o seu país no momento. Nada foi cobrado.</string>
+    <string name="gv_dialog_close">Fechar</string>
+    <string name="gv_info_body_held">Os sete dias grátis contam a partir da instalação e terminaram. Seu nível fica exatamente como está até o controle ser parado ou o aparelho reiniciar. Para mudar, desbloqueie o controle: um pagamento, uma única vez. Nada se renova e não há assinatura.</string>
+    <string name="gv_notif_held">%1$s. A semana grátis terminou. Toque para ver os detalhes.</string>
+    <string name="gv_trial_grace">A semana grátis conta a partir da instalação e já passou. Tudo fica aberto por 24 horas a partir de agora. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</string>
+    <plurals name="gv_trial_orientation_days">
+        <item quantity="one">Tudo fica aberto por mais um dia. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</item>
+        <item quantity="other">Tudo fica aberto por mais %d dias. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</item>
+    </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Resta um dia de acesso completo</item>
         <item quantity="other">Restam %d dias de acesso completo</item>

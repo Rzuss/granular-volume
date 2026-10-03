@@ -2,6 +2,56 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.0 (versionCode 44)
+
+One idea behind the release: every surface tells the same true story about where the user stands.
+
+### Changed
+- The app icon and the control's notification are doors now. While the control is running, tapping either
+  one opens "Your access" (status, price, restore, help) instead of starting a control that is already on.
+- Google Play version, after the free week: a control that was on when the week ended keeps its level
+  exactly as it is until it is stopped or the device restarts. The first tap on the dial that would change
+  the level asks for the unlock. The device's own volume buttons keep working, and volume up still makes
+  the sound louder. Nothing gets louder or quieter by itself.
+- Google Play version: our own update no longer ends that held level. After an update the control comes
+  back as it was. A restart of the device and a control you stopped behave as before.
+- Google Play version: the first screen states the whole arrangement in one sentence, with the real number
+  of days left, and the button in "Your access" reads "Keep it for good" during the free week.
+- Google Play version: a first open that finds the free week already over gets 24 hours of everything,
+  once, and the first screen says so.
+- The setup screen shows one button at a time (the step you are on), explains the optional notification
+  permission before Android asks for it, and its hints follow what is actually missing.
+- The notification says "On" instead of "Pass-through".
+
+### Added
+- Google Play version: when a newer version is in the store, "Your access" shows a row with an Update
+  button and the dial's info button carries a small dot. The app asks the Play Store app on the device;
+  it still has no internet permission.
+- A Help link on the setup screen and in "Your access".
+- When a device does not let the app attach its quiet steps, the app says so once and keeps saying it in
+  "Your access". Until now this was only written to the log.
+- A line about battery managers on the setup screen, shown only while the system may put the app to sleep.
+
+### Fixed
+- Rotating the screen: the dial and the edge tab are placed again for the new screen shape. On a phone held
+  sideways the dial is drawn slightly smaller so its lowest part (the level readout and mute) is on screen.
+- The Quick Settings tile, the app icon and the free-week note read whether the control is really running.
+  After the system closed the control, the tile could show On and need two taps.
+- The feature tour waits until the "Add tile" question has been answered. It used to start underneath it.
+- Google Play version: a purchase the device had not heard of yet (new device, reinstall, a payment that
+  was confirmed later) is found whenever a purchase screen or the setup screen opens, not only at the next
+  start. A second tap on the buy button while Google Play is opening is ignored. Restore that finds nothing
+  explains the account switch. A product that is not on sale for the account says so, and that nothing was
+  charged. While a payment is pending the buy button is hidden.
+- The control no longer keeps running without its dial when the "display over other apps" permission was
+  switched off: it stops and opens the setup screen.
+- Screen readers: the links in "Your access" are announced as buttons and are full-size targets, and the
+  dial says when it is locked.
+
+### Unchanged on purpose
+- Trial length, the long-time-user grant, the price, the audio engine, the tour's order and text (its last
+  card now names the X and the i), and the F-Droid build, which stays free and complete.
+
 ## 1.6.4 (versionCode 43)
 
 ### Fixed
