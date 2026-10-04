@@ -106,7 +106,7 @@
   <ul class="plain">
     <li><strong>Regular phone calls.</strong> Android carries cellular voice on a separate path that runs no audio effects. During a regular call the quiet steps are dimmed. Calls made through apps such as WhatsApp are lowered on phones that play them through the media output, which varies by phone.</li>
     <li><strong>Keyboard clicks and touch sounds.</strong> Android plays these on a low-latency path that skips audio effects.</li>
-    <li><strong>Some Bluetooth combinations.</strong> On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth.</li>
+    <li><strong>Some Bluetooth combinations.</strong> On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, although they work on the speaker. The phone sends that headset's audio through a separate output on which the system does not apply the effect, and it does not tell the app, so the app cannot warn you. One thing to try: in that headset's Bluetooth settings on the phone, switch off the high-quality codec option (shown as "HD audio: aptX" on some phones), reconnect, and start the dial again. This brought the quiet steps back on the one setup where it was reported and tested, a Pixel 7 running LineageOS with aptX headphones.</li>
     <li><strong>Some devices.</strong> A device maker can decline to let apps attach the audio effect the quiet steps use. When that happens the app says so in "Your access", and the normal range above the line still works.</li>
   </ul>
   <p>Try this first: play something, set the device's own volume to its lowest step that still makes sound, then tap a bar below the orange line.</p>

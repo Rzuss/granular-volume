@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-10-02",
+  "dateModified": "2026-10-04",
   "mainEntityOfPage": "https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html"
 }
 </script>
@@ -190,7 +190,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Bluetooth headphones or earbuds too loud at the lowest volume?</h1>
     <p class="dek">Why one Bluetooth step is such a big jump, why disabling Absolute Volume only half-helps, and the method that adds real steps below the lowest, whatever brand your earbuds are. No root.</p>
-    <p class="meta">Updated October 2, 2026 · 8 min read</p>
+    <p class="meta">Updated October 4, 2026 · 8 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -254,7 +254,7 @@
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio engine <span class="verdict v-works">Actually works</span></h3>
       <p>Instead of remapping the Bluetooth steps, this method applies a negative-gain audio effect to Android's media output using the DynamicsProcessing framework. Because it lowers the audio itself before it reaches the earbuds, it produces levels quieter than the lowest step, and it does not depend on the brand of the earbuds. Wired headphones and the device speaker are lowered in the same way.</p>
-      <p>One limit to know. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, because the audio takes a path that Android's audio effects do not reach. We cannot list those combinations, so use the seven free days to check with your own pair.</p>
+      <p>One limit to know. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, because the audio takes a path that Android's audio effects do not reach. We cannot list those combinations, so use the seven free days to check with your own pair. If the quiet steps work on the speaker but not on your Bluetooth headset, open that headset's Bluetooth settings on the phone, switch off the high-quality codec option (shown as "HD audio: aptX" on some phones), reconnect, and start the dial again. That brought them back on the one setup where this was reported and tested, a Pixel 7 running LineageOS with aptX headphones.</p>
       <p>This is what <a href="../">Granular Volume</a> does: a floating dial with your whole volume range on one slider: normal volume above the device minimum, and six quiet steps below it, 5&nbsp;dB each, down to 30&nbsp;dB under the hardware minimum, all without leaving whatever you are listening to. Pair it with Absolute Volume disabled for the smoothest possible low-end control.</p>
     </div>
 
