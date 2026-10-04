@@ -17,7 +17,7 @@ EIN SCHWEBENDER REGLER, IMMER GRIFFBEREIT
 Der Regler liegt über allem, was Sie gerade tun. App öffnen, Audio starten, und er ist da. Frei platzierbar oder zwischendurch am Rand geparkt. Ein Tipp schließt ihn. Die letzte Position wird gemerkt.
 
 SCHNELLEINSTELLUNGEN-KACHEL
-Nach unten wischen, einmal tippen. Fügen Sie Granular Volume Ihren Schnelleinstellungen hinzu und schalten Sie das Overlay ein oder aus, ohne die App zu öffnen.
+Nach unten wischen, einmal tippen. Nach der ersten Einrichtung schalten Sie den Regler über die Kachel „Quiet Dial“ in den Schnelleinstellungen ein und aus.
 
 FÜR LEISE MOMENTE GEMACHT
 - App-Anrufe wie WhatsApp, sofern das Handy sie über den Medienausgang abspielt; das ist je nach Gerät verschieden. Normale Telefonate laufen über einen eigenen Weg, den keine App absenken kann
