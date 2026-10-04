@@ -434,7 +434,7 @@ class VolumeControlService : Service() {
                 if (!ControlLive.running) return@prefetch
                 if (owned == true) onKeyArrived("play-record") else refreshAccessSurfaces()
             }
-            askForUpdateIfDue()
+            askForUpdateIfDue(atStart = true)
         }, BILLING_PREFETCH_DELAY_MS)
         overlayManager.setUpdateDot(UpdateCheck.isKnownAvailable(applicationContext))
 
@@ -560,8 +560,9 @@ class VolumeControlService : Service() {
     }
 
     /**
-     * 1.7.0: at most once a day, ask the Play Store app on this device whether a newer version
-     * exists. The answer marks the dial's info button, nothing more.
+     * 1.7.0: ask the Play Store app on this device whether a newer version exists: at every
+     * start of the control, and at most once a day while it keeps running. The answer marks
+     * the dial's info button, nothing more.
      *
      * Called at start, and again whenever the volume changes: a control that is restored at
      * every boot can run for weeks without a start, and one question at onCreate would leave
@@ -570,14 +571,19 @@ class VolumeControlService : Service() {
      * the hour gate keeps a Store that does not answer from being asked at every key press.
      */
     private var updateAskedAtElapsed = 0L
-    private fun askForUpdateIfDue() {
+    private fun askForUpdateIfDue(atStart: Boolean = false) {
         if (noOverlayPermission || !ControlLive.running) return
         val now = SystemClock.elapsedRealtime()
-        if (updateAskedAtElapsed != 0L && now - updateAskedAtElapsed < UPDATE_ASK_GAP_MS) return
+        if (!atStart && updateAskedAtElapsed != 0L && now - updateAskedAtElapsed < UPDATE_ASK_GAP_MS) return
         updateAskedAtElapsed = now
-        UpdateCheck.checkDaily(applicationContext) { available ->
+        val onAnswer: (Boolean) -> Unit = { available ->
             if (ControlLive.running) overlayManager.setUpdateDot(available)
         }
+        // Every start asks, whatever the day stamp says. Owner's phone, 2026-10-04: he turned
+        // the control off and on to see the mark, and it stayed dark because the access sheet
+        // had asked minutes earlier. A start is a person, a boot or an update, never a loop.
+        if (atStart) UpdateCheck.checkNow(applicationContext, onAnswer)
+        else UpdateCheck.checkDaily(applicationContext, onAnswer)
     }
 
     /**
