@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-14",
-  "dateModified": "2026-09-28",
+  "dateModified": "2026-10-04",
   "mainEntityOfPage": "https://granularvolume.com/use-cases/sensitive-iem-headphones.html"
 }
 </script>
@@ -39,7 +39,7 @@
     {
       "@type": "Question",
       "name": "Does it work with Bluetooth IEMs and TWS earbuds?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the reduction applies before the signal is sent to the Bluetooth stack."}
+      "acceptedAnswer": {"@type": "Answer", "text": "In most cases, yes: the reduction is applied to Android's output before the signal is sent to the earbuds. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, so check your own pair during the seven free days."}
     },
     {
       "@type": "Question",
@@ -160,7 +160,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>IEMs too loud at the lowest volume? A quieter floor for sensitive ears</h1>
     <p class="dek">A phone's minimum volume step is set for average headphones. In-ear monitors and bone conduction headphones aren't average, and that gap is exactly why the lowest setting still feels too loud.</p>
-    <p class="meta">Updated September 28, 2026 · 4 min read</p>
+    <p class="meta">Updated October 4, 2026 · 4 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -171,12 +171,12 @@
 
     <div class="quickfix">
       <div class="kicker">The actual fix</div>
-      <p><strong>Granular Volume</strong> adds real volume steps below the hardware minimum, applied cleanly to the output before it reaches your headphones, wired or Bluetooth, IEMs or bone conduction, it doesn't matter which.</p>
+      <p><strong>Granular Volume</strong> adds real volume steps below the hardware minimum, applied to Android's own output before it reaches your headphones. It works on the phone speaker and over Bluetooth on the phones we have tested; a 3.5 mm jack should behave the same, and USB-C adapters and DACs are not verified, so check yours during the seven free days.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dsensitive-iem-headphones" data-goatcounter-click="play-cta-sensitive-iem-headphones">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2>Why "more precise" volume apps don't solve this</h2>
@@ -197,7 +197,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dsensitive-iem-headphones" data-goatcounter-click="play-cta-sensitive-iem-headphones">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../">See how it works</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2 id="faq">FAQ</h2>
@@ -206,7 +206,7 @@
       <dd>The phone's speaker and Bluetooth headphones work on the phones we have tested. A 3.5 mm headphone jack normally uses the same main output, so it should work too, though we have not measured it separately. USB audio, such as USB-C adapters and DACs, has not been verified: USB output can run on a separate path, and the one USB route we tested, a car connected over USB, was not reached. Whatever you use, check it on yours during the seven free days.</dd>
 
       <dt>Does it work with Bluetooth IEMs and TWS earbuds?</dt>
-      <dd>Yes, the same way. Bluetooth output goes through the same global audio session as wired output, so the reduction applies before the signal is sent to the Bluetooth stack.</dd>
+      <dd>In most cases, yes: the reduction is applied to Android's output before the signal is sent to the earbuds. On a small number of phone and headphone combinations the quiet steps have no effect over Bluetooth, so check your own pair during the seven free days.</dd>
 
       <dt>Does going that low introduce distortion or hiss at very low levels?</dt>
       <dd>It does not add hiss of its own. It's a clean gain-reduction stage rather than a compressor or limiter, so it doesn't reshape the signal. One thing it cannot do, and this matters if hiss is your actual problem: the reduction happens in software, before the signal reaches your DAC and amplifier, so it cannot lower a hiss those stages are producing. Turning the music down that way leaves that background noise where it was, which makes it relatively easier to hear. If the noise floor is what bothers you rather than the loudness, a passive inline volume control on the cable is what addresses that, because it works after the amplifier. This app is for the case where the sound is simply too loud at its lowest step.</dd>
@@ -225,7 +225,7 @@
     <a href="sleeping-baby-white-noise.html">quiet white noise for a sleeping baby</a> ·
     <a href="quiet-rooms-libraries.html">volume for quiet shared spaces</a> ·
     <a href="tinnitus-sensitive-hearing.html">sound sensitivity and tinnitus</a>.
-      <a href="../accessibility.html">Accessibility</a>.
+      <a href="../help.html">Help</a> · <a href="../accessibility.html">Accessibility</a>.
   <br>  This site counts visits with GoatCounter, without cookies and without storing IP addresses or other personal data.
   </div>
 </footer>

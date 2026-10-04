@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-28",
-  "dateModified": "2026-09-23",
+  "dateModified": "2026-10-04",
   "mainEntityOfPage": "https://granularvolume.com/guide/tried-everything-volume-still-too-loud-android.html"
 }
 </script>
@@ -33,7 +33,7 @@
   "mainEntity": [
     {"@type":"Question","name":"I already tried a volume limiter app and the minimum is still too loud, what now?","acceptedAnswer":{"@type":"Answer","text":"Volume limiter apps and Android's built-in 85 dB Safe Listening feature both cap the top of the loudness range for hearing safety. They don't touch the bottom of it, so if the problem is that the lowest step is already too loud, a limiter changes nothing. It's aimed at a different problem than yours."}},
     {"@type":"Question","name":"Does an equalizer or sound profile fix a volume that's too loud at the minimum?","acceptedAnswer":{"@type":"Answer","text":"Not usefully. An equalizer redistributes tone between frequencies, it doesn't lower overall level. Pulling every band down tends to make audio sound thin and hollow well before it makes anything meaningfully quieter, and most EQ apps only touch media, not calls."}},
-    {"@type":"Question","name":"Why didn't my phone's fine-step or 1-step volume mode fix it?","acceptedAnswer":{"@type":"Answer","text":"Fine-step tools (like Samsung's SoundAssistant single-step mode) add more positions between the existing minimum and maximum, but they don't create a new position below the existing minimum. If the stock minimum was already too loud, a finer scale just gives you more ways to land on the same too-loud floor."}},
+    {"@type":"Question","name":"Why didn't my phone's fine-step or 1-step volume mode fix it?","acceptedAnswer":{"@type":"Answer","text":"Fine-step tools (like Samsung's SoundAssistant single-step mode) add more positions between the existing minimum and maximum. Their first step can be a few dB lower than the stock one, and then they reach a fixed bottom, so they do not get far below the existing minimum."}},
     {"@type":"Question","name":"Does Normalize Volume solve a minimum that's too loud?","acceptedAnswer":{"@type":"Answer","text":"No. Normalize Volume evens out loudness differences between tracks and sources so quiet songs don't sound quieter than loud ones. It's a consistency tool, not a level-lowering one, and it operates within the existing volume range rather than extending it downward."}},
     {"@type":"Question","name":"What actually works if none of the built-in options lower the minimum?","acceptedAnswer":{"@type":"Answer","text":"Something has to apply negative gain after the system has already applied its own minimum, rather than trying to add a new step inside the existing range. That's what Granular Volume does: it attaches an audio effect to the system's global output and reduces the level below where the volume keys stop."}},
     {"@type":"Question","name":"Is this different from just turning the volume all the way down or muting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mute is silence. This is a set of intermediate steps between the stock minimum and silence, so you can go quieter than the floor without losing the audio entirely."}},
@@ -196,7 +196,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dtried-everything-volume-still-too-loud-android" data-goatcounter-click="play-cta-tried-everything-volume-still-too-loud-android">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this one is different</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <div class="toc">
@@ -233,7 +233,7 @@
     <h2 id="finestep">Manufacturer fine-step volume tools</h2>
     <div class="fixcard">
       <h3>1-step or fine-adjustment modes <span class="verdict v-doesnt">Lowers it a few dB, then stops</span></h3>
-      <p>Some manufacturers offer a setting that replaces the default handful of volume steps with a longer, finer scale, for example Samsung's SoundAssistant with single-step adjustment instead of the default ten steps. This genuinely gives you more positions to choose from. What it does not do is create a position <em>below</em> the stock minimum. If step one on the default scale was already too loud, a finer scale just gives you more ways to land on the same floor, not a way underneath it. This is confirmed by the same owner quoted above, who tried exactly this and still ended up choosing between too quiet to hear and too loud to bear.</p>
+      <p>Some manufacturers offer a setting that replaces the default handful of volume steps with a longer, finer scale, for example Samsung's SoundAssistant with single-step adjustment instead of the default ten steps. This genuinely gives you more positions to choose from. Its first step can sit a few dB lower than the stock first step (about 5 dB on the one configuration we measured), and then it reaches a fixed bottom. If you need more than those few dB, a finer scale gives you more ways to land near the same floor, not a way far underneath it. This is confirmed by the same owner quoted above, who tried exactly this and still ended up choosing between too quiet to hear and too loud to bear.</p>
     </div>
 
     <h2 id="normalize">Normalize Volume</h2>
@@ -258,7 +258,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dtried-everything-volume-still-too-loud-android" data-goatcounter-click="play-cta-tried-everything-volume-still-too-loud-android">Get it on Google Play</a>
         <a class="btn btn-ghost" href="lower-android-volume-below-minimum.html">The full below-minimum guide</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2 id="faq">FAQ</h2>
@@ -268,7 +268,7 @@
       <dt>Does an equalizer or sound profile fix a volume that's too loud at the minimum?</dt>
       <dd>Not usefully. An equalizer redistributes tone between frequencies, it doesn't lower overall level, and most EQ apps only affect media, not calls.</dd>
       <dt>Why didn't my phone's fine-step or 1-step volume mode fix it?</dt>
-      <dd>Fine-step tools add more positions between the existing minimum and maximum, they don't create a new position below the existing minimum. A finer scale just gives more ways to land on the same too-loud floor.</dd>
+      <dd>Fine-step tools add more positions between the existing minimum and maximum. Their first step can be a few dB lower than the stock one, and then they reach a fixed bottom, so they do not get far below the existing minimum.</dd>
       <dt>Does Normalize Volume solve a minimum that's too loud?</dt>
       <dd>No. It evens out loudness differences between sources so quiet content doesn't sound quieter than loud content. It's a consistency tool that operates inside the existing range, not one that extends it downward.</dd>
       <dt>What actually works if none of the built-in options lower the minimum?</dt>
@@ -290,7 +290,7 @@
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;
-    <a href="../accessibility.html">Accessibility</a>.
+    <a href="../help.html">Help</a> · <a href="../accessibility.html">Accessibility</a>.
     <br>
     See also:
     <a href="lower-android-volume-below-minimum.html">every method for going below the minimum, ranked</a> ·

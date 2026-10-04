@@ -29,7 +29,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-04",
   "mainEntityOfPage": "https://granularvolume.com/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -136,12 +136,12 @@
     {
       "@type": "Question",
       "name": "Do I need to reopen the app after restarting my phone?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. The floating dial can be brought back after a reboot from the Quick Settings tile with one tap, without having to find and open the full app first."}
+      "acceptedAnswer": {"@type": "Answer", "text": "No. If the control was on when the phone shut down, it comes back by itself after the restart, during the free week or once unlocked. If you had stopped it, it stays stopped until you turn it on again, from the app or from its Quick Settings tile."}
     },
     {
       "@type": "Question",
       "name": "Is there a faster way to turn it on than opening the app?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Swiping down to Quick Settings and tapping the Granular Volume tile toggles the floating dial on or off directly, without navigating into the app itself."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. After the first setup, swiping down to Quick Settings and tapping the Quiet Dial tile turns the floating dial on or off directly."}
     },
     {
       "@type": "Question",
@@ -316,7 +316,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated October 1, 2026 · 10 min read</p>
+    <p class="meta">Updated October 4, 2026 · 10 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -337,7 +337,7 @@
         <tr><td><a href="#normalize">Normalize Volume, Adapt Sound</a></td><td>Evens out peaks</td><td>No</td></tr>
         <tr><td><a href="#limiters">Volume limits, the 85 dB cap</a></td><td>The top of the range</td><td>No</td></tr>
         <tr><td><a href="#firmware">Firmware updates</a></td><td>Anecdotal</td><td>Not guaranteed</td></tr>
-        <tr><td><a href="#adb">Volume curve over ADB</a></td><td>The curve itself</td><td>Yes, but needs a computer and care</td></tr>
+        <tr><td><a href="#adb">Volume curve over ADB</a></td><td>The curve itself</td><td>Not verified by us; on a stock phone it needs root</td></tr>
         <tr><td><a href="#attenuation">Below-floor attenuation (Granular Volume)</a></td><td>Reduces output after the system's own minimum</td><td>Yes, down to 30 dB below it, no computer</td></tr>
         </tbody>
       </table>
@@ -350,7 +350,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlower-android-volume-below-minimum" data-goatcounter-click="play-cta-lower-android-volume-below-minimum">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#attenuation">Why this works, others don't</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <div class="toc">
@@ -428,8 +428,8 @@
 
     <h2 id="adb">8. Editing the volume curve over ADB</h2>
     <div class="fixcard">
-      <h3>Modify audio config files via a computer <span class="verdict v-partial">Works, technical, no root needed</span></h3>
-      <p>On a computer with USB debugging enabled, it's possible to modify the device's audio volume curve files directly through ADB to change how loud each step is, without root. This genuinely works and doesn't require root access, but it requires comfort with a command line, a computer, and is easy to get wrong. It's also undone by a factory reset or sometimes a system update.</p>
+      <h3>Modify audio config files via a computer <span class="verdict v-partial">Not verified, needs root on a stock phone</span></h3>
+      <p>Some guides describe changing the device's volume curve files from a computer over ADB, so that every step comes out quieter. We have not tested this. On a stock phone those files sit on a system partition that cannot be changed without root or an unlocked bootloader, so in practice this is a root method, it is easy to get wrong, and a system update can undo it.</p>
     </div>
 
     <h2 id="attenuation">9. Apps that go below the floor: the one method that actually lowers it</h2>
@@ -446,7 +446,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlower-android-volume-below-minimum" data-goatcounter-click="play-cta-lower-android-volume-below-minimum">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../">See how it works</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2 id="faq">FAQ</h2>
@@ -508,10 +508,10 @@
       <dd>Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an app like this fills in, rather than something Android exposes natively.</dd>
 
       <dt>Do I need to reopen the app after restarting my phone?</dt>
-      <dd>No. The floating dial can be brought back after a reboot from the Quick Settings tile with one tap, without having to find and open the full app first.</dd>
+      <dd>No. If the control was on when the phone shut down, it comes back by itself after the restart, during the free week or once unlocked. If you had stopped it, it stays stopped until you turn it on again, from the app or from its Quick Settings tile.</dd>
 
       <dt>Is there a faster way to turn it on than opening the app?</dt>
-      <dd>Yes. Swiping down to Quick Settings and tapping the Granular Volume tile toggles the floating dial on or off directly, without navigating into the app itself.</dd>
+      <dd>Yes. After the first setup, swiping down to Quick Settings and tapping the Quiet Dial tile turns the floating dial on or off directly.</dd>
 
       <dt>Does it override or disable my phone's physical volume buttons?</dt>
       <dd>No. It doesn't take over the volume buttons or the system volume panel. The slider covers your normal range above the device minimum and adds a lower range underneath what those controls reach.</dd>
@@ -538,7 +538,7 @@
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> ·
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;
-    <a href="../accessibility.html">Accessibility</a>.
+    <a href="../help.html">Help</a> · <a href="../accessibility.html">Accessibility</a>.
     <br>
     See also:
     <a href="bluetooth-earbuds-volume-too-loud-lowest.html">Bluetooth earbuds specifically</a> ·

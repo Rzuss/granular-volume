@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-14",
-  "dateModified": "2026-10-02",
+  "dateModified": "2026-10-04",
   "mainEntityOfPage": "https://granularvolume.com/use-cases/sleeping-baby-white-noise.html"
 }
 </script>
@@ -39,7 +39,7 @@
     {
       "@type": "Question",
       "name": "Can I leave it running at a fixed quiet level all night?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The dial's level is saved and stays put until you change it. Set it once to the level that works, then minimize the dial to a small tab at the edge of the screen. It lowers everything the phone plays, including alarms, ringtones and notifications, so if the same phone has to wake you or ring for you, check that you can still hear it at that step."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The dial's level is saved and stays put until you change it. Set it once to the level that works, then minimize the dial to a small tab at the edge of the screen. It lowers media, alarms, ringtones and notifications together, so if the same phone has to wake you or ring for you, check that you can still hear it at that step."}
     },
     {
       "@type": "Question",
@@ -167,7 +167,7 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Quiet white noise for a sleeping baby, when the minimum volume is still too loud</h1>
     <p class="dek">Phones and tablets are built to be heard across a room. A crib a few feet away needs something much quieter than that, and Android's own volume slider usually can't get there.</p>
-    <p class="meta">Updated October 2, 2026 · 5 min read</p>
+    <p class="meta">Updated October 4, 2026 · 5 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -199,12 +199,12 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dsleeping-baby-white-noise" data-goatcounter-click="play-cta-sleeping-baby-white-noise">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../guide/lower-android-volume-below-minimum.html">See every method, ranked</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2>Why turning the volume all the way down still isn't quiet enough</h2>
     <p>It's tempting to assume any remaining loudness at the lowest step is a hardware limitation that can't be worked around. It isn't. It's a software limitation, specifically the fact that stock Android has no control for anything quieter than step 1. The fix has to live outside the volume slider itself, cutting the volume <em>underneath</em> the existing floor rather than trying to subdivide it further.</p>
-    <p>Apps that add "more precise" volume steps (100 clicks instead of 15, for example) help a few dB and then stop, because Android's loudness curve has a fixed bottom that no step count passes. More clicks between mute and the same step 1 still bottom out at exactly the same loudness step 1 always had.</p>
+    <p>Apps that add "more precise" volume steps (100 clicks instead of 15, for example) help a few dB and then stop, because Android's loudness curve has a fixed bottom that no step count passes.</p>
 
     <h2>What actually works for this specific case</h2>
     <p>An app that applies negative gain through Android's own audio effect framework, rather than remapping the existing volume steps, genuinely produces output quieter than the hardware floor. That's the entire mechanism behind Granular Volume: a small floating dial that sits over your white noise or lullaby app, with steps that go below what the device's own slider can reach.</p>
@@ -221,7 +221,7 @@
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dsleeping-baby-white-noise" data-goatcounter-click="play-cta-sleeping-baby-white-noise">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../">See how it works</a>
       </div>
-      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup.</p>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
     </div>
 
     <h2 id="faq">FAQ</h2>
@@ -230,7 +230,7 @@
       <dd>No. The reduction is a continuous gain stage, not a mute or a compression effect, so a white noise loop plays exactly as smoothly at -30 dB as it does at 0 dB, just quieter throughout.</dd>
 
       <dt>Can I leave it running at a fixed quiet level all night?</dt>
-      <dd>Yes. The dial's level is saved and stays put until you change it. Set it once to the level that works, then minimize the dial to a small tab at the edge of the screen. It lowers everything the phone plays, including alarms, ringtones and notifications, so if the same phone has to wake you or ring for you, check that you can still hear it at that step.</dd>
+      <dd>Yes. The dial's level is saved and stays put until you change it. Set it once to the level that works, then minimize the dial to a small tab at the edge of the screen. It lowers media, alarms, ringtones and notifications together, so if the same phone has to wake you or ring for you, check that you can still hear it at that step.</dd>
 
       <dt>Does it change the sound quality of the white noise?</dt>
       <dd>It applies flat gain reduction, not an equalizer curve, so it doesn't reshape the frequency content the way turning down a bass-heavy EQ band would. White noise sounds the same, just quieter.</dd>
@@ -248,7 +248,7 @@
     See also: <a href="../guide/lower-android-volume-below-minimum.html">the full guide</a> ·
     <a href="sensitive-iem-headphones.html">quiet volume for sensitive IEMs</a> ·
     <a href="night-audiobooks-podcasts.html">falling asleep to audio</a>.
-      <a href="../accessibility.html">Accessibility</a>.
+      <a href="../help.html">Help</a> · <a href="../accessibility.html">Accessibility</a>.
   <br>  This site counts visits with GoatCounter, without cookies and without storing IP addresses or other personal data.
   </div>
 </footer>
