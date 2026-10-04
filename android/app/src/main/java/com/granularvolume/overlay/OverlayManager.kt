@@ -112,6 +112,12 @@ class OverlayManager(
         private const val IDLE_FADE_MS = 380L
         private const val WAKE_MS = 120L
         private const val IDLE_ALPHA = 0.4f
+
+        // 1.7.0, "a newer version is ready" on the info button.
+        private const val UPDATE_DOT_DP = 10
+        private const val UPDATE_TINTS_INFO = true
+        private const val UPDATE_GREEN = 0xFF34D399.toInt()
+        private const val INFO_TINT = 0x8CFFFFFF.toInt()   // the layout's own tint, restored when the signal clears
         private const val ACTIVE_ALPHA = 1.0f
 
         private const val ALPHA_CURRENT  = 1.00f
@@ -425,10 +431,15 @@ class OverlayManager(
         info.overlay.remove(updateDotDrawable)
         info.contentDescription = context.getString(R.string.gv_info) +
             if (updateDot) " " + context.getString(R.string.gv_update_ready) else ""
+        // The glyph carries the signal too. Measured on the owner's phone (2026-10-04): a 7dp dot
+        // on a dial resting at 40% opacity was not seen at all, with the update row on screen.
+        (info as? ImageView)?.imageTintList = android.content.res.ColorStateList.valueOf(
+            if (updateDot && UPDATE_TINTS_INFO) UPDATE_GREEN else INFO_TINT
+        )
         if (!updateDot) return
         info.post {
             if (overlayView !== view || !updateDot) return@post
-            val d = (7 * dialDensity).toInt().coerceAtLeast(6)
+            val d = (UPDATE_DOT_DP * dialDensity).toInt().coerceAtLeast(8)
             updateDotDrawable.setBounds(info.width - d, 0, info.width, d)
             info.overlay.add(updateDotDrawable)
             android.util.Log.d("GranularVolume", "update dot shown on the info button")

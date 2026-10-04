@@ -114,6 +114,7 @@ class VolumeControlService : Service() {
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
         private const val BILLING_PREFETCH_DELAY_MS = 1500L
+        private const val UPDATE_ASK_GAP_MS = 60L * 60L * 1000L
 
         /** The paid key app. Must match KeyCheck and the play manifest's <queries> entry. */
         private const val KEY_APP_PACKAGE = "com.granularvolume.key"
@@ -175,6 +176,7 @@ class VolumeControlService : Service() {
             val from = intent.getIntExtra(EXTRA_PREV_VOLUME_STREAM_VALUE, to)
             if (to < 0) return
             coordinator.onExternalVolumeChange(stream, from, to)
+            askForUpdateIfDue()
         }
     }
 
@@ -432,11 +434,7 @@ class VolumeControlService : Service() {
                 if (!ControlLive.running) return@prefetch
                 if (owned == true) onKeyArrived("play-record") else refreshAccessSurfaces()
             }
-            // 1.7.0: at most once a day, ask the Play Store app on this device whether a newer
-            // version exists. The answer lights a dot on the dial's info button, nothing more.
-            UpdateCheck.checkDaily(applicationContext) { available ->
-                if (ControlLive.running) overlayManager.setUpdateDot(available)
-            }
+            askForUpdateIfDue()
         }, BILLING_PREFETCH_DELAY_MS)
         overlayManager.setUpdateDot(UpdateCheck.isKnownAvailable(applicationContext))
 
@@ -554,7 +552,32 @@ class VolumeControlService : Service() {
     private fun refreshAccessSurfaces() {
         if (noOverlayPermission) return
         overlayManager.refresh()
+        // The access sheet asks Play every time it opens. When its answer differs from what
+        // this dial shows, the sheet sends ACTION_ACCESS_CHANGED and the mark follows here.
+        // Found on the owner's phone (2026-10-04): the row was on screen and the dial knew nothing.
+        overlayManager.setUpdateDot(UpdateCheck.isKnownAvailable(applicationContext))
         updateNotification(audioController.attenuationDb.value)
+    }
+
+    /**
+     * 1.7.0: at most once a day, ask the Play Store app on this device whether a newer version
+     * exists. The answer marks the dial's info button, nothing more.
+     *
+     * Called at start, and again whenever the volume changes: a control that is restored at
+     * every boot can run for weeks without a start, and one question at onCreate would leave
+     * exactly the longest-running users without the signal. The volume broadcast is the one
+     * event that only happens while the device is in use; it costs two preference reads, and
+     * the hour gate keeps a Store that does not answer from being asked at every key press.
+     */
+    private var updateAskedAtElapsed = 0L
+    private fun askForUpdateIfDue() {
+        if (noOverlayPermission || !ControlLive.running) return
+        val now = SystemClock.elapsedRealtime()
+        if (updateAskedAtElapsed != 0L && now - updateAskedAtElapsed < UPDATE_ASK_GAP_MS) return
+        updateAskedAtElapsed = now
+        UpdateCheck.checkDaily(applicationContext) { available ->
+            if (ControlLive.running) overlayManager.setUpdateDot(available)
+        }
     }
 
     /**

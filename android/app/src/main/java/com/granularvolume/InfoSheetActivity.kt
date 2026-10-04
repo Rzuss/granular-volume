@@ -150,7 +150,11 @@ class InfoSheetActivity : AppCompatActivity() {
                 tellService()
             }
         }
-        UpdateCheck.checkNow(applicationContext) { _ ->
+        val knownBefore = UpdateCheck.isKnownAvailable(this)
+        UpdateCheck.checkNow(applicationContext) { available ->
+            // The dial marks its info button from the same answer; a running dial is told now,
+            // not at its next start (found on the owner's phone, 2026-10-04).
+            if (available != knownBefore) tellService()
             if (!isFinishing && !isDestroyed && signature() != lastSignature) rerender()
         }
     }
