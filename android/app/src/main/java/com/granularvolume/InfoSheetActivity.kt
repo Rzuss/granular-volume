@@ -388,19 +388,23 @@ class InfoSheetActivity : AppCompatActivity() {
     private fun supportButtons(pending: Boolean): View {
         val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
         val half = { LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f) }
-        row.addView(Button(this).apply {
-            text = getString(R.string.gv_paywall_not_now)
+        // One look for both answers: same size, same outline, same text colour. A filled
+        // "Support" beside an outlined "Not now" would be the app leaning on the reader, on the
+        // one card whose whole point is that nothing is asked of them.
+        fun answer(label: String, onClick: () -> Unit): Button = Button(this).apply {
+            text = label
             isAllCaps = false
             setTextColor(ContextCompat.getColor(context, R.color.gv_text_primary))
             background = GradientDrawable().apply {
                 cornerRadius = dp(4).toFloat()
                 setColor(ContextCompat.getColor(context, R.color.gv_surface))
-                setStroke(dp(1), ContextCompat.getColor(context, R.color.gv_surface_stroke))
+                setStroke(dp(1), ContextCompat.getColor(context, R.color.gv_accent_text))
             }
-            setOnClickListener {
-                Prefs.setSupportCardDone(this@InfoSheetActivity)
-                rerender()
-            }
+            setOnClickListener { onClick() }
+        }
+        row.addView(answer(getString(R.string.gv_paywall_not_now)) {
+            Prefs.setSupportCardDone(this@InfoSheetActivity)
+            rerender()
         }, half().apply { marginEnd = dp(6) })
         if (!pending) {
             val price = BillingManager.priceOrNull(this)
@@ -411,7 +415,10 @@ class InfoSheetActivity : AppCompatActivity() {
             }
             // Opening Google Play and closing it again without paying is not an answer: the
             // card stays until the reader says "Not now" or pays.
-            row.addView(buyButton(label), half().apply { marginStart = dp(6) })
+            row.addView(answer(label) { buy() }.apply {
+                isEnabled = !PurchaseFlow.isInFlight()
+                alpha = if (isEnabled) 1f else 0.6f
+            }, half().apply { marginStart = dp(6) })
         }
         return row
     }
