@@ -2,6 +2,27 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.1 (versionCode 50)
+
+Fixes only. Nothing about the free week, the unlock or the price changes.
+
+### Fixed
+- After the control was stopped and started again (also after a restart of the device or an update), a level
+  chosen on a bar above the line could come back shown as "-5 dB" below the line. The next press on volume up
+  then dropped the sound to the device's lowest step. The dial now comes back in the place it was left.
+- On a wireless output of a device with more than about 17 volume steps, the bars above the line did not fit
+  their space, and a tap on the first quiet bars could land on a level above the line instead. The bars now
+  always fit, every tap lands where it is drawn, and a tap between two thin bars picks the nearest one.
+- A press on a volume button ends a mute made on the dial. The dial no longer reads MUTE over sound that is
+  playing, and the next tap no longer jumps back to the level from before the mute.
+- Stopping the control within a moment of a call starting or ending can no longer leave the sound lowered
+  with no dial on screen.
+- Google Play version: "Try again" after a restore that could not reach Google Play repeats the restore. It
+  used to open the purchase.
+- Google Play version: the access sheet and the unlock sheet stay open while you read the Terms, the Privacy
+  Policy, Help or the licences opened from them.
+- Google Play version: turning the screen while the days-left card is showing keeps the card.
+
 ## 1.7.0 (versionCode 49)
 
 One idea behind the release: every surface tells the same true story about where the user stands.

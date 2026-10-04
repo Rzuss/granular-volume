@@ -13,6 +13,7 @@ object Prefs {
     private const val FILE_NAME = "gv_prefs"
 
     private const val KEY_ATTENUATION_DB   = "attenuation_db"
+    private const val KEY_LEVEL_IN_QUIET_ZONE = "level_in_quiet_zone"
     private const val KEY_OVERLAY_X        = "overlay_x"
     private const val KEY_OVERLAY_Y        = "overlay_y"
     private const val KEY_OVERLAY_LANDSCAPE = "overlay_saved_landscape"
@@ -65,6 +66,20 @@ object Prefs {
 
     fun setAttenuation(context: Context, dB: Float) {
         prefs(context).edit { putFloat(KEY_ATTENUATION_DB, dB.coerceIn(ATTENUATION_MIN, ATTENUATION_MAX)) }
+    }
+
+    /**
+     * Which zone the stored level belongs to (1.7.1). The level alone cannot say: a negative
+     * value is either a quiet step or the small correction an upper rung carries. Absent on
+     * an install that has not changed zone since updating; the caller then infers it.
+     */
+    fun hasLevelZone(context: Context): Boolean = prefs(context).contains(KEY_LEVEL_IN_QUIET_ZONE)
+
+    fun isLevelInQuietZone(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_LEVEL_IN_QUIET_ZONE, false)
+
+    fun setLevelInQuietZone(context: Context, quiet: Boolean) {
+        prefs(context).edit { putBoolean(KEY_LEVEL_IN_QUIET_ZONE, quiet) }
     }
 
     fun getOverlayX(context: Context, default: Int): Int =

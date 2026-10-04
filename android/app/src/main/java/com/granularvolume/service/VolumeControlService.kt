@@ -772,6 +772,7 @@ class VolumeControlService : Service() {
             }
         }
         overlayManager.hide()
+        coordinator.release()
         audioController.release()
         serviceScope.cancel()
         // Only a user-intended stop clears the boot-restore flag. A system-initiated

@@ -964,12 +964,22 @@ class OverlayManager(
         upperBars.clear()
 
         // dialDensity, not density: on a fitted (smaller) dial the container is smaller too.
-        val gapPx = (UPPER_BAR_GAP_DP * dialDensity).toInt()
+        var gapPx = (UPPER_BAR_GAP_DP * dialDensity).toInt()
         val totalPx = (UPPER_CONTAINER_DP * dialDensity).toInt()
-        val barPx = max(
-            (UPPER_BAR_MIN_DP * dialDensity).toInt(),
-            (totalPx - gapPx * (count - 1)) / count
-        )
+        var barPx = (totalPx - gapPx * (count - 1)) / count
+        // 1.7.1: the stack must never be taller than its container. With the bar held at its
+        // usual minimum, more than about 17 positions did not fit (a wireless route on a device
+        // with 25 volume steps has 25): the bars past the container's edge were not drawn, yet
+        // they sat over the orange line and the first quiet bars and took the taps meant for
+        // those. So past that count the gap thins first, then the bar.
+        if (barPx < (UPPER_BAR_MIN_DP * dialDensity).toInt()) {
+            gapPx = max(1, dialDensity.toInt())
+            barPx = max(1, (totalPx - gapPx * (count - 1)) / count)
+            if (barPx * count + gapPx * (count - 1) > totalPx) {
+                gapPx = 0
+                barPx = max(1, totalPx / count)
+            }
+        }
 
         // One name for the whole rung stack. Each bar previously carried the SAME description,
         // so a screen reader read "Volume level" once per rung before reaching anything useful.
@@ -1137,8 +1147,8 @@ class OverlayManager(
         if (hit(btnMute, rawX, rawY, muteHitSlop)) {
             pressPulse(btnMute); confirmHaptic(root); coordinator.toggleMute(); onEngaged?.invoke(); return
         }
-        for (i in upperBars.indices) {
-            if (hit(upperBars[i], rawX, rawY)) { tick(root); coordinator.applyUpper(i); onEngaged?.invoke(); return }
+        upperBarAt(root, rawX, rawY)?.let { i ->
+            tick(root); coordinator.applyUpper(i); onEngaged?.invoke(); return
         }
         for (i in quietBars.indices) {
             if (hit(quietBars[i], rawX, rawY)) { tick(root); selectQuiet(i); onEngaged?.invoke(); return }
@@ -1194,6 +1204,26 @@ class OverlayManager(
             tip.visibility = View.GONE
             Prefs.setLineTooltipShown(context)
         }
+    }
+
+    /**
+     * The upper bar a tap inside the upper zone belongs to: the nearest one, so a tap that
+     * lands in the gap between two thin bars still chooses a level. Null outside the zone,
+     * which is what keeps a bar from ever answering for a place it is not drawn in (1.7.1).
+     */
+    private fun upperBarAt(root: View, rawX: Float, rawY: Float): Int? {
+        val container = root.findViewById<View>(R.id.gv_upper_container) ?: return null
+        if (upperBars.isEmpty() || !hit(container, rawX, rawY)) return null
+        val loc = IntArray(2)
+        var best = -1
+        var bestDistance = Float.MAX_VALUE
+        for (i in upperBars.indices) {
+            val bar = upperBars[i]
+            bar.getLocationOnScreen(loc)
+            val distance = abs(rawY - (loc[1] + bar.height / 2f))
+            if (distance < bestDistance) { bestDistance = distance; best = i }
+        }
+        return best.takeIf { it >= 0 }
     }
 
     private fun hit(v: View, rawX: Float, rawY: Float, slop: Int = 0): Boolean {

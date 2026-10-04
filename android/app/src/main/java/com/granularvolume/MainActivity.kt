@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity() {
     ) { _ -> startServiceAndOfferTile() }
 
     companion object {
+        private const val STATE_TRIAL_CARD = "trial_card_showing"
+
         /**
          * Version of the Terms this build presents. Bump ONLY on a material change to the
          * Terms, which re-prompts every existing user. Cosmetic edits must not bump it.
@@ -104,6 +106,15 @@ class MainActivity : AppCompatActivity() {
         private const val URL_PRIVACY = "https://rzuss.github.io/granular-volume-privacy/"
     }
 
+    /** The countdown card is on screen now / was on screen when this screen was rebuilt. */
+    private var trialCardShowing = false
+    private var trialCardRestored = false
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(STATE_TRIAL_CARD, trialCardShowing)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -131,6 +142,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // 1.7.1: a rotation (or any rebuild of this screen) while the countdown card is up keeps
+        // the card. Its once-a-day turn is recorded when it is drawn, so the rebuilt screen saw
+        // "already shown today", started the control and closed itself under the reader.
+        trialCardRestored = savedInstanceState?.getBoolean(STATE_TRIAL_CARD, false) == true
         val cardShowing = setupTipjarCard()
 
         if (isSetUp() && !cardShowing) {
@@ -320,11 +335,14 @@ class MainActivity : AppCompatActivity() {
             // button there pushed "Agree and continue" off the screen (seen on a late first open,
             // which starts with one day). The card's daily turn is not spent either.
             if (!hasAcceptedTerms()) { card.visibility = View.GONE; return false }
-            if (daysLeft > TRIAL_CARD_FROM_DAYS || Prefs.getTrialCardShownForDay(this) == daysLeft) {
+            val shownToday = Prefs.getTrialCardShownForDay(this) == daysLeft &&
+                !trialCardRestored && !trialCardShowing
+            if (daysLeft > TRIAL_CARD_FROM_DAYS || shownToday) {
                 card.visibility = View.GONE
                 return false
             }
             Prefs.setTrialCardShownForDay(this, daysLeft)
+            trialCardShowing = true
             card.visibility = View.VISIBLE
             title.text = resources.getQuantityString(R.plurals.gv_trial_days_left, daysLeft, daysLeft)
             body.setText(if (pending) R.string.gv_purchase_pending else R.string.gv_trial_body)
@@ -334,6 +352,7 @@ class MainActivity : AppCompatActivity() {
             // 1.7.0: "Later" means "not now, take me to the dial". It used to hide the card and
             // leave the person on the setup screen, one more tap away from what they came for.
             dismiss.setOnClickListener {
+                trialCardShowing = false
                 card.visibility = View.GONE
                 if (isSetUp()) launchService()
             }

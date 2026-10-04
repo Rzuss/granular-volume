@@ -1,0 +1,1 @@
+A level chosen above the line now comes back in the right place after the control restarts. Before, the dial could show it below the line, and one press on volume up dropped the sound to the lowest step. On a wireless output of a device with many volume steps, a tap on the first quiet bars now lands where it is drawn. A press on a volume button ends a mute made on the dial.

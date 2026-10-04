@@ -30,7 +30,17 @@ class AudioController(private val context: Context) {
 
     private val tag = "GranularVolume:AudioCtrl"
 
+    @Volatile
     private var strategy: AudioEffectStrategy? = null
+
+    /**
+     * Set by [release]. 1.7.1: until then nothing stopped a late [initialize] or [reattach]
+     * (the start runs on a background thread, and the coordinator posts re-attach passes up
+     * to a few seconds ahead) from building a fresh effect on the output mix after the
+     * control had stopped: sound held down with no dial and no notification.
+     */
+    @Volatile
+    private var released = false
 
     // ── Full-range gate (1.5.0) ─────────────────────────────────────
     /**
@@ -40,6 +50,13 @@ class AudioController(private val context: Context) {
      * or grandfathered user losing depth.
      */
     var proProvider: () -> Boolean = { true }
+
+    /**
+     * True while a level change is written to storage, which is the same condition
+     * [setAttenuation] uses. The coordinator stores the zone under this rule too, so the
+     * stored level and the stored zone always describe the same moment.
+     */
+    fun keepsLevel(): Boolean = proProvider()
 
     /** Emits current attenuation in dB. UI observes this. */
     private val _attenuationDb = MutableStateFlow(Prefs.getAttenuation(context))
@@ -69,7 +86,9 @@ class AudioController(private val context: Context) {
      * Call this from Service.onCreate() — never from UI thread.
      * @return true if any strategy initialized successfully
      */
+    @Synchronized
     fun initialize(): Boolean {
+        if (released) return false
         val strategies: List<AudioEffectStrategy> = listOf(
             DynamicsProcessingStrategy(),
             LoudnessEnhancerStrategy()
@@ -173,7 +192,9 @@ class AudioController(private val context: Context) {
      * so the audible state is preserved across the swap; on devices where policy re-picks
      * the same output this is a harmless no-op glitch of a few ms.
      */
+    @Synchronized
     fun reattach() {
+        if (released) return
         Log.i(tag, "Reattaching audio effect (attenuation=${_attenuationDb.value}dB)")
         strategy?.release()
         strategy = null
@@ -185,7 +206,9 @@ class AudioController(private val context: Context) {
      * Releases the underlying AudioEffect. Must be called in Service.onDestroy().
      * After this call, this instance should not be used.
      */
+    @Synchronized
     fun release() {
+        released = true
         strategy?.release()
         strategy = null
         Log.i(tag, "AudioController released")

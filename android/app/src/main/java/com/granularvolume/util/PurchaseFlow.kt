@@ -131,7 +131,9 @@ object PurchaseFlow {
                     onUnlocked()
                 }
                 false -> showNotFound(activity, onUnlocked)
-                null -> showUnavailable(activity, {}, onUnlocked)
+                // 1.7.1: the retry of a restore is a restore. It used to be the purchase, so a
+                // person who asked for their purchase back was shown Google's window with a price.
+                null -> showUnavailable(activity, {}, onUnlocked) { restore(activity, onUnlocked) }
             }
         }
     }
@@ -158,7 +160,13 @@ object PurchaseFlow {
      * offered, so nobody is sent to buy a second app (owner's decision, 2026-09-28). A key that
      * is already installed still unlocks, see [ProAccess.hasPaidUnlock].
      */
-    private fun showUnavailable(activity: Activity, onSettled: () -> Unit, onUnlocked: () -> Unit, code: Int = -1) {
+    private fun showUnavailable(
+        activity: Activity,
+        onSettled: () -> Unit,
+        onUnlocked: () -> Unit,
+        code: Int = -1,
+        retry: () -> Unit = { start(activity, onSettled, onUnlocked) }
+    ) {
         if (activity.isFinishing || activity.isDestroyed) return
         val builder = AlertDialog.Builder(activity)
         if (code == ITEM_UNAVAILABLE) {
@@ -175,7 +183,7 @@ object PurchaseFlow {
                     if (code == BILLING_UNAVAILABLE) R.string.gv_purchase_unavailable_billing_hint
                     else R.string.gv_purchase_unavailable_hint
                 )
-                .setPositiveButton(R.string.gv_purchase_retry) { _, _ -> start(activity, onSettled, onUnlocked) }
+                .setPositiveButton(R.string.gv_purchase_retry) { _, _ -> retry() }
                 .setNegativeButton(R.string.gv_paywall_not_now, null)
         }
         sentenceCase(builder.show())

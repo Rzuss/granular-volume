@@ -94,6 +94,8 @@ class PaywallActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
+        leavingForLink = false
+        linkReturn.removeCallbacks(closeUnreturned)
         if (ProAccess.isPro(this)) { closeUnlocked(); return }
         // 1.7.0: ask Google Play too. A buyer whose purchase this device has not heard of yet
         // (new device, reinstall, a payment confirmed since the last start) is let in here,
@@ -140,11 +142,28 @@ class PaywallActivity : AppCompatActivity() {
      */
     override fun onStop() {
         super.onStop()
-        if (isChangingConfigurations || PurchaseFlow.isInFlight()) return
+        if (isChangingConfigurations || PurchaseFlow.isInFlight() || leavingForLink) return
         if (!isFinishing) finish()
     }
 
+    /**
+     * 1.7.1: set when the reader opens one of this sheet's own links (Terms, Privacy, Help,
+     * licences), cleared when the sheet is back in front. Since 1.7.0 the sheet closes when it
+     * leaves the screen, which also closed it under the person who went to read the Terms
+     * before paying and then pressed Back. Bounded: a sheet nobody came back to still closes.
+     */
+    private var leavingForLink = false
+    private val linkReturn = android.os.Handler(android.os.Looper.getMainLooper())
+    private val closeUnreturned = Runnable { if (!isFinishing && !isDestroyed) finish() }
+
+    private fun leaveForLink() {
+        leavingForLink = true
+        linkReturn.removeCallbacks(closeUnreturned)
+        linkReturn.postDelayed(closeUnreturned, LINK_RETURN_MS)
+    }
+
     override fun onDestroy() {
+        linkReturn.removeCallbacks(closeUnreturned)
         dialog?.setOnCancelListener(null)
         dialog?.dismiss()
         dialog = null
@@ -257,6 +276,7 @@ class PaywallActivity : AppCompatActivity() {
     }
 
     private fun openUrl(url: String) {
+        leaveForLink()
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
     }
 
@@ -281,5 +301,7 @@ class PaywallActivity : AppCompatActivity() {
     private companion object {
         // Same document the consent gate links to (MainActivity.URL_TERMS).
         const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
+        /** How long the sheet waits for its reader to come back from the Terms. */
+        const val LINK_RETURN_MS = 10 * 60_000L
     }
 }

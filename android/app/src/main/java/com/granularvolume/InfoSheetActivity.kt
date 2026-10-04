@@ -121,6 +121,8 @@ class InfoSheetActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         leavingForUpdate = false
+        leavingForLink = false
+        linkReturn.removeCallbacks(closeUnreturned)
         val before = lastState
         dialog?.setContentView(buildSheet())
         val after = lastState
@@ -196,14 +198,31 @@ class InfoSheetActivity : AppCompatActivity() {
      */
     override fun onStop() {
         super.onStop()
-        if (isChangingConfigurations || PurchaseFlow.isInFlight() || leavingForUpdate) return
+        if (isChangingConfigurations || PurchaseFlow.isInFlight() || leavingForUpdate || leavingForLink) return
         if (!isFinishing) finish()
     }
 
     /** Set when Update is pressed, cleared when the sheet is back in front. */
     private var leavingForUpdate = false
 
+    /**
+     * 1.7.1: set when the reader opens one of this sheet's own links (Terms, Privacy, Help,
+     * licences), cleared when the sheet is back in front. Since 1.7.0 the sheet closes when it
+     * leaves the screen, which also closed it under the person who went to read the Terms
+     * before paying and then pressed Back. Bounded: a sheet nobody came back to still closes.
+     */
+    private var leavingForLink = false
+    private val linkReturn = android.os.Handler(android.os.Looper.getMainLooper())
+    private val closeUnreturned = Runnable { if (!isFinishing && !isDestroyed) finish() }
+
+    private fun leaveForLink() {
+        leavingForLink = true
+        linkReturn.removeCallbacks(closeUnreturned)
+        linkReturn.postDelayed(closeUnreturned, LINK_RETURN_MS)
+    }
+
     override fun onDestroy() {
+        linkReturn.removeCallbacks(closeUnreturned)
         dialog?.setOnCancelListener(null)
         dialog?.dismiss()
         dialog = null
@@ -477,11 +496,12 @@ class InfoSheetActivity : AppCompatActivity() {
             )
             finish()
         })
-        first.addView(link(getString(R.string.gv_help)) { Links.open(this, Links.HELP) })
+        first.addView(link(getString(R.string.gv_help)) { leaveForLink(); Links.open(this, Links.HELP) })
         val second = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER }
         second.addView(link(getString(R.string.gv_info_terms)) { openUrl(URL_TERMS) })
         second.addView(link(getString(R.string.gv_info_privacy)) { openUrl(URL_PRIVACY) })
         second.addView(link(getString(R.string.gv_licenses_title)) {
+            leaveForLink()
             startActivity(
                 Intent(this, LicensesActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -513,6 +533,7 @@ class InfoSheetActivity : AppCompatActivity() {
     }
 
     private fun openUrl(url: String) {
+        leaveForLink()
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
     }
 
@@ -537,5 +558,7 @@ class InfoSheetActivity : AppCompatActivity() {
     private companion object {
         const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
         const val URL_PRIVACY = "https://rzuss.github.io/granular-volume-privacy/"
+        /** How long a sheet waits for its reader to come back from one of its links. */
+        const val LINK_RETURN_MS = 10 * 60_000L
     }
 }
