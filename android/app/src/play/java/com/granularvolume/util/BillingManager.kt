@@ -57,6 +57,8 @@ object BillingManager {
     const val isAvailable = true
 
     private const val TAG = "GranularVolume:Billing"
+    private const val CONNECT_RETRIES = 4
+    private const val CONNECT_RETRY_MS = 1_000L
 
     private val main = Handler(Looper.getMainLooper())
     private val worker: Handler by lazy {
@@ -118,10 +120,22 @@ object BillingManager {
             .also { client = it }
     }
 
-    /** Runs [cb] with the connection result, connecting first if needed. Callbacks may arrive off the main thread. */
+    /**
+     * Runs [cb] with the connection result, connecting first if needed. Callbacks may arrive off the main thread.
+     *
+     * 1.7.1: the test is the connection STATE, not [BillingClient.isReady]. With automatic
+     * reconnection enabled the library answers isReady = true while it is still disconnected
+     * (measured: ready=true, state=0), because it connects by itself at the first call. Every
+     * start makes two calls back to back, the ownership query and the price query: the first
+     * began the library's own connection, the second found it "already in the process of
+     * connecting", was retried three times over three seconds and came back with code -1
+     * whenever the connection took longer than that. On a slow device one of the two answers
+     * was lost at every start: either a purchase was not re-checked, or the buy button had no
+     * price. Now this class opens the connection itself, once, and both calls wait for it.
+     */
     private fun ensureConnected(context: Context, cb: (BillingResult) -> Unit) {
         val c = client(context)
-        if (c.isReady) {
+        if (isConnected(c)) {
             cb(BillingResult.newBuilder().setResponseCode(BillingClient.BillingResponseCode.OK).build())
             return
         }
@@ -130,9 +144,32 @@ object BillingManager {
             if (connecting) return
             connecting = true
         }
+        connect(c, attempt = 0)
+    }
+
+    private fun isConnected(c: BillingClient): Boolean =
+        c.connectionState == BillingClient.ConnectionState.CONNECTED
+
+    private fun connect(c: BillingClient, attempt: Int) {
         try {
             c.startConnection(object : BillingClientStateListener {
                 override fun onBillingSetupFinished(result: BillingResult) {
+                    // The library may be connecting on its own account (after a disconnect); it
+                    // then refuses a second request with DEVELOPER_ERROR. That is "not yet", not
+                    // "unavailable": look again shortly, a few times, before giving that answer.
+                    if (result.responseCode == BillingClient.BillingResponseCode.DEVELOPER_ERROR &&
+                        attempt < CONNECT_RETRIES && !isConnected(c)
+                    ) {
+                        worker.postDelayed({
+                            if (isConnected(c)) {
+                                flushWaiters(BillingResult.newBuilder()
+                                    .setResponseCode(BillingClient.BillingResponseCode.OK).build())
+                            } else {
+                                connect(c, attempt + 1)
+                            }
+                        }, CONNECT_RETRY_MS)
+                        return
+                    }
                     if (result.responseCode != BillingClient.BillingResponseCode.OK) {
                         Log.w(TAG, "Billing unavailable (code ${result.responseCode}): ${result.debugMessage}")
                     }

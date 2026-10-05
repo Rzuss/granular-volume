@@ -2,7 +2,7 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
-## 1.7.1 (versionCode 50)
+## 1.7.1 (versionCode 51)
 
 Fixes only. Nothing about the free week, the unlock or the price changes.
 
@@ -17,6 +17,9 @@ Fixes only. Nothing about the free week, the unlock or the price changes.
   playing, and the next tap no longer jumps back to the level from before the mute.
 - Stopping the control within a moment of a call starting or ending can no longer leave the sound lowered
   with no dial on screen.
+- Google Play version: at every start the app asks Google Play two things, whether the unlock is owned and what
+  it costs. On a slow device one of the two answers could be lost, so a purchase was not re-checked at that
+  start or the button showed no price until a sheet was opened. Both now wait for one connection.
 - Google Play version: "Try again" after a restore that could not reach Google Play repeats the restore. It
   used to open the purchase.
 - Google Play version: the access sheet and the unlock sheet stay open while you read the Terms, the Privacy
