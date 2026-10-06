@@ -7,7 +7,7 @@
 **Volume below Android's minimum. A floating control that stays above any app.**
 
 *It also stands in for broken volume buttons: the slider drives normal system volume above the
-device-minimum line, in even 5 dB steps, and keeps going below it.*
+device-minimum line, in even steps, and keeps going below it.*
 
 *Listed on Google Play as "Volume Control: Quiet Dial". Same app, same developer.*
 
@@ -58,7 +58,7 @@ It's a small floating dial that sits over any app:
 - **Drag it anywhere** on screen and it stays there across restarts.
 - **Minimize it** to a small tab at the screen edge and the quiet level keeps working. Left alone, the dial fades so it stays out of the way.
 - **Close it with one tap**, or reopen it from a **Quick Settings tile** without leaving the app you're in.
-- **Covers your normal range too.** Above the line marking your device's minimum, the slider sets regular system volume in even 5 dB steps, so it stands in for worn or broken volume buttons.
+- **Covers your normal range too.** Above the line marking your device's minimum, the slider sets regular system volume in even steps, so it stands in for worn or broken volume buttons.
 - **Mutes media without touching alarms.** One tap silences media; your wake-up alarm still rings.
 - **Doesn't take over your physical volume buttons** or replace the system volume panel. The buttons keep working; inside the quiet zone the dial folds their presses into its own finer scale.
 
@@ -66,7 +66,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 
 ## Features
 
-- **One slider, the whole range**: normal system volume above the device-minimum line in even 5 dB steps, and the quiet zone below it.
+- **One slider, the whole range**: normal system volume above the device-minimum line in even steps, and the quiet zone below it.
 - **Fine grained attenuation** from 0 dB (pass through, i.e. Android's own step 1) down to about -30 dB in steps, applied to the global output mix.
 - **Media mute that spares alarms**: one tap silences media playback and leaves alarm streams untouched.
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
@@ -106,7 +106,7 @@ Most apps in this space solve the opposite problem, or a different problem that 
 | Direction | Goes **quieter** than the hardware minimum | Usually makes things **louder**, or adds more clicks within the *existing* range |
 | Mechanism | Independent output-gain effect, applied underneath the existing volume steps | Often remaps or subdivides the same step range you already have |
 | Touches volume buttons? | No takeover: buttons and panel keep working; in the quiet zone their presses fold into the dial's finer scale | Sometimes overrides or intercepts them |
-| Setup | One dial, drag it, done | Frequently an equalizer, presets, or an account |
+| Setup | One dial: tap a bar or an arrow, done | Frequently an equalizer, presets, or an account |
 | Cost model | Open source, no ads, no tracking; one payment after a free week | Often ad supported or subscription based |
 
 The distinction matters because "more steps" and "a lower floor" are not the same fix, though they overlap more than is usually admitted. A longer step scale does put its first step lower on Android's attenuation curve: on one Android 16 configuration measured in August 2026, going from 15 steps to 100 was worth about 5 dB. What it cannot do is pass the bottom of that curve, which is fixed regardless of step count, and past roughly 100 steps the extra ones sit at mute rather than adding anything. Only attenuation applied *underneath* that floor actually changes the quietest sound the device can produce.

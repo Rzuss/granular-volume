@@ -22,7 +22,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-10-04",
+  "dateModified": "2026-10-06",
   "mainEntityOfPage": "https://granularvolume.com/guide/samsung-galaxy-volume-too-loud-minimum.html"
 }
 </script>
@@ -179,16 +179,16 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Samsung lowest volume too loud, even at minimum?</h1>
     <p class="dek">Why the lowest step on Galaxy phones, tablets, and Buds is still too loud, why Sound Assistant helps but only so far, and the method that actually goes below Samsung's hardware floor. No root, no Good Lock.</p>
-    <p class="meta">Updated October 4, 2026 · 8 min read</p>
+    <p class="meta">Updated October 6, 2026 · 8 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
   <article>
-    <p class="lead-p">If the first notch above mute on your Galaxy is still too loud, in a quiet room, next to a sleeping baby, or through Galaxy Buds, you are hitting a real limit, not doing something wrong. This is one of the longest-running complaints on Samsung's own community forums, reopened with every device generation from the Galaxy S9 to the S24. Here is why it happens on Samsung specifically, why the popular fixes fall short, and the one approach that actually lowers the floor.</p>
+    <p class="lead-p">If the first notch above mute on your Galaxy is still too loud, in a quiet room, next to a sleeping baby, or through Galaxy Buds, you are hitting a real limit, not doing something wrong. This is one of the longest-running complaints on Samsung's own community forums, reopened across many Galaxy generations. Here is why it happens on Samsung specifically, why the popular fixes fall short, and the one approach that actually lowers the floor.</p>
 
     <div class="quickfix">
       <div class="kicker">Short on time? Here's the answer</div>
-      <p><strong>Granular Volume</strong> adds real volume steps below your Galaxy's hardware minimum, using Android's own audio engine. It is built for Galaxy phones, tablets, and Buds, and needs no root, ADB, Good Lock, or a Samsung account. Set up in under a minute.</p>
+      <p><strong>Granular Volume</strong> adds real volume steps below your Galaxy's hardware minimum, using Android's own audio engine. It runs on Android 9 and later, Galaxy phones and tablets included, and needs no root, ADB, Good Lock, or a Samsung account. It lowers media, ringtones, notifications and alarms, not regular phone calls or keyboard sounds. How it behaves depends on the device, so check it on yours during the seven days.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dsamsung-galaxy-volume-too-loud-minimum" data-goatcounter-click="play-cta-samsung-galaxy-volume-too-loud-minimum">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -224,7 +224,7 @@
     </div>
 
     <h2 id="buds">Galaxy Buds too loud even at one bar</h2>
-    <p>Galaxy Buds, Buds2, Buds2 Pro, and Buds3 all share the phone's media volume over Bluetooth, so they inherit the same problem, made worse by sensitive in-ear drivers sitting directly in your ear canal. Many owners report that even a single bar is too loud for quiet listening or falling asleep. Disabling Absolute Volume can help the mapping, but the reliable way to get below that first bar is to lower the media output itself, which is what the fix below does. The same reduction applies on the phone speaker and, in most cases, over Bluetooth; check your own pair during the seven free days.</p>
+    <p>Galaxy Buds share the phone's media volume over Bluetooth, so they inherit the same problem, made worse by sensitive in-ear drivers sitting directly in your ear canal. Many owners report that even a single bar is too loud for quiet listening or falling asleep. Disabling Absolute Volume can help the mapping, but the reliable way to get below that first bar is to lower the media output itself, which is what the fix below does. The same reduction applies on the phone speaker and over Bluetooth, except on a small number of phone and headset pairs where the quiet steps have no effect; check your own pair during the seven free days.</p>
 
     <h2 id="tablets">Galaxy Tab: when the lowest step is too loud</h2>
     <p>A tablet is built to fill a room, so on some Galaxy Tab models the lowest step is even louder than on a phone. It depends on the model. If you use a Tab S for late-night video, audiobooks, or white noise and the lowest step is too loud, the below-floor method works the same way on tablets. The <a href="tablet-volume-too-loud-lowest-setting.html">tablet guide</a> covers tablets of every brand.</p>
@@ -233,7 +233,7 @@
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio engine <span class="verdict v-works">Actually works</span></h3>
       <p>Instead of re-slicing the existing steps, this approach lays a negative-gain audio effect on top of the lowest system step, using Android's own DynamicsProcessing framework. That produces output genuinely quieter than the hardware minimum, because it is not working inside the existing step range at all. It is part of Android itself since Android 9, so it needs no Good Lock, no Samsung account, and no root.</p>
-      <p>This is how <a href="../">Granular Volume</a> works: a small floating dial that sits over any app with seven steps, from no change down to a full 30&nbsp;dB below your hardware minimum. Drag it anywhere, tuck it to an edge, or toggle it from a Quick Settings tile. It does not take over your volume buttons, One UI's volume panel, Knox, or Samsung Pay. It adds the quiet end Samsung leaves out. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even 5 dB steps on the speaker and wired headphones, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
+      <p>This is how <a href="../">Granular Volume</a> works: a small floating dial that sits over any app with six quiet steps below your hardware minimum, 5&nbsp;dB each, the lowest 30&nbsp;dB below it. Drag it anywhere, tuck it to an edge, or toggle it from a Quick Settings tile. It does not take over your volume buttons, One UI's volume panel, Knox, or Samsung Pay. It adds the quiet end Samsung leaves out. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even 5 dB steps on the speaker and wired headphones, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
     </div>
 
     <div class="callout">

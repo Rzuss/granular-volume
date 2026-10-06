@@ -29,7 +29,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-10-04",
+  "dateModified": "2026-10-06",
   "mainEntityOfPage": "https://granularvolume.com/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -316,12 +316,12 @@
     <div class="icon"><img src="../img/icon.webp" alt="Granular Volume icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated October 4, 2026 · 10 min read</p>
+    <p class="meta">Updated October 6, 2026 · 10 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
   <article>
-    <p class="lead-p">If the lowest step on your phone or tablet's volume slider is still too loud for a quiet room, a sleeping baby, or sensitive headphones, you are not imagining it and you are not doing anything wrong. Android's volume range is divided into a fixed number of steps between silence and full output, and the first step above mute is a fixed fraction of the maximum, not a fixed loudness. On a phone or tablet with a loud maximum, that first step can be genuinely too loud. Stock Android has no setting to move it.</p>
+    <p class="lead-p">If your Android phone or tablet is still too loud on the lowest setting, for a quiet room, a sleeping baby, or sensitive headphones, you are not imagining it and you are not doing anything wrong. Android's volume range is divided into a fixed number of steps between silence and full output, and the first step above mute is a fixed fraction of the maximum, not a fixed loudness. On a phone or tablet with a loud maximum, that first step can be genuinely too loud. Stock Android has no setting to move it.</p>
     <p>This guide covers every real method people use to work around it, including the ones that don't actually work the way they're usually described. That distinction matters, because most of what ranks for this question online recommends apps and settings that make the steps <em>finer</em> without making the <em>floor</em> any lower.</p>
 
     <div class="glance">
@@ -436,7 +436,7 @@
     <div class="fixcard">
       <h3>Apps using DynamicsProcessing or LoudnessEnhancer with negative gain <span class="verdict v-works">Actually works</span></h3>
       <p>A small category of apps takes a fundamentally different approach: instead of remapping the existing volume steps, they apply an audio effect with negative gain on top of the lowest system step, using Android's own audio effect framework (DynamicsProcessing, or LoudnessEnhancer as a fallback on older versions). This genuinely produces output quieter than the hardware minimum allows, because it isn't working within the existing step range at all.</p>
-      <p>This is how <a href="../">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even 5 dB steps, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
+      <p>This is how <a href="../">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even steps, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
     </div>
 
     <div class="callout">
@@ -487,7 +487,7 @@
       <dd>No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
-      <dd>Media is what it is built around, and ringtones, notifications, and alarms are affected too, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. <a href="call-volume-too-loud-android.html">Regular phone calls</a> are the exception: they run on a separate path that no app can lower. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains the one category of sound that no app can lower.</dd>
+      <dd>Media is what it is built around, and ringtones, notifications, and alarms are affected too, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. <a href="call-volume-too-loud-android.html">Regular phone calls</a> are the exception: they run on a separate path that no app can lower. Pixel owners can start with <a href="pixel-call-volume-too-loud-lowest-setting.html">Pixel call volume too loud on the lowest setting</a>. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains the one category of sound that no app can lower.</dd>
 
       <dt>Will lowering the output this way add hiss, distortion, or reduce audio quality?</dt>
       <dd>It does not add hiss of its own. It's a clean gain-reduction stage, not a compressor, limiter, or equalizer, so it doesn't reshape the signal. What it cannot do is remove a hiss your headphones or amplifier are already producing, because the reduction happens in software before the signal reaches them. Turning the music down leaves that background noise where it was, so it can become relatively easier to hear. If a constant background hiss is the problem rather than loudness, a passive inline volume control on the cable is what addresses that.</dd>
