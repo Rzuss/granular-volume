@@ -75,4 +75,9 @@
     <string name="gv_retry_body">Na lista, encontre o Quiet Dial, toque nele e ative a chave.</string>
     <string name="gv_retry_open">Abrir a lista de novo</string>
     <string name="gv_retry_help">Não encontrou? Ver ajuda</string>
+    <string name="gv_bluetooth_floor_title">%1$s: primeiro nível de volume audível</string>
+    <string name="gv_bluetooth_floor_help">Reproduza um áudio e use − ou + para encontrar o nível mais baixo que você consegue ouvir. Cada toque testa esse nível sem atenuação adicional. A configuração é salva para este nome de fone de ouvido.</string>
+    <string name="gv_bluetooth_floor_lower">Diminuir o primeiro nível audível</string>
+    <string name="gv_bluetooth_floor_raise">Aumentar o primeiro nível audível</string>
+    <string name="gv_bluetooth_floor_limit">A calibração é limitada aos níveis %1$d–%2$d.</string>
 </resources>

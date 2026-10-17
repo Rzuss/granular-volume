@@ -75,4 +75,9 @@
     <string name="gv_retry_body">En la lista, busca Quiet Dial, tócalo y activa su interruptor.</string>
     <string name="gv_retry_open">Abrir la lista otra vez</string>
     <string name="gv_retry_help">¿No lo encuentras? Ver ayuda</string>
+    <string name="gv_bluetooth_floor_title">%1$s: primer nivel de volumen audible</string>
+    <string name="gv_bluetooth_floor_help">Reproduce audio y usa − o + para encontrar el nivel más bajo que puedas oír. Cada toque prueba ese nivel sin atenuación adicional. El ajuste se guarda para este nombre de auriculares.</string>
+    <string name="gv_bluetooth_floor_lower">Bajar el primer nivel audible</string>
+    <string name="gv_bluetooth_floor_raise">Subir el primer nivel audible</string>
+    <string name="gv_bluetooth_floor_limit">La calibración está limitada a los niveles %1$d–%2$d.</string>
 </resources>

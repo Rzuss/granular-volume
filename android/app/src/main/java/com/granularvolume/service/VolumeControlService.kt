@@ -79,6 +79,9 @@ class VolumeControlService : Service() {
         const val ACTION_KEY_INSTALLED = "com.granularvolume.ACTION_KEY_INSTALLED"
         /** 1.5.1: replay the feature tour, sent by the info sheet's "Show the tour" link. */
         const val ACTION_SHOW_TOUR = "com.granularvolume.ACTION_SHOW_TOUR"
+        const val ACTION_CALIBRATE_BLUETOOTH_FLOOR = "com.granularvolume.ACTION_CALIBRATE_BLUETOOTH_FLOOR"
+        const val EXTRA_BLUETOOTH_NAME = "bluetooth_name"
+        const val EXTRA_BLUETOOTH_FLOOR = "bluetooth_floor"
 
         /**
          * 1.7.0: "the first-run dialogs are answered, show the tour now if it is due". Sent by the
@@ -465,6 +468,11 @@ class VolumeControlService : Service() {
             }
             ACTION_KEY_INSTALLED -> onKeyArrived("activity")
             ACTION_SHOW_TOUR -> overlayManager.startTourOnRequest()
+            ACTION_CALIBRATE_BLUETOOTH_FLOOR -> {
+                val name = intent.getStringExtra(EXTRA_BLUETOOTH_NAME)
+                val floor = intent.getIntExtra(EXTRA_BLUETOOTH_FLOOR, -1)
+                if (name != null && floor >= 1) coordinator.calibrateBluetoothFloor(name, floor)
+            }
             ACTION_TOUR_IF_DUE -> startTourIfDue()
             ACTION_ACCESS_CHANGED -> {
                 // A sheet found the purchase before the service did: same door as the key signal.

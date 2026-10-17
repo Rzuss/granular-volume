@@ -79,4 +79,9 @@
     <string name="gv_retry_body">Na liście znajdź Quiet Dial, kliknij i włącz przełącznik.</string>
     <string name="gv_retry_open">Otwórz listę ponownie</string>
     <string name="gv_retry_help">Nie możesz znaleźć? Zobacz pomoc</string>
+    <string name="gv_bluetooth_floor_title">%1$s: pierwszy słyszalny poziom głośności</string>
+    <string name="gv_bluetooth_floor_help">Odtwórz dźwięk, a następnie użyj − lub +, aby znaleźć najniższy słyszalny poziom. Każde dotknięcie odtwarza wybrany poziom bez dodatkowego tłumienia. Ustawienie jest zapisywane dla tej nazwy słuchawek.</string>
+    <string name="gv_bluetooth_floor_lower">Obniż pierwszy słyszalny poziom</string>
+    <string name="gv_bluetooth_floor_raise">Podwyższ pierwszy słyszalny poziom</string>
+    <string name="gv_bluetooth_floor_limit">Kalibracja jest ograniczona do poziomów %1$d–%2$d.</string>
 </resources>

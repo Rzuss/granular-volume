@@ -324,7 +324,8 @@ class FullRangeCoordinator(
             Log.i(tag, "Wireless route with Absolute Volume: raw-index upper zone")
             null
         } else {
-            VolumeCurve.read(am, AudioManager.STREAM_MUSIC)
+            VolumeCurve.read(am, AudioManager.STREAM_MUSIC,
+                streamVol.minAudibleIndex(AudioManager.STREAM_MUSIC))
         }
         if (isMuted) {
             // The saved pre-mute level belonged to the previous route, and indices are per
@@ -429,7 +430,17 @@ class FullRangeCoordinator(
         if (isMuted) cancelMute()
         surrendered = false
         val media = AudioManager.STREAM_MUSIC
-        streamVol.lowerTo(media, streamVol.minAudibleIndex(media))
+        val floor = streamVol.minAudibleIndex(media)
+        val raiseToCalibratedFloor = floor > maxOf(1, am.getStreamMinVolume(media)) &&
+            streamVol.index(media) < floor
+        if (raiseToCalibratedFloor) {
+            // Entering from a headset's silent nonzero index must raise hardware to its
+            // calibrated audible floor. Apply attenuation first to avoid a loud burst.
+            audioController.setAttenuation(stepDb, AudioController.GainSource.QUIET_STEP)
+            streamVol.setIndex(media, floor)
+        } else {
+            streamVol.lowerTo(media, floor)
+        }
         // VoIP call: the audible stream is the voice stream, which the media floor does not
         // touch. Drop it to its own minimum too, so hardware does its half and the gain (which
         // DOES reach VoIP audio, owner-verified in a WhatsApp call) carries the rest.
@@ -437,8 +448,30 @@ class FullRangeCoordinator(
             val voice = AudioManager.STREAM_VOICE_CALL
             streamVol.lowerTo(voice, streamVol.minAudibleIndex(voice))
         }
-        audioController.setAttenuation(stepDb, AudioController.GainSource.QUIET_STEP)
+        if (!raiseToCalibratedFloor) {
+            audioController.setAttenuation(stepDb, AudioController.GainSource.QUIET_STEP)
+        }
         zoneQuiet = true
+        notifyUi()
+    }
+
+    /** Calibrate only the output the listener saw when they pressed the preview button. */
+    fun calibrateBluetoothFloor(deviceName: String, index: Int) {
+        if (lockedProvider()) { onLockedInteraction?.invoke(null); return }
+        // Calibration previews MEDIA at normal gain; it must not change a call's sound.
+        if (streamVol.inCall() || streamVol.activeBluetoothName() != deviceName) return
+        val media = AudioManager.STREAM_MUSIC
+        val floor = index.coerceIn(maxOf(1, am.getStreamMinVolume(media)), streamVol.calibrationMaxIndex())
+        Prefs.setBluetoothFloor(appContext, deviceName, floor)
+        // The floor is also the bottom of the upper ladder. Rebuild it immediately.
+        refreshCurve()
+        // Set the chosen low hardware level BEFORE removing the previous attenuation.
+        // Do not cancelMute(), which would briefly restore the old, potentially high index.
+        streamVol.setIndex(media, floor)
+        audioController.setAttenuation(0f, AudioController.GainSource.SYSTEM)
+        isMuted = false
+        zoneQuiet = false
+        surrendered = false
         notifyUi()
     }
 
@@ -536,6 +569,12 @@ class FullRangeCoordinator(
 
         val floor = streamVol.minAudibleIndex(stream)
         val current = audioController.attenuationDb.value
+        if (floor > maxOf(1, am.getStreamMinVolume(stream)) && to <= floor) {
+            // Crossing a headset's silent index into its calibrated floor is already
+            // a hardware increase. Do not also ease the gain by 5 dB.
+            notifyUi()
+            return
+        }
         if (to - from == 1) {
             // Single button step up: absorb — back to floor, attenuation eases 5 dB.
             // Easing is cooperative progress, not a fight, so it never consumes the

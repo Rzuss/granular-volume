@@ -222,4 +222,9 @@
     <string name="gv_retry_body">In the list, find Quiet Dial, tap it, and turn its switch on.</string>
     <string name="gv_retry_open">Open the list again</string>
     <string name="gv_retry_help">Can\'t find it? See help</string>
+    <string name="gv_bluetooth_floor_title">%1$s: first audible volume step</string>
+    <string name="gv_bluetooth_floor_help">Play audio, then use − or + to find the lowest step you can hear. Each tap previews that step without extra attenuation. This setting is saved for this headset name.</string>
+    <string name="gv_bluetooth_floor_lower">Lower first audible step</string>
+    <string name="gv_bluetooth_floor_raise">Raise first audible step</string>
+    <string name="gv_bluetooth_floor_limit">Calibration is limited to steps %1$d–%2$d.</string>
 </resources>

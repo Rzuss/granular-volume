@@ -1,7 +1,9 @@
 package com.granularvolume
 
 import android.content.Intent
+import android.content.Context
 import android.graphics.Typeface
+import android.media.AudioManager
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +21,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.service.VolumeControlService
+import com.granularvolume.audio.StreamVolumeController
 import com.granularvolume.util.AccessState
 import com.granularvolume.util.BillingManager
 import com.granularvolume.util.ControlLive
@@ -52,9 +55,10 @@ import com.granularvolume.util.UpdateCheck
  * [AccessState] every other surface reads, so a control that is still holding its level
  * after the free week is told exactly that, and never "locked".
  *
- * Read-only by design: it reports state and offers Play. It never writes entitlement
+ * It reports state and offers Play. It never writes entitlement
  * itself; 1.6.0's purchase route ([PurchaseFlow]) opens Google Play's own sheet over this
  * one, and the cache it writes belongs to [com.granularvolume.util.BillingManager].
+ * Bluetooth floor calibration stores only the listener's selected audible index.
  */
 class InfoSheetActivity : AppCompatActivity() {
 
@@ -314,6 +318,7 @@ class InfoSheetActivity : AppCompatActivity() {
             AccessState.WEEK_ENDED_RUNNING -> R.string.gv_info_body_held
         }
         root.addView(text(getString(body), 13f, colorRes = R.color.gv_text_secondary).topPad(8))
+        bluetoothFloorControls()?.let { root.addView(it.topPad(18, fill = true)) }
 
         // 1.7.0: when the device is the reason the quiet steps do nothing, say so, here, for as
         // long as it is true. Only a running control knows; a stopped one says nothing.
@@ -378,6 +383,64 @@ class InfoSheetActivity : AppCompatActivity() {
 
         root.addView(linksBlock().topPad(14, fill = true))
         return root.inScroller()
+    }
+
+    private fun bluetoothFloorControls(): View? {
+        if (!ControlLive.running || AccessState.of(this).weekOver) return null
+        val volume = StreamVolumeController(this)
+        if (volume.inCall()) return null
+        val name = volume.activeBluetoothName() ?: return null
+        val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val max = volume.calibrationMaxIndex()
+        val min = maxOf(1, am.getStreamMinVolume(AudioManager.STREAM_MUSIC))
+        val current = Prefs.getBluetoothFloor(this, name).coerceIn(min, max)
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            addView(text(getString(R.string.gv_bluetooth_floor_title, name), 14f, bold = true,
+                colorRes = R.color.gv_text_primary))
+            addView(text(getString(R.string.gv_bluetooth_floor_help), 12f,
+                colorRes = R.color.gv_text_secondary).topPad(4))
+            addView(text(getString(R.string.gv_bluetooth_floor_limit, min, max), 12f,
+                colorRes = R.color.gv_text_secondary).topPad(4))
+            val row = LinearLayout(this@InfoSheetActivity).apply { gravity = Gravity.CENTER_VERTICAL }
+            val value = text("$current", 16f, bold = true, colorRes = R.color.gv_text_primary)
+            val down = Button(this@InfoSheetActivity)
+            val up = Button(this@InfoSheetActivity)
+            var selected = current
+            fun updateButtons() {
+                down.isEnabled = selected > min
+                up.isEnabled = selected < max
+            }
+            fun change(delta: Int) {
+                if (!ControlLive.running || volume.inCall() || volume.activeBluetoothName() != name) {
+                    rerender()
+                    return
+                }
+                val next = (selected + delta)
+                    .coerceIn(min, max)
+                if (next == selected) return
+                selected = next
+                value.text = "$next"
+                updateButtons()
+                startService(Intent(this@InfoSheetActivity, VolumeControlService::class.java)
+                    .setAction(VolumeControlService.ACTION_CALIBRATE_BLUETOOTH_FLOOR)
+                    .putExtra(VolumeControlService.EXTRA_BLUETOOTH_NAME, name)
+                    .putExtra(VolumeControlService.EXTRA_BLUETOOTH_FLOOR, next))
+            }
+            row.addView(down.apply {
+                text = "−"
+                contentDescription = getString(R.string.gv_bluetooth_floor_lower)
+                setOnClickListener { change(-1) }
+            })
+            row.addView(value.apply { setPadding(dp(18), 0, dp(18), 0) })
+            row.addView(up.apply {
+                text = "+"
+                contentDescription = getString(R.string.gv_bluetooth_floor_raise)
+                setOnClickListener { change(1) }
+            })
+            updateButtons()
+            addView(row.topPad(8))
+        }
     }
 
     // -- purchase -------------------------------------------------------------

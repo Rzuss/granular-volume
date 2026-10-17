@@ -73,4 +73,9 @@
     <string name="gv_retry_body">Di daftar, cari Quiet Dial, ketuk, lalu aktifkan tombol alihnya.</string>
     <string name="gv_retry_open">Buka daftar lagi</string>
     <string name="gv_retry_help">Tidak menemukannya? Lihat bantuan</string>
+    <string name="gv_bluetooth_floor_title">%1$s: tingkat volume pertama yang terdengar</string>
+    <string name="gv_bluetooth_floor_help">Putar audio, lalu gunakan − atau + untuk menemukan tingkat terendah yang dapat Anda dengar. Setiap ketukan mencoba tingkat tersebut tanpa peredaman tambahan. Pengaturan ini disimpan untuk nama headset ini.</string>
+    <string name="gv_bluetooth_floor_lower">Turunkan tingkat pertama yang terdengar</string>
+    <string name="gv_bluetooth_floor_raise">Naikkan tingkat pertama yang terdengar</string>
+    <string name="gv_bluetooth_floor_limit">Kalibrasi dibatasi pada tingkat %1$d–%2$d.</string>
 </resources>

@@ -75,4 +75,9 @@
     <string name="gv_retry_body">Dans la liste, cherchez Quiet Dial, touchez-le et activez son interrupteur.</string>
     <string name="gv_retry_open">Rouvrir la liste</string>
     <string name="gv_retry_help">Introuvable ? Voir l\'aide</string>
+    <string name="gv_bluetooth_floor_title">%1$s : premier niveau de volume audible</string>
+    <string name="gv_bluetooth_floor_help">Lancez un son, puis utilisez − ou + pour trouver le niveau le plus bas que vous entendez. Chaque appui teste ce niveau sans atténuation supplémentaire. Ce réglage est enregistré pour ce nom de casque.</string>
+    <string name="gv_bluetooth_floor_lower">Baisser le premier niveau audible</string>
+    <string name="gv_bluetooth_floor_raise">Augmenter le premier niveau audible</string>
+    <string name="gv_bluetooth_floor_limit">Le calibrage est limité aux niveaux %1$d–%2$d.</string>
 </resources>

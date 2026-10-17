@@ -75,4 +75,9 @@
     <string name="gv_retry_body">Suche in der Liste Quiet Dial, tippe darauf und schalte den Schalter ein.</string>
     <string name="gv_retry_open">Liste noch einmal öffnen</string>
     <string name="gv_retry_help">Nicht gefunden? Zur Hilfe</string>
+    <string name="gv_bluetooth_floor_title">%1$s: erste hörbare Lautstärkestufe</string>
+    <string name="gv_bluetooth_floor_help">Spiele Audio ab und suche mit − oder + die niedrigste hörbare Stufe. Jeder Tipp spielt die gewählte Stufe ohne zusätzliche Dämpfung vor. Die Einstellung wird für diesen Kopfhörernamen gespeichert.</string>
+    <string name="gv_bluetooth_floor_lower">Erste hörbare Stufe senken</string>
+    <string name="gv_bluetooth_floor_raise">Erste hörbare Stufe erhöhen</string>
+    <string name="gv_bluetooth_floor_limit">Die Kalibrierung ist auf die Stufen %1$d–%2$d begrenzt.</string>
 </resources>
