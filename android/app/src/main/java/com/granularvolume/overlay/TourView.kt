@@ -75,6 +75,9 @@ class TourView(
     private val next: TextView
     private val cardWidth = dpi(296f)
 
+    /** 1.7.3: the card's text sizes as built, so a step can shrink them to fit and the next step starts over. */
+    private val baseTextPx = HashMap<TextView, Float>()
+
     init {
         setWillNotDraw(false)
         val pad = dpi(18f)
@@ -121,6 +124,11 @@ class TourView(
         card.addView(footer, lp(topDp = 14f))
         addView(card, LayoutParams(cardWidth, LayoutParams.WRAP_CONTENT))
         card.alpha = 0f
+        for (tv in listOf(counter, title, body, skip, next)) baseTextPx[tv] = tv.textSize
+    }
+
+    private fun scaleText(s: Float) {
+        for ((tv, px) in baseTextPx) tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, px * s)
     }
 
     private fun text(sizeSp: Float, colorRes: Int, bold: Boolean = false): TextView =
@@ -163,10 +171,22 @@ class TourView(
         val cardLp = card.layoutParams as LayoutParams
         cardLp.width = cw
         val cardX = if (cardOnRight) dial.right - ox + gap else dial.left - ox - gap - cw
-        card.measure(
+        // 1.7.3: with the largest text size on a phone held sideways the card was taller than the
+        // screen, and Next fell below its edge. Shrink the card's text, in steps, until the card
+        // fits with its margins; the next step starts again from the size as built.
+        val room = h - 2 * (margin + dpi(24f))
+        var textScale = 1f
+        scaleText(textScale)
+        fun measureCard() = card.measure(
             MeasureSpec.makeMeasureSpec(cw, MeasureSpec.EXACTLY),
-            MeasureSpec.makeMeasureSpec(h, MeasureSpec.AT_MOST)
+            MeasureSpec.makeMeasureSpec(max(h, 0), if (h > 0) MeasureSpec.AT_MOST else MeasureSpec.UNSPECIFIED)
         )
+        measureCard()
+        while (h > 0 && card.measuredHeight > room && textScale > MIN_TEXT_SCALE) {
+            textScale -= TEXT_SCALE_STEP
+            scaleText(textScale)
+            measureCard()
+        }
         val ch = card.measuredHeight
         val targetCy = target.centerY() - oy
         // 1.7.3: when the window is shorter than the card plus its margins (the largest text size,
@@ -264,5 +284,11 @@ class TourView(
     fun fadeOut(onEnd: () -> Unit) {
         lineAnimator?.cancel()
         animate().alpha(0f).setDuration(160L).withEndAction { onEnd() }.start()
+    }
+
+    private companion object {
+        /** 1.7.3: the card's text never shrinks below this fraction of its size, in these steps. */
+        const val MIN_TEXT_SCALE = 0.55f
+        const val TEXT_SCALE_STEP = 0.1f
     }
 }
