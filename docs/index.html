@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="msvalidate.01" content="8A5722EBDAC8FF8C2D53BF75161DFEDE">
 <title>Granular Volume: Quieter than your phone or tablet allows</title>
-<meta name="description" content="Volume too loud at the lowest setting, or volume buttons not working? One slider for Android phones and tablets. On Google Play as Volume Control: Quiet Dial.">
+<meta name="description" content="Lowest volume still too loud, or volume buttons not working? One slider for Android phones and tablets. On Google Play as Volume Control: Quiet Dial.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://granularvolume.com/">
+<meta property="og:url" content="https://granularvolume.com/">
 <meta property="og:title" content="Granular Volume">
 <meta property="og:description" content="Fix volume that's too loud at the minimum, on phones and tablets. No root. Open source, no ads.">
 <meta property="og:image" content="https://granularvolume.com/img/feature.png">
@@ -42,6 +43,54 @@
     "embedUrl": "https://www.youtube.com/embed/z0E8cnxuU14",
     "contentUrl": "https://www.youtube.com/shorts/z0E8cnxuU14"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Do I need root or a computer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. No root, no ADB and no computer. Install it from Google Play, open it once and allow it to display over other apps."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it work with Bluetooth headphones and speakers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The quiet steps apply over Bluetooth as well as on the speaker. On a small number of phone and headphone combinations they have no effect over Bluetooth, although they work on the speaker. The seven days with everything open are the time to check yours."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it lower phone calls?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Calls in apps such as WhatsApp, yes. Regular calls over the mobile network, no: Android carries them on a separate path that runs no audio effects, so no app can lower them below the phone's own minimum."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does it collect?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Nothing. The app has no internet permission at all, no ads, no account and no tracking. The source code is public under GPL-3.0."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it work on tablets?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, on Android phones and tablets alike, from Android 9."
+   }
+  }
+ ]
 }
 </script>
 <style>
@@ -82,6 +131,15 @@
   .sub{max-width:620px;margin:18px auto 0;color:var(--muted);font-size:18px;}
   .setup-note{margin-top:12px;font-size:14px;line-height:1.5;opacity:.85;}
 .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+  @media (max-width:640px){header.hero{padding-top:48px;}}
+  .hero-shot{margin:28px auto 0;max-width:260px;}
+  .hero-shot img{display:block;width:100%;height:auto;border-radius:22px;border:1px solid var(--line);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);background:#0a0c18;}
+  @media (min-width:900px){
+    header.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:48px;align-items:center;
+      grid-template-areas:"top shot" "chips shot";text-align:center;}
+    .hero-top{grid-area:top;} .hero-chips{grid-area:chips;} .hero-shot{grid-area:shot;margin:0;max-width:300px;}
+  }
   .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
   .chip{font-size:14px;color:#d7d9ee;background:rgba(255,255,255,.05);
     border:1px solid var(--line);border-radius:999px;padding:8px 16px;}
@@ -99,14 +157,19 @@
     background:rgba(108,99,255,.16);margin-bottom:14px;font-size:20px;}
 
   .shots{display:flex;gap:18px;overflow-x:auto;padding:6px 2px 14px;scroll-snap-type:x mandatory;}
-  .shots img{height:520px;border-radius:22px;border:1px solid var(--line);scroll-snap-align:center;flex:0 0 auto;}
+  .shots img{height:520px;width:auto;border-radius:22px;border:1px solid var(--line);scroll-snap-align:center;flex:0 0 auto;}
 
   .compare{max-width:760px;margin:0 auto;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
   .compare div{display:grid;grid-template-columns:1fr 1fr;}
   .compare .h{background:rgba(255,255,255,.03);font-weight:700;}
   .compare span{padding:14px 18px;border-bottom:1px solid var(--line);font-size:15px;}
-  .compare span:nth-child(odd){color:var(--muted);}
+  .compare span:nth-child(even){color:var(--muted);}
+  .compare span:nth-child(odd){color:var(--txt);font-weight:600;}
 
+  @media (min-width:900px){#uses .grid,#guides .grid{grid-template-columns:repeat(3,1fr);}}
+  .faq{max-width:720px;margin:0 auto;}
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
   footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);}
   footer a{color:var(--accent2);text-decoration:none;}
 
@@ -130,6 +193,7 @@
     display:flex;align-items:center;justify-content:center;background:#5046E5;color:#fff;border:2px solid #fff;
     box-shadow:0 6px 18px rgba(0,0,0,.45);cursor:pointer;padding:0;text-decoration:none;}
   .gv-a11y-fab svg{width:30px;height:30px;fill:currentColor;}
+  @media (max-width:640px){.gv-a11y-fab{width:44px;height:44px;left:10px;bottom:10px;}.gv-a11y-fab svg{width:25px;height:25px;}.gv-a11y-panel{bottom:64px;}body{padding-bottom:64px;}}
   .gv-a11y-fab:focus-visible,.gv-a11y-btn:focus-visible,.gv-a11y-link:focus-visible{outline:3px solid #22d3ee;outline-offset:3px;}
   .gv-a11y-panel{position:fixed;left:16px;bottom:78px;z-index:1000;width:min(300px,calc(100vw - 32px));
     max-height:calc(100vh - 100px);overflow:auto;background:#161232;color:#f4f6ff;border:1px solid rgba(255,255,255,.35);
@@ -160,18 +224,21 @@
 <a class="skip-link" href="#main">Skip to the main content</a>
 <div class="wrap">
 
-  <header>
-    <div class="icon"><img src="img/icon.webp" alt="Granular Volume icon"></div>
+  <header class="hero">
+   <div class="hero-top">
+    <div class="icon"><img width="512" height="512" src="img/icon.webp" alt="Granular Volume icon"></div>
     <h1>Granular Volume</h1>
     <div class="tag">Quieter than your phone or tablet allows.</div>
     <p class="playname">On Google Play as <strong>Volume Control: Quiet Dial</strong>.</p>
     <p class="sub">Sometimes the lowest volume setting is still too loud, on a phone or a tablet. And sometimes the volume buttons themselves stop working. Granular Volume puts the whole volume range on your screen: one floating slider with normal volume above your device's minimum line, and the quiet steps Android leaves out below it.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhome" data-goatcounter-click="play-cta-home">Get it on Google Play</a>
-      <a class="btn btn-ghost" href="https://github.com/Rzuss/granular-volume">View source</a>
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhome" data-goatcounter-click="play-cta-home-top">Get it on Google Play</a>
+      <a class="btn btn-ghost" href="#demo" data-goatcounter-click="demo-home-top">Watch the demo</a>
     </div>
       <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
-    <div class="chips">
+   </div>
+    <figure class="hero-shot"><img src="img/hero-dial.webp" width="480" height="512" fetchpriority="high" alt="The Quiet Dial: your phone's own volume range above the orange device-minimum line, and quieter steps below it"></figure>
+    <div class="chips hero-chips">
       
       <span class="chip">No ads</span>
       <span class="chip">No tracking</span>
@@ -190,7 +257,7 @@
         <a class="video-poster" href="https://www.youtube-nocookie.com/embed/z0E8cnxuU14" data-embed="https://www.youtube-nocookie.com/embed/z0E8cnxuU14?autoplay=1"
            style="position:absolute;inset:0;display:block;color:#fff;text-decoration:none;"
            aria-label="Play the demo video. It loads from YouTube only after you press play.">
-          <img src="img/demo-poster.jpg" alt="The Quiet Dial overlay on an Android home screen: a vertical slider with the quiet steps below the orange line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" decoding="async" width="405" height="720" src="img/demo-poster.jpg" alt="The Quiet Dial overlay on an Android home screen: a vertical slider with the quiet steps below the orange line" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
           <span aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:rgba(10,14,29,.82);border:2px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           </span>
@@ -236,9 +303,17 @@
     <div class="grid">
       <a class="feat" href="use-cases/sleeping-baby-white-noise.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🌙</div><h3>Sleep and white noise</h3><p>Keep lullabies and white noise barely audible next to a sleeping baby.</p></a>
       <a class="feat" href="use-cases/sensitive-iem-headphones.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🎧</div><h3>Sensitive headphones</h3><p>For IEMs and bone conduction where even a few percent is too strong.</p></a>
-      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📱</div><h3>Tablet speakers</h3><p>Tablet speakers and headphones, where on some models the minimum step is even louder than on a phone.</p></a>
       <a class="feat" href="use-cases/night-audiobooks-podcasts.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📖</div><h3>Late night listening</h3><p>A podcast or audiobook to fall asleep to, without waking anyone beside you.</p></a>
       <a class="feat" href="use-cases/quiet-rooms-libraries.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🧘</div><h3>Quiet rooms</h3><p>A library, a quiet office, meditation, or anywhere that needs calm.</p></a>
+      <a class="feat" href="use-cases/tinnitus-sensitive-hearing.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">👂</div><h3>Sensitive ears</h3><p>Quieter levels than the minimum for sensitive hearing. A comfort utility, not a medical device.</p></a>
+      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📱</div><h3>Tablet speakers</h3><p>Tablet speakers and headphones, where on some models the minimum step is even louder than on a phone.</p></a>
+    </div>
+  </section>
+
+  <section id="guides">
+    <h2>Guides for a specific problem</h2>
+    <p class="lead">Free fixes first, on each page, then where the dial helps.</p>
+    <div class="grid">
       <a class="feat" href="guide/samsung-galaxy-volume-too-loud-minimum.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📲</div><h3>Samsung Galaxy too loud</h3><p>Galaxy phone, tablet, or Buds still too loud at the lowest step, when Sound Assistant doesn't help.</p></a>
       <a class="feat" href="guide/bluetooth-earbuds-volume-too-loud-lowest.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔉</div><h3>Earbuds too loud</h3><p>When even the lowest Bluetooth step is still too loud in your ears.</p></a>
       <a class="feat" href="guide/call-volume-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📞</div><h3>Calls too loud</h3><p>Which calls an app can lower and which it cannot: regular phone calls stay at the phone's own lowest step, app calls get quieter on some phones.</p></a>
@@ -248,7 +323,6 @@
       <a class="feat" href="guide/why-android-minimum-volume-is-too-loud.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔬</div><h3>Why the floor exists</h3><p>The lowest step is a decision in Android's audio mixer, not a fault in your phone. Where the limit comes from, and what can move it.</p></a>
       <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">💻</div><h3>Tablet too loud</h3><p>An Android tablet still too loud at the last step before mute, at bedtime, with white noise or late at night.</p></a>
       <a class="feat" href="guide/volume-buttons-not-working-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔘</div><h3>Volume buttons not working</h3><p>Stuck, stiff or dead volume keys. The free fixes first, then a slider on screen that stands in for them.</p></a>
-      <a class="feat" href="use-cases/tinnitus-sensitive-hearing.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">👂</div><h3>Sensitive ears</h3><p>Quieter levels than the minimum for sensitive hearing. A comfort utility, not a medical device.</p></a>
     </div>
   </section>
 
@@ -256,11 +330,11 @@
     <h2>See it</h2>
     <p class="lead">Swipe through.</p>
     <div class="shots">
-      <img src="img/shot1.webp" alt="When the lowest setting is still too loud">
-      <img src="img/shot2.webp" alt="One dial, the whole volume range">
-      <img src="img/shot3.webp" alt="Works when your buttons do not">
-      <img src="img/shot4.webp" alt="Mutes media, never your alarms">
-      <img src="img/shot5.webp" alt="One tap from Quick Settings">
+      <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot1.webp" alt="When the lowest setting is still too loud">
+      <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot2.webp" alt="One dial, the whole volume range">
+      <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot3.webp" alt="Works when your buttons do not">
+      <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot4.webp" alt="Mutes media, never your alarms">
+      <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot5.webp" alt="One tap from Quick Settings">
     </div>
   </section>
 
@@ -271,16 +345,33 @@
       <div class="h"><span>Granular Volume</span><span>Typical volume app</span></div>
       <div><span>Goes quieter than the minimum</span><span>Makes things louder</span></div>
       <div><span>Stands in for broken volume buttons</span><span>Overrides working ones</span></div>
-      <div><span>One slider, no setup</span><span>Equalizer, presets, accounts</span></div>
+      <div><span>One slider, one permission to allow</span><span>Equalizer, presets, accounts</span></div>
       <div><span>Open source, no ads, no tracking; one payment after a free week</span><span>Often ad supported or subscription based</span></div>
     </div>
+  </section>
+
+  <section id="faq">
+    <h2>Questions</h2>
+    <dl class="faq">
+      <dt>Do I need root or a computer?</dt>
+      <dd>No. No root, no ADB and no computer. Install it from Google Play, open it once and allow it to display over other apps.</dd>
+      <dt>Does it work with Bluetooth headphones and speakers?</dt>
+      <dd>The quiet steps apply over Bluetooth as well as on the speaker. On a small number of phone and headphone combinations they have no effect over Bluetooth, although they work on the speaker. The seven days with everything open are the time to check yours.</dd>
+      <dt>Does it lower phone calls?</dt>
+      <dd>Calls in apps such as WhatsApp, yes. Regular calls over the mobile network, no: Android carries them on a separate path that runs no audio effects, so no app can lower them below the phone's own minimum.</dd>
+      <dt>What does it collect?</dt>
+      <dd>Nothing. The app has no internet permission at all, no ads, no account and no tracking. The source code is public under GPL-3.0.</dd>
+      <dt>Does it work on tablets?</dt>
+      <dd>Yes, on Android phones and tablets alike, from Android 9.</dd>
+    </dl>
+    <p class="lead" style="margin-top:22px;">More in <a href="help.html">Help</a>.</p>
   </section>
 
   <section style="text-align:center;">
     <h2>Get the volume you were missing, on your phone or tablet</h2>
     <div class="cta" style="margin-top:24px;">
-      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhome" data-goatcounter-click="play-cta-home">Get it on Google Play</a>
-      <a class="btn btn-ghost" href="https://www.youtube.com/shorts/z0E8cnxuU14">Watch the demo</a>
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhome" data-goatcounter-click="play-cta-home-bottom">Get it on Google Play</a>
+      <a class="btn btn-ghost" href="#demo" data-goatcounter-click="demo-home-bottom">Watch the demo</a>
     </div>
       <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
   </section>
