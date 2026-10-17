@@ -1,0 +1,1 @@
+Fixes a crash in the short introduction tour on screens with very large text or held sideways. The tour now fits the screen, and if it cannot, it closes while the dial keeps working.

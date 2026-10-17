@@ -169,7 +169,14 @@ class TourView(
         )
         val ch = card.measuredHeight
         val targetCy = target.centerY() - oy
-        val cardY = (targetCy - ch / 2).coerceIn(margin + dpi(24f), max(margin, h - ch - margin - dpi(24f)))
+        // 1.7.3: when the window is shorter than the card plus its margins (the largest text size,
+        // a phone held sideways, or a window not laid out yet) the range is empty, and coerceIn
+        // threw and took the service down (Play vitals on 1.7.2). Then the card goes as low as it
+        // fits, never above the top edge.
+        val topY = margin + dpi(24f)
+        val bottomY = h - ch - margin - dpi(24f)
+        val cardY = if (bottomY >= topY) (targetCy - ch / 2).coerceIn(topY, bottomY)
+                    else max(0, min(topY, h - ch - margin))
         cardLp.leftMargin = cardX
         cardLp.topMargin = cardY
         card.layoutParams = cardLp
@@ -178,7 +185,8 @@ class TourView(
         startX = (if (cardOnRight) dial.right else dial.left) - ox.toFloat()
         startY = targetCy.toFloat()
         val endX = if (cardOnRight) cardX.toFloat() else (cardX + cw).toFloat()
-        val endY = (cardY + ch / 2f).coerceIn(cardY + dp(20f), cardY + ch - dp(20f))
+        val endY = if (ch > dp(40f)) (cardY + ch / 2f).coerceIn(cardY + dp(20f), cardY + ch - dp(20f))
+                   else cardY + ch / 2f
         val midX = (startX + endX) / 2f
         linePath.reset()
         linePath.moveTo(startX, startY)
