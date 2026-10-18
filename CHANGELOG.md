@@ -2,6 +2,16 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.3 (versionCode 53)
+
+One fix. Nothing else changes.
+
+### Fixed
+- The short tour that introduces the dial could stop the app on a screen too short for its card: the largest
+  text size, a phone held sideways, or a window not yet laid out. The control stopped with it. The card now
+  goes as low as fits, the first card waits for the window to have its size, and if a card still cannot be
+  placed the tour simply ends while the dial keeps working.
+
 ## 1.7.2 (versionCode 52)
 
 The first setup step only. Nothing about the dial, the sound, the free week, the unlock or the price changes.

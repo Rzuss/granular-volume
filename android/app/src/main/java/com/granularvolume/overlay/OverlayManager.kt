@@ -40,6 +40,7 @@ import com.granularvolume.audio.FullRangeCoordinator
 import com.granularvolume.audio.FullRangeCoordinator.LockDisplay
 import com.granularvolume.util.AccessState
 import com.granularvolume.util.Prefs
+import androidx.core.view.doOnLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -835,7 +836,9 @@ class OverlayManager(
         dial.alpha = ACTIVE_ALPHA
         dial.overlay.add(tourRing)
         tv.animate().alpha(1f).setDuration(220L).start()
-        tv.post { showTourStep(firstStep.coerceIn(1, TOUR_STEPS)) }
+        // 1.7.3: place the first card only once the window has its real size. A post can run
+        // before the first layout, and the card was then placed in a window of height 0.
+        tv.doOnLayout { showTourStep(firstStep.coerceIn(1, TOUR_STEPS)) }
     }
 
     private fun tourTargets(dial: View, step: Int): List<View> = when (step) {
@@ -865,11 +868,19 @@ class OverlayManager(
         val lastBody = if (state.onTrial || state.weekOver) R.string.gv_tour_4_body_price else R.string.gv_tour_4_body
         val bodies = intArrayOf(R.string.gv_tour_1_body, R.string.gv_tour_2_body, R.string.gv_tour_3_body, lastBody)
         val cardOnRight = dialRect.centerX() < fullDisplayBounds().width() / 2
-        tv.showStep(
-            step, TOUR_STEPS,
-            context.getString(titles[step - 1]), context.getString(bodies[step - 1]),
-            t, dialRect, cardOnRight, animate = animationsEnabled()
-        )
+        // 1.7.3: the tour is a guide, never a reason for the control to stop. If a step cannot
+        // be placed on this screen, end the tour; the dial and the service carry on.
+        try {
+            tv.showStep(
+                step, TOUR_STEPS,
+                context.getString(titles[step - 1]), context.getString(bodies[step - 1]),
+                t, dialRect, cardOnRight, animate = animationsEnabled()
+            )
+        } catch (e: RuntimeException) {
+            android.util.Log.w("GranularVolume", "tour step $step could not be placed, ending the tour", e)
+            endTour(animated = false)
+            return
+        }
 
         // Ring the element inside the dial; between steps the ring glides to its new home.
         val pad = (4 * density).toInt()
