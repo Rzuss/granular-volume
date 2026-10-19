@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="store-assets/play_icon_512.png" width="120" alt="Granular Volume icon">
+<img src="store-assets/play_icon_512.png" width="120" alt="Quiet Dial icon">
 
-# Granular Volume
+# Quiet Dial
 
 **Volume below Android's minimum. A floating control that stays above any app.**
 
 *It also stands in for broken volume buttons: the slider drives normal system volume above the
 device-minimum line, in even steps, and keeps going below it.*
 
-*Listed on Google Play as "Volume Control: Quiet Dial". Same app, same developer.*
+*Volume Control: Quiet Dial by Granular Apps (formerly Granular Volume).*
 
 **[Get it on Google Play](https://play.google.com/store/apps/details?id=granularvolume.com&referrer=utm_source%3Dgithub%26utm_medium%3Dreadme%26utm_campaign%3Dinstall)**
 
@@ -51,9 +51,9 @@ The problem is that "predictable steps" and "quiet enough" are different goals, 
 
 So: sensitive IEMs, bone-conduction headphones, tablet speakers (on some tablets the minimum step is louder than on a phone, depending on the model), a sleeping baby a few feet away, tinnitus, a library, 2 a.m.: all of these need something below step 1, and Android's own settings simply do not offer it.
 
-## What Granular Volume does
+## What Quiet Dial does
 
-Granular Volume adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range. Step-count apps do lower the first step somewhat, because Android places each step on a fixed attenuation curve by its position in the range, but that curve has a fixed bottom they cannot pass. Granular Volume adds genuine headroom underneath it instead.
+Quiet Dial adds real attenuation **below** the hardware's step 1, not more steps squeezed into the existing range. Step-count apps do lower the first step somewhat, because Android places each step on a fixed attenuation curve by its position in the range, but that curve has a fixed bottom they cannot pass. Quiet Dial adds genuine headroom underneath it instead.
 
 It's a small floating dial that sits over any app:
 
@@ -103,7 +103,7 @@ Use case pages: [sensitive IEMs and bone conduction](https://granularvolume.com/
 
 Most apps in this space solve the opposite problem, or a different problem that looks similar on the surface:
 
-| | Granular Volume | Typical volume app |
+| | Quiet Dial | Typical volume app |
 |---|---|---|
 | Direction | Goes **quieter** than the hardware minimum | Usually makes things **louder**, or adds more clicks within the *existing* range |
 | Mechanism | Independent output-gain effect, applied underneath the existing volume steps | Often remaps or subdivides the same step range you already have |
@@ -194,7 +194,7 @@ F-Droid requires that everything in its build be free and open source, including
 That's not something a regular app can change. The per-step volume curve is defined by the device manufacturer at the OS/firmware level, not exposed to third-party apps through any public API. Adding attenuation on top, outside the standard volume steps entirely, is the practical mechanism available to an app that isn't the device's own system software. Re-encoding a file to be quieter also works, but only per file and never for streaming.
 
 **Can I use this alongside an equalizer app?**
-Generally yes, since Granular Volume applies a gain-only stage rather than reshaping frequencies, but behavior with other apps that also attach global audio effects (some EQ apps do) depends on Android's effect-chaining order on that specific device, which isn't something a third-party app controls.
+Generally yes, since Quiet Dial applies a gain-only stage rather than reshaping frequencies, but behavior with other apps that also attach global audio effects (some EQ apps do) depends on Android's effect-chaining order on that specific device, which isn't something a third-party app controls.
 
 **Does closing the dial stop the attenuation?**
 Closing the floating dial (the one-tap dismiss) stops the foreground service entirely, which releases the audio effect. Attenuation goes back to whatever the system's own volume step was already set to. The Quick Settings tile is the fast way to bring it back.
@@ -304,4 +304,4 @@ Issues and pull requests are welcome. A few things that make a report or a PR fa
 
 ## License
 
-Granular Volume is free software, licensed under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text. You are free to use, study, share, and modify it, provided derivative works remain under the same license.
+Quiet Dial is free software, licensed under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text. You are free to use, study, share, and modify it, provided derivative works remain under the same license.
