@@ -2,6 +2,20 @@
 
 All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.4 (versionCode 54)
+
+Two display fixes. Nothing else changes.
+
+### Fixed
+- The introduction tour measured the dial before its window had settled, so the first card could sit beside
+  an empty spot, its line could start near the top corner of the screen, and the highlight could land on the
+  dial's top buttons instead of the part being described. It happened most visibly with the dial on the right
+  edge. The tour now waits until the dial is in place, and the highlight is measured inside the dial itself.
+- With three-button navigation and the phone held sideways, the info sheet and the purchase sheet showed a
+  light strip on one side, the sheet's default background beside the app's own. The sheets now keep clear of
+  the navigation bar and a camera cutout by centring in the free part of the screen, and their background
+  matches the app's at every edge.
+
 ## 1.7.3 (versionCode 53)
 
 One fix. Nothing else changes.

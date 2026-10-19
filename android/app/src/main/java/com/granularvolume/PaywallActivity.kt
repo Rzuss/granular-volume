@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.granularvolume.util.SheetFit
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.AccessState
 import com.granularvolume.util.BillingManager
@@ -57,7 +58,7 @@ class PaywallActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialog = BottomSheetDialog(this).apply {
+        dialog = BottomSheetDialog(this, R.style.ThemeOverlay_GranularVolume_Sheet).apply {
             setContentView(buildSheet())
             setOnCancelListener { finish() }
             // 1.6.3: open fully in every orientation. On a wide, short screen (a tablet or a phone
@@ -67,6 +68,8 @@ class PaywallActivity : AppCompatActivity() {
             behavior.skipCollapsed = true
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
             show()
+            // 1.7.4: centred inside the safe area, clear of a side navigation bar or a cutout.
+            SheetFit.centreInSafeArea(this)
         }
         // 1.6.2: the paywall only opens on a locked gesture, so the person now knows the week is
         // over; the one-time ended notice has nothing left to say.

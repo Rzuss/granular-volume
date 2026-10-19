@@ -40,7 +40,7 @@ import com.granularvolume.audio.FullRangeCoordinator
 import com.granularvolume.audio.FullRangeCoordinator.LockDisplay
 import com.granularvolume.util.AccessState
 import com.granularvolume.util.Prefs
-import androidx.core.view.doOnLayout
+import androidx.core.view.doOnPreDraw
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -189,6 +189,8 @@ class OverlayManager(
         // 1.5.1 feature tour
         private const val TOUR_STEPS = 4
         private const val TOUR_START_DELAY_MS = 700L
+        /** 1.7.4: the first card goes up by now even if a window has not drawn yet. */
+        private const val TOUR_PLACE_TIMEOUT_MS = 600L
 
         // 1.4.4 press feedback + key-press flash.
         private const val PRESS_SCALE = 0.96f
@@ -838,7 +840,23 @@ class OverlayManager(
         tv.animate().alpha(1f).setDuration(220L).start()
         // 1.7.3: place the first card only once the window has its real size. A post can run
         // before the first layout, and the card was then placed in a window of height 0.
-        tv.doOnLayout { showTourStep(firstStep.coerceIn(1, TOUR_STEPS)) }
+        // 1.7.4: wait for BOTH windows. The dial was just removed and added back (above), and
+        // until its new window is laid out Android reports it at the screen's left edge. The
+        // first card was placed beside that phantom dial, its line started near the top-left
+        // corner and the ring sat on the dial's top buttons instead of the step's element
+        // (owner's report 2026-10-19, dial on the right edge). Each window draws once after it
+        // is added, so its first pre-draw is the earliest moment its position is real.
+        val first = firstStep.coerceIn(1, TOUR_STEPS)
+        var waiting = 2
+        var shown = false
+        val place = {
+            if (!shown && tourView === tv && overlayView === dial) { shown = true; showTourStep(first) }
+        }
+        val oneReady = { if (--waiting == 0) place() }
+        tv.doOnPreDraw { oneReady() }
+        dial.doOnPreDraw { oneReady() }
+        // A window that never draws (screen off, dial hidden) must not leave an empty scrim.
+        tv.postDelayed({ place() }, TOUR_PLACE_TIMEOUT_MS)
     }
 
     private fun tourTargets(dial: View, step: Int): List<View> = when (step) {
@@ -883,9 +901,21 @@ class OverlayManager(
         }
 
         // Ring the element inside the dial; between steps the ring glides to its new home.
+        // 1.7.4: measured inside the dial's own window, so the ring hugs the element even if the
+        // window's screen position were ever read a frame early.
         val pad = (4 * density).toInt()
-        val ringTo = Rect(t.left - dialLoc[0] - pad, t.top - dialLoc[1] - pad,
-                          t.right - dialLoc[0] + pad, t.bottom - dialLoc[1] + pad)
+        val dialWin = IntArray(2); dial.getLocationInWindow(dialWin)
+        var inDial: Rect? = null
+        for (v in tourTargets(dial, step)) {
+            val l = IntArray(2); v.getLocationInWindow(l)
+            val r = Rect(l[0] - dialWin[0], l[1] - dialWin[1], l[0] - dialWin[0] + v.width, l[1] - dialWin[1] + v.height)
+            inDial = inDial?.apply { union(r) } ?: r
+        }
+        val local = inDial ?: Rect(0, 0, dial.width, dial.height)
+        val ringTo = Rect(local.left - pad, local.top - pad, local.right + pad, local.bottom + pad)
+        // Testability (1.7.4): the geometry each step was placed with, all in screen pixels except the ring.
+        android.util.Log.d("GranularVolume", "tour geom step=$step dial=${dialRect.flattenToString()} " +
+            "target=${t.flattenToString()} ring=${ringTo.flattenToString()} cardOnRight=$cardOnRight")
         ringAnimator?.cancel()
         val from = Rect(tourRing.bounds)
         if (from.isEmpty || !animationsEnabled()) {
