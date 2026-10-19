@@ -19,4 +19,17 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
+
+    <!-- 1.7.4: the info sheet and the paywall. No navigation-bar padding on the sides (it showed
+         the sheet's default background as a strip beside our content in landscape) and the sheet
+         painted in our surface colour, so no other colour can show at any edge. SheetFit centres
+         the sheet inside the safe area instead. -->
+    <style name="ThemeOverlay.GranularVolume.Sheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.GranularVolume.Sheet</item>
+    </style>
+    <style name="Widget.GranularVolume.Sheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/gv_surface</item>
+        <item name="paddingLeftSystemWindowInsets">false</item>
+        <item name="paddingRightSystemWindowInsets">false</item>
+    </style>
 </resources>
