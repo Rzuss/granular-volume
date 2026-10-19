@@ -57,12 +57,12 @@
     {
       "@type": "Question",
       "name": "Do custom step-count apps or Sound Assistant lower the volume floor?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A little, and then they stop. Android maps each volume step onto a fixed loudness curve by its position in the range, so the first step of 100 does sit lower than the first step of 15. Measured on one Android 16 configuration in August 2026, that was worth about 5 dB. But the curve has a fixed bottom that no step count goes past, so once you reach it, extra steps add nothing at all. If that bottom is still louder than you need, more steps cannot get you there. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB."}
+      "acceptedAnswer": {"@type": "Answer", "text": "A little, and then they stop. Android maps each volume step onto a fixed loudness curve by its position in the range, so the first step of 100 does sit lower than the first step of 15. Measured on one Android 16 configuration in August 2026, that was worth about 5 dB. But the curve has a fixed bottom that no step count goes past, so once you reach it, extra steps add nothing at all. If that bottom is still louder than you need, more steps cannot get you there. Some equalizer apps do separately offer a post-gain slider that reduces overall output, and the deepest one we measured in July 2026 bottomed out at about -17.7 dB, though that control lives inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Quiet Dial goes to -30 dB."}
     },
     {
       "@type": "Question",
       "name": "Is there a way to do this without root?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Apps that apply negative gain through Android's own audio effect framework (DynamicsProcessing or LoudnessEnhancer) can lower output below the hardware minimum without root, without modifying system files, and without ADB. Granular Volume works this way."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Apps that apply negative gain through Android's own audio effect framework (DynamicsProcessing or LoudnessEnhancer) can lower output below the hardware minimum without root, without modifying system files, and without ADB. Quiet Dial works this way."}
     },
     {
       "@type": "Question",
@@ -87,7 +87,7 @@
     {
       "@type": "Question",
       "name": "What's the minimum Android version required?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Granular Volume requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Quiet Dial requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff."}
     },
     {
       "@type": "Question",
@@ -116,7 +116,7 @@
     },
     {
       "@type": "Question",
-      "name": "Is Granular Volume free, or does it have a paid tier or in-app purchases?",
+      "name": "Is Quiet Dial free, or does it have a paid tier or in-app purchases?",
       "acceptedAnswer": {"@type": "Answer", "text": "The app is free to install, and the first seven days after you install are the complete app with nothing held back. After that, keeping the control takes one payment, once, inside the app through Google Play. There are no subscriptions and no ads."}
     },
     {
@@ -127,7 +127,7 @@
     {
       "@type": "Question",
       "name": "Is the source code available to verify these claims?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Granular Volume is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Quiet Dial is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust."}
     },
     {
       "@type": "Question",
@@ -152,7 +152,7 @@
     {
       "@type": "Question",
       "name": "How is this different from a \"volume booster\" app?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Granular Volume does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction."}
+      "acceptedAnswer": {"@type": "Answer", "text": "A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction."}
     },
     {
       "@type": "Question",
@@ -310,8 +310,8 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="crumb"><a href="../">Granular Volume</a> / Guide</div>
-    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Granular Volume icon"></div>
+    <div class="crumb"><a href="../">Quiet Dial</a> / Guide</div>
+    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Quiet Dial icon"></div>
     <h1>How to lower Android volume below the minimum setting</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
     <p class="meta">Updated October 12, 2026 · 10 min read</p>
@@ -336,14 +336,14 @@
         <tr><td><a href="#limiters">Volume limits, the 85 dB cap</a></td><td>The top of the range</td><td>No</td></tr>
         <tr><td><a href="#firmware">Firmware updates</a></td><td>Anecdotal</td><td>Not guaranteed</td></tr>
         <tr><td><a href="#adb">Volume curve over ADB</a></td><td>The curve itself</td><td>Not verified by us; on a stock phone it needs root</td></tr>
-        <tr><td><a href="#attenuation">Below-floor attenuation (Granular Volume)</a></td><td>Reduces output after the system's own minimum</td><td>Yes, down to 30 dB below it, no computer</td></tr>
+        <tr><td><a href="#attenuation">Below-floor attenuation (Quiet Dial)</a></td><td>Reduces output after the system's own minimum</td><td>Yes, down to 30 dB below it, no computer</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="quickfix">
       <div class="kicker">Short on time? Here's the answer</div>
-      <p><strong>Granular Volume</strong> is built entirely around this: it adds real volume steps below your device's hardware minimum, up to 30 dB below the floor, deeper than the other volume apps we tested, not just finer clicks within the existing range. If that's your exact problem, this is the fix, and it is set up in under a minute.</p>
+      <p><strong>Volume Control: Quiet Dial</strong> is built entirely around this: it adds real volume steps below your device's hardware minimum, up to 30 dB below the floor, deeper than the other volume apps we tested, not just finer clicks within the existing range. If that's your exact problem, this is the fix, and it is set up in under a minute.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlower-android-volume-below-minimum" data-goatcounter-click="play-cta-lower-android-volume-below-minimum-top">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#attenuation">Why this works, others don't</a>
@@ -387,7 +387,7 @@
       <p>Several well-known apps override Android's default 15 to 25 volume steps with a custom count, up to 1000 in some cases. They're often the top suggestion for this exact problem, and they're good at what they do.</p>
       <p>The step feature uses the same mechanism as the stock slider, and it does buy you something real. Android places each step on a fixed loudness curve according to its position in the range, so step 1 of 100 sits lower than step 1 of 15. Measured on one Android 16 configuration in August 2026, the gain from that was about 5 dB.</p>
       <p>Then it stops dead. The curve has a fixed bottom, and no step count reaches past it. Beyond roughly 100 steps the extra ones are not merely useless: on that same configuration a 1000-step scale left the first nine steps silent, with the tenth landing on exactly the level 100 steps already gave. So more steps is a real but small and hard-capped win, and if the bottom of the curve is still too loud for you, no number of steps will fix it.</p>
-      <p>To be fair and precise: some apps in this category also carry a separate post-gain slider inside their graphic equalizer that genuinely reduces overall output. We measured the deepest one we could find in July 2026, and its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and that floor is roughly half the additional headroom a dedicated tool provides (Granular Volume reaches -30 dB, one tap from the dial).</p>
+      <p>To be fair and precise: some apps in this category also carry a separate post-gain slider inside their graphic equalizer that genuinely reduces overall output. We measured the deepest one we could find in July 2026, and its slider bottomed out at about -17.7 dB. It works, but it lives a few menus deep inside the equalizer rather than being the app's volume control, and that floor is roughly half the additional headroom a dedicated tool provides (Quiet Dial reaches -30 dB, one tap from the dial).</p>
     </div>
 
     <h2 id="eq">4. Disabling Dolby Atmos or lowering the equalizer</h2>
@@ -434,12 +434,12 @@
     <div class="fixcard">
       <h3>Apps using DynamicsProcessing or LoudnessEnhancer with negative gain <span class="verdict v-works">Actually works</span></h3>
       <p>A small category of apps takes a fundamentally different approach: instead of remapping the existing volume steps, they apply an audio effect with negative gain on top of the lowest system step, using Android's own audio effect framework (DynamicsProcessing). This genuinely produces output quieter than the hardware minimum allows, because it isn't working within the existing step range at all.</p>
-      <p>This is how <a href="../">Granular Volume</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel. It lowers media, ringtones, notifications and alarms. It cannot lower regular phone calls or keyboard and touch sounds, because Android plays those on paths this kind of audio effect does not reach, and on a small number of phone and headphone pairs the quiet steps have no effect over Bluetooth. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even steps, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
+      <p>This is how <a href="../">Quiet Dial</a> works: a small floating dial that sits over any app and adds volume steps below the usual floor, on both phones and tablets, no root, no ADB, no Samsung requirement. It doesn't override your volume buttons or the system volume panel. It lowers media, ringtones, notifications and alarms. It cannot lower regular phone calls or keyboard and touch sounds, because Android plays those on paths this kind of audio effect does not reach, and on a small number of phone and headphone pairs the quiet steps have no effect over Bluetooth. Since version 1.4.0 the same slider also covers your normal range above the device minimum, in even steps, so it can stand in for <a href="volume-buttons-not-working-android.html">worn or broken volume buttons</a> too.</p>
     </div>
 
     <div class="callout">
       <h2>The quiet setting your phone doesn't have</h2>
-      <p>If everything above still leaves you at "still too loud," this is the actual gap: Granular Volume adds real steps below your device's hardware minimum, on phones and tablets alike. Open source, no ads, no tracking, no account.</p>
+      <p>If everything above still leaves you at "still too loud," this is the actual gap: Quiet Dial adds real steps below your device's hardware minimum, on phones and tablets alike. Open source, no ads, no tracking, no account.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dlower-android-volume-below-minimum" data-goatcounter-click="play-cta-lower-android-volume-below-minimum-bottom">Get it on Google Play</a>
         <a class="btn btn-ghost" href="../">See how it works</a>
@@ -460,7 +460,7 @@
       <dd>Sometimes, partially, and inconsistently. It can reduce output on some devices because those effects add gain, but many devices see no change at all, and it's a side effect of disabling a feature rather than a real minimum-volume control.</dd>
 
       <dt>Do custom step-count apps or Sound Assistant lower the volume floor?</dt>
-      <dd>A little, then they stop. The first step of 100 sits lower on Android's loudness curve than the first step of 15, worth roughly 5 dB on one configuration we measured in August 2026. But the curve has a fixed bottom that no step count passes, so if that bottom is still too loud, more steps cannot help. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Granular Volume goes to -30 dB.</dd>
+      <dd>A little, then they stop. The first step of 100 sits lower on Android's loudness curve than the first step of 15, worth roughly 5 dB on one configuration we measured in August 2026. But the curve has a fixed bottom that no step count passes, so if that bottom is still too loud, more steps cannot help. Some equalizer apps do separately offer a post-gain slider that reduces output, and the deepest one we measured in July 2026 reached about -17.7 dB, though it's tucked inside the equalizer rather than being a dedicated minimum-volume control. Dedicated below-minimum tools reach lower; Quiet Dial goes to -30 dB.</dd>
 
       <dt>Is there a way to do this without root?</dt>
       <dd>Yes. Apps that apply negative gain through Android's own audio effect framework can lower output below the hardware minimum without root, without modifying system files, and without ADB.</dd>
@@ -478,7 +478,7 @@
       <dd>It is not tied to one brand. It uses Android's own audio effect APIs rather than a manufacturer-specific feature like Samsung's Good Lock, so unlike Sound Assistant there is no brand restriction. How far below the minimum it reaches still depends on the device and the kind of audio, as the guide on why the minimum is too loud explains.</dd>
 
       <dt>What's the minimum Android version required?</dt>
-      <dd>Granular Volume requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff.</dd>
+      <dd>Quiet Dial requires Android 9.0 (API 28) or newer. This is a hard requirement of the underlying audio effect APIs the app depends on, not an arbitrary cutoff.</dd>
 
       <dt>Does it need root, Accessibility permission, or Device Admin access?</dt>
       <dd>No. It needs a display-over-other-apps permission for the floating dial and standard audio/notification permissions, nothing more invasive. No root, no Accessibility Service, no Device Admin.</dd>
@@ -495,14 +495,14 @@
       <dt>Does it conflict with equalizer apps or other volume-control apps installed at the same time?</dt>
       <dd>It adds its own gain reduction and does not replace another app's effects. Another audio effect on the device can take precedence, though, so check it with your equalizer switched on.</dd>
 
-      <dt>Is Granular Volume free, or does it have a paid tier or in-app purchases?</dt>
+      <dt>Is Quiet Dial free, or does it have a paid tier or in-app purchases?</dt>
       <dd>The app is free to install, and the first seven days after you install are the complete app with nothing held back. After that, keeping the control takes one payment, once, inside the app through Google Play. There are no subscriptions and no ads.</dd>
 
       <dt>Does the app collect any personal data or require an account?</dt>
       <dd>No. There's no account, no analytics, and no network permission in the app at all, so it has no technical means of sending data anywhere even if it wanted to.</dd>
 
       <dt>Is the source code available to verify these claims?</dt>
-      <dd>Yes. Granular Volume is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust.</dd>
+      <dd>Yes. Quiet Dial is open source under the GPL-3.0 license, with the full source on GitHub, so the lack of network access and data collection can be independently verified rather than taken on trust.</dd>
 
       <dt>Why isn't sub-minimum volume just built into Android already?</dt>
       <dd>Stock Android's volume steps are calibrated for average listening conditions across all devices, and there's no built-in setting to extend the range below the lowest step. That gap is exactly what an app like this fills in, rather than something Android exposes natively.</dd>
@@ -517,7 +517,7 @@
       <dd>No. It doesn't take over the volume buttons or the system volume panel. The slider covers your normal range above the device minimum and adds a lower range underneath what those controls reach.</dd>
 
       <dt>How is this different from a "volume booster" app?</dt>
-      <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Granular Volume does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction.</dd>
+      <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction.</dd>
 
       <dt>Will this work if my phone is in Do Not Disturb or Bedtime mode?</dt>
       <dd>Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the volume reduction.</dd>
@@ -531,7 +531,7 @@
 </div>
 <footer>
   <div class="wrap">
-    Part of <a href="../">Granular Volume</a>, free software under the
+    Part of <a href="../">Quiet Dial</a> by Granular Apps (formerly Granular Volume), free software under the
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> ·
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;

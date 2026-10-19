@@ -37,7 +37,7 @@
     {"@type":"Question","name":"Does Clear Calling reduce call volume on a Pixel?","acceptedAnswer":{"@type":"Answer","text":"No. Clear Calling is designed to reduce background noise on the other person's side and make speech easier to follow. It changes clarity rather than level, so it does not lower how loud the call is in your ear, and people who try it for that reason generally report no difference."}},
     {"@type":"Question","name":"Why do the volume keys stop before it is quiet enough during a call?","acceptedAnswer":{"@type":"Answer","text":"During a call the volume keys control the call stream rather than media, and Android does not allow that stream to be muted with the keys. The lowest position you can reach is the quietest step the system offers, and holding the key longer does nothing further."}},
     {"@type":"Question","name":"Is this a fault with my Pixel, or is a repair needed?","acceptedAnswer":{"@type":"Answer","text":"Usually neither. If the hearing aid setting is off and the earpiece still feels too loud at the minimum, the phone is behaving as designed. The same complaint recurs across several Pixel generations in Google's own support community, which points at how the volume scale is defined rather than at a hardware defect on any one unit."}},
-    {"@type":"Question","name":"What actually adds a quieter level below the minimum?","acceptedAnswer":{"@type":"Answer","text":"Lowering the volume through Android's own audio effect framework, after the system has already applied its own minimum. That places the output below where the volume keys stop. Granular Volume gives you those steps from a small floating dial. Being straight about the limit: on a regular phone call it cannot go below the lowest step your phone already offers, because Android carries cellular voice on a path that runs no audio effects. App calls such as WhatsApp get the quiet steps on phones that play them through the media output. That varies by phone: some route app calls the same way as ordinary calls, and there they are out of reach too."}},
+    {"@type":"Question","name":"What actually adds a quieter level below the minimum?","acceptedAnswer":{"@type":"Answer","text":"Lowering the volume through Android's own audio effect framework, after the system has already applied its own minimum. That places the output below where the volume keys stop. Quiet Dial gives you those steps from a small floating dial. Being straight about the limit: on a regular phone call it cannot go below the lowest step your phone already offers, because Android carries cellular voice on a path that runs no audio effects. App calls such as WhatsApp get the quiet steps on phones that play them through the media output. That varies by phone: some route app calls the same way as ordinary calls, and there they are out of reach too."}},
     {"@type":"Question","name":"Does it need root or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio effect framework, needs only a display over other apps permission and standard audio permissions, and requires no root, no ADB and no computer."}},
     {"@type":"Question","name":"Is it free and private?","acceptedAnswer":{"@type":"Answer","text":"Free to install, and the first seven days after you install are the complete app with nothing held back. After that, keeping the control takes one payment, once. Nothing renews and there is no subscription to cancel. No ads, no account, no subscription, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0."}}
   ]
@@ -181,8 +181,8 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="crumb"><a href="../">Granular Volume</a> / Guide</div>
-    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Granular Volume icon"></div>
+    <div class="crumb"><a href="../">Quiet Dial</a> / Guide</div>
+    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Quiet Dial icon"></div>
     <h1>Pixel call volume too loud, even at the lowest setting?</h1>
     <p class="dek">One accessibility setting is worth checking before anything else, because it fixes this outright for some people. If that is not it, the in-call floor itself is the problem, and here is what does and does not move it. No root.</p>
     <p class="meta">Updated October 12, 2026 &middot; 7 min read</p>
@@ -195,7 +195,7 @@
     <div class="quickfix">
       <div class="kicker">Short on time</div>
       <p><strong>First, check the hearing aid setting.</strong> Phone app, three line menu, Settings, Accessibility, Hearing aids. If it is on, that alone can make the earpiece far louder than normal. Free, instant, reversible.</p>
-      <p><strong>If that was not it,</strong> the ordinary in-call floor is simply too high on your device, and nothing in the stock settings goes below it. <strong>Granular Volume</strong> adds quieter steps underneath Android's own minimum. That covers media, ringtones, notifications, alarms, and app calls such as WhatsApp on phones that play them through the media output. Regular phone calls are out of reach: Android carries cellular voice on an output that runs no audio effects, so no app can lower it further. No root.</p>
+      <p><strong>If that was not it,</strong> the ordinary in-call floor is simply too high on your device, and nothing in the stock settings goes below it. <strong>Volume Control: Quiet Dial</strong> adds quieter steps underneath Android's own minimum. That covers media, ringtones, notifications, alarms, and app calls such as WhatsApp on phones that play them through the media output. Regular phone calls are out of reach: Android carries cellular voice on an output that runs no audio effects, so no app can lower it further. No root.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dpixel-call-volume-too-loud-lowest-setting" data-goatcounter-click="play-cta-pixel-call-volume-too-loud-lowest-setting-top">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -271,7 +271,7 @@
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio framework <span class="verdict v-works">Actually works</span></h3>
       <p>Rather than trying to add steps inside the existing range, this method applies negative gain through Android's own audio effect framework. Because it reduces the level after the system has already applied its own minimum, it can place the output below where the volume keys stop.</p>
-      <p>This is what <a href="../">Granular Volume</a> does for app calls such as WhatsApp, on phones that play them through the media output: a small floating dial you can open during the call, with steps from no change down to well below your hardware minimum, as a flat reduction that makes things quieter without changing how they sound. On a regular phone call it cannot go below the lowest step your phone already offers, because Android carries cellular voice on a separate path that runs no audio effects. There the dial gives you your phone's own steps and shows the quiet steps dimmed. The mechanism is part of Android itself rather than anything Pixel specific, so it does not depend on a Pixel-only setting. How it behaves still depends on the device.</p>
+      <p>This is what <a href="../">Quiet Dial</a> does for app calls such as WhatsApp, on phones that play them through the media output: a small floating dial you can open during the call, with steps from no change down to well below your hardware minimum, as a flat reduction that makes things quieter without changing how they sound. On a regular phone call it cannot go below the lowest step your phone already offers, because Android carries cellular voice on a separate path that runs no audio effects. There the dial gives you your phone's own steps and shows the quiet steps dimmed. The mechanism is part of Android itself rather than anything Pixel specific, so it does not depend on a Pixel-only setting. How it behaves still depends on the device.</p>
       <p>Two honest notes. It lowers the level, so use it in steps rather than going straight to the bottom, and adjust mid-call if you have gone too far. And it does not change tone, so if your real complaint is that voices sound harsh or sharp rather than loud, this addresses the loudness half of that and not the sharpness half.</p>
     </div>
 
@@ -312,7 +312,7 @@
 </div>
 <footer>
   <div class="wrap">
-    Part of <a href="../">Granular Volume</a>, free software under the
+    Part of <a href="../">Quiet Dial</a> by Granular Apps (formerly Granular Volume), free software under the
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;
