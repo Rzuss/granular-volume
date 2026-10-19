@@ -346,7 +346,15 @@ class VolumeControlService : Service() {
                 stopRequestedByUser = true
                 stopSelf()
             },
-            onInfo          = { openInfoSheet() }
+            onInfo          = { openInfoSheet() },
+            // 1.7.5: Android refused a dial, tab or tour window (the overlay permission was
+            // withdrawn while the control ran). Say so and end the control, never crash. Not a
+            // user stop: the boot restore keeps its flag and meets the permission check there.
+            onWindowRefused = {
+                Log.w(tag, "Overlay window refused: stopping the control")
+                toast(getString(R.string.gv_toast_dial_failed))
+                stopSelf()
+            }
         )
         // Wired HERE, after construction, never inside a callback. It sat inside the onInfo
         // lambda until 2026-09-09, which compiled and meant it was only ever assigned after

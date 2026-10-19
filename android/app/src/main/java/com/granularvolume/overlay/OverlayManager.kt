@@ -71,8 +71,32 @@ class OverlayManager(
     private val coordinator: FullRangeCoordinator,
     private val scope: CoroutineScope,
     private val onDismiss: () -> Unit,
-    private val onInfo: () -> Unit
+    private val onInfo: () -> Unit,
+    private val onWindowRefused: () -> Unit = {}
 ) {
+
+    /**
+     * 1.7.5: Android refused one of our windows. Play vitals on 1.7.3 (Samsung Galaxy S25,
+     * Android 16): tapping the tab to bring the dial back threw BadTokenException from addView
+     * and stopped the app. The likely cause is "Display over other apps" switched off while the
+     * control ran; from then on every new overlay window is refused. Instead of crashing, the
+     * refusal is reported once and the service ends the control cleanly.
+     */
+    private var windowRefused = false
+
+    private fun addWindow(view: View, params: WindowManager.LayoutParams): Boolean = try {
+        wm.addView(view, params)
+        true
+    } catch (e: RuntimeException) {
+        if (e !is WindowManager.BadTokenException && e !is WindowManager.InvalidDisplayException &&
+            e !is SecurityException) throw e
+        android.util.Log.w("GranularVolume", "window refused: ${e.javaClass.simpleName}: ${e.message}")
+        if (!windowRefused) {
+            windowRefused = true
+            onWindowRefused()
+        }
+        false
+    }
 
     /**
      * Fired after every VOLUME gesture the dial handles: chevrons, bars, mute.
@@ -328,7 +352,10 @@ class OverlayManager(
         // bring the whole dial on screen. One chosen in this orientation is the user's own
         // placement, parked low or not, and is kept as it always was.
         val fitFully = Prefs.wasOverlaySavedInLandscape(context) != isLandscape()
-        wm.addView(view, layoutParams)
+        if (!addWindow(view, layoutParams)) {
+            if (overlayView === view) overlayView = null
+            return
+        }
         applyUpdateDot(view)
 
         // Entrance from the tab: the dial springs out of the wall it was folded into. Set
@@ -620,7 +647,11 @@ class OverlayManager(
         bladeParams.height = winH
         bladeParams.x = if (bladeOnRight) screen.width() - winW else 0
         bladeParams.y = clampTabY(Prefs.getBladeY(context, screen.height() / 3))
-        wm.addView(root, bladeParams)
+        if (!addWindow(root, bladeParams)) {
+            bladeRoot = null
+            bladeView = null
+            return
+        }
 
         if (animateIn && animationsEnabled()) {
             root.pivotX = if (bladeOnRight) winW.toFloat() else 0f
@@ -828,11 +859,17 @@ class OverlayManager(
         // API 30+ the window can simply opt out of fitting any inset. (A negative y offset
         // with NO_LIMITS also draws there, but it broke touch delivery in the pilot.)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) tourParams.fitInsetsTypes = 0
-        wm.addView(tv, tourParams)
+        if (!addWindow(tv, tourParams)) {
+            tourView = null
+            return
+        }
         // The dial must sit ABOVE the scrim and stay live, so it is re-added as the newest
         // window. Same view, same params, same listeners; only the z-order changes.
         runCatching { wm.removeView(dial) }
-        wm.addView(dial, layoutParams)
+        if (!addWindow(dial, layoutParams)) {
+            if (overlayView === dial) overlayView = null
+            return
+        }
         dial.removeCallbacks(idleFadeRunnable)
         dial.animate().cancel()
         dial.alpha = ACTIVE_ALPHA
