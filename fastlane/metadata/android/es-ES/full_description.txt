@@ -33,7 +33,7 @@ DISEÑADO PARA NO ESTORBAR
 Granular Volume no se apodera de tus botones de volumen: siguen funcionando, y dentro de la zona silenciosa el control convierte sus pulsaciones en su propia escala más fina. No reemplaza el panel de volumen del sistema ni añade un ecualizador que no pediste. Se queda encima como una superposición y cambia una sola cosa: el nivel, desde el volumen normal hasta por debajo del mínimo del hardware.
 
 PRIVADO, CÓDIGO ABIERTO
-Esta versión de F-Droid es gratuita y completa: incluye todos los pasos de forma permanente, sin retener nada y sin nada que comprar. En Google Play la app trae siete días con todo incluido, y después el control requiere una compra única. Sin anuncios. Sin rastreo. Sin permiso de internet, la app no puede conectarse a nada. Sin cuenta, sin registro, sin analíticas. Código abierto bajo licencia GPL-3.0.
+Siete días con la app completa y después una compra única en Google Play, sin suscripción. Sin anuncios. Sin rastreo. Sin permiso de internet, la app no puede conectarse a nada. Sin cuenta, sin registro, sin analíticas. Código abierto bajo licencia GPL-3.0.
 
 PERMISOS, EXPLICADOS
 - Mostrar sobre otras apps: muestra el control flotante
