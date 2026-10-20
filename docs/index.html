@@ -28,6 +28,7 @@
   "description": "Quiet Dial puts your whole Android volume range on one floating slider: normal system volume above the line marking your device's minimum, and a quiet zone below it with six fine steps down to about -30 dB. It stands in for worn or broken volume buttons, and a mute control silences media without touching alarms. Everything is open for seven days; after that, one payment inside the app, and the price depends on your country. No root required. Open source under GPL-3.0, no ads, no tracking.",
   "downloadUrl": "https://play.google.com/store/apps/details?id=granularvolume.com",
   "sameAs": [
+    "https://play.google.com/store/apps/details?id=granularvolume.com",
     "https://github.com/Rzuss/granular-volume"
   ],
   "author": {"@type": "Person", "name": "Rotem Zussman"},
@@ -72,6 +73,14 @@
    "acceptedAnswer": {
     "@type": "Answer",
     "text": "Calls in apps such as WhatsApp, yes. Regular calls over the mobile network, no: Android carries them on a separate path that runs no audio effects, so no app can lower them below the phone's own minimum."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does the floating dial get in the way?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Android has no setting below its lowest step, so going lower takes a control of its own on screen. You can fold the dial into a small tab at the edge of the screen: the quiet level stays, your volume buttons keep working, and a Quick Settings tile turns the control on and off."
    }
   },
   {
@@ -166,6 +175,10 @@
   .compare span:nth-child(even){color:var(--muted);}
   .compare span:nth-child(odd){color:var(--txt);font-weight:600;}
 
+  /* Phones: show the dial right under the title, before the long text (the shot used to start below the first screen). */
+  @media (max-width:899px){header.hero{display:flex;flex-direction:column;}.hero-top{display:contents;}
+    .hero .icon{order:0;align-self:center;}.hero h1{order:1;}.hero .tag{order:2;}.hero-shot{order:3;margin:20px auto 4px;}
+    .hero .cta{order:4;}.hero .setup-note{order:5;}.hero .playname{order:6;}.hero .sub{order:7;}.hero-chips{order:8;}}
   @media (min-width:900px){#uses .grid,#guides .grid{grid-template-columns:repeat(3,1fr);}}
   .faq{max-width:720px;margin:0 auto;}
   .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
@@ -360,6 +373,8 @@
       <dd>The quiet steps apply over Bluetooth as well as on the speaker. On a small number of phone and headphone combinations they have no effect over Bluetooth, although they work on the speaker. The seven days with everything open are the time to check yours.</dd>
       <dt>Does it lower phone calls?</dt>
       <dd>Calls in apps such as WhatsApp, yes. Regular calls over the mobile network, no: Android carries them on a separate path that runs no audio effects, so no app can lower them below the phone's own minimum.</dd>
+      <dt>Does the floating dial get in the way?</dt>
+      <dd>Android has no setting below its lowest step, so going lower takes a control of its own on screen. You can fold the dial into a small tab at the edge of the screen: the quiet level stays, your volume buttons keep working, and a Quick Settings tile turns the control on and off.</dd>
       <dt>What does it collect?</dt>
       <dd>Nothing. The app has no internet permission at all, no ads, no account and no tracking. The source code is public under GPL-3.0.</dd>
       <dt>Does it work on tablets?</dt>
