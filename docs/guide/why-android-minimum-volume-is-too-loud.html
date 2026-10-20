@@ -21,7 +21,7 @@
   "description": "Android's volume floor is a design decision in the audio mixer, not a bug. Where it comes from, and what can and cannot get underneath it.",
   "image": "https://granularvolume.com/img/feature.png",
   "author": {"@type": "Person", "name": "Rotem Zussman"},
-  "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Apps"},
+  "publisher": {"@type": "Person", "name": "Rotem Zussman", "alternateName": "Granular Volume"},
   "datePublished": "2026-09-01",
   "dateModified": "2026-10-12",
   "mainEntityOfPage": "https://granularvolume.com/guide/why-android-minimum-volume-is-too-loud.html"
@@ -142,7 +142,8 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
-</style><script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</style><script src="/src.js"></script>
+<script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style id="gv-a11y-style">
   /* Accessibility button and panel, self-hosted (a11y.js). No third-party code, no cookies. */
   .gv-a11y-fab{position:fixed;left:16px;bottom:16px;z-index:1000;width:52px;height:52px;border-radius:50%;
@@ -181,8 +182,8 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="crumb"><a href="../">Granular Volume</a> / Guide</div>
-    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Granular Volume icon"></div>
+    <div class="crumb"><a href="../">Quiet Dial</a> / Guide</div>
+    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Quiet Dial icon"></div>
     <h1>Why Android's lowest volume step is still too loud</h1>
     <p class="dek">The floor is not a bug and it is not your imagination. It is a number chosen inside Android's audio mixer, and it sits where it sits for reasons that have nothing to do with your bedroom at two in the morning. Here is where it comes from, what can get underneath it, and what nothing can.</p>
     <p class="meta">Updated October 12, 2026 &middot; 9 min read</p>
@@ -197,7 +198,7 @@
 
     <div class="quickfix">
       <div class="kicker">If you only need it quieter</div>
-      <p>Android has no setting below its lowest step. <strong>Granular Volume</strong> adds six quieter steps underneath it, down to 30 dB below the minimum, on a floating dial. The rest of this page explains where the floor comes from.</p>
+      <p>Android has no setting below its lowest step. <strong>Volume Control: Quiet Dial</strong> adds six quieter steps underneath it, down to 30 dB below the minimum, on a floating dial. The rest of this page explains where the floor comes from.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dguide%26utm_campaign%3Dguide-why-top" data-goatcounter-click="play-cta-why-android-minimum-volume-is-too-loud-top">Get it on Google Play</a>
         <a class="btn btn-ghost" href="lower-android-volume-below-minimum.html">Every method, ranked</a>
@@ -312,7 +313,7 @@
 
     <div class="callout">
       <h2>Where this leads</h2>
-      <p>This article describes the mechanism, not a product, because the mechanism is the useful part and it stays true whatever anyone builds on it. That said, I wrote it while building on it. Granular Volume is a floating dial that applies exactly this: a flat attenuator on the device's mixed output, six quieter steps of 5 decibels each, down to 30 decibels below the device minimum, plus the ordinary volume range above the device minimum for anyone whose physical buttons have failed.</p>
+      <p>This article describes the mechanism, not a product, because the mechanism is the useful part and it stays true whatever anyone builds on it. That said, I wrote it while building on it. Quiet Dial is a floating dial that applies exactly this: a flat attenuator on the device's mixed output, six quieter steps of 5 decibels each, down to 30 decibels below the device minimum, plus the ordinary volume range above the device minimum for anyone whose physical buttons have failed.</p>
       <p>It is open source under GPL-3.0, weighs under 3 MB, and requests no internet permission at all, which means it has no way to send anything anywhere. That last part is not a promise in a policy document, it is something you can confirm by looking at the installed package.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dguide%26utm_campaign%3Dguide-mechanism" data-goatcounter-click="play-cta-why-android-minimum-volume-is-too-loud-bottom">Get it on Google Play</a>
@@ -349,7 +350,7 @@
 </div>
 <footer>
   <div class="wrap">
-    Part of <a href="../">Granular Volume</a>, free software under the
+    Part of <a href="../">Quiet Dial</a> by Granular Volume, free software under the
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;

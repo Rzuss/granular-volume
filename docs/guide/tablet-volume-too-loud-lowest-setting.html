@@ -27,7 +27,7 @@
   "publisher": {
     "@type": "Person",
     "name": "Rotem Zussman",
-    "alternateName": "Granular Apps"
+    "alternateName": "Granular Volume"
   },
   "datePublished": "2026-09-28",
   "dateModified": "2026-10-12",
@@ -73,7 +73,7 @@
     },
     {
       "@type": "Question",
-      "name": "Does Granular Volume work on tablets?",
+      "name": "Does Quiet Dial work on tablets?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "It is built for phones and tablets alike and uses Android's own audio effect framework rather than a feature of one brand. It lowers media, such as videos, music, audiobooks and white noise, plus notifications and alarms. How it behaves still depends on the device, so try it during the seven free days before paying."
@@ -218,6 +218,7 @@
   figure.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;}
   figure.shot figcaption{color:var(--muted);font-size:14px;margin-top:8px;}
 </style>
+<script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style id="gv-a11y-style">
   /* Accessibility button and panel, self-hosted (a11y.js). No third-party code, no cookies. */
@@ -257,8 +258,8 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="crumb"><a href="../">Granular Volume</a> / Guide</div>
-    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Granular Volume icon"></div>
+    <div class="crumb"><a href="../">Quiet Dial</a> / Guide</div>
+    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Quiet Dial icon"></div>
     <h1>Tablet too loud, even at the lowest volume?</h1>
     <p class="dek">Why an Android tablet's quietest step can be louder than a phone's, what the built-in settings can and cannot change, and the method that adds quieter levels below the minimum. No root.</p>
     <p class="meta">Updated October 12, 2026 &middot; 7 min read</p>
@@ -270,7 +271,7 @@
 
     <div class="quickfix">
       <div class="kicker">Short answer</div>
-      <p>An Android tablet's lowest volume step is a fraction of its full output, set by the manufacturer, and no built-in setting goes below it. <strong>Granular Volume</strong> adds six quieter steps underneath that minimum, down to 30 dB below it, through a small floating dial. It covers media such as videos, music, audiobooks and white noise, plus notifications and alarms. It is built for phones and tablets alike and needs no root. Amazon Fire tablets are not covered.</p>
+      <p>An Android tablet's lowest volume step is a fraction of its full output, set by the manufacturer, and no built-in setting goes below it. <strong>Volume Control: Quiet Dial</strong> adds six quieter steps underneath that minimum, down to 30 dB below it, through a small floating dial. It covers media such as videos, music, audiobooks and white noise, plus notifications and alarms. It is built for phones and tablets alike and needs no root. Amazon Fire tablets are not covered.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dtablet-volume-too-loud-lowest-setting" data-goatcounter-click="play-cta-tablet-volume-too-loud-lowest-setting-top">Get it on Google Play</a>
         <a class="btn btn-ghost" href="#fix">Why this works, others don't</a>
@@ -342,7 +343,7 @@
     </div>
     <div class="fixcard">
       <h3>Amazon Fire tablets <span class="verdict v-doesnt">Not covered by our app</span></h3>
-      <p>Fire tablets get their apps from Amazon's Appstore, not from Google Play. Granular Volume is not published there, and we have not tested it on Fire OS, so we cannot tell you it works on a Fire tablet. A player's own volume control, described below, is the option that applies.</p>
+      <p>Fire tablets get their apps from Amazon's Appstore, not from Google Play. Quiet Dial is not published there, and we have not tested it on Fire OS, so we cannot tell you it works on a Fire tablet. A player's own volume control, described below, is the option that applies.</p>
     </div>
     <div class="fixcard">
       <h3>Other and lower-cost tablets <span class="verdict v-doesnt">Nothing extra built in</span></h3>
@@ -365,7 +366,7 @@
     <div class="fixcard">
       <h3>Below-floor volume reduction through Android's audio framework <span class="verdict v-works">Actually works</span></h3>
       <p>Rather than re-slicing the existing steps, this method applies a negative gain through Android's own audio effect framework, after the system has already applied its lowest step. That is why it can take the output below where the keys stop.</p>
-      <p>This is what <a href="../">Granular Volume</a> does: a small floating dial with six quiet steps below your tablet's minimum, 5 dB each, the lowest 30 dB below it, as a flat reduction that makes things quieter without changing how they sound. Above the minimum line the same dial sets the normal volume in even steps, so it also stands in for volume keys that are worn out, or hard to reach when the tablet sits in a stand or a case. The <a href="volume-buttons-not-working-android.html#tablet">guide to volume buttons that are not working</a> covers that side.</p>
+      <p>This is what <a href="../">Quiet Dial</a> does: a small floating dial with six quiet steps below your tablet's minimum, 5 dB each, the lowest 30 dB below it, as a flat reduction that makes things quieter without changing how they sound. Above the minimum line the same dial sets the normal volume in even steps, so it also stands in for volume keys that are worn out, or hard to reach when the tablet sits in a stand or a case. The <a href="volume-buttons-not-working-android.html#tablet">guide to volume buttons that are not working</a> covers that side.</p>
       <figure class="shot"><img src="../img/tablet-dial-bedtime.webp" width="1280" height="800" loading="lazy" alt="Illustration of a tablet playing a bedtime story with the floating volume dial at the right edge, set below the minimum line"><figcaption>Illustration: the dial on a tablet, set below the minimum line.</figcaption></figure>
       <p>Two honest notes. It reaches media, notifications and alarms, but not keyboard and touch sounds, which Android plays on a separate path that no app can lower. And how it behaves depends on the device, so use the seven free days to check it on your own tablet.</p>
     </div>
@@ -392,7 +393,7 @@
       <dd>Not with this problem. Volume limits and volume-limiting headphones cap the top of the range to protect hearing. They do not lower the bottom of it, so if the quietest step is already too loud, a limit changes nothing about where the floor sits.</dd>
       <dt>Can I lower the volume inside the app instead?</dt>
       <dd>Sometimes. Players with their own volume control, such as some video and audiobook apps, can turn their own audio down below what the system allows. That works only inside that one app, it resets in some apps, and it does nothing for notifications, alarms or any other app.</dd>
-      <dt>Does Granular Volume work on tablets?</dt>
+      <dt>Does Quiet Dial work on tablets?</dt>
       <dd>It is built for phones and tablets alike and uses Android's own audio effect framework rather than a feature of one brand. It lowers media, such as videos, music, audiobooks and white noise, plus notifications and alarms. How it behaves still depends on the device, so try it during the seven free days before paying.</dd>
       <dt>Does it work on a Lenovo, Xiaomi, Redmi or Pixel tablet?</dt>
       <dd>It is not tied to a brand. It uses Android's standard audio effect framework and needs Android 9 or later. We have not tested every model and behaviour varies by device, so use the seven free days to check it on your own tablet.</dd>
@@ -409,7 +410,7 @@
 </div>
 <footer>
   <div class="wrap">
-    Part of <a href="../">Granular Volume</a>, free software under the
+    Part of <a href="../">Quiet Dial</a> by Granular Volume, free software under the
     <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
     <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> &middot;
     <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;
