@@ -9,7 +9,7 @@
 *It also stands in for broken volume buttons: the slider drives normal system volume above the
 device-minimum line, in even steps, and keeps going below it.*
 
-*Volume Control: Quiet Dial by Granular Apps (formerly Granular Volume).*
+*Volume Control: Quiet Dial, an app by Granular Volume.*
 
 **[Get it on Google Play](https://play.google.com/store/apps/details?id=granularvolume.com&referrer=utm_source%3Dgithub%26utm_medium%3Dreadme%26utm_campaign%3Dinstall)**
 
