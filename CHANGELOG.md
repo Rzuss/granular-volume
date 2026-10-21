@@ -13,7 +13,7 @@ One stability fix and one change to the free week.
   refuses it, the control ends cleanly and a short message says the dial could not be shown.
 
 ### Changed
-- The "Your access" sheet, with the days left, now also opens once in the middle of the free week (day 5 or 6),
+- The "Your access" sheet, with the days left, now also opens once in the middle of the free week (day 5),
   when you start the control or touch the dial. It never opens on its own and is shown once per install.
 
 ## 1.7.4 (versionCode 54)

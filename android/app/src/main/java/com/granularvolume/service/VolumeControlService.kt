@@ -111,7 +111,7 @@ class VolumeControlService : Service() {
 
         /** 1.6.2: grace before the last-day notice, so a start's own last-day sheet goes first. */
         private const val LAST_DAY_NOTICE_DELAY_MS = 4000L
-        /** 1.7.5: the midweek access sheet appears on days 5 and 6 of the free week (3 or 2 days left). */
+        /** 1.7.5: the midweek access sheet appears on day 5 of the free week (3 days left). */
         private const val MIDWEEK_NUDGE_DAYS_LEFT = 3
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
@@ -631,7 +631,7 @@ class VolumeControlService : Service() {
 
     /**
      * Once, on the trial's final day: cheapest check first, so the everyday cost is one boolean read.
-     * 1.7.5: and once before it, on day 5 or 6. Until now someone whose dial kept running met the
+     * 1.7.5: and once before it, on day 5. Until now someone whose dial kept running met the
      * price only on the last day, if at all. Same door as the last-day sheet: it answers a start or
      * a touch of the dial, never opens on its own, and is shown once per install.
      */
@@ -640,7 +640,9 @@ class VolumeControlService : Service() {
         if (!ProAccess.isOnTrial(applicationContext)) return false
         val daysLeft = Entitlement.daysLeftInTrial(applicationContext)
         if (daysLeft > 1) {
-            if (daysLeft > MIDWEEK_NUDGE_DAYS_LEFT || Prefs.wasMidweekNudgeShown(applicationContext)) return false
+            // Day 5 only (3 days left). Day 6 stays quiet on purpose: Layer A A21 holds that a start
+            // two days before the end opens nothing, so the last-day sheet keeps its own moment.
+            if (daysLeft != MIDWEEK_NUDGE_DAYS_LEFT || Prefs.wasMidweekNudgeShown(applicationContext)) return false
             Prefs.setMidweekNudgeShown(applicationContext)
             Log.i(tag, "Midweek access sheet: $daysLeft days left")
             openInfoSheet()

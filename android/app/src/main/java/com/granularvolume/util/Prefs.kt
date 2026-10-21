@@ -264,7 +264,7 @@ object Prefs {
     }
 
     /**
-     * 1.7.5: the "Your access" sheet was opened once in the middle of the free week (days 5 and 6),
+     * 1.7.5: the "Your access" sheet was opened once in the middle of the free week (day 5),
      * so the price is seen before the last day. Once per install, outside the backup like the
      * last-day flag.
      */
