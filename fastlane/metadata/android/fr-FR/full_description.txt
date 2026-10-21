@@ -1,28 +1,25 @@
-Le volume de votre Android reste trop fort même au niveau le plus bas, en lecture, sonneries ou notifications ? Votre téléphone ou tablette s'arrête au minimum matériel. Granular Volume descend en dessous.
+Le volume de votre Android reste trop fort même au niveau le plus bas, en lecture, sonneries ou notifications ? Votre téléphone ou tablette s'arrête au minimum matériel. Quiet Dial descend en dessous. L'installation est gratuite, et les sept premiers jours après l'installation donnent l'application complète. Ensuite, le contrôle se verrouille jusqu'à un paiement unique dans l'application via Google Play. Une appli de Granular Volume. Ouvrez-la une fois et autorisez l'affichage par-dessus les autres applis.
 
-Un petit contrôle flottant apparaît au-dessus de toute application, avec toute votre plage de volume sur un seul curseur : le volume système normal au-dessus de la ligne du minimum de votre appareil, et une zone silencieuse en dessous, six paliers de 5 dB jusqu'à 30 dB complets sous le minimum matériel. Déplacez-le où vous voulez, rangez-le sur un bord, fermez-le quand c'est fini. Sa position est mémorisée.
+Un petit contrôle flottant apparaît au-dessus de toute application, avec toute votre plage de volume sur un seul curseur : le volume système normal au-dessus de la ligne du minimum de votre appareil, et une zone silencieuse en dessous, six paliers jusqu'à 30 dB complets sous le minimum matériel.
 
 C'est un utilitaire de confort, pas une protection auditive. Le volume réel dépend de votre appareil et de vos écouteurs, restez prudent.
 
 PLUS BAS QUE CE QUE VOTRE APPAREIL PERMET
-Granular Volume est faite pour le bas de l'échelle : elle réduit le volume sous le palier le plus bas que le matériel autorise, via le moteur audio d'Android, sur téléphones comme sur tablettes. Sans root. Ne remplace pas le panneau de volume du système. Sans publicité, sans compte, sans aucune permission internet. La zone silencieuse est le cœur de l'appli, et le même curseur couvre aussi votre plage normale.
+Les applis qui ajoutent seulement des paliers de volume découpent la même plage plus finement ; elles n'abaissent pas le bas de l'échelle. Quiet Dial est faite pour le bas de l'échelle : elle réduit le volume sous le palier le plus bas que le matériel autorise, via le moteur audio d'Android, sur téléphones comme sur tablettes. Sans root. Ne remplace pas le panneau de volume du système. La zone silencieuse est le cœur de l'appli, et le même curseur couvre aussi votre plage normale.
 
 QUAND VOS BOUTONS DE VOLUME SONT CASSÉS OU NE FONCTIONNENT PLUS
-Les boutons de volume s'usent, se coincent, ne répondent plus ou se retrouvent sous une coque. Le curseur est un contrôle du volume à l'écran qui les remplace. Au-dessus de la ligne marquant le minimum de votre appareil, il règle le volume système normal : touchez une barre ou les flèches pour monter et baisser, par paliers réguliers de 5 dB construits à partir de la courbe de volume de votre propre appareil. Sous la ligne, il continue, plus bas que ce que le téléphone permet. La commande muet ne touche pas aux alarmes, mais les paliers silencieux baissent aussi alarmes et sonneries.
-
-CONÇU AUSSI POUR LES TABLETTES
-Sur certaines tablettes, le volume minimum est encore plus fort que sur un téléphone, selon le modèle. Granular Volume fonctionne de la même façon sur tablette Android, avec le même plancher silencieux.
+Les boutons de volume s'usent, se coincent, ne répondent plus ou se retrouvent sous une coque. Le curseur est un contrôle du volume à l'écran qui les remplace. Au-dessus de la ligne marquant le minimum de votre appareil, il règle le volume système normal : touchez une barre ou les flèches pour monter et baisser, par paliers réguliers. Sous la ligne, il continue, plus bas que ce que le téléphone permet. La commande muet ne touche pas aux alarmes, mais les paliers silencieux baissent aussi alarmes et sonneries.
 
 UN CONTRÔLE FLOTTANT, TOUJOURS À PORTÉE
-Le contrôle vit au-dessus de ce que vous faites. Ouvrez une appli, lancez un son, il est là. Un appui le ferme. Sa dernière position est retenue.
+Le contrôle vit au-dessus de ce que vous faites. Réduisez-le en un petit onglet au bord de l'écran et le niveau silencieux continue d'agir. Le fermer l'éteint. Sa dernière position est retenue.
 
 TUILE DE RÉGLAGES RAPIDES
-Balayez vers le bas, appuyez une fois. Après la première configuration, activez ou coupez le contrôle depuis la tuile Quiet Dial des réglages rapides.
+Après la première configuration, activez-le ou coupez-le depuis la tuile Quiet Dial.
 
 FAIT POUR LES MOMENTS CALMES
-- Appels d'applis comme WhatsApp, si le téléphone les fait passer par la sortie média, ce qui dépend du modèle. Les appels classiques restent hors de portée des applis
+- Appels d'applis comme WhatsApp si le téléphone les lit comme des médias. Les appels classiques restent hors de portée des applis
 - Écouteurs intra sensibles où même le palier 1 est trop fort
-- Haut-parleurs et casques de tablette, au minimum plus fort que sur téléphone sur certains modèles
+- Haut-parleurs et casques de tablette, au minimum parfois plus fort que sur téléphone
 - Bruit blanc ou berceuses pour un bébé qui dort, à peine audibles
 - Écoute nocturne à côté d'une personne qui dort
 - Pièces calmes, bibliothèques, open spaces et méditation
@@ -30,15 +27,14 @@ FAIT POUR LES MOMENTS CALMES
 - Appareils auditifs et amplifiés où le volume minimal du système est trop fort
 
 CONÇU POUR SE FAIRE OUBLIER
-Granular Volume ne prend pas vos boutons de volume : ils continuent de fonctionner, et dans la zone silencieuse leurs pressions passent dans une échelle plus fine. Il ne remplace pas le panneau de volume du système et n'ajoute pas d'égaliseur non demandé. Il change une seule chose : le niveau, du volume normal jusque sous le minimum matériel.
+Quiet Dial ne prend pas vos boutons de volume : ils continuent de fonctionner, et dans la zone silencieuse leurs pressions passent dans une échelle plus fine. Elle ne remplace pas le panneau de volume du système et n'ajoute pas d'égaliseur non demandé.
 
 PRIVÉ, OPEN SOURCE
-Sept jours avec l'application complète, puis un achat unique sur Google Play, sans abonnement. Pas de publicité. Pas de pistage. Pas de permission internet, l'appli ne peut se connecter à rien. Pas de compte, pas d'inscription, pas d'analyse. Open source sous licence GPL-3.0.
+Sept jours gratuits, puis un achat unique, sans abonnement. Pas de publicité. Pas de pistage. Pas de permission internet, l'appli ne peut se connecter à rien. Pas de compte, pas d'analyse. Open source, GPL-3.0.
 
 PERMISSIONS, EXPLIQUÉES
 - Superposition aux autres applis : affiche le contrôle flottant
 - Modifier les réglages audio : applique l'atténuation
 - Service au premier plan : garde le contrôle fiable pendant l'écoute
 - Lancement au démarrage : restaure le contrôle après un redémarrage s'il était actif
-
-Fonctionne aussi bien sur téléphones que sur tablettes Android. Si votre minimum a toujours été trop fort, voici le volume qui vous manquait.
+- Notifications (facultatif) : le contrôle dans le volet et deux rappels sur la semaine gratuite
