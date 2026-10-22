@@ -305,3 +305,7 @@ Issues and pull requests are welcome. A few things that make a report or a PR fa
 ## License
 
 Quiet Dial is free software, licensed under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text. You are free to use, study, share, and modify it, provided derivative works remain under the same license.
+
+### Name and icon
+
+The license covers the code. If you publish a modified version, please give it a name and an icon of its own, so that nobody mistakes it for Quiet Dial or Granular Volume and nobody sends its bug reports here. "Quiet Dial" is the name of this app, and "Granular Volume" is the name of its maker.
