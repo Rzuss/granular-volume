@@ -130,5 +130,26 @@
     if (!panel.hidden && !panel.contains(e.target) && !button.contains(e.target)) closePanel(false);
   });
 
+  // On a phone the round button sits over the text being read. It slides off the edge while the
+  // page scrolls down and comes back on any scroll up, near the top, at the end of the page, and
+  // whenever it has keyboard focus or its panel is open.
+  var narrow = window.matchMedia ? window.matchMedia('(max-width:640px)') : null;
+  if (narrow) {
+    var style = el('style', {});
+    style.textContent = '.gv-a11y-fab{transition:transform .2s ease;}' +
+      '.gv-a11y-fab.gv-a11y-away{transform:translateX(-72px);}' +
+      '.gv-a11y-fab.gv-a11y-away:focus-visible{transform:none;}' +
+      '@media (prefers-reduced-motion:reduce){.gv-a11y-fab{transition:none;}}';
+    document.head.appendChild(style);
+    var lastY = window.pageYOffset;
+    window.addEventListener('scroll', function () {
+      var y = window.pageYOffset;
+      var atEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 80;
+      var away = narrow.matches && panel.hidden && y > lastY && y > 200 && !atEnd;
+      button.classList.toggle('gv-a11y-away', away);
+      lastY = y;
+    }, { passive: true });
+  }
+
   refresh();
 })();
