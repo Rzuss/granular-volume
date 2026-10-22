@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Granular Volume are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
+All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
 ## 1.7.5 (versionCode 55)
 
