@@ -1,0 +1,1 @@
+If permission to display over other apps is switched off while the control runs, the app no longer stops: the control ends cleanly and says why.

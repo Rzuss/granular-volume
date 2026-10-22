@@ -37,6 +37,7 @@ object Prefs {
     private const val KEY_UNLOCK_ACKNOWLEDGED    = "unlock_acknowledged"
     private const val KEY_TRIAL_CARD_DAY         = "trial_card_shown_for_day"
     private const val KEY_LAST_DAY_NUDGE_SHOWN   = "last_day_nudge_shown"
+    private const val KEY_MIDWEEK_NUDGE_SHOWN    = "midweek_nudge_shown"
     // 1.6.2: the two one-time notices of the free week (see TrialNotices)
     private const val KEY_LAST_DAY_NOTICE_POSTED = "last_day_notice_posted"
     private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
@@ -260,6 +261,18 @@ object Prefs {
 
     fun setLastDayNudgeShown(context: Context) {
         prefs(context).edit { putBoolean(KEY_LAST_DAY_NUDGE_SHOWN, true) }
+    }
+
+    /**
+     * 1.7.5: the "Your access" sheet was opened once in the middle of the free week (day 5),
+     * so the price is seen before the last day. Once per install, outside the backup like the
+     * last-day flag.
+     */
+    fun wasMidweekNudgeShown(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_MIDWEEK_NUDGE_SHOWN, false)
+
+    fun setMidweekNudgeShown(context: Context) {
+        prefs(context).edit { putBoolean(KEY_MIDWEEK_NUDGE_SHOWN, true) }
     }
 
     /** 1.6.2: the last-day notice went to the shade (once per install, never re-armed). */

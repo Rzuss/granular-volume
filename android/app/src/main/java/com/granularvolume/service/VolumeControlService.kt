@@ -111,6 +111,8 @@ class VolumeControlService : Service() {
 
         /** 1.6.2: grace before the last-day notice, so a start's own last-day sheet goes first. */
         private const val LAST_DAY_NOTICE_DELAY_MS = 4000L
+        /** 1.7.5: the midweek access sheet appears on day 5 of the free week (3 days left). */
+        private const val MIDWEEK_NUDGE_DAYS_LEFT = 3
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
         private const val BILLING_PREFETCH_DELAY_MS = 1500L
@@ -346,7 +348,15 @@ class VolumeControlService : Service() {
                 stopRequestedByUser = true
                 stopSelf()
             },
-            onInfo          = { openInfoSheet() }
+            onInfo          = { openInfoSheet() },
+            // 1.7.5: Android refused a dial, tab or tour window (the overlay permission was
+            // withdrawn while the control ran). Say so and end the control, never crash. Not a
+            // user stop: the boot restore keeps its flag and meets the permission check there.
+            onWindowRefused = {
+                Log.w(tag, "Overlay window refused: stopping the control")
+                toast(getString(R.string.gv_toast_dial_failed))
+                stopSelf()
+            }
         )
         // Wired HERE, after construction, never inside a callback. It sat inside the onInfo
         // lambda until 2026-09-09, which compiled and meant it was only ever assigned after
@@ -619,11 +629,25 @@ class VolumeControlService : Service() {
         if (!maybeLastDayNudge()) overlayManager.maybeStartTour()
     }
 
-    /** Once, on the trial's final day: cheapest check first, so the everyday cost is one boolean read. */
+    /**
+     * Once, on the trial's final day: cheapest check first, so the everyday cost is one boolean read.
+     * 1.7.5: and once before it, on day 5. Until now someone whose dial kept running met the
+     * price only on the last day, if at all. Same door as the last-day sheet: it answers a start or
+     * a touch of the dial, never opens on its own, and is shown once per install.
+     */
     private fun maybeLastDayNudge(): Boolean {
         if (Prefs.wasLastDayNudgeShown(applicationContext)) return false
         if (!ProAccess.isOnTrial(applicationContext)) return false
-        if (Entitlement.daysLeftInTrial(applicationContext) > 1) return false
+        val daysLeft = Entitlement.daysLeftInTrial(applicationContext)
+        if (daysLeft > 1) {
+            // Day 5 only (3 days left). Day 6 stays quiet on purpose: Layer A A21 holds that a start
+            // two days before the end opens nothing, so the last-day sheet keeps its own moment.
+            if (daysLeft != MIDWEEK_NUDGE_DAYS_LEFT || Prefs.wasMidweekNudgeShown(applicationContext)) return false
+            Prefs.setMidweekNudgeShown(applicationContext)
+            Log.i(tag, "Midweek access sheet: $daysLeft days left")
+            openInfoSheet()
+            return true
+        }
         Prefs.setLastDayNudgeShown(applicationContext)
         openInfoSheet()
         return true
