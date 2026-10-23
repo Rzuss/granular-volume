@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Quiet Is -30 dB? Volume Below Your Phone&#x27;s Minimum</title>
+<meta name="description" content="What -30 dB below your phone&#x27;s lowest volume step means: about 3% of the sound wave, a thousandth of the power, and roughly an eighth as loud.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://granularvolume.com/guide/how-quiet-is-minus-30-db.html">
+<meta property="og:url" content="https://granularvolume.com/guide/how-quiet-is-minus-30-db.html">
+<meta property="og:title" content="How Quiet Is -30 dB? Volume Below Your Phone&#x27;s Minimum">
+<meta property="og:image" content="https://granularvolume.com/img/og/guide-how-quiet-is-minus-30-db.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="How Quiet Is -30 dB? Volume Below Your Phone&#x27;s Minimum">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://granularvolume.com/img/og/guide-how-quiet-is-minus-30-db.png">
+<meta property="og:description" content="What -30 dB below your phone&#x27;s lowest volume step means: about 3% of the sound wave, a thousandth of the power, and roughly an eighth as loud.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../img/icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Quiet Is -30 dB? Volume Below Your Phone's Minimum",
+  "description": "What -30 dB below your phone's lowest volume step means: about 3% of the sound wave, a thousandth of the power, and roughly an eighth as loud.",
+  "image": "https://granularvolume.com/img/og/guide-how-quiet-is-minus-30-db.png",
+  "author": {
+    "@type": "Person",
+    "name": "Rotem Zussman"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://granularvolume.com/#org",
+    "name": "Granular Volume",
+    "url": "https://granularvolume.com/"
+  },
+  "datePublished": "2026-10-23",
+  "dateModified": "2026-10-23",
+  "mainEntityOfPage": "https://granularvolume.com/guide/how-quiet-is-minus-30-db.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How quiet is -30 dB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When it is measured from your phone's lowest volume step, -30 dB leaves about 3% of the sound wave's amplitude and one thousandth of its power. By the usual rule of thumb that 10 dB quieter sounds about half as loud, it seems roughly one eighth as loud as that lowest step."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is -30 dB the same as a whisper at 30 dB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A whisper at 30 dB is a sound pressure level measured from the threshold of hearing. A volume of -30 dB is a reduction: 30 dB quieter than a starting point, here your phone's lowest step. How loud the result is depends on how loud that step was on your phone and headphones."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much quieter is each 5 dB step?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each 5 dB step keeps about 56% of the amplitude and about 32% of the power of the step above it. By the rule of thumb it sounds roughly 30% quieter, so two steps, 10 dB, sound about half as loud."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is -30 dB silent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is a reduction, not mute. Whether you can still hear it depends on how loud your lowest step was to begin with; it is meant for barely audible listening such as white noise for a sleeping baby or a podcast in a silent bedroom. Mute is silence, and Quiet Dial has a separate mute."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the scale start at my phone's lowest step instead of at zero volume?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because that is where Android stops. Above that line Quiet Dial sets the normal system volume. Below it, each quiet step lowers Android's own output by a further 5 dB, so the numbers say how far below your phone's minimum you are."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does -30 dB sound the same on every phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The reduction is the same distance on every phone that uses Android's standard audio effects, but the final loudness differs, because every phone and every pair of headphones starts from a different lowest step. A phone maker can also replace the standard effects, and on a few phone and Bluetooth headset pairs the quiet steps have no effect, so check your own setup during the seven free days."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg0:#0a0e1d; --bg1:#121833; --card:#161232; --accent:#5046E5; --accent2:#22d3ee;
+    --txt:#f4f6ff; --muted:#9aa3c7; --line:rgba(255,255,255,.08);
+    --good:#22d3ee; --bad:#ff6b6b; --warn:#f5b942;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Segoe UI",system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
+      linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
+    line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent2);}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;
+    padding:15px 28px;border-radius:14px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(145deg,var(--accent),#5B52F0);color:#fff;
+    box-shadow:0 14px 40px rgba(108,99,255,.45);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03);}
+
+  header.top{padding:56px 0 8px;}
+  .crumb{font-size:14px;color:var(--muted);margin-bottom:22px;}
+  .crumb a{color:var(--muted);text-decoration:none;}
+  .crumb a:hover{color:var(--accent2);}
+  .icon{width:76px;height:76px;border-radius:20px;margin-bottom:22px;
+    background:linear-gradient(135deg,#16162B 0%, #4A43C9 100%);
+    box-shadow:0 18px 48px rgba(74,67,201,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+    display:inline-flex;align-items:center;justify-content:center;overflow:hidden;}
+  .icon img{width:100%;height:100%;}
+  h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.8px;line-height:1.08;margin-bottom:16px;}
+  .dek{color:var(--muted);font-size:19px;max-width:620px;}
+  .meta{color:var(--muted);font-size:14px;margin-top:18px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+
+  .quickfix{background:linear-gradient(145deg, rgba(108,99,255,.16), rgba(34,211,238,.07));
+    border:1px solid rgba(108,99,255,.4);border-radius:18px;padding:24px 28px;margin:28px 0 8px;}
+  .quickfix .kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+  .quickfix p{color:var(--txt);font-size:16.5px;margin-bottom:0;}
+  .quickfix .setup-note{margin-top:12px;font-size:14px;line-height:1.5;opacity:.85;}
+.cta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+  .quickfix .btn{padding:12px 22px;font-size:15.5px;}
+
+  article{padding:36px 0;}
+  article h2{font-size:26px;font-weight:800;margin:44px 0 14px;letter-spacing:-.2px;}
+  article h3{font-size:19px;font-weight:700;margin:26px 0 8px;}
+  article p{margin-bottom:16px;font-size:17px;color:#e3e5f7;}
+  article ul, article ol{margin:0 0 16px 22px;font-size:17px;color:#e3e5f7;}
+  article li{margin-bottom:8px;}
+  .lead-p{font-size:18px;color:var(--txt);}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:28px 0;}
+  .toc div{font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;}
+  .toc ol{margin:0 0 0 20px;font-size:15px;}
+  .toc a{text-decoration:none;color:#c9cdf0;}
+  .toc a:hover{color:var(--accent2);}
+
+  .fixcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;}
+  .fixcard h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .verdict{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:auto;}
+  .v-works{background:rgba(34,211,238,.14);color:var(--good);}
+  .v-partial{background:rgba(245,185,66,.14);color:var(--warn);}
+  .v-doesnt{background:rgba(255,107,107,.14);color:var(--bad);}
+  .fixcard p{color:var(--muted);font-size:15.5px;margin-bottom:0;}
+  .fixcard p + p{margin-top:10px;}
+
+  .callout{background:linear-gradient(145deg, rgba(108,99,255,.14), rgba(34,211,238,.08));
+    border:1px solid rgba(108,99,255,.35);border-radius:18px;padding:28px 30px;margin:40px 0;}
+  .callout h2{margin-top:0;}
+  .callout .cta{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap;}
+
+  .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
+  .faq dd{color:var(--muted);margin:8px 0 0;font-size:16px;}
+
+  footer{padding:48px 0 72px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);margin-top:24px;}
+  footer a{color:var(--accent2);text-decoration:none;}
+
+  /* Keyboard accessibility. Nothing here changes the page for mouse users. */
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:999;padding:12px 20px;
+    background:var(--accent2);color:var(--bg0);font-weight:700;text-decoration:none;
+    border-radius:0 0 10px 0;}
+  .skip-link:focus{left:0;}
+  :focus-visible{outline:3px solid var(--accent2);outline-offset:3px;border-radius:4px;}
+  main:focus{outline:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{transition:none !important;animation:none !important;}
+  }
+  .tablewrap{overflow-x:auto;margin:18px 0;}
+  table.cmp{width:100%;border-collapse:collapse;font-size:15px;background:var(--card);border:1px solid var(--line);border-radius:12px;}
+  table.cmp th,table.cmp td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);color:#e3e5f7;}
+  table.cmp thead th{color:var(--txt);font-weight:700;}
+  table.cmp tbody th{color:var(--muted);font-weight:600;min-width:130px;}
+  table.cmp tr:last-child th,table.cmp tr:last-child td{border-bottom:0;}
+  figure.shot{margin:22px 0;}
+  figure.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;}
+  figure.shot figcaption{color:var(--muted);font-size:14px;margin-top:8px;}
+  /*GV-POLISH-NAV*/
+  .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .gv-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:20px;}
+  .gv-brand{display:flex;align-items:center;gap:10px;color:#f4f6ff;text-decoration:none;font-weight:800;font-size:17px;margin-right:auto;}
+  .gv-brand img{width:30px;height:30px;border-radius:8px;display:block;}
+  .gv-nav-in>a.gv-link{color:#c7cbec;text-decoration:none;font-size:15px;font-weight:600;padding:8px 4px;}
+  .gv-nav-in>a.gv-link:hover{color:#22d3ee;}
+  .gv-play{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;
+    background:#5046E5;color:#fff !important;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;}
+  .gv-play:hover{background:#5B52F0;}
+  @media (max-width:520px){.gv-nav-in{gap:12px;padding:0 14px;}.gv-nav-in>a.gv-link{font-size:14px;padding:8px 2px;}
+    .gv-brand span{display:none;}.gv-play{padding:0 13px;font-size:14px;}}
+  [id]{scroll-margin-top:76px;}
+  @media print{.gv-nav{display:none;}}
+/*GV-POLISH-NAV-END*/
+  /*GV-POLISH-CARDS*/
+  @media (max-width:640px){
+    table.gv-cards,table.gv-cards tbody,table.gv-cards tr,table.gv-cards td,table.gv-cards tbody th{display:block;width:auto !important;}
+    table.gv-cards thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+    table.gv-cards tr{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;margin:0 0 12px;
+      background:rgba(255,255,255,.03);}
+    table.gv-cards td,table.gv-cards tbody th{border:0 !important;padding:5px 0 !important;text-align:left !important;}
+    table.gv-cards tr>:first-child{font-weight:700;font-size:16px;color:#f4f6ff;padding-top:0 !important;}
+    table.gv-cards td[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;
+      letter-spacing:.04em;text-transform:uppercase;color:#9aa3c7;margin-bottom:2px;}
+  }
+/*GV-POLISH-CARDS-END*/
+</style>
+<script src="/src.js"></script>
+<script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style id="gv-a11y-style">
+  /* Accessibility button and panel, self-hosted (a11y.js). No third-party code, no cookies. */
+  .gv-a11y-fab{position:fixed;left:16px;bottom:16px;z-index:1000;width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;background:#5046E5;color:#fff;border:2px solid #fff;
+    box-shadow:0 6px 18px rgba(0,0,0,.45);cursor:pointer;padding:0;text-decoration:none;}
+  .gv-a11y-fab svg{width:30px;height:30px;fill:currentColor;}
+  @media (max-width:640px){.gv-a11y-fab{width:44px;height:44px;left:10px;bottom:10px;}.gv-a11y-fab svg{width:25px;height:25px;}.gv-a11y-panel{bottom:64px;}body{padding-bottom:64px;}}
+  .gv-a11y-fab:focus-visible,.gv-a11y-btn:focus-visible,.gv-a11y-link:focus-visible{outline:3px solid #22d3ee;outline-offset:3px;}
+  .gv-a11y-panel{position:fixed;left:16px;bottom:78px;z-index:1000;width:min(300px,calc(100vw - 32px));
+    max-height:calc(100vh - 100px);overflow:auto;background:#161232;color:#f4f6ff;border:1px solid rgba(255,255,255,.35);
+    border-radius:14px;padding:14px;box-shadow:0 12px 32px rgba(0,0,0,.55);font:16px/1.4 "Segoe UI",system-ui,sans-serif;text-align:left;}
+  .gv-a11y-title{font-weight:800;font-size:17px;margin:0 0 10px;}
+  .gv-a11y-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .gv-a11y-label{flex:1;}
+  .gv-a11y-value{min-width:46px;text-align:center;}
+  .gv-a11y-btn{display:block;width:100%;min-height:44px;margin:0 0 8px;padding:8px 12px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.35);background:#232a55;color:#f4f6ff;font:inherit;text-align:left;cursor:pointer;}
+  .gv-a11y-step{width:52px;margin:0;text-align:center;font-weight:700;}
+  .gv-a11y-btn[aria-pressed="true"]{background:#5046E5;border-color:#fff;}
+  .gv-a11y-btn[aria-pressed="true"]::after{content:" \2713";}
+  .gv-a11y-btn:disabled{opacity:.45;cursor:default;}
+  .gv-a11y-link{display:block;margin:4px 0 10px;color:#22d3ee;}
+  .gv-a11y-close{margin-bottom:0;}
+  html.gv-hc body,html.gv-hc body *:not(img):not(svg):not(path){background:#000 !important;
+    border-color:#fff !important;text-shadow:none !important;box-shadow:none !important;}
+  html.gv-hc body,html.gv-hc body *{color:#fff !important;}
+  html.gv-hc body a,html.gv-hc body a *{color:#ff0 !important;}
+  html.gv-hc .gv-a11y-btn[aria-pressed="true"]{outline:3px solid #ff0;}
+  html.gv-ul a{text-decoration:underline !important;}
+  html.gv-rf body,html.gv-rf body *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.02em;word-spacing:.06em;}
+  @media print{.gv-a11y{display:none !important;}}
+</style>
+<script type="application/ld+json" data-gv="crumbs">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Quiet Dial", "item": "https://granularvolume.com/"}, {"@type": "ListItem", "position": 2, "name": "How quiet is -30 dB?", "item": "https://granularvolume.com/guide/how-quiet-is-minus-30-db.html"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the main content</a>
+<!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-link" href="/#guides">Guides</a><a class="gv-link" href="/help.html">Help</a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3Dhow-quiet-is-minus-30-db" data-goatcounter-click="play-nav-guide-how-quiet-is-minus-30-db"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="../">Quiet Dial</a> / Guide</div>
+    <div class="icon"><img width="512" height="512" src="../img/icon.webp" alt="Quiet Dial icon"></div>
+    <h1>How quiet is -30 dB?</h1>
+    <p class="dek">What a number like -30&nbsp;dB means when it sits below your phone's lowest volume step: how much of the sound is left, how loud it is likely to seem, and why it is always measured from your own device, not from silence.</p>
+    <p class="meta">Updated October 23, 2026 · 5 min read</p>
+  </header>
+<main id="main" tabindex="-1">
+
+  <article>
+    <p class="lead-p">Volume apps, audio settings and spec sheets all talk in decibels, and the numbers are easy to misread. A volume of -30&nbsp;dB is not a loudness you can look up in a chart of whispers and jet engines. It is a distance: how far below a starting point the sound has been turned down. Here is what that distance means in practice.</p>
+
+    <div class="quickfix">
+      <div class="kicker">Short answer</div>
+      <p>-30&nbsp;dB below your phone's lowest step leaves about <strong>3% of the sound wave's size</strong> and <strong>one thousandth of its power</strong>. By the usual rule of thumb that 10&nbsp;dB quieter sounds about half as loud, it seems roughly <strong>one eighth as loud</strong> as the lowest step you had before. <strong>Volume Control: Quiet Dial</strong> adds six steps of 5&nbsp;dB each between your lowest step and that point.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhow-quiet-is-minus-30-db" data-goatcounter-click="play-cta-how-quiet-is-minus-30-db-top">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#table">See every step</a>
+      </div>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
+    </div>
+
+    <div class="toc">
+      <div>On this page</div>
+      <ol>
+        <li><a href="#relative">Decibels here are a distance, not a loudness</a></li>
+        <li><a href="#table">Every step from 0 to -30 dB</a></li>
+        <li><a href="#feel">How loud it is likely to seem</a></li>
+        <li><a href="#start">Why the starting point differs on every phone</a></li>
+        <li><a href="#applied">How the -30 dB is applied</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </div>
+
+    <h2 id="relative">Decibels here are a distance, not a loudness</h2>
+    <p>You may have seen tables that put a whisper at 30&nbsp;dB and a busy street at 70&nbsp;dB. Those are sound pressure levels, measured from the threshold of hearing. A volume setting of -30&nbsp;dB is something else: it says the output is 30&nbsp;dB below a reference, and here the reference is your phone's own lowest volume step. So -30&nbsp;dB does not mean &ldquo;as quiet as a whisper&rdquo;. It means &ldquo;30&nbsp;dB quieter than whatever your lowest step was&rdquo;.</p>
+    <p>That is also why the number has a minus sign. Zero is where you start, and every step below it takes some of the sound away.</p>
+
+    <h2 id="table">Every step from 0 to -30 dB</h2>
+    <p>Decibels are logarithmic, so each 5&nbsp;dB step removes the same share of what is left, not the same amount. The table shows what remains at each of Quiet Dial's quiet steps, compared with your phone's lowest step.</p>
+    <div class="tablewrap">
+    <table class="cmp gv-cards">
+      <thead><tr><th scope="col">Step</th><th scope="col">Sound wave left (amplitude)</th><th scope="col">Power left</th><th scope="col">Seems about (rule of thumb)</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">0 dB (your lowest step)</th><td data-label="Sound wave left (amplitude)">100%</td><td data-label="Power left">100%</td><td data-label="Seems about (rule of thumb)">as loud as now</td></tr>
+        <tr><th scope="row">-5 dB</th><td data-label="Sound wave left (amplitude)">56%</td><td data-label="Power left">32%</td><td data-label="Seems about (rule of thumb)">70%</td></tr>
+        <tr><th scope="row">-10 dB</th><td data-label="Sound wave left (amplitude)">32%</td><td data-label="Power left">10%</td><td data-label="Seems about (rule of thumb)">half</td></tr>
+        <tr><th scope="row">-15 dB</th><td data-label="Sound wave left (amplitude)">18%</td><td data-label="Power left">3.2%</td><td data-label="Seems about (rule of thumb)">a third</td></tr>
+        <tr><th scope="row">-20 dB</th><td data-label="Sound wave left (amplitude)">10%</td><td data-label="Power left">1%</td><td data-label="Seems about (rule of thumb)">a quarter</td></tr>
+        <tr><th scope="row">-25 dB</th><td data-label="Sound wave left (amplitude)">5.6%</td><td data-label="Power left">0.3%</td><td data-label="Seems about (rule of thumb)">a sixth</td></tr>
+        <tr><th scope="row">-30 dB</th><td data-label="Sound wave left (amplitude)">3.2%</td><td data-label="Power left">0.1%</td><td data-label="Seems about (rule of thumb)">an eighth</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>The first two columns are plain arithmetic: amplitude is 10 to the power of dB&nbsp;/&nbsp;20, power is 10 to the power of dB&nbsp;/&nbsp;10. The last column is an estimate, explained next.</p>
+
+    <h2 id="feel">How loud it is likely to seem</h2>
+    <p>Your ears do not hear power the way a meter measures it. The common rule of thumb in acoustics, from Stevens' work on perceived loudness that gave us the sone, is that a sound about 10&nbsp;dB quieter seems about half as loud. By that rule each 5&nbsp;dB step sounds roughly 30% quieter than the one before, and -30&nbsp;dB, three halvings, seems about one eighth as loud as where you started.</p>
+    <p>Treat that as a guide, not a measurement. Loudness also depends on pitch and on the listener, and at very low levels it falls off faster than the rule predicts, so the last steps can seem quieter still. In practice the bottom steps are meant for things like white noise beside a sleeping baby or a podcast in a silent bedroom, where barely audible is the goal.</p>
+
+    <h2 id="start">Why the starting point differs on every phone</h2>
+    <p>Because the scale starts at your lowest step, where you end up depends on how loud that step was to begin with. That varies a lot. Phones and tablets set their own minimum, and the same signal is far louder in sensitive in-ear earbuds than through the phone's speaker. So -30&nbsp;dB is the same distance on every device, but not the same final loudness. If your lowest step is painfully loud in earbuds, -30&nbsp;dB still takes off that same share of it.</p>
+    <p>For the same reason, nobody can honestly tell you that -30&nbsp;dB equals a particular number on a sound level meter without measuring your own phone and headphones.</p>
+
+    <h2 id="applied">How the -30 dB is applied</h2>
+    <div class="fixcard">
+      <h3>Android's own audio engine, in decibels <span class="verdict v-works">How Quiet Dial does it</span></h3>
+      <p>Quiet Dial sets the input gain of Android's DynamicsProcessing audio effect on the mixed output, in decibels, with every other stage of the effect switched off. In Android's standard implementation that gain multiplies the signal by 10 to the power of dB&nbsp;/&nbsp;20, so -30&nbsp;dB leaves 0.0316 of the amplitude, exactly the 3.2% in the table.</p>
+      <p>Two honest limits. A phone maker can replace Android's standard audio effects with its own, so we never claim that every device behaves identically. And on a small number of phone and Bluetooth headset pairs the quiet steps have no effect, because the audio takes a path that Android's audio effects do not reach. The seven free days are there to check your own setup.</p>
+    </div>
+    <p>The quiet steps lower media, ringtones, notifications, alarms, and app calls such as WhatsApp when the phone plays them as media. Regular phone calls run on a separate path that no app can lower, and keyboard and touch sounds bypass audio effects by design.</p>
+
+    <div class="callout">
+      <h2>Six steps between too loud and mute</h2>
+      <p>One floating slider for your whole range: normal volume above your device's minimum line, and six quiet steps of 5&nbsp;dB below it, down to -30&nbsp;dB. No root, no ads, no tracking, no account. This is a convenience tool, not hearing protection.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhow-quiet-is-minus-30-db" data-goatcounter-click="play-cta-how-quiet-is-minus-30-db-bottom">Get it on Google Play</a>
+        <a class="btn btn-ghost" href="why-android-minimum-volume-is-too-loud.html">Why the minimum is too loud</a>
+      </div>
+      <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
+    </div>
+
+    <h2 id="faq">FAQ</h2>
+    <dl class="faq">
+      <dt>How quiet is -30 dB?</dt>
+      <dd>When it is measured from your phone&#x27;s lowest volume step, -30 dB leaves about 3% of the sound wave&#x27;s amplitude and one thousandth of its power. By the usual rule of thumb that 10 dB quieter sounds about half as loud, it seems roughly one eighth as loud as that lowest step.</dd>
+      <dt>Is -30 dB the same as a whisper at 30 dB?</dt>
+      <dd>No. A whisper at 30 dB is a sound pressure level measured from the threshold of hearing. A volume of -30 dB is a reduction: 30 dB quieter than a starting point, here your phone&#x27;s lowest step. How loud the result is depends on how loud that step was on your phone and headphones.</dd>
+      <dt>How much quieter is each 5 dB step?</dt>
+      <dd>Each 5 dB step keeps about 56% of the amplitude and about 32% of the power of the step above it. By the rule of thumb it sounds roughly 30% quieter, so two steps, 10 dB, sound about half as loud.</dd>
+      <dt>Is -30 dB silent?</dt>
+      <dd>No. It is a reduction, not mute. Whether you can still hear it depends on how loud your lowest step was to begin with; it is meant for barely audible listening such as white noise for a sleeping baby or a podcast in a silent bedroom. Mute is silence, and Quiet Dial has a separate mute.</dd>
+      <dt>Why does the scale start at my phone&#x27;s lowest step instead of at zero volume?</dt>
+      <dd>Because that is where Android stops. Above that line Quiet Dial sets the normal system volume. Below it, each quiet step lowers Android&#x27;s own output by a further 5 dB, so the numbers say how far below your phone&#x27;s minimum you are.</dd>
+      <dt>Does -30 dB sound the same on every phone?</dt>
+      <dd>The reduction is the same distance on every phone that uses Android&#x27;s standard audio effects, but the final loudness differs, because every phone and every pair of headphones starts from a different lowest step. A phone maker can also replace the standard effects, and on a few phone and Bluetooth headset pairs the quiet steps have no effect, so check your own setup during the seven free days.</dd>
+    </dl>
+  </article>
+
+</main>
+</div>
+<footer>
+  <div class="wrap">
+    Part of <a href="../">Quiet Dial</a> by Granular Volume, free software under the
+    <a href="https://github.com/Rzuss/granular-volume/blob/main/LICENSE">GNU GPL-3.0</a>.
+    <a href="https://rzuss.github.io/granular-volume-privacy/">Privacy Policy</a> ·
+    <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html">Terms of Use</a> &middot; <a href="https://rzuss.github.io/granular-volume-privacy/terms-of-use.html#refunds">Refunds</a> &middot;
+    <a href="../help.html">Help</a> · <a href="../accessibility.html">Accessibility</a>.
+    <br>
+    See also: <a href="why-android-minimum-volume-is-too-loud.html">why the Android minimum is too loud</a> ·
+    <a href="lower-android-volume-below-minimum.html">every method for going below the minimum, ranked</a> ·
+    <a href="bluetooth-earbuds-volume-too-loud-lowest.html">Bluetooth earbuds too loud at the lowest volume</a>.
+  <br>  This site counts visits with GoatCounter, without cookies and without storing IP addresses or other personal data.
+  </div>
+</footer>
+<a class="gv-a11y gv-a11y-fab" id="gv-a11y-fab" href="../accessibility.html" aria-label="Accessibility"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm8.5 5.6-5.5 1.1v4.1l2.4 7.4a1 1 0 0 1-1.9.6L13.3 15h-2.6l-2.2 5.8a1 1 0 0 1-1.9-.6l2.4-7.4V8.7L3.5 7.6a1 1 0 1 1 .4-2l6.2 1.2h3.8l6.2-1.2a1 1 0 1 1 .4 2z"/></svg></a>
+<script src="../a11y.js" defer></script>
+</body>
+</html>
