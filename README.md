@@ -156,7 +156,7 @@ rather than just read about it.
 - **Android 9.0 (API 28) and up**: this is the actual `minSdk` in `android/app/build.gradle.kts`. If you've seen "Android 8+" mentioned elsewhere by mistake, this README and the app's own listing are the source of truth.
 - **Phones and tablets alike.** The attenuation is applied to the global audio session, not to a specific screen size or form factor, so it behaves identically on both.
 - **No root required.**
-- Distributed as two build flavors: `play` (Google Play: a seven-day trial, then a one-time purchase inside the app through Google Play Billing, plus an optional in-app review prompt) and `fdroid` (zero Google Play dependencies; see [Building from source](#building-from-source)).
+- Built in two flavors: `play`, the version on Google Play (a seven-day trial, then a one-time purchase inside the app through Google Play Billing, plus an optional in-app review prompt), and `fdroid`, a build with zero Google Play code (see [Building from source](#building-from-source)).
 
 ## FAQ
 
@@ -187,8 +187,8 @@ The underlying mechanism is identical. On some tablets the minimum step is loude
 **Is there a Pro or paid version?**
 There is no separate Pro build. On Google Play the complete app comes with a seven-day trial, and after that a one-time purchase inside the app keeps every feature; nothing renews and there is no subscription. The code is open source under GPL-3.0.
 
-**Why is there a Play flavor and an F-Droid flavor?**
-F-Droid requires that everything in its build be free and open source, including build dependencies. The `play` flavor includes three proprietary Google libraries: Play Billing, for the one-time unlock; the in-app review library, only used to occasionally ask for a Play Store rating; and the in-app update library, used to show that a newer version is waiting on Google Play. All three talk to the Play Store app on the device, and the app itself still has no internet permission; the `fdroid` flavor has zero Google Play code. See [`build.gradle.kts`](android/app/build.gradle.kts) for the exact flavor split.
+**Why are there two build flavors?**
+The `fdroid` flavor follows F-Droid's inclusion rules, under which everything in a build, including build dependencies, must be free and open source. The `play` flavor includes three proprietary Google libraries: Play Billing, for the one-time unlock; the in-app review library, only used to occasionally ask for a Play Store rating; and the in-app update library, used to show that a newer version is waiting on Google Play. All three talk to the Play Store app on the device, and the app itself still has no internet permission; the `fdroid` flavor has zero Google Play code. See [`build.gradle.kts`](android/app/build.gradle.kts) for the exact flavor split.
 
 **Why not just make Android's default minimum volume lower?**
 That's not something a regular app can change. The per-step volume curve is defined by the device manufacturer at the OS/firmware level, not exposed to third-party apps through any public API. Adding attenuation on top, outside the standard volume steps entirely, is the practical mechanism available to an app that isn't the device's own system software. Re-encoding a file to be quieter also works, but only per file and never for streaming.
