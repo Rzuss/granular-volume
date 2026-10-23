@@ -241,7 +241,7 @@
   <h2 id="stops">Why did the control stop by itself?</h2>
   <p>The usual cause is the device's battery manager closing apps that run for a long time. The setting has different names on different devices. Look in <strong>Settings, Apps, Quiet Dial, Battery</strong> and choose the option that does not restrict the app (often called Unrestricted, or Don't optimise). Some devices also have a list of apps that may run in the background, or apps that are never put to sleep: add Quiet Dial to it.</p>
   <p>After a restart of the device, the control comes back by itself only if it was on when the device shut down. A control you stopped stays stopped.</p>
-  <p>If the dial is gone but the notification is still there, the "display over other apps" permission was switched off. Open Quiet Dial and grant it again.</p>
+  <p>If the permission to display over other apps is switched off while the control runs, the control ends and a short message says: "Could not show the dial. Check that Quiet Dial may display over other apps." Open Quiet Dial and grant it again (from version 1.7.5; earlier versions could leave the notification on with no dial).</p>
 
   <h2 id="quiet">Why did the sound not get quieter?</h2>
   <p>A few kinds of sound cannot be reached by this app. This is how Android routes them, and no setting in the app changes it.</p>
