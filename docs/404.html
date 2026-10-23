@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/img/icon.png">
 <style>
-  body{margin:0;font-family:"Inter","Segoe UI",system-ui,sans-serif;color:#f4f6ff;line-height:1.65;
+  body{margin:0;font-family:"Segoe UI",system-ui,sans-serif;color:#f4f6ff;line-height:1.65;
     background:linear-gradient(180deg,#121833 0%,#0a0e1d 40%);min-height:100vh;}
   .wrap{max-width:640px;margin:0 auto;padding:72px 24px;}
   h1{font-size:34px;font-weight:900;margin:0 0 12px;}
@@ -16,9 +16,26 @@
   li{margin-bottom:8px;}
   a{color:#22d3ee;}
   :focus-visible{outline:3px solid #22d3ee;outline-offset:3px;border-radius:4px;}
+  /*GV-POLISH-NAV*/
+  .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .gv-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:20px;}
+  .gv-brand{display:flex;align-items:center;gap:10px;color:#f4f6ff;text-decoration:none;font-weight:800;font-size:17px;margin-right:auto;}
+  .gv-brand img{width:30px;height:30px;border-radius:8px;display:block;}
+  .gv-nav-in>a.gv-link{color:#c7cbec;text-decoration:none;font-size:15px;font-weight:600;padding:8px 4px;}
+  .gv-nav-in>a.gv-link:hover{color:#22d3ee;}
+  .gv-play{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;
+    background:#5046E5;color:#fff !important;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;}
+  .gv-play:hover{background:#5B52F0;}
+  @media (max-width:520px){.gv-nav-in{gap:12px;padding:0 14px;}.gv-nav-in>a.gv-link{font-size:14px;padding:8px 2px;}
+    .gv-brand span{display:none;}.gv-play{padding:0 13px;font-size:14px;}}
+  [id]{scroll-margin-top:76px;}
+  @media print{.gv-nav{display:none;}}
+/*GV-POLISH-NAV-END*/
 </style>
 </head>
-<body>
+<body><!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3D404" data-goatcounter-click="play-nav-404"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
+
 <main class="wrap">
   <h1>That page is not here</h1>
   <p>The address may have changed, or the link was mistyped. These are the pages people usually want:</p>

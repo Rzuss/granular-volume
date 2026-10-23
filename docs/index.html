@@ -10,11 +10,14 @@
 <link rel="canonical" href="https://granularvolume.com/">
 <meta property="og:url" content="https://granularvolume.com/">
 <meta property="og:title" content="Quiet Dial">
-<meta property="og:description" content="Fix volume that's too loud at the minimum, on phones and tablets. No root. Open source, no ads.">
-<meta property="og:image" content="https://granularvolume.com/img/feature.png">
-<meta property="og:type" content="website">
+<meta property="og:image" content="https://granularvolume.com/img/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quiet Dial">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://granularvolume.com/img/feature.png">
+<meta name="twitter:image" content="https://granularvolume.com/img/og/home.png">
+<meta property="og:description" content="Fix volume that's too loud at the minimum, on phones and tablets. No root. Open source, no ads.">
+<meta property="og:type" content="website">
 <link rel="icon" href="img/icon.png">
 <script type="application/ld+json">
 {
@@ -110,7 +113,7 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    font-family:"Segoe UI",system-ui,sans-serif;color:var(--txt);
     background:
       radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
       linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
@@ -198,6 +201,25 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  /*GV-POLISH-NAV*/
+  .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .gv-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:20px;}
+  .gv-brand{display:flex;align-items:center;gap:10px;color:#f4f6ff;text-decoration:none;font-weight:800;font-size:17px;margin-right:auto;}
+  .gv-brand img{width:30px;height:30px;border-radius:8px;display:block;}
+  .gv-nav-in>a.gv-link{color:#c7cbec;text-decoration:none;font-size:15px;font-weight:600;padding:8px 4px;}
+  .gv-nav-in>a.gv-link:hover{color:#22d3ee;}
+  .gv-play{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;
+    background:#5046E5;color:#fff !important;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;}
+  .gv-play:hover{background:#5B52F0;}
+  @media (max-width:520px){.gv-nav-in{gap:12px;padding:0 14px;}.gv-nav-in>a.gv-link{font-size:14px;padding:8px 2px;}
+    .gv-brand span{display:none;}.gv-play{padding:0 13px;font-size:14px;}}
+  [id]{scroll-margin-top:76px;}
+  @media print{.gv-nav{display:none;}}
+/*GV-POLISH-NAV-END*/
+  /*GV-POLISH-ICONS*/
+  .dot svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+/*GV-POLISH-ICONS-END*/
 </style>
 <script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -235,7 +257,8 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to the main content</a>
+<a class="skip-link" href="#main">Skip to the main content</a><!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-link" href="/#guides">Guides</a><a class="gv-link" href="/help.html">Help</a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3Dhome" data-goatcounter-click="play-nav-home"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
+
 <div class="wrap">
 
   <header class="hero">
@@ -300,14 +323,14 @@
     <h2>When the lowest setting is still too loud</h2>
     <p class="lead">The first notch above mute can be too much for a quiet room, a sleeping baby, or a sensitive pair of headphones, on a phone or a tablet. Android will not go lower. Quiet Dial does, on both.</p>
     <div class="grid">
-      <div class="feat"><div class="dot" aria-hidden="true">🔉</div><h3>Quieter than minimum</h3><p>Fine volume steps beneath the lowest hardware step, for when even the minimum is too much.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">🎛️</div><h3>The whole range on screen</h3><p>Above the device-minimum line the slider sets normal system volume, so it stands in for worn or broken volume buttons. Even 5 dB steps on speaker and wired; on Bluetooth it follows your device's real hardware steps, so every bar is audible.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">🔕</div><h3>Mutes media, not alarms</h3><p>One tap silences media and leaves the alarm volume where it was. The quiet steps do lower alarms too, so test your level before a morning you cannot miss.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">📱</div><h3>Phones and tablets alike</h3><p>On some tablets the lowest volume is even louder than on a phone, depending on the model. Quiet Dial works exactly the same way on both.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">🎚️</div><h3>A floating volume control</h3><p>It floats over any app. Drag it anywhere, tuck it to an edge, close it with one tap.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">🛡️</div><h3>No takeover</h3><p>Your buttons and the system panel keep working. The dial sits on top as an overlay and controls only the level.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">⬇️</div><h3>Quick Settings tile</h3><p>Swipe down, tap once. Toggle the control on or off from your notification shade without opening the app.</p></div>
-      <div class="feat"><div class="dot" aria-hidden="true">🔒</div><h3>Private by design</h3><p>No ads, no tracking, no account, no network access. Open source under GPL-3.0.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l4-4v14l-4-4H4z"/><path d="M15 10a3 3 0 0 1 0 4"/></svg></div><h3>Quieter than minimum</h3><p>Fine volume steps beneath the lowest hardware step, for when even the minimum is too much.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16"/><path d="M12 4v16"/><path d="M19 4v16"/><path d="M3 9h4"/><path d="M10 15h4"/><path d="M17 7h4"/></svg></div><h3>The whole range on screen</h3><p>Above the device-minimum line the slider sets normal system volume, so it stands in for worn or broken volume buttons. Even 5 dB steps on speaker and wired; on Bluetooth it follows your device's real hardware steps, so every bar is audible.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.2A6 6 0 0 1 18 10v3l2 3H8"/><path d="M6 9.5V13l-2 3h3"/><path d="M10 19a2 2 0 0 0 4 0"/><path d="M3 3l18 18"/></svg></div><h3>Mutes media, not alarms</h3><p>One tap silences media and leaves the alarm volume where it was. The quiet steps do lower alarms too, so test your level before a morning you cannot miss.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div><h3>Phones and tablets alike</h3><p>On some tablets the lowest volume is even louder than on a phone, depending on the model. Quiet Dial works exactly the same way on both.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="18" rx="3"/><path d="M12 7v4"/><path d="M9 14h6"/></svg></div><h3>A floating volume control</h3><p>It floats over any app. Drag it anywhere, tuck it to an edge, close it with one tap.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>No takeover</h3><p>Your buttons and the system panel keep working. The dial sits on top as an overlay and controls only the level.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></div><h3>Quick Settings tile</h3><p>Swipe down, tap once. Toggle the control on or off from your notification shade without opening the app.</p></div>
+      <div class="feat"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Private by design</h3><p>No ads, no tracking, no account, no network access. Open source under GPL-3.0.</p></div>
     </div>
   </section>
 
@@ -315,12 +338,12 @@
     <h2>Made for quiet moments</h2>
     <p class="lead">The volume you reach for at night, on a phone or a tablet.</p>
     <div class="grid">
-      <a class="feat" href="use-cases/sleeping-baby-white-noise.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🌙</div><h3>Sleep and white noise</h3><p>Keep lullabies and white noise barely audible next to a sleeping baby.</p></a>
-      <a class="feat" href="use-cases/sensitive-iem-headphones.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🎧</div><h3>Sensitive headphones</h3><p>For IEMs and bone conduction where even a few percent is too strong.</p></a>
-      <a class="feat" href="use-cases/night-audiobooks-podcasts.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📖</div><h3>Late night listening</h3><p>A podcast or audiobook to fall asleep to, without waking anyone beside you.</p></a>
-      <a class="feat" href="use-cases/quiet-rooms-libraries.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🧘</div><h3>Quiet rooms</h3><p>A library, a quiet office, meditation, or anywhere that needs calm.</p></a>
-      <a class="feat" href="use-cases/tinnitus-sensitive-hearing.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">👂</div><h3>Sensitive ears</h3><p>Quieter levels than the minimum for sensitive hearing. A comfort utility, not a medical device.</p></a>
-      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📱</div><h3>Tablet speakers</h3><p>Tablet speakers and headphones, where on some models the minimum step is even louder than on a phone.</p></a>
+      <a class="feat" href="use-cases/sleeping-baby-white-noise.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></div><h3>Sleep and white noise</h3><p>Keep lullabies and white noise barely audible next to a sleeping baby.</p></a>
+      <a class="feat" href="use-cases/sensitive-iem-headphones.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h3v6H5a1 1 0 0 1-1-1z"/><path d="M20 15h-3v6h2a1 1 0 0 0 1-1z"/></svg></div><h3>Sensitive headphones</h3><p>For IEMs and bone conduction where even a few percent is too strong.</p></a>
+      <a class="feat" href="use-cases/night-audiobooks-podcasts.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></svg></div><h3>Late night listening</h3><p>A podcast or audiobook to fall asleep to, without waking anyone beside you.</p></a>
+      <a class="feat" href="use-cases/quiet-rooms-libraries.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l7-7"/></svg></div><h3>Quiet rooms</h3><p>A library, a quiet office, meditation, or anywhere that needs calm.</p></a>
+      <a class="feat" href="use-cases/tinnitus-sensitive-hearing.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9a5 5 0 0 1 10 0c0 3-2 4-3 5.5S13 18 10.5 19.5 6 18 6 16"/><path d="M10 9a2 2 0 0 1 4 0"/></svg></div><h3>Sensitive ears</h3><p>Quieter levels than the minimum for sensitive hearing. A comfort utility, not a medical device.</p></a>
+      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div><h3>Tablet speakers</h3><p>Tablet speakers and headphones, where on some models the minimum step is even louder than on a phone.</p></a>
     </div>
   </section>
 
@@ -328,15 +351,15 @@
     <h2>Guides for a specific problem</h2>
     <p class="lead">Free fixes first, on each page, then where the dial helps.</p>
     <div class="grid">
-      <a class="feat" href="guide/samsung-galaxy-volume-too-loud-minimum.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📲</div><h3>Samsung Galaxy too loud</h3><p>Galaxy phone, tablet, or Buds still too loud at the lowest step, when Sound Assistant doesn't help.</p></a>
-      <a class="feat" href="guide/bluetooth-earbuds-volume-too-loud-lowest.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔉</div><h3>Earbuds too loud</h3><p>When even the lowest Bluetooth step is still too loud in your ears.</p></a>
-      <a class="feat" href="guide/call-volume-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📞</div><h3>Calls too loud</h3><p>Which calls an app can lower and which it cannot: regular phone calls stay at the phone's own lowest step, app calls get quieter on some phones.</p></a>
-      <a class="feat" href="guide/tried-everything-volume-still-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🧩</div><h3>Already tried everything?</h3><p>Limiter apps, EQ presets, fine-step tools, Normalize Volume, none of it moved the floor. Here's why, and what does.</p></a>
-      <a class="feat" href="guide/pixel-call-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">📶</div><h3>Pixel calls too loud</h3><p>Check the hearing aid setting first, then the in-call floor itself.</p></a>
+      <a class="feat" href="guide/samsung-galaxy-volume-too-loud-minimum.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div><h3>Samsung Galaxy too loud</h3><p>Galaxy phone, tablet, or Buds still too loud at the lowest step, when Sound Assistant doesn't help.</p></a>
+      <a class="feat" href="guide/bluetooth-earbuds-volume-too-loud-lowest.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l4-4v14l-4-4H4z"/><path d="M15 10a3 3 0 0 1 0 4"/></svg></div><h3>Earbuds too loud</h3><p>When even the lowest Bluetooth step is still too loud in your ears.</p></a>
+      <a class="feat" href="guide/call-volume-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></div><h3>Calls too loud</h3><p>Which calls an app can lower and which it cannot: regular phone calls stay at the phone's own lowest step, app calls get quieter on some phones.</p></a>
+      <a class="feat" href="guide/tried-everything-volume-still-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4h4v3a1.5 1.5 0 0 0 3 0V4h3v6h-3a1.5 1.5 0 0 0 0 3h3v7h-6v-3a1.5 1.5 0 0 0-3 0v3H4v-7h3a1.5 1.5 0 0 0 0-3H4V4z"/></svg></div><h3>Already tried everything?</h3><p>Limiter apps, EQ presets, fine-step tools, Normalize Volume, none of it moved the floor. Here's why, and what does.</p></a>
+      <a class="feat" href="guide/pixel-call-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-3"/><path d="M10 20v-7"/><path d="M15 20V9"/><path d="M20 20V4"/></svg></div><h3>Pixel calls too loud</h3><p>Check the hearing aid setting first, then the in-call floor itself.</p></a>
       <a class="feat" href="guide/alarm-too-loud-lowest-volume-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">⏰</div><h3>Alarm too loud</h3><p>The alarm slider is on step one and still jolts you awake. Also covers ringtones and notifications. Keyboard and touch sounds cannot be lowered by any app.</p></a>
-      <a class="feat" href="guide/why-android-minimum-volume-is-too-loud.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔬</div><h3>Why the floor exists</h3><p>The lowest step is a decision in Android's audio mixer, not a fault in your phone. Where the limit comes from, and what can move it.</p></a>
-      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">💻</div><h3>Tablet too loud</h3><p>An Android tablet still too loud at the last step before mute, at bedtime, with white noise or late at night.</p></a>
-      <a class="feat" href="guide/volume-buttons-not-working-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true">🔘</div><h3>Volume buttons not working</h3><p>Stuck, stiff or dead volume keys. The free fixes first, then a slider on screen that stands in for them.</p></a>
+      <a class="feat" href="guide/why-android-minimum-volume-is-too-loud.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/><path d="M11 8v6"/><path d="M8 11h6"/></svg></div><h3>Why the floor exists</h3><p>The lowest step is a decision in Android's audio mixer, not a fault in your phone. Where the limit comes from, and what can move it.</p></a>
+      <a class="feat" href="guide/tablet-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M11 17h2"/></svg></div><h3>Tablet too loud</h3><p>An Android tablet still too loud at the last step before mute, at bedtime, with white noise or late at night.</p></a>
+      <a class="feat" href="guide/volume-buttons-not-working-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Volume buttons not working</h3><p>Stuck, stiff or dead volume keys. The free fixes first, then a slider on screen that stands in for them.</p></a>
     </div>
   </section>
 
