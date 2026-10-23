@@ -28,7 +28,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/"},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-23",
   "mainEntityOfPage": "https://granularvolume.com/use-cases/tinnitus-sensitive-hearing.html"
 }
 </script>
@@ -217,7 +217,7 @@
     <p>Android divides the range between silence and full output into a fixed number of steps. The lowest step above mute is a fixed fraction of the maximum, not a fixed loudness. Phones and tablets are tuned for a loud maximum, so that first fraction can be well above what sensitive ears want, and it is worse through in-ear headphones that sit directly in the ear canal. Stock Android has no setting to place a level below that step. That gap is the entire problem.</p>
 
     <h2>What doesn't solve it</h2>
-    <p>Apps that add more volume steps, like Sound Assistant's 1% increments or custom step-count apps, lower the first step a little and then stop. A finer first step does sit lower on Android's loudness curve, by a few dB, but the curve has a fixed bottom that no step count passes. Lowering the equalizer or disabling audio enhancements helps a little on some devices as a side effect, but not reliably. None of these place a level below the floor.</p>
+    <p>Apps that add more volume steps, like Sound Assistant's finer steps or custom step-count apps, lower the first step a little and then stop. A finer first step does sit lower on Android's loudness curve, by a few dB, but the curve has a fixed bottom that no step count passes. Lowering the equalizer or disabling audio enhancements helps a little on some devices as a side effect, but not reliably. None of these place a level below the floor.</p>
 
     <h2>What does: going below the floor itself</h2>
     <p>The one method that genuinely gets quieter applies negative gain to Android's media output through its own DynamicsProcessing framework. Because it lowers the audio itself rather than working inside the existing steps, it produces output below the hardware minimum. It only reduces level and never boosts, so there is no distortion or added loudness in that direction. It does not depend on the brand of headphones, wired or wireless, and it is built for phones and tablets alike. On a small number of phone and headphone combinations it has no effect over Bluetooth, so check with your own pair during the seven free days.</p>
