@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -137,5 +137,11 @@
     <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://granularvolume.com/guide/disable-absolute-volume-android.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

@@ -201,6 +201,17 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  /*GV-POLISH-REVIEWS*/
+  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
+  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
+  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
+  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
+  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
+  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
+  .rv figcaption b{color:var(--txt);font-weight:700;}
+  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
+  .rv-note a{color:var(--accent2);}
+/*GV-POLISH-REVIEWS-END*/
   /*GV-POLISH-NAV*/
   .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
     backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
@@ -220,17 +231,6 @@
   /*GV-POLISH-ICONS*/
   .dot svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 /*GV-POLISH-ICONS-END*/
-  /*GV-POLISH-REVIEWS*/
-  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
-  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
-  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
-  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
-  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
-  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
-  .rv figcaption b{color:var(--txt);font-weight:700;}
-  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
-  .rv-note a{color:var(--accent2);}
-/*GV-POLISH-REVIEWS-END*/
 </style>
 <script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -364,6 +364,7 @@
     <div class="grid">
       <a class="feat" href="guide/samsung-galaxy-volume-too-loud-minimum.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div><h3>Samsung Galaxy too loud</h3><p>Galaxy phone, tablet, or Buds still too loud at the lowest step, when Sound Assistant doesn't help.</p></a>
       <a class="feat" href="guide/bluetooth-earbuds-volume-too-loud-lowest.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l4-4v14l-4-4H4z"/><path d="M15 10a3 3 0 0 1 0 4"/></svg></div><h3>Earbuds too loud</h3><p>When even the lowest Bluetooth step is still too loud in your ears.</p></a>
+      <a class="feat" href="guide/disable-absolute-volume-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.2"/></svg></div><h3>Disable absolute volume</h3><p>Where the Bluetooth switch is, what it changes, and why it resets.</p></a>
       <a class="feat" href="guide/call-volume-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></div><h3>Calls too loud</h3><p>Which calls an app can lower and which it cannot: regular phone calls stay at the phone's own lowest step, app calls get quieter on some phones.</p></a>
       <a class="feat" href="guide/tried-everything-volume-still-too-loud-android.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4h4v3a1.5 1.5 0 0 0 3 0V4h3v6h-3a1.5 1.5 0 0 0 0 3h3v7h-6v-3a1.5 1.5 0 0 0-3 0v3H4v-7h3a1.5 1.5 0 0 0 0-3H4V4z"/></svg></div><h3>Already tried everything?</h3><p>Limiter apps, EQ presets, fine-step tools, Normalize Volume, none of it moved the floor. Here's why, and what does.</p></a>
       <a class="feat" href="guide/pixel-call-volume-too-loud-lowest-setting.html" style="text-decoration:none;display:block;"><div class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-3"/><path d="M10 20v-7"/><path d="M15 20V9"/><path d="M20 20V4"/></svg></div><h3>Pixel calls too loud</h3><p>Check the hearing aid setting first, then the in-call floor itself.</p></a>
