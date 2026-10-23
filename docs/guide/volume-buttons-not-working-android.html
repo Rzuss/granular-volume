@@ -9,8 +9,13 @@
 <link rel="canonical" href="https://granularvolume.com/guide/volume-buttons-not-working-android.html">
 <meta property="og:url" content="https://granularvolume.com/guide/volume-buttons-not-working-android.html">
 <meta property="og:title" content="Volume Buttons Not Working on Android? Fixes and a Slider">
+<meta property="og:image" content="https://granularvolume.com/img/og/guide-volume-buttons-not-working-android.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Volume Buttons Not Working on Android? Fixes and a Slider">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://granularvolume.com/img/og/guide-volume-buttons-not-working-android.png">
 <meta property="og:description" content="Volume keys dead, stiff, or working only some of the time? Free fixes first, then a slider on screen that sets the volume without them. Phones and tablets.">
-<meta property="og:image" content="https://granularvolume.com/img/feature.png">
 <meta property="og:type" content="article">
 <link rel="icon" href="../img/icon.png">
 <script type="application/ld+json">
@@ -19,7 +24,7 @@
   "@type": "Article",
   "headline": "Volume Buttons Not Working on Android? Fixes and a Slider",
   "description": "Volume keys dead, stiff, or working only some of the time? Free fixes first, then a slider on screen that sets the volume without them. Phones and tablets.",
-  "image": "https://granularvolume.com/img/feature.png",
+  "image": "https://granularvolume.com/img/og/guide-volume-buttons-not-working-android.png",
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/"},
   "datePublished": "2026-08-09",
@@ -55,7 +60,7 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:"Inter","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    font-family:"Segoe UI",system-ui,sans-serif;color:var(--txt);
     background:
       radial-gradient(80% 50% at 75% 0%, #232a55 0%, rgba(35,42,85,0) 60%),
       linear-gradient(180deg,#121833 0%, #0a0e1d 40%);
@@ -154,6 +159,34 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  /*GV-POLISH-NAV*/
+  .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .gv-nav-in{max-width:1080px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:20px;}
+  .gv-brand{display:flex;align-items:center;gap:10px;color:#f4f6ff;text-decoration:none;font-weight:800;font-size:17px;margin-right:auto;}
+  .gv-brand img{width:30px;height:30px;border-radius:8px;display:block;}
+  .gv-nav-in>a.gv-link{color:#c7cbec;text-decoration:none;font-size:15px;font-weight:600;padding:8px 4px;}
+  .gv-nav-in>a.gv-link:hover{color:#22d3ee;}
+  .gv-play{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;
+    background:#5046E5;color:#fff !important;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;}
+  .gv-play:hover{background:#5B52F0;}
+  @media (max-width:520px){.gv-nav-in{gap:12px;padding:0 14px;}.gv-nav-in>a.gv-link{font-size:14px;padding:8px 2px;}
+    .gv-brand span{display:none;}.gv-play{padding:0 13px;font-size:14px;}}
+  [id]{scroll-margin-top:76px;}
+  @media print{.gv-nav{display:none;}}
+/*GV-POLISH-NAV-END*/
+  /*GV-POLISH-CARDS*/
+  @media (max-width:640px){
+    table.gv-cards,table.gv-cards tbody,table.gv-cards tr,table.gv-cards td,table.gv-cards tbody th{display:block;width:auto !important;}
+    table.gv-cards thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+    table.gv-cards tr{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;margin:0 0 12px;
+      background:rgba(255,255,255,.03);}
+    table.gv-cards td,table.gv-cards tbody th{border:0 !important;padding:5px 0 !important;text-align:left !important;}
+    table.gv-cards tr>:first-child{font-weight:700;font-size:16px;color:#f4f6ff;padding-top:0 !important;}
+    table.gv-cards td[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;
+      letter-spacing:.04em;text-transform:uppercase;color:#9aa3c7;margin-bottom:2px;}
+  }
+/*GV-POLISH-CARDS-END*/
 </style><script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style id="gv-a11y-style">
@@ -188,9 +221,11 @@
   html.gv-rf body,html.gv-rf body *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.02em;word-spacing:.06em;}
   @media print{.gv-a11y{display:none !important;}}
 </style>
+<script type="application/ld+json" data-gv="crumbs">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Quiet Dial", "item": "https://granularvolume.com/"}, {"@type": "ListItem", "position": 2, "name": "Volume buttons not working on your Android phone or tablet?", "item": "https://granularvolume.com/guide/volume-buttons-not-working-android.html"}]}</script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to the main content</a>
+<a class="skip-link" href="#main">Skip to the main content</a><!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-link" href="/#guides">Guides</a><a class="gv-link" href="/help.html">Help</a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3Dvolume-buttons-not-working-android" data-goatcounter-click="play-nav-guide-volume-buttons-not-working-android"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
+
 <div class="wrap">
 
   <header class="top">
@@ -286,14 +321,14 @@
     <h2 id="without">How to change the volume without the buttons, compared</h2>
     <p>These are the three ways that work with a broken, stuck or missing volume key, side by side.</p>
     <div class="tablewrap">
-    <table class="cmp">
+    <table class="cmp gv-cards">
       <thead><tr><th scope="col"></th><th scope="col">Settings slider</th><th scope="col">Accessibility Menu</th><th scope="col">Floating slider</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Needs an install</th><td>No</td><td>No</td><td>Yes</td></tr>
-        <tr><th scope="row">Each volume change</th><td>Leave your app, open Settings, Sound, drag</td><td>Open the menu, tap volume up or down once per step, close it</td><td>One tap</td></tr>
-        <tr><th scope="row">Usable on top of a video or game</th><td>No</td><td>Yes, through its menu</td><td>Yes</td></tr>
-        <tr><th scope="row">Goes below the device's minimum</th><td>No</td><td>No</td><td>Yes, six quiet steps</td></tr>
-        <tr><th scope="row">Cost</th><td>Free</td><td>Free</td><td>Seven days free, then one payment</td></tr>
+        <tr><th scope="row">Needs an install</th><td data-label="Settings slider">No</td><td data-label="Accessibility Menu">No</td><td data-label="Floating slider">Yes</td></tr>
+        <tr><th scope="row">Each volume change</th><td data-label="Settings slider">Leave your app, open Settings, Sound, drag</td><td data-label="Accessibility Menu">Open the menu, tap volume up or down once per step, close it</td><td data-label="Floating slider">One tap</td></tr>
+        <tr><th scope="row">Usable on top of a video or game</th><td data-label="Settings slider">No</td><td data-label="Accessibility Menu">Yes, through its menu</td><td data-label="Floating slider">Yes</td></tr>
+        <tr><th scope="row">Goes below the device's minimum</th><td data-label="Settings slider">No</td><td data-label="Accessibility Menu">No</td><td data-label="Floating slider">Yes, six quiet steps</td></tr>
+        <tr><th scope="row">Cost</th><td data-label="Settings slider">Free</td><td data-label="Accessibility Menu">Free</td><td data-label="Floating slider">Seven days free, then one payment</td></tr>
       </tbody>
     </table>
     </div>
