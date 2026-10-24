@@ -12,6 +12,7 @@ How it works: it applies Android's DynamicsProcessing audio effect to the mixed 
 
 ## Guides
 
+- [All guides and use cases](https://granularvolume.com/guide/): the index of every page below, grouped by problem, device and use
 - [Android lowest volume too loud? How to go below the minimum](https://granularvolume.com/guide/lower-android-volume-below-minimum.html): every method, ranked by whether it lowers the floor
 - [Why the Android minimum volume is too loud](https://granularvolume.com/guide/why-android-minimum-volume-is-too-loud.html): where the floor comes from
 - [Tried everything and the volume is still too loud](https://granularvolume.com/guide/tried-everything-volume-still-too-loud-android.html): why the usual fixes do not move the floor
