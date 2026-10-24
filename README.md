@@ -248,8 +248,7 @@ android/                        Android project (Gradle root)
     build.gradle.kts
   build.gradle.kts
   settings.gradle.kts
-store-assets/                   Store icon, feature graphic, screenshots
-video/assets/                   Promo and card source files
+store-assets/play/              Current Google Play screenshots (phone and tablet) and feature graphic
 fdroid-reference/               Reproducible-build verification artifacts for F-Droid
 ```
 
