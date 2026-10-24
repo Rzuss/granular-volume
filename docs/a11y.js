@@ -130,10 +130,10 @@
     if (!panel.hidden && !panel.contains(e.target) && !button.contains(e.target)) closePanel(false);
   });
 
-  // On a phone the round button sits over the text being read. It slides off the edge while the
+  // On a phone or tablet the round button sits over the text being read. It slides off the edge while the
   // page scrolls down and comes back on any scroll up, near the top, at the end of the page, and
   // whenever it has keyboard focus or its panel is open.
-  var narrow = window.matchMedia ? window.matchMedia('(max-width:640px)') : null;
+  var narrow = window.matchMedia ? window.matchMedia('(max-width:1024px)') : null;
   if (narrow) {
     var style = el('style', {});
     style.textContent = '.gv-a11y-fab{transition:transform .2s ease;}' +

@@ -10,6 +10,7 @@
 <link rel="canonical" href="https://granularvolume.com/">
 <meta property="og:url" content="https://granularvolume.com/">
 <meta property="og:title" content="Quiet Dial">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://granularvolume.com/img/og/home.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -35,7 +36,7 @@
     "https://github.com/Rzuss/granular-volume"
   ],
   "author": {"@type": "Person", "name": "Rotem Zussman"},
-  "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/", "founder": {"@type": "Person", "name": "Rotem Zussman"}},
+  "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/", "logo": "https://granularvolume.com/img/icon.png", "founder": {"@type": "Person", "name": "Rotem Zussman"}},
   "license": "https://github.com/Rzuss/granular-volume/blob/main/LICENSE",
   "video": {
     "@type": "VideoObject",
@@ -141,6 +142,11 @@
   .playname{color:var(--muted);font-size:15px;margin:6px 0 0;}
   .tag{font-size:clamp(18px,3.4vw,26px);color:var(--accent2);font-weight:600;}
   .sub{max-width:620px;margin:18px auto 0;color:var(--muted);font-size:18px;}
+  .hero-proof{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:520px;margin:22px auto 0;padding:14px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);color:var(--txt);text-decoration:none;}
+  .hero-proof:hover{border-color:rgba(34,211,238,.5);}
+  .hp-stars{display:flex;gap:3px;color:#f5b301;}.hp-stars svg{width:16px;height:16px;fill:currentColor;}
+  .hp-quote{font-size:15px;line-height:1.5;}
+  .hp-by{font-size:13px;color:var(--muted);}.hp-by u{color:var(--accent2);text-decoration:none;}
   .setup-note{margin-top:12px;font-size:14px;line-height:1.5;opacity:.85;}
 .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
   @media (max-width:640px){header.hero{padding-top:48px;}}
@@ -181,7 +187,7 @@
   /* Phones: show the dial right under the title, before the long text (the shot used to start below the first screen). */
   @media (max-width:899px){header.hero{display:flex;flex-direction:column;}.hero-top{display:contents;}
     .hero .icon{order:0;align-self:center;}.hero h1{order:1;}.hero .tag{order:2;}.hero-shot{order:3;margin:20px auto 4px;}
-    .hero .cta{order:4;}.hero .setup-note{order:5;}.hero .playname{order:6;}.hero .sub{order:7;}.hero-chips{order:8;}}
+    .hero .cta{order:4;}.hero .hero-proof{order:4;}.hero .setup-note{order:5;}.hero .playname{order:6;}.hero .sub{order:7;}.hero-chips{order:8;}}
   @media (min-width:900px){#uses .grid,#guides .grid{grid-template-columns:repeat(3,1fr);}}
   .faq{max-width:720px;margin:0 auto;}
   .faq dt{font-weight:700;font-size:17px;margin-top:20px;}
@@ -201,6 +207,17 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
+  /*GV-POLISH-REVIEWS*/
+  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
+  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
+  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
+  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
+  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
+  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
+  .rv figcaption b{color:var(--txt);font-weight:700;}
+  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
+  .rv-note a{color:var(--accent2);}
+/*GV-POLISH-REVIEWS-END*/
   /*GV-POLISH-NAV*/
   .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
     backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
@@ -220,17 +237,6 @@
   /*GV-POLISH-ICONS*/
   .dot svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 /*GV-POLISH-ICONS-END*/
-  /*GV-POLISH-REVIEWS*/
-  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
-  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
-  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
-  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
-  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
-  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
-  .rv figcaption b{color:var(--txt);font-weight:700;}
-  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
-  .rv-note a{color:var(--accent2);}
-/*GV-POLISH-REVIEWS-END*/
 </style>
 <script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -268,8 +274,8 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to the main content</a><!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-link" href="/#guides">Guides</a><a class="gv-link" href="/help.html">Help</a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3Dhome" data-goatcounter-click="play-nav-home"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
-
+<a class="skip-link" href="#main">Skip to the main content</a>
+<!--GV-POLISH-NAV--><nav class="gv-nav" aria-label="Site"><div class="gv-nav-in"><a class="gv-brand" href="/" aria-label="Quiet Dial home"><img src="/img/icon.webp" width="30" height="30" alt=""><span>Quiet Dial</span></a><a class="gv-link" href="/guide/">Guides</a><a class="gv-link" href="/help.html">Help</a><a class="gv-play" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dnav%26utm_campaign%3Dhome" data-goatcounter-click="play-nav-home"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>Google Play</a></div></nav><!--GV-POLISH-NAV-END-->
 <div class="wrap">
 
   <header class="hero">
@@ -283,13 +289,14 @@
       <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=granularvolume.com&amp;referrer=utm_source%3Dsite%26utm_medium%3Dcta%26utm_campaign%3Dhome" data-goatcounter-click="play-cta-home-top">Get it on Google Play</a>
       <a class="btn btn-ghost" href="#demo" data-goatcounter-click="demo-home-top">Watch the demo</a>
     </div>
+      <a class="hero-proof" href="#reviews" data-goatcounter-click="hero-proof-reviews"><span class="hp-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></span><span class="hp-quote">&ldquo;Does exactly what I needed it to (Lowers minimum volume). Haven&#x27;t had any issues so far. Huge thanks to dev&rdquo;</span><span class="hp-by">Kay D. on Google Play &middot; <u>More reviews</u></span></a>
       <p class="setup-note">After you install, open it once and allow it to display over other apps. That is the entire setup. Everything is open for seven days; after that the dial needs one payment, once, inside the app. No subscription.</p>
    </div>
     <figure class="hero-shot"><img src="img/hero-dial.webp" width="480" height="512" fetchpriority="high" alt="The Quiet Dial: your phone's own volume range above the orange device-minimum line, and quieter steps below it"></figure>
     <div class="chips hero-chips">
       
       <span class="chip">No ads</span>
-      <span class="chip">No tracking</span>
+      <span class="chip">No tracking in the app</span>
       <span class="chip">Open source</span>
       <span class="chip">Phones &amp; tablets</span>
       <span class="chip">Android 9+</span>
@@ -383,7 +390,7 @@
   <section id="shots">
     <h2>See it</h2>
     <p class="lead">Swipe through.</p>
-    <div class="shots">
+    <div class="shots" tabindex="0" role="region" aria-label="App screenshots, scroll sideways">
       <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot1.webp" alt="When the lowest setting is still too loud">
       <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot2.webp" alt="One dial, the whole volume range">
       <img loading="lazy" decoding="async" width="1080" height="1920" src="img/shot3.webp" alt="Works when your buttons do not">
