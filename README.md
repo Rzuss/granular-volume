@@ -300,16 +300,17 @@ Notably absent: any network permission. It isn't requested because the app has n
 
 ## Contributing
 
-Issues and pull requests are welcome. A few things that make a report or a PR faster to act on:
+Issues are welcome. Pull requests are not merged: the project is written and maintained by one developer, and a fix that a pull request points at is written here instead, with credit in the issue or the changelog. A clear issue is the fastest way to get something fixed. A few things that make a report faster to act on:
 
 - **Bug reports:** include the device model, Android version, and app version (from the setup screen). If it's audio-related, mention which app was producing sound and which output device (speaker, wired, Bluetooth) was active.
-- **Pull requests:** keep changes focused: one behavior change per PR is easier to review and easier to revert if something's wrong. Match the surrounding Kotlin style rather than introducing a new one.
-- **Flavor-affecting changes:** if a change touches anything under `android/app/src/play/` or `android/app/src/fdroid/`, please note in the PR description whether it was tested on both flavors, since the two are expected to stay behaviorally identical outside of the purchase, review-prompt and update differences documented above.
-- **New dependencies:** since the `fdroid` flavor exists specifically to stay free-software-only, any new dependency should be added as `implementation` (available to both flavors) only if it's fully open source; anything proprietary needs to go behind `playImplementation`, the same pattern used for the review library.
 
 ## License
 
-Quiet Dial is free software, licensed under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text. You are free to use, study, share, and modify it, provided derivative works remain under the same license.
+Quiet Dial is open source, licensed under the **GNU General Public License v3.0**. See [LICENSE](LICENSE) for the full text. You are free to use, study, share, and modify it, provided derivative works remain under the same license.
+
+### Additional permission (GPL-3.0 section 7)
+
+As an additional permission under GNU GPL version 3 section 7, you may link this program with the Google Play Billing Library, the Google Play In-App Review Library and the Google Play In-App Update Library, and distribute the resulting work, without those libraries being covered by the GPL. This permission applies to the `play` flavor; the `fdroid` flavor contains none of these libraries.
 
 ### Name and icon
 
