@@ -108,6 +108,13 @@ class OverlayManager(
      */
     var onEngaged: (() -> Unit)? = null
 
+    /**
+     * 1.7.6: fired when the person parks the dial in its edge tab, once the tab is showing.
+     * Only for that gesture (the push to an edge or the minimise button), never for close.
+     * The service uses it for the dial-only moment of the in-app review prompt.
+     */
+    var onCollapsed: (() -> Unit)? = null
+
     companion object {
         /**
          * The version of the tour's CONTENT, not of the app (1.6.4). The tour used to be gated on
@@ -586,6 +593,9 @@ class OverlayManager(
             if (!Prefs.wasBladeTipShown(context)) {
                 Prefs.setBladeTipShown(context)
                 runCatching { Toast.makeText(context, R.string.gv_blade_tip, Toast.LENGTH_LONG).show() }
+            } else {
+                // Not on the very first collapse, which already shows the tip above.
+                onCollapsed?.invoke()
             }
         }
         dial.animate().cancel()

@@ -15,6 +15,33 @@ object Links {
     /** 1.7.2: the help section for someone who cannot find the app in Android's permission list. */
     const val HELP_FIND = "https://granularvolume.com/help.html#find"
 
+    /** 1.7.6: the developer's address, for the "write to us" link on the locked sheets. */
+    const val SUPPORT_EMAIL = "rotemzus@gmail.com"
+
+    /**
+     * 1.7.6: opens the person's own mail app on a new message to the developer, so someone
+     * stopped by the lock can ask instead of guessing. The app sends nothing itself: this is an
+     * ACTION_SENDTO that the mail app answers, and only the subject (with the version, to help
+     * answer) is filled in. Without a mail app, the address is shown so it can be copied.
+     */
+    fun writeToUs(context: Context) {
+        val version = runCatching {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName
+        }.getOrNull() ?: ""
+        val subject = context.getString(com.granularvolume.R.string.gv_write_subject, version)
+        val uri = Uri.parse("mailto:$SUPPORT_EMAIL?subject=" + Uri.encode(subject))
+        val sent = runCatching {
+            context.startActivity(Intent(Intent.ACTION_SENDTO, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }.isSuccess
+        if (!sent) {
+            android.widget.Toast.makeText(
+                context,
+                context.getString(com.granularvolume.R.string.gv_write_no_app, SUPPORT_EMAIL),
+                android.widget.Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
     fun open(context: Context, url: String) {
         // Android's own log shortens the address of a VIEW request on older versions, so the
         // app says which page it asked for. These are fixed public addresses, nothing personal.

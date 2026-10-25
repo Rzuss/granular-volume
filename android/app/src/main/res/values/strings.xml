@@ -186,7 +186,7 @@
     <string name="gv_licenses_oss">Open source components</string>
     <string name="gv_licenses_proprietary">Other components</string>
     <string name="gv_licenses_own">This app</string>
-    <string name="gv_licenses_own_body">Volume Control: Quiet Dial is itself free software under the GNU General Public License version 3.0. The complete source is at github.com/Rzuss/granular-volume.</string>
+    <string name="gv_licenses_own_body">Volume Control: Quiet Dial is itself open source under the GNU General Public License version 3.0. The complete source is at github.com/Rzuss/granular-volume.</string>
     <string name="gv_licenses_apache">Apache License 2.0, full text</string>
     <string name="gv_open_licenses">Open source licences</string>
 
@@ -222,4 +222,8 @@
     <string name="gv_retry_body">In the list, find Quiet Dial, tap it, and turn its switch on.</string>
     <string name="gv_retry_open">Open the list again</string>
     <string name="gv_retry_help">Can\'t find it? See help</string>
+    <!-- 1.7.6: "write to us" on the locked sheets; the subject carries the version. -->
+    <string name="gv_write_to_us">Questions or a problem? Write to us</string>
+    <string name="gv_write_subject">Quiet Dial %1$s: a question</string>
+    <string name="gv_write_no_app">No mail app found. Write to %1$s</string>
 </resources>

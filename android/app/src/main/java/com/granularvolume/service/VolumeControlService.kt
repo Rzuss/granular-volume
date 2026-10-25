@@ -41,6 +41,7 @@ import com.granularvolume.util.ControlLive
 import com.granularvolume.util.UpdateCheck
 import com.granularvolume.util.KeyCheck
 import com.granularvolume.util.Prefs
+import com.granularvolume.util.ReviewHelper
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -364,7 +365,22 @@ class VolumeControlService : Service() {
         // begins" warning (see onOpenedByUser) was dead for anyone driving the app from the
         // dial. The harness was green over it because A17 reads the countdown by tapping
         // info, the one action that armed the broken assignment. A21 now covers this path.
-        overlayManager.onEngaged = { mainHandler.post { maybeLastDayNudge() } }
+        overlayManager.onEngaged = {
+            // 1.7.6: a day with a level change counts toward the dial-only review moment.
+            Prefs.recordUseDay(applicationContext, java.time.LocalDate.now().toEpochDay())
+            mainHandler.post { maybeLastDayNudge() }
+        }
+        // 1.7.6: parking the dial in its tab is a calm moment; after a few days of real use the
+        // review card may be offered there. Started like any sheet, so a refusal is only logged.
+        overlayManager.onCollapsed = {
+            ReviewHelper.dialMomentIntent(applicationContext)?.let { intent ->
+                try {
+                    startActivity(intent)
+                } catch (e: RuntimeException) {
+                    Log.w(tag, "Could not open the review card: ${e.message}")
+                }
+            }
+        }
 
         // 1.6.2: arm the two free-week notices (a no-op for anyone not on the trial). When the
         // start already falls inside the last day, the notice waits a moment so a person's own
