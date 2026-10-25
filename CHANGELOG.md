@@ -2,6 +2,22 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.6 (versionCode 56)
+
+Translations, a direct way to ask, and better timing for the rating card.
+
+### Changed
+- Every screen of the app is now translated into German, Spanish, French, Indonesian, Polish and Portuguese
+  (Brazil). Until now about two thirds of the texts, including the first-run consent screen, the tour, the
+  notification and the licences screen, appeared in English in those languages.
+- Once the free week is over, the access sheet and the purchase sheet carry "Questions or a problem? Write to
+  us", which opens your own mail app on a message to the developer. The app itself still sends nothing.
+- Google Play's in-app rating card can now also be offered right after a purchase, and to people who only use
+  the floating dial (after the level has been changed on three separate days, when the dial is parked in its
+  edge tab). It is offered at most twice per install: a second time only to someone who has the full app for
+  good, and not sooner than 90 days after the first (14 days when the occasion is the purchase). It is never
+  offered while the dial is locked or on the last day of the free week, and the app asks no question before it.
+
 ## 1.7.5 (versionCode 55)
 
 One stability fix and one change to the free week.

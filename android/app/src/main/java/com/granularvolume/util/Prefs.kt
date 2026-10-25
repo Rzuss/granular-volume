@@ -27,6 +27,10 @@ object Prefs {
     private const val KEY_LAUNCH_COUNT     = "launch_count"
     private const val KEY_TILE_ACTIVATIONS = "tile_activations"
     private const val KEY_REVIEW_REQUESTED = "review_flow_requested"
+    private const val KEY_REVIEW_ASK_COUNT = "review_ask_count"
+    private const val KEY_REVIEW_LAST_ASK_MS = "review_last_ask_ms"
+    private const val KEY_USE_DAY_COUNT    = "use_day_count"
+    private const val KEY_USE_LAST_DAY     = "use_last_day"
     private const val KEY_LINE_TOOLTIP_SHOWN = "line_tooltip_shown"
     private const val KEY_TERMS_ACCEPTED_VERSION = "terms_accepted_version"
 
@@ -185,6 +189,52 @@ object Prefs {
     fun setReviewFlowRequested(context: Context, requested: Boolean) {
         prefs(context).edit { putBoolean(KEY_REVIEW_REQUESTED, requested) }
     }
+
+    /**
+     * 1.7.6: how many times the in-app review flow has been started on this install, and when
+     * the last one was. An install that asked before 1.7.6 only has [KEY_REVIEW_REQUESTED]; it
+     * is counted as one ask made now, the cautious reading of an unknown date.
+     */
+    fun reviewAskCount(context: Context): Int {
+        val p = prefs(context)
+        val n = p.getInt(KEY_REVIEW_ASK_COUNT, 0)
+        if (n == 0 && p.getBoolean(KEY_REVIEW_REQUESTED, false)) {
+            p.edit {
+                putInt(KEY_REVIEW_ASK_COUNT, 1)
+                putLong(KEY_REVIEW_LAST_ASK_MS, System.currentTimeMillis())
+            }
+            return 1
+        }
+        return n
+    }
+
+    fun reviewLastAskMs(context: Context): Long =
+        prefs(context).getLong(KEY_REVIEW_LAST_ASK_MS, 0L)
+
+    fun recordReviewAsk(context: Context) {
+        val n = reviewAskCount(context) + 1
+        prefs(context).edit {
+            putInt(KEY_REVIEW_ASK_COUNT, n)
+            putLong(KEY_REVIEW_LAST_ASK_MS, System.currentTimeMillis())
+            putBoolean(KEY_REVIEW_REQUESTED, true)
+        }
+    }
+
+    /**
+     * 1.7.6: distinct calendar days on which the person changed the level on the dial. The
+     * dial-only path of the review prompt waits for a few such days, so it asks someone who
+     * has actually lived with the app rather than someone who just installed it.
+     */
+    fun recordUseDay(context: Context, epochDay: Long) {
+        val p = prefs(context)
+        if (p.getLong(KEY_USE_LAST_DAY, -1L) == epochDay) return
+        p.edit {
+            putLong(KEY_USE_LAST_DAY, epochDay)
+            putInt(KEY_USE_DAY_COUNT, p.getInt(KEY_USE_DAY_COUNT, 0) + 1)
+        }
+    }
+
+    fun useDayCount(context: Context): Int = prefs(context).getInt(KEY_USE_DAY_COUNT, 0)
 
     /** One-time "drag below the line" tooltip on the first overlay display (full-range spec). */
     fun wasLineTooltipShown(context: Context): Boolean =

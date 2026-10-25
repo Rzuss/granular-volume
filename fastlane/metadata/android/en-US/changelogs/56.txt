@@ -1,0 +1,1 @@
+The whole app is now in German, Spanish, French, Indonesian, Polish and Portuguese, including the first screen. A new "Write to us" link reaches the developer directly with any question.

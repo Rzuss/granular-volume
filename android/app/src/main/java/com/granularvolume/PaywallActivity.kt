@@ -25,6 +25,7 @@ import com.granularvolume.util.Entitlement
 import com.granularvolume.util.TrialNotices
 import com.granularvolume.util.ProAccess
 import com.granularvolume.util.PurchaseFlow
+import com.granularvolume.util.Links
 import com.granularvolume.util.StatusHeader
 
 /**
@@ -249,6 +250,15 @@ class PaywallActivity : AppCompatActivity() {
             asButtonForAccessibility()
             setOnClickListener { openUrl(URL_TERMS) }
         }.topPad(4, fill = true))
+
+        // 1.7.6: someone stopped by the lock gets a direct way to ask, before the store is the
+        // only place left to say something.
+        root.addView(text(R.string.gv_write_to_us, 13f, colorRes = R.color.gv_accent_text).apply {
+            gravity = Gravity.CENTER
+            setPadding(0, dp(6), 0, dp(10))
+            asButtonForAccessibility()
+            setOnClickListener { leaveForLink(); Links.writeToUs(this@PaywallActivity) }
+        }.topPad(0, fill = true))
 
         root.addView(TextView(this).apply {
             text = getString(R.string.gv_paywall_not_now)

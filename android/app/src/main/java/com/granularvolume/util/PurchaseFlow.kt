@@ -91,6 +91,9 @@ object PurchaseFlow {
                 PurchaseOutcome.Purchased, PurchaseOutcome.AlreadyOwned -> {
                     notifyService(activity)
                     onUnlocked()
+                    // 1.7.6: a completed purchase is the moment someone is happiest with the app.
+                    // Not for "already owned": that person bought before and is only restoring.
+                    if (outcome == PurchaseOutcome.Purchased) ReviewHelper.afterPurchase(activity)
                 }
                 PurchaseOutcome.Pending ->
                     if (live) Toast.makeText(activity, R.string.gv_purchase_pending, Toast.LENGTH_LONG).show()

@@ -354,6 +354,10 @@ class InfoSheetActivity : AppCompatActivity() {
                 root.addView(link(getString(R.string.gv_purchase_restore_link)) {
                     PurchaseFlow.restore(this) { rerender() }
                 }.apply { gravity = Gravity.CENTER }.topPad(2, fill = true))
+                // 1.7.6: once the week is over, a direct way to ask, as on the paywall.
+                if (st.weekOver) root.addView(link(getString(R.string.gv_write_to_us)) {
+                    leaveForLink(); Links.writeToUs(this)
+                }.apply { gravity = Gravity.CENTER }.topPad(0, fill = true))
             }
         }
 
