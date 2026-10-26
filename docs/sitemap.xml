@@ -8,7 +8,7 @@
   </url>
   <url>
     <loc>https://granularvolume.com/guide/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -122,7 +122,7 @@
   </url>
   <url>
     <loc>https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -177,6 +177,12 @@
   <url>
     <loc>https://granularvolume.com/guide/usb-c-wired-earphones-too-loud-lowest.html</loc>
     <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://granularvolume.com/guide/galaxy-tab-volume-too-loud-lowest.html</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
