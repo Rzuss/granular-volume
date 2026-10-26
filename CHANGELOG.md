@@ -2,14 +2,15 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
-## 1.7.7 (versionCode 57)
+## 1.7.7 (versionCode 58)
 
 A new icon.
 
 ### Changed
-- New app icon: a speaker next to the dial's scale, with the normal volume above the orange line and the
-  quieter steps below it, one of them lit. It replaces the rising bars, which read as "louder". The same icon
-  is used on Google Play, on the home screen and inside the app.
+- New app icon: a speaker sending out sound waves that fade as they travel, next to the dial's scale, with
+  the normal volume above the orange line and the quieter steps below it, the two lowest lit. It replaces
+  the rising bars, which read as "louder". The same icon is used on Google Play, on the home screen and
+  inside the app.
 - The icon now has a monochrome layer, so it follows themed icons on Android 13 and later.
 
 ## 1.7.6 (versionCode 56)
