@@ -2,13 +2,22 @@
 
 > Volume Control: Quiet Dial is an Android app by Granular Volume that lowers sound below the device's own minimum volume step. One floating slider covers the whole range: normal system volume above the device's minimum line, and six quiet steps of 5 dB each below it, down to 30 dB under the hardware minimum. No root, no ads, no tracking, no account and no internet permission. Open source under GPL-3.0. Free to install; the first seven days are the complete app, then one payment, once, inside the app through Google Play.
 
-What it lowers: media, ringtones, notifications, alarms, and app calls such as WhatsApp when the phone plays them as media. What it cannot lower: regular cellular calls, which run on a separate audio path, and keyboard or touch sounds, which bypass audio effects by design. On a small number of phone and Bluetooth headset pairs the quiet steps have no effect; the seven free days are there to check a given setup. It works on Android 9 and later, on phones and tablets.
+What it lowers: media, ringtones, notifications, alarms, and app calls such as WhatsApp when the phone plays them as media. What it cannot lower: regular cellular calls, which run on a separate audio path, and keyboard or touch sounds, which bypass audio effects by design. On a small number of phone and Bluetooth headset pairs the quiet steps have no effect; the seven free days are there to check a given setup. It works on Android 9 and later, on phones and tablets. The app is in English, German, Spanish, French, Indonesian, Polish and Portuguese (Brazil).
 
 How it works: it applies Android's DynamicsProcessing audio effect to the mixed output (audio session 0) as a flat negative gain set in decibels, with every other stage of the effect switched off.
 
 - [Google Play listing](https://play.google.com/store/apps/details?id=granularvolume.com)
 - [Source code](https://github.com/Rzuss/granular-volume)
 - [Help](https://granularvolume.com/help.html)
+
+## Tablets
+
+Tablets are where this problem started: tablet speakers are made to fill a room, so the first step above mute can stay too loud for a bedroom, a child's tablet at bedtime, or white noise at night. Built-in volume limits cap the top of the range; none of them lowers the bottom step.
+
+- [Tablet volume too loud at the lowest setting](https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html): any Android tablet, by brand
+- [Galaxy Tab too loud at the lowest volume](https://granularvolume.com/guide/galaxy-tab-volume-too-loud-lowest.html): Sound Assistant, Media volume limit, video calls, and going below the floor
+- [Lenovo Tab too loud at the lowest volume](https://granularvolume.com/guide/lenovo-tab-volume-too-loud-lowest.html): Dolby Atmos, calling apps, wired earphones, and going below the floor
+- [A child's tablet too loud even on the lowest volume](https://granularvolume.com/guide/kids-tablet-volume-too-loud-lowest.html): limiting the top versus lowering the floor; not a parental lock
 
 ## Guides
 
@@ -24,7 +33,6 @@ How it works: it applies Android's DynamicsProcessing audio effect to the mixed 
 - [Samsung Sound Assistant and a volume that is too loud](https://granularvolume.com/guide/samsung-sound-assistant-volume-too-loud.html)
 - [Xiaomi, Redmi or POCO too loud at the lowest volume](https://granularvolume.com/guide/xiaomi-redmi-poco-volume-too-loud-lowest.html)
 - [OnePlus too loud at the lowest volume](https://granularvolume.com/guide/oneplus-volume-too-loud-lowest.html)
-- [Tablet volume too loud at the lowest setting](https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html)
 - [Alarm too loud at the lowest volume](https://granularvolume.com/guide/alarm-too-loud-lowest-volume-android.html)
 - [Call volume too loud on Android](https://granularvolume.com/guide/call-volume-too-loud-android.html)
 - [Pixel call volume too loud at the lowest setting](https://granularvolume.com/guide/pixel-call-volume-too-loud-lowest-setting.html)
