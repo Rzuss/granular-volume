@@ -5,14 +5,17 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Same radial gradient as the 512 px store icon (store-assets/icon_v4, D8). -->
     <path android:pathData="M0,0 H108 V108 H0 Z">
         <aapt:attr name="android:fillColor">
             <gradient
-                android:type="linear"
-                android:startX="0" android:startY="0"
-                android:endX="108" android:endY="108">
-                <item android:offset="0.0" android:color="#FF16162B" />
-                <item android:offset="1.0" android:color="#FF4A43C9" />
+                android:type="radial"
+                android:centerX="27"
+                android:centerY="13"
+                android:gradientRadius="130">
+                <item android:offset="0.0" android:color="#FF1C1B40" />
+                <item android:offset="0.55" android:color="#FF33309C" />
+                <item android:offset="1.0" android:color="#FF4C42C8" />
             </gradient>
         </aapt:attr>
     </path>
