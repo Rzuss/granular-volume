@@ -146,16 +146,16 @@ In the interest of being straightforward about what this app does and doesn't do
 
 ## Demo
 
-Android's own slider runs out of room, then one on-screen slider carries the
-whole range: up through normal volume, and on below the minimum. The audio in
-the video drops with every step shown on screen, so you can hear the difference
+Android's own volume panel runs out of room, then the dial keeps going below it:
+six quieter steps, down to -30 dB under the device minimum. The audio in the
+video drops with every step shown on screen, so you can hear the difference
 rather than just read about it.
 
-<a href="https://www.youtube.com/shorts/z0E8cnxuU14">
-<img src="https://i.ytimg.com/vi/z0E8cnxuU14/hqdefault.jpg" width="320" alt="Quiet Dial: your whole Android volume range on one slider">
+<a href="https://www.youtube.com/shorts/dYxHayiZ-M8">
+<img src="https://i.ytimg.com/vi/dYxHayiZ-M8/hqdefault.jpg" width="320" alt="Lowest volume still too loud? Go below it">
 </a>
 
-[Watch on YouTube](https://www.youtube.com/shorts/z0E8cnxuU14)
+[Watch on YouTube](https://www.youtube.com/shorts/dYxHayiZ-M8)
 
 ## Compatibility
 
