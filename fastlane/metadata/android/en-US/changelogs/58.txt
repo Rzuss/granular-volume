@@ -1,0 +1,1 @@
+A new app icon that shows what the app does: the speaker and its sound, your normal volume above the orange line, and the quieter steps below it. On Android 13 and later it also follows your themed icons.
