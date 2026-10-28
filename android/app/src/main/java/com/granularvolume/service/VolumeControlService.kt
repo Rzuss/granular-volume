@@ -114,6 +114,10 @@ class VolumeControlService : Service() {
         private const val LAST_DAY_NOTICE_DELAY_MS = 4000L
         /** 1.7.5: the midweek access sheet appears on day 5 of the free week (3 days left). */
         private const val MIDWEEK_NUDGE_DAYS_LEFT = 3
+        /** 1.7.8: how long the dial must be left alone before a touch-triggered sheet opens. */
+        private const val NUDGE_IDLE_MS = 2500L
+        /** 1.7.8: a refused gesture opens the purchase sheet by itself at most this often. */
+        private const val PAYWALL_AUTO_GAP_MS = 24L * 60L * 60L * 1000L
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
         private const val BILLING_PREFETCH_DELAY_MS = 1500L
@@ -247,6 +251,9 @@ class VolumeControlService : Service() {
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
+    /** 1.7.8: the touch-triggered day-5 / last-day sheet, run once the dial is idle. */
+    private val idleNudge = Runnable { maybeLastDayNudge() }
+
     override fun onCreate() {
         super.onCreate()
         Log.i(tag, "Service starting")
@@ -318,12 +325,24 @@ class VolumeControlService : Service() {
             mainHandler.post {
                 pendingQuietStepDb = pendingStep
                 pendingQuietStepAtMs = SystemClock.elapsedRealtime()
-                // Observable refusal: this is now the ONLY way a user gesture reaches the
-                // paywall, so the harness asserts on it instead of on the gate's clamp.
-                Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), opening paywall, display=${lockDisplay()}")
                 // The refusal may be the first moment the dial learns the week is over: draw it.
                 refreshAccessSurfaces()
-                openPaywall()
+                // 1.7.8: the sheet opens by itself at most once a day. Every touch reopening it
+                // made a paused dial feel broken; in between, one line says what happened and
+                // that the device's own volume keeps working. The sheet is still one tap away
+                // on the info button.
+                val now = System.currentTimeMillis()
+                val last = Prefs.paywallAutoLastMs(applicationContext)
+                if (last in 1..now && now - last < PAYWALL_AUTO_GAP_MS) {
+                    Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), paywall shown today: hint only, display=${lockDisplay()}")
+                    toast(getString(R.string.gv_paused_hint))
+                } else {
+                    // Observable refusal: this is now the ONLY way a user gesture reaches the
+                    // paywall, so the harness asserts on it instead of on the gate's clamp.
+                    Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), opening paywall, display=${lockDisplay()}")
+                    Prefs.setPaywallAutoLastMs(applicationContext, now)
+                    openPaywall()
+                }
             }
         }
         coordinator.onQuietUnavailable = {
@@ -368,7 +387,10 @@ class VolumeControlService : Service() {
         overlayManager.onEngaged = {
             // 1.7.6: a day with a level change counts toward the dial-only review moment.
             Prefs.recordUseDay(applicationContext, java.time.LocalDate.now().toEpochDay())
-            mainHandler.post { maybeLastDayNudge() }
+            // 1.7.8: not in the middle of a touch. The sheet waits until the dial has been left
+            // alone for a moment; every further press restarts the wait.
+            mainHandler.removeCallbacks(idleNudge)
+            mainHandler.postDelayed(idleNudge, NUDGE_IDLE_MS)
         }
         // 1.7.6: parking the dial in its tab is a calm moment; after a few days of real use the
         // review card may be offered there. Started like any sheet, so a refusal is only logged.
@@ -671,7 +693,17 @@ class VolumeControlService : Service() {
 
     private fun openInfoSheet() = startSheet(InfoSheetActivity::class.java)
 
-    private fun openPaywall() = startSheet(PaywallActivity::class.java)
+    private fun openPaywall() {
+        try {
+            startActivity(
+                Intent(applicationContext, PaywallActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra(PaywallActivity.EXTRA_FROM_DIAL, true)
+            )
+        } catch (e: RuntimeException) {
+            Log.w(tag, "Could not open PaywallActivity: ${e.message}")
+        }
+    }
 
     /**
      * 1.5.3: every screen the service opens goes through here. Android may refuse an activity
@@ -800,6 +832,7 @@ class VolumeControlService : Service() {
 
     override fun onDestroy() {
         Log.i(tag, "Service stopping (userRequested=$stopRequestedByUser)")
+        mainHandler.removeCallbacks(idleNudge)
         ControlLive.reset()
         if (noOverlayPermission) { super.onDestroy(); return }
         runCatching { unregisterReceiver(volumeChangeReceiver) }

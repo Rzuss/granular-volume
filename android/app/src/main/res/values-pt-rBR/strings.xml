@@ -4,7 +4,7 @@
 <resources>
     <string name="gv_paywall_title">A semana grátis terminou</string>
     <string name="gv_paywall_depth">Todos os passos silenciosos até −30 dB, toda a faixa normal e o mudo. Um pagamento, uma única vez, abre tudo.</string>
-    <string name="gv_paywall_body">Compra única, sua nesta conta do Google, sem nada para renovar. Sem assinatura. Sem ela, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. O app continua sem anúncios, sem rastreamento e sem acesso à internet.</string>
+    <string name="gv_paywall_body">Compra única, sua nesta conta do Google, sem nada para renovar. Sem assinatura. Sem ela, o controle continua pausado e os controles de volume do próprio aparelho funcionam como antes. O app continua sem anúncios, sem rastreamento e sem acesso à internet.</string>
     <string name="gv_paywall_not_now">Agora não</string>
     <string name="gv_paywall_unlocked">Faixa completa desbloqueada. Aproveite o silêncio.</string>
     <string name="gv_purchase_cta">Desbloquear a faixa completa</string>
@@ -23,14 +23,14 @@
     <string name="gv_info_title">Seu acesso</string>
     <string name="gv_info_state_locked">A semana grátis terminou</string>
     <string name="gv_info_body_trial">Tudo fica aberto enquanto você testa. Você pode ficar com ele de vez a qualquer momento ou esperar a semana acabar. Um pagamento, uma única vez, nesta conta do Google. Nada se renova e nada é cobrado sozinho.</string>
-    <string name="gv_info_body_trial_last_day">Sua semana grátis termina em menos de 24 horas, e o controle é bloqueado. Um pagamento, uma única vez, mantém tudo aberto, sem nada para renovar. Cada passo fica exatamente como você deixou.</string>
+    <string name="gv_info_body_trial_last_day">Sua semana grátis termina em menos de 24 horas, e o controle é pausado. Um pagamento, uma única vez, mantém tudo aberto, sem nada para renovar. Cada passo fica exatamente como você deixou. O volume do próprio aparelho continua funcionando.</string>
     <string name="gv_info_body_unlocked">Obrigado. Todos os passos, a faixa completa e o mudo ficam abertos nesta conta, sem nada para renovar.</string>
-    <string name="gv_info_body_locked">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está bloqueado. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Sem ele, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
+    <string name="gv_info_body_locked">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está pausado. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Sem ele, o controle continua pausado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
     <string name="gv_notif_locked">A semana grátis terminou. Toque para ver os detalhes.</string>
     <string name="gv_trial_body">Todos os passos ficam abertos enquanto você testa. Você pode ficar com ele de vez a qualquer momento ou esperar a semana acabar. Um pagamento, uma única vez, nesta conta do Google. Nada se renova e nada é cobrado sozinho.</string>
     <string name="gv_trial_dismiss">Depois</string>
     <string name="gv_trial_over_title">A semana grátis terminou</string>
-    <string name="gv_trial_over_body">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está bloqueado. Um pagamento, uma única vez, e cada passo volta exatamente para onde você deixou. Sem ele, o controle continua bloqueado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
+    <string name="gv_trial_over_body">Os sete dias grátis contam a partir da instalação e terminaram, por isso o controle está pausado. Um pagamento, uma única vez, e cada passo volta exatamente para onde você deixou. Sem ele, o controle continua pausado e os controles de volume do próprio aparelho funcionam como antes. Nada se renova e não há assinatura.</string>
     <string name="gv_unlocked_title">Faixa completa desbloqueada</string>
     <string name="gv_unlocked_body">Obrigado. Todos os passos até −30 dB estão abertos agora nesta conta do Google. Inicie o controle e escolha qualquer passo abaixo da linha laranja.</string>
     <string name="gv_unlocked_dismiss">Entendi</string>
@@ -52,10 +52,10 @@
     <string name="gv_dialog_close">Fechar</string>
     <string name="gv_info_body_held">Os sete dias grátis contam a partir da instalação e terminaram. Seu nível fica exatamente como está até o controle ser parado ou o aparelho reiniciar. Para mudar, desbloqueie o controle: um pagamento, uma única vez. Nada se renova e não há assinatura.</string>
     <string name="gv_notif_held">%1$s. A semana grátis terminou. Toque para ver os detalhes.</string>
-    <string name="gv_trial_grace">A semana grátis conta a partir da instalação e já passou. Tudo fica aberto por 24 horas a partir de agora. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</string>
+    <string name="gv_trial_grace">A semana grátis conta a partir da instalação e já passou. Tudo fica aberto por 24 horas a partir de agora. Depois, o controle é pausado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura. O volume do próprio aparelho continua funcionando.</string>
     <plurals name="gv_trial_orientation_days">
-        <item quantity="one">Tudo fica aberto por mais um dia. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</item>
-        <item quantity="other">Tudo fica aberto por mais %d dias. Depois, o controle é bloqueado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura.</item>
+        <item quantity="one">Tudo fica aberto por mais um dia. Depois, o controle é pausado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura. O volume do próprio aparelho continua funcionando.</item>
+        <item quantity="other">Tudo fica aberto por mais %d dias. Depois, o controle é pausado até que um pagamento, uma única vez, o desbloqueie de vez. Sem assinatura. O volume do próprio aparelho continua funcionando.</item>
     </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Resta um dia de acesso completo</item>
@@ -90,7 +90,7 @@
     <string name="gv_hint_grant_direct">Toque no botão e ative a chave. O app continua sozinho.</string>
     <string name="gv_hint_ready">Tudo pronto, inicie o controle</string>
     <string name="gv_hint_consent">Aceite acima para continuar.</string>
-    <string name="gv_hint_locked">A semana grátis terminou. Desbloqueie acima para usar o controle de novo.</string>
+    <string name="gv_hint_locked">A semana grátis terminou. Desbloqueie acima para usar o controle de novo. O volume do próprio aparelho continua funcionando.</string>
     <string name="gv_perm_notif_title">Notificações (opcional)</string>
     <string name="gv_perm_notif_desc">Mostra o controle na área de notificações</string>
     <string name="gv_perm_notif_desc_trial">Mostra o controle na área de notificações, e um aviso antes de a sua semana grátis terminar</string>
@@ -117,7 +117,7 @@
     <string name="gv_label_desc_muted">Mídia silenciada</string>
     <string name="gv_label_desc_quiet">Volume %1$s, abaixo do mínimo do aparelho</string>
     <string name="gv_label_desc_normal">Volume em %1$d por cento</string>
-    <string name="gv_label_desc_locked">Controle bloqueado. A semana grátis terminou.</string>
+    <string name="gv_label_desc_locked">Controle pausado. A semana grátis terminou.</string>
     <string name="gv_label_desc_held">%1$s. A semana grátis terminou, e mudar o nível exige o desbloqueio.</string>
     <string name="gv_mute_bar_label">MUDO</string>
     <string name="gv_mute_bar_label_active">SILENCIADO</string>
@@ -186,4 +186,8 @@
     <string name="gv_write_to_us">Dúvidas ou um problema? Escreva para nós</string>
     <string name="gv_write_subject">Quiet Dial %1$s: uma pergunta</string>
     <string name="gv_write_no_app">Nenhum app de e-mail encontrado. Escreva para %1$s</string>
+    <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
+    <string name="gv_paused_hint">O controle está pausado. O volume do próprio aparelho continua funcionando. Toque no i do controle para ver os detalhes.</string>
+    <string name="gv_paywall_turn_off">Desligar o controle</string>
+    <string name="gv_write_body">Aparelho: %1$s\nAndroid: %2$s\nPassos silenciosos: %3$s\n\n</string>
 </resources>

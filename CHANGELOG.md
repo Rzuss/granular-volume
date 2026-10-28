@@ -2,6 +2,31 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.8 (versionCode 59)
+
+A calmer end to the free week, and the app's own icon everywhere.
+
+### Changed
+- Once the free week is over, a touch on the dial opens the purchase sheet at most once a day. In between, a
+  short line says the dial is paused and that the device's own volume keeps working. The sheet is always one
+  tap away on the info button.
+- The purchase sheet opened from the dial has a "Turn the dial off" button. A dial turned off this way stays off
+  after a restart, like any dial the person stops.
+- The texts about the end of the free week say "paused" instead of "locked", and each one says that the
+  device's own volume keeps working.
+- "Questions or a problem? Write to us" is on the info sheet during the free week too. The mail draft starts
+  with the device model, the Android version and how the quiet steps are attached; it is the person's own
+  draft and nothing is sent by the app.
+- The notification icon and the main-screen glyph are now drawn from the app icon (speaker, wave, scale and
+  the quiet steps below the line) instead of a generic sliders symbol.
+
+### Fixed
+- The rating card was almost never offered to people who had bought the app: a purchase that came within 14
+  days of an earlier ask was skipped and forgotten. A purchase now marks the ask as owed; it is offered at the
+  purchase, or at the next calm moment, at least a day after any earlier ask. Never more than twice per install.
+- The day-5 and last-day access sheets no longer open in the middle of a touch on the dial: they wait until the
+  dial has been left alone for a moment.
+
 ## 1.7.7 (versionCode 58)
 
 A new icon.

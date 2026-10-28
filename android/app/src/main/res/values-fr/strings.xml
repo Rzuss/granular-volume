@@ -4,7 +4,7 @@
 <resources>
     <string name="gv_paywall_title">La semaine gratuite est terminée</string>
     <string name="gv_paywall_depth">Chaque cran silencieux jusqu\'à −30 dB, toute la plage normale et le mode muet. Un paiement, une seule fois, ouvre tout.</string>
-    <string name="gv_paywall_body">Achat unique, à vous sur ce compte Google, sans rien à renouveler. Pas d\'abonnement. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. L\'application reste sans publicité, sans pistage et sans accès à internet.</string>
+    <string name="gv_paywall_body">Achat unique, à vous sur ce compte Google, sans rien à renouveler. Pas d\'abonnement. Sans lui, le curseur reste en pause et les commandes de volume de votre appareil fonctionnent comme avant. L\'application reste sans publicité, sans pistage et sans accès à internet.</string>
     <string name="gv_paywall_not_now">Pas maintenant</string>
     <string name="gv_paywall_unlocked">Plage complète débloquée. Profitez du calme.</string>
     <string name="gv_purchase_cta">Débloquer la plage complète</string>
@@ -23,14 +23,14 @@
     <string name="gv_info_title">Votre accès</string>
     <string name="gv_info_state_locked">La semaine gratuite est terminée</string>
     <string name="gv_info_body_trial">Tout est ouvert pendant votre essai. Vous pouvez le garder pour de bon à tout moment, ou attendre la fin de la semaine. Un paiement, une seule fois, sur ce compte Google. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
-    <string name="gv_info_body_trial_last_day">Votre semaine gratuite se termine dans moins de 24 heures, puis le curseur se verrouille. Un paiement, une seule fois, garde tout ouvert, sans rien à renouveler. Chaque cran reste exactement comme vous l\'avez réglé.</string>
+    <string name="gv_info_body_trial_last_day">Votre semaine gratuite se termine dans moins de 24 heures, puis le curseur se met en pause. Un paiement, une seule fois, garde tout ouvert, sans rien à renouveler. Chaque cran reste exactement comme vous l\'avez réglé. Le volume propre de votre appareil continue de fonctionner.</string>
     <string name="gv_info_body_unlocked">Merci. Chaque cran, toute la plage et le mode muet restent ouverts sur ce compte, sans rien à renouveler.</string>
-    <string name="gv_info_body_locked">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc verrouillé. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
+    <string name="gv_info_body_locked">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc en pause. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Sans lui, le curseur reste en pause et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
     <string name="gv_notif_locked">La semaine gratuite est terminée. Touchez pour en savoir plus.</string>
     <string name="gv_trial_body">Chaque cran est ouvert pendant votre essai. Vous pouvez le garder pour de bon à tout moment, ou attendre la fin de la semaine. Un paiement, une seule fois, sur ce compte Google. Rien ne se renouvelle et rien n\'est prélevé tout seul.</string>
     <string name="gv_trial_dismiss">Plus tard</string>
     <string name="gv_trial_over_title">La semaine gratuite est terminée</string>
-    <string name="gv_trial_over_body">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc verrouillé. Un paiement, une seule fois, et chaque cran revient exactement là où vous l\'aviez laissé. Sans lui, le curseur reste verrouillé et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
+    <string name="gv_trial_over_body">Les sept jours gratuits comptent à partir de l\'installation et sont terminés, le curseur est donc en pause. Un paiement, une seule fois, et chaque cran revient exactement là où vous l\'aviez laissé. Sans lui, le curseur reste en pause et les commandes de volume de votre appareil fonctionnent comme avant. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
     <string name="gv_unlocked_title">Plage complète débloquée</string>
     <string name="gv_unlocked_body">Merci. Chaque cran jusqu\'à −30 dB est maintenant ouvert sur ce compte Google. Lancez le curseur et choisissez n\'importe quel cran sous la ligne orange.</string>
     <string name="gv_unlocked_dismiss">Compris</string>
@@ -52,10 +52,10 @@
     <string name="gv_dialog_close">Fermer</string>
     <string name="gv_info_body_held">Les sept jours gratuits comptent à partir de l\'installation et sont terminés. Votre niveau reste exactement tel quel jusqu\'à ce que le curseur soit arrêté ou que l\'appareil redémarre. Pour le modifier, débloquez le curseur : un paiement, une seule fois. Rien ne se renouvelle et il n\'y a pas d\'abonnement.</string>
     <string name="gv_notif_held">%1$s. La semaine gratuite est terminée. Touchez pour en savoir plus.</string>
-    <string name="gv_trial_grace">La semaine gratuite compte à partir de l\'installation et elle est déjà passée. Tout est ouvert pendant 24 heures à partir de maintenant. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</string>
+    <string name="gv_trial_grace">La semaine gratuite compte à partir de l\'installation et elle est déjà passée. Tout est ouvert pendant 24 heures à partir de maintenant. Ensuite, le curseur se met en pause jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement. Le volume propre de votre appareil continue de fonctionner.</string>
     <plurals name="gv_trial_orientation_days">
-        <item quantity="one">Tout est ouvert encore un jour. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</item>
-        <item quantity="other">Tout est ouvert encore %d jours. Ensuite, le curseur se verrouille jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement.</item>
+        <item quantity="one">Tout est ouvert encore un jour. Ensuite, le curseur se met en pause jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement. Le volume propre de votre appareil continue de fonctionner.</item>
+        <item quantity="other">Tout est ouvert encore %d jours. Ensuite, le curseur se met en pause jusqu\'à ce qu\'un paiement, une seule fois, le débloque pour de bon. Pas d\'abonnement. Le volume propre de votre appareil continue de fonctionner.</item>
     </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Il reste un jour d\'accès complet</item>
@@ -90,7 +90,7 @@
     <string name="gv_hint_grant_direct">Touchez le bouton et activez l\'interrupteur. L\'appli continue d\'elle-même.</string>
     <string name="gv_hint_ready">Tout est prêt, démarrez le contrôle</string>
     <string name="gv_hint_consent">Acceptez ci-dessus pour continuer.</string>
-    <string name="gv_hint_locked">La semaine gratuite est terminée. Débloquez ci-dessus pour réutiliser le curseur.</string>
+    <string name="gv_hint_locked">La semaine gratuite est terminée. Débloquez ci-dessus pour réutiliser le curseur. Le volume propre de votre appareil continue de fonctionner.</string>
     <string name="gv_perm_notif_title">Notifications (facultatif)</string>
     <string name="gv_perm_notif_desc">Affiche le contrôle dans le volet des notifications</string>
     <string name="gv_perm_notif_desc_trial">Affiche le contrôle dans le volet des notifications, et un rappel avant la fin de votre semaine gratuite</string>
@@ -117,7 +117,7 @@
     <string name="gv_label_desc_muted">Médias coupés</string>
     <string name="gv_label_desc_quiet">Volume %1$s, sous le minimum de l\'appareil</string>
     <string name="gv_label_desc_normal">Volume à %1$d pour cent</string>
-    <string name="gv_label_desc_locked">Curseur verrouillé. La semaine gratuite est terminée.</string>
+    <string name="gv_label_desc_locked">Curseur en pause. La semaine gratuite est terminée.</string>
     <string name="gv_label_desc_held">%1$s. La semaine gratuite est terminée, et changer le niveau demande le déblocage.</string>
     <string name="gv_mute_bar_label">MUET</string>
     <string name="gv_mute_bar_label_active">MUET</string>
@@ -186,4 +186,8 @@
     <string name="gv_write_to_us">Une question ou un problème ? Écrivez-nous</string>
     <string name="gv_write_subject">Quiet Dial %1$s : une question</string>
     <string name="gv_write_no_app">Aucune appli de messagerie trouvée. Écrivez à %1$s</string>
+    <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
+    <string name="gv_paused_hint">Le curseur est en pause. Le volume propre de votre appareil continue de fonctionner. Touchez le i du curseur pour les détails.</string>
+    <string name="gv_paywall_turn_off">Désactiver le curseur</string>
+    <string name="gv_write_body">Appareil : %1$s\nAndroid : %2$s\nCrans silencieux : %3$s\n\n</string>
 </resources>
