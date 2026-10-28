@@ -1,0 +1,1 @@
+The app's own icon now appears in the notification and on the main screen. When the dial is paused it tells you once and leaves you in peace, your device's own volume keeps working, and a new button turns the dial off. During the first week you can write to us from the info sheet, with your device details already filled in.

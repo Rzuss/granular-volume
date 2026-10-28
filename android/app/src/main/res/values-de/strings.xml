@@ -4,7 +4,7 @@
 <resources>
     <string name="gv_paywall_title">Die kostenlose Woche ist vorbei</string>
     <string name="gv_paywall_depth">Jede leise Stufe bis −30 dB, der ganze normale Bereich und Stumm. Eine Zahlung, einmalig, öffnet alles.</string>
-    <string name="gv_paywall_body">Einmaliger Kauf, auf diesem Google-Konto für immer deins, ohne Verlängerung. Kein Abo. Ohne ihn bleibt der Regler gesperrt, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Die App bleibt frei von Werbung, Tracking und Internetzugriff.</string>
+    <string name="gv_paywall_body">Einmaliger Kauf, auf diesem Google-Konto für immer deins, ohne Verlängerung. Kein Abo. Ohne ihn bleibt der Regler pausiert, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Die App bleibt frei von Werbung, Tracking und Internetzugriff.</string>
     <string name="gv_paywall_not_now">Nicht jetzt</string>
     <string name="gv_paywall_unlocked">Voller Bereich freigeschaltet. Genieß die Ruhe.</string>
     <string name="gv_purchase_cta">Vollen Bereich freischalten</string>
@@ -23,14 +23,14 @@
     <string name="gv_info_title">Dein Zugang</string>
     <string name="gv_info_state_locked">Die kostenlose Woche ist vorbei</string>
     <string name="gv_info_body_trial">Alles ist offen, solange du testest. Du kannst es jederzeit dauerhaft behalten oder warten, bis die Woche um ist. Eine Zahlung, einmalig, auf diesem Google-Konto. Nichts verlängert sich und nichts wird von selbst abgebucht.</string>
-    <string name="gv_info_body_trial_last_day">Deine kostenlose Woche endet in weniger als 24 Stunden, dann wird der Regler gesperrt. Eine Zahlung, einmalig, hält alles offen, ohne Verlängerung. Jede Stufe bleibt genau so, wie du sie eingestellt hast.</string>
+    <string name="gv_info_body_trial_last_day">Deine kostenlose Woche endet in weniger als 24 Stunden, dann pausiert der Regler. Eine Zahlung, einmalig, hält alles offen, ohne Verlängerung. Jede Stufe bleibt genau so, wie du sie eingestellt hast. Die eigene Lautstärke deines Geräts funktioniert weiter.</string>
     <string name="gv_info_body_unlocked">Danke. Jede Stufe, der ganze Bereich und Stumm bleiben auf diesem Konto offen, ohne Verlängerung.</string>
-    <string name="gv_info_body_locked">Die sieben kostenlosen Tage zählen ab der Installation und sind vorbei, deshalb ist der Regler gesperrt. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Ohne sie bleibt der Regler gesperrt, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Nichts verlängert sich und es gibt kein Abo.</string>
+    <string name="gv_info_body_locked">Die sieben kostenlosen Tage zählen ab der Installation und sind vorbei, deshalb ist der Regler pausiert. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Ohne sie bleibt der Regler pausiert, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Nichts verlängert sich und es gibt kein Abo.</string>
     <string name="gv_notif_locked">Die kostenlose Woche ist vorbei. Für Details tippen.</string>
     <string name="gv_trial_body">Jede Stufe ist offen, solange du testest. Du kannst sie jederzeit dauerhaft behalten oder warten, bis die Woche um ist. Eine Zahlung, einmalig, auf diesem Google-Konto. Nichts verlängert sich und nichts wird von selbst abgebucht.</string>
     <string name="gv_trial_dismiss">Später</string>
     <string name="gv_trial_over_title">Die kostenlose Woche ist vorbei</string>
-    <string name="gv_trial_over_body">Die sieben kostenlosen Tage zählen ab der Installation und sind vorbei, deshalb ist der Regler gesperrt. Eine Zahlung, einmalig, und jede Stufe kommt genau dorthin zurück, wo du sie gelassen hast. Ohne sie bleibt der Regler gesperrt, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Nichts verlängert sich und es gibt kein Abo.</string>
+    <string name="gv_trial_over_body">Die sieben kostenlosen Tage zählen ab der Installation und sind vorbei, deshalb ist der Regler pausiert. Eine Zahlung, einmalig, und jede Stufe kommt genau dorthin zurück, wo du sie gelassen hast. Ohne sie bleibt der Regler pausiert, und die eigene Lautstärkeregelung deines Geräts funktioniert wie bisher. Nichts verlängert sich und es gibt kein Abo.</string>
     <string name="gv_unlocked_title">Voller Bereich freigeschaltet</string>
     <string name="gv_unlocked_body">Danke. Jede Stufe bis −30 dB ist auf diesem Google-Konto jetzt offen. Starte den Regler und wähle eine beliebige Stufe unter der orangefarbenen Linie.</string>
     <string name="gv_unlocked_dismiss">Verstanden</string>
@@ -52,10 +52,10 @@
     <string name="gv_dialog_close">Schließen</string>
     <string name="gv_info_body_held">Die sieben kostenlosen Tage zählen ab der Installation und sind vorbei. Deine Lautstärke bleibt genau so, wie sie ist, bis der Regler gestoppt oder das Gerät neu gestartet wird. Um sie zu ändern, schalte den Regler frei: eine Zahlung, einmalig. Nichts verlängert sich und es gibt kein Abo.</string>
     <string name="gv_notif_held">%1$s. Die kostenlose Woche ist vorbei. Für Details tippen.</string>
-    <string name="gv_trial_grace">Die kostenlose Woche zählt ab der Installation und ist bereits vorbei. Ab jetzt ist alles 24 Stunden lang offen. Danach wird der Regler gesperrt, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo.</string>
+    <string name="gv_trial_grace">Die kostenlose Woche zählt ab der Installation und ist bereits vorbei. Ab jetzt ist alles 24 Stunden lang offen. Danach pausiert der Regler, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo. Die eigene Lautstärke deines Geräts funktioniert weiter.</string>
     <plurals name="gv_trial_orientation_days">
-        <item quantity="one">Alles ist noch einen Tag offen. Danach wird der Regler gesperrt, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo.</item>
-        <item quantity="other">Alles ist noch %d Tage offen. Danach wird der Regler gesperrt, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo.</item>
+        <item quantity="one">Alles ist noch einen Tag offen. Danach pausiert der Regler, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo. Die eigene Lautstärke deines Geräts funktioniert weiter.</item>
+        <item quantity="other">Alles ist noch %d Tage offen. Danach pausiert der Regler, bis eine Zahlung, einmalig, ihn dauerhaft freischaltet. Kein Abo. Die eigene Lautstärke deines Geräts funktioniert weiter.</item>
     </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Noch ein Tag voller Zugang</item>
@@ -90,7 +90,7 @@
     <string name="gv_hint_grant_direct">Tippe auf die Schaltfläche und schalte den Schalter ein. Die App macht von selbst weiter.</string>
     <string name="gv_hint_ready">Alles bereit, starte die Regelung</string>
     <string name="gv_hint_consent">Stimme oben zu, um fortzufahren.</string>
-    <string name="gv_hint_locked">Die kostenlose Woche ist vorbei. Schalte oben frei, um den Regler wieder zu nutzen.</string>
+    <string name="gv_hint_locked">Die kostenlose Woche ist vorbei. Schalte oben frei, um den Regler wieder zu nutzen. Die eigene Lautstärke deines Geräts funktioniert weiter.</string>
     <string name="gv_perm_notif_title">Benachrichtigungen (optional)</string>
     <string name="gv_perm_notif_desc">Zeigt die Regelung in der Benachrichtigungsleiste</string>
     <string name="gv_perm_notif_desc_trial">Zeigt die Regelung in der Benachrichtigungsleiste, und einen Hinweis, bevor deine kostenlose Woche endet</string>
@@ -117,7 +117,7 @@
     <string name="gv_label_desc_muted">Medien stumm</string>
     <string name="gv_label_desc_quiet">Lautstärke %1$s, unter dem Gerätemindestwert</string>
     <string name="gv_label_desc_normal">Lautstärke %1$d Prozent</string>
-    <string name="gv_label_desc_locked">Regler gesperrt. Die kostenlose Woche ist vorbei.</string>
+    <string name="gv_label_desc_locked">Regler pausiert. Die kostenlose Woche ist vorbei.</string>
     <string name="gv_label_desc_held">%1$s. Die kostenlose Woche ist vorbei, und zum Ändern der Stufe braucht es die Freischaltung.</string>
     <string name="gv_mute_bar_label">STUMM</string>
     <string name="gv_mute_bar_label_active">STUMM</string>
@@ -186,4 +186,8 @@
     <string name="gv_write_to_us">Fragen oder ein Problem? Schreib uns</string>
     <string name="gv_write_subject">Quiet Dial %1$s: eine Frage</string>
     <string name="gv_write_no_app">Keine Mail-App gefunden. Schreib an %1$s</string>
+    <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
+    <string name="gv_paused_hint">Der Regler ist pausiert. Die eigene Lautstärke deines Geräts funktioniert weiter. Details unter dem i am Regler.</string>
+    <string name="gv_paywall_turn_off">Regler ausschalten</string>
+    <string name="gv_write_body">Gerät: %1$s\nAndroid: %2$s\nLeise Stufen: %3$s\n\n</string>
 </resources>

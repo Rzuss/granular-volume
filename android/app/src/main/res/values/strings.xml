@@ -16,7 +16,7 @@
     <string name="gv_hint_grant_direct">Tap the button and turn the switch on. The app continues by itself.</string>
     <string name="gv_hint_ready">You\'re all set, start the control</string>
     <string name="gv_hint_consent">Agree above to continue.</string>
-    <string name="gv_hint_locked">The free week has ended. Unlock above to use the dial again.</string>
+    <string name="gv_hint_locked">The free week has ended, so the dial is paused. Unlock above to use it again. Your device\'s own volume keeps working.</string>
     <string name="gv_perm_notif_title">Notifications (optional)</string>
     <string name="gv_perm_notif_desc">Shows the control in the shade</string>
     <string name="gv_perm_notif_desc_trial">Shows the control in the shade, and one note before your free week ends</string>
@@ -50,7 +50,7 @@
     <string name="gv_label_desc_quiet">Volume %1$s, below the device minimum</string>
     <string name="gv_label_desc_normal">Volume %1$d percent</string>
     <!-- 1.7.0: what a screen reader is told when the free week is over. -->
-    <string name="gv_label_desc_locked">Dial locked. The free week has ended.</string>
+    <string name="gv_label_desc_locked">Dial paused. The free week has ended.</string>
     <string name="gv_label_desc_held">%1$s. The free week has ended, and changing the level needs the unlock.</string>
     <string name="gv_mute_bar_label">MUTE</string>
     <string name="gv_mute_bar_label_active">MUTED</string>
@@ -72,7 +72,7 @@
     <!-- Full-range paywall (1.5.0) -->
     <string name="gv_paywall_title">The free week has ended</string>
     <string name="gv_paywall_depth">Every quiet step down to −30 dB, the whole normal range, and mute. One payment, once, opens all of it.</string>
-    <string name="gv_paywall_body">One-time purchase, yours on this Google account with nothing to renew. No subscription. Without it, the dial stays locked and your device\'s own volume controls work as before. The app stays free of ads, tracking and internet access.</string>
+    <string name="gv_paywall_body">One-time purchase, yours on this Google account with nothing to renew. No subscription. Without it, the dial stays paused and your device\'s own volume controls work as before. The app stays free of ads, tracking and internet access.</string>
     <!-- 1.7.0: shown instead of nothing when the control is still holding its level. -->
     <string name="gv_paywall_held">Your level stays exactly as it is. Changing it needs the unlock.</string>
     <string name="gv_paywall_not_now">Not now</string>
@@ -130,9 +130,9 @@
     <string name="gv_info_state_locked">The free week has ended</string>
     <string name="gv_info_body_grandfathered">You were here before the paid unlock existed, so nothing was taken and nothing will be.</string>
     <string name="gv_info_body_trial">Everything is open while you try it. You can keep it for good at any time, or wait until the week is up. One payment, once, on this Google account. Nothing renews and nothing is charged on its own.</string>
-    <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial locks. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again.</string>
+    <string name="gv_info_body_trial_last_day">Your free week ends within 24 hours, and the dial pauses. One payment, once, keeps everything open, with nothing to renew. Every step stays exactly as you have it, with nothing to set up again. Your device\'s own volume keeps working.</string>
     <string name="gv_info_body_unlocked">Thank you. Every step, the whole range and mute stay open on this account, with nothing to renew.</string>
-    <string name="gv_info_body_locked">The seven free days run from the install, and they have ended, so the dial is locked. One payment, once, brings every step back exactly where you left it. Without it, the dial stays locked and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
+    <string name="gv_info_body_locked">The seven free days run from the install, and they have ended, so the dial is paused. One payment, once, brings every step back exactly where you left it. Without it, the dial stays paused and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
     <!-- 1.7.0: the week ended while the control was on. Never worded "locked": the level is still applied. -->
     <string name="gv_info_body_held">The seven free days run from the install, and they have ended. Your level stays exactly as it is until the control is stopped or the device restarts. To change it, unlock the dial: one payment, once. Nothing renews and there is no subscription.</string>
     <!-- 1.7.0: one voluntary invitation for people who keep everything free. Shown until answered, once. -->
@@ -163,15 +163,15 @@
     </plurals>
     <!-- 1.7.0: the whole deal in one sentence on the first screen. No price here, by the owner\'s decision. -->
     <plurals name="gv_trial_orientation_days">
-        <item quantity="one">Everything is open for one more day. After that the dial locks until one payment, once, unlocks it for good. No subscription.</item>
-        <item quantity="other">Everything is open for %d more days. After that the dial locks until one payment, once, unlocks it for good. No subscription.</item>
+        <item quantity="one">Everything is open for one more day. After that the dial pauses until one payment, once, unlocks it for good. No subscription. Your device\'s own volume keeps working.</item>
+        <item quantity="other">Everything is open for %d more days. After that the dial pauses until one payment, once, unlocks it for good. No subscription. Your device\'s own volume keeps working.</item>
     </plurals>
     <!-- 1.7.0: a first open that finds the week already over gets 24 hours, once, and is told so. -->
-    <string name="gv_trial_grace">The free week counts from the install, and it has already passed. Everything is open for 24 hours from now. After that the dial locks until one payment, once, unlocks it for good. No subscription.</string>
+    <string name="gv_trial_grace">The free week counts from the install, and it has already passed. Everything is open for 24 hours from now. After that the dial pauses until one payment, once, unlocks it for good. No subscription. Your device\'s own volume keeps working.</string>
     <string name="gv_trial_body">Every step is open while you try it. You can keep it for good at any time, or wait until the week is up. One payment, once, on this Google account. Nothing renews and nothing is charged on its own.</string>
     <string name="gv_trial_dismiss">Later</string>
     <string name="gv_trial_over_title">The free week has ended</string>
-    <string name="gv_trial_over_body">The seven free days run from the install, and they have ended, so the dial is locked. One payment, once, and every step comes back exactly where you left it. Without it, the dial stays locked and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
+    <string name="gv_trial_over_body">The seven free days run from the install, and they have ended, so the dial is paused. One payment, once, and every step comes back exactly where you left it. Without it, the dial stays paused and your device\'s own volume controls work as before. Nothing renews and there is no subscription.</string>
 
     <!-- Grandfather tip-jar card (1.5.0) -->
     <string name="gv_tipjar_title">You have the full range, free, always</string>
@@ -226,4 +226,8 @@
     <string name="gv_write_to_us">Questions or a problem? Write to us</string>
     <string name="gv_write_subject">Quiet Dial %1$s: a question</string>
     <string name="gv_write_no_app">No mail app found. Write to %1$s</string>
+    <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
+    <string name="gv_paused_hint">The dial is paused. Your device\'s own volume keeps working. Tap the i on the dial for details.</string>
+    <string name="gv_paywall_turn_off">Turn the dial off</string>
+    <string name="gv_write_body">Device: %1$s\nAndroid: %2$s\nQuiet steps: %3$s\n\n</string>
 </resources>

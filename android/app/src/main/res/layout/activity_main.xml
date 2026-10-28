@@ -28,7 +28,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_volume_slider"
+                android:src="@drawable/ic_hero_glyph"
                 android:contentDescription="@string/gv_app_glyph" />
         </FrameLayout>
 

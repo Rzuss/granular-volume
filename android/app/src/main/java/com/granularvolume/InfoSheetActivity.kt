@@ -355,7 +355,10 @@ class InfoSheetActivity : AppCompatActivity() {
                     PurchaseFlow.restore(this) { rerender() }
                 }.apply { gravity = Gravity.CENTER }.topPad(2, fill = true))
                 // 1.7.6: once the week is over, a direct way to ask, as on the paywall.
-                if (st.weekOver) root.addView(link(getString(R.string.gv_write_to_us)) {
+                // 1.7.8: during the free week too. A question asked on day 4 is a setup fixed
+                // before the week runs out, and a person who wrote to us has no need to say it
+                // in a review.
+                root.addView(link(getString(R.string.gv_write_to_us)) {
                     leaveForLink(); Links.writeToUs(this)
                 }.apply { gravity = Gravity.CENTER }.topPad(0, fill = true))
             }

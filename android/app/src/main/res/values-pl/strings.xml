@@ -4,7 +4,7 @@
 <resources>
     <string name="gv_paywall_title">Bezpłatny tydzień dobiegł końca</string>
     <string name="gv_paywall_depth">Każdy cichy stopień aż do −30 dB, cały zwykły zakres i wyciszenie. Jedna płatność, jednorazowo, otwiera wszystko.</string>
-    <string name="gv_paywall_body">Jednorazowy zakup, Twój na tym koncie Google, bez odnawiania. Bez subskrypcji. Bez niego regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Aplikacja pozostaje bez reklam, śledzenia i dostępu do internetu.</string>
+    <string name="gv_paywall_body">Jednorazowy zakup, Twój na tym koncie Google, bez odnawiania. Bez subskrypcji. Bez niego regulator pozostaje wstrzymany, a własne sterowanie głośnością urządzenia działa jak dotąd. Aplikacja pozostaje bez reklam, śledzenia i dostępu do internetu.</string>
     <string name="gv_paywall_not_now">Nie teraz</string>
     <string name="gv_paywall_unlocked">Pełny zakres odblokowany. Ciesz się ciszą.</string>
     <string name="gv_purchase_cta">Odblokuj pełny zakres</string>
@@ -23,14 +23,14 @@
     <string name="gv_info_title">Twój dostęp</string>
     <string name="gv_info_state_locked">Bezpłatny tydzień dobiegł końca</string>
     <string name="gv_info_body_trial">Wszystko jest otwarte, dopóki testujesz. Możesz zachować to na stałe w dowolnej chwili albo poczekać do końca tygodnia. Jedna płatność, jednorazowo, na tym koncie Google. Nic się nie odnawia i nic nie jest pobierane samo.</string>
-    <string name="gv_info_body_trial_last_day">Twój bezpłatny tydzień kończy się za mniej niż 24 godziny, a regulator zostanie zablokowany. Jedna płatność, jednorazowo, zostawia wszystko otwarte, bez odnawiania. Każdy stopień zostaje dokładnie tak, jak go ustawiono.</string>
+    <string name="gv_info_body_trial_last_day">Twój bezpłatny tydzień kończy się za mniej niż 24 godziny, a regulator zostanie wstrzymany. Jedna płatność, jednorazowo, zostawia wszystko otwarte, bez odnawiania. Każdy stopień zostaje dokładnie tak, jak go ustawiono. Własna głośność urządzenia nadal działa.</string>
     <string name="gv_info_body_unlocked">Dziękujemy. Każdy stopień, cały zakres i wyciszenie pozostają otwarte na tym koncie, bez odnawiania.</string>
-    <string name="gv_info_body_locked">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest zablokowany. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
+    <string name="gv_info_body_locked">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest wstrzymany. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje wstrzymany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
     <string name="gv_notif_locked">Bezpłatny tydzień dobiegł końca. Dotknij, aby zobaczyć szczegóły.</string>
     <string name="gv_trial_body">Każdy stopień jest otwarty, dopóki testujesz. Możesz zachować to na stałe w dowolnej chwili albo poczekać do końca tygodnia. Jedna płatność, jednorazowo, na tym koncie Google. Nic się nie odnawia i nic nie jest pobierane samo.</string>
     <string name="gv_trial_dismiss">Później</string>
     <string name="gv_trial_over_title">Bezpłatny tydzień dobiegł końca</string>
-    <string name="gv_trial_over_body">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest zablokowany. Jedna płatność, jednorazowo, i każdy stopień wraca dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje zablokowany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
+    <string name="gv_trial_over_body">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca, dlatego regulator jest wstrzymany. Jedna płatność, jednorazowo, i każdy stopień wraca dokładnie tam, gdzie go zostawiono. Bez niej regulator pozostaje wstrzymany, a własne sterowanie głośnością urządzenia działa jak dotąd. Nic się nie odnawia i nie ma subskrypcji.</string>
     <string name="gv_unlocked_title">Pełny zakres odblokowany</string>
     <string name="gv_unlocked_body">Dziękujemy. Każdy stopień aż do −30 dB jest teraz otwarty na tym koncie Google. Uruchom regulator i wybierz dowolny stopień poniżej pomarańczowej linii.</string>
     <string name="gv_unlocked_dismiss">Rozumiem</string>
@@ -52,12 +52,12 @@
     <string name="gv_dialog_close">Zamknij</string>
     <string name="gv_info_body_held">Siedem bezpłatnych dni liczy się od instalacji i dobiegło końca. Poziom zostaje dokładnie taki, jaki jest, dopóki regulator nie zostanie zatrzymany lub urządzenie nie uruchomi się ponownie. Aby go zmienić, odblokuj regulator: jedna płatność, jednorazowo. Nic się nie odnawia i nie ma subskrypcji.</string>
     <string name="gv_notif_held">%1$s. Bezpłatny tydzień dobiegł końca. Dotknij, aby zobaczyć szczegóły.</string>
-    <string name="gv_trial_grace">Bezpłatny tydzień liczy się od instalacji i już minął. Od teraz wszystko jest otwarte przez 24 godziny. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</string>
+    <string name="gv_trial_grace">Bezpłatny tydzień liczy się od instalacji i już minął. Od teraz wszystko jest otwarte przez 24 godziny. Potem regulator zostanie wstrzymany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji. Własna głośność urządzenia nadal działa.</string>
     <plurals name="gv_trial_orientation_days">
-        <item quantity="one">Wszystko jest otwarte jeszcze przez jeden dzień. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
-        <item quantity="few">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
-        <item quantity="many">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
-        <item quantity="other">Wszystko jest otwarte jeszcze przez %d dnia. Potem regulator zostanie zablokowany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji.</item>
+        <item quantity="one">Wszystko jest otwarte jeszcze przez jeden dzień. Potem regulator zostanie wstrzymany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji. Własna głośność urządzenia nadal działa.</item>
+        <item quantity="few">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie wstrzymany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji. Własna głośność urządzenia nadal działa.</item>
+        <item quantity="many">Wszystko jest otwarte jeszcze przez %d dni. Potem regulator zostanie wstrzymany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji. Własna głośność urządzenia nadal działa.</item>
+        <item quantity="other">Wszystko jest otwarte jeszcze przez %d dnia. Potem regulator zostanie wstrzymany, dopóki jedna płatność, jednorazowo, nie odblokuje go na stałe. Bez subskrypcji. Własna głośność urządzenia nadal działa.</item>
     </plurals>
     <plurals name="gv_trial_days_left">
         <item quantity="one">Został jeden dzień pełnego dostępu</item>
@@ -94,7 +94,7 @@
     <string name="gv_hint_grant_direct">Dotknij przycisku i włącz przełącznik. Aplikacja przejdzie dalej sama.</string>
     <string name="gv_hint_ready">Wszystko gotowe, uruchom regulację</string>
     <string name="gv_hint_consent">Zaakceptuj powyżej, aby kontynuować.</string>
-    <string name="gv_hint_locked">Bezpłatny tydzień dobiegł końca. Odblokuj powyżej, aby znów korzystać z regulatora.</string>
+    <string name="gv_hint_locked">Bezpłatny tydzień dobiegł końca. Odblokuj powyżej, aby znów korzystać z regulatora. Własna głośność urządzenia nadal działa.</string>
     <string name="gv_perm_notif_title">Powiadomienia (opcjonalnie)</string>
     <string name="gv_perm_notif_desc">Pokazuje regulację na pasku powiadomień</string>
     <string name="gv_perm_notif_desc_trial">Pokazuje regulację na pasku powiadomień oraz jedną uwagę przed końcem bezpłatnego tygodnia</string>
@@ -121,7 +121,7 @@
     <string name="gv_label_desc_muted">Multimedia wyciszone</string>
     <string name="gv_label_desc_quiet">Głośność %1$s, poniżej minimum urządzenia</string>
     <string name="gv_label_desc_normal">Głośność %1$d procent</string>
-    <string name="gv_label_desc_locked">Regulator zablokowany. Bezpłatny tydzień dobiegł końca.</string>
+    <string name="gv_label_desc_locked">Regulator wstrzymany. Bezpłatny tydzień dobiegł końca.</string>
     <string name="gv_label_desc_held">%1$s. Bezpłatny tydzień dobiegł końca, a zmiana poziomu wymaga odblokowania.</string>
     <string name="gv_mute_bar_label">WYCISZ</string>
     <string name="gv_mute_bar_label_active">WYCISZONO</string>
@@ -190,4 +190,8 @@
     <string name="gv_write_to_us">Pytania lub problem? Napisz do nas</string>
     <string name="gv_write_subject">Quiet Dial %1$s: pytanie</string>
     <string name="gv_write_no_app">Nie znaleziono aplikacji pocztowej. Napisz na %1$s</string>
+    <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
+    <string name="gv_paused_hint">Regulator jest wstrzymany. Własna głośność urządzenia nadal działa. Szczegóły pod przyciskiem i na regulatorze.</string>
+    <string name="gv_paywall_turn_off">Wyłącz regulator</string>
+    <string name="gv_write_body">Urządzenie: %1$s\nAndroid: %2$s\nCiche stopnie: %3$s\n\n</string>
 </resources>

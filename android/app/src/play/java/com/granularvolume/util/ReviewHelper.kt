@@ -22,10 +22,16 @@ import com.granularvolume.ReviewActivity
  *
  * How often (1.7.6, see [canAskNow]): at most twice per install. The first ask may come from any
  * moment. A second ask is only for someone who now has the full app for good (bought it, or a
- * long-time user) and comes at least 90 days after the first, or 14 days after it when the
- * occasion is the purchase itself. Until 1.7.6 the prompt was offered exactly once, and most
- * people, who drive the app from the dial, never reached either of the first two moments, so the
- * people asked were few and the ones who rated on their own were mostly unhappy ones.
+ * long-time user) and comes at least 90 days after the first. Until 1.7.6 the prompt was offered
+ * exactly once, and most people, who drive the app from the dial, never reached either of the
+ * first two moments, so the people asked were few and the ones who rated on their own were
+ * mostly unhappy ones.
+ *
+ * 1.7.8: a purchase is owed its ask. The trial asks on day 3 or so and the purchase comes on day
+ * 7, so the 14-day gap 1.7.6 required after a trial ask blocked the purchase moment for almost
+ * every buyer, and nothing remembered it. Now a purchase marks the ask as owed; it runs at the
+ * purchase itself when that is at least [REASK_AFTER_PURCHASE_MS] after the trial ask, otherwise
+ * at the next calm moment (a parked dial, a return visit, the tile) once that gap has passed.
  *
  * Google's own quota then decides whether a card is actually shown; this class only decides
  * whether it is a reasonable moment to ask. Nothing here asks the person a question first, and no
@@ -53,7 +59,8 @@ object ReviewHelper {
 
     private const val DAY_MS = 24L * 60 * 60 * 1000
     private const val REASK_AFTER_MS = 90 * DAY_MS
-    private const val REASK_AFTER_PURCHASE_MS = 14 * DAY_MS
+    /** 1.7.8: a day, so Google's card never comes twice in one sitting; its own quota still applies. */
+    private const val REASK_AFTER_PURCHASE_MS = 1 * DAY_MS
 
     /** Lets the unlock wave on the dial finish before Google's card appears over it. */
     private const val AFTER_PURCHASE_DELAY_MS = 2_500L
@@ -88,16 +95,17 @@ object ReviewHelper {
         Entitlement.isGrandfathered(context) || ProAccess.hasPaidUnlock(context)
 
     /**
-     * 1.7.6: the frequency rule. [afterPurchase] is true only for the purchase moment, which
-     * may follow an ask made during the trial sooner than the general 90 days.
+     * 1.7.6: the frequency rule. 1.7.8: an ask owed for a purchase (see the class note) may follow
+     * a trial ask after [REASK_AFTER_PURCHASE_MS], from the purchase or any later moment.
      */
-    private fun canAskNow(context: Context, afterPurchase: Boolean = false): Boolean {
+    private fun canAskNow(context: Context): Boolean {
         if (!isFairMomentToAsk(context)) return false
         val asks = Prefs.reviewAskCount(context)
         if (asks == 0) return true
         if (asks >= MAX_ASKS || !ownsFullApp(context)) return false
         val since = System.currentTimeMillis() - Prefs.reviewLastAskMs(context)
-        return since >= if (afterPurchase) REASK_AFTER_PURCHASE_MS else REASK_AFTER_MS
+        val owed = Prefs.isReviewPurchasePending(context) && ProAccess.hasPaidUnlock(context)
+        return since >= if (owed) REASK_AFTER_PURCHASE_MS else REASK_AFTER_MS
     }
 
     /**
@@ -149,13 +157,15 @@ object ReviewHelper {
     /**
      * 1.7.6 purchase path. Called once a purchase has completed (not a restore, not "already
      * owned"). The card is shown a moment later over whatever is in front, so the unlock wave
-     * on the dial plays first. Starting it can be refused (no visible window of ours); then
-     * nothing happens and the next natural moment asks instead.
+     * on the dial plays first. Starting it can be refused (no visible window of ours), or come
+     * too soon after a trial ask; 1.7.8: either way the ask stays owed and the next calm moment
+     * runs it.
      */
     fun afterPurchase(activity: Activity) {
         val app = activity.applicationContext
+        if (Prefs.reviewAskCount(app) < MAX_ASKS) Prefs.setReviewPurchasePending(app)
         main.postDelayed({
-            if (!canAskNow(app, afterPurchase = true)) return@postDelayed
+            if (!canAskNow(app)) return@postDelayed
             val intent = reviewActivityIntent(app)
             val host = activity.takeIf { !it.isFinishing && !it.isDestroyed }
             runCatching { (host ?: app).startActivity(intent) }

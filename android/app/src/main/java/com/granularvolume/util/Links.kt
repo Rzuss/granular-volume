@@ -23,13 +23,31 @@ object Links {
      * stopped by the lock can ask instead of guessing. The app sends nothing itself: this is an
      * ACTION_SENDTO that the mail app answers, and only the subject (with the version, to help
      * answer) is filled in. Without a mail app, the address is shown so it can be copied.
+     *
+     * 1.7.8: the body starts with the device, the Android version and how the quiet steps are
+     * attached, the three facts every answer begins with. It is plain text in the person's own
+     * draft, visible and editable before they choose to send it.
      */
     fun writeToUs(context: Context) {
         val version = runCatching {
             context.packageManager.getPackageInfo(context.packageName, 0).versionName
         }.getOrNull() ?: ""
         val subject = context.getString(com.granularvolume.R.string.gv_write_subject, version)
-        val uri = Uri.parse("mailto:$SUPPORT_EMAIL?subject=" + Uri.encode(subject))
+        val path = when (ControlLive.effect) {
+            ControlLive.Effect.PREFERRED -> "standard"
+            ControlLive.Effect.FALLBACK -> "fallback"
+            ControlLive.Effect.NONE -> "none"
+            ControlLive.Effect.UNKNOWN -> "not running"
+        }
+        val body = context.getString(
+            com.granularvolume.R.string.gv_write_body,
+            "${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}",
+            android.os.Build.VERSION.RELEASE,
+            path
+        )
+        val uri = Uri.parse(
+            "mailto:$SUPPORT_EMAIL?subject=" + Uri.encode(subject) + "&body=" + Uri.encode(body)
+        )
         val sent = runCatching {
             context.startActivity(Intent(Intent.ACTION_SENDTO, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }.isSuccess
