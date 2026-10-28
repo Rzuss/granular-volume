@@ -266,6 +266,8 @@ class PaywallActivity : AppCompatActivity() {
         if (intent.getBooleanExtra(EXTRA_FROM_DIAL, false) && ControlLive.running) {
             root.addView(text(R.string.gv_paywall_turn_off, 13f, colorRes = R.color.gv_accent_text).apply {
                 gravity = Gravity.CENTER
+                // 1.7.9: a 48 dp touch target, the minimum a finger can be sure of.
+                minimumHeight = dp(48)
                 setPadding(0, dp(10), 0, dp(10))
                 asButtonForAccessibility()
                 setOnClickListener {

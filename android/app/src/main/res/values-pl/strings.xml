@@ -191,7 +191,7 @@
     <string name="gv_write_subject">Quiet Dial %1$s: pytanie</string>
     <string name="gv_write_no_app">Nie znaleziono aplikacji pocztowej. Napisz na %1$s</string>
     <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
-    <string name="gv_paused_hint">Regulator jest wstrzymany. Własna głośność urządzenia nadal działa. Szczegóły pod przyciskiem i na regulatorze.</string>
+    <string name="gv_paused_hint">Regulator wstrzymany. Głośność urządzenia nadal działa.</string>
     <string name="gv_paywall_turn_off">Wyłącz regulator</string>
     <string name="gv_write_body">Urządzenie: %1$s\nAndroid: %2$s\nCiche stopnie: %3$s\n\n</string>
 </resources>

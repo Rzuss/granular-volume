@@ -29,4 +29,7 @@ object ReviewHelper {
 
     @Suppress("UNUSED_PARAMETER")
     fun afterPurchase(activity: Activity) = Unit
+
+    @Suppress("UNUSED_PARAMETER")
+    fun purchaseSettled(context: Context) = Unit
 }

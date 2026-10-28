@@ -187,7 +187,7 @@
     <string name="gv_write_subject">Quiet Dial %1$s: eine Frage</string>
     <string name="gv_write_no_app">Keine Mail-App gefunden. Schreib an %1$s</string>
     <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
-    <string name="gv_paused_hint">Der Regler ist pausiert. Die eigene Lautstärke deines Geräts funktioniert weiter. Details unter dem i am Regler.</string>
+    <string name="gv_paused_hint">Regler pausiert. Die Lautstärke deines Geräts funktioniert weiter.</string>
     <string name="gv_paywall_turn_off">Regler ausschalten</string>
     <string name="gv_write_body">Gerät: %1$s\nAndroid: %2$s\nLeise Stufen: %3$s\n\n</string>
 </resources>
