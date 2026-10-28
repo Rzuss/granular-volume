@@ -227,7 +227,7 @@
     <string name="gv_write_subject">Quiet Dial %1$s: a question</string>
     <string name="gv_write_no_app">No mail app found. Write to %1$s</string>
     <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
-    <string name="gv_paused_hint">The dial is paused. Your device\'s own volume keeps working. Tap the i on the dial for details.</string>
+    <string name="gv_paused_hint">Dial paused. Your device\'s own volume still works.</string>
     <string name="gv_paywall_turn_off">Turn the dial off</string>
     <string name="gv_write_body">Device: %1$s\nAndroid: %2$s\nQuiet steps: %3$s\n\n</string>
 </resources>

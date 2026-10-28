@@ -2,6 +2,28 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.7.9 (versionCode 60)
+
+The paused line said once, and the rating card for every buyer. Fixes to 1.7.8, found by an outside review.
+
+### Fixed
+- The "paused" line was a new three-sentence toast on every refused touch, never cancelled: five touches queued
+  some seventeen seconds of text, and on Android 12 and later the third sentence was cut off. It is now one
+  short sentence, shown once, and not repeated while it is still on screen.
+- A purchase that Google confirmed later (cash, bank transfer: pending at the sheet, completed on a later
+  check) never owed a rating card, because only the sheet's own completion marked it. The purchase record
+  marks it now, wherever the confirmation arrives.
+- The day's one automatic opening of the purchase sheet was recorded before the sheet started; a refused
+  start spent it. It is recorded only once the sheet is really open.
+
+### Changed
+- The rating card a purchase owes waits at least thirty days after any earlier ask (was one day). Google's
+  own limit for the card is not published, and a second launch inside it would have been swallowed by Google
+  yet counted here as the install's second and last ask.
+- "Questions or a problem? Write to us" is on the info sheet for everyone, buyers and long-time users
+  included, not only while there is something to buy.
+- The "Turn the dial off" button on the purchase sheet is 48 dp tall.
+
 ## 1.7.8 (versionCode 59)
 
 A calmer end to the free week, and the app's own icon everywhere.

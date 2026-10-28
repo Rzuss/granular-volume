@@ -187,7 +187,7 @@
     <string name="gv_write_subject">Quiet Dial %1$s : une question</string>
     <string name="gv_write_no_app">Aucune appli de messagerie trouvée. Écrivez à %1$s</string>
     <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
-    <string name="gv_paused_hint">Le curseur est en pause. Le volume propre de votre appareil continue de fonctionner. Touchez le i du curseur pour les détails.</string>
+    <string name="gv_paused_hint">Curseur en pause. Le volume de votre appareil fonctionne toujours.</string>
     <string name="gv_paywall_turn_off">Désactiver le curseur</string>
     <string name="gv_write_body">Appareil : %1$s\nAndroid : %2$s\nCrans silencieux : %3$s\n\n</string>
 </resources>

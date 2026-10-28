@@ -187,7 +187,7 @@
     <string name="gv_write_subject">Quiet Dial %1$s: una pregunta</string>
     <string name="gv_write_no_app">No se encontró una app de correo. Escribe a %1$s</string>
     <!-- 1.7.8: a refused gesture between daily sheets; the way out on the sheet; the mail body. -->
-    <string name="gv_paused_hint">El control está en pausa. El volumen propio de tu dispositivo sigue funcionando. Toca la i del control para ver los detalles.</string>
+    <string name="gv_paused_hint">Control en pausa. El volumen de tu dispositivo sigue funcionando.</string>
     <string name="gv_paywall_turn_off">Apagar el control</string>
     <string name="gv_write_body">Dispositivo: %1$s\nAndroid: %2$s\nPasos silenciosos: %3$s\n\n</string>
 </resources>

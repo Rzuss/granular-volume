@@ -59,8 +59,12 @@ object ReviewHelper {
 
     private const val DAY_MS = 24L * 60 * 60 * 1000
     private const val REASK_AFTER_MS = 90 * DAY_MS
-    /** 1.7.8: a day, so Google's card never comes twice in one sitting; its own quota still applies. */
-    private const val REASK_AFTER_PURCHASE_MS = 1 * DAY_MS
+    /**
+     * 1.7.8 made this a day. 1.7.9: thirty days. Google's quota for the review card is not
+     * published, and a second launch inside it is swallowed by Google yet counted here as the
+     * second and last ask of the install; a month keeps the owed ask out of that window.
+     */
+    private const val REASK_AFTER_PURCHASE_MS = 30 * DAY_MS
 
     /** Lets the unlock wave on the dial finish before Google's card appears over it. */
     private const val AFTER_PURCHASE_DELAY_MS = 2_500L
@@ -163,7 +167,7 @@ object ReviewHelper {
      */
     fun afterPurchase(activity: Activity) {
         val app = activity.applicationContext
-        if (Prefs.reviewAskCount(app) < MAX_ASKS) Prefs.setReviewPurchasePending(app)
+        purchaseSettled(app)
         main.postDelayed({
             if (!canAskNow(app)) return@postDelayed
             val intent = reviewActivityIntent(app)
@@ -171,6 +175,19 @@ object ReviewHelper {
             runCatching { (host ?: app).startActivity(intent) }
                 .onFailure { Log.d(TAG, "Review after purchase not started: ${it.message}") }
         }, AFTER_PURCHASE_DELAY_MS)
+    }
+
+    /**
+     * 1.7.9: marks the ask a purchase is owed, with no card now. [afterPurchase] runs this for a
+     * purchase completed in the sheet; [BillingManager] runs it when a purchase that Google was
+     * still confirming (cash, bank transfer: PENDING, then PURCHASED on a later query) settles
+     * outside any sheet of ours. Until now that buyer was never asked at all.
+     */
+    fun purchaseSettled(context: Context) {
+        if (Prefs.reviewAskCount(context) < MAX_ASKS) {
+            Prefs.setReviewPurchasePending(context)
+            Log.i(TAG, "Review owed for a purchase")
+        }
     }
 
     private fun reviewActivityIntent(context: Context): Intent =

@@ -318,7 +318,13 @@ object BillingManager {
             when (p.purchaseState) {
                 Purchase.PurchaseState.PURCHASED -> {
                     if (!p.isAcknowledged) acknowledge(context, p)
-                    if (!Entitlement.isPurchased(context)) Log.i(TAG, "Purchase state: PURCHASED, entitlement cached")
+                    if (!Entitlement.isPurchased(context)) {
+                        Log.i(TAG, "Purchase state: PURCHASED, entitlement cached")
+                        // 1.7.9: a purchase that settles here (pending payment confirmed, or
+                        // a purchase the sheet never saw) owes the same review as one made in
+                        // the sheet. Harmless when the sheet already marked it.
+                        ReviewHelper.purchaseSettled(context)
+                    }
                     Entitlement.setPurchased(context, true)
                     Entitlement.setPurchasePending(context, false)
                     strongest = Purchase.PurchaseState.PURCHASED
