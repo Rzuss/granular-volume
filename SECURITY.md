@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-If you find a security issue in Quiet Dial (Volume Control: Quiet Dial on Google Play, by Granular Volume), please report it privately rather than opening a public issue. Email the maintainer at rotemzus@gmail.com. You can expect an acknowledgement within a few days.
+If you find a security issue in Quiet Dial (Volume Control: Quiet Dial on Google Play, by Granular Volume), please report it privately rather than opening a public issue. Email the maintainer at support@granularvolume.com. You can expect an acknowledgement within a few days.
 
 ## Scope and data handling
 
