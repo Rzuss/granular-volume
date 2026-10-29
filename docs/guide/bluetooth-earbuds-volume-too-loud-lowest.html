@@ -29,7 +29,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/"},
   "datePublished": "2026-07-22",
-  "dateModified": "2026-10-24",
+  "dateModified": "2026-10-29",
   "mainEntityOfPage": "https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html"
 }
 </script>
@@ -46,7 +46,7 @@
     {"@type":"Question","name":"Will a volume app fix one earbud being louder than the other?","acceptedAnswer":{"@type":"Answer","text":"No. Volume-lowering apps, including Quiet Dial, lower both channels by the same amount, so the difference between the left and right sides stays exactly as it was. Fix the imbalance first using the balance slider and by cleaning the mesh. A below-minimum volume app solves the separate problem of the quietest available level still being too loud."}},
     {"@type":"Question","name":"Will it also help with wired headphones and the phone speaker?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because it lowers the media output itself rather than a Bluetooth-specific setting, the same quieter floor applies to wired headphones and the built-in speaker as well."}},
     {"@type":"Question","name":"Does it need root or a computer?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Android's own audio-effect framework, needs only a display-over-other-apps permission and standard audio permissions, and requires no root, no ADB, and no computer."}},
-    {"@type":"Question","name":"Is it a volume booster?","acceptedAnswer":{"@type":"Answer","text":"No, the opposite. It only ever reduces gain below the existing minimum. It never pushes output past the device's normal maximum, so there is no boosting and no added risk of distortion or driver damage in that direction."}},
+    {"@type":"Question","name":"Is it a volume booster?","acceptedAnswer":{"@type":"Answer","text":"No, the opposite. Below the existing minimum it only reduces gain, and above it the dial sets the device's normal volume. It never pushes output past the device's normal maximum, so there is no boosting and no added risk of distortion or driver damage in that direction."}},
     {"@type":"Question","name":"Is it free and private?","acceptedAnswer":{"@type":"Answer","text":"Free to install, and the first seven days after you install are the complete app with nothing held back. After that, keeping the control takes one payment, once. Nothing renews and there is no subscription to cancel. No ads, no account, no subscription, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0."}}
   ]
 }
@@ -232,7 +232,7 @@
     <div class="icon"><img width="160" height="160" src="../img/icon-160.webp" alt="Quiet Dial icon"></div>
     <h1>Bluetooth headphones or earbuds too loud at the lowest volume?</h1>
     <p class="dek">Why one Bluetooth step is such a big jump, why disabling Absolute Volume only half-helps, and the method that adds real steps below the lowest and is not tied to one earbud brand. No root.</p>
-    <p class="meta">Updated October 24, 2026 · 8 min read</p>
+    <p class="meta">Updated October 29, 2026 · 8 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -356,7 +356,7 @@
       <dt>Does it need root or a computer?</dt>
       <dd>No. It uses Android's own audio-effect framework, needs only a display-over-other-apps permission and standard audio permissions, and requires no root, ADB, or computer.</dd>
       <dt>Is it a volume booster?</dt>
-      <dd>No, the opposite. It only reduces gain below the existing minimum and never boosts past the maximum, so there is no distortion or driver-damage risk in that direction.</dd>
+      <dd>No, the opposite. Below the existing minimum it only reduces gain, and above it the dial sets the device's normal volume. It never boosts past the device's maximum, so there is no distortion or driver-damage risk in that direction.</dd>
       <dt>Is it free and private?</dt>
       <dd>Free to install, and the first seven days after you install are the complete app with nothing held back. After that, keeping the control takes one payment, once. Nothing renews and there is no subscription to cancel. No ads, no account, no subscription, and no internet permission at all, so it cannot send data anywhere. Open source under GPL-3.0.</dd>
     </dl>
