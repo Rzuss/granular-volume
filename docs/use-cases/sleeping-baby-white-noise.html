@@ -29,7 +29,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/"},
   "datePublished": "2026-07-14",
-  "dateModified": "2026-10-24",
+  "dateModified": "2026-10-29",
   "mainEntityOfPage": "https://granularvolume.com/use-cases/sleeping-baby-white-noise.html"
 }
 </script>
@@ -41,7 +41,7 @@
     {
       "@type": "Question",
       "name": "Will white noise glitch or cut out at the lowest level?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. The reduction is a continuous gain stage, not a mute or a compression effect, so a white noise loop plays exactly as smoothly at -30 dB as it does at 0 dB, just quieter throughout."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Not on the standard Android audio path. The reduction is a continuous gain stage, not a mute or a compression effect, so a white noise loop plays as smoothly at -30 dB as it does at 0 dB, just quieter throughout. Audio paths vary by device: on a few phone and Bluetooth speaker pairs the quiet steps have no effect, so try it on your own setup before you rely on it at night."}
     },
     {
       "@type": "Question",
@@ -51,7 +51,7 @@
     {
       "@type": "Question",
       "name": "Does it change the sound quality of the white noise?",
-      "acceptedAnswer": {"@type": "Answer", "text": "It applies flat gain reduction, not an equalizer curve, so it doesn't reshape the frequency content the way turning down a bass-heavy EQ band would. White noise sounds the same, just quieter."}
+      "acceptedAnswer": {"@type": "Answer", "text": "It applies flat gain reduction, not an equalizer curve, so it doesn't reshape the frequency content the way turning down a bass-heavy EQ band would. On the standard Android audio path, white noise sounds the same, just quieter."}
     }
   ]
 }
@@ -209,7 +209,7 @@
     <div class="icon"><img width="160" height="160" src="../img/icon-160.webp" alt="Quiet Dial icon"></div>
     <h1>Quiet white noise for a sleeping baby, when the minimum volume is still too loud</h1>
     <p class="dek">Phones and tablets are built to be heard across a room. A crib a few feet away needs something much quieter than that, and Android's own volume slider usually can't get there.</p>
-    <p class="meta">Updated October 24, 2026 · 5 min read</p>
+    <p class="meta">Updated October 29, 2026 · 5 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -269,13 +269,13 @@
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
       <dt>Will white noise glitch or cut out at the lowest level?</dt>
-      <dd>No. The reduction is a continuous gain stage, not a mute or a compression effect, so a white noise loop plays exactly as smoothly at -30 dB as it does at 0 dB, just quieter throughout.</dd>
+      <dd>Not on the standard Android audio path. The reduction is a continuous gain stage, not a mute or a compression effect, so a white noise loop plays as smoothly at -30 dB as it does at 0 dB, just quieter throughout. Audio paths vary by device: on a few phone and Bluetooth speaker pairs the quiet steps have no effect, so try it on your own setup before you rely on it at night.</dd>
 
       <dt>Can I leave it running at a fixed quiet level all night?</dt>
       <dd>Yes. The dial's level is saved and stays put until you change it. Set it once to the level that works, then minimize the dial to a small tab at the edge of the screen. It lowers media, alarms, ringtones and notifications together, so if the same phone has to wake you or ring for you, check that you can still hear it at that step.</dd>
 
       <dt>Does it change the sound quality of the white noise?</dt>
-      <dd>It applies flat gain reduction, not an equalizer curve, so it doesn't reshape the frequency content the way turning down a bass-heavy EQ band would. White noise sounds the same, just quieter.</dd>
+      <dd>It applies flat gain reduction, not an equalizer curve, so it doesn't reshape the frequency content the way turning down a bass-heavy EQ band would. On the standard Android audio path, white noise sounds the same, just quieter.</dd>
     </dl>
   </article>
 
