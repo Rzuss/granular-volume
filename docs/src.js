@@ -56,3 +56,33 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { tagLinks(engine); });
   else tagLinks(engine);
 })();
+
+/* How far down a page people read, counted once per page view at half and at nine tenths.
+   It goes to the same cookie-free GoatCounter as the page views, as events named
+   scroll-50/<path> and scroll-90/<path>. Nothing else is sent. */
+(function () {
+  var marks = [50, 90], sent = {};
+  function send(m) {
+    var gc = window.goatcounter;
+    if (!gc || !gc.count) return false;
+    gc.count({ path: 'scroll-' + m + location.pathname, title: document.title, event: true });
+    return true;
+  }
+  function check() {
+    var doc = document.documentElement;
+    var range = doc.scrollHeight - window.innerHeight;
+    var pct = range > 0 ? (window.scrollY / range) * 100 : 100;
+    for (var i = 0; i < marks.length; i++) {
+      var m = marks[i];
+      if (!sent[m] && pct >= m && send(m)) sent[m] = true;
+    }
+    if (sent[50] && sent[90]) window.removeEventListener('scroll', onScroll);
+  }
+  var queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    setTimeout(function () { queued = false; check(); }, 250);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
