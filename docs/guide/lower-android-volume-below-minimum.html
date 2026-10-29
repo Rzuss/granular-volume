@@ -36,7 +36,7 @@
   "author": {"@type": "Person", "name": "Rotem Zussman"},
   "publisher": {"@type": "Organization", "@id": "https://granularvolume.com/#org", "name": "Granular Volume", "url": "https://granularvolume.com/"},
   "datePublished": "2026-07-13",
-  "dateModified": "2026-10-24",
+  "dateModified": "2026-11-01",
   "mainEntityOfPage": "https://granularvolume.com/guide/lower-android-volume-below-minimum.html"
 }
 </script>
@@ -108,7 +108,7 @@
     {
       "@type": "Question",
       "name": "Can pushing negative gain like this damage my speaker or headphones?",
-      "acceptedAnswer": {"@type": "Answer", "text": "No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume."}
+      "acceptedAnswer": {"@type": "Answer", "text": "No. Below the orange line it only lowers the sound, and it never boosts gain past the device's own maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume."}
     },
     {
       "@type": "Question",
@@ -163,7 +163,7 @@
     {
       "@type": "Question",
       "name": "How is this different from a \"volume booster\" app?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction."}
+      "acceptedAnswer": {"@type": "Answer", "text": "A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it never makes anything louder than the device's own maximum, and below the orange line it only lowers the sound, so there's no boosting and no added risk in that direction."}
     },
     {
       "@type": "Question",
@@ -358,7 +358,7 @@
     <div class="icon"><img width="160" height="160" src="../img/icon-160.webp" alt="Quiet Dial icon"></div>
     <h1>Android lowest volume too loud? How to go below the minimum</h1>
     <p class="dek">Every real method, ranked honestly by what actually lowers the floor versus what just adds more clicks in between. No root required for any of these.</p>
-    <p class="meta">Updated October 24, 2026 · 10 min read</p>
+    <p class="meta">Updated November 1, 2026 · 10 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -532,7 +532,7 @@
       <dd>No. It needs a display-over-other-apps permission for the floating dial and standard audio/notification permissions, nothing more invasive. No root, no Accessibility Service, no Device Admin.</dd>
 
       <dt>Can pushing negative gain like this damage my speaker or headphones?</dt>
-      <dd>No. It only reduces output below the existing hardware minimum, it never boosts gain past the device's normal maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
+      <dd>No. Below the orange line it only lowers the sound, and it never boosts gain past the device's own maximum, so there's no mechanism for it to push more power into a speaker or headphone driver than the device's own volume slider already allows at full volume.</dd>
 
       <dt>Does it affect ringtone and alarm volume, or only media?</dt>
       <dd>Media is what it is built around, and ringtones, notifications, and alarms are affected too, each tested directly by moving the dial through its steps while the sound played and hearing the level drop every time. <a href="call-volume-too-loud-android.html">Regular phone calls</a> are the exception: they run on a separate path that no app can lower. Pixel owners can start with <a href="pixel-call-volume-too-loud-lowest-setting.html">Pixel call volume too loud on the lowest setting</a>. There is a dedicated guide for <a href="alarm-too-loud-lowest-volume-android.html">an alarm that is too loud at the lowest volume</a>, which also covers ringtones and notifications, and explains which sounds no app can lower.</dd>
@@ -565,7 +565,7 @@
       <dd>No. It doesn't take over the volume buttons or the system volume panel. The slider covers your normal range above the device minimum and adds a lower range underneath what those controls reach.</dd>
 
       <dt>How is this different from a "volume booster" app?</dt>
-      <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it only ever reduces gain below the existing minimum, so there's no boosting and no added risk in that direction.</dd>
+      <dd>A volume booster pushes gain above 100% to make quiet audio louder, which risks distortion and, at high enough levels, hearing damage. Quiet Dial does the opposite: it never makes anything louder than the device's own maximum, and below the orange line it only lowers the sound, so there's no boosting and no added risk in that direction.</dd>
 
       <dt>Will this work if my phone is in Do Not Disturb or Bedtime mode?</dt>
       <dd>Yes. Those are separate Android features that control which notifications interrupt you, not the audio output level of whatever media is actively playing, so they don't interfere with the volume reduction.</dd>
