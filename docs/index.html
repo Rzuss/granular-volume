@@ -209,17 +209,6 @@
     html{scroll-behavior:auto;}
     *,*::before,*::after{transition:none !important;animation:none !important;}
   }
-  /*GV-POLISH-REVIEWS*/
-  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
-  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
-  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
-  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
-  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
-  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
-  .rv figcaption b{color:var(--txt);font-weight:700;}
-  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
-  .rv-note a{color:var(--accent2);}
-/*GV-POLISH-REVIEWS-END*/
   /*GV-POLISH-NAV*/
   .gv-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,29,.86);-webkit-backdrop-filter:saturate(140%) blur(10px);
     backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.08);}
@@ -242,6 +231,17 @@
   /*GV-POLISH-ICONS*/
   .dot svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 /*GV-POLISH-ICONS-END*/
+  /*GV-POLISH-REVIEWS*/
+  .rv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
+  .rv{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;margin:0;}
+  .rv-stars{display:flex;gap:3px;color:#f5b301;margin-bottom:12px;}
+  .rv-stars svg{width:18px;height:18px;fill:currentColor;}
+  .rv blockquote{margin:0;color:var(--txt);font-size:16px;line-height:1.55;}
+  .rv figcaption{margin-top:auto;padding-top:14px;color:var(--muted);font-size:14px;}
+  .rv figcaption b{color:var(--txt);font-weight:700;}
+  .rv-note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px;}
+  .rv-note a{color:var(--accent2);}
+/*GV-POLISH-REVIEWS-END*/
 </style>
 <script src="/src.js"></script>
 <script data-goatcounter="https://granularvolume.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -427,6 +427,7 @@
     <p class="lead">Five-star reviews from people who installed Quiet Dial from Google Play.</p>
     <div class="rv-grid">
       <figure class="rv"><div class="rv-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></div><blockquote>finally! I needed something to limit the volume and finally this offered an option that works. I paid for it immediately. […]</blockquote><figcaption><b>Dawna Q.</b> · October 2026</figcaption></figure>
+      <figure class="rv"><div class="rv-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></div><blockquote>It&#x27;s simple, without complicated settings. […] On my Cubot King Kong 9, the minimum volume is very high, and I couldn&#x27;t get it down any further, but this app did the trick. Congratulations, and I highly recommend it.</blockquote><figcaption><b>Ismael M.</b> · October 2026 · translated from Spanish</figcaption></figure>
       <figure class="rv"><div class="rv-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></div><blockquote>Does exactly what I needed it to (Lowers minimum volume). Haven&#x27;t had any issues so far. Huge thanks to dev</blockquote><figcaption><b>Kay D.</b> · September 2026</figcaption></figure>
       <figure class="rv"><div class="rv-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></div><blockquote>thank you so much. phones must have this in system. i blocked the holes with my finger for years. […]</blockquote><figcaption><b>Yusuf E.</b> · October 2026</figcaption></figure>
       <figure class="rv"><div class="rv-stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2-4.6-4.4 6.3-.9z"/></svg></div><blockquote>just what I was looking ,easy to use,transparent when ontop,and folds away to the side when not needed. works awesome!!</blockquote><figcaption><b>Chris R.</b> · October 2026</figcaption></figure>
