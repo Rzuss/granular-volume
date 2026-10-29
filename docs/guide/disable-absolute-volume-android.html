@@ -37,7 +37,7 @@
     "url": "https://granularvolume.com/"
   },
   "datePublished": "2026-10-23",
-  "dateModified": "2026-10-24",
+  "dateModified": "2026-10-29",
   "mainEntityOfPage": "https://granularvolume.com/guide/disable-absolute-volume-android.html"
 }
 </script>
@@ -48,10 +48,18 @@
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "Disable absolute volume is missing on Android 17. Was it removed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Android 17 it moved. Android's own Settings code for Android 17 places it on a new Bluetooth page inside Developer options instead of the main list. Search Settings for \"absolute\" to jump straight to it. Some people on later Android 17 betas for Pixel report it missing entirely; if yours has none, try a different Bluetooth codec on that page, and for the lowest step use a dial that lowers the sound on the phone."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Where is the Disable absolute volume setting on Android?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "In Developer options. Turn those on by tapping Build number seven times (on Samsung under About phone, Software information; on Xiaomi tap OS version under About phone, Detailed info and specs), then open Developer options and switch on Disable absolute volume. On Pixel and most phones close to stock Android it sits in the Networking section. Typing \"absolute\" into the Settings search finds it on most phones."
+        "text": "In Developer options. Turn those on by tapping Build number seven times (on Samsung under About phone, Software information; on Xiaomi tap OS version under About phone, Detailed info and specs), then open Developer options and switch on Disable absolute volume. On Pixel and most phones close to stock Android it sits in the Networking section up to Android 16; on Android 17 it is on the new Bluetooth page inside Developer options. Typing \"absolute\" into the Settings search finds it on most phones."
       }
     },
     {
@@ -277,8 +285,8 @@
     <div class="crumb"><a href="../">Quiet Dial</a> / <a href="./">Guides</a></div>
     <div class="icon"><img width="160" height="160" src="../img/icon-160.webp" alt="Quiet Dial icon"></div>
     <h1>How to disable absolute volume on Android</h1>
-    <p class="dek">The exact path on Pixel, Samsung, Xiaomi and OnePlus, what the switch really changes for Bluetooth earbuds and headphones, the one thing that quietly turns it back on, and what to do when the lowest step is still too loud.</p>
-    <p class="meta">Updated October 24, 2026 · 6 min read</p>
+    <p class="dek">The exact path on Pixel, Samsung, Xiaomi and OnePlus, including where it moved in Android 17, what the switch really changes for Bluetooth earbuds and headphones, the one thing that quietly turns it back on, and what to do when the lowest step is still too loud.</p>
+    <p class="meta">Updated October 29, 2026 · 7 min read</p>
   </header>
 <main id="main" tabindex="-1">
 
@@ -329,7 +337,7 @@
     <p>Brand guides cover the whole too-loud problem, not only this switch: <a href="samsung-galaxy-volume-too-loud-minimum.html">Samsung Galaxy</a>, <a href="xiaomi-redmi-poco-volume-too-loud-lowest.html">Xiaomi, Redmi and POCO</a>, and <a href="oneplus-volume-too-loud-lowest.html">OnePlus</a>.</p>
 
     <h3>2. Switch on Disable absolute volume</h3>
-    <p>Open Developer options and look for <strong>Disable absolute volume</strong>. On Pixel and phones close to stock Android it is in the <strong>Networking</strong> section, among the Bluetooth entries. On any phone, typing <strong>absolute</strong> into the Settings search usually finds it.</p>
+    <p>Open Developer options and look for <strong>Disable absolute volume</strong>. Up to Android 16, on Pixel and phones close to stock Android, it is in the <strong>Networking</strong> section, among the Bluetooth entries. <strong>On Android 17 it moved</strong>: Developer options now has its own <strong>Bluetooth</strong> page, and the switch is inside it, on the same page as the Bluetooth codec settings. On any phone, typing <strong>absolute</strong> into the Settings search usually finds it.</p>
     <p>Mind the wording: the switch is named after what it turns off. Switch <em>on</em> means absolute volume is <em>off</em>.</p>
 
     <h3>3. Reconnect the headset</h3>
@@ -337,6 +345,10 @@
 
     <h3>4. Leave Developer options on</h3>
     <p>This is the step most guides skip. In Android's Settings code, switching Developer options off also resets Disable absolute volume to off. If you tidy up afterwards by turning Developer options off, you undo the change.</p>
+
+    <h3 id="android17">Missing on Android 17?</h3>
+    <p>It moved rather than disappeared. In Android 17's own Settings code, the switch left the main Developer options list and now sits on a new <strong>Bluetooth</strong> page inside Developer options, still named <strong>Disable absolute volume</strong>. Open Developer options, tap <strong>Bluetooth</strong>, and switch it on there, or search Settings for <strong>absolute</strong>. Leaving Developer options on still matters on this version.</p>
+    <p>Some people testing later Android 17 beta updates on Pixel report that the switch is not there at all, and we have not been able to check those builds. If your phone has no such switch, two things are left: try a different Bluetooth audio codec on the same Bluetooth page, and to get below the lowest step, lower the sound on the phone before it reaches the headset, which is what the dial further down this page does.</p>
 
     <h2 id="after">What changes afterwards</h2>
     <p>Now there are two volumes: the phone's slider scales the audio, and the headset keeps its own level. Which way that goes depends on the headset, not on the phone.</p>
@@ -377,7 +389,9 @@
     <h2 id="faq">FAQ</h2>
     <dl class="faq">
       <dt>Where is the Disable absolute volume setting on Android?</dt>
-      <dd>In Developer options. Turn those on by tapping Build number seven times (on Samsung under About phone, Software information; on Xiaomi tap OS version under About phone, Detailed info and specs), then open Developer options and switch on Disable absolute volume. On Pixel and most phones close to stock Android it sits in the Networking section. Typing &quot;absolute&quot; into the Settings search finds it on most phones.</dd>
+      <dd>In Developer options. Turn those on by tapping Build number seven times (on Samsung under About phone, Software information; on Xiaomi tap OS version under About phone, Detailed info and specs), then open Developer options and switch on Disable absolute volume. On Pixel and most phones close to stock Android it sits in the Networking section up to Android 16; on Android 17 it is on the new Bluetooth page inside Developer options. Typing &quot;absolute&quot; into the Settings search finds it on most phones.</dd>
+      <dt>Disable absolute volume is missing on Android 17. Was it removed?</dt>
+      <dd>In Android 17 it moved. Android&#x27;s own Settings code for Android 17 places it on a new Bluetooth page inside Developer options instead of the main list. Search Settings for &quot;absolute&quot; to jump straight to it. Some people on later Android 17 betas for Pixel report it missing entirely; if yours has none, try a different Bluetooth codec on that page, and for the lowest step use a dial that lowers the sound on the phone.</dd>
       <dt>Does disabling absolute volume make earbuds quieter?</dt>
       <dd>Sometimes, not always. It splits the phone&#x27;s volume from the headset&#x27;s own volume. On some headsets that gives quieter, finer low steps. On others the headset stays at its own full level and the result is louder, in which case lower the headset&#x27;s own volume with its buttons or companion app, or switch the setting back off. It never adds a level below the phone&#x27;s lowest step.</dd>
       <dt>Why did absolute volume turn itself back on?</dt>
