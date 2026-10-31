@@ -79,7 +79,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 
 ## Use cases
 
-- **A sleeping baby or partner nearby**: white noise or a lullaby that needs to be barely audible, not just "quiet."
+- **A sleeping baby or partner nearby**: a lullaby or a bedtime story that needs to be barely audible, not just "quiet."
 - **Sensitive in-ear monitors or bone-conduction headphones**: where even a couple of percent of the device's output is already too much.
 - **Tablet speakers**: on some tablets the minimum step is louder than on a phone, depending on the model.
 - **Late-night podcasts or audiobooks**: falling asleep to something without it waking anyone else.
@@ -103,7 +103,7 @@ Longer write-ups on why Android's volume floor exists, what people usually try f
 - [How quiet is -30 dB?](https://granularvolume.com/guide/how-quiet-is-minus-30-db.html) turns each quiet step into plain numbers: amplitude, power and approximate loudness.
 - [Why the Android minimum volume is too loud](https://granularvolume.com/guide/why-android-minimum-volume-is-too-loud.html), [tablet volume too loud at the lowest setting](https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html) and [volume buttons not working](https://granularvolume.com/guide/volume-buttons-not-working-android.html) round out the set.
 
-Use case pages: [sensitive IEMs and bone conduction](https://granularvolume.com/use-cases/sensitive-iem-headphones.html), [a sleeping baby](https://granularvolume.com/use-cases/sleeping-baby-white-noise.html), [night audiobooks and podcasts](https://granularvolume.com/use-cases/night-audiobooks-podcasts.html), [quiet rooms and libraries](https://granularvolume.com/use-cases/quiet-rooms-libraries.html), [sound sensitivity and tinnitus](https://granularvolume.com/use-cases/tinnitus-sensitive-hearing.html).
+Use case pages: [sensitive IEMs and bone conduction](https://granularvolume.com/use-cases/sensitive-iem-headphones.html), [night audiobooks and podcasts](https://granularvolume.com/use-cases/night-audiobooks-podcasts.html), [quiet rooms and libraries](https://granularvolume.com/use-cases/quiet-rooms-libraries.html), [sound sensitivity and tinnitus](https://granularvolume.com/use-cases/tinnitus-sensitive-hearing.html).
 
 ## How this compares to a typical volume booster or step-count app
 
