@@ -47,6 +47,8 @@ object Prefs {
     // 1.6.2: the two one-time notices of the free week (see TrialNotices)
     private const val KEY_LAST_DAY_NOTICE_POSTED = "last_day_notice_posted"
     private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
+    // 1.8.0
+    private const val KEY_HELD_REMINDER_DONE     = "held_reminder_done"
     // 1.7.0
     private const val KEY_SESSION_OPEN           = "session_open"
     private const val KEY_SESSION_OPEN_BOOT      = "session_open_boot_count"
@@ -364,6 +366,13 @@ object Prefs {
     /** 1.6.2: the ended notice was posted, or made redundant by the locked sheet (once per install). */
     fun wasEndedNoticePosted(context: Context): Boolean =
         prefs(context).getBoolean(KEY_ENDED_NOTICE_POSTED, false)
+
+    fun wasHeldReminderDone(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_HELD_REMINDER_DONE, false)
+
+    fun setHeldReminderDone(context: Context) {
+        prefs(context).edit { putBoolean(KEY_HELD_REMINDER_DONE, true) }
+    }
 
     fun setEndedNoticePosted(context: Context) {
         prefs(context).edit { putBoolean(KEY_ENDED_NOTICE_POSTED, true) }

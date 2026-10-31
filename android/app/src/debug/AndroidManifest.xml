@@ -8,5 +8,8 @@
             android:exported="true"
             android:excludeFromRecents="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name="com.granularvolume.debugtools.ReviewCardSimActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 </manifest>

@@ -299,6 +299,17 @@ class VolumeControlService : Service() {
                 else -> ControlLive.Effect.FALLBACK
             }
         }
+        // 1.8.0: the dial says it once, the shade and the access sheet for as long as it is true.
+        audioController.onEffectControl = { hasControl ->
+            mainHandler.post {
+                val taken = !hasControl
+                if (taken != ControlLive.effectTaken) {
+                    ControlLive.effectTaken = taken
+                    if (taken) Toast.makeText(applicationContext, R.string.gv_effect_taken, Toast.LENGTH_LONG).show()
+                    if (ControlLive.running) updateNotification(audioController.attenuationDb.value)
+                }
+            }
+        }
 
         // Full-range gate (1.5.0): decide grandfathering once, then latch the verdict for
         // this session. Must precede initialize(), which routes the boot-restore level
@@ -415,6 +426,7 @@ class VolumeControlService : Service() {
         // start already falls inside the last day, the notice waits a moment so a person's own
         // start can show the last-day sheet first; the notice then sees it and stays silent.
         TrialNotices.arm(applicationContext)
+        ControlLive.onReviewCard = { showing -> mainHandler.post { overlayManager.setHiddenForCard(showing) } }
         if (ProAccess.isOnTrial(applicationContext)) {
             mainHandler.postDelayed({ TrialNotices.maybePostLastDay(applicationContext) }, LAST_DAY_NOTICE_DELAY_MS)
         }
@@ -940,11 +952,13 @@ class VolumeControlService : Service() {
             FullRangeCoordinator.LockDisplay.HELD -> getString(R.string.gv_notif_held, level)
             FullRangeCoordinator.LockDisplay.OPEN -> level
         }
+        val text = if (ControlLive.effectTaken) getString(R.string.gv_effect_taken) else dbText
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_volume_slider)
             .setContentTitle(getString(R.string.app_name))
-            .setContentText(dbText)
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(tapIntent)
             .addAction(R.drawable.ic_close, getString(R.string.gv_notif_stop), stopIntent)
             .setOngoing(true)

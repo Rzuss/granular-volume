@@ -77,14 +77,14 @@
         android:gravity="center_horizontal">
 
         <!-- Louder: one step up the combined full-range scale.
-             1.4.4 option B "Sculpted Glass": wide stadium key, 48x30. The 10dp saved
-             versus the old 40dp-tall chevron is spent as 2+2dp margins here (and on the
-             down key) so the pill's OUTER envelope does not move — the tuned tuck-to-edge
+             1.4.4 option B "Sculpted Glass": wide stadium key, 56x40 since 1.8.0. The rung
+             stack gave up 12dp for it and the dial grew 12dp; the key's 2dp margins stay
+             so the pill's OUTER envelope keeps its shape — the tuned tuck-to-edge
              geometry is a locked constraint. -->
         <ImageButton
             android:id="@+id/gv_btn_up"
-            android:layout_width="48dp"
-            android:layout_height="30dp"
+            android:layout_width="56dp"
+            android:layout_height="40dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/bg_glass_key"
             android:src="@drawable/ic_chevron_up"
@@ -100,10 +100,10 @@
         <LinearLayout
             android:id="@+id/gv_upper_container"
             android:layout_width="48dp"
-            android:layout_height="84dp"
+            android:layout_height="72dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="6dp" />
 
         <!-- The device-minimum line: everything below it is territory the hardware
              cannot reach. The visual centerpiece of full-range mode. -->
@@ -226,8 +226,8 @@
         <!-- Quieter: one step down the combined full-range scale -->
         <ImageButton
             android:id="@+id/gv_btn_down"
-            android:layout_width="48dp"
-            android:layout_height="30dp"
+            android:layout_width="56dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/bg_glass_key"
             android:src="@drawable/ic_chevron_down"

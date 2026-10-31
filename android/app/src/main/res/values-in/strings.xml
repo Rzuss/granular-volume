@@ -35,12 +35,14 @@
     <string name="gv_unlocked_body">Terima kasih. Semua langkah hingga −30 dB sekarang terbuka di akun Google ini. Mulai kontrol dan pilih langkah mana pun di bawah garis oranye.</string>
     <string name="gv_unlocked_dismiss">Mengerti</string>
     <string name="gv_notice_channel_name">Minggu gratis</string>
-    <string name="gv_notice_channel_desc">Satu catatan sebelum minggu gratis Anda berakhir, dan satu saat sudah berakhir. Tidak pernah lebih.</string>
+    <string name="gv_notice_channel_desc">Satu catatan sebelum minggu gratis Anda berakhir, satu saat sudah berakhir, dan satu pengingat jika kontrol masih aktif. Tidak pernah lebih.</string>
     <string name="gv_notice_last_day_title">Minggu gratis Anda berakhir dalam kurang dari 24 jam</string>
     <string name="gv_notice_last_day_body">Satu pembayaran, sekali saja, mempertahankan semua langkah. Tidak ada yang diperpanjang. Ketuk untuk detailnya.</string>
     <string name="gv_notice_ended_title">Minggu gratis sudah berakhir</string>
     <string name="gv_notice_ended_running_body">Level Anda tetap seperti sekarang sampai kontrol dihentikan atau perangkat dimulai ulang. Untuk mengubahnya, buka kunci kontrol: satu pembayaran, sekali saja. Ketuk untuk detailnya.</string>
     <string name="gv_notice_ended_paused_body">Langkah senyap dijeda. Satu pembayaran, sekali saja, mengembalikan setiap langkah persis ke tempat Anda meninggalkannya. Ketuk untuk detailnya.</string>
+    <string name="gv_notice_held_title">Level Anda masih aktif</string>
+    <string name="gv_notice_held_body">Minggu gratis telah berakhir dan level Anda tetap seperti sekarang. Untuk mengubahnya, buka kunci kontrol: satu pembayaran, sekali saja. Ketuk untuk detailnya.</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Level Anda tetap persis seperti sekarang. Untuk mengubahnya, kontrol perlu dibuka.</string>
     <string name="gv_purchase_cta_keep">Miliki selamanya</string>
@@ -159,6 +161,7 @@
     <string name="gv_support_thanks">Terima kasih telah mendukung aplikasi ini. Semuanya tetap gratis untuk Anda, persis seperti sebelumnya.</string>
     <string name="gv_effect_none">Perangkat ini tidak mengizinkan aplikasi memasang langkah senyapnya. Rentang normal di atas garis tetap bekerja.</string>
     <string name="gv_effect_fallback">Perangkat ini memakai efek audio cadangan. Jika suara tidak berubah saat Anda mengetuk batang di bawah garis, perangkat ini tidak mendukung langkah senyap.</string>
+    <string name="gv_effect_taken">Aplikasi audio lain sedang mengendalikan suara; langkah senyap mungkin tidak berfungsi.</string>
     <string name="gv_update_ready">Versi yang lebih baru sudah siap.</string>
     <string name="gv_update_cta">Perbarui</string>
     <string name="gv_info_cta_support">Dukung aplikasi ini di Google Play</string>

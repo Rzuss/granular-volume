@@ -35,12 +35,14 @@
     <string name="gv_unlocked_body">Merci. Chaque cran jusqu\'à −30 dB est maintenant ouvert sur ce compte Google. Lancez le curseur et choisissez n\'importe quel cran sous la ligne orange.</string>
     <string name="gv_unlocked_dismiss">Compris</string>
     <string name="gv_notice_channel_name">Semaine gratuite</string>
-    <string name="gv_notice_channel_desc">Une note avant la fin de votre semaine gratuite, et une quand elle est terminée. Jamais plus.</string>
+    <string name="gv_notice_channel_desc">Une note avant la fin de votre semaine gratuite, une quand elle est terminée, et un rappel si le curseur est toujours actif. Jamais plus.</string>
     <string name="gv_notice_last_day_title">Votre semaine gratuite se termine dans moins de 24 heures</string>
     <string name="gv_notice_last_day_body">Un paiement, une seule fois, garde chaque cran. Rien ne se renouvelle. Touchez pour en savoir plus.</string>
     <string name="gv_notice_ended_title">La semaine gratuite est terminée</string>
     <string name="gv_notice_ended_running_body">Votre niveau reste tel quel jusqu\'à ce que le curseur soit arrêté ou que l\'appareil redémarre. Pour le modifier, débloquez le curseur : un paiement, une seule fois. Touchez pour en savoir plus.</string>
     <string name="gv_notice_ended_paused_body">Les crans silencieux sont en pause. Un paiement, une seule fois, remet chaque cran exactement là où vous l\'aviez laissé. Touchez pour en savoir plus.</string>
+    <string name="gv_notice_held_title">Votre niveau est toujours actif</string>
+    <string name="gv_notice_held_body">La semaine gratuite est terminée et votre niveau est resté tel quel. Pour le modifier, débloquez le curseur : un paiement, une seule fois. Touchez pour en savoir plus.</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Votre niveau reste exactement tel quel. Le modifier demande le déblocage.</string>
     <string name="gv_purchase_cta_keep">Le garder pour de bon</string>
@@ -161,6 +163,7 @@
     <string name="gv_support_thanks">Merci de soutenir l\'appli. Tout reste gratuit pour vous, exactement comme avant.</string>
     <string name="gv_effect_none">Cet appareil n\'a pas laissé l\'appli appliquer ses crans silencieux. La plage normale au-dessus de la ligne fonctionne toujours.</string>
     <string name="gv_effect_fallback">Cet appareil utilise un effet audio de secours. Si le son ne change pas quand vous touchez une barre sous la ligne, cet appareil ne prend pas en charge les crans silencieux.</string>
+    <string name="gv_effect_taken">Une autre appli audio contrôle le son en ce moment ; les crans silencieux peuvent ne pas fonctionner.</string>
     <string name="gv_update_ready">Une nouvelle version est prête.</string>
     <string name="gv_update_cta">Mettre à jour</string>
     <string name="gv_info_cta_support">Soutenir cette appli sur Google Play</string>

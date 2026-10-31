@@ -35,12 +35,14 @@
     <string name="gv_unlocked_body">Danke. Jede Stufe bis −30 dB ist auf diesem Google-Konto jetzt offen. Starte den Regler und wähle eine beliebige Stufe unter der orangefarbenen Linie.</string>
     <string name="gv_unlocked_dismiss">Verstanden</string>
     <string name="gv_notice_channel_name">Kostenlose Woche</string>
-    <string name="gv_notice_channel_desc">Ein Hinweis, bevor deine kostenlose Woche endet, und einer, wenn sie vorbei ist. Nie mehr.</string>
+    <string name="gv_notice_channel_desc">Ein Hinweis, bevor deine kostenlose Woche endet, einer, wenn sie vorbei ist, und eine Erinnerung, falls der Regler noch läuft. Nie mehr.</string>
     <string name="gv_notice_last_day_title">Deine kostenlose Woche endet in weniger als 24 Stunden</string>
     <string name="gv_notice_last_day_body">Eine Zahlung, einmalig, behält jede Stufe. Nichts verlängert sich. Für Details tippen.</string>
     <string name="gv_notice_ended_title">Die kostenlose Woche ist vorbei</string>
     <string name="gv_notice_ended_running_body">Deine Lautstärke bleibt, wie sie ist, bis der Regler gestoppt oder das Gerät neu gestartet wird. Um sie zu ändern, schalte den Regler frei: eine Zahlung, einmalig. Für Details tippen.</string>
     <string name="gv_notice_ended_paused_body">Die leisen Stufen sind pausiert. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Für Details tippen.</string>
+    <string name="gv_notice_held_title">Deine Lautstärke ist weiter aktiv</string>
+    <string name="gv_notice_held_body">Die kostenlose Woche ist vorbei und deine Lautstärke ist geblieben, wie sie ist. Um sie zu ändern, schalte den Regler frei: eine Zahlung, einmalig. Für Details tippen.</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Deine Lautstärke bleibt genau so, wie sie ist. Um sie zu ändern, ist die Freischaltung nötig.</string>
     <string name="gv_purchase_cta_keep">Dauerhaft behalten</string>
@@ -161,6 +163,7 @@
     <string name="gv_support_thanks">Danke, dass du die App unterstützt. Für dich bleibt alles kostenlos, genau wie vorher.</string>
     <string name="gv_effect_none">Dieses Gerät hat der App nicht erlaubt, ihre leisen Stufen anzuwenden. Der normale Bereich über der Linie funktioniert weiterhin.</string>
     <string name="gv_effect_fallback">Dieses Gerät nutzt einen Ersatz-Audioeffekt. Wenn sich der Ton nicht ändert, wenn du auf einen Balken unter der Linie tippst, unterstützt dieses Gerät die leisen Stufen nicht.</string>
+    <string name="gv_effect_taken">Eine andere Audio-App steuert gerade den Ton; die leisen Stufen funktionieren dann eventuell nicht.</string>
     <string name="gv_update_ready">Eine neuere Version ist bereit.</string>
     <string name="gv_update_cta">Aktualisieren</string>
     <string name="gv_info_cta_support">Diese App auf Google Play unterstützen</string>

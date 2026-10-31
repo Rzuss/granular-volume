@@ -15,6 +15,8 @@ class DynamicsProcessingStrategy : AudioEffectStrategy {
     private val tag = "GranularVolume:DynProc"
     private var dp: DynamicsProcessing? = null
 
+    override var onControlChanged: ((granted: Boolean) -> Unit)? = null
+
     override fun initialize(): Boolean {
         return try {
             val config = DynamicsProcessing.Config.Builder(
@@ -32,6 +34,7 @@ class DynamicsProcessingStrategy : AudioEffectStrategy {
                 config
             ).also { effect ->
                 effect.enabled = true
+                effect.setControlStatusListener { _, granted -> onControlChanged?.invoke(granted) }
                 Log.i(tag, "DynamicsProcessing initialized successfully")
             }
             true
@@ -40,6 +43,8 @@ class DynamicsProcessingStrategy : AudioEffectStrategy {
             false
         }
     }
+
+    override fun hasControl(): Boolean = runCatching { dp?.hasControl() }.getOrNull() ?: true
 
     override fun setAttenuation(dB: Float) {
         val effect = dp ?: return

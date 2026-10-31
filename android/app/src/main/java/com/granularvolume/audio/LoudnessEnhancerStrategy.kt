@@ -13,11 +13,14 @@ class LoudnessEnhancerStrategy : AudioEffectStrategy {
     private val tag = "GranularVolume:LE"
     private var enhancer: LoudnessEnhancer? = null
 
+    override var onControlChanged: ((granted: Boolean) -> Unit)? = null
+
     override fun initialize(): Boolean {
         return try {
             enhancer = LoudnessEnhancer(AudioEffectStrategy.GLOBAL_SESSION_ID).also { le ->
                 le.setTargetGain(0) // Start neutral
                 le.enabled = true
+                le.setControlStatusListener { _, granted -> onControlChanged?.invoke(granted) }
                 Log.i(tag, "LoudnessEnhancer initialized (fallback mode)")
             }
             true
@@ -26,6 +29,8 @@ class LoudnessEnhancerStrategy : AudioEffectStrategy {
             false
         }
     }
+
+    override fun hasControl(): Boolean = runCatching { enhancer?.hasControl() }.getOrNull() ?: true
 
     override fun setAttenuation(dB: Float) {
         val le = enhancer ?: return

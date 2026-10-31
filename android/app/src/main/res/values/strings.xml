@@ -143,6 +143,7 @@
     <!-- 1.7.0: device honesty, shown in the access sheet for as long as it is true. -->
     <string name="gv_effect_none">This device did not let the app attach its quiet steps. The normal range above the line still works.</string>
     <string name="gv_effect_fallback">This device is using a fallback audio effect. If the sound does not change when you tap a bar below the line, this device does not support the quiet steps.</string>
+    <string name="gv_effect_taken">Another audio app is controlling the sound right now; quiet steps may not work.</string>
     <!-- 1.7.0: a newer version exists in the store. A row here and a dot on the dial\'s info button. -->
     <string name="gv_update_ready">A newer version is ready.</string>
     <string name="gv_update_cta">Update</string>
@@ -201,12 +202,14 @@
          VoIP calls are unaffected and never show this. -->
     <!-- 1.6.2: the two one-time notices of the free week (TrialNotices). No price, no urgency words. -->
     <string name="gv_notice_channel_name">Free week</string>
-    <string name="gv_notice_channel_desc">One note before your free week ends, and one when it has ended. Never more.</string>
+    <string name="gv_notice_channel_desc">A note before your free week ends, one when it has ended, and one reminder if the control is still on. Never more.</string>
     <string name="gv_notice_last_day_title">Your free week ends within 24 hours</string>
     <string name="gv_notice_last_day_body">One payment, once, keeps every step. Nothing renews. Tap for details.</string>
     <string name="gv_notice_ended_title">The free week has ended</string>
     <string name="gv_notice_ended_running_body">Your level stays as it is until the control is stopped or the device restarts. To change it, unlock the dial: one payment, once. Tap for details.</string>
     <string name="gv_notice_ended_paused_body">The quiet steps are paused. One payment, once, brings every step back exactly where you left it. Tap for details.</string>
+    <string name="gv_notice_held_title">Your level is still on</string>
+    <string name="gv_notice_held_body">The free week has ended and your level has stayed as it is. To change it, unlock the dial: one payment, once. Tap for details.</string>
     <string name="gv_quiet_unavailable_in_call">Call audio cannot go below the device minimum</string>
 
     <!-- 1.7.2: the guide shown before Android's "Display over other apps" list, and the card

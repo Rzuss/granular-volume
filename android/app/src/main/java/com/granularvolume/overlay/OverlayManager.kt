@@ -14,6 +14,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.SystemClock
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
@@ -160,18 +161,31 @@ class OverlayManager(
          *  bars come back the moment the call ends and a gap in the dial would alarm. */
         private const val ALPHA_UNAVAILABLE = 0.04f
 
-        // Upper-zone bar geometry: the container height is FIXED (84dp in XML) — only bar
+        // Upper-zone bar geometry: the container height is FIXED (72dp in XML, 84dp until 1.8.0) — only bar
         // density varies with the device's rung count, per the no-growth size cap.
-        private const val UPPER_CONTAINER_DP = 84
+        private const val UPPER_CONTAINER_DP = 72
         private const val UPPER_BAR_GAP_DP = 2
         private const val UPPER_BAR_MIN_DP = 3
 
         // 1.4.4 option B: manual hit-test slops, re-derived for the new geometry.
-        // Chevron keys are 48x30 — 9dp slop makes the effective target 66x48 (≥48dp).
+        // 1.8.0: chevron keys are 56x40, 9dp slop makes the effective target 74x58. The 12dp
+        // that the upper rungs gave up, plus 12dp more on the dial, pay for it. A 6dp gap under
+        // the up key sits inside that slop, so the place a finger misses it by belongs to it.
         // Mute bar is 56x24 — 12dp slop makes it 80x48. Contested slop space between the
         // down key and the mute bar is decided by TEST ORDER: chevrons before mute, because
         // the mis-tap option B exists to prevent is a chevron tap landing on mute.
         private const val CHEVRON_SLOP_DP = 9
+
+        /**
+         * 1.8.0, the loud-jump guard (a Play review and an email, 2026-10-30: a finger aiming at
+         * the up key landed on a rung and the sound jumped). A tap may raise this many visible
+         * bars at once. Further than that it moves one bar, and only a second tap on the same
+         * rung within [JUMP_CONFIRM_MS] goes the whole way. Lowering is never held back.
+         */
+        private const val MAX_DIRECT_RAISE = 2
+        private const val JUMP_CONFIRM_MS = 2000L
+
+        private const val CARD_HIDE_LIMIT_MS = 60_000L
 
         /**
          * 1.5.1 pilot 2: info sits alone at the top; 6dp of slop claims the gap down to the
@@ -292,6 +306,14 @@ class OverlayManager(
 
     private val upperBars = ArrayList<View>()
 
+    private var hiddenForCard = false
+    private val cardHandler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val cardLimit = Runnable { setHiddenForCard(false) }
+
+    /** The rung a guarded tap is waiting to be confirmed on, and when; -1 for none. */
+    private var armedRung = -1
+    private var armedAt = 0L
+
     private val idleFadeRunnable = Runnable {
         overlayView?.animate()?.alpha(IDLE_ALPHA)?.setDuration(IDLE_FADE_MS)?.start()
     }
@@ -391,6 +413,18 @@ class OverlayManager(
             // Harness hook (A34): the upper zone must be populated in the view that is on screen.
             android.util.Log.d("GranularVolume", "dial shown: upper bars in container=" +
                 view.findViewById<LinearLayout>(R.id.gv_upper_container).childCount)
+            // Harness hook (t180): the overlay is out of uiautomator's sight, and the system may
+            // still move the window on its first layout pass, so this waits for that.
+            view.postDelayed({
+                if (overlayView === view) android.util.Log.d("GranularVolume", "dial geom " + listOf(
+                    R.id.gv_btn_up, R.id.gv_upper_container, R.id.gv_btn_down, R.id.gv_btn_mute
+                ).joinToString(" ") { id ->
+                    val at = IntArray(2)
+                    val v = view.findViewById<View>(id)
+                    v.getLocationOnScreen(at)
+                    "${at[0]},${at[1]},${at[0] + v.width},${at[1] + v.height}"
+                })
+            }, 600L)
         }
     }
 
@@ -426,6 +460,26 @@ class OverlayManager(
         if (bladeView != null) renderBlade()
     }
 
+    /**
+     * 1.8.0: takes the dial or the tab off the screen while Google's review card is up, and puts
+     * it back. Only the view's visibility: the window, the place and the sound stay as they are.
+     * A time limit brings it back whatever the flow does, a person must never lose the control
+     * to a card that never reported its end.
+     */
+    fun setHiddenForCard(hidden: Boolean) {
+        cardHandler.removeCallbacks(cardLimit)
+        hiddenForCard = hidden
+        applyCardVisibility()
+        if (hidden) cardHandler.postDelayed(cardLimit, CARD_HIDE_LIMIT_MS)
+        android.util.Log.d("GranularVolume", "review card: dial ${if (hidden) "hidden" else "back"}")
+    }
+
+    private fun applyCardVisibility() {
+        val visibility = if (hiddenForCard) View.GONE else View.VISIBLE
+        overlayView?.visibility = visibility
+        bladeRoot?.visibility = visibility
+    }
+
     /** 1.7.0: repaint from the current truth (the free week ended, a purchase arrived). */
     fun refresh() = renderCurrent()
 
@@ -453,6 +507,7 @@ class OverlayManager(
             removeBladeWindow()
             runCatching { showTab(animateIn = false) }
         }
+        applyCardVisibility()   // a rebuilt view must not come back up over the review card
         if (tourAt > 0) overlayView?.let { v -> v.post { if (overlayView === v) startTour(tourAt) } }
     }
 
@@ -1050,6 +1105,7 @@ class OverlayManager(
         if (count == upperBars.size && upperBars.firstOrNull()?.parent === container) return
         container.removeAllViews()
         upperBars.clear()
+        android.util.Log.d("GranularVolume", "upper bars built: $count")
 
         // dialDensity, not density: on a fitted (smaller) dial the container is smaller too.
         var gapPx = (UPPER_BAR_GAP_DP * dialDensity).toInt()
@@ -1215,6 +1271,10 @@ class OverlayManager(
         // minimizes. That is recoverable with one tap on the blade, and it is close to
         // what the finger wanted. Info then beats close for the same reason it always did:
         // an accidental sheet is a tap to dismiss, an accidental close takes the dial away.
+        //
+        // 1.8.0: any tap ends a waiting confirmation; only the rung tap below can begin one.
+        val armed = armedRung.takeIf { SystemClock.uptimeMillis() - armedAt <= JUMP_CONFIRM_MS }
+        armedRung = -1
         if (hit(btnUp, rawX, rawY, chevronHitSlop)) {
             pressPulse(btnUp); tick(root); stepCombined(+1); onEngaged?.invoke(); return
         }
@@ -1236,11 +1296,41 @@ class OverlayManager(
             pressPulse(btnMute); confirmHaptic(root); coordinator.toggleMute(); onEngaged?.invoke(); return
         }
         upperBarAt(root, rawX, rawY)?.let { i ->
-            tick(root); coordinator.applyUpper(i); onEngaged?.invoke(); return
+            tick(root); tapUpper(root, i, armed); onEngaged?.invoke(); return
         }
         for (i in quietBars.indices) {
             if (hit(quietBars[i], rawX, rawY)) { tick(root); selectQuiet(i); onEngaged?.invoke(); return }
         }
+    }
+
+    /**
+     * A direct tap on upper rung [rung] (0 = loudest), under the loud-jump guard. [armed] is the
+     * rung still waiting for its confirmation, if any.
+     *
+     * Distance is counted in visible bars from where the sound is now, the quiet steps included,
+     * and silence counts as one bar below the floor rung: restoring the level from before a mute
+     * could itself be the jump (see the 1.7.1 note in the coordinator). A refused gesture is not
+     * guarded, the gate has to see the tap the person made.
+     */
+    private fun tapUpper(root: View, rung: Int, armed: Int?) {
+        val s = coordinator.uiState()
+        val from = when {
+            s.muted -> s.upperCount
+            s.zoneQuiet -> s.upperCount + QUIET_TOP_VISIBLE - currentStep
+            else -> s.upperPos
+        }
+        val open = coordinator.lockDisplayProvider() == FullRangeCoordinator.LockDisplay.OPEN
+        if (!open || from - rung <= MAX_DIRECT_RAISE || armed == rung) {
+            coordinator.applyUpper(rung)
+            return
+        }
+        android.util.Log.d("GranularVolume", "loud-jump guard: rung $rung from $from, one step")
+        armedRung = rung
+        armedAt = SystemClock.uptimeMillis()
+        if (s.muted) coordinator.applyUpper(s.upperCount - 1) else stepCombined(+1)
+        root.postDelayed({
+            if (overlayView === root) upperBars.getOrNull(rung)?.let { pulseBar(root, it, 1) }
+        }, FLASH_DELAY_MS)
     }
 
     /**

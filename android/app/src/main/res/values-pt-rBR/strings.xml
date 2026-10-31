@@ -35,12 +35,14 @@
     <string name="gv_unlocked_body">Obrigado. Todos os passos até −30 dB estão abertos agora nesta conta do Google. Inicie o controle e escolha qualquer passo abaixo da linha laranja.</string>
     <string name="gv_unlocked_dismiss">Entendi</string>
     <string name="gv_notice_channel_name">Semana grátis</string>
-    <string name="gv_notice_channel_desc">Um aviso antes de a sua semana grátis terminar, e outro quando ela terminar. Nunca mais que isso.</string>
+    <string name="gv_notice_channel_desc">Um aviso antes de a sua semana grátis terminar, outro quando ela terminar e um lembrete se o controle continuar ligado. Nunca mais que isso.</string>
     <string name="gv_notice_last_day_title">Sua semana grátis termina em menos de 24 horas</string>
     <string name="gv_notice_last_day_body">Um pagamento, uma única vez, mantém todos os passos. Nada se renova. Toque para ver os detalhes.</string>
     <string name="gv_notice_ended_title">A semana grátis terminou</string>
     <string name="gv_notice_ended_running_body">Seu nível fica como está até o controle ser parado ou o aparelho reiniciar. Para mudar, desbloqueie o controle: um pagamento, uma única vez. Toque para ver os detalhes.</string>
     <string name="gv_notice_ended_paused_body">Os passos silenciosos estão pausados. Um pagamento, uma única vez, devolve cada passo exatamente onde você deixou. Toque para ver os detalhes.</string>
+    <string name="gv_notice_held_title">Seu nível continua ativo</string>
+    <string name="gv_notice_held_body">A semana grátis terminou e seu nível ficou como estava. Para mudar, desbloqueie o controle: um pagamento, uma única vez. Toque para ver os detalhes.</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Seu nível fica exatamente como está. Para mudar, é preciso desbloquear.</string>
     <string name="gv_purchase_cta_keep">Ficar com ele de vez</string>
@@ -161,6 +163,7 @@
     <string name="gv_support_thanks">Obrigado por apoiar o app. Tudo continua grátis para você, exatamente como antes.</string>
     <string name="gv_effect_none">Este aparelho não deixou o app aplicar os passos silenciosos. A faixa normal acima da linha continua funcionando.</string>
     <string name="gv_effect_fallback">Este aparelho está usando um efeito de áudio alternativo. Se o som não mudar ao tocar uma barra abaixo da linha, este aparelho não oferece suporte aos passos silenciosos.</string>
+    <string name="gv_effect_taken">Outro app de áudio está controlando o som agora; os passos silenciosos podem não funcionar.</string>
     <string name="gv_update_ready">Uma versão mais nova está pronta.</string>
     <string name="gv_update_cta">Atualizar</string>
     <string name="gv_info_cta_support">Apoiar este app no Google Play</string>

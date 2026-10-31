@@ -35,12 +35,14 @@
     <string name="gv_unlocked_body">Dziękujemy. Każdy stopień aż do −30 dB jest teraz otwarty na tym koncie Google. Uruchom regulator i wybierz dowolny stopień poniżej pomarańczowej linii.</string>
     <string name="gv_unlocked_dismiss">Rozumiem</string>
     <string name="gv_notice_channel_name">Bezpłatny tydzień</string>
-    <string name="gv_notice_channel_desc">Jedna informacja przed końcem bezpłatnego tygodnia i jedna po jego zakończeniu. Nigdy więcej.</string>
+    <string name="gv_notice_channel_desc">Jedna informacja przed końcem bezpłatnego tygodnia, jedna po jego zakończeniu i jedno przypomnienie, jeśli regulator nadal działa. Nigdy więcej.</string>
     <string name="gv_notice_last_day_title">Twój bezpłatny tydzień kończy się za mniej niż 24 godziny</string>
     <string name="gv_notice_last_day_body">Jedna płatność, jednorazowo, zachowuje każdy stopień. Nic się nie odnawia. Dotknij, aby zobaczyć szczegóły.</string>
     <string name="gv_notice_ended_title">Bezpłatny tydzień dobiegł końca</string>
     <string name="gv_notice_ended_running_body">Poziom zostaje taki, jaki jest, dopóki regulator nie zostanie zatrzymany lub urządzenie nie uruchomi się ponownie. Aby go zmienić, odblokuj regulator: jedna płatność, jednorazowo. Dotknij, aby zobaczyć szczegóły.</string>
     <string name="gv_notice_ended_paused_body">Ciche stopnie są wstrzymane. Jedna płatność, jednorazowo, przywraca każdy stopień dokładnie tam, gdzie go zostawiono. Dotknij, aby zobaczyć szczegóły.</string>
+    <string name="gv_notice_held_title">Twój poziom nadal działa</string>
+    <string name="gv_notice_held_body">Bezpłatny tydzień się zakończył, a poziom został taki, jaki był. Aby go zmienić, odblokuj regulator: jedna płatność, jednorazowo. Dotknij, aby zobaczyć szczegóły.</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Poziom zostaje dokładnie taki, jaki jest. Jego zmiana wymaga odblokowania.</string>
     <string name="gv_purchase_cta_keep">Zachowaj na stałe</string>
@@ -165,6 +167,7 @@
     <string name="gv_support_thanks">Dziękujemy za wsparcie aplikacji. Wszystko pozostaje dla Ciebie bezpłatne, dokładnie jak wcześniej.</string>
     <string name="gv_effect_none">To urządzenie nie pozwoliło aplikacji zastosować cichych stopni. Zwykły zakres nad linią nadal działa.</string>
     <string name="gv_effect_fallback">To urządzenie używa zastępczego efektu dźwiękowego. Jeśli dźwięk się nie zmienia po dotknięciu paska pod linią, to urządzenie nie obsługuje cichych stopni.</string>
+    <string name="gv_effect_taken">Inna aplikacja audio steruje teraz dźwiękiem; ciche stopnie mogą nie działać.</string>
     <string name="gv_update_ready">Nowsza wersja jest gotowa.</string>
     <string name="gv_update_cta">Aktualizuj</string>
     <string name="gv_info_cta_support">Wesprzyj tę aplikację w Google Play</string>
