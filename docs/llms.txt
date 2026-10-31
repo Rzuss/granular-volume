@@ -12,7 +12,7 @@ How it works: it applies Android's DynamicsProcessing audio effect to the mixed 
 
 ## Tablets
 
-Tablets are where this problem started: tablet speakers are made to fill a room, so the first step above mute can stay too loud for a bedroom, a child's tablet at bedtime, or white noise at night. Built-in volume limits cap the top of the range; none of them lowers the bottom step.
+Tablets are where this problem started: tablet speakers are made to fill a room, so the first step above mute can stay too loud for a bedroom or a child's tablet at bedtime. Built-in volume limits cap the top of the range; none of them lowers the bottom step.
 
 - [Tablet volume too loud at the lowest setting](https://granularvolume.com/guide/tablet-volume-too-loud-lowest-setting.html): any Android tablet, by brand
 - [Galaxy Tab too loud at the lowest volume](https://granularvolume.com/guide/galaxy-tab-volume-too-loud-lowest.html): Sound Assistant, Media volume limit, video calls, and going below the floor
@@ -41,7 +41,6 @@ Tablets are where this problem started: tablet speakers are made to fill a room,
 ## Use cases
 
 - [Sensitive IEMs and headphones](https://granularvolume.com/use-cases/sensitive-iem-headphones.html)
-- [Quiet white noise for a sleeping baby](https://granularvolume.com/use-cases/sleeping-baby-white-noise.html)
 - [Audiobooks and podcasts at night](https://granularvolume.com/use-cases/night-audiobooks-podcasts.html)
 - [Quiet rooms and libraries](https://granularvolume.com/use-cases/quiet-rooms-libraries.html)
 - [Sound sensitivity and tinnitus](https://granularvolume.com/use-cases/tinnitus-sensitive-hearing.html)
