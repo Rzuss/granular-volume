@@ -19,6 +19,9 @@ Bigger keys, and no sudden jump from a slip of the finger.
 - The up and down keys are 56x40 dp (were 48x30), and the 6 dp gap under the up key belongs to it. The rung
   stack is 72 dp (was 84), and the dial is 12 dp taller.
 - The app's "Write to us" link goes to support@granularvolume.com.
+- Once the free week is over, every touch on the dial opens the purchase sheet, as it did up to 1.7.7. The
+  once-a-day limit, the short line between openings and the "Turn the dial off" button on the sheet are gone,
+  and the texts about the end of the free week say "locked" again.
 
 ### Fixed
 - The dial or its edge tab stayed on screen while Google's review card was up, which Google's guidelines do
