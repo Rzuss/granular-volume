@@ -14,7 +14,7 @@ import com.granularvolume.R
 import com.granularvolume.receiver.TrialNoticeReceiver
 
 /**
- * The two informative notices of the free week (1.6.2), and nothing else.
+ * The informative notices of the free week (1.6.2): two, and a third since 1.8.0, and nothing else.
  *
  * Why they exist: the sheets only ever answer a person's own action (a start, a touch of the
  * dial). Someone who set a level and tucked the dial away never takes that action, so before
@@ -32,6 +32,9 @@ import com.granularvolume.receiver.TrialNoticeReceiver
  *  - a notice is skipped when the person has already been told the same thing in the app
  *    (the last-day sheet, or the locked sheet), so nobody is told twice.
  *  - notifications denied on Android 13+: nothing is shown, nothing breaks.
+ *  - 1.8.0, the held reminder: at most ONE more, three days after the week ended, only while the
+ *    control is still holding its level and only for someone who has not opened a sheet since
+ *    the week ended. That person tucked the dial away and has no other way to hear of it.
  */
 object TrialNotices {
 
@@ -79,8 +82,24 @@ object TrialNotices {
         return posted
     }
 
+    /** 1.8.0: the held reminder; see the class note. Spent only when it really went up. */
+    fun maybePostHeldReminder(context: Context): Boolean {
+        if (!ProAccess.isTrialExpired(context) || Prefs.wasHeldReminderDone(context)) return false
+        val posted = post(
+            context,
+            context.getString(R.string.gv_notice_held_title),
+            context.getString(R.string.gv_notice_held_body),
+            "held-reminder"
+        )
+        if (posted) Prefs.setHeldReminderDone(context)
+        return posted
+    }
+
     /** The person has now seen the locked sheet in the app: the ended notice has nothing to add. */
     fun markEndedToldInApp(context: Context) {
+        if (ProAccess.isTrialExpired(context) && !Prefs.wasHeldReminderDone(context)) {
+            Prefs.setHeldReminderDone(context)
+        }
         if (ProAccess.isTrialExpired(context) && !Prefs.wasEndedNoticePosted(context)) {
             Prefs.setEndedNoticePosted(context)
             Log.i(TAG, "Ended notice retired: the locked sheet was shown in the app")
@@ -96,6 +115,7 @@ object TrialNotices {
      * week is over, posts the ended notice itself.
      */
     fun arm(context: Context) {
+        armHeldReminder(context)
         if (!ProAccess.isOnTrial(context)) return
         val left = Entitlement.millisLeftInTrial(context)
         if (left <= 0L) return
@@ -108,6 +128,26 @@ object TrialNotices {
             am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, now + left + SLACK_MS, alarm(context, ACTION_ENDED, 12))
         }
         Log.i(TAG, "Armed: last day in ${(left - DAY_MS) / 60000} min, end in ${left / 60000} min")
+    }
+
+    /**
+     * Counted from the end of the week. A session already past that point (an update landing on
+     * someone who has been held for weeks) gets it shortly, once. The receiver decides whether
+     * the control is really still holding when the alarm lands.
+     */
+    private fun armHeldReminder(context: Context) {
+        if (Prefs.wasHeldReminderDone(context)) return
+        val waited = when {
+            ProAccess.isOnTrial(context) -> Entitlement.millisLeftInTrial(context) + HELD_REMINDER_AFTER_MS
+            ProAccess.isTrialExpired(context) -> Entitlement.millisSinceTrialEnded(context)
+                .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(0L) }
+            else -> return
+        }
+        val am = context.getSystemService(AlarmManager::class.java) ?: return
+        am.setAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + waited + SLACK_MS,
+            alarm(context, ACTION_HELD_REMINDER, 13)
+        )
     }
 
     private fun alarm(context: Context, action: String, code: Int): PendingIntent =
@@ -171,4 +211,6 @@ object TrialNotices {
     private const val SLACK_MS = 5_000L
     const val ACTION_LAST_DAY = "com.granularvolume.NOTICE_LAST_DAY"
     const val ACTION_ENDED = "com.granularvolume.NOTICE_ENDED"
+    const val ACTION_HELD_REMINDER = "com.granularvolume.NOTICE_HELD_REMINDER"
+    private const val HELD_REMINDER_AFTER_MS = 3L * DAY_MS
 }

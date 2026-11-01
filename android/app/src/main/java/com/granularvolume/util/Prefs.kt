@@ -30,7 +30,6 @@ object Prefs {
     private const val KEY_REVIEW_ASK_COUNT = "review_ask_count"
     private const val KEY_REVIEW_LAST_ASK_MS = "review_last_ask_ms"
     private const val KEY_REVIEW_PURCHASE_PENDING = "review_purchase_pending"
-    private const val KEY_PAYWALL_AUTO_LAST_MS = "paywall_auto_last_ms"
     private const val KEY_USE_DAY_COUNT    = "use_day_count"
     private const val KEY_USE_LAST_DAY     = "use_last_day"
     private const val KEY_LINE_TOOLTIP_SHOWN = "line_tooltip_shown"
@@ -47,6 +46,8 @@ object Prefs {
     // 1.6.2: the two one-time notices of the free week (see TrialNotices)
     private const val KEY_LAST_DAY_NOTICE_POSTED = "last_day_notice_posted"
     private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
+    // 1.8.0
+    private const val KEY_HELD_REMINDER_DONE     = "held_reminder_done"
     // 1.7.0
     private const val KEY_SESSION_OPEN           = "session_open"
     private const val KEY_SESSION_OPEN_BOOT      = "session_open_boot_count"
@@ -238,17 +239,6 @@ object Prefs {
     }
 
     /**
-     * 1.7.8: when a refused gesture last opened the purchase sheet by itself. The sheet opens on
-     * its own at most once a day; between those, a refused gesture only says so in one line.
-     */
-    fun paywallAutoLastMs(context: Context): Long =
-        prefs(context).getLong(KEY_PAYWALL_AUTO_LAST_MS, 0L)
-
-    fun setPaywallAutoLastMs(context: Context, ms: Long) {
-        prefs(context).edit { putLong(KEY_PAYWALL_AUTO_LAST_MS, ms) }
-    }
-
-    /**
      * 1.7.6: distinct calendar days on which the person changed the level on the dial. The
      * dial-only path of the review prompt waits for a few such days, so it asks someone who
      * has actually lived with the app rather than someone who just installed it.
@@ -364,6 +354,13 @@ object Prefs {
     /** 1.6.2: the ended notice was posted, or made redundant by the locked sheet (once per install). */
     fun wasEndedNoticePosted(context: Context): Boolean =
         prefs(context).getBoolean(KEY_ENDED_NOTICE_POSTED, false)
+
+    fun wasHeldReminderDone(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_HELD_REMINDER_DONE, false)
+
+    fun setHeldReminderDone(context: Context) {
+        prefs(context).edit { putBoolean(KEY_HELD_REMINDER_DONE, true) }
+    }
 
     fun setEndedNoticePosted(context: Context) {
         prefs(context).edit { putBoolean(KEY_ENDED_NOTICE_POSTED, true) }

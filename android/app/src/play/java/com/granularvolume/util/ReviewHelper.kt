@@ -201,20 +201,27 @@ object ReviewHelper {
         // Recorded before launching so a thrown/failed flow still counts as an ask and
         // never loops.
         Prefs.recordReviewAsk(activity)
+        // 1.8.0: Google's guidelines allow nothing on or around the card, and the dial or its tab
+        // was still up. Hidden for exactly as long as the flow runs, on every way out of it.
+        val finished = {
+            ControlLive.onReviewCard?.invoke(false)
+            onDone()
+        }
         try {
             val manager = ReviewManagerFactory.create(activity)
             manager.requestReviewFlow().addOnCompleteListener { request ->
                 if (request.isSuccessful) {
+                    ControlLive.onReviewCard?.invoke(true)
                     manager.launchReviewFlow(activity, request.result)
-                        .addOnCompleteListener { onDone() }
+                        .addOnCompleteListener { finished() }
                 } else {
                     Log.d(TAG, "In-app review unavailable, skipping: ${request.exception?.message}")
-                    onDone()
+                    finished()
                 }
             }
         } catch (t: Throwable) {
             Log.d(TAG, "In-app review threw, skipping: ${t.message}")
-            onDone()
+            finished()
         }
     }
 }

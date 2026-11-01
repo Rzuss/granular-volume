@@ -20,7 +20,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.granularvolume.util.SheetFit
 import com.granularvolume.service.VolumeControlService
 import com.granularvolume.util.AccessState
-import com.granularvolume.util.ControlLive
 import com.granularvolume.util.BillingManager
 import com.granularvolume.util.Entitlement
 import com.granularvolume.util.TrialNotices
@@ -261,22 +260,6 @@ class PaywallActivity : AppCompatActivity() {
             setOnClickListener { leaveForLink(); Links.writeToUs(this@PaywallActivity) }
         }.topPad(0, fill = true))
 
-        // 1.7.8: someone who does not want to buy is shown the way out, not only "Not now": the
-        // dial goes away and the device's own volume controls are all that is left, as before.
-        if (intent.getBooleanExtra(EXTRA_FROM_DIAL, false) && ControlLive.running) {
-            root.addView(text(R.string.gv_paywall_turn_off, 13f, colorRes = R.color.gv_accent_text).apply {
-                gravity = Gravity.CENTER
-                // 1.7.9: a 48 dp touch target, the minimum a finger can be sure of.
-                minimumHeight = dp(48)
-                setPadding(0, dp(10), 0, dp(10))
-                asButtonForAccessibility()
-                setOnClickListener {
-                    serviceAction(VolumeControlService.ACTION_STOP)
-                    finish()
-                }
-            }.topPad(0, fill = true))
-        }
-
         root.addView(TextView(this).apply {
             text = getString(R.string.gv_paywall_not_now)
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
@@ -328,12 +311,10 @@ class PaywallActivity : AppCompatActivity() {
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
-    companion object {
-        /** 1.7.8: set when the dial opened this sheet after a refused gesture. */
-        const val EXTRA_FROM_DIAL = "com.granularvolume.EXTRA_FROM_DIAL"
+    private companion object {
         // Same document the consent gate links to (MainActivity.URL_TERMS).
-        private const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
+        const val URL_TERMS = "https://rzuss.github.io/granular-volume-privacy/terms-of-use.html"
         /** How long the sheet waits for its reader to come back from the Terms. */
-        private const val LINK_RETURN_MS = 10 * 60_000L
+        const val LINK_RETURN_MS = 10 * 60_000L
     }
 }

@@ -15,8 +15,11 @@ object Links {
     /** 1.7.2: the help section for someone who cannot find the app in Android's permission list. */
     const val HELP_FIND = "https://granularvolume.com/help.html#find"
 
+    /** 1.8.0: the help section for sound that did not get quieter. */
+    const val HELP_QUIET = "https://granularvolume.com/help.html#quiet"
+
     /** 1.7.6: the developer's address, for the "write to us" link on the locked sheets. */
-    const val SUPPORT_EMAIL = "rotemzus@gmail.com"
+    const val SUPPORT_EMAIL = "support@granularvolume.com"
 
     /**
      * 1.7.6: opens the person's own mail app on a new message to the developer, so someone

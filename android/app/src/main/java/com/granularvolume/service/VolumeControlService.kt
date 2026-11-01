@@ -116,10 +116,6 @@ class VolumeControlService : Service() {
         private const val MIDWEEK_NUDGE_DAYS_LEFT = 3
         /** 1.7.8: how long the dial must be left alone before a touch-triggered sheet opens. */
         private const val NUDGE_IDLE_MS = 2500L
-        /** 1.7.8: a refused gesture opens the purchase sheet by itself at most this often. */
-        private const val PAYWALL_AUTO_GAP_MS = 24L * 60L * 60L * 1000L
-        /** 1.7.9: the "paused" line is not repeated while it is still on screen. */
-        private const val PAUSED_HINT_GAP_MS = 4_000L
 
         /** How long after the dial is up the billing warm-up may start (1.6.0). */
         private const val BILLING_PREFETCH_DELAY_MS = 1500L
@@ -153,10 +149,6 @@ class VolumeControlService : Service() {
 
     /** When [pendingQuietStepDb] was refused (uptime). A step refused long ago is not a request. */
     private var pendingQuietStepAtMs = 0L
-
-    /** 1.7.9: the one "paused" toast and when it was last shown (uptime), see [pausedHint]. */
-    private var pausedHintToast: Toast? = null
-    private var pausedHintAtMs = -PAUSED_HINT_GAP_MS
 
     /**
      * 1.7.0: the service was started without the "display over other apps" permission (revoked
@@ -299,6 +291,17 @@ class VolumeControlService : Service() {
                 else -> ControlLive.Effect.FALLBACK
             }
         }
+        // 1.8.0: the dial says it once, the shade and the access sheet for as long as it is true.
+        audioController.onEffectControl = { hasControl ->
+            mainHandler.post {
+                val taken = !hasControl
+                if (taken != ControlLive.effectTaken) {
+                    ControlLive.effectTaken = taken
+                    if (taken) Toast.makeText(applicationContext, R.string.gv_effect_taken, Toast.LENGTH_LONG).show()
+                    if (ControlLive.running) updateNotification(audioController.attenuationDb.value)
+                }
+            }
+        }
 
         // Full-range gate (1.5.0): decide grandfathering once, then latch the verdict for
         // this session. Must precede initialize(), which routes the boot-restore level
@@ -331,25 +334,12 @@ class VolumeControlService : Service() {
             mainHandler.post {
                 pendingQuietStepDb = pendingStep
                 pendingQuietStepAtMs = SystemClock.elapsedRealtime()
+                // Observable refusal: this is now the ONLY way a user gesture reaches the
+                // paywall, so the harness asserts on it instead of on the gate's clamp.
+                Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), opening paywall, display=${lockDisplay()}")
                 // The refusal may be the first moment the dial learns the week is over: draw it.
                 refreshAccessSurfaces()
-                // 1.7.8: the sheet opens by itself at most once a day. Every touch reopening it
-                // made a paused dial feel broken; in between, one line says what happened and
-                // that the device's own volume keeps working. The sheet is still one tap away
-                // on the info button.
-                val now = System.currentTimeMillis()
-                val last = Prefs.paywallAutoLastMs(applicationContext)
-                if (last in 1..now && now - last < PAYWALL_AUTO_GAP_MS) {
-                    Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), paywall shown today: hint only, display=${lockDisplay()}")
-                    pausedHint()
-                } else {
-                    // Observable refusal: this is now the ONLY way a user gesture reaches the
-                    // paywall, so the harness asserts on it instead of on the gate's clamp.
-                    Log.i(tag, "Locked gesture refused (pendingQuietStep=$pendingStep), opening paywall, display=${lockDisplay()}")
-                    // 1.7.9: the day's one opening counts only once the sheet really started;
-                    // a refused start (background-start limits) must not spend it.
-                    if (openPaywall()) Prefs.setPaywallAutoLastMs(applicationContext, now)
-                }
+                openPaywall()
             }
         }
         coordinator.onQuietUnavailable = {
@@ -415,6 +405,7 @@ class VolumeControlService : Service() {
         // start already falls inside the last day, the notice waits a moment so a person's own
         // start can show the last-day sheet first; the notice then sees it and stays silent.
         TrialNotices.arm(applicationContext)
+        ControlLive.onReviewCard = { showing -> mainHandler.post { overlayManager.setHiddenForCard(showing) } }
         if (ProAccess.isOnTrial(applicationContext)) {
             mainHandler.postDelayed({ TrialNotices.maybePostLastDay(applicationContext) }, LAST_DAY_NOTICE_DELAY_MS)
         }
@@ -700,41 +691,7 @@ class VolumeControlService : Service() {
 
     private fun openInfoSheet() = startSheet(InfoSheetActivity::class.java)
 
-    private fun openPaywall(): Boolean {
-        return try {
-            startActivity(
-                Intent(applicationContext, PaywallActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra(PaywallActivity.EXTRA_FROM_DIAL, true)
-            )
-            true
-        } catch (e: RuntimeException) {
-            Log.w(tag, "Could not open PaywallActivity: ${e.message}")
-            false
-        }
-    }
-
-    /**
-     * 1.7.9: the "paused" line is ONE toast. 1.7.8 made a new LENGTH_LONG toast for every
-     * refused touch and never cancelled the last, so five touches queued some seventeen
-     * seconds of text, and the three-sentence string was cut at two lines on Android 12+.
-     * Now the previous toast is cancelled, a repeat inside [PAUSED_HINT_GAP_MS] is dropped
-     * (the line is still on screen), and the string is one short sentence.
-     */
-    private fun pausedHint() {
-        val now = SystemClock.elapsedRealtime()
-        if (now - pausedHintAtMs < PAUSED_HINT_GAP_MS) {
-            Log.i(tag, "Paused hint still on screen: not repeated")
-            return
-        }
-        pausedHintAtMs = now
-        mainHandler.post {
-            pausedHintToast?.cancel()
-            pausedHintToast = Toast.makeText(applicationContext, R.string.gv_paused_hint, Toast.LENGTH_SHORT)
-                .also { it.show() }
-            Log.i(tag, "Paused hint shown")
-        }
-    }
+    private fun openPaywall() = startSheet(PaywallActivity::class.java)
 
     /**
      * 1.5.3: every screen the service opens goes through here. Android may refuse an activity
@@ -940,11 +897,13 @@ class VolumeControlService : Service() {
             FullRangeCoordinator.LockDisplay.HELD -> getString(R.string.gv_notif_held, level)
             FullRangeCoordinator.LockDisplay.OPEN -> level
         }
+        val text = if (ControlLive.effectTaken) getString(R.string.gv_effect_taken) else dbText
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_volume_slider)
             .setContentTitle(getString(R.string.app_name))
-            .setContentText(dbText)
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(tapIntent)
             .addAction(R.drawable.ic_close, getString(R.string.gv_notif_stop), stopIntent)
             .setOngoing(true)

@@ -162,6 +162,10 @@ object Entitlement {
 
     fun isTrialActive(context: Context): Boolean = millisLeftInTrial(context) > 0L
 
+    /** 1.8.0: how long ago the week ran out; 0 while it runs. The allowance is not counted. */
+    fun millisSinceTrialEnded(context: Context): Long =
+        (trustedNow(context) - trialStart(context) - TRIAL_MS).coerceAtLeast(0L)
+
     fun millisLeftInTrial(context: Context): Long {
         val start = trialStart(context)   // first: it is what may write the allowance below
         val now = trustedNow(context)

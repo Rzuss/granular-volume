@@ -74,6 +74,14 @@ class AudioController(private val context: Context) {
     var onEffectState: ((available: Boolean, preferred: Boolean) -> Unit)? = null
 
     /**
+     * 1.8.0: told after every [initialize] and whenever another app takes or returns the control
+     * of the effect. We never fight for it (the priority stays 0, and it may be an equalizer the
+     * person chose). When the control comes back the level is written again, because what the
+     * other owner left in the effect is not ours.
+     */
+    var onEffectControl: ((hasControl: Boolean) -> Unit)? = null
+
+    /**
      * True while the preferred DynamicsProcessing strategy holds the effect. False means
      * either no strategy at all or the LoudnessEnhancer fallback, whose negative-gain
      * support is OEM-dependent — both states that a caller may want to retry out of.
@@ -98,11 +106,17 @@ class AudioController(private val context: Context) {
             if (s.initialize()) {
                 strategy = s
                 isEffectAvailable = true
+                s.onControlChanged = { granted ->
+                    Log.i(tag, "Effect control ${if (granted) "returned" else "taken by another app"}")
+                    if (granted) setAttenuation(_attenuationDb.value, GainSource.SYSTEM)
+                    onEffectControl?.invoke(granted)
+                }
                 Log.i(tag, "Using strategy: ${s::class.simpleName}")
                 // Apply persisted attenuation immediately, THROUGH the gate: a stale
                 // deep level from a refunded or pre-gate state re-clamps at service start.
                 setAttenuation(_attenuationDb.value, GainSource.SYSTEM)
                 onEffectState?.invoke(true, usingPreferredStrategy)
+                onEffectControl?.invoke(s.hasControl())
                 return true
             }
         }
@@ -110,6 +124,7 @@ class AudioController(private val context: Context) {
         Log.e(tag, "No AudioEffect strategy available on this device")
         isEffectAvailable = false
         onEffectState?.invoke(false, false)
+        onEffectControl?.invoke(true)
         return false
     }
 

@@ -1,0 +1,1 @@
+Bigger up and down buttons, easier to hit. A tap on a bar far above your level now moves one step, so a slip of the finger cannot make the sound jump; tap the same bar again to go all the way. The app also tells you when another audio app is controlling the sound.

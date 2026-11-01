@@ -2,6 +2,31 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.8.0 (versionCode 61)
+
+Bigger keys, and no sudden jump from a slip of the finger.
+
+### Added
+- A tap on a rung more than two bars above the current level moves one bar and pulses the rung; a second tap
+  on the same rung within two seconds goes all the way. Lowering is never held back, and the up key is unchanged.
+- When another app takes the audio effect the quiet steps use, the app says so once on screen, and in the
+  notification and on the info sheet for as long as it lasts. When the effect comes back the level is written
+  again. The app does not fight for it: the priority stays the lowest, it may be an equalizer the person chose.
+- One more silent notification for someone whose control still holds its level three days after the free week
+  ended and who has not opened a sheet since. Once per install, and never for a buyer.
+
+### Changed
+- The up and down keys are 56x40 dp (were 48x30), and the 6 dp gap under the up key belongs to it. The rung
+  stack is 72 dp (was 84), and the dial is 12 dp taller.
+- The app's "Write to us" link goes to support@granularvolume.com.
+- Once the free week is over, every touch on the dial opens the purchase sheet, as it did up to 1.7.7. The
+  once-a-day limit, the short line between openings and the "Turn the dial off" button on the sheet are gone,
+  and the texts about the end of the free week say "locked" again.
+
+### Fixed
+- The dial or its edge tab stayed on screen while Google's review card was up, which Google's guidelines do
+  not allow. It now steps aside for as long as the card runs and returns to the same place.
+
 ## 1.7.9 (versionCode 60)
 
 The paused line said once, and the rating card for every buyer. Fixes to 1.7.8, found by an outside review.

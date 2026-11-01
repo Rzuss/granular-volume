@@ -35,6 +35,9 @@ class TrialNoticeReceiver : BroadcastReceiver() {
                     }
                 } else Log.i("GranularVolume:Notices", "Week ended with the control off: no notice")
             }
+            // 1.8.0: only a control still holding its level has anything to remind of.
+            TrialNotices.ACTION_HELD_REMINDER ->
+                if (ControlLive.running && ControlLive.sessionOpen) TrialNotices.maybePostHeldReminder(context)
         }
     }
 }

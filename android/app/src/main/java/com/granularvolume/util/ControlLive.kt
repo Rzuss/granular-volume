@@ -29,9 +29,22 @@ object ControlLive {
     @Volatile
     var effect = Effect.UNKNOWN
 
+    /** 1.8.0: another app holds the control of the effect right now, so the steps may do nothing. */
+    @Volatile
+    var effectTaken = false
+
+    /**
+     * 1.8.0: Google's review card may not have anything drawn over or around it. Whoever shows the
+     * card says so here, true before and false after; the running service hides the dial meanwhile.
+     */
+    @Volatile
+    var onReviewCard: ((showing: Boolean) -> Unit)? = null
+
     fun reset() {
         running = false
         sessionOpen = false
         effect = Effect.UNKNOWN
+        effectTaken = false
+        onReviewCard = null
     }
 }

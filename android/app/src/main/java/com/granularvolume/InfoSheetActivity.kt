@@ -329,6 +329,10 @@ class InfoSheetActivity : AppCompatActivity() {
             if (effectLine != 0) {
                 root.addView(text(getString(effectLine), 13f, colorRes = R.color.gv_warning).topPad(10))
             }
+            if (ControlLive.effectTaken) {
+                root.addView(text(getString(R.string.gv_effect_taken), 13f, colorRes = R.color.gv_warning).topPad(10))
+                root.addView(link(getString(R.string.gv_help)) { leaveForLink(); Links.open(this, Links.HELP_QUIET) })
+            }
         }
 
         // A buyer is offered nothing: they already paid, and a live "buy" button would read
