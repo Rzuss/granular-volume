@@ -1,11 +1,11 @@
-¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en multimedia, tonos o notificaciones? Tu móvil o tablet se detiene en el mínimo del hardware. Quiet Dial baja más. La instalación es gratuita y los primeros siete días tras instalarla son la app completa. Después el control se bloquea hasta hacer un pago único dentro de la app a través de Google Play. Una app de Granular Volume. Ábrela una vez y permite que se muestre sobre otras apps.
+¿El volumen de tu Android sigue siendo demasiado alto incluso en el nivel más bajo, en multimedia, tonos, notificaciones o tus auriculares? Tu móvil o tablet se detiene en el mínimo del hardware. Quiet Dial baja más. La instalación es gratuita y los primeros siete días tras instalarla son la app completa. Después el control se bloquea hasta hacer un pago único dentro de la app a través de Google Play. Una app de Granular Volume. Ábrela una vez y permite que se muestre sobre otras apps.
 
 Un pequeño control flotante aparece sobre cualquier aplicación, con todo tu rango de volumen en un solo deslizador: el volumen normal del sistema por encima de la línea del mínimo de tu dispositivo, y una zona silenciosa por debajo, seis pasos hasta 30 dB completos bajo el mínimo del hardware.
 
 Es una utilidad de comodidad, no protección auditiva. El volumen real depende de tu dispositivo y auriculares, usa el buen juicio.
 
 MÁS BAJO DE LO QUE TU DISPOSITIVO PERMITE
-Las apps que solo añaden pasos de volumen dividen el mismo rango en partes más finas; no bajan el extremo inferior. Quiet Dial está hecha para el extremo silencioso: reduce el volumen por debajo del paso más bajo que permite el hardware, usando el motor de audio de Android, en móviles y tablets por igual. Sin root. No reemplaza el panel de volumen del sistema. La zona silenciosa es el corazón de la app, y el mismo deslizador cubre también tu rango normal.
+Las apps que solo añaden pasos de volumen dividen el mismo rango en partes más finas; no bajan el extremo inferior. Quiet Dial está hecha para el extremo silencioso: reduce el volumen por debajo del paso más bajo que permite el hardware, usando el motor de audio de Android, en móviles y tablets por igual. Sin root. La zona silenciosa es el corazón de la app, y el mismo deslizador cubre también tu rango normal.
 
 CUANDO TUS BOTONES DE VOLUMEN ESTÁN ROTOS O NO FUNCIONAN
 Los botones de volumen se desgastan, se endurecen, dejan de responder o quedan bajo una funda. El dial es un control de volumen en pantalla que los sustituye. Por encima de la línea que marca el mínimo de tu dispositivo, ajusta el volumen normal del sistema: toca una barra o las flechas para subir y bajar, en pasos uniformes. Por debajo de la línea sigue bajando, más silencioso de lo que el móvil permite. El silencio no toca las alarmas, pero los pasos silenciosos también bajan alarmas y tonos de llamada.
@@ -18,9 +18,9 @@ Desliza hacia abajo, toca una vez. Tras la primera configuración, actívalo y d
 
 HECHO PARA MOMENTOS SILENCIOSOS
 - Llamadas de apps como WhatsApp si el móvil las reproduce como multimedia. Las llamadas normales usan una ruta que ninguna app puede bajar
-- IEM sensibles y auriculares de alta sensibilidad, donde incluso el paso 1 es demasiado
+- Auriculares, IEM y cascos sensibles, con cable o Bluetooth, donde incluso el paso 1 es demasiado. Por Bluetooth algunas parejas de móvil y auriculares no responden, pruébalo en la semana gratis
 - Altavoces y auriculares de tablet, cuyo mínimo a veces es aún más alto que en el móvil
-- Ruido blanco o nanas para un bebé dormido, apenas audibles
+- Nanas o cuentos para un niño dormido, apenas audibles
 - Escuchar de noche junto a alguien que duerme
 - Salas silenciosas, bibliotecas, oficinas abiertas y meditación
 - ASMR y audio de relajación a un nivel cómodo
