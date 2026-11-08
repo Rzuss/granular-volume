@@ -61,7 +61,7 @@ It's a small floating dial that sits over any app:
 - **Minimize it** to a small tab at the screen edge and the quiet level keeps working. Left alone, the dial fades so it stays out of the way.
 - **Close it with one tap**, or reopen it from a **Quick Settings tile** without leaving the app you're in.
 - **Covers your normal range too.** Above the line marking your device's minimum, the slider sets regular system volume in even steps, so it stands in for worn or broken volume buttons.
-- **Mutes media without touching alarms.** One tap silences media; your wake-up alarm still rings.
+- **A one-tap media mute that leaves alarms ringing.** The quiet steps themselves do lower alarms, ringtones and notifications along with media; only the mute button is limited to media.
 - **Doesn't take over your physical volume buttons** or replace the system volume panel. The buttons keep working; inside the quiet zone the dial folds their presses into its own finer scale.
 
 No ads. No tracking. No account. No network permission requested at all. The app has no way to send or receive data even if it wanted to.
@@ -70,7 +70,7 @@ No ads. No tracking. No account. No network permission requested at all. The app
 
 - **One slider, the whole range**: normal system volume above the device-minimum line in even steps, and the quiet zone below it.
 - **Fine grained attenuation** from 0 dB (pass through, i.e. Android's own step 1) down to about -30 dB in steps, applied to the global output mix.
-- **Media mute that spares alarms**: one tap silences media playback and leaves alarm streams untouched.
+- **Media mute**: one tap silences media playback only, so a wake-up alarm still rings. (The quiet steps are different: they lower every stream on the mixed output, alarms included.)
 - **Floating overlay** that sits above any app, draggable to any position and persisted across restarts.
 - **Quick Settings tile**: toggle the overlay on or off from the notification shade without opening the app.
 - **One tap dismiss** and a clean, native feeling control surface.
