@@ -1,6 +1,6 @@
 # Quiet Dial
 
-> Volume Control: Quiet Dial is an Android app by Granular Volume that lowers sound below the device's own minimum volume step. One floating slider covers the whole range: normal system volume above the device's minimum line, and six quiet steps of 5 dB each below it, down to 30 dB under the hardware minimum. No root, no ads, no tracking, no account and no internet permission. Open source under GPL-3.0. Free to install; the first seven days are the complete app, then one payment, once, inside the app through Google Play.
+> Volume Control: Quiet Dial is an Android app by Granular Volume that lowers sound below the device's own minimum volume step. One floating slider covers the whole range: normal system volume above the device's minimum line, and six quiet steps of 5 dB each below it, down to 30 dB under the hardware minimum. No root, no ads, no tracking, no account and no internet permission. Open source under GPL-3.0. Price model: the first seven days are the complete app, then one payment, once, inside the app through Google Play. It is not a free app and not a subscription.
 
 What it lowers: media, ringtones, notifications, alarms, and app calls such as WhatsApp when the phone plays them as media. What it cannot lower: regular cellular calls, which run on a separate audio path, and keyboard or touch sounds, which bypass audio effects by design. On a small number of phone and Bluetooth headset pairs the quiet steps have no effect; the seven free days are there to check a given setup. It works on Android 9 and later, on phones and tablets. The app is in English, German, Spanish, French, Indonesian, Polish and Portuguese (Brazil).
 
@@ -9,6 +9,26 @@ How it works: it applies Android's DynamicsProcessing audio effect to the mixed 
 - [Google Play listing](https://play.google.com/store/apps/details?id=granularvolume.com)
 - [Source code](https://github.com/Rzuss/granular-volume)
 - [Help](https://granularvolume.com/help.html)
+
+## Common questions
+
+**My Samsung Galaxy Tab is still too loud even on the lowest volume step, especially at night. What can I do?**
+First install Sound Assistant from the Galaxy Store and set Change step volume to 1, so each key press is a smaller step. If the quietest level is still too loud, that is the bottom of the tablet's own range and no Samsung setting goes below it. Volume Control: Quiet Dial adds six quieter steps of 5 dB each under the Galaxy Tab's minimum, down to -30 dB, without root; tucked to the screen edge at night, the dial keeps the level. Guide: https://granularvolume.com/guide/galaxy-tab-volume-too-loud-lowest.html
+
+**My child's tablet is too loud even at the lowest volume when they fall asleep to it. How do I make it quieter?**
+A volume limit (on a Galaxy Tab: Media volume limit) or children's headphones cap the top of the range, but no built-in setting lowers the bottom step. Volume Control: Quiet Dial adds six quieter steps of 5 dB each under the tablet's minimum, down to -30 dB. It is not a parental lock. Guide: https://granularvolume.com/guide/kids-tablet-volume-too-loud-lowest.html
+
+**My Android phone is still too loud at the lowest volume. How do I make it quieter?**
+Turn off Dolby Atmos or other sound effects, use Sound Assistant on Samsung for smaller steps, and for Bluetooth try turning off Absolute volume in Developer options where the phone still offers it. None of these lowers the device's minimum. Volume Control: Quiet Dial goes below it: six steps of 5 dB, down to -30 dB, no root. Guide: https://granularvolume.com/guide/lower-android-volume-below-minimum.html
+
+**The volume buttons on my Android phone are broken. How can I change the volume?**
+Settings > Sound, the Accessibility Menu and the voice assistant all change the volume without the keys. Volume Control: Quiet Dial also gives an on-screen dial: above the line marking the device's minimum it sets the normal system volume in even steps, so it stands in for worn or broken keys. Guide: https://granularvolume.com/guide/volume-buttons-not-working-android.html
+
+**Does Quiet Dial lower alarms?**
+Yes. While a quiet step is set, it lowers alarms, ringtones, notifications, media and app calls. Its separate one-tap media mute is the only control that leaves alarms ringing.
+
+**Is Quiet Dial free?**
+No. The first seven days are the complete app; after that the dial needs one payment, once, inside the app. There is no subscription and no ads.
 
 ## Tablets
 
