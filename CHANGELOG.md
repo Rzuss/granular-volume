@@ -12,6 +12,9 @@ The end of the free week now reaches people whose control is off.
 - The one reminder three days after the free week ended now also goes to someone whose control is off, with its
   own title. It is still one reminder per install, shared with the held-level reminder, never after a sheet was
   seen in the app, and never for a buyer or a long-time user. The notification channel description says so.
+- The reminder counts its three days from the moment the "free week has ended" note actually went up. Someone who
+  was never told hears that first, and a phone restarted long after the week ended no longer swaps the note for the
+  reminder a few seconds later.
 
 ## 1.8.0 (versionCode 61)
 

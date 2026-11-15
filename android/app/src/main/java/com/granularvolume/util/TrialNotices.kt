@@ -78,7 +78,13 @@ object TrialNotices {
             ),
             if (stillRunning) "ended-running" else "ended-paused"
         )
-        if (posted) Prefs.setEndedNoticePosted(context)   // 1.6.4: spent only on success, see above
+        if (posted) {
+            Prefs.setEndedNoticePosted(context)   // 1.6.4: spent only on success, see above
+            // 1.8.1: the reminder counts from this moment, so it can never land on top of the
+            // ended notice (a boot long after the week ended armed it for "now").
+            Prefs.setEndedNoticeAt(context, System.currentTimeMillis())
+            armHeldReminder(context)
+        }
         return posted
     }
 
@@ -103,6 +109,14 @@ object TrialNotices {
      */
     fun maybePostOffReminder(context: Context): Boolean {
         if (!ProAccess.isTrialExpired(context) || Prefs.wasHeldReminderDone(context)) return false
+        // Someone never told that the week ended hears that first; the reminder follows later.
+        if (!Prefs.wasEndedNoticePosted(context)) return maybePostEnded(context, stillRunning = false)
+        // An alarm armed before the ended notice went up: too early, wait the full three days.
+        if (sinceEndedNotice(context) < HELD_REMINDER_AFTER_MS) {
+            armHeldReminder(context)
+            Log.i(TAG, "Reminder not yet: the ended notice went up less than three days ago")
+            return false
+        }
         val posted = post(
             context,
             context.getString(R.string.gv_notice_off_title),
@@ -157,7 +171,7 @@ object TrialNotices {
         if (Prefs.wasHeldReminderDone(context)) return
         val waited = when {
             ProAccess.isOnTrial(context) -> Entitlement.millisLeftInTrial(context) + HELD_REMINDER_AFTER_MS
-            ProAccess.isTrialExpired(context) -> Entitlement.millisSinceTrialEnded(context)
+            ProAccess.isTrialExpired(context) -> sinceEndedNotice(context)
                 .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(0L) }
             else -> return
         }
@@ -166,6 +180,14 @@ object TrialNotices {
             AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + waited + SLACK_MS,
             alarm(context, ACTION_HELD_REMINDER, 13)
         )
+    }
+
+    /** 1.8.1: time since the ended notice went up; before 1.8.1 (no record) since the week ended. */
+    private fun sinceEndedNotice(context: Context): Long {
+        val since = Entitlement.millisSinceTrialEnded(context)
+        val at = Prefs.endedNoticeAt(context)
+        if (at <= 0L) return since
+        return minOf(since, (System.currentTimeMillis() - at).coerceAtLeast(0L))
     }
 
     private fun alarm(context: Context, action: String, code: Int): PendingIntent =
