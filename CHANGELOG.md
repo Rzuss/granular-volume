@@ -15,6 +15,8 @@ The end of the free week now reaches people whose control is off.
 - The reminder counts its three days from the moment the "free week has ended" note actually went up. Someone who
   was never told hears that first, and a phone restarted long after the week ended no longer swaps the note for the
   reminder a few seconds later.
+- A reminder that is already due waits a quarter of an hour instead of a few seconds, so it never lands in the shade
+  while the person is reading the same news in the app (the sheet they see retires it).
 
 ## 1.8.0 (versionCode 61)
 

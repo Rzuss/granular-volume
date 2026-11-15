@@ -171,8 +171,11 @@ object TrialNotices {
         if (Prefs.wasHeldReminderDone(context)) return
         val waited = when {
             ProAccess.isOnTrial(context) -> Entitlement.millisLeftInTrial(context) + HELD_REMINDER_AFTER_MS
+            // 1.8.1: an overdue reminder waits a quarter of an hour, never five seconds. Every start
+            // and every opening of the app re-arms it, and the person is being told in the app right
+            // then; the sheet retires it first, so nothing lands in the shade while they read it.
             ProAccess.isTrialExpired(context) -> sinceEndedNotice(context)
-                .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(0L) }
+                .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(OVERDUE_REMINDER_WAIT_MS) }
             else -> return
         }
         val am = context.getSystemService(AlarmManager::class.java) ?: return
@@ -253,4 +256,5 @@ object TrialNotices {
     const val ACTION_ENDED = "com.granularvolume.NOTICE_ENDED"
     const val ACTION_HELD_REMINDER = "com.granularvolume.NOTICE_HELD_REMINDER"
     private const val HELD_REMINDER_AFTER_MS = 3L * DAY_MS
+    private const val OVERDUE_REMINDER_WAIT_MS = 15L * 60L * 1000L
 }
