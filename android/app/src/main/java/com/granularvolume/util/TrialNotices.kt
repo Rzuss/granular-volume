@@ -95,6 +95,24 @@ object TrialNotices {
         return posted
     }
 
+    /**
+     * 1.8.1, the same one reminder for someone whose control is OFF. Until now a week that ended
+     * with the control off told that person nothing, ever: no ended notice, no held reminder, and
+     * the locked sheet only on a start they had no reason to make. It shares the held reminder's
+     * once-per-install flag and its retirement by a sheet seen in the app, so nobody gets both.
+     */
+    fun maybePostOffReminder(context: Context): Boolean {
+        if (!ProAccess.isTrialExpired(context) || Prefs.wasHeldReminderDone(context)) return false
+        val posted = post(
+            context,
+            context.getString(R.string.gv_notice_off_title),
+            context.getString(R.string.gv_notice_ended_paused_body),
+            "off-reminder"
+        )
+        if (posted) Prefs.setHeldReminderDone(context)
+        return posted
+    }
+
     /** The person has now seen the locked sheet in the app: the ended notice has nothing to add. */
     fun markEndedToldInApp(context: Context) {
         if (ProAccess.isTrialExpired(context) && !Prefs.wasHeldReminderDone(context)) {
