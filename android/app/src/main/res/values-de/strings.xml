@@ -35,7 +35,7 @@
     <string name="gv_unlocked_body">Danke. Jede Stufe bis −30 dB ist auf diesem Google-Konto jetzt offen. Starte den Regler und wähle eine beliebige Stufe unter der orangefarbenen Linie.</string>
     <string name="gv_unlocked_dismiss">Verstanden</string>
     <string name="gv_notice_channel_name">Kostenlose Woche</string>
-    <string name="gv_notice_channel_desc">Ein Hinweis, bevor deine kostenlose Woche endet, einer, wenn sie vorbei ist, und eine Erinnerung, falls der Regler noch läuft. Nie mehr.</string>
+    <string name="gv_notice_channel_desc">Ein Hinweis, bevor deine kostenlose Woche endet, einer, wenn sie vorbei ist, und eine Erinnerung ein paar Tage später. Nie mehr.</string>
     <string name="gv_notice_last_day_title">Deine kostenlose Woche endet in weniger als 24 Stunden</string>
     <string name="gv_notice_last_day_body">Eine Zahlung, einmalig, behält jede Stufe. Nichts verlängert sich. Für Details tippen.</string>
     <string name="gv_notice_ended_title">Die kostenlose Woche ist vorbei</string>
@@ -43,6 +43,7 @@
     <string name="gv_notice_ended_paused_body">Die leisen Stufen sind pausiert. Eine Zahlung, einmalig, bringt jede Stufe genau dorthin zurück, wo du sie gelassen hast. Für Details tippen.</string>
     <string name="gv_notice_held_title">Deine Lautstärke ist weiter aktiv</string>
     <string name="gv_notice_held_body">Die kostenlose Woche ist vorbei und deine Lautstärke ist geblieben, wie sie ist. Um sie zu ändern, schalte den Regler frei: eine Zahlung, einmalig. Für Details tippen.</string>
+    <string name="gv_notice_off_title">Deine leisen Stufen warten auf dich</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Deine Lautstärke bleibt genau so, wie sie ist. Um sie zu ändern, ist die Freischaltung nötig.</string>
     <string name="gv_purchase_cta_keep">Dauerhaft behalten</string>

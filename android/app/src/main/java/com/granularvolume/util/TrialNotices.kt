@@ -78,7 +78,13 @@ object TrialNotices {
             ),
             if (stillRunning) "ended-running" else "ended-paused"
         )
-        if (posted) Prefs.setEndedNoticePosted(context)   // 1.6.4: spent only on success, see above
+        if (posted) {
+            Prefs.setEndedNoticePosted(context)   // 1.6.4: spent only on success, see above
+            // 1.8.1: the reminder counts from this moment, so it can never land on top of the
+            // ended notice (a boot long after the week ended armed it for "now").
+            Prefs.setEndedNoticeAt(context, System.currentTimeMillis())
+            armHeldReminder(context)
+        }
         return posted
     }
 
@@ -90,6 +96,32 @@ object TrialNotices {
             context.getString(R.string.gv_notice_held_title),
             context.getString(R.string.gv_notice_held_body),
             "held-reminder"
+        )
+        if (posted) Prefs.setHeldReminderDone(context)
+        return posted
+    }
+
+    /**
+     * 1.8.1, the same one reminder for someone whose control is OFF. Until now a week that ended
+     * with the control off told that person nothing, ever: no ended notice, no held reminder, and
+     * the locked sheet only on a start they had no reason to make. It shares the held reminder's
+     * once-per-install flag and its retirement by a sheet seen in the app, so nobody gets both.
+     */
+    fun maybePostOffReminder(context: Context): Boolean {
+        if (!ProAccess.isTrialExpired(context) || Prefs.wasHeldReminderDone(context)) return false
+        // Someone never told that the week ended hears that first; the reminder follows later.
+        if (!Prefs.wasEndedNoticePosted(context)) return maybePostEnded(context, stillRunning = false)
+        // An alarm armed before the ended notice went up: too early, wait the full three days.
+        if (sinceEndedNotice(context) < HELD_REMINDER_AFTER_MS) {
+            armHeldReminder(context)
+            Log.i(TAG, "Reminder not yet: the ended notice went up less than three days ago")
+            return false
+        }
+        val posted = post(
+            context,
+            context.getString(R.string.gv_notice_off_title),
+            context.getString(R.string.gv_notice_ended_paused_body),
+            "off-reminder"
         )
         if (posted) Prefs.setHeldReminderDone(context)
         return posted
@@ -139,8 +171,11 @@ object TrialNotices {
         if (Prefs.wasHeldReminderDone(context)) return
         val waited = when {
             ProAccess.isOnTrial(context) -> Entitlement.millisLeftInTrial(context) + HELD_REMINDER_AFTER_MS
-            ProAccess.isTrialExpired(context) -> Entitlement.millisSinceTrialEnded(context)
-                .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(0L) }
+            // 1.8.1: an overdue reminder waits a quarter of an hour, never five seconds. Every start
+            // and every opening of the app re-arms it, and the person is being told in the app right
+            // then; the sheet retires it first, so nothing lands in the shade while they read it.
+            ProAccess.isTrialExpired(context) -> sinceEndedNotice(context)
+                .let { (HELD_REMINDER_AFTER_MS - it).coerceAtLeast(OVERDUE_REMINDER_WAIT_MS) }
             else -> return
         }
         val am = context.getSystemService(AlarmManager::class.java) ?: return
@@ -148,6 +183,14 @@ object TrialNotices {
             AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + waited + SLACK_MS,
             alarm(context, ACTION_HELD_REMINDER, 13)
         )
+    }
+
+    /** 1.8.1: time since the ended notice went up; before 1.8.1 (no record) since the week ended. */
+    private fun sinceEndedNotice(context: Context): Long {
+        val since = Entitlement.millisSinceTrialEnded(context)
+        val at = Prefs.endedNoticeAt(context)
+        if (at <= 0L) return since
+        return minOf(since, (System.currentTimeMillis() - at).coerceAtLeast(0L))
     }
 
     private fun alarm(context: Context, action: String, code: Int): PendingIntent =
@@ -213,4 +256,5 @@ object TrialNotices {
     const val ACTION_ENDED = "com.granularvolume.NOTICE_ENDED"
     const val ACTION_HELD_REMINDER = "com.granularvolume.NOTICE_HELD_REMINDER"
     private const val HELD_REMINDER_AFTER_MS = 3L * DAY_MS
+    private const val OVERDUE_REMINDER_WAIT_MS = 15L * 60L * 1000L
 }

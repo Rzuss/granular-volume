@@ -48,6 +48,7 @@ object Prefs {
     private const val KEY_ENDED_NOTICE_POSTED    = "ended_notice_posted"
     // 1.8.0
     private const val KEY_HELD_REMINDER_DONE     = "held_reminder_done"
+    private const val KEY_ENDED_NOTICE_AT        = "ended_notice_at"
     // 1.7.0
     private const val KEY_SESSION_OPEN           = "session_open"
     private const val KEY_SESSION_OPEN_BOOT      = "session_open_boot_count"
@@ -364,6 +365,14 @@ object Prefs {
 
     fun setEndedNoticePosted(context: Context) {
         prefs(context).edit { putBoolean(KEY_ENDED_NOTICE_POSTED, true) }
+    }
+
+    /** 1.8.1: when the ended notice really went up (0 = never, or posted before 1.8.1). */
+    fun endedNoticeAt(context: Context): Long =
+        prefs(context).getLong(KEY_ENDED_NOTICE_AT, 0L)
+
+    fun setEndedNoticeAt(context: Context, at: Long) {
+        prefs(context).edit { putLong(KEY_ENDED_NOTICE_AT, at) }
     }
 
     // ── 1.7.0: the session across our own update ────────────────────────────

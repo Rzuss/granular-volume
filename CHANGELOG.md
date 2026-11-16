@@ -2,6 +2,22 @@
 
 All notable changes to Quiet Dial (Volume Control: Quiet Dial on Google Play, an app by Granular Volume) are documented here. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## 1.8.1 (versionCode 62)
+
+The end of the free week now reaches people whose control is off.
+
+### Changed
+- A free week that ends while the control is off now posts the "free week has ended" note (the steps are paused,
+  one payment brings them back). Until now that person was told nothing until they happened to start the control.
+- The one reminder three days after the free week ended now also goes to someone whose control is off, with its
+  own title. It is still one reminder per install, shared with the held-level reminder, never after a sheet was
+  seen in the app, and never for a buyer or a long-time user. The notification channel description says so.
+- The reminder counts its three days from the moment the "free week has ended" note actually went up. Someone who
+  was never told hears that first, and a phone restarted long after the week ended no longer swaps the note for the
+  reminder a few seconds later.
+- A reminder that is already due waits a quarter of an hour instead of a few seconds, so it never lands in the shade
+  while the person is reading the same news in the app (the sheet they see retires it).
+
 ## 1.8.0 (versionCode 61)
 
 Bigger keys, and no sudden jump from a slip of the finger.

@@ -35,7 +35,7 @@
     <string name="gv_unlocked_body">Gracias. Todos los pasos hasta −30 dB están abiertos ahora en esta cuenta de Google. Inicia el control y elige cualquier paso por debajo de la línea naranja.</string>
     <string name="gv_unlocked_dismiss">Entendido</string>
     <string name="gv_notice_channel_name">Semana gratuita</string>
-    <string name="gv_notice_channel_desc">Un aviso antes de que termine tu semana gratuita, otro cuando haya terminado y un recordatorio si el control sigue activo. Nunca más.</string>
+    <string name="gv_notice_channel_desc">Un aviso antes de que termine tu semana gratuita, otro cuando haya terminado y un recordatorio unos días después. Nunca más.</string>
     <string name="gv_notice_last_day_title">Tu semana gratuita termina en menos de 24 horas</string>
     <string name="gv_notice_last_day_body">Un pago, una sola vez, conserva todos los pasos. Nada se renueva. Toca para ver los detalles.</string>
     <string name="gv_notice_ended_title">La semana gratuita ha terminado</string>
@@ -43,6 +43,7 @@
     <string name="gv_notice_ended_paused_body">Los pasos silenciosos están en pausa. Un pago, una sola vez, devuelve cada paso exactamente adonde lo dejaste. Toca para ver los detalles.</string>
     <string name="gv_notice_held_title">Tu nivel sigue activo</string>
     <string name="gv_notice_held_body">La semana gratuita ha terminado y tu nivel se ha quedado como estaba. Para cambiarlo, desbloquea el control: un pago, una sola vez. Toca para ver los detalles.</string>
+    <string name="gv_notice_off_title">Tus pasos silenciosos te esperan</string>
     <!-- 1.7.0 -->
     <string name="gv_paywall_held">Tu nivel se queda exactamente como está. Para cambiarlo hace falta el desbloqueo.</string>
     <string name="gv_purchase_cta_keep">Conservarlo para siempre</string>

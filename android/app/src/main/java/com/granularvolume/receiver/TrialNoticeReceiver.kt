@@ -33,11 +33,18 @@ class TrialNoticeReceiver : BroadcastReceiver() {
                                 .setAction(VolumeControlService.ACTION_ACCESS_CHANGED)
                         )
                     }
-                } else Log.i("GranularVolume:Notices", "Week ended with the control off: no notice")
+                } else {
+                    // 1.8.1: the control is off, so this is the only way the person hears that the
+                    // week is over. The paused text says what is true for them: the steps wait, one
+                    // payment brings them back. Same once-per-install flag as before.
+                    TrialNotices.maybePostEnded(context, stillRunning = false)
+                }
             }
-            // 1.8.0: only a control still holding its level has anything to remind of.
+            // 1.8.0: a control still holding its level gets the held text. 1.8.1: a control that
+            // is off gets the off text instead of nothing; one of the two, once per install.
             TrialNotices.ACTION_HELD_REMINDER ->
                 if (ControlLive.running && ControlLive.sessionOpen) TrialNotices.maybePostHeldReminder(context)
+                else TrialNotices.maybePostOffReminder(context)
         }
     }
 }
