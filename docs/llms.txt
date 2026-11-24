@@ -45,6 +45,7 @@ Tablets are where this problem started: tablet speakers are made to fill a room,
 - [How to lower Android volume below the minimum](https://granularvolume.com/guide/lower-android-volume-below-minimum.html): every method, ranked by whether it lowers the floor
 - [Why the Android minimum volume is too loud](https://granularvolume.com/guide/why-android-minimum-volume-is-too-loud.html): where the floor comes from
 - [Tried everything and the volume is still too loud](https://granularvolume.com/guide/tried-everything-volume-still-too-loud-android.html): why the usual fixes do not move the floor
+- [Finer volume control on Android](https://granularvolume.com/guide/android-finer-volume-control.html): smaller volume steps on Samsung, Bluetooth and other brands, and what to do when the lowest step is too loud
 - [How quiet is -30 dB?](https://granularvolume.com/guide/how-quiet-is-minus-30-db.html): each quiet step in amplitude, power and approximate loudness
 - [Bluetooth earbuds too loud at the lowest volume](https://granularvolume.com/guide/bluetooth-earbuds-volume-too-loud-lowest.html)
 - [How to disable absolute volume on Android](https://granularvolume.com/guide/disable-absolute-volume-android.html): paths on Pixel, Samsung, Xiaomi and OnePlus, and why it resets
